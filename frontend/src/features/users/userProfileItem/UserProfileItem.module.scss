@@ -1,6 +1,13 @@
+@import "../../../styles/core/mixins.scss";
+
 .userProfileItem {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  @include medium-screen {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .group {
