@@ -1,0 +1,14 @@
+@import "../../styles/core/colors.module.scss";
+
+.tabItem {
+  color: $color-tab-unselected;
+  font-size: large;
+  font-weight: 600;
+  &:hover {
+    color: $color-tab-selected;
+  }
+}
+
+.selectedTabItem {
+  color: $color-tab-selected;
+}

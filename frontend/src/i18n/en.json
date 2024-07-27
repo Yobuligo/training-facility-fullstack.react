@@ -1,4 +1,9 @@
 {
+    "administration": {
+        "trainings": "Trainings",
+        "users": "Users",
+        "home": "Home"
+    },
     "login": {
         "errorLogin": "Unknown error while login",
         "errorRegister": "Unknown error while register",
