@@ -1,6 +1,8 @@
 import { useId } from "react";
+import { style } from "../../utils/style";
 import { LabeledElement } from "../labeledElement/LabeledElement";
 import { ILabeledInputProps } from "./ILabeledInputProps";
+import styles from "./LabeledInput.module.scss";
 
 export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
   const id = useId();
@@ -17,7 +19,7 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
   return (
     <LabeledElement elementId={id} label={props.label}>
       <input
-        className={props.classNameInput}
+        className={style(props.classNameInput, styles.labeledInput)}
         disabled={props.disabled}
         id={id}
         onChange={onChange}
