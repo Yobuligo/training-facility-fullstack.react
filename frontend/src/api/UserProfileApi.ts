@@ -3,7 +3,7 @@ import { Gender } from "../shared/types/Gender";
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";
 
-export class UserProfile extends Repository<IUserProfile> {
+export class UserProfileApi extends Repository<IUserProfile> {
   private userProfiles: IUserProfile[] = [
     {id:uuid(), userId: uuid(), firstname:"Beatriz", lastname:"Bascon-Wolf", gender:Gender.FEMALE, birthday: new Date("04.01.1969"), street:"Anne-Frank-Straße 21", postalCode:69221, city:"Dossenheim", email:"bascon@gmx.de", phone:"", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},
     {id:uuid(), userId: uuid(), firstname:"Frank", lastname:"Burkart", gender:Gender.MALE, birthday: new Date("04.01.1969"), street:"Richard-Wagner-Straße 29", postalCode:69221, city:"Dossenheim", email:"frank.burkart@hotmail.de", phone:"", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},
@@ -33,7 +33,6 @@ export class UserProfile extends Repository<IUserProfile> {
     {id:uuid(), userId: uuid(), firstname:"Kerstin", lastname:"Godziatkowski", gender:Gender.FEMALE, birthday: new Date("04.01.1969"), street:"Bergheimerstraße 38", postalCode:69115, city:"Heidelberg", email:"dragontussy@hotmail.de", phone:"", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},
     {id:uuid(), userId: uuid(), firstname:"Natalie", lastname:"Wendel-Minz", gender:Gender.FEMALE, birthday: new Date("04.01.1969"), street:"Landstraße 84", postalCode:69198, city:"Schriesheim", email:"Nata-Wendel@gmx.de", phone:"", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},
     {id:uuid(), userId: uuid(), firstname:"Bianca", lastname:"Maus", gender:Gender.FEMALE, birthday: new Date("04.01.1969"), street:"Ladenburgerstraße 4", postalCode:69198, city:"Schriesheim", email:"bianca.andrea.maus@gmail.com", phone:"16090429138", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},
-    {id:uuid(), userId: uuid(), firstname:"", lastname:"", gender:Gender.MALE, birthday: new Date("04.01.1969"), street:"", postalCode:123, city:"", email:"", phone:"", joinedOn: new Date(), createdAt: new Date(), updatedAt: new Date()},    
 ];
 
   constructor() {

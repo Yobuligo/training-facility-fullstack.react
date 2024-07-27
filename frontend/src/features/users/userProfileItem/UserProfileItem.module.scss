@@ -1,0 +1,17 @@
+.userProfileItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: large;
+}
+
+.address {
+  font-size: medium;
+}
