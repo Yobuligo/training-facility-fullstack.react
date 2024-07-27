@@ -1,0 +1,7 @@
+@import "../../Variables.scss";
+
+.labeledElement {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}

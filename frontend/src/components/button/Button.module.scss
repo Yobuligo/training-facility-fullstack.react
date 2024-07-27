@@ -1,0 +1,32 @@
+@import "../../styles/core/colors.module.scss";
+@import "../../styles/core/mixins.scss";
+@import "../../styles/variables.scss";
+
+.button {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  margin: 0;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  font-size: medium;
+  font-weight: 400;
+}
+
+.buttonCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.buttonEnabled {
+  color: black;
+  @include hoverButton {
+    cursor: pointer;
+  }
+}
+
+.buttonDisabled {
+  color: $color-disabled;
+}

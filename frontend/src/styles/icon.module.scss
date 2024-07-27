@@ -1,0 +1,11 @@
+@import "../styles/core/mixins.scss";
+@import "../styles/core/colors.module.scss";
+
+.icon {
+  @include hoverIcon;
+  fill: $color-primary-dark;
+}
+
+.disabledIcon {
+  fill: $color-disabled;
+}

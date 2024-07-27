@@ -1,0 +1,8 @@
+@import '../../styles/core/colors.module.scss';
+
+.card {
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: 1px solid rgba(128, 128, 128, 0.151);
+  background-color: transparentize($color: $color-primary, $amount: 0.7);
+}

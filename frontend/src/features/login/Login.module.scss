@@ -1,0 +1,59 @@
+@import "../../styles/variables.scss";
+@import "../../styles/core/colors.module.scss";
+@import "../../styles/core/mixins.scss";
+
+.login {
+  margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20rem;
+
+  @include medium-screen {
+    width: 25rem;
+  }
+
+  @include large-screen {
+    width: 30rem;
+  }
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+  padding: 1rem;
+}
+
+.headline {
+  margin-bottom: 0;
+}
+
+.register {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: white;
+  justify-content: right;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.errorMessage {
+  background-color: $color-error;
+  color: white;
+}
+
+.successMessage {
+  background-color: $color-success;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  justify-content: right;
+}
