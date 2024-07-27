@@ -5,20 +5,15 @@
 .button {
   display: flex;
   flex-direction: row;
+  align-items: center;
   column-gap: $negative-space;
   margin: 0;
-  background-color: transparent;
+  background-color: $color-secondary;
   outline: none;
   border: 0;
   font-size: medium;
   font-weight: 400;
-}
-
-.buttonCard {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: $color-secondary;
+  padding: $negative-space 1rem;
 }
 
 .buttonEnabled {

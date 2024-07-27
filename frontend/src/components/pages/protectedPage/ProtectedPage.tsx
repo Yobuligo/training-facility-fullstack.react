@@ -8,9 +8,9 @@ import { AppRoutes } from "../../../routes/AppRoutes";
 import { isError } from "../../../shared/utils/isError";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
+import { PageHeader } from "../pageHeader/PageHeader";
 import { IProtectedPageProps } from "./IProtectedPageProps";
 import styles from "./ProtectedPage.module.scss";
-import { PageHeader } from "../pageHeader/PageHeader";
 
 export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
   const [session] = useSession();
@@ -42,11 +42,6 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
             texts.logout.title
           )} (${session.username})`}</SpinnerButton>
         </PageHeader>
-        <div className={styles.header}>
-          <SpinnerButton displaySpinner={isLoggingOut} onClick={onLogout}>{`${t(
-            texts.logout.title
-          )} (${session.username})`}</SpinnerButton>
-        </div>
         <div>{props.children}</div>
       </div>
     </Page>
