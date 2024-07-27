@@ -13,7 +13,11 @@
   border: 0;
   font-size: medium;
   font-weight: 400;
-  padding: $negative-space 1rem;
+  padding: $negative-space;
+
+  @include medium-screen {
+    padding: $negative-space 1rem;
+  }
 }
 
 .buttonEnabled {
