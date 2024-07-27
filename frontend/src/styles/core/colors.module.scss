@@ -1,13 +1,14 @@
-$color-primary: #4a7fac;
-$color-primary-dark: #0a3f6d;
-$color-secondary: #81b8b9;
-$color-secondary-dark: #669fa0;
+$color-primary: #893F61;
+$color-primary-dark: #742053;
+$color-primary-light: #B492A0;
+$color-secondary: #687857;
+$color-secondary-light: #ACAE9B;
 $color-copy: white;
 $color-error: rgba(255, 0, 0, 0.493);
 $color-success: rgba(63, 150, 13, 0.493);
-$color-hover: lighten(#4a7fac, 0.5);
+$color-hover: lighten($color-secondary, 0.5);
 $color-enabled: black;
-$color-disabled: rgba(211, 211, 211, 0.63);
+$color-disabled:  rgba(211, 211, 211, 0.63);
 
 :export {
   colorDisabled: $color-disabled;

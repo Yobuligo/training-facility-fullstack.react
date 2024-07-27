@@ -19,7 +19,10 @@ export const Button: React.FC<IButtonProps> = (props) => {
       )}
     >
       <button
-        className={styles.button}
+        className={style(
+          styles.button,
+          props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled
+        )}
         disabled={props.disabled}
         onClick={onClick}
       >
