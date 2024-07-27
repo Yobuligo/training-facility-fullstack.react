@@ -1,4 +1,7 @@
+@import "../../styles/core/colors.module.scss";
+
 .card {
+  box-shadow: $box-shadow;
   padding: 0.5rem;
-  border: 1px solid rgba(128, 128, 128, 0.151);
+  border: 1px solid rgba(128, 128, 128, 0.411);
 }

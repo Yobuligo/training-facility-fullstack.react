@@ -1,7 +1,7 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/core/colors.module.scss";
 
 .page {
-  margin: 3rem 5rem;
   display: flex;
   flex-direction: column;
   row-gap: $negative-space;

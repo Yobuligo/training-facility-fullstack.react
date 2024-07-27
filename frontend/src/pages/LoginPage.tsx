@@ -1,5 +1,10 @@
+import { PublicPage } from "../components/pages/publicPage/PublicPage";
 import { Login } from "../features/login/Login";
 
 export const LoginPage: React.FC = () => {
-  return <Login />;
+  return (
+    <PublicPage>
+      <Login />
+    </PublicPage>
+  );
 };

@@ -1,0 +1,10 @@
+@import "../../../styles/core/colors.module.scss";
+
+.pageHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  background-color: $color-primary;
+}
