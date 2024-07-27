@@ -1,10 +1,16 @@
 @import "../../../styles/core/colors.module.scss";
+@import "../../../styles/variables.scss";
 
 .pageHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   align-items: center;
   height: 6rem;
   background-color: $color-primary;
+}
+
+.right {
+  justify-self: right;
+  margin-right: $negative-space;
 }

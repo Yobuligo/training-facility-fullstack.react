@@ -1,11 +1,9 @@
-import { PageHeader } from "../pageHeader/PageHeader";
 import { IPageProps } from "./IPageProps";
 import styles from "./Page.module.scss";
 
 export const Page: React.FC<IPageProps> = (props) => {
   return (
     <div className={styles.page}>
-      <PageHeader />
       <body>{props.children}</body>
     </div>
   );
