@@ -1,0 +1,20 @@
+@import "../../styles//core/colors.module.scss";
+@import "../../styles/core/mixins.scss";
+
+.search {
+  display: flex;
+  flex-direction: row;
+}
+
+.input {
+  font-size: large;
+  width: 10rem;
+
+  @include medium-screen {
+    width: auto;
+  }
+}
+
+.icon {
+  fill: $color-button-text;
+}
