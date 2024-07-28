@@ -57,5 +57,8 @@
     },
     "userProfileItem": {
         "deactivated": "Deactivated"
+    },
+    "userProfileSection": {
+        "addUser": "Add user"
     }
 }

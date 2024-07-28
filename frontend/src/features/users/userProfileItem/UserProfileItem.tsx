@@ -33,13 +33,25 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
         </div>
 
         <div className={styles.group}>
-          <div>E-Mail: {props.userProfile.email}</div>
-          <div>{props.userProfile.phone}</div>
+          <div>
+            {t(texts.userProfile.email)}: {props.userProfile.email}
+          </div>
+          <div>
+            {t(texts.userProfile.phone)}: {props.userProfile.phone}
+          </div>
         </div>
 
         <div className={styles.group}>
-          <div>Birthday: {props.userProfile.birthday.toDateString()}</div>
-          <div>Joined on: {props.userProfile.joinedOn.toDateString()}</div>
+          <div>
+            {t(texts.userProfile.birthday)}
+            {": "}
+            {props.userProfile.birthday.toDateString()}
+          </div>
+          <div>
+            {t(texts.userProfile.joinedOn)}
+            {": "}
+            {props.userProfile.joinedOn.toDateString()}
+          </div>
         </div>
       </Card>
       {props.isSelected && (
@@ -47,6 +59,7 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
           <UserProfile
             isAdminMode={true}
             userProfile={props.userProfile}
+            onCancel={props.onCancel}
             onChange={props.onChange}
           />
         </Card>

@@ -11,7 +11,7 @@ export interface IUserProfile extends IEntity, IHaveIsAdmin {
   gender: Gender;
   birthday: Date;
   street: string;
-  postalCode: number;
+  postalCode: string;
   city: string;
   email: string;
   phone: string;

@@ -8,8 +8,9 @@ export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
       key={userProfile.id}
       isSelected={userProfile === props.selected}
       userProfile={userProfile}
-      onSelect={() => props.onSelect?.(userProfile)}
+      onCancel={() => props.onCancel?.(userProfile)}
       onChange={() => props.onChange?.(userProfile)}
+      onSelect={() => props.onSelect?.(userProfile)}
     />
   ));
 

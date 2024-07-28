@@ -1,14 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { Gender } from "../../../shared/types/Gender";
 import { Language } from "../../../shared/types/Language";
 import { IUserProfileProps } from "./IUserProfileProps";
 
 export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const { t } = useTranslation();
-  const [displayMode, setDisplayMode] = useState(true);
+  const [displayMode, setDisplayMode] = useState(
+    props.userProfile instanceof DummyUserProfile &&
+      props.userProfile.isPersisted === false
+      ? false
+      : true
+  );
   const [birthday, setBirthday] = useState(props.userProfile.birthday);
   const [email, setEmail] = useState(props.userProfile.email);
   const [firstname, setFirstname] = useState(props.userProfile.firstname);
@@ -58,10 +64,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.deactivatedAt,
   ]);
 
-  useEffect(() => {
-    reset();
-  }, [props.userProfile, reset]);
-
   const genderOptions: ISelectOption[] = useMemo(
     () => [
       { key: Gender.FEMALE.toString(), text: t(texts.general.female) },
@@ -104,16 +106,21 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const onIsAdminChange = (option: ISelectOption) =>
     setIsAdmin(option.key === "0" ? true : false);
 
-  const onToggleMode = () => setDisplayMode((previous) => !previous);
+  const onToggleMode = () => {
+    setDisplayMode((previous) => !previous);
+  };
 
   const onChangeBirthday = (newValue: string) =>
     setBirthday(new Date(newValue));
 
   const onChangePostalCode = (newValue: string) => {
-    setPostalCode(parseInt(newValue));
+    setPostalCode(parseInt(newValue).toString());
   };
 
-  const onCancel = () => reset();
+  const onCancel = () => {
+    reset();
+    props.onCancel?.(props.userProfile);
+  };
 
   const onToggleIsDeactivated = () =>
     setIsDeactivated((previous) => {
