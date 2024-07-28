@@ -106,9 +106,20 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             texts.userProfile.joinedOn
           )}: ${props.userProfile.joinedOn.toLocaleDateString()}`}
           {props.isAdminMode && (
-            <div>
-              <Button>{t(texts.userProfile.generateNewPassword)}</Button>
-            </div>
+            <>
+              <div>
+                <LabeledSelect
+                  disabled={viewModel.displayMode}
+                  label={t(texts.userProfile.isAdmin)}
+                  options={viewModel.isAdminOptions}
+                  onSelect={viewModel.onIsAdminChange}
+                  selected={viewModel.selectedIsAdminOption}
+                />
+              </div>
+              <div>
+                <Button>{t(texts.userProfile.generateNewPassword)}</Button>
+              </div>
+            </>
           )}
         </div>
       </Card>

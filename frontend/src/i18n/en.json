@@ -5,12 +5,14 @@
         "trainings": "Trainings",
         "users": "Users"
     },
-    "general":{
+    "general": {
         "edit": "Edit",
         "female": "Female",
-        "male": "Male"
+        "male": "Male",
+        "no": "No",
+        "yes": "Yes"
     },
-    "language":{
+    "language": {
         "de": "Deutsch",
         "en": "English"
     },
@@ -39,6 +41,7 @@
         "firstname": "Firstname",
         "gender": "Gender",
         "generateNewPassword": "Generate new Password",
+        "isAdmin": "Is Admin",
         "joinedOn": "Joined On",
         "language": "Language",
         "lastname": "Lastname",

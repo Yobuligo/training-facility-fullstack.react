@@ -1,0 +1,8 @@
+@import "../../styles/core/mixins.scss";
+
+.myProfile {
+  @include large-screen {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
