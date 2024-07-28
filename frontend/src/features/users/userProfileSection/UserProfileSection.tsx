@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserProfileApi } from "../../../api/UserProfileApi";
 import { Button } from "../../../components/button/Button";
-import { Card } from "../../../components/card/Card";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
-import { UserProfile } from "../userProfile/UserProfile";
 import { UserProfileList } from "../userProfileList/UserProfileList";
 import styles from "./UserProfileSection.module.scss";
 
@@ -24,25 +22,33 @@ export const UserProfileSection: React.FC = () => {
   }, []);
 
   const onSelect = (userProfile: IUserProfile) =>
-    setSelectedUserProfile(userProfile);
+    setSelectedUserProfile((previous) => {
+      if (previous === userProfile) {
+        return undefined;
+      }
+      return userProfile;
+    });
+
+  const onChange = (userProfile: IUserProfile) =>
+    setUserProfiles((previous) => {
+      const index = previous.findIndex((item) => item.id === userProfile.id);
+      if (index !== -1) {
+        previous.splice(index, 1, userProfile);
+      }
+      return [...previous];
+    });
 
   return (
     <div className={styles.userProfileSection}>
       <div>
         <Button>Add User</Button>
       </div>
-      <div className={styles.list}>
-        <UserProfileList
-          onSelect={onSelect}
-          selected={selectedUserProfile}
-          userProfiles={userProfiles}
-        />
-        {selectedUserProfile && (
-          <Card>
-            <UserProfile isAdminMode={true} userProfile={selectedUserProfile} />
-          </Card>
-        )}
-      </div>
+      <UserProfileList
+        onChange={onChange}
+        onSelect={onSelect}
+        selected={selectedUserProfile}
+        userProfiles={userProfiles}
+      />
     </div>
   );
 };

@@ -1,7 +1,13 @@
+@import "../../../styles/core/mixins.scss";
+
 .userProfileSection {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  @include large-screen {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 }
 
 .list {

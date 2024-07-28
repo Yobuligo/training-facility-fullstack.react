@@ -55,6 +55,14 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             value={viewModel.lastname}
           />
 
+          <LabeledSelect
+            disabled={viewModel.displayMode}
+            label={t(texts.userProfile.gender)}
+            options={viewModel.genderOptions}
+            onSelect={viewModel.onGenderChange}
+            selected={viewModel.selectedGenderOption}
+          />
+
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.email)}
@@ -75,14 +83,6 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             type="date"
             onChange={viewModel.onChangeBirthday}
             value={toDate(viewModel.birthday)}
-          />
-
-          <LabeledSelect
-            disabled={viewModel.displayMode}
-            label={t(texts.userProfile.gender)}
-            options={viewModel.genderOptions}
-            onSelect={viewModel.onGenderChange}
-            selected={viewModel.selectedGenderOption}
           />
 
           <LabeledSelect

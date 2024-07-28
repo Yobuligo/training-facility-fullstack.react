@@ -118,7 +118,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
     setDisplayMode(true);
-    props.onUserProfileChange?.(props.userProfile);
+    props.onChange?.(props.userProfile);
   };
 
   return {
