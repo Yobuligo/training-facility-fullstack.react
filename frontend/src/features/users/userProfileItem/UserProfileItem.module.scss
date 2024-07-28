@@ -16,6 +16,11 @@
   background-color: $color-secondary-light;
 }
 
+.deactivated {
+  background-color: $color-disabled;
+  color: rgba(0, 0, 0, 0.425);
+}
+
 .group {
   display: flex;
   flex-direction: column;

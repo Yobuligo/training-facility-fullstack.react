@@ -54,5 +54,8 @@
         "postalCode": "Postal Code",
         "street": "Street",
         "technicalInformation": "Technical Information"
+    },
+    "userProfileItem": {
+        "deactivated": "Deactivated"
     }
 }
