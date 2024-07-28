@@ -5,6 +5,9 @@
         "trainings": "Trainings",
         "users": "Users"
     },
+    "general":{
+        "edit": "Edit"
+    },
     "login": {
         "errorLogin": "Unknown error while login",
         "errorRegister": "Unknown error while register",
@@ -21,5 +24,22 @@
     },
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
+    },
+    "userProfile": {
+        "address": "Address",
+        "birthday": "Birthday",
+        "city": "City",
+        "email": "Email",
+        "firstname": "Firstname",
+        "gender": "Gender",
+        "generateNewPassword": "Generate new Password",
+        "joinedOn": "Joined On",
+        "language": "Language",
+        "lastname": "Lastname",
+        "personalInformation": "Personal Information",
+        "phone": "Phone",
+        "postalCode": "Postal Code",
+        "street": "Street",
+        "technicalInformation": "Technical Information"
     }
 }

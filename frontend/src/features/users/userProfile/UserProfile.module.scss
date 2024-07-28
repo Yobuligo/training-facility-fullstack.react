@@ -1,2 +1,31 @@
+@import "../../..//styles/variables.scss";
+@import "../../../styles/core/mixins.scss";
+
 .userProfile {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: $negative-space;
+
+  @include medium-screen {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include large-screen {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  column-gap: 2rem;
+  padding: 1rem;
 }

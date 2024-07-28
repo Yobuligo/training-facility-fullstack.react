@@ -23,7 +23,7 @@ export const TabStrip: React.FC<ITabStripProps> = (props) => {
   return (
     <div>
       <header className={styles.header}>{items}</header>
-      <body>{props.tabItems[selected].content}</body>
+      <body className={styles.body}>{props.tabItems[selected].content}</body>
     </div>
   );
 };

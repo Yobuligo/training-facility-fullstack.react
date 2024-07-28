@@ -9,9 +9,8 @@ export const MyProfile: React.FC = () => {
   return (
     <div>
       {viewModel.error && <Error message={viewModel.error} />}
-      {viewModel.isLoading ? (
-        <Spinner />
-      ) : (
+      {viewModel.isLoading && <Spinner />}
+      {viewModel.userProfile && (
         <UserProfile userProfile={viewModel.userProfile!} />
       )}
     </div>

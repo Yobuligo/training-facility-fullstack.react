@@ -6,7 +6,7 @@ import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { texts } from "../../hooks/useTranslation/texts";
 
 export const useMyProfileViewModel = () => {
-    const { t } = useTranslation()
+  const { t } = useTranslation();
   const [session] = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -23,7 +23,11 @@ export const useMyProfileViewModel = () => {
     setIsLoading(true);
     const userProfileApi = new UserProfileApi();
     const userProfile = await userProfileApi.findByUserId(session.userId);
-    setUserProfile(userProfile);
+    if (!userProfile) {
+      setError(t(texts.myProfile.errorLoadingUserSession));
+    } else {
+      setUserProfile(userProfile);
+    }
     setIsLoading(false);
   }, [session, t]);
 
