@@ -20,6 +20,9 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [street, setStreet] = useState(props.userProfile.street);
   const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
   const [city, setCity] = useState(props.userProfile.city);
+  const [isDeactivated, setIsDeactivated] = useState(
+    props.userProfile.isDeactivated
+  );
 
   const reset = useCallback(() => {
     setBirthday(props.userProfile.birthday);
@@ -33,6 +36,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setStreet(props.userProfile.street);
     setPostalCode(props.userProfile.postalCode);
     setCity(props.userProfile.city);
+    setIsDeactivated(props.userProfile.isDeactivated);
     setDisplayMode(true);
   }, [
     props.userProfile.birthday,
@@ -46,6 +50,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.phone,
     props.userProfile.postalCode,
     props.userProfile.street,
+    props.userProfile.isDeactivated,
   ]);
 
   useEffect(() => {
@@ -105,6 +110,8 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onCancel = () => reset();
 
+  const onToggleIsDeactivated = () => setIsDeactivated((previous) => !previous);
+
   const onSave = () => {
     props.userProfile.birthday = birthday;
     props.userProfile.email = email;
@@ -117,6 +124,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.street = street;
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
+    props.userProfile.isDeactivated = isDeactivated;
     setDisplayMode(true);
     props.onChange?.(props.userProfile);
   };
@@ -129,6 +137,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     firstname,
     genderOptions,
     isAdminOptions,
+    isDeactivated,
     languageOptions,
     lastname,
     onCancel,
@@ -138,6 +147,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onGenderChange,
     onLanguageChange,
     onSave,
+    onToggleIsDeactivated,
     onToggleMode,
     phone,
     postalCode,

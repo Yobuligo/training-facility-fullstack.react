@@ -36,9 +36,11 @@
         "errorLoadingUserSession": "Error while loading user session"
     },
     "userProfile": {
+        "activate": "Activate",
         "address": "Address",
         "birthday": "Birthday",
         "city": "City",
+        "deactivate": "Deactivate",
         "email": "Email",
         "firstname": "Firstname",
         "gender": "Gender",

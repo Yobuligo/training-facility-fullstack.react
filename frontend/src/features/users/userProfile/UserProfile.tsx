@@ -141,9 +141,19 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
                   selected={viewModel.selectedIsAdminOption}
                 />
               </div>
-              <div>
-                <Button>{t(texts.userProfile.generateNewPassword)}</Button>
-              </div>
+              <Toolbar>
+                <Button disabled={viewModel.displayMode}>
+                  {t(texts.userProfile.generateNewPassword)}
+                </Button>
+                <Button
+                  disabled={viewModel.displayMode}
+                  onClick={viewModel.onToggleIsDeactivated}
+                >
+                  {viewModel.isDeactivated
+                    ? t(texts.userProfile.activate)
+                    : t(texts.userProfile.deactivate)}
+                </Button>
+              </Toolbar>
             </>
           )}
         </div>
