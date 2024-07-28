@@ -17,6 +17,7 @@ export interface IUserProfile extends IEntity, IHaveIsAdmin {
   phone: string;
   language: Language;
   isDeactivated: boolean;
+  deactivatedAt?: Date;
   joinedOn: Date;
 }
 

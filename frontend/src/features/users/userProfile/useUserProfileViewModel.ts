@@ -23,6 +23,9 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [isDeactivated, setIsDeactivated] = useState(
     props.userProfile.isDeactivated
   );
+  const [deactivatedAt, setDeactivatedAt] = useState(
+    props.userProfile.deactivatedAt
+  );
 
   const reset = useCallback(() => {
     setBirthday(props.userProfile.birthday);
@@ -37,6 +40,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setPostalCode(props.userProfile.postalCode);
     setCity(props.userProfile.city);
     setIsDeactivated(props.userProfile.isDeactivated);
+    setDeactivatedAt(props.userProfile.deactivatedAt);
     setDisplayMode(true);
   }, [
     props.userProfile.birthday,
@@ -51,6 +55,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.postalCode,
     props.userProfile.street,
     props.userProfile.isDeactivated,
+    props.userProfile.deactivatedAt,
   ]);
 
   useEffect(() => {
@@ -110,7 +115,16 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onCancel = () => reset();
 
-  const onToggleIsDeactivated = () => setIsDeactivated((previous) => !previous);
+  const onToggleIsDeactivated = () =>
+    setIsDeactivated((previous) => {
+      previous = !previous;
+      if (previous === true) {
+        setDeactivatedAt(new Date());
+      } else {
+        setDeactivatedAt(undefined);
+      }
+      return previous;
+    });
 
   const onSave = () => {
     props.userProfile.birthday = birthday;
@@ -125,6 +139,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
     props.userProfile.isDeactivated = isDeactivated;
+    props.userProfile.deactivatedAt = deactivatedAt;
     setDisplayMode(true);
     props.onChange?.(props.userProfile);
   };
