@@ -122,6 +122,39 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
       </Card>
 
       <Card>
+        <h4 className={styles.headline}>{t(texts.userProfile.bank)}</h4>
+        <div className={styles.group}>
+          <LabeledInput
+            disabled={viewModel.displayMode}
+            label={t(texts.userProfile.bankAccountOwner)}
+            onChange={viewModel.setBankAccountOwner}
+            value={viewModel.bankAccountOwner}
+          />
+
+          <LabeledInput
+            disabled={viewModel.displayMode}
+            label={t(texts.userProfile.bankAccountIBAN)}
+            onChange={viewModel.setBankAccountIBAN}
+            value={viewModel.bankAccountIBAN}
+          />
+
+          <LabeledInput
+            disabled={viewModel.displayMode}
+            label={t(texts.userProfile.bankAccountBIC)}
+            onChange={viewModel.setBankAccountBIC}
+            value={viewModel.bankAccountBIC}
+          />
+
+          <LabeledInput
+            disabled={viewModel.displayMode}
+            label={t(texts.userProfile.bankAccountInstitution)}
+            onChange={viewModel.setBankAccountInstitution}
+            value={viewModel.bankAccountInstitution}
+          />
+        </div>
+      </Card>
+
+      <Card>
         <h4 className={styles.headline}>
           {t(texts.userProfile.technicalInformation)}
         </h4>

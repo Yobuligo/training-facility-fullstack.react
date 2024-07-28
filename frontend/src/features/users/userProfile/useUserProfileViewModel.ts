@@ -26,6 +26,18 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [street, setStreet] = useState(props.userProfile.street);
   const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
   const [city, setCity] = useState(props.userProfile.city);
+  const [bankAccountOwner, setBankAccountOwner] = useState(
+    props.userProfile.bankAccountOwner
+  );
+  const [bankAccountIBAN, setBankAccountIBAN] = useState(
+    props.userProfile.bankAccountIBAN
+  );
+  const [bankAccountBIC, setBankAccountBIC] = useState(
+    props.userProfile.bankAccountBIC
+  );
+  const [bankAccountInstitution, setBankAccountInstitution] = useState(
+    props.userProfile.bankAccountInstitution
+  );
   const [isDeactivated, setIsDeactivated] = useState(
     props.userProfile.isDeactivated
   );
@@ -152,6 +164,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   };
 
   return {
+    bankAccountBIC,
+    bankAccountIBAN,
+    bankAccountInstitution,
+    bankAccountOwner,
     birthday,
     city,
     displayMode,
@@ -176,6 +192,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     selectedIsAdminOption,
     selectedGenderOption,
     selectedLanguageOption,
+    setBankAccountBIC,
+    setBankAccountIBAN,
+    setBankAccountInstitution,
+    setBankAccountOwner,
     setCity,
     setEmail,
     setFirstname,

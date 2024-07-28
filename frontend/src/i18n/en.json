@@ -38,6 +38,11 @@
     "userProfile": {
         "activate": "Activate",
         "address": "Address",
+        "bank": "Bank",
+        "bankAccountOwner": "Account owner",
+        "bankAccountIBAN": "IBAN",
+        "bankAccountBIC": "BIC",
+        "bankAccountInstitution": "Institution",
         "birthday": "Birthday",
         "city": "City",
         "deactivate": "Deactivate",

@@ -22,6 +22,10 @@ export class DummyUserProfile implements IUserProfile {
   createdAt = new Date();
   updatedAt = new Date();
   language = Language.en;
+  bankAccountOwner = "";
+  bankAccountIBAN = "";
+  bankAccountBIC = "";
+  bankAccountInstitution = "";
   isDeactivated = false;
 
   get isPersisted() {

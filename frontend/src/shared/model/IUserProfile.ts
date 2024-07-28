@@ -16,6 +16,10 @@ export interface IUserProfile extends IEntity, IHaveIsAdmin {
   email: string;
   phone: string;
   language: Language;
+  bankAccountOwner: string;
+  bankAccountIBAN: string;
+  bankAccountBIC: string;
+  bankAccountInstitution: string;
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
