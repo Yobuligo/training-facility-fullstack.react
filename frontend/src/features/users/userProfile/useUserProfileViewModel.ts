@@ -44,6 +44,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [deactivatedAt, setDeactivatedAt] = useState(
     props.userProfile.deactivatedAt
   );
+  const [collapseBank, setCollapseBank] = useState(false);
 
   const reset = useCallback(() => {
     setBirthday(props.userProfile.birthday);
@@ -169,6 +170,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     bankAccountInstitution,
     bankAccountOwner,
     birthday,
+    collapseBank,
     city,
     displayMode,
     email,
@@ -197,6 +199,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setBankAccountInstitution,
     setBankAccountOwner,
     setCity,
+    setCollapseBank,
     setEmail,
     setFirstname,
     setLastname,
