@@ -1,10 +1,17 @@
 import { Card } from "../../../components/card/Card";
+import { style } from "../../../utils/style";
 import { IUserProfileItem } from "./IUserProfileItemProps";
 import styles from "./UserProfileItem.module.scss";
 
 export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
   return (
-    <Card className={styles.userProfileItem}>
+    <Card
+      className={style(
+        styles.userProfileItem,
+        props.isSelected ? styles.selected : ""
+      )}
+      onClick={props.onSelect}
+    >
       <div className={styles.group}>
         <div className={styles.name}>
           {`${props.userProfile.firstname} ${props.userProfile.lastname}`}

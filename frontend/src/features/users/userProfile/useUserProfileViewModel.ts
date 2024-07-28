@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
@@ -20,6 +20,37 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [street, setStreet] = useState(props.userProfile.street);
   const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
   const [city, setCity] = useState(props.userProfile.city);
+
+  const reset = useCallback(() => {
+    setBirthday(props.userProfile.birthday);
+    setEmail(props.userProfile.email);
+    setFirstname(props.userProfile.firstname);
+    setLastname(props.userProfile.lastname);
+    setGender(props.userProfile.gender);
+    setLanguage(props.userProfile.language);
+    setIsAdmin(props.userProfile.isAdmin);
+    setPhone(props.userProfile.phone);
+    setStreet(props.userProfile.street);
+    setPostalCode(props.userProfile.postalCode);
+    setCity(props.userProfile.city);
+    setDisplayMode(true);
+  }, [
+    props.userProfile.birthday,
+    props.userProfile.city,
+    props.userProfile.email,
+    props.userProfile.firstname,
+    props.userProfile.gender,
+    props.userProfile.isAdmin,
+    props.userProfile.language,
+    props.userProfile.lastname,
+    props.userProfile.phone,
+    props.userProfile.postalCode,
+    props.userProfile.street,
+  ]);
+
+  useEffect(() => {
+    reset();
+  }, [props.userProfile, reset]);
 
   const genderOptions: ISelectOption[] = useMemo(
     () => [
@@ -70,21 +101,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onChangePostalCode = (newValue: string) => {
     setPostalCode(parseInt(newValue));
-  };
-
-  const reset = () => {
-    setBirthday(props.userProfile.birthday);
-    setEmail(props.userProfile.email);
-    setFirstname(props.userProfile.firstname);
-    setLastname(props.userProfile.lastname);
-    setGender(props.userProfile.gender);
-    setLanguage(props.userProfile.language);
-    setIsAdmin(props.userProfile.isAdmin);
-    setPhone(props.userProfile.phone);
-    setStreet(props.userProfile.street);
-    setPostalCode(props.userProfile.postalCode);
-    setCity(props.userProfile.city);
-    setDisplayMode(true);
   };
 
   const onCancel = () => reset();

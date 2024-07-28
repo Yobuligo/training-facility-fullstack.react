@@ -14,6 +14,7 @@ export const TabStrip: React.FC<ITabStripProps> = (props) => {
 
   const items = props.tabItems.map((tabItem, index) => (
     <TabItem
+      key={index}
       onSelect={() => onSelect(tabItem, index)}
       selected={selected === index}
       title={tabItem.title}
@@ -23,7 +24,7 @@ export const TabStrip: React.FC<ITabStripProps> = (props) => {
   return (
     <div>
       <header className={styles.header}>{items}</header>
-      <body className={styles.body}>{props.tabItems[selected].content}</body>
+      <div className={styles.body}>{props.tabItems[selected].content}</div>
     </div>
   );
 };

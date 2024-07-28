@@ -4,7 +4,12 @@ import styles from "./UserProfileList.module.scss";
 
 export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
   const items = props.userProfiles.map((userProfile) => (
-    <UserProfileItem key={userProfile.id} userProfile={userProfile} />
+    <UserProfileItem
+      key={userProfile.id}
+      isSelected={userProfile === props.selected}
+      userProfile={userProfile}
+      onSelect={() => props.onSelect?.(userProfile)}
+    />
   ));
 
   return <div className={styles.userProfileList}>{items}</div>;

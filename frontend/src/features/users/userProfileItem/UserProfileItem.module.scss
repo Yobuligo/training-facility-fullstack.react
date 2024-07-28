@@ -1,6 +1,8 @@
 @import "../../../styles/core/mixins.scss";
+@import "../../../styles/core/colors.module.scss";
 
 .userProfileItem {
+  cursor: pointer;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
 
@@ -8,6 +10,10 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
+}
+
+.selected {
+  background-color: $color-secondary-light;
 }
 
 .group {
