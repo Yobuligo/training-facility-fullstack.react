@@ -1,0 +1,7 @@
+@import "../../styles/variables.scss";
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+}

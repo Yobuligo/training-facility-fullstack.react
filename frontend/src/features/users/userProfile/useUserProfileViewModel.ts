@@ -9,9 +9,17 @@ import { IUserProfileProps } from "./IUserProfileProps";
 export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const { t } = useTranslation();
   const [displayMode, setDisplayMode] = useState(true);
+  const [birthday, setBirthday] = useState(props.userProfile.birthday);
+  const [email, setEmail] = useState(props.userProfile.email);
+  const [firstname, setFirstname] = useState(props.userProfile.firstname);
+  const [lastname, setLastname] = useState(props.userProfile.lastname);
   const [gender, setGender] = useState(props.userProfile.gender);
   const [language, setLanguage] = useState(props.userProfile.language);
   const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
+  const [phone, setPhone] = useState(props.userProfile.phone);
+  const [street, setStreet] = useState(props.userProfile.street);
+  const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
+  const [city, setCity] = useState(props.userProfile.city);
 
   const genderOptions: ISelectOption[] = useMemo(
     () => [
@@ -57,18 +65,76 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onToggleMode = () => setDisplayMode((previous) => !previous);
 
+  const onChangeBirthday = (newValue: string) =>
+    setBirthday(new Date(newValue));
+
+  const onChangePostalCode = (newValue: string) => {
+    setPostalCode(parseInt(newValue));
+  };
+
+  const reset = () => {
+    setBirthday(props.userProfile.birthday);
+    setEmail(props.userProfile.email);
+    setFirstname(props.userProfile.firstname);
+    setLastname(props.userProfile.lastname);
+    setGender(props.userProfile.gender);
+    setLanguage(props.userProfile.language);
+    setIsAdmin(props.userProfile.isAdmin);
+    setPhone(props.userProfile.phone);
+    setStreet(props.userProfile.street);
+    setPostalCode(props.userProfile.postalCode);
+    setCity(props.userProfile.city);
+    setDisplayMode(true);
+  };
+
+  const onCancel = () => reset();
+
+  const onSave = () => {
+    props.userProfile.birthday = birthday;
+    props.userProfile.email = email;
+    props.userProfile.firstname = firstname;
+    props.userProfile.lastname = lastname;
+    props.userProfile.gender = gender;
+    props.userProfile.language = language;
+    props.userProfile.isAdmin = isAdmin;
+    props.userProfile.phone = phone;
+    props.userProfile.street = street;
+    props.userProfile.postalCode = postalCode;
+    props.userProfile.city = city;
+    setDisplayMode(true);
+    props.onUserProfileChange?.(props.userProfile);
+  };
+
   return {
+    birthday,
+    city,
     displayMode,
+    email,
+    firstname,
     genderOptions,
     isAdminOptions,
     languageOptions,
+    lastname,
+    onCancel,
+    onChangeBirthday,
+    onChangePostalCode,
     onIsAdminChange,
     onGenderChange,
     onLanguageChange,
+    onSave,
     onToggleMode,
+    phone,
+    postalCode,
     selectedIsAdminOption,
     selectedGenderOption,
     selectedLanguageOption,
+    setCity,
+    setEmail,
+    setFirstname,
+    setLastname,
     setGender,
+    setPhone,
+    setStreet,
+    street,
   };
 };

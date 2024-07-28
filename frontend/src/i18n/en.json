@@ -6,10 +6,12 @@
         "users": "Users"
     },
     "general": {
+        "cancel": "Cancel",
         "edit": "Edit",
         "female": "Female",
         "male": "Male",
         "no": "No",
+        "save": "Save",
         "yes": "Yes"
     },
     "language": {

@@ -2,6 +2,7 @@ import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { toDate } from "../../../utils/toDate";
@@ -18,44 +19,62 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
       <div className={styles.header}>
         <h3>{`${props.userProfile.firstname} ${props.userProfile.lastname}`}</h3>
         <div>
-          <Button onClick={viewModel.onToggleMode}>
-            {t(texts.general.edit)}
-          </Button>
+          {viewModel.displayMode ? (
+            <Button onClick={viewModel.onToggleMode}>
+              {t(texts.general.edit)}
+            </Button>
+          ) : (
+            <Toolbar>
+              <Button onClick={viewModel.onCancel}>
+                {t(texts.general.cancel)}
+              </Button>
+              <Button onClick={viewModel.onSave}>
+                {t(texts.general.save)}
+              </Button>
+            </Toolbar>
+          )}
         </div>
       </div>
 
       <Card>
-        <h4>{t(texts.userProfile.personalInformation)}</h4>
+        <h4 className={styles.headline}>
+          {t(texts.userProfile.personalInformation)}
+        </h4>
         <div className={styles.group}>
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.firstname)}
-            value={props.userProfile.firstname}
+            onChange={viewModel.setFirstname}
+            value={viewModel.firstname}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.lastname)}
-            value={props.userProfile.lastname}
+            onChange={viewModel.setLastname}
+            value={viewModel.lastname}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.email)}
-            value={props.userProfile.email}
+            onChange={viewModel.setEmail}
+            value={viewModel.email}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.phone)}
-            value={props.userProfile.phone}
+            onChange={viewModel.setPhone}
+            value={viewModel.phone}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.birthday)}
             type="date"
-            value={toDate(props.userProfile.birthday)}
+            onChange={viewModel.onChangeBirthday}
+            value={toDate(viewModel.birthday)}
           />
 
           <LabeledSelect
@@ -77,34 +96,40 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
       </Card>
 
       <Card>
-        <h4>{t(texts.userProfile.address)}</h4>
+        <h4 className={styles.headline}>{t(texts.userProfile.address)}</h4>
         <div className={styles.group}>
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.street)}
-            value={props.userProfile.street}
+            onChange={viewModel.setStreet}
+            value={viewModel.street}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.postalCode)}
-            value={props.userProfile.postalCode.toString()}
+            onChange={viewModel.onChangePostalCode}
+            value={viewModel.postalCode.toString()}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.city)}
-            value={props.userProfile.city}
+            onChange={viewModel.setCity}
+            value={viewModel.city}
           />
         </div>
       </Card>
 
       <Card>
-        <h4>{t(texts.userProfile.technicalInformation)}</h4>
+        <h4 className={styles.headline}>
+          {t(texts.userProfile.technicalInformation)}
+        </h4>
         <div className={styles.group}>
-          {`${t(
-            texts.userProfile.joinedOn
-          )}: ${props.userProfile.joinedOn.toLocaleDateString()}`}
+          <div>
+            <div>{t(texts.userProfile.joinedOn)}</div>
+            <div>{props.userProfile.joinedOn.toLocaleDateString()}</div>
+          </div>
           {props.isAdminMode && (
             <>
               <div>
