@@ -42,8 +42,16 @@ export const useUserProfileSectionViewModel = () => {
       const index = previous.findIndex((item) => item.id === userProfile.id);
 
       // todo: if user profile is a dummy object (which is not persisted), save it to db and mark it as persisted
-      if (userProfile instanceof DummyUserProfile) {
+      const userProfileApi = new UserProfileApi();
+      if (
+        userProfile instanceof DummyUserProfile &&
+        userProfile.isPersisted === false
+      ) {
         userProfile.setIsPersisted();
+
+        userProfileApi.insert(userProfile);
+      } else {
+        userProfileApi.update(userProfile);
       }
 
       if (index !== -1) {
@@ -52,7 +60,10 @@ export const useUserProfileSectionViewModel = () => {
       return [...previous];
     });
 
-  const onAdd = () => {
+  /**
+   * Appends a new user profile, which is not persisted yet
+   */
+  const onAppend = () => {
     setUserProfiles((previous) => {
       const userProfile: IUserProfile = new DummyUserProfile();
       setSelectedUserProfile(userProfile);
@@ -78,7 +89,7 @@ export const useUserProfileSectionViewModel = () => {
 
   return {
     filterUserProfiles,
-    onAdd,
+    onAppend,
     onCancel,
     onChange,
     onSelect,

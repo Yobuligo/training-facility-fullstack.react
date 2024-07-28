@@ -7,6 +7,20 @@ export class UserProfileApi extends Repository<IUserProfile> {
     super(UserProfileMeta);
   }
 
+  insert(data: IUserProfile): Promise<IUserProfile> {
+    // Todo: replace by productive code
+    return new Promise((resolve) => {
+      DummyUserProfiles.push(data);
+      resolve(data);
+    });
+  }
+
+  update(data: IUserProfile): Promise<void> {
+    return new Promise((resolve) => {
+      resolve();
+    });
+  }
+
   findAll(): Promise<IUserProfile[]> {
     // Todo: replace by productive code
     return new Promise((resolve) => {

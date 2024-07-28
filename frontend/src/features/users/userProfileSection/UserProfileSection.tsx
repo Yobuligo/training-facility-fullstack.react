@@ -13,7 +13,7 @@ export const UserProfileSection: React.FC = () => {
   return (
     <div className={styles.userProfileSection}>
       <div className={styles.header}>
-        <Button onClick={viewModel.onAdd}>
+        <Button onClick={viewModel.onAppend}>
           {t(texts.userProfileSection.addUser)}
         </Button>
         <Search onSearch={(query) => viewModel.setQuery(query)} />
