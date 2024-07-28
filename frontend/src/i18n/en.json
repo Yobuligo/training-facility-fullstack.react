@@ -1,8 +1,9 @@
 {
-    "administration": {
+    "dashboard": {
+        "myProfile": "My profile",
+        "myTrainings": "My trainings",
         "trainings": "Trainings",
-        "users": "Users",
-        "home": "Home"
+        "users": "Users"
     },
     "login": {
         "errorLogin": "Unknown error while login",
@@ -17,5 +18,8 @@
     },
     "logout": {
         "title": "Logout"
+    },
+    "myProfile": {
+        "errorLoadingUserSession": "Error while loading user session"
     }
 }

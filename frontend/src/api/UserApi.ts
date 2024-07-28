@@ -31,8 +31,9 @@ export class UserApi extends Repository<any> {
         createdAt: new Date(),
         expiresAt: new Date(),
         updatedAt: new Date(),
-        userId: uuid(),
+        userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
         username: "frank",
+        isAdmin: true,
       });
     });
   }

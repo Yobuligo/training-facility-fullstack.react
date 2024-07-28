@@ -1,6 +1,7 @@
+import { ReactNode } from "react";
 import { ITabItem } from "./ITabItem";
 
 export interface ITabStripProps {
-  tabItems: ITabItem[];
   onSelect?: (tabItem: ITabItem) => void;
+  tabItems: ITabItem[];
 }

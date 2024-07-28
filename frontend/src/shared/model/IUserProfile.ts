@@ -1,8 +1,10 @@
 import { Gender } from "../types/Gender";
 import { IEntity } from "../types/IEntity";
+import { IHaveIsAdmin } from "../types/IHaveIsAdmin";
 import { IHavePath } from "../types/IHavePath";
+import { Language } from "../types/Language";
 
-export interface IUserProfile extends IEntity {
+export interface IUserProfile extends IEntity, IHaveIsAdmin {
   userId: string;
   firstname: string;
   lastname: string;
@@ -13,6 +15,7 @@ export interface IUserProfile extends IEntity {
   city: string;
   email: string;
   phone: string;
+  language: Language;
   joinedOn: Date;
 }
 

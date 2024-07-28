@@ -51,7 +51,7 @@ export const useLoginViewModel = () => {
       const userApi = new UserApi();
       const session = await userApi.login(credentials);
       setSession(session);
-      navigate(AppRoutes.start.toPath());
+      navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
       if (isError(error)) {
         updateErrorMessage(error.message);

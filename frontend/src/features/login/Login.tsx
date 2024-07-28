@@ -3,6 +3,7 @@ import { LabeledInput } from "../../components/labeledInput/LabeledInput";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { Error } from "../error/Error";
 import styles from "./Login.module.scss";
 import { useLoginViewModel } from "./useLoginViewModel";
 
@@ -16,9 +17,7 @@ export const Login: React.FC = () => {
         <h3 className={styles.headline}>
           {viewModel.loginMode ? t(texts.login.title) : t(texts.login.register)}
         </h3>
-        {viewModel.errorMessage && (
-          <Card className={styles.errorMessage}>{viewModel.errorMessage}</Card>
-        )}
+        {viewModel.errorMessage && <Error message={viewModel.errorMessage} />}
         {viewModel.successMessage && (
           <Card className={styles.successMessage}>
             {viewModel.successMessage}
