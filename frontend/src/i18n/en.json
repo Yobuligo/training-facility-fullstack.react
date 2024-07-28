@@ -6,7 +6,13 @@
         "users": "Users"
     },
     "general":{
-        "edit": "Edit"
+        "edit": "Edit",
+        "female": "Female",
+        "male": "Male"
+    },
+    "language":{
+        "de": "Deutsch",
+        "en": "English"
     },
     "login": {
         "errorLogin": "Unknown error while login",

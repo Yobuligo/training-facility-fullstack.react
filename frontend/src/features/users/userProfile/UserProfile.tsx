@@ -1,8 +1,10 @@
 import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
+import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { toDate } from "../../../utils/toDate";
 import { IUserProfileProps } from "./IUserProfileProps";
 import styles from "./UserProfile.module.scss";
 import { useUserProfileViewModel } from "./useUserProfileViewModel";
@@ -16,7 +18,9 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
       <div className={styles.header}>
         <h3>{`${props.userProfile.firstname} ${props.userProfile.lastname}`}</h3>
         <div>
-          <Button>{t(texts.general.edit)}</Button>
+          <Button onClick={viewModel.onToggleMode}>
+            {t(texts.general.edit)}
+          </Button>
         </div>
       </div>
 
@@ -50,19 +54,24 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.birthday)}
-            value={props.userProfile.birthday.toString()}
+            type="date"
+            value={toDate(props.userProfile.birthday)}
           />
 
-          <LabeledInput
+          <LabeledSelect
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.gender)}
-            value={props.userProfile.gender.toString()}
+            options={viewModel.genderOptions}
+            onSelect={viewModel.onGenderChange}
+            selected={viewModel.selectedGenderOption}
           />
 
-          <LabeledInput
+          <LabeledSelect
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.language)}
-            value={props.userProfile.language.toString()}
+            options={viewModel.languageOptions}
+            onSelect={viewModel.onLanguageChange}
+            selected={viewModel.selectedLanguageOption}
           />
         </div>
       </Card>
@@ -93,11 +102,12 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
       <Card>
         <h4>{t(texts.userProfile.technicalInformation)}</h4>
         <div className={styles.group}>
-          <LabeledInput
-            label={t(texts.userProfile.joinedOn)}
-            value={props.userProfile.joinedOn.toString()}
-          />
-          <Button>{t(texts.userProfile.generateNewPassword)}</Button>
+          {`${t(
+            texts.userProfile.joinedOn
+          )}: ${props.userProfile.joinedOn.toLocaleDateString()}`}
+          <div>
+            <Button>{t(texts.userProfile.generateNewPassword)}</Button>
+          </div>
         </div>
       </Card>
     </div>
