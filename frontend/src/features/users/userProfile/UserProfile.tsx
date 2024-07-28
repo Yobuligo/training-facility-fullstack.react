@@ -105,9 +105,11 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           {`${t(
             texts.userProfile.joinedOn
           )}: ${props.userProfile.joinedOn.toLocaleDateString()}`}
-          <div>
-            <Button>{t(texts.userProfile.generateNewPassword)}</Button>
-          </div>
+          {props.isAdminMode && (
+            <div>
+              <Button>{t(texts.userProfile.generateNewPassword)}</Button>
+            </div>
+          )}
         </div>
       </Card>
     </div>
