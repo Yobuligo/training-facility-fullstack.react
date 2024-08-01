@@ -2,7 +2,7 @@ import { Card } from "../../../components/card/Card";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { style } from "../../../utils/style";
-import { UserProfile } from "../userProfile/UserProfile";
+import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { IUserProfileItem } from "./IUserProfileItemProps";
 import styles from "./UserProfileItem.module.scss";
 
@@ -56,11 +56,11 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
       </Card>
       {props.isSelected && (
         <Card>
-          <UserProfile
+          <UserProfileDetails
             isAdminMode={true}
-            userProfile={props.userProfile}
             onCancel={props.onCancel}
             onChange={props.onChange}
+            userProfile={props.userProfile}
           />
         </Card>
       )}
