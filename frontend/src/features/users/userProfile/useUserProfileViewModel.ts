@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
+import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
@@ -9,6 +10,8 @@ import { IUserProfileProps } from "./IUserProfileProps";
 
 export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const { t } = useTranslation();
+  const [profileDetailsSettings, setProfileDetailsSettings] =
+    useProfileDetailsSettings();
   const [displayMode, setDisplayMode] = useState(
     props.userProfile instanceof DummyUserProfile &&
       props.userProfile.isPersisted === false
@@ -164,6 +167,30 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.onChange?.(props.userProfile);
   };
 
+  const onToggleCollapseAddress = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseAddress = collapsed;
+      return { ...previous };
+    });
+
+  const onToggleCollapseBank = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseBank = collapsed;
+      return { ...previous };
+    });
+
+  const onToggleCollapsePersonalInformation = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapsePersonalInformation = collapsed;
+      return { ...previous };
+    });
+
+  const onToggleCollapseTechnicalInformation = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseTechnicalInformation = collapsed;
+      return { ...previous };
+    });
+
   return {
     bankAccountBIC,
     bankAccountIBAN,
@@ -187,10 +214,15 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onGenderChange,
     onLanguageChange,
     onSave,
+    onToggleCollapseAddress,
+    onToggleCollapseBank,
+    onToggleCollapsePersonalInformation,
+    onToggleCollapseTechnicalInformation,
     onToggleIsDeactivated,
     onToggleMode,
     phone,
     postalCode,
+    profileDetailsSettings,
     selectedIsAdminOption,
     selectedGenderOption,
     selectedLanguageOption,

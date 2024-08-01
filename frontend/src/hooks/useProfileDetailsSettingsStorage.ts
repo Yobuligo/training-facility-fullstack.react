@@ -6,10 +6,10 @@ export const useProfileDetailsSettingsStorage =
   (): Value<IProfileDetailsSettings> => {
     const [profileDetailsSettings, setProfileDetailsSettings] =
       useLocalStorage<IProfileDetailsSettings>("training-facility", {
-        displayTechnicalInformation: true,
-        displayAddress: true,
-        displayBank: true,
-        displayPersonalInformation: true,
+        collapseTechnicalInformation: false,
+        collapseAddress: false,
+        collapseBank: false,
+        collapsePersonalInformation: false,
       });
 
     return [profileDetailsSettings, setProfileDetailsSettings];

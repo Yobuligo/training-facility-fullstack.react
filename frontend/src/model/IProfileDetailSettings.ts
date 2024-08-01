@@ -1,6 +1,6 @@
 export interface IProfileDetailsSettings {
-  displayPersonalInformation?: boolean;
-  displayAddress?: boolean;
-  displayBank?: boolean;
-  displayTechnicalInformation: boolean;
+  collapsePersonalInformation?: boolean;
+  collapseAddress?: boolean;
+  collapseBank?: boolean;
+  collapseTechnicalInformation: boolean;
 }

@@ -36,7 +36,11 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         </div>
       </div>
 
-      <UserProfileGroup title={t(texts.userProfile.personalInformation)}>
+      <UserProfileGroup
+        collapsed={viewModel.profileDetailsSettings.collapsePersonalInformation}
+        onToggleCollapse={viewModel.onToggleCollapsePersonalInformation}
+        title={t(texts.userProfile.personalInformation)}
+      >
         <LabeledInput
           disabled={viewModel.displayMode}
           label={t(texts.userProfile.firstname)}
@@ -90,7 +94,11 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         />
       </UserProfileGroup>
 
-      <UserProfileGroup title={t(texts.userProfile.address)}>
+      <UserProfileGroup
+        collapsed={viewModel.profileDetailsSettings.collapseAddress}
+        onToggleCollapse={viewModel.onToggleCollapseAddress}
+        title={t(texts.userProfile.address)}
+      >
         <LabeledInput
           disabled={viewModel.displayMode}
           label={t(texts.userProfile.street)}
@@ -113,7 +121,11 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         />
       </UserProfileGroup>
 
-      <UserProfileGroup title={t(texts.userProfile.bank)}>
+      <UserProfileGroup
+        collapsed={viewModel.profileDetailsSettings.collapseBank}
+        onToggleCollapse={viewModel.onToggleCollapseBank}
+        title={t(texts.userProfile.bank)}
+      >
         <LabeledInput
           disabled={viewModel.displayMode}
           label={t(texts.userProfile.bankAccountOwner)}
@@ -143,7 +155,13 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         />
       </UserProfileGroup>
 
-      <UserProfileGroup title={t(texts.userProfile.technicalInformation)}>
+      <UserProfileGroup
+        collapsed={
+          viewModel.profileDetailsSettings.collapseTechnicalInformation
+        }
+        onToggleCollapse={viewModel.onToggleCollapseTechnicalInformation}
+        title={t(texts.userProfile.technicalInformation)}
+      >
         <div>
           <div>{t(texts.userProfile.joinedOn)}</div>
           <div>{props.userProfile.joinedOn.toLocaleDateString()}</div>
