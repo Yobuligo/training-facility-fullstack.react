@@ -95,6 +95,7 @@ export const useUserProfileSectionViewModel = () => {
     onCancel,
     onChange,
     onSelect,
+    query,
     selectedUserProfile,
     setQuery,
   };

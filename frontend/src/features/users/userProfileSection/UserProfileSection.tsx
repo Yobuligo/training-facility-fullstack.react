@@ -26,7 +26,7 @@ export const UserProfileSection: React.FC = () => {
             <Button onClick={viewModel.onAppend}>
               {t(texts.userProfileSection.addUser)}
             </Button>
-            <Search onSearch={(query) => viewModel.setQuery(query)} />
+            <Search onSearch={(query) => viewModel.setQuery(query)} query={viewModel.query} />
           </div>
           <UserProfileList
             onCancel={viewModel.onCancel}
