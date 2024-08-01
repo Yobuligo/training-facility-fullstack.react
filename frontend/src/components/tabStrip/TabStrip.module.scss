@@ -1,4 +1,4 @@
-@import "../../styles//core/colors.module.scss";
+@import "../../styles/core/colors.module.scss";
 
 .header {
   display: flex;
@@ -9,8 +9,4 @@
   background-color: $color-primary;
   height: 4rem;
   margin-top: 0.1rem;
-}
-
-.body {
-  padding: 2rem;
 }
