@@ -35,6 +35,9 @@
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
     },
+    "trainingPlanSection": {
+        "addTraining": "Add training"
+    },
     "userProfile": {
         "activate": "Activate",
         "address": "Address",

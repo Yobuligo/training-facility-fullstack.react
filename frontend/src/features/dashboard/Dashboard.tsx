@@ -6,6 +6,7 @@ import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { MyProfile } from "../myProfile/MyProfile";
+import { TrainingPlanSection } from "../training/trainingPlanSection/TrainingPlanSection";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
 import { IDashboardProps } from "./IDashboardProps";
@@ -31,7 +32,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
       });
       tabItems.push({
         title: t(texts.dashboard.trainings),
-        content: <>Trainings</>,
+        content: <TrainingPlanSection />,
       });
     }
 
