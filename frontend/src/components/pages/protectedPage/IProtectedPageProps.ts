@@ -1,3 +1,5 @@
 import { IPageProps } from "../page/IPageProps";
 
-export interface IProtectedPageProps extends IPageProps {}
+export interface IProtectedPageProps extends IPageProps {
+  onAppLogoClick?: () => void;
+}

@@ -5,7 +5,7 @@ import { IPublicPageProps } from "./IPublicPageProps";
 export const PublicPage: React.FC<IPublicPageProps> = (props) => {
   return (
     <Page>
-      <PageHeader />
+      <PageHeader onAppLogoClick={props.onAppLogoClick} />
       {props.children}
     </Page>
   );

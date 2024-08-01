@@ -7,7 +7,7 @@ export const PageHeader: React.FC<IPageHeaderProps> = (props) => {
     <header className={styles.pageHeader}>
       <div></div>
       <div>
-        <AppLogo className={styles.appLogo} />
+        <AppLogo className={styles.appLogo} onClick={props.onAppLogoClick} />
       </div>
       <div className={styles.right}>{props.children}</div>
     </header>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITabItem } from "../../components/tabStrip/ITabItem";
 import { TabStrip } from "../../components/tabStrip/TabStrip";
 import { TabStripContent } from "../../components/tabStripContent/TabStripContent";
@@ -8,11 +8,18 @@ import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { MyProfile } from "../myProfile/MyProfile";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
+import { IDashboardProps } from "./IDashboardProps";
 
-export const Dashboard: React.FC = () => {
-  const [selected, setSelected] = useState(0);
+export const Dashboard: React.FC<IDashboardProps> = (props) => {
+  const [selected, setSelected] = useState(-1);
   const { t } = useTranslation();
   const [session] = useSession();
+
+  useEffect(() => {
+    if (props.displayWelcomeSignal) {
+      setSelected(-1);
+    }
+  }, [props.displayWelcomeSignal]);
 
   const getTabItems = (): ITabItem[] => {
     const tabItems: ITabItem[] = [];

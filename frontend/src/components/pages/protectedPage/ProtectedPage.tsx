@@ -37,7 +37,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
   return (
     <Page>
       <div className={styles.protectedPage}>
-        <PageHeader>
+        <PageHeader onAppLogoClick={props.onAppLogoClick}>
           <SpinnerButton displaySpinner={isLoggingOut} onClick={onLogout}>{`${t(
             texts.logout.title
           )} (${session.username})`}</SpinnerButton>
