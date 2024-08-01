@@ -4,6 +4,7 @@ import { ISelectOption } from "../select/ISelectOption";
 import { Select } from "../select/Select";
 import { ILabeledSelectProps } from "./ILabeledSelectProps";
 import styles from "./LabeledSelect.module.scss";
+import { style } from "../../utils/style";
 
 export function LabeledSelect<T extends ISelectOption>(
   props: ILabeledSelectProps<T>
@@ -12,7 +13,10 @@ export function LabeledSelect<T extends ISelectOption>(
   return (
     <LabeledElement elementId={id} label={props.label}>
       <Select
-        className={styles.select}
+        className={style(
+          styles.select,
+          props.disabled ? styles.selectDisabled : ""
+        )}
         disabled={props.disabled}
         onSelect={props.onSelect}
         selected={props.selected}
