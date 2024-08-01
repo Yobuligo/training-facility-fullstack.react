@@ -2,9 +2,9 @@
 @import "../../../styles/dimensions.scss";
 
 .pageHeader {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   height: 6rem;
   background-color: $color-primary;
@@ -20,4 +20,5 @@
   fill: white;
   width: 10rem;
   height: 5rem;
+  margin-left: $negative-space;
 }
