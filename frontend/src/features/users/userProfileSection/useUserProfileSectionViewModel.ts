@@ -85,6 +85,8 @@ export const useUserProfileSectionViewModel = () => {
         return [...previous];
       });
     }
+
+    setSelectedUserProfile(undefined);
   };
 
   return {

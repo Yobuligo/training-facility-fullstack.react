@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../hooks/useTranslation/texts";
@@ -80,6 +80,17 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.deactivatedAt,
   ]);
 
+  const onCancel = useCallback(() => {
+    reset();
+    props.onCancel?.(props.userProfile);
+  }, [props, reset]);
+
+  useEffect(() => {
+    if (props.cancelSignal) {
+      onCancel();
+    }
+  }, [onCancel, props.cancelSignal]);
+
   const genderOptions: ISelectOption[] = useMemo(
     () => [
       { key: Gender.FEMALE.toString(), text: t(texts.general.female) },
@@ -131,11 +142,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onChangePostalCode = (newValue: string) => {
     setPostalCode(parseInt(newValue).toString());
-  };
-
-  const onCancel = () => {
-    reset();
-    props.onCancel?.(props.userProfile);
   };
 
   const onToggleIsDeactivated = () =>
