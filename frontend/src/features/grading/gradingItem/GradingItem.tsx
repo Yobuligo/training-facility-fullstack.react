@@ -103,9 +103,9 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
         </div>
         <div className={styles.details}>
           <div className={styles.title}>{gradeToText(props.grading.grade)}</div>
-          <div className={styles.achievedAt}>{`${t(
-            texts.gradingItem.achievedAt
-          )} ${DateTime.formatDate(props.grading.achievedAt)}`}</div>
+          <div className={styles.examiners}>{`${t(
+            texts.gradingItem.examiners
+          )} ${props.grading.examiners}`}</div>
         </div>
       </div>
       {props.isAdminMode && (

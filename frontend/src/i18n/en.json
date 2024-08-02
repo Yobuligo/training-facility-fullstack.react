@@ -30,6 +30,7 @@
     },
     "gradingItem": {
         "achievedAt": "Achieved At",
+        "examiners": "Examiners:",
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",

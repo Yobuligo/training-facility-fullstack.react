@@ -4,8 +4,9 @@ import { IEntity } from "../types/IEntity";
 
 export interface IGrading extends IEntity {
   userId: string;
-  grade: Grade;
   achievedAt: Date;
+  examiners: string;
+  grade: Grade;
 }
 
 export const GradingMeta: IHavePath = { path: "/gradings" };
