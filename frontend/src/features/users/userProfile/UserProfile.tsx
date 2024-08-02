@@ -166,6 +166,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
 
       {props.isAdminMode && (
         <UserProfileGroup
+          className={styles.gradingGroup}
           collapsed={viewModel.profileDetailsSettings.collapseGradings}
           onToggleCollapse={viewModel.onToggleCollapseGradings}
           title={t(texts.userProfile.gradings)}

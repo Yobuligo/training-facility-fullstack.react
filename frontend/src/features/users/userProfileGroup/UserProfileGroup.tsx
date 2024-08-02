@@ -19,7 +19,11 @@ export const UserProfileGroup: React.FC<IUserProfileGroupProps> = (props) => {
           onToggle={props.onToggleCollapse}
         />
       </div>
-      {!collapsed && <div className={styles.group}>{props.children}</div>}
+      {!collapsed && (
+        <div className={props.className !== undefined ? props.className : styles.group}>
+          {props.children}
+        </div>
+      )}
     </Card>
   );
 };
