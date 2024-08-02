@@ -29,6 +29,9 @@
         "save": "Save",
         "yes": "Yes"
     },
+    "gradingAddForm": {
+        "addGrading": "Add grading"
+    },
     "gradingItem": {
         "achievedAt": "Achieved At",
         "examiners": "Examiners:",
@@ -49,8 +52,8 @@
         "dan6": "6. Dan",
         "dan7": "7. Dan"
     },
-    "gradingAddForm": {
-        "addGrading": "Add grading"
+    "gradingList": {
+        "noGradingsAvailable": "Currently you have no gradings"
     },
     "gradingSection": {
         "title": "Add new Grading"
