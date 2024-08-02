@@ -26,6 +26,16 @@ export class DateTime {
     return timeString;
   }
 
+  static toDay(date: Date): string {
+    const [, , day] = this.toDate(date).split("-");
+    return day;
+  }
+
+  static toMonth(date: Date): string {
+    const [, month] = this.toDate(date).split("-");
+    return month;
+  }
+
   static toYear(date: Date): string {
     const [year] = this.toDate(date).split("-");
     return year;

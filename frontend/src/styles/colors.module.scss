@@ -16,6 +16,17 @@ $color-tab-unselected: white;
 
 $color-button-text: white;
 
+$color-grade-dan: hsl(0, 0%, 13%);
+$color-grade-kup1: #d92626;
+$color-grade-kup2: #d92626;
+$color-grade-kup3: #2626d9;
+$color-grade-kup4: #2626d9;
+$color-grade-kup5: #136c13;
+$color-grade-kup6: #136c13;
+$color-grade-kup7: #e6e619;
+$color-grade-kup8: #e6e619;
+$color-grade-kup9: rgb(241, 241, 241);
+
 :export {
   colorDisabled: $color-disabled;
   colorPrimary: $color-primary;

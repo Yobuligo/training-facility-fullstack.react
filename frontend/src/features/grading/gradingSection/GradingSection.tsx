@@ -20,7 +20,10 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
       {viewModel.isLoading ? (
         <Spinner />
       ) : (
-        <GradingList gradings={viewModel.gradings} />
+        <GradingList
+          gradings={viewModel.gradings}
+          isAdminMode={props.isAdminMode}
+        />
       )}
     </div>
   );

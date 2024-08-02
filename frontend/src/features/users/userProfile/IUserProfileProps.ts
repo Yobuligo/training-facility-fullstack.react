@@ -1,9 +1,9 @@
 import { ISignal } from "../../../services/signal/ISignal";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 
-export interface IUserProfileProps {
+export interface IUserProfileProps extends IHaveIsAdminMode {
   cancelSignal?: ISignal;
-  isAdminMode: boolean;
   onCancel?: (userProfile: IUserProfile) => void;
   onChange?: (userProfile: IUserProfile) => void;
   userProfile: IUserProfile;

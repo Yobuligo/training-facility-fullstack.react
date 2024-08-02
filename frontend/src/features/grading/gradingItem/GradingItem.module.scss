@@ -1,12 +1,53 @@
+@import "../../../styles/colors.module.scss";
+
 .gradingItem {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
-.logo {
+.card {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.year {
+  font-weight: 700;
+  font-size: large;
 }
 
 .details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-weight: 500;
+  font-size: large;
+  text-transform: uppercase;
+}
+
+.achievedAt {
+  color: $color-secondary-light;
+}
+
+.deleteIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

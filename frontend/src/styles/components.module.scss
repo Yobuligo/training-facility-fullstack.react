@@ -9,3 +9,49 @@
 .disabledIcon {
   fill: $color-disabled;
 }
+
+@mixin border($color) {
+  border: 8px solid $color;
+  color: $color-secondary;
+  background-color: transparentize($color, $amount: 0.95)
+}
+
+.dan {
+  @include border($color-grade-dan);
+}
+
+.kup1 {
+  @include border($color-grade-kup1);
+}
+
+.kup2 {
+  @include border($color-grade-kup2);
+}
+
+.kup3 {
+  @include border($color-grade-kup3);
+}
+
+.kup4 {
+  @include border($color-grade-kup4);
+}
+
+.kup5 {
+  @include border($color-grade-kup5);
+}
+
+.kup6 {
+  @include border($color-grade-kup6);
+}
+
+.kup7 {
+  @include border($color-grade-kup7);
+}
+
+.kup8 {
+  @include border($color-grade-kup8);
+}
+
+.kup9 {
+  @include border($color-grade-kup9);
+}
