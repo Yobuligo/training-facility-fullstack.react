@@ -19,8 +19,11 @@ export const useGradingSectionViewModel = (props: IGradingSectionProps) => {
     loadGradings();
   }, [loadGradings]);
 
+  const onAddGrading = () => {};
+
   return {
     gradings,
     isLoading,
+    onAddGrading,
   };
 };

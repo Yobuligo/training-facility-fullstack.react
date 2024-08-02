@@ -4,6 +4,9 @@ import { UserProfile } from "../userProfile/UserProfile";
 import { IUserProfileDetails } from "./IUserProfileDetails";
 import styles from "./UserProfileDetails.module.scss";
 
+/**
+ * This component is responsible for displaying a user profile and provides an icon to navigate back.
+ */
 export const UserProfileDetails: React.FC<IUserProfileDetails> = (props) => {
   const [cancelSignal, triggerCancelSignal] = useSignal();
 

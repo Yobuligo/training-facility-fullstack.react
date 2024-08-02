@@ -1,3 +1,102 @@
 import { IGrading } from "../shared/model/IGrading";
+import { Grade } from "../shared/types/Grade";
+import { uuid } from "../utils/uuid";
 
-export const DummyGradings: IGrading[] = [];
+export const DummyGradings: IGrading[] = [
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "1999-04-29T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP9,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "1999-12-17T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP8,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2000-06-27T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP7,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2000-11-18T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP6,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2001-05-06T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP5,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2001-10-27T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP4,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2002-06-20T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP3,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2002-11-23T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2003-04-05T12:00:00.000Z" as unknown as Date,
+    grade: Grade.KUP1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2004-12-04T12:00:00.000Z" as unknown as Date,
+    grade: Grade.DAN1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2009-09-27T12:00:00.000Z" as unknown as Date,
+    grade: Grade.DAN2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: uuid(),
+    userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+    achievedAt: "2016-11-12T12:00:00.000Z" as unknown as Date,
+    grade: Grade.DAN3,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];

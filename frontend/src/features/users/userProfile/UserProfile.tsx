@@ -171,6 +171,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           title={t(texts.userProfile.gradings)}
         >
           <GradingSection
+            displayMode={viewModel.displayMode}
             isAdminMode={props.isAdminMode}
             userId={props.userProfile.userId}
           />
