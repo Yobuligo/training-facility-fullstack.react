@@ -17,6 +17,7 @@ export const UserProfileSection: React.FC = () => {
         <UserProfileDetails
           isAdminMode={true}
           userProfile={viewModel.selectedUserProfile}
+          onBack={viewModel.onBack}
           onCancel={viewModel.onCancel}
           onChange={viewModel.onChange}
         />

@@ -71,6 +71,11 @@ export const useUserProfileSectionViewModel = () => {
     });
   };
 
+  /**
+   * Handles event on click back from the user profile detail screen
+   */
+  const onBack = () => setSelectedUserProfile(undefined);
+
   const onCancel = (userProfile: IUserProfile) => {
     // if user profile is a dummy object (which is not persisted), delete it from the list
     if (
@@ -85,13 +90,12 @@ export const useUserProfileSectionViewModel = () => {
         return [...previous];
       });
     }
-
-    setSelectedUserProfile(undefined);
   };
 
   return {
     filterUserProfiles,
     onAppend,
+    onBack,
     onCancel,
     onChange,
     onSelect,

@@ -10,7 +10,10 @@ import styles from "./UserProfileDetails.module.scss";
 export const UserProfileDetails: React.FC<IUserProfileDetails> = (props) => {
   const [cancelSignal, triggerCancelSignal] = useSignal();
 
-  const onBack = () => triggerCancelSignal();
+  const onBack = () => {
+    triggerCancelSignal();
+    props.onBack?.(props.userProfile);
+  };
 
   return (
     <div className={styles.userProfileDetails}>
