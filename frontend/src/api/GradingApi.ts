@@ -8,6 +8,15 @@ export class GradingApi extends Repository<IGrading> {
     super(GradingMeta);
   }
 
+  async deleteGrading(grading: IGrading): Promise<boolean> {
+    const index = DummyGradings.findIndex((item) => item.id === grading.id);
+    if (index !== -1) {
+      DummyGradings.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
   async findByUserId(userId: string): Promise<IGrading[]> {
     return DummyGradings.filter((grading) => grading.userId === userId).sort(
       (left, right) => DateTime.compare(right.achievedAt, left.achievedAt)

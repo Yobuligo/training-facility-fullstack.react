@@ -23,6 +23,7 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
         <GradingList
           gradings={viewModel.gradings}
           isAdminMode={props.isAdminMode}
+          onDelete={viewModel.onDelete}
         />
       )}
     </div>

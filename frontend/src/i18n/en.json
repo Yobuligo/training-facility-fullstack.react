@@ -10,6 +10,20 @@
         "edit": "Edit",
         "female": "Female",
         "male": "Male",
+        "month": {
+            "jan": "Jan",
+            "feb": "Feb",
+            "mar": "Mar",
+            "apr": "Apr",
+            "may": "May",
+            "jun": "Jun",
+            "july": "July",
+            "aug": "Aug",
+            "sept": "Sept",
+            "oct": "Oct",
+            "nov": "Nov",
+            "dec": "Dec"
+        },
         "no": "No",
         "save": "Save",
         "yes": "Yes"

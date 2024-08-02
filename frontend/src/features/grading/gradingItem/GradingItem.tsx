@@ -1,4 +1,4 @@
-import { Card } from "../../../components/card/Card";
+import { useRenderMonth } from "../../../hooks/useRenderMonth";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
@@ -11,6 +11,7 @@ import { IGradingItemProps } from "./IGradingItemProps";
 
 export const GradingItem: React.FC<IGradingItemProps> = (props) => {
   const { t } = useTranslation();
+  const renderMonth = useRenderMonth();
 
   const gradeToText = (grade: Grade) => {
     switch (grade) {
@@ -95,7 +96,9 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
           <div className={styles.year}>
             {DateTime.toYear(props.grading.achievedAt)}
           </div>
-          <div>{DateTime.toMonth(props.grading.achievedAt)}</div>
+          <div>
+            {renderMonth(parseInt(DateTime.toMonth(props.grading.achievedAt)))}
+          </div>
           <div>{DateTime.toDay(props.grading.achievedAt)}</div>
         </div>
         <div className={styles.details}>
@@ -107,7 +110,7 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
       </div>
       {props.isAdminMode && (
         <div className={styles.deleteIcon}>
-          <DeleteIcon />
+          <DeleteIcon onClick={props.onDelete} />
         </div>
       )}
     </div>

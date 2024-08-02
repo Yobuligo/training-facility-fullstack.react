@@ -8,6 +8,7 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
       key={grading.id}
       grading={grading}
       isAdminMode={props.isAdminMode}
+      onDelete={() => props.onDelete?.(grading)}
     />
   ));
 

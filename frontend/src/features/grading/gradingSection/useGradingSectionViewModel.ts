@@ -21,9 +21,22 @@ export const useGradingSectionViewModel = (props: IGradingSectionProps) => {
 
   const onAddGrading = () => {};
 
+  const onDelete = (grading: IGrading) => {
+    setGradings((previous) => {
+      const index = previous.findIndex((item) => item.id === grading.id);
+      if (index !== -1) {
+        previous.splice(index, 1);
+        const gradingApi = new GradingApi();
+        gradingApi.deleteGrading(grading);
+      }
+      return [...previous];
+    });
+  };
+
   return {
     gradings,
     isLoading,
     onAddGrading,
+    onDelete,
   };
 };
