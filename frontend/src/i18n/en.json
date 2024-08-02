@@ -9,6 +9,7 @@
         "cancel": "Cancel",
         "edit": "Edit",
         "female": "Female",
+        "grade": "Grade",
         "male": "Male",
         "month": {
             "jan": "Jan",
@@ -48,8 +49,11 @@
         "dan6": "6. Dan",
         "dan7": "7. Dan"
     },
-    "gradingSection": {
+    "gradingAddForm": {
         "addGrading": "Add grading"
+    },
+    "gradingSection": {
+        "title": "Add new Grading"
     },
     "language": {
         "de": "Deutsch",

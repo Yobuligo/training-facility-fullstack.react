@@ -6,8 +6,10 @@ import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IGrading } from "../../../shared/model/IGrading";
 import { Gender } from "../../../shared/types/Gender";
+import { Grade } from "../../../shared/types/Grade";
 import { Language } from "../../../shared/types/Language";
 import { Tariff } from "../../../shared/types/Tariff";
+import { uuid } from "../../../utils/uuid";
 import { IUserProfileProps } from "./IUserProfileProps";
 
 export const useUserProfileViewModel = (props: IUserProfileProps) => {
@@ -186,14 +188,24 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setPostalCode(parseInt(newValue).toString());
   };
 
+  const onAddGrading = (achievedAt: Date, grade: Grade, examiners: string) => {
+    setGradings((previous) => {
+      const grading: IGrading = {
+        id: uuid(),
+        userId: props.userProfile.userId,
+        achievedAt: achievedAt.toISOString() as unknown as Date,
+        examiners,
+        grade,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      return [...previous, grading];
+    });
+  };
+
   const onDeleteGrading = (grading: IGrading) =>
     setGradings((previous) => {
       return previous.filter((item) => item.id !== grading.id);
-      // const index = previous.findIndex((item) => item.id === grading.id);
-      // if (index !== -1) {
-      //   previous.splice(index, 1);
-      // }
-      // return [...previous];
     });
 
   const onToggleIsDeactivated = () =>
@@ -278,6 +290,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     isDeactivated,
     languageOptions,
     lastname,
+    onAddGrading,
     onCancel,
     onChangeBirthday,
     onChangePostalCode,

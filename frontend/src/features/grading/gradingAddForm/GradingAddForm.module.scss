@@ -1,0 +1,28 @@
+@import "../../../styles/dimensions.scss";
+@import "../../../styles/mixins.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: $negative-space;
+
+  @include medium-screen {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include large-screen {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  column-gap: 3rem;
+}
+
+.toolbar {
+  justify-content: right;
+}
