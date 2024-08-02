@@ -6,6 +6,7 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
   const items = props.gradings.map((grading) => (
     <GradingItem
       key={grading.id}
+      displayMode={props.displayMode}
       grading={grading}
       isAdminMode={props.isAdminMode}
       onDelete={() => props.onDelete?.(grading)}

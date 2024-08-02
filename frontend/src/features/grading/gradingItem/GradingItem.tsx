@@ -110,7 +110,7 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
       </div>
       {props.isAdminMode && (
         <div className={styles.deleteIcon}>
-          <DeleteIcon onClick={props.onDelete} />
+          <DeleteIcon onClick={props.onDelete} disabled={props.displayMode} />
         </div>
       )}
     </div>

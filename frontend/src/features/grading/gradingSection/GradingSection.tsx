@@ -13,14 +13,17 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
 
   return (
     <div className={styles.gradingSection}>
-      <Button onClick={viewModel.onAddGrading}>
-        {t(texts.gradingSection.addGrading)}
-      </Button>
+      {props.isAdminMode && (
+        <Button onClick={viewModel.onAddGrading} disabled={props.displayMode}>
+          {t(texts.gradingSection.addGrading)}
+        </Button>
+      )}
 
       {viewModel.isLoading ? (
         <Spinner />
       ) : (
         <GradingList
+          displayMode={props.displayMode}
           gradings={viewModel.gradings}
           isAdminMode={props.isAdminMode}
           onDelete={viewModel.onDelete}
