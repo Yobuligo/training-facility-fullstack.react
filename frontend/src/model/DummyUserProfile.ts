@@ -1,12 +1,14 @@
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { Gender } from "../shared/types/Gender";
 import { Language } from "../shared/types/Language";
+import { Tariff } from "../shared/types/Tariff";
 import { uuid } from "../utils/uuid";
 
 export class DummyUserProfile implements IUserProfile {
   private _isPersisted = false;
 
   id = uuid();
+  memberId = "";
   userId = uuid();
   firstname = "";
   lastname = "";
@@ -17,6 +19,7 @@ export class DummyUserProfile implements IUserProfile {
   city = "";
   email = "";
   phone = "";
+  tariff: Tariff = Tariff.TEENAGER_ADULT;
   joinedOn = new Date();
   isAdmin = false;
   createdAt = new Date();

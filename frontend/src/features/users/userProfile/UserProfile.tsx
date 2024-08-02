@@ -178,6 +178,9 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
               />
             </div>
             <Toolbar>
+            <Button disabled={viewModel.displayMode}>
+                {t(texts.userProfile.sendInvitation)}
+              </Button>                            
               <Button disabled={viewModel.displayMode}>
                 {t(texts.userProfile.generateNewPassword)}
               </Button>

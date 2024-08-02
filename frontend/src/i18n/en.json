@@ -60,6 +60,7 @@
         "personalInformation": "Personal Information",
         "phone": "Phone",
         "postalCode": "Postal Code",
+        "sendInvitation": "Send invitation",
         "street": "Street",
         "technicalInformation": "Technical Information"
     },
