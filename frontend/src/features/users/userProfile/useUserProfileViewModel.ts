@@ -226,6 +226,12 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
       return { ...previous };
     });
 
+  const onToggleCollapseGradings = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseGradings = collapsed;
+      return { ...previous };
+    });
+
   const onToggleCollapsePersonalInformation = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
       previous.collapsePersonalInformation = collapsed;
@@ -264,6 +270,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onTariffChange,
     onToggleCollapseAddress,
     onToggleCollapseBank,
+    onToggleCollapseGradings,
     onToggleCollapsePersonalInformation,
     onToggleCollapseTechnicalInformation,
     onToggleIsDeactivated,

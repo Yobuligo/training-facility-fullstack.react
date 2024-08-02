@@ -5,6 +5,7 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { toDate } from "../../../utils/toDate";
+import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProfileProps } from "./IUserProfileProps";
 import styles from "./UserProfile.module.scss";
@@ -162,6 +163,19 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           value={viewModel.bankAccountInstitution}
         />
       </UserProfileGroup>
+
+      {props.isAdminMode && (
+        <UserProfileGroup
+          collapsed={viewModel.profileDetailsSettings.collapseGradings}
+          onToggleCollapse={viewModel.onToggleCollapseGradings}
+          title={t(texts.userProfile.gradings)}
+        >
+          <GradingSection
+            isAdminMode={props.isAdminMode}
+            userId={props.userProfile.userId}
+          />
+        </UserProfileGroup>
+      )}
 
       <UserProfileGroup
         collapsed={

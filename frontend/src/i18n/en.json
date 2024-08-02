@@ -63,6 +63,7 @@
         "firstname": "Firstname",
         "gender": "Gender",
         "generateNewPassword": "Generate new Password",
+        "gradings": "Gradings",
         "isAdmin": "Is Admin",
         "joinedOn": "Joined On",
         "language": "Language",
