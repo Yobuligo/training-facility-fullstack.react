@@ -94,7 +94,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         />
 
         <LabeledSelect
-          disabled={viewModel.displayMode}
+          disabled={props.isAdminMode === true ? viewModel.displayMode : true}
           label={t(texts.userProfile.tariff)}
           options={viewModel.tariffOptions}
           onSelect={viewModel.onTariffChange}
