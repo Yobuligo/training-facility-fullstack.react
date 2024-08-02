@@ -96,10 +96,10 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
           <div className={styles.year}>
             {DateTime.toYear(props.grading.achievedAt)}
           </div>
+          <div>{DateTime.toDay(props.grading.achievedAt)}</div>
           <div>
             {renderMonth(parseInt(DateTime.toMonth(props.grading.achievedAt)))}
           </div>
-          <div>{DateTime.toDay(props.grading.achievedAt)}</div>
         </div>
         <div className={styles.details}>
           <div className={styles.title}>{gradeToText(props.grading.grade)}</div>

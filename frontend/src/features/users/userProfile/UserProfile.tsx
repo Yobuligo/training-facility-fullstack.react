@@ -26,7 +26,10 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             </Button>
           ) : (
             <Toolbar>
-              <Button onClick={viewModel.onCancel}>
+              <Button
+                className={styles.cancelButton}
+                onClick={viewModel.onCancel}
+              >
                 {t(texts.general.cancel)}
               </Button>
               <Button onClick={viewModel.onSave}>

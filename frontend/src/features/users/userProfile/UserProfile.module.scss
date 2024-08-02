@@ -1,4 +1,5 @@
 @import "../../../styles/dimensions.scss";
+@import "../../../styles/colors.module.scss";
 
 .userProfile {
   display: flex;
@@ -16,4 +17,15 @@
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 1rem;
+}
+
+.cancelButton {
+  background-color: transparent;
+  outline: $color-primary solid 1px;
+  color: $color-primary;
+  &:hover {
+    background-color: transparent;
+    outline: $color-primary solid 1px;
+    color: $color-primary;
+  }
 }
