@@ -6,7 +6,7 @@ import styles from "./GradingList.module.scss";
 import { IGradingListProps } from "./IGradingListProps";
 
 export const GradingList: React.FC<IGradingListProps> = (props) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const items = props.gradings
     .sort((left, right) => DateTime.compare(right.achievedAt, left.achievedAt))
@@ -20,5 +20,9 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
       />
     ));
 
-  return <div className={styles.gradingList}>{items.length > 0 ? items : t(texts.gradingList.noGradingsAvailable)}</div>;
+  return (
+    <div className={styles.gradingList}>
+      {items.length > 0 ? items : t(texts.gradingList.noGradingsAvailable)}
+    </div>
+  );
 };
