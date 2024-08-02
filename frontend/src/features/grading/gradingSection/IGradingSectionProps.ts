@@ -5,6 +5,7 @@ import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 export interface IGradingSectionProps
   extends IHaveDisplayMode,
     IHaveIsAdminMode {
-  gradings?: IGrading[];
+  gradings: IGrading[];
+  onDelete?: (grading: IGrading) => void;
   userId: string;
 }

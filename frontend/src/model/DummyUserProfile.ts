@@ -1,3 +1,4 @@
+import { IGrading } from "../shared/model/IGrading";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { Gender } from "../shared/types/Gender";
 import { Language } from "../shared/types/Language";
@@ -30,6 +31,7 @@ export class DummyUserProfile implements IUserProfile {
   bankAccountBIC = "";
   bankAccountInstitution = "";
   isDeactivated = false;
+  gradings: IGrading[] = [];
 
   get isPersisted() {
     return this._isPersisted;

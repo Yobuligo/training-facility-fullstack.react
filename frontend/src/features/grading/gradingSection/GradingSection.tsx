@@ -1,5 +1,4 @@
 import { Button } from "../../../components/button/Button";
-import { Spinner } from "../../../components/spinner/Spinner";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { GradingList } from "../gradingList/GradingList";
@@ -19,16 +18,12 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
         </Button>
       )}
 
-      {viewModel.isLoading ? (
-        <Spinner />
-      ) : (
-        <GradingList
-          displayMode={props.displayMode}
-          gradings={viewModel.gradings}
-          isAdminMode={props.isAdminMode}
-          onDelete={viewModel.onDelete}
-        />
-      )}
+      <GradingList
+        displayMode={props.displayMode}
+        gradings={props.gradings}
+        isAdminMode={props.isAdminMode}
+        onDelete={props.onDelete}
+      />
     </div>
   );
 };

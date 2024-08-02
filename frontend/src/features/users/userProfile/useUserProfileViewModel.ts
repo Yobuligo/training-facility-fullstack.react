@@ -4,6 +4,7 @@ import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSetti
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
+import { IGrading } from "../../../shared/model/IGrading";
 import { Gender } from "../../../shared/types/Gender";
 import { Language } from "../../../shared/types/Language";
 import { Tariff } from "../../../shared/types/Tariff";
@@ -50,6 +51,9 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.deactivatedAt
   );
   const [collapseBank, setCollapseBank] = useState(false);
+  const [gradings, setGradings] = useState<IGrading[]>(
+    props.userProfile.gradings
+  );
 
   const reset = useCallback(() => {
     setBirthday(props.userProfile.birthday);
@@ -70,6 +74,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setBankAccountIBAN(props.userProfile.bankAccountIBAN);
     setBankAccountInstitution(props.userProfile.bankAccountInstitution);
     setBankAccountOwner(props.userProfile.bankAccountOwner);
+    setGradings(props.userProfile.gradings);
     setDisplayMode(true);
   }, [
     props.userProfile.birthday,
@@ -90,6 +95,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.bankAccountIBAN,
     props.userProfile.bankAccountInstitution,
     props.userProfile.bankAccountOwner,
+    props.userProfile.gradings,
   ]);
 
   const onCancel = useCallback(() => {
@@ -180,6 +186,16 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setPostalCode(parseInt(newValue).toString());
   };
 
+  const onDeleteGrading = (grading: IGrading) =>
+    setGradings((previous) => {
+      return previous.filter((item) => item.id !== grading.id);
+      // const index = previous.findIndex((item) => item.id === grading.id);
+      // if (index !== -1) {
+      //   previous.splice(index, 1);
+      // }
+      // return [...previous];
+    });
+
   const onToggleIsDeactivated = () =>
     setIsDeactivated((previous) => {
       previous = !previous;
@@ -210,6 +226,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.bankAccountOwner = bankAccountOwner;
     props.userProfile.isDeactivated = isDeactivated;
     props.userProfile.deactivatedAt = deactivatedAt;
+    props.userProfile.gradings = gradings;
     setDisplayMode(true);
     props.onChange?.(props.userProfile);
   };
@@ -256,6 +273,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     email,
     firstname,
     genderOptions,
+    gradings,
     isAdminOptions,
     isDeactivated,
     languageOptions,
@@ -263,6 +281,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onCancel,
     onChangeBirthday,
     onChangePostalCode,
+    onDeleteGrading,
     onIsAdminChange,
     onGenderChange,
     onLanguageChange,

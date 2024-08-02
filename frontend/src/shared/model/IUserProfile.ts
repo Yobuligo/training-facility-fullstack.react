@@ -4,6 +4,7 @@ import { IHaveIsAdmin } from "../types/IHaveIsAdmin";
 import { IHavePath } from "../types/IHavePath";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
+import { IGrading } from "./IGrading";
 
 export interface IUserProfile extends IEntity, IHaveIsAdmin {
   userId: string;
@@ -26,6 +27,7 @@ export interface IUserProfile extends IEntity, IHaveIsAdmin {
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
+  gradings: IGrading[];
 }
 
 export const UserProfileMeta: IHavePath = { path: "/user-profiles" };

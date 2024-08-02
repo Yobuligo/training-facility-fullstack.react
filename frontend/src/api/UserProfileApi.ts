@@ -1,6 +1,7 @@
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
 import { Repository } from "./core/Repository";
 import { DummyUserProfiles } from "./DummyUserProfiles";
+import { GradingApi } from "./GradingApi";
 
 export class UserProfileApi extends Repository<IUserProfile> {
   constructor() {
@@ -23,16 +24,26 @@ export class UserProfileApi extends Repository<IUserProfile> {
 
   findAll(): Promise<IUserProfile[]> {
     // Todo: replace by productive code
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
+      const gradingApi = new GradingApi();
+      await DummyUserProfiles.map(async (userProfile) => {
+        const gradings = await gradingApi.findByUserId(userProfile.userId);
+        userProfile.gradings = gradings;
+      });
       resolve(DummyUserProfiles);
     });
   }
 
   findByUserId(userId: string): Promise<IUserProfile | undefined> {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       const userProfile = DummyUserProfiles.find(
         (userProfile) => userProfile.userId === userId
       );
+      if (userProfile) {
+        const gradingApi = new GradingApi();
+        const gradings = await gradingApi.findByUserId(userId);
+        userProfile.gradings = gradings;
+      }
       resolve(userProfile);
     });
   }

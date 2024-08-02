@@ -173,7 +173,9 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         >
           <GradingSection
             displayMode={viewModel.displayMode}
+            gradings={viewModel.gradings}
             isAdminMode={props.isAdminMode}
+            onDelete={viewModel.onDeleteGrading}
             userId={props.userProfile.userId}
           />
         </UserProfileGroup>
