@@ -91,10 +91,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     }
   }, [onCancel, props.cancelSignal]);
 
-  const genderOptions: ISelectOption[] = useMemo(
+  const genderOptions: ISelectOption<Gender>[] = useMemo(
     () => [
-      { key: Gender.FEMALE.toString(), text: t(texts.general.female) },
-      { key: Gender.MALE.toString(), text: t(texts.general.male) },
+      { key: Gender.FEMALE, text: t(texts.general.female) },
+      { key: Gender.MALE, text: t(texts.general.male) },
     ],
     [t]
   );
@@ -102,13 +102,13 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const selectedGenderOption =
     gender === Gender.FEMALE ? genderOptions[0] : genderOptions[1];
 
-  const onGenderChange = (option: ISelectOption) =>
-    setGender((Gender as any)[option.key]);
+  const onGenderChange = (option: ISelectOption<Gender>) =>
+    setGender(option.key);
 
-  const languageOptions: ISelectOption[] = useMemo(
+  const languageOptions: ISelectOption<Language>[] = useMemo(
     () => [
-      { key: Language.en.toString(), text: t(texts.language.en) },
-      { key: Language.de.toString(), text: t(texts.language.de) },
+      { key: Language.en, text: t(texts.language.en) },
+      { key: Language.de, text: t(texts.language.de) },
     ],
     [t]
   );
@@ -116,13 +116,13 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const selectedLanguageOption =
     language === Language.en ? languageOptions[0] : languageOptions[1];
 
-  const onLanguageChange = (option: ISelectOption) =>
+  const onLanguageChange = (option: ISelectOption<Language>) =>
     setLanguage((Language as any)[option.key]);
 
-  const isAdminOptions: ISelectOption[] = useMemo(
+  const isAdminOptions: ISelectOption<boolean>[] = useMemo(
     () => [
-      { key: "0", text: t(texts.general.yes) },
-      { key: "1", text: t(texts.general.no) },
+      { key: true, text: t(texts.general.yes) },
+      { key: false, text: t(texts.general.no) },
     ],
     [t]
   );
@@ -130,8 +130,8 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const selectedIsAdminOption =
     isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
 
-  const onIsAdminChange = (option: ISelectOption) =>
-    setIsAdmin(option.key === "0" ? true : false);
+  const onIsAdminChange = (option: ISelectOption<boolean>) =>
+    setIsAdmin(option.key);
 
   const onToggleMode = () => {
     setDisplayMode((previous) => !previous);

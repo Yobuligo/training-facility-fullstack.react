@@ -1,12 +1,12 @@
 import { useId } from "react";
+import { style } from "../../utils/style";
 import { LabeledElement } from "../labeledElement/LabeledElement";
 import { ISelectOption } from "../select/ISelectOption";
 import { Select } from "../select/Select";
 import { ILabeledSelectProps } from "./ILabeledSelectProps";
 import styles from "./LabeledSelect.module.scss";
-import { style } from "../../utils/style";
 
-export function LabeledSelect<T extends ISelectOption>(
+export function LabeledSelect<T extends ISelectOption<any>>(
   props: ILabeledSelectProps<T>
 ) {
   const id = useId();
