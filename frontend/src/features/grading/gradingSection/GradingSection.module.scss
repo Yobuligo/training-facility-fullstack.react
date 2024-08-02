@@ -1,0 +1,7 @@
+@import "../../../styles/dimensions.scss";
+
+.gradingSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}
