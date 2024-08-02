@@ -65,21 +65,31 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setCity(props.userProfile.city);
     setIsDeactivated(props.userProfile.isDeactivated);
     setDeactivatedAt(props.userProfile.deactivatedAt);
+    setTariff(props.userProfile.tariff);
+    setBankAccountBIC(props.userProfile.bankAccountBIC);
+    setBankAccountIBAN(props.userProfile.bankAccountIBAN);
+    setBankAccountInstitution(props.userProfile.bankAccountInstitution);
+    setBankAccountOwner(props.userProfile.bankAccountOwner);
     setDisplayMode(true);
   }, [
     props.userProfile.birthday,
-    props.userProfile.city,
     props.userProfile.email,
     props.userProfile.firstname,
-    props.userProfile.gender,
-    props.userProfile.isAdmin,
-    props.userProfile.language,
     props.userProfile.lastname,
+    props.userProfile.gender,
+    props.userProfile.language,
+    props.userProfile.isAdmin,
     props.userProfile.phone,
-    props.userProfile.postalCode,
     props.userProfile.street,
+    props.userProfile.postalCode,
+    props.userProfile.city,
     props.userProfile.isDeactivated,
     props.userProfile.deactivatedAt,
+    props.userProfile.tariff,
+    props.userProfile.bankAccountBIC,
+    props.userProfile.bankAccountIBAN,
+    props.userProfile.bankAccountInstitution,
+    props.userProfile.bankAccountOwner,
   ]);
 
   const onCancel = useCallback(() => {
@@ -193,6 +203,11 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.street = street;
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
+    props.userProfile.tariff = tariff;
+    props.userProfile.bankAccountBIC = bankAccountBIC;
+    props.userProfile.bankAccountIBAN = bankAccountIBAN;
+    props.userProfile.bankAccountInstitution = bankAccountInstitution;
+    props.userProfile.bankAccountOwner = bankAccountOwner;
     props.userProfile.isDeactivated = isDeactivated;
     props.userProfile.deactivatedAt = deactivatedAt;
     setDisplayMode(true);
