@@ -35,6 +35,16 @@
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
     },
+    "tariff": {
+        "teenagersAdults": "Teenagers, Adults",
+        "children": "Children",
+        "traineeStudentsPensioner": "Trainees, Students, Pensioners",
+        "family1": "Family 1",
+        "family2": "Family 2",
+        "family3": "Family 3",
+        "principals": "Principal",
+        "relatives": "Relative"
+    },
     "trainingPlanSection": {
         "addTraining": "Add training"
     },
@@ -62,6 +72,7 @@
         "postalCode": "Postal Code",
         "sendInvitation": "Send invitation",
         "street": "Street",
+        "tariff": "Tariff",
         "technicalInformation": "Technical Information"
     },
     "userProfileItem": {

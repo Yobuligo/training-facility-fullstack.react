@@ -19,7 +19,7 @@ export class DummyUserProfile implements IUserProfile {
   city = "";
   email = "";
   phone = "";
-  tariff: Tariff = Tariff.TEENAGER_ADULT;
+  tariff: Tariff = Tariff.TEENAGERS_ADULTS;
   joinedOn = new Date();
   isAdmin = false;
   createdAt = new Date();

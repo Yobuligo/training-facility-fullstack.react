@@ -6,6 +6,7 @@ import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { Gender } from "../../../shared/types/Gender";
 import { Language } from "../../../shared/types/Language";
+import { Tariff } from "../../../shared/types/Tariff";
 import { IUserProfileProps } from "./IUserProfileProps";
 
 export const useUserProfileViewModel = (props: IUserProfileProps) => {
@@ -24,6 +25,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [lastname, setLastname] = useState(props.userProfile.lastname);
   const [gender, setGender] = useState(props.userProfile.gender);
   const [language, setLanguage] = useState(props.userProfile.language);
+  const [tariff, setTariff] = useState(props.userProfile.tariff);
   const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
   const [phone, setPhone] = useState(props.userProfile.phone);
   const [street, setStreet] = useState(props.userProfile.street);
@@ -117,7 +119,31 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     language === Language.en ? languageOptions[0] : languageOptions[1];
 
   const onLanguageChange = (option: ISelectOption<Language>) =>
-    setLanguage((Language as any)[option.key]);
+    setLanguage(option.key);
+
+  const tariffOptions: ISelectOption<Tariff>[] = useMemo(
+    () => [
+      { key: Tariff.TEENAGERS_ADULTS, text: t(texts.tariff.teenagersAdults) },
+      { key: Tariff.CHILDREN, text: t(texts.tariff.children) },
+      {
+        key: Tariff.TRAINEES_STUDENTS_PENSIONERS,
+        text: t(texts.tariff.traineeStudentsPensioner),
+      },
+      { key: Tariff.FAMILY_1, text: t(texts.tariff.family1) },
+      { key: Tariff.FAMILY_2, text: t(texts.tariff.family2) },
+      { key: Tariff.FAMILY_3, text: t(texts.tariff.family3) },
+      { key: Tariff.PRINCIPALS, text: t(texts.tariff.principals) },
+      { key: Tariff.RELATIVES, text: t(texts.tariff.relatives) },
+    ],
+    [t]
+  );
+
+  const selectedTariffOption = tariffOptions.find(
+    (tariffOption) => tariffOption.key === tariff
+  );
+
+  const onTariffChange = (option: ISelectOption<Tariff>) =>
+    setTariff(option.key);
 
   const isAdminOptions: ISelectOption<boolean>[] = useMemo(
     () => [
@@ -220,6 +246,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onGenderChange,
     onLanguageChange,
     onSave,
+    onTariffChange,
     onToggleCollapseAddress,
     onToggleCollapseBank,
     onToggleCollapsePersonalInformation,
@@ -232,6 +259,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     selectedIsAdminOption,
     selectedGenderOption,
     selectedLanguageOption,
+    selectedTariffOption,
     setBankAccountBIC,
     setBankAccountIBAN,
     setBankAccountInstitution,
@@ -245,5 +273,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setPhone,
     setStreet,
     street,
+    tariffOptions,
   };
 };

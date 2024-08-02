@@ -17,7 +17,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
   return (
     <div className={styles.userProfile}>
       <div className={styles.header}>
-        <h3>{`${props.userProfile.firstname} ${props.userProfile.lastname}`}</h3>
+        <h3>{`${props.userProfile.firstname} ${props.userProfile.lastname} (${props.userProfile.memberId})`}</h3>
         <div>
           {viewModel.displayMode ? (
             <Button onClick={viewModel.onToggleMode}>
@@ -91,6 +91,14 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           options={viewModel.languageOptions}
           onSelect={viewModel.onLanguageChange}
           selected={viewModel.selectedLanguageOption}
+        />
+
+        <LabeledSelect
+          disabled={viewModel.displayMode}
+          label={t(texts.userProfile.tariff)}
+          options={viewModel.tariffOptions}
+          onSelect={viewModel.onTariffChange}
+          selected={viewModel.selectedTariffOption}
         />
       </UserProfileGroup>
 
@@ -178,9 +186,9 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
               />
             </div>
             <Toolbar>
-            <Button disabled={viewModel.displayMode}>
+              <Button disabled={viewModel.displayMode}>
                 {t(texts.userProfile.sendInvitation)}
-              </Button>                            
+              </Button>
               <Button disabled={viewModel.displayMode}>
                 {t(texts.userProfile.generateNewPassword)}
               </Button>
