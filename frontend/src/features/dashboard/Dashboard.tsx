@@ -42,6 +42,11 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     });
 
     tabItems.push({
+      title: t(texts.dashboard.myGradings),
+      content: <MyProfile />,
+    });
+
+    tabItems.push({
       title: t(texts.dashboard.myProfile),
       content: <MyProfile />,
     });
