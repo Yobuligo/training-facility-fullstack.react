@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UserProfileApi } from "../../../api/UserProfileApi";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
-import { FuzzySearch } from "../../../services/fuzzySearch/FuzzySearch";
+import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 
 export const useUserProfileSectionViewModel = () => {

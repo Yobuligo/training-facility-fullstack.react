@@ -1,6 +1,6 @@
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { DateTime } from "../../../services/date/DateTime";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { GradingItem } from "../gradingItem/GradingItem";
 import styles from "./GradingList.module.scss";
 import { IGradingListProps } from "./IGradingListProps";

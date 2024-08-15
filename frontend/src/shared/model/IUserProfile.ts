@@ -2,12 +2,12 @@ import { Gender } from "../types/Gender";
 import { IEntity } from "../types/IEntity";
 import { IHaveIsAdmin } from "../types/IHaveIsAdmin";
 import { IHavePath } from "../types/IHavePath";
+import { IHaveUserId } from "../types/IHaveUserId";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
 import { IGrading } from "./IGrading";
 
-export interface IUserProfile extends IEntity, IHaveIsAdmin {
-  userId: string;
+export interface IUserProfile extends IEntity, IHaveIsAdmin, IHaveUserId {
   memberId: string;
   firstname: string;
   lastname: string;

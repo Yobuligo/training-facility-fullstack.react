@@ -1,4 +1,4 @@
-import { DateTime } from "../services/date/DateTime";
+import { DateTime } from "../core/services/date/DateTime";
 import { GradingMeta, IGrading } from "../shared/model/IGrading";
 import { Repository } from "./core/Repository";
 import { DummyGradings } from "./DummyGradings";

@@ -2,7 +2,7 @@ import { useRenderMonth } from "../../../hooks/useRenderMonth";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
-import { DateTime } from "../../../services/date/DateTime";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { Grade } from "../../../shared/types/Grade";
 import componentStyles from "../../../styles/components.module.scss";
 import { style } from "../../../utils/style";
@@ -97,9 +97,7 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
             {DateTime.toYear(props.grading.achievedAt)}
           </div>
           <div>{DateTime.toDay(props.grading.achievedAt)}</div>
-          <div>
-            {renderMonth(parseInt(DateTime.toMonth(props.grading.achievedAt)))}
-          </div>
+          <div>{renderMonth(DateTime.toMonth(props.grading.achievedAt))}</div>
         </div>
         <div className={styles.details}>
           <div className={styles.title}>{gradeToText(props.grading.grade)}</div>

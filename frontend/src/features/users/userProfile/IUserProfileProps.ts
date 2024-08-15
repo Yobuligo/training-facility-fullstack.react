@@ -1,4 +1,4 @@
-import { ISignal } from "../../../services/signal/ISignal";
+import { ISignal } from "../../../core/services/signal/ISignal";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 
