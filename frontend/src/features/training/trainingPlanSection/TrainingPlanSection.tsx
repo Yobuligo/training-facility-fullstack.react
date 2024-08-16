@@ -5,6 +5,7 @@ import { ChangeableForm } from "../../../components/changeableForm/ChangeableFor
 import { DetailView } from "../../../components/detailView/DetailView";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { Recurrence } from "../../../shared/types/Recurrence";
 import { TrainingCalendar } from "../trainingCalendar/TrainingCalendar";
 import styles from "./TrainingPlanSection.module.scss";
 import { useTrainingPlanSectionViewModel } from "./useTrainingPlanSectionViewModel";
@@ -22,7 +23,17 @@ export const TrainingPlanSection: React.FC = () => {
             displayMode={displayMode}
             setDisplayMode={setDisplayMode}
           >
-            <AppointmentForm disabled={displayMode} />
+            <AppointmentForm
+              appointment={{
+                id: "1",
+                description: "Test",
+                title: "Testtitle",
+                from: new Date(),
+                recurrence: Recurrence.MONTHLY,
+                to: new Date(),
+              }}
+              disabled={displayMode}
+            />
           </ChangeableForm>
         </DetailView>
       ) : (
