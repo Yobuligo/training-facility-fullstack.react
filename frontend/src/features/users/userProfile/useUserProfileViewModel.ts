@@ -177,8 +177,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const onIsAdminChange = (option: ISelectOption<boolean>) =>
     setIsAdmin(option.key);
 
-  const onToggleMode = () => setDisplayMode((previous) => !previous);
-
   const onChangeBirthday = (newValue: string) =>
     setBirthday(new Date(newValue));
 
@@ -304,7 +302,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     onToggleCollapsePersonalInformation,
     onToggleCollapseTechnicalInformation,
     onToggleIsDeactivated,
-    onToggleMode,
     phone,
     postalCode,
     profileDetailsSettings,
@@ -318,6 +315,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setBankAccountOwner,
     setCity,
     setCollapseBank,
+    setDisplayMode,
     setEmail,
     setFirstname,
     setLastname,

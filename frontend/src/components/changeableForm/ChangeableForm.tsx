@@ -16,7 +16,7 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
   return (
     <form className={styles.changeableForm} onSubmit={onSubmit}>
       <Toolbar className={styles.toolbar}>
-        {viewModel.displayMode ? (
+        {props.displayMode ? (
           <Button onClick={viewModel.onToggleMode}>
             {t(texts.general.edit)}
           </Button>

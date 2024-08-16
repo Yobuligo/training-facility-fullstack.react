@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
@@ -9,6 +10,7 @@ import styles from "./TrainingPlanSection.module.scss";
 import { useTrainingPlanSectionViewModel } from "./useTrainingPlanSectionViewModel";
 
 export const TrainingPlanSection: React.FC = () => {
+  const [displayMode, setDisplayMode] = useState(true);
   const { t } = useTranslation();
   const viewModel = useTrainingPlanSectionViewModel();
 
@@ -16,7 +18,10 @@ export const TrainingPlanSection: React.FC = () => {
     <div className={styles.trainingPlanSection}>
       {viewModel.displayDetails ? (
         <DetailView onBack={viewModel.onBack}>
-          <ChangeableForm>
+          <ChangeableForm
+            displayMode={displayMode}
+            setDisplayMode={setDisplayMode}
+          >
             <AppointmentForm />
           </ChangeableForm>
         </DetailView>
