@@ -1,0 +1,14 @@
+@import "../../styles/colors.module.scss";
+
+.appointmentForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 18rem;
+}
+
+.dateTime {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

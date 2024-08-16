@@ -1,5 +1,6 @@
 export enum Recurrence {
-  SINGLE,
+  ONCE,
   DAILY,
   WEEKLY,
+  MONTHLY,
 }

@@ -27,6 +27,12 @@
             "dec": "Dec"
         },
         "no": "No",
+        "recurrence": {
+            "daily": "Daily",
+            "monthly": "Monthly",
+            "once": "Once",
+            "weekly": "Weekly"
+        },
         "save": "Save",
         "weekdays": {
             "monday": "Monday",
@@ -99,13 +105,14 @@
         "principals": "Principal",
         "relatives": "Relative"
     },
-    "timetableAddForm": {
-        "title": "Title",
+    "AppointmentForm": {
+        "description": "Description",
         "endDate": "End date",
         "endTime": "End time",
         "recurrence": "Recurrence",
         "startDate": "Start date",
-        "startTime": "Start time"
+        "startTime": "Start time",
+        "title": "Title"
     },
     "trainingPlanSection": {
         "addTraining": "Add training"

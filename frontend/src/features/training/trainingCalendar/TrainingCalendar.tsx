@@ -11,7 +11,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
-const MyCalendar = () => {
+export const TrainingCalendar: React.FC = () => {
   const [events, setEvents] = useState([
     {
       id: 1,
@@ -91,5 +91,3 @@ const MyCalendar = () => {
     />
   );
 };
-
-export default MyCalendar;
