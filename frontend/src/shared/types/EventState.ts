@@ -1,4 +1,4 @@
-export enum TrainingInstanceState {
+export enum EventState {
   CHECKED_IN,
   CHECKED_OUT,
   MISSING,
