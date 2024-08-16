@@ -9,8 +9,8 @@ import { MyProfile } from "../myProfile/MyProfile";
 import { TrainingPlanSection } from "../training/trainingPlanSection/TrainingPlanSection";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
+import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
-import { AppointmentForm } from "../../components/appointmentForm/AppointmentForm";
 
 export const Dashboard: React.FC<IDashboardProps> = (props) => {
   const [selected, setSelected] = useState(-1);
@@ -43,11 +43,6 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     });
 
     tabItems.push({
-      title: t(texts.dashboard.myGradings),
-      content: <AppointmentForm />,
-    });
-
-    tabItems.push({
       title: t(texts.dashboard.myProfile),
       content: <MyProfile />,
     });
@@ -66,7 +61,15 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
       />
       <TabStripContent
         children={
-          selected === -1 ? <Welcome /> : getTabItems()[selected].content
+          selected === -1 ? (
+            <div className={styles.dashboardContent}>
+              <Welcome />
+            </div>
+          ) : (
+            <div className={styles.dashboardContent}>
+              {getTabItems()[selected].content}
+            </div>
+          )
         }
       />
     </div>

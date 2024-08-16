@@ -1,8 +1,7 @@
+import { DetailView } from "../../../components/detailView/DetailView";
 import { useSignal } from "../../../hooks/useSignal";
-import { ArrowBackIcon } from "../../../icons/ArrowBackIcon";
 import { UserProfile } from "../userProfile/UserProfile";
 import { IUserProfileDetails } from "./IUserProfileDetails";
-import styles from "./UserProfileDetails.module.scss";
 
 /**
  * This component is responsible for displaying a user profile and provides an icon to navigate back.
@@ -16,8 +15,7 @@ export const UserProfileDetails: React.FC<IUserProfileDetails> = (props) => {
   };
 
   return (
-    <div className={styles.userProfileDetails}>
-      <ArrowBackIcon onClick={onBack} />
+    <DetailView onBack={onBack}>
       <UserProfile
         cancelSignal={cancelSignal}
         isAdminMode={props.isAdminMode}
@@ -25,6 +23,6 @@ export const UserProfileDetails: React.FC<IUserProfileDetails> = (props) => {
         onChange={props.onChange}
         userProfile={props.userProfile}
       />
-    </div>
+    </DetailView>
   );
 };
