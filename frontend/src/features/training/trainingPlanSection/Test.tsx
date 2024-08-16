@@ -85,8 +85,9 @@ const MyCalendar = () => {
       }}
       culture="de"
       messages={messages}
-      min={new Date(2024, 7, 16, 18, 15, 0, 0)}
-      max={new Date(2024, 7, 16, 19, 15, 0, 0)}
+      min={new Date(2024, 7, 16, 17, 15, 0, 0)}
+      max={new Date(2024, 7, 16, 20, 15, 0, 0)}
+      views={["day", "week", "month"]}
     />
   );
 };
