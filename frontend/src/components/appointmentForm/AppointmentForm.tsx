@@ -10,8 +10,11 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
   const { t } = useTranslation();
   const viewModel = useAppointmentFormViewModel(props);
 
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
+    event.preventDefault();
+
   return (
-    <div className={styles.appointmentForm}>
+    <form className={styles.appointmentForm} onSubmit={onSubmit}>
       <div>
         <LabeledInput label={t(texts.AppointmentForm.title)} />
       </div>
@@ -32,6 +35,6 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
           options={viewModel.recurrenceOptions}
         />
       </div>
-    </div>
+    </form>
   );
 };

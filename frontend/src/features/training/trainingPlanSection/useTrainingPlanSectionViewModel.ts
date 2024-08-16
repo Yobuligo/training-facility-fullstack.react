@@ -1,9 +1,11 @@
 import { useState } from "react";
 
 export const useTrainingPlanSectionViewModel = () => {
-  const [index, setIndex] = useState(0);
+  const [displayDetails, setDisplayDetails] = useState(false);
 
-  const onAppend = () => {};
+  const onAdd = () => setDisplayDetails(true);
 
-  return { onAppend };
+  const onBack = () => setDisplayDetails(false);
+
+  return { displayDetails, onAdd, onBack };
 };

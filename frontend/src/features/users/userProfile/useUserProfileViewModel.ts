@@ -177,9 +177,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const onIsAdminChange = (option: ISelectOption<boolean>) =>
     setIsAdmin(option.key);
 
-  const onToggleMode = () => {
-    setDisplayMode((previous) => !previous);
-  };
+  const onToggleMode = () => setDisplayMode((previous) => !previous);
 
   const onChangeBirthday = (newValue: string) =>
     setBirthday(new Date(newValue));
