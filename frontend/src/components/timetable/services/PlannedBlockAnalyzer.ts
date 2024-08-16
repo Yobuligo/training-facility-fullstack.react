@@ -17,6 +17,9 @@ class PlannedBlockAnalyzerDefault implements IPlannedBlockAnalyzer {
     plannedBlocks: IPlannedBlock[],
     timelineIntervalInMinutes: number
   ): Time[] {
+    if (plannedBlocks.length === 0) {
+      return [];
+    }
     const earliest = TimeConverter.findEarliestTime(
       plannedBlocks.map((block) => block.startTime)
     );
