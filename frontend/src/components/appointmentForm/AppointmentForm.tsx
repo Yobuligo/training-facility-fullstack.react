@@ -16,21 +16,44 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
   return (
     <form className={styles.appointmentForm} onSubmit={onSubmit}>
       <div>
-        <LabeledInput label={t(texts.AppointmentForm.title)} />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.title)}
+        />
       </div>
       <div>
-        <LabeledInput label={t(texts.AppointmentForm.description)} />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.description)}
+        />
       </div>
       <div className={styles.dateTime}>
-        <LabeledInput label={t(texts.AppointmentForm.startDate)} type="date" />
-        <LabeledInput label={t(texts.AppointmentForm.startTime)} type="time" />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.startDate)}
+          type="date"
+        />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.startTime)}
+          type="time"
+        />
       </div>
       <div className={styles.dateTime}>
-        <LabeledInput label={t(texts.AppointmentForm.endDate)} type="date" />
-        <LabeledInput label={t(texts.AppointmentForm.endTime)} type="time" />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.endDate)}
+          type="date"
+        />
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.endTime)}
+          type="time"
+        />
       </div>
       <div>
         <LabeledSelect
+          disabled={props.disabled}
           label={t(texts.AppointmentForm.recurrence)}
           options={viewModel.recurrenceOptions}
         />

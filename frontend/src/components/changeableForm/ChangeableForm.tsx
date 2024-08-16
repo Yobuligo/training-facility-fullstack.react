@@ -6,6 +6,9 @@ import styles from "./ChangeableForm.module.scss";
 import { IChangeableFormProps } from "./IChangeableFormProps";
 import { useChangeableFormViewModel } from "./useChangeableFormViewModel";
 
+/**
+ * This component is responsible for displaying a form with a toolbar to switch between change and display mode and buttons for saving or cancelling changes.
+ */
 export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
   const viewModel = useChangeableFormViewModel(props);
   const { t } = useTranslation();

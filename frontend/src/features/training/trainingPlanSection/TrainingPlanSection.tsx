@@ -22,7 +22,7 @@ export const TrainingPlanSection: React.FC = () => {
             displayMode={displayMode}
             setDisplayMode={setDisplayMode}
           >
-            <AppointmentForm />
+            <AppointmentForm disabled={displayMode} />
           </ChangeableForm>
         </DetailView>
       ) : (

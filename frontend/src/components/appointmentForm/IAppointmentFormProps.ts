@@ -1,1 +1,3 @@
-export interface IAppointmentFormProps {}
+export interface IAppointmentFormProps {
+  disabled?: boolean;
+}
