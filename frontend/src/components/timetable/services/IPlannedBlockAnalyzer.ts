@@ -1,6 +1,6 @@
 import { IPlannedBlock } from "../IPlannedBlocks";
 import { Time } from "../types/Time";
-import { Weekday } from "../Weekday";
+import { Weekday } from "../../../core/types/Weekday";
 
 export interface IPlannedBlockAnalyzer {
   findPositionInInterval(timeIntervals: Time[], date: Date): number;

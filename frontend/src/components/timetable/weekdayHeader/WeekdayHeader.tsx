@@ -1,7 +1,9 @@
+import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import { IWeekdayHeaderProps } from "./IWeekdayHeaderProps";
 import styles from "./WeekdayHeader.module.scss";
 
 export const WeekdayHeader: React.FC<IWeekdayHeaderProps> = (props) => {
+  const renderWeekday = useRenderWeekday();
   const lengthOfWeekdayBlockWithColor = props.blockColumnSpan + 1;
 
   const timelineColumn = 1;
@@ -23,7 +25,7 @@ export const WeekdayHeader: React.FC<IWeekdayHeaderProps> = (props) => {
         gridColumn: weekdayGridColumn(props.positionInGrid),
       }}
     >
-      {props.weekday}
+      {renderWeekday(props.weekday)}
     </div>
   );
 };

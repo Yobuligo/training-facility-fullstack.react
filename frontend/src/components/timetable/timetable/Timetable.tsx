@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
+import { Weekday } from "../../../core/types/Weekday";
 import { Block } from "../block/Block";
 import { IBlock } from "../block/IBlock";
-import { Weekday } from "../Weekday";
 import { WeekdayHeader } from "../weekdayHeader/WeekdayHeader";
 import { ITimetableProps } from "./ITimetableProps";
 import styles from "./Timetable.module.scss";
@@ -33,15 +33,16 @@ export const Timetable: React.FC<ITimetableProps> = (props) => {
   };
 
   const weekdays = (): ReactElement | ReactElement[] =>
-    viewModel.plannedWeekdays.map((weekday, index) => (
+    viewModel.plannedWeekdays.map((plannedWeekday, index) => (
       <WeekdayHeader
+        key={index}
         blockColumnSpan={blockColumnSpan}
         positionInGrid={index}
-        weekday={weekday}
+        weekday={plannedWeekday}
       />
     ));
 
-  const weekday = (weekday: string): ReactElement => (
+  const weekday = (weekday: Weekday): ReactElement => (
     <WeekdayHeader
       blockColumnSpan={blockColumnSpan}
       positionInGrid={viewModel.isSmallScreen ? 0 : 1}
@@ -59,6 +60,7 @@ export const Timetable: React.FC<ITimetableProps> = (props) => {
 
   const buildBlock = (block: IBlock): ReactElement => (
     <Block
+      key={block.startTime}
       color={block.color}
       startTime={block.startTime}
       endTime={block.endTime}
@@ -97,7 +99,7 @@ export const Timetable: React.FC<ITimetableProps> = (props) => {
               <div className={styles.leftTop}></div>
               {timeline()}
               {weekday(plannedWeekday)}
-              {blocksByWeekday(plannedWeekday as any as Weekday)}
+              {blocksByWeekday(plannedWeekday)}
             </div>
           ))}
         </div>

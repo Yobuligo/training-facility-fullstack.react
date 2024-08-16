@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IPlannedBlock } from "../../../components/timetable/IPlannedBlocks";
-import { Weekday } from "../../../components/timetable/Weekday";
+import { Weekday } from "../../../core/types/Weekday";
 
 export const useTrainingPlanSectionViewModel = () => {
   const [plannedBlocks, setPlannedBlocks] = useState<IPlannedBlock[]>([]);
@@ -11,9 +11,10 @@ export const useTrainingPlanSectionViewModel = () => {
     switch (index) {
       case 0: {
         plannedBlock = {
+          id: index.toString(),
           title: "Training für Kinder",
           color: "#893F61",
-          weekdayIndex: Weekday.MONDAY,
+          weekday: Weekday.MONDAY,
           startTime: new Date(2024, 11, 17, 17, 30),
           endTime: new Date(2024, 11, 17, 18, 30),
         };
@@ -21,9 +22,10 @@ export const useTrainingPlanSectionViewModel = () => {
       }
       case 1: {
         plannedBlock = {
+          id: index.toString(),
           title: "Pause",
           color: "#e2e2e2",
-          weekdayIndex: Weekday.MONDAY,
+          weekday: Weekday.MONDAY,
           startTime: new Date(2024, 11, 17, 18, 30),
           endTime: new Date(2024, 11, 17, 18, 45),
         };
@@ -31,9 +33,10 @@ export const useTrainingPlanSectionViewModel = () => {
       }
       case 2: {
         plannedBlock = {
+          id: index.toString(),
           title: "Training für alle",
           color: "#485136",
-          weekdayIndex: Weekday.MONDAY,
+          weekday: Weekday.MONDAY,
           startTime: new Date(2024, 11, 21, 18, 45),
           endTime: new Date(2024, 11, 21, 19, 45),
         };
@@ -42,9 +45,10 @@ export const useTrainingPlanSectionViewModel = () => {
       case 3: {
         plannedBlock = {
           // title: "Training für alle",
+          id: index.toString(),
           title: "Training für Fortgeschrittene",
           color: "#893F61",
-          weekdayIndex: Weekday.WEDNESDAY,
+          weekday: Weekday.WEDNESDAY,
           startTime: new Date(2024, 11, 19, 20),
           endTime: new Date(2024, 11, 19, 21),
         };
@@ -52,9 +56,10 @@ export const useTrainingPlanSectionViewModel = () => {
       }
       case 4: {
         plannedBlock = {
+          id: index.toString(),
           title: "Früheres Training",
           color: "#3f8976",
-          weekdayIndex: Weekday.WEDNESDAY,
+          weekday: Weekday.WEDNESDAY,
           startTime: new Date(2024, 11, 19, 15, 30),
           endTime: new Date(2024, 11, 19, 17, 30),
         };
@@ -62,9 +67,10 @@ export const useTrainingPlanSectionViewModel = () => {
       }
       case 5: {
         plannedBlock = {
+          id: index.toString(),
           title: "Training für Kinder",
           color: "#893F61",
-          weekdayIndex: Weekday.TUESDAY,
+          weekday: Weekday.TUESDAY,
           startTime: new Date(2024, 11, 19, 20, 0),
           endTime: new Date(2024, 11, 19, 21, 15),
         };
@@ -72,9 +78,10 @@ export const useTrainingPlanSectionViewModel = () => {
       }
       case 6: {
         plannedBlock = {
+          id: index.toString(),
           title: "Training für Kinder",
           color: "#893F61",
-          weekdayIndex: Weekday.SATURDAY,
+          weekday: Weekday.SATURDAY,
           startTime: new Date(2024, 11, 19, 20, 0),
           endTime: new Date(2024, 11, 19, 21, 15),
         };

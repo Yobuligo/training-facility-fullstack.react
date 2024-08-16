@@ -1,6 +1,6 @@
 import { IPlannedBlock } from "../IPlannedBlocks";
 import { Time } from "../types/Time";
-import { Weekday } from "../Weekday";
+import { Weekday } from "../../../core/types/Weekday";
 import { IPlannedBlockAnalyzer } from "./IPlannedBlockAnalyzer";
 import { TimeConverter } from "./TimeConverter";
 
@@ -42,8 +42,9 @@ class PlannedBlockAnalyzerDefault implements IPlannedBlockAnalyzer {
   getPlannedWeekdays(plannedBlocks: IPlannedBlock[]): Weekday[] {
     const weekdays: Weekday[] = [];
     plannedBlocks.forEach((block) => {
-      if (weekdays.findIndex((item) => item === block.weekdayIndex) === -1) {
-        weekdays.push(block.weekdayIndex);
+      // create a distinct weekday list
+      if (weekdays.findIndex((item) => item === block.weekday) === -1) {
+        weekdays.push(block.weekday);
       }
     });
     return weekdays.sort((a, b) => a - b);

@@ -1,3 +1,4 @@
+import { Weekday } from "../../../core/types/Weekday";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import global from "../../../styles/global.module.scss";
 import { IBlock } from "../block/IBlock";
@@ -5,23 +6,18 @@ import { IPlannedBlock } from "../IPlannedBlocks";
 import { PlannedBlockAnalyzer } from "../services/PlannedBlockAnalyzer";
 import { TimeConverter } from "../services/TimeConverter";
 import { Time } from "../types/Time";
-import { Weekday } from "../Weekday";
 import { ITimetableProps } from "./ITimetableProps";
 
 export const useTimeTableViewModel = (props: ITimetableProps) => {
   const { width } = useWindowDimensions();
 
   const isSmallScreen = width <= +global.mediumScreenWidth;
-  const plannedWeekdaysIndices = PlannedBlockAnalyzer.getPlannedWeekdays(
+  const plannedWeekdays = PlannedBlockAnalyzer.getPlannedWeekdays(
     props.plannedBlocks
   );
 
-  const plannedWeekdays: string[] = plannedWeekdaysIndices.map(
-    (weekday) => Object.values(Weekday)[weekday] as string
-  );
-
   const xPositionOfDayInTimetable = (weekday: Weekday) =>
-    plannedWeekdaysIndices.findIndex((item) => item === weekday) + 1;
+    plannedWeekdays.findIndex((item) => item === weekday) + 1;
 
   const timeIntervals: Time[] = PlannedBlockAnalyzer.getTimeIntervals(
     props.plannedBlocks,
@@ -42,13 +38,14 @@ export const useTimeTableViewModel = (props: ITimetableProps) => {
     xPositionOfDayInTimetable: (weekday: Weekday) => number
   ): IBlock => {
     return {
+      id: plannedBlock.id,
       title: plannedBlock.title,
       description: plannedBlock.description,
       color: plannedBlock.color,
       startTime: TimeConverter.getDateTimeAsString(plannedBlock.startTime),
       endTime: TimeConverter.getDateTimeAsString(plannedBlock.endTime),
       xPositionOfDayInTimetable: xPositionOfDayInTimetable(
-        plannedBlock.weekdayIndex
+        plannedBlock.weekday
       ),
       startTimeIntervalIndex: PlannedBlockAnalyzer.findPositionInInterval(
         timeIntervals,
@@ -65,7 +62,7 @@ export const useTimeTableViewModel = (props: ITimetableProps) => {
   const blocksByWeekday = (weekday: Weekday) => {
     const plannedBlocks = props.plannedBlocks.filter(
       (plannedBlock) =>
-        plannedBlock.weekdayIndex ===
+        plannedBlock.weekday ===
         Object.values(Weekday).findIndex((item) => item === weekday)
     );
     return plannedBlocks.map((plannedBlock) => block(plannedBlock, () => 2));

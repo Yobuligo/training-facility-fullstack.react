@@ -28,6 +28,15 @@
         },
         "no": "No",
         "save": "Save",
+        "weekdays": {
+            "monday": "Monday",
+            "tuesday": "Tuesday",
+            "wednesday": "Wednesday",
+            "thursday": "Thursday",
+            "friday": "Friday",
+            "saturday": "Saturday",
+            "sunday": "Sunday"
+        },
         "yes": "Yes"
     },
     "gradingAddForm": {

@@ -1,10 +1,11 @@
-import { Weekday } from "./Weekday";
+import { Weekday } from "../../core/types/Weekday";
 
 export interface IPlannedBlock {
-  title: string;
-  description?: string;
+  id: string;
   color: string;
-  weekdayIndex: Weekday;
-  startTime: Date;
+  description?: string;
   endTime: Date;
+  title: string;
+  startTime: Date;
+  weekday: Weekday;
 }
