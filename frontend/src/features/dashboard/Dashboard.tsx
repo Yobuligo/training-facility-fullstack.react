@@ -10,6 +10,7 @@ import { TrainingPlanSection } from "../training/trainingPlanSection/TrainingPla
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
 import { IDashboardProps } from "./IDashboardProps";
+import { TimetableAddForm } from "../../components/timetableAddForm/TimetableAddForm";
 
 export const Dashboard: React.FC<IDashboardProps> = (props) => {
   const [selected, setSelected] = useState(-1);
@@ -43,7 +44,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
 
     tabItems.push({
       title: t(texts.dashboard.myGradings),
-      content: <MyProfile />,
+      content: <TimetableAddForm />,
     });
 
     tabItems.push({

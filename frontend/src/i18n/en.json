@@ -99,6 +99,14 @@
         "principals": "Principal",
         "relatives": "Relative"
     },
+    "timetableAddForm": {
+        "title": "Title",
+        "endDate": "End date",
+        "endTime": "End time",
+        "recurrence": "Recurrence",
+        "startDate": "Start date",
+        "startTime": "Start time"
+    },
     "trainingPlanSection": {
         "addTraining": "Add training"
     },
