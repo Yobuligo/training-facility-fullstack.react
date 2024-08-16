@@ -1,5 +1,6 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { Button } from "../../../components/button/Button";
+import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
@@ -15,7 +16,9 @@ export const TrainingPlanSection: React.FC = () => {
     <div className={styles.trainingPlanSection}>
       {viewModel.displayDetails ? (
         <DetailView onBack={viewModel.onBack}>
-          <AppointmentForm />
+          <ChangeableForm>
+            <AppointmentForm />
+          </ChangeableForm>
         </DetailView>
       ) : (
         <>
