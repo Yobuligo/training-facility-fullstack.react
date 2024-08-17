@@ -2,18 +2,16 @@ import { DateTime } from "../core/services/date/DateTime";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 
 /**
- * Checks if {@link eventDefinition} is valid
+ * Checks if {@link eventDefinition} matches a date time span {@link from} {@link to}
  */
 export const matchesDateTimeSpan = (
   from: Date,
   to: Date,
   eventDefinition: IEventDefinition
 ): boolean => {
-  // From date must be in range, so
+  // if the range is from e.g. 1 - 5 and eventDefinitionFrom starts at 7, it doesn't match
   const dateTimeSpanTo = DateTime.toDate(to);
   const eventDefinitionFrom = DateTime.toDate(eventDefinition.from);
-
-  // if the range is from e.g. 1 - 5 and eventDefinitionFrom starts at 7, it doesn't match
   if (eventDefinitionFrom > dateTimeSpanTo) {
     return false;
   }

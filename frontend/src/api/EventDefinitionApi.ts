@@ -44,12 +44,6 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
         );
       }
 
-      // // does event of recurrence type "once" matches the range?
-      // // Daily fits for each day if event definition is in the range
-      // if (eventDefinition.recurrence === Recurrence.DAILY) {
-      //   return this.matchesDateTimeSpan(dateTimeSpan, eventDefinition);
-      // }
-
       // does event of recurrence type "week" matches the range?
       if (eventDefinition.recurrence === Recurrence.WEEKLY) {
         if (
@@ -66,15 +60,6 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
         const weekday = eventDefinition.from.getDay();
         return lazyWeekdays.data.has(weekday);
       }
-
-      // // does event of recurrence type "week" matches the range?
-      // if (eventDefinition.recurrence === Recurrence.MONTHLY) {
-      //   if (!this.matchesDateTimeSpan(dateTimeSpan, eventDefinition)){
-      //     return false
-      //   }
-
-      // }
-
       return false;
     });
     return eventDefinitions;
