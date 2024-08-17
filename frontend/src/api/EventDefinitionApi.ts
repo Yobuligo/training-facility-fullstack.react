@@ -33,8 +33,17 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
       return weekdays;
     });
 
+    // build a list of days for the given dateTimeSpan
+    const lazyDays = new Lazy(() => {
+      const days = new Set<number>();
+      DateTimeIterator.iterate(dateTimeSpan.from, dateTimeSpan.to, (cursor) => {
+        days.add(DateTime.toDay(cursor));
+      });
+      return days;
+    });
+
     const eventDefinitions = DummyEventDefinitions.filter((eventDefinition) => {
-      // does event of recurrence type "once" matches the range?
+      // does event definition of recurrence type "once" matches the range?
       if (eventDefinition.recurrence === Recurrence.ONCE) {
         return (
           DateTime.toDate(eventDefinition.from) >=
@@ -44,7 +53,7 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
         );
       }
 
-      // does event of recurrence type "week" matches the range?
+      // does event definition of recurrence type "week" matches the range?
       if (eventDefinition.recurrence === Recurrence.WEEKLY) {
         if (
           !matchesDateTimeSpan(
@@ -56,10 +65,27 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
           return false;
         }
 
-        // get weekday of definition and check if the weekday belongs to the weekdays of the given dateTimeSpan
-        const weekday = eventDefinition.from.getDay();
+        // get weekday of event definition and check if the weekday belongs to the weekdays of the given dateTimeSpan
+        const weekday = DateTime.toWeekday(eventDefinition.from);
         return lazyWeekdays.data.has(weekday);
       }
+
+      if (eventDefinition.recurrence === Recurrence.MONTHLY) {
+        if (
+          !matchesDateTimeSpan(
+            dateTimeSpan.from,
+            dateTimeSpan.to,
+            eventDefinition
+          )
+        ) {
+          return false;
+        }
+
+        // get day of definition and check if the day belongs to the days of the given dateTimeSpan
+        const day = DateTime.toDay(eventDefinition.from);
+        return lazyDays.data.has(day);
+      }
+
       return false;
     });
     return eventDefinitions;

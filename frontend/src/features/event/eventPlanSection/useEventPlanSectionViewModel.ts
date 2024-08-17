@@ -56,6 +56,27 @@ const eventDefinitionsToEvent = (
         });
         break;
       }
+      case Recurrence.MONTHLY: {
+        DateTimeIterator.iterate(from, to, (current) => {
+          // add entry for day if days are equal
+          if (
+            DateTime.toDay(current) === DateTime.toDay(eventDefinition.from)
+          ) {
+            events.push({
+              start: DateTime.create(
+                DateTime.toDate(current),
+                DateTime.toTime(eventDefinition.from)
+              ),
+              end: DateTime.create(
+                DateTime.toDate(current),
+                DateTime.toTime(eventDefinition.to)
+              ),
+              title: eventDefinition.title,
+            });
+          }
+        });
+        break;
+      }
     }
   });
   return events;
