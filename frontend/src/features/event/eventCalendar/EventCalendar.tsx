@@ -74,7 +74,7 @@ export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
     <Calendar
       localizer={localizer}
       events={events}
-      defaultView="week"
+      defaultView={props.view ?? "week"}
       startAccessor="start"
       endAccessor="end"
       style={{ height: 500 }}

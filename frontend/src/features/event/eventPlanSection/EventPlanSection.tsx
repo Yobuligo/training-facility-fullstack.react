@@ -27,8 +27,9 @@ export const EventPlanSection: React.FC = () => {
           <EventCalendar
             events={viewModel.events}
             from={new Date()}
-            to={new Date()}
             onRangeChanged={viewModel.onEventRangeChanged}
+            to={new Date()}
+            view="week"
           />
         </>
       )}
