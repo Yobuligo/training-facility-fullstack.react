@@ -113,7 +113,7 @@
         "startTime": "Start time",
         "title": "Title"
     },
-    "trainingPlanSection": {
+    "EventPlanSection": {
         "addTraining": "Add training"
     },
     "userProfile": {

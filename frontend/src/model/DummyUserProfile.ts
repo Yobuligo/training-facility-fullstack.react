@@ -4,10 +4,9 @@ import { Gender } from "../shared/types/Gender";
 import { Language } from "../shared/types/Language";
 import { Tariff } from "../shared/types/Tariff";
 import { uuid } from "../utils/uuid";
+import { Dummy } from "./Dummy";
 
-export class DummyUserProfile implements IUserProfile {
-  private _isPersisted = false;
-
+export class DummyUserProfile extends Dummy implements IUserProfile {
   id = uuid();
   memberId = "";
   userId = uuid();
@@ -32,12 +31,4 @@ export class DummyUserProfile implements IUserProfile {
   bankAccountInstitution = "";
   isDeactivated = false;
   gradings: IGrading[] = [];
-
-  get isPersisted() {
-    return this._isPersisted;
-  }
-
-  setIsPersisted() {
-    this._isPersisted = true;
-  }
 }

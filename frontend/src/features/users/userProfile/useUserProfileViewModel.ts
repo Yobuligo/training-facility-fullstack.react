@@ -235,7 +235,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.isDeactivated = isDeactivated;
     props.userProfile.deactivatedAt = deactivatedAt;
     props.userProfile.gradings = gradings;
-    setDisplayMode(true);
     props.onChange?.(props.userProfile);
   };
 
