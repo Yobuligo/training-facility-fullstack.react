@@ -31,12 +31,3 @@ export class DateTimeIterator {
     }
   }
 }
-
-const iterator: DateTimeIterator = new DateTimeIterator(new Date(), new Date());
-while (iterator.hasNext()) {
-  const current = iterator.next();
-}
-
-DateTimeIterator.iterate(new Date(), new Date(), (current) => {
-    
-});
