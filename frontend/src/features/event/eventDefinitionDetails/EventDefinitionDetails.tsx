@@ -20,15 +20,19 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
         <AppointmentForm
           description={viewModel.description}
           disabled={viewModel.displayMode}
-          from={viewModel.from}
+          fromDate={viewModel.fromDate}
+          fromTime={viewModel.fromTime}
           recurrence={viewModel.recurrence}
           setDescription={viewModel.setDescription}
-          setFrom={viewModel.setFrom}
+          setFromDate={viewModel.setFromDate}
+          setFromTime={viewModel.setFromTime}
           setRecurrence={viewModel.setRecurrence}
           setTitle={viewModel.setTitle}
-          setTo={viewModel.setTo}
+          setToDate={viewModel.setToDate}
+          setToTime={viewModel.setToTime}
           title={viewModel.title}
-          to={viewModel.to}
+          toDate={viewModel.toDate}
+          toTime={viewModel.toTime}
         />
       </ChangeableForm>
     </DetailView>

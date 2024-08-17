@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { DateTime } from "../../core/services/date/DateTime";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
 import { Recurrence } from "../../shared/types/Recurrence";
 import { ISelectOption } from "../select/ISelectOption";
@@ -22,38 +21,14 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     (selectOption) => selectOption.key === props.recurrence
   );
 
-  const onChangeFromDate = (newDate: string) => {
-    const from = DateTime.create(newDate, DateTime.toTime(props.from));
-    props.setFrom(from);
-  };
-
-  const onChangeFromTime = (newTime: string) => {
-    const from = DateTime.create(DateTime.toDate(props.from), newTime);
-    props.setFrom(from);
-  };
-
   const onChangeRecurrence = (selectedRecurrence: ISelectOption<Recurrence>) =>
     props.setRecurrence(selectedRecurrence.key);
-
-  const onChangeToDate = (newDate: string) => {
-    const to = DateTime.create(newDate, DateTime.toTime(props.to));
-    props.setTo(to);
-  };
-
-  const onChangeToTime = (newTime: string) => {
-    const to = DateTime.create(DateTime.toDate(props.to), newTime);
-    props.setFrom(to);
-  };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
 
   return {
-    onChangeFromDate,
-    onChangeFromTime,
     onChangeRecurrence,
-    onChangeToDate,
-    onChangeToTime,
     onSubmit,
     recurrenceOptions,
     selectedRecurrence,

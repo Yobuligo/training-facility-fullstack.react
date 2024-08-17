@@ -66,6 +66,7 @@ export const useEventPlanSectionViewModel = () => {
   const onSaveEventDefinition = async (eventDefinition: IEventDefinition) => {
     const eventDefinitionApi = new EventDefinitionApi();
     await eventDefinitionApi.insert(eventDefinition);
+    loadEventDefinitions(from, to);
   };
 
   return {

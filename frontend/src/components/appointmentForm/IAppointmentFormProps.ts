@@ -1,14 +1,19 @@
-import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../shared/types/Recurrence";
 
-export interface IAppointmentFormProps extends IDateTimeSpan {
+export interface IAppointmentFormProps {
   disabled?: boolean;
   description: string;
+  fromDate: string;
+  fromTime: string;
   recurrence: Recurrence;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
-  setFrom: React.Dispatch<React.SetStateAction<Date>>;
+  setFromDate: React.Dispatch<React.SetStateAction<string>>;
+  setFromTime: React.Dispatch<React.SetStateAction<string>>;
   setRecurrence: React.Dispatch<React.SetStateAction<Recurrence>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setTo: React.Dispatch<React.SetStateAction<Date>>;
+  setToDate: React.Dispatch<React.SetStateAction<string>>;
+  setToTime: React.Dispatch<React.SetStateAction<string>>;
   title: string;
+  toDate: string;
+  toTime: string;
 }

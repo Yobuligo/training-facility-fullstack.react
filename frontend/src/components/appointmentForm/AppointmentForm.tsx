@@ -1,4 +1,3 @@
-import { DateTime } from "../../core/services/date/DateTime";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { LabeledInput } from "../labeledInput/LabeledInput";
@@ -33,32 +32,32 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.startDate)}
-          onChange={viewModel.onChangeFromDate}
+          onChange={props.setFromDate}
           type="date"
-          value={DateTime.toDate(props.from)}
+          value={props.fromDate}
         />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.startTime)}
-          onChange={viewModel.onChangeFromTime}
+          onChange={props.setFromTime}
           type="time"
-          value={DateTime.toTime(props.from)}
+          value={props.fromTime}
         />
       </div>
       <div className={styles.dateTime}>
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.endDate)}
-          onChange={viewModel.onChangeToDate}
+          onChange={props.setToDate}
           type="date"
-          value={DateTime.toDate(props.to)}
+          value={props.toDate}
         />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.endTime)}
-          onChange={viewModel.onChangeToTime}
+          onChange={props.setToTime}
           type="time"
-          value={DateTime.toTime(props.to)}
+          value={props.toTime}
         />
       </div>
       <div>

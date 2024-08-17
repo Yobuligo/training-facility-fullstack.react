@@ -1,8 +1,9 @@
 import moment from "moment";
 import "moment/locale/de";
-import React, { useState } from "react";
+import React from "react";
 import {
   Calendar,
+  Event,
   EventPropGetter,
   EventProps,
   momentLocalizer,
@@ -13,16 +14,6 @@ import { IEventCalendarProps } from "./IEventCalendarProps";
 const localizer = momentLocalizer(moment);
 
 export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: "Kindertraining",
-      start: new Date(2024, 7, 16, 18, 15, 0, 0),
-      end: new Date(2024, 7, 16, 19, 15, 0, 0),
-    },
-    // Weitere Ereignisse hier
-  ]);
-
   const handleRegister = (eventId: number) => {
     alert(`You registered for event with ID: ${eventId}`);
   };
@@ -42,16 +33,11 @@ export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
   };
 
   const customEventComponent: React.ComponentType<
-    EventProps<{
-      id: number;
-      title: string;
-      start: Date;
-      end: Date;
-    }>
+    EventProps<Event>
   > = ({ event }) => (
     <div>
       <strong>{event.title}</strong>
-      <button onClick={() => handleRegister(event.id)}>Register</button>
+      <button onClick={() => handleRegister(12)}>Register</button>
     </div>
   );
 
@@ -73,7 +59,7 @@ export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
   return (
     <Calendar
       localizer={localizer}
-      events={events}
+      events={props.events}
       defaultView={props.view ?? "week"}
       startAccessor="start"
       endAccessor="end"

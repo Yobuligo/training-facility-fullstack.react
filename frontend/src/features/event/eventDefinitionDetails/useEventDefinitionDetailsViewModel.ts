@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (
@@ -9,9 +10,18 @@ export const useEventDefinitionDetailsViewModel = (
     props.eventDefinition.description
   );
   const [title, setTitle] = useState(props.eventDefinition.title);
-
-  const [from, setFrom] = useState(props.eventDefinition.from);
-  const [to, setTo] = useState(props.eventDefinition.to);
+  const [fromDate, setFromDate] = useState(
+    DateTime.toDate(props.eventDefinition.from)
+  );
+  const [fromTime, setFromTime] = useState(
+    DateTime.toTime(props.eventDefinition.from)
+  );
+  const [toDate, setToDate] = useState(
+    DateTime.toDate(props.eventDefinition.to)
+  );
+  const [toTime, setToTime] = useState(
+    DateTime.toTime(props.eventDefinition.to)
+  );
   const [recurrence, setRecurrence] = useState(
     props.eventDefinition.recurrence
   );
@@ -19,8 +29,10 @@ export const useEventDefinitionDetailsViewModel = (
   const reset = () => {
     setTitle(props.eventDefinition.title);
     setDescription(props.eventDefinition.description);
-    setFrom(props.eventDefinition.from);
-    setTo(props.eventDefinition.to);
+    setFromDate(DateTime.toDate(props.eventDefinition.from));
+    setFromTime(DateTime.toTime(props.eventDefinition.from));
+    setToDate(DateTime.toDate(props.eventDefinition.to));
+    setToTime(DateTime.toTime(props.eventDefinition.to));
     setRecurrence(props.eventDefinition.recurrence);
   };
 
@@ -28,27 +40,31 @@ export const useEventDefinitionDetailsViewModel = (
 
   const onSave = () => {
     props.eventDefinition.description = description;
-    props.eventDefinition.from = from;
+    props.eventDefinition.from = DateTime.create(fromDate, fromTime);
     props.eventDefinition.recurrence = recurrence;
     props.eventDefinition.title = title;
-    props.eventDefinition.to = to;
+    props.eventDefinition.to = DateTime.create(toDate, toTime);
     props.onSave?.(props.eventDefinition);
   };
 
   return {
     description,
     displayMode,
-    from,
+    fromDate,
+    fromTime,
     onCancel,
     onSave,
     recurrence,
     setDescription,
     setDisplayMode,
-    setFrom,
+    setFromDate,
+    setFromTime,
     setRecurrence,
     setTitle,
-    setTo,
+    setToDate,
+    setToTime,
     title,
-    to,
+    toDate,
+    toTime,
   };
 };
