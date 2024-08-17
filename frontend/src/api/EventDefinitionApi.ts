@@ -43,11 +43,11 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
         );
       }
 
-      // does event of recurrence type "once" matches the range?
-      // Daily fits for each day if event definition is in the range
-      if (eventDefinition.recurrence === Recurrence.DAILY) {
-        return this.matchesDateTimeSpan(dateTimeSpan, eventDefinition);
-      }
+      // // does event of recurrence type "once" matches the range?
+      // // Daily fits for each day if event definition is in the range
+      // if (eventDefinition.recurrence === Recurrence.DAILY) {
+      //   return this.matchesDateTimeSpan(dateTimeSpan, eventDefinition);
+      // }
 
       // does event of recurrence type "week" matches the range?
       if (eventDefinition.recurrence === Recurrence.WEEKLY) {
@@ -73,14 +73,19 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     return eventDefinitions;
   }
 
+  /**
+   * Checks if {@link eventDefinition} is valid for {@link dateTimeSpan}
+   */
   private matchesDateTimeSpan(
     dateTimeSpan: IDateTimeSpan,
     eventDefinition: IEventDefinition
   ): boolean {
-    // From date must be equal or greater otherwise return false
-    const dateTimeSpanFrom = DateTime.toDate(dateTimeSpan.from);
+    // From date must be in range, so
+    const dateTimeSpanTo = DateTime.toDate(dateTimeSpan.to);
     const eventDefinitionFrom = DateTime.toDate(eventDefinition.from);
-    if (eventDefinitionFrom < dateTimeSpanFrom) {
+
+    // if the range is from e.g. 1 - 5 and eventDefinitionFrom starts at 7, it doesn't match
+    if (eventDefinitionFrom > dateTimeSpanTo) {
       return false;
     }
 
@@ -90,9 +95,9 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
       return true;
     }
 
-    // To date must be equal or smaller otherwise return false
-    const dateTimeSpanTo = DateTime.toDate(dateTimeSpan.to);
-    if (eventDefinitionTo > dateTimeSpanTo) {
+    // if the range is from e.g. 5 - 10 and eventDefinitionTo ends at 4, it doesn't match
+    const dateTimeSpanFrom = DateTime.toDate(dateTimeSpan.from);
+    if (eventDefinitionTo < dateTimeSpanFrom) {
       return false;
     }
 
