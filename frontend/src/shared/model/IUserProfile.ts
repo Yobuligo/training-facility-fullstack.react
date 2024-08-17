@@ -1,7 +1,7 @@
 import { Gender } from "../types/Gender";
 import { IEntity } from "../types/IEntity";
 import { IHaveIsAdmin } from "../types/IHaveIsAdmin";
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { IHaveUserId } from "../types/IHaveUserId";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
@@ -30,4 +30,4 @@ export interface IUserProfile extends IEntity, IHaveIsAdmin, IHaveUserId {
   gradings: IGrading[];
 }
 
-export const UserProfileMeta: IHavePath = { path: "/user-profiles" };
+export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

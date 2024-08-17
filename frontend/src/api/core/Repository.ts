@@ -1,9 +1,9 @@
 import { AppConfig } from "../../AppConfig";
-import { IHavePath } from "../../shared/types/IHavePath";
+import { IRouteMeta } from "../../shared/types/IRouteMeta";
 import { RESTApi } from "./RESTApi";
 
 export abstract class Repository<T> extends RESTApi {
-  constructor(private meta: IHavePath) {
+  constructor(private routeMeta: IRouteMeta) {
     super();
   }
 
@@ -51,6 +51,6 @@ export abstract class Repository<T> extends RESTApi {
    * localhost:5000/api/persons
    */
   protected get url(): string {
-    return `${this.host}${this.meta.path}`;
+    return `${this.host}${this.routeMeta.path}`;
   }
 }

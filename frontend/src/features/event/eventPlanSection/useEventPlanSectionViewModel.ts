@@ -7,7 +7,9 @@ export const useEventPlanSectionViewModel = () => {
 
   const onBack = () => setDisplayDetails(false);
 
-  const onSaveEventDefinition = () => {};
+  const onSaveEventDefinition = () => {
+    
+  };
 
   return {
     displayDetails,

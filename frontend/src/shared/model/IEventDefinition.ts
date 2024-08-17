@@ -1,5 +1,6 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { IEntity } from "../types/IEntity";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { Recurrence } from "../types/Recurrence";
 
 /**
@@ -11,3 +12,7 @@ export interface IEventDefinition extends IEntity, IDateTimeSpan {
   recurrence: Recurrence;
   title: string;
 }
+
+export const EventDefinitionRouteMeta: IRouteMeta = {
+  path: "event-definitions",
+};

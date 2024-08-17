@@ -1,7 +1,7 @@
 import { Grade } from "../types/Grade";
 import { IEntity } from "../types/IEntity";
 import { IHaveUserId } from "../types/IHaveUserId";
-import { IHavePath } from "./../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 
 export interface IGrading extends IEntity, IHaveUserId {
   achievedAt: Date;
@@ -9,4 +9,4 @@ export interface IGrading extends IEntity, IHaveUserId {
   grade: Grade;
 }
 
-export const GradingMeta: IHavePath = { path: "/gradings" };
+export const GradingMeta: IRouteMeta = { path: "/gradings" };

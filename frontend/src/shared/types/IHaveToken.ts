@@ -1,7 +1,7 @@
-import { IHavePath } from "./IHavePath";
+import { IRouteMeta } from "./IRouteMeta";
 
 export interface IHaveToken {
   token: string;
 }
 
-export const HaveTokenMeta: IHavePath = { path: "token" };
+export const HaveTokenMeta: IRouteMeta = { path: "token" };
