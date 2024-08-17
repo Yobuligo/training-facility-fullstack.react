@@ -7,6 +7,7 @@ import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../shared/types/Recurrence";
+import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
@@ -33,8 +34,12 @@ const eventDefinitionsToEvent = (
         // find weekday of EventDefinition
         const weekday = eventDefinition.from.getDay();
 
-        // add events for each date in the range with the same weekday
+        // add events for dates in the range with the same weekday,
+        // which are greater than the from and smaller then to date of the eventDefinition
         DateTimeIterator.iterate(from, to, (current) => {
+          if (!matchesDateTimeSpan(current, current, eventDefinition)) {
+            return;
+          }
           if (current.getDay() === weekday) {
             events.push({
               start: DateTime.create(
