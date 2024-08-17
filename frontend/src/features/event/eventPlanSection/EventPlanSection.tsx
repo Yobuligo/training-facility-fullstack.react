@@ -24,7 +24,12 @@ export const EventPlanSection: React.FC = () => {
           <Button className={styles.button} onClick={viewModel.onAdd}>
             {t(texts.EventPlanSection.addTraining)}
           </Button>
-          <EventCalendar />
+          <EventCalendar
+            events={viewModel.events}
+            from={new Date()}
+            to={new Date()}
+            onRangeChanged={viewModel.onEventRangeChanged}
+          />
         </>
       )}
     </div>

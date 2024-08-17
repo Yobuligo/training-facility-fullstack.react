@@ -8,10 +8,11 @@ import {
   momentLocalizer,
 } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);
 
-export const EventCalendar: React.FC = () => {
+export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
   const [events, setEvents] = useState([
     {
       id: 1,
@@ -86,7 +87,10 @@ export const EventCalendar: React.FC = () => {
       culture="de"
       messages={messages}
       min={new Date(2024, 7, 16, 17, 15, 0, 0)}
+      // min={props.from}
       max={new Date(2024, 7, 16, 20, 15, 0, 0)}
+      // max={props.to}
+      onRangeChange={props.onRangeChanged}
       views={["day", "week", "month"]}
     />
   );
