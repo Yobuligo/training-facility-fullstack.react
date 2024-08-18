@@ -53,6 +53,20 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
         );
       }
 
+      // does event definition of recurrence type "daily" matches the range?
+      if (eventDefinition.recurrence === Recurrence.DAILY) {
+        if (
+          !matchesDateTimeSpan(
+            dateTimeSpan.from,
+            dateTimeSpan.to,
+            eventDefinition
+          )
+        ) {
+          return false;
+        }
+        return true;
+      }
+
       // does event definition of recurrence type "week" matches the range?
       if (eventDefinition.recurrence === Recurrence.WEEKLY) {
         if (

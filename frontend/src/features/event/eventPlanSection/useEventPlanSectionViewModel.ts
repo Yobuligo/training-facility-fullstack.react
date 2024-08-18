@@ -30,6 +30,28 @@ const eventDefinitionsToEvent = (
         });
         break;
       }
+      case Recurrence.DAILY: {
+        // daily events must be added for each day of the date time span
+        // which are greater than the from and smaller then to date of the eventDefinition
+        DateTimeIterator.iterate(from, to, (current) => {
+          if (!matchesDateTimeSpan(current, current, eventDefinition)) {
+            return;
+          }
+
+          events.push({
+            start: DateTime.create(
+              DateTime.toDate(current),
+              DateTime.toTime(eventDefinition.from)
+            ),
+            end: DateTime.create(
+              DateTime.toDate(current),
+              DateTime.toTime(eventDefinition.to)
+            ),
+            title: eventDefinition.title,
+          });
+        });
+        break;
+      }
       case Recurrence.WEEKLY: {
         // find weekday of EventDefinition
         const weekday = eventDefinition.from.getDay();
