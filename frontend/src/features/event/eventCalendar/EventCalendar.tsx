@@ -27,10 +27,7 @@ export function EventCalendar<TEvent extends Event>(
     isSelected
   ) => {
     return {
-      style: {
-        backgroundColor: "event",
-        padding: "0.5rem",
-      },
+      style: props.styleEvent?.(event),
     };
   };
 

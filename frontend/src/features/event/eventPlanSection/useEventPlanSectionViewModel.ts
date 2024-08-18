@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { Event } from "react-big-calendar";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -10,6 +9,7 @@ import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../shared/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { uuid } from "../../../utils/uuid";
+import { IEvent } from "./IEvent";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
@@ -113,11 +113,6 @@ const eventDefinitionsToEvent = (
   });
   return events;
 };
-
-interface IEvent extends Event {
-  id: string;
-  eventDefinition: IEventDefinition;
-}
 
 export const useEventPlanSectionViewModel = () => {
   const [selectedEventDefinition, setSelectedEventDefinition] = useState<

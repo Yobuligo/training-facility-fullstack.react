@@ -5,11 +5,19 @@ import { EventCalendar } from "../eventCalendar/EventCalendar";
 import { EventContent } from "../eventContent/EventContent";
 import { EventDefinitionDetails } from "../eventDefinitionDetails/EventDefinitionDetails";
 import styles from "./EventPlanSection.module.scss";
+import { IEvent } from "./IEvent";
 import { useEventPlanSectionViewModel } from "./useEventPlanSectionViewModel";
 
 export const EventPlanSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventPlanSectionViewModel();
+
+  const styleEvent = (event: IEvent) => {
+    return {
+      backgroundColor: event.eventDefinition.color,
+      padding: "0.5rem",
+    };
+  };
 
   return (
     <div>
@@ -32,6 +40,7 @@ export const EventPlanSection: React.FC = () => {
             renderEvent={(event) => (
               <EventContent eventDefinition={event.eventDefinition} />
             )}
+            styleEvent={styleEvent}
             to={new Date()}
             view="week"
           />

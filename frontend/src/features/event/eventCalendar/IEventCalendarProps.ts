@@ -12,5 +12,10 @@ export interface IEventCalendarProps<TEvent extends Event>
    * Renders the {@link event} by returning the content that should be displayed
    */
   renderEvent: (event: TEvent) => ReactNode;
+
+  /**
+   * Styles the {@link event} by returning the css information
+   */
+  styleEvent?: (event: TEvent) => React.CSSProperties;
   view?: View;
 }
