@@ -17,9 +17,14 @@
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+}
 
-  @include medium-screen {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.date {
+  display: flex;
+  flex-direction: row;
+}
+
+.weekday {
+  align-self: flex-end;
+  margin: 1rem;
 }

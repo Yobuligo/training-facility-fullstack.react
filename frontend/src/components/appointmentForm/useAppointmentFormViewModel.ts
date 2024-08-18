@@ -78,7 +78,19 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     correctFrom(from, to);
   };
 
+  const getFromWeekendDay = () => {
+    const from = DateTime.create(props.fromDate, props.fromTime);
+    return DateTime.toWeekday(from);
+  };
+
+  const getToWeekendDay = () => {
+    const to = DateTime.create(props.toDate, props.toTime);
+    return DateTime.toWeekday(to);
+  };
+
   return {
+    getFromWeekendDay,
+    getToWeekendDay,
     onChangeRecurrence,
     onChangeFromDate,
     onChangeFromTime,
