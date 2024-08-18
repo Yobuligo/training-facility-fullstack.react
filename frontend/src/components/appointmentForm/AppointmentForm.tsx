@@ -32,14 +32,14 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.startDate)}
-          onChange={props.setFromDate}
+          onChange={viewModel.onChangeFromDate}
           type="date"
           value={props.fromDate}
         />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.startTime)}
-          onChange={props.setFromTime}
+          onChange={viewModel.onChangeFromTime}
           type="time"
           value={props.fromTime}
         />
@@ -48,14 +48,14 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.endDate)}
-          onChange={props.setToDate}
+          onChange={viewModel.onChangeToDate}
           type="date"
           value={props.toDate}
         />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.endTime)}
-          onChange={props.setToTime}
+          onChange={viewModel.onChangeToTime}
           type="time"
           value={props.toTime}
         />
