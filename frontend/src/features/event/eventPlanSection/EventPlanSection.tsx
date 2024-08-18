@@ -37,12 +37,13 @@ export const EventPlanSection: React.FC = () => {
             from={new Date()}
             onSelect={viewModel.onEventSelected}
             onRangeChanged={viewModel.onEventRangeChanged}
+            onViewChanged={viewModel.onViewChanged}
             renderEvent={(event) => (
               <EventContent eventDefinition={event.eventDefinition} />
             )}
             styleEvent={styleEvent}
             to={new Date()}
-            view="week"
+            view={viewModel.view}
           />
         </div>
       )}

@@ -72,6 +72,7 @@ export function EventCalendar<TEvent extends Event>(
       // max={props.to}
       onSelectEvent={(event) => props.onSelect?.(event)}
       onRangeChange={props.onRangeChanged}
+      onView={props.onViewChanged}
       views={["day", "week", "month"]}
     />
   );

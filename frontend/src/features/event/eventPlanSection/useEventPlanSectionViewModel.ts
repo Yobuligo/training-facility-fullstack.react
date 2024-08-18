@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { View } from "react-big-calendar";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -118,6 +119,7 @@ export const useEventPlanSectionViewModel = () => {
   const [selectedEventDefinition, setSelectedEventDefinition] = useState<
     IEventDefinition | undefined
   >(undefined);
+  const [view, setView] = useState<View>("week");
   let from: Date = useMemo(() => DateTime.getWeekStartDate(new Date()), []);
   let to: Date = useMemo(() => DateTime.getWeekEndDate(new Date()), []);
   const [events, setEvents] = useState<IEvent[]>([]);
@@ -178,6 +180,8 @@ export const useEventPlanSectionViewModel = () => {
     loadEventDefinitions(from, to);
   };
 
+  const onViewChanged = (view: View) => setView(view);
+
   return {
     events,
     onAdd,
@@ -185,6 +189,8 @@ export const useEventPlanSectionViewModel = () => {
     onEventRangeChanged,
     onEventSelected,
     onSaveEventDefinition,
+    onViewChanged,
     selectedEventDefinition,
+    view,
   };
 };

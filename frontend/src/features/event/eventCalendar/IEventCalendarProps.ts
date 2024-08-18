@@ -9,6 +9,11 @@ export interface IEventCalendarProps<TEvent extends Event>
   onSelect?: (event: TEvent) => void;
 
   /**
+   * Is called when the view (daily, weekly, monthly, etc.) changed
+   */
+  onViewChanged?: (view: View) => void;
+
+  /**
    * Renders the {@link event} by returning the content that should be displayed
    */
   renderEvent: (event: TEvent) => ReactNode;
