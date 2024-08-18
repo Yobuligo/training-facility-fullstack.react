@@ -8,22 +8,25 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../shared/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
+import { uuid } from "../../../utils/uuid";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
   from: Date,
   to: Date
-): Event[] => {
+): IEvent[] => {
   // an EventDefinition can occur several times
   // assume an EventDefinition occurs each monday and the range is a month
   // then we have to create events for each monday
 
-  const events: Event[] = [];
+  const events: IEvent[] = [];
 
   eventDefinitions.forEach((eventDefinition) => {
     switch (eventDefinition.recurrence) {
       case Recurrence.ONCE: {
         events.push({
+          id: uuid(),
+          eventDefinition,
           start: eventDefinition.from,
           end: eventDefinition.to,
           title: eventDefinition.title,
@@ -39,6 +42,8 @@ const eventDefinitionsToEvent = (
           }
 
           events.push({
+            id: uuid(),
+            eventDefinition,
             start: DateTime.create(
               DateTime.toDate(current),
               DateTime.toTime(eventDefinition.from)
@@ -64,6 +69,8 @@ const eventDefinitionsToEvent = (
           }
           if (current.getDay() === weekday) {
             events.push({
+              id: uuid(),
+              eventDefinition,
               start: DateTime.create(
                 DateTime.toDate(current),
                 DateTime.toTime(eventDefinition.from)
@@ -85,6 +92,8 @@ const eventDefinitionsToEvent = (
             DateTime.toDay(current) === DateTime.toDay(eventDefinition.from)
           ) {
             events.push({
+              id: uuid(),
+              eventDefinition,
               start: DateTime.create(
                 DateTime.toDate(current),
                 DateTime.toTime(eventDefinition.from)
@@ -104,11 +113,16 @@ const eventDefinitionsToEvent = (
   return events;
 };
 
+interface IEvent extends Event {
+  id: string;
+  eventDefinition: IEventDefinition;
+}
+
 export const useEventPlanSectionViewModel = () => {
   const [displayDetails, setDisplayDetails] = useState(false);
   let from: Date = useMemo(() => DateTime.getWeekStartDate(new Date()), []);
   let to: Date = useMemo(() => DateTime.getWeekEndDate(new Date()), []);
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
 
   const loadEventDefinitions = async (from: Date, to: Date) => {
     const dateTimeSpan: IDateTimeSpan = { from, to };

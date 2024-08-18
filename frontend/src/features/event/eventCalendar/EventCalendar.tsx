@@ -36,12 +36,7 @@ export function EventCalendar<TEvent extends Event>(
 
   const customEventComponent: React.ComponentType<EventProps<TEvent>> = ({
     event,
-  }) => (
-    <div>
-      <strong>{event.title}</strong>
-      <button onClick={() => handleRegister(12)}>Register</button>
-    </div>
-  );
+  }) => <>{props.renderEvent(event)}</>;
 
   const messages = {
     allDay: "Ganztägig",
