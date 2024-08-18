@@ -13,12 +13,14 @@ import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);
 
-export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
+export function EventCalendar<TEvent extends Event>(
+  props: IEventCalendarProps<TEvent>
+) {
   const handleRegister = (eventId: number) => {
     alert(`You registered for event with ID: ${eventId}`);
   };
 
-  const eventStyleGetter: EventPropGetter<any> = (
+  const eventStyleGetter: EventPropGetter<TEvent> = (
     event,
     start,
     end,
@@ -32,9 +34,9 @@ export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
     };
   };
 
-  const customEventComponent: React.ComponentType<
-    EventProps<Event>
-  > = ({ event }) => (
+  const customEventComponent: React.ComponentType<EventProps<TEvent>> = ({
+    event,
+  }) => (
     <div>
       <strong>{event.title}</strong>
       <button onClick={() => handleRegister(12)}>Register</button>
@@ -80,4 +82,4 @@ export const EventCalendar: React.FC<IEventCalendarProps> = (props) => {
       views={["day", "week", "month"]}
     />
   );
-};
+}

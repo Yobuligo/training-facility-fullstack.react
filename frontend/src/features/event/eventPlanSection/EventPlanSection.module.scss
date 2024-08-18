@@ -1,9 +1,9 @@
-.eventPlanSection {
+.button {
+  align-self: flex-start;
+}
+
+.eventCalendar {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-}
-
-.button {
-  align-self: flex-start;
 }

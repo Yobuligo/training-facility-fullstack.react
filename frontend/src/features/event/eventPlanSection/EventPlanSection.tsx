@@ -12,7 +12,7 @@ export const EventPlanSection: React.FC = () => {
   const viewModel = useEventPlanSectionViewModel();
 
   return (
-    <div className={styles.EventPlanSection}>
+    <div>
       {viewModel.displayDetails ? (
         <EventDefinitionDetails
           eventDefinition={new DummyEventDefinition()}
@@ -20,7 +20,7 @@ export const EventPlanSection: React.FC = () => {
           onSave={viewModel.onSaveEventDefinition}
         />
       ) : (
-        <>
+        <div className={styles.eventCalendar}>
           <Button className={styles.button} onClick={viewModel.onAdd}>
             {t(texts.EventPlanSection.addTraining)}
           </Button>
@@ -31,7 +31,7 @@ export const EventPlanSection: React.FC = () => {
             to={new Date()}
             view="week"
           />
-        </>
+        </div>
       )}
     </div>
   );
