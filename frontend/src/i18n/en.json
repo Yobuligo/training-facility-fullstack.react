@@ -119,6 +119,9 @@
         "startTime": "Start time",
         "title": "Title"
     },
+    "eventDefinitionDetails": {
+        "enterTitle": "Please enter a valid title"
+    },
     "EventPlanSection": {
         "addTraining": "Add training"
     },

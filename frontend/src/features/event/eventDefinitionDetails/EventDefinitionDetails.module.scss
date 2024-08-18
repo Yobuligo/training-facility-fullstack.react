@@ -3,8 +3,9 @@
 @import "../../../styles/mixins.scss";
 
 .eventDefinitionDetails {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
 
   @include medium-screen {
     width: $appointment-form-medium-screen-width;

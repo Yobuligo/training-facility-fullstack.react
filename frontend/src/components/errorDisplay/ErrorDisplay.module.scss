@@ -1,0 +1,7 @@
+@import "../../styles/colors.module.scss";
+
+.errorDisplay {
+  color: $color-error;
+  font-size: large;
+  font-weight: 600;
+}

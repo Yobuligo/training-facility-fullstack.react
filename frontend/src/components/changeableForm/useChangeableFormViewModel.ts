@@ -18,8 +18,13 @@ export const useChangeableFormViewModel = (props: IChangeableFormProps) => {
   };
 
   const onSave = () => {
-    props.setDisplayMode(true);
-    props.onSave?.();
+    try {
+      props.onValidate?.();
+      props.setDisplayMode(true);
+      props.onSave?.();
+    } catch (error) {
+      // do nothing
+    }
   };
 
   const onToggleMode = () => props.setDisplayMode((previous) => !previous);

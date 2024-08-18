@@ -8,5 +8,6 @@ export interface IChangeableFormProps {
   onCancel?: () => void;
   onDelete?: () => void;
   onSave?: () => void;
+  onValidate?: () => void;
   setDisplayMode: (value: React.SetStateAction<boolean>) => void;
 }

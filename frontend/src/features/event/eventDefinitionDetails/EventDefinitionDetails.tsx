@@ -1,6 +1,7 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
+import { ErrorDisplay } from "../../../components/errorDisplay/ErrorDisplay";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import colors from "../../../styles/colors.module.scss";
 import { style } from "../../../utils/style";
@@ -33,9 +34,11 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
         onCancel={viewModel.onCancel}
         onDelete={viewModel.onDelete}
         onSave={viewModel.onSave}
+        onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
         <div className={styles.eventDefinitionDetails}>
+          {viewModel.error && <ErrorDisplay error={viewModel.error} />}
           <AppointmentForm
             description={viewModel.description}
             disabled={viewModel.displayMode}
@@ -46,7 +49,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             setFromDate={viewModel.setFromDate}
             setFromTime={viewModel.setFromTime}
             setRecurrence={viewModel.setRecurrence}
-            setTitle={viewModel.setTitle}
+            setTitle={viewModel.onChangeTitle}
             setToDate={viewModel.setToDate}
             setToTime={viewModel.setToTime}
             title={viewModel.title}

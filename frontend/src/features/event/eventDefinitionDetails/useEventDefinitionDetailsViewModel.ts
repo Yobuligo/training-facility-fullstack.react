@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { isInitial } from "../../../core/utils/isInitial";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (
   props: IEventDefinitionDetailsProps
 ) => {
+  const { t } = useTranslation();
+  const [error, setError] = useState("");
   const [displayMode, setDisplayMode] = useState(false);
   const [description, setDescription] = useState(
     props.eventDefinition.description
@@ -40,7 +45,15 @@ export const useEventDefinitionDetailsViewModel = (
     setSelectedColor(props.eventDefinition.color);
   };
 
-  const onCancel = () => reset();
+  const onCancel = () => {
+    setError("");
+    reset();
+  };
+
+  const onChangeTitle = (value: React.SetStateAction<string>) => {
+    setError("");
+    setTitle(value);
+  };
 
   const onDelete = () => props.onDelete?.(props.eventDefinition);
 
@@ -56,15 +69,25 @@ export const useEventDefinitionDetailsViewModel = (
 
   const onSelectColor = (color: string) => setSelectedColor(color);
 
+  const onValidate = () => {
+    if (isInitial(title)) {
+      setError(t(texts.eventDefinitionDetails.enterTitle));
+      throw new Error();
+    }
+  };
+
   return {
     description,
     displayMode,
+    error,
     fromDate,
     fromTime,
     onCancel,
+    onChangeTitle,
     onDelete,
     onSave,
     onSelectColor,
+    onValidate,
     recurrence,
     selectedColor,
     setDescription,
@@ -72,7 +95,6 @@ export const useEventDefinitionDetailsViewModel = (
     setFromDate,
     setFromTime,
     setRecurrence,
-    setTitle,
     setToDate,
     setToTime,
     title,
