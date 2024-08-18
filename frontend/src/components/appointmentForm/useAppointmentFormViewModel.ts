@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { DateTime } from "../../core/services/date/DateTime";
+import { Recurrence } from "../../core/types/Recurrence";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
-import { Recurrence } from "../../shared/types/Recurrence";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 
@@ -32,7 +32,7 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
    * Checks if to is earlier than from, in that case correct to by adding one hour
    */
   const correctTo = (from: Date, to: Date) => {
-    if (DateTime.compare(from, to) === 1) {
+    if (DateTime.compare(from, to) >= 0) {
       const newTo = DateTime.addHours(from, 1);
       props.setToDate(DateTime.toDate(newTo));
       props.setToTime(DateTime.toTime(newTo));

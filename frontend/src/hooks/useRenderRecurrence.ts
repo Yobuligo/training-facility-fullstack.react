@@ -1,5 +1,5 @@
 import { IllegalArgumentError } from "../core/errors/IllegalArgumentError";
-import { Recurrence } from "../shared/types/Recurrence";
+import { Recurrence } from "../core/types/Recurrence";
 import { texts } from "./useTranslation/texts";
 import { useTranslation } from "./useTranslation/useTranslation";
 

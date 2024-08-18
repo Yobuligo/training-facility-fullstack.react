@@ -1,6 +1,6 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
-import { Recurrence } from "../shared/types/Recurrence";
+import { Recurrence } from "../core/types/Recurrence";
 import colors from "../styles/colors.module.scss";
 import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";

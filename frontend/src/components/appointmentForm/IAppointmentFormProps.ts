@@ -1,4 +1,4 @@
-import { Recurrence } from "../../shared/types/Recurrence";
+import { Recurrence } from "../../core/types/Recurrence";
 
 export interface IAppointmentFormProps {
   disabled?: boolean;

@@ -6,7 +6,7 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
-import { Recurrence } from "../../../shared/types/Recurrence";
+import { Recurrence } from "../../../core/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { uuid } from "../../../utils/uuid";
 import { IEvent } from "../model/IEvent";

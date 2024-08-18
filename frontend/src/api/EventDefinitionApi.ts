@@ -7,7 +7,7 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
-import { Recurrence } from "../shared/types/Recurrence";
+import { Recurrence } from "../core/types/Recurrence";
 import { matchesDateTimeSpan } from "../utils/matchesDateTimeSpan";
 import { Repository } from "./core/Repository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
