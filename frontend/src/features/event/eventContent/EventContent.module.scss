@@ -3,7 +3,18 @@
   flex-direction: column;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .title {
   font-size: large;
   margin: 0;
+}
+
+.description {
+  font-style: italic;
 }

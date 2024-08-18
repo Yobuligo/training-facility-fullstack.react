@@ -5,8 +5,9 @@ import { TabStripContent } from "../../components/tabStripContent/TabStripConten
 import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
-import { MyProfile } from "../myProfile/MyProfile";
 import { EventPlanSection } from "../event/eventPlanSection/EventPlanSection";
+import { MyProfile } from "../myProfile/MyProfile";
+import { MyTrainings } from "../myTrainings/MyTrainings";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
 import styles from "./Dashboard.module.scss";
@@ -39,7 +40,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
 
     tabItems.push({
       title: t(texts.dashboard.myTrainings),
-      content: <>My trainings</>,
+      content: <MyTrainings />,
     });
 
     tabItems.push({

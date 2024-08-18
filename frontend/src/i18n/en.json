@@ -94,6 +94,10 @@
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
     },
+    "myTrainings": {
+        "register": "Register",
+        "unregister": "Unregister"
+    },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
         "children": "Children",

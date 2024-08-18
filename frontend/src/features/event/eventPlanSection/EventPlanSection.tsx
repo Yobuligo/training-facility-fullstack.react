@@ -1,23 +1,15 @@
 import { Button } from "../../../components/button/Button";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { EventCalendar } from "../eventCalendar/EventCalendar";
+import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
 import { EventDefinitionDetails } from "../eventDefinitionDetails/EventDefinitionDetails";
 import styles from "./EventPlanSection.module.scss";
-import { IEvent } from "../model/IEvent";
 import { useEventPlanSectionViewModel } from "./useEventPlanSectionViewModel";
 
 export const EventPlanSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventPlanSectionViewModel();
-
-  const styleEvent = (event: IEvent) => {
-    return {
-      backgroundColor: event.eventDefinition.color,
-      padding: "0.5rem",
-    };
-  };
 
   return (
     <div>
@@ -32,18 +24,12 @@ export const EventPlanSection: React.FC = () => {
           <Button className={styles.button} onClick={viewModel.onAdd}>
             {t(texts.EventPlanSection.addTraining)}
           </Button>
-          <EventCalendar
-            events={viewModel.events}
-            from={new Date()}
-            onSelect={viewModel.onEventSelected}
-            onRangeChanged={viewModel.onEventRangeChanged}
-            onViewChanged={viewModel.onViewChanged}
+          <EventCalendarSection
+            onEventSelected={viewModel.onEventSelected}
+            reloadSignal={viewModel.reloadSignal}
             renderEvent={(event) => (
               <EventContent eventDefinition={event.eventDefinition} />
             )}
-            styleEvent={styleEvent}
-            to={new Date()}
-            view={viewModel.view}
           />
         </div>
       )}

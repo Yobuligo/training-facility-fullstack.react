@@ -6,7 +6,7 @@ import { useEventCalendarSectionViewModel } from "./useEventCalendarSectionViewM
 export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   props
 ) => {
-  const viewModel = useEventCalendarSectionViewModel();
+  const viewModel = useEventCalendarSectionViewModel(props);
 
   const styleEvent = (event: IEvent) => {
     return {

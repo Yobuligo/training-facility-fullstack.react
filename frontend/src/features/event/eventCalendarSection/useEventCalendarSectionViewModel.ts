@@ -10,6 +10,7 @@ import { Recurrence } from "../../../shared/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { uuid } from "../../../utils/uuid";
 import { IEvent } from "../model/IEvent";
+import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
@@ -114,7 +115,9 @@ const eventDefinitionsToEvent = (
   return events;
 };
 
-export const useEventCalendarSectionViewModel = () => {
+export const useEventCalendarSectionViewModel = (
+  props: IEventCalendarSectionProps
+) => {
   const [view, setView] = useState<View>("week");
   const [events, setEvents] = useState<IEvent[]>([]);
 
@@ -159,6 +162,12 @@ export const useEventCalendarSectionViewModel = () => {
     const events = eventDefinitionsToEvent(eventDefinitions, from, to);
     setEvents(events);
   };
+
+  useEffect(() => {
+    if (props.reloadSignal) {
+      loadEventDefinitions(from, to);
+    }
+  }, [from, props.reloadSignal, to]);
 
   useEffect(() => {
     loadEventDefinitions(from, to);
