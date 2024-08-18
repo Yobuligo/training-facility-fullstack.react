@@ -16,8 +16,9 @@ export class UserApi extends Repository<any> {
     // Todo: replace by productive code
     return new Promise((resolve, reject) => {
       if (
-        credentials.username !== "frank" ||
-        credentials.password !== "frank"
+        (credentials.username !== "frank" ||
+          credentials.password !== "frank") &&
+        (credentials.username !== "sonja" || credentials.password !== "sonja")
       ) {
         const error: IError = {
           createdAt: new Date(),
@@ -26,14 +27,26 @@ export class UserApi extends Repository<any> {
         return reject(error);
       }
 
-      resolve({
+      if (credentials.username === "frank") {
+        return resolve({
+          id: uuid(),
+          createdAt: new Date(),
+          expiresAt: new Date(),
+          updatedAt: new Date(),
+          userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+          username: "frank",
+          isAdmin: true,
+        });
+      }
+
+      return resolve({
         id: uuid(),
         createdAt: new Date(),
         expiresAt: new Date(),
         updatedAt: new Date(),
-        userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
-        username: "frank",
-        isAdmin: true,
+        userId: "b7c64925-3c0b-404d-acac-66f9c5e03ba3",
+        username: "sonja",
+        isAdmin: false,
       });
     });
   }
