@@ -7,6 +7,8 @@
     },
     "general": {
         "cancel": "Cancel",
+        "delete": "Delete",
+        "deleteQuestion": "Do you really want to delete?",
         "edit": "Edit",
         "female": "Female",
         "grade": "Grade",

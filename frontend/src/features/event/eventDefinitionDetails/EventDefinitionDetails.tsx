@@ -28,6 +28,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
   return (
     <DetailView onBack={props.onBack}>
       <ChangeableForm
+        displayDelete={true}
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}
         onSave={viewModel.onSave}
