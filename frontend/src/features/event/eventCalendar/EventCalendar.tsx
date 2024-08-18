@@ -57,7 +57,7 @@ export function EventCalendar<TEvent extends Event>(
       defaultView={props.view ?? "week"}
       startAccessor="start"
       endAccessor="end"
-      style={{ height: 500 }}
+      style={{ height: "75vh" }}
       step={15}
       timeslots={1}
       eventPropGetter={eventStyleGetter}
