@@ -70,7 +70,6 @@ export function EventCalendar<TEvent extends Event>(
       // min={props.from}
       max={new Date(2024, 7, 16, 20, 15, 0, 0)}
       // max={props.to}
-      onSelectEvent={(event) => props.onSelect?.(event)}
       onRangeChange={props.onRangeChanged}
       onView={props.onViewChanged}
       views={["day", "week", "month"]}
