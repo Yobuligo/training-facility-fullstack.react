@@ -15,6 +15,19 @@ export const useEventPlanSectionViewModel = () => {
 
   const onBack = () => setSelectedEventDefinition(undefined);
 
+  const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) => {
+    if (
+      !(eventDefinition instanceof DummyEventDefinition) ||
+      (eventDefinition instanceof DummyEventDefinition &&
+        eventDefinition.isPersisted)
+    ) {
+      const eventDefinitionApi = new EventDefinitionApi();
+      await eventDefinitionApi.deleteById(eventDefinition.id);
+    }
+    setSelectedEventDefinition(undefined);
+    triggerReloadSignal();
+  };
+
   const onEventSelected = (event: IEvent) =>
     setSelectedEventDefinition(event.eventDefinition);
 
@@ -36,6 +49,7 @@ export const useEventPlanSectionViewModel = () => {
     onAdd,
     onBack,
     onEventSelected,
+    onDeleteEventDefinition,
     onSaveEventDefinition,
     reloadSignal,
     selectedEventDefinition,

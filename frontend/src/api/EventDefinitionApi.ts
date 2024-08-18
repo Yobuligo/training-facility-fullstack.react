@@ -2,6 +2,7 @@ import { DateTime } from "../core/services/date/DateTime";
 import { DateTimeIterator } from "../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { Lazy } from "../core/services/Lazy";
+import { Dummy } from "../model/Dummy";
 import {
   EventDefinitionRouteMeta,
   IEventDefinition,
@@ -14,6 +15,15 @@ import { DummyEventDefinitions } from "./DummyEventDefinitions";
 export class EventDefinitionApi extends Repository<IEventDefinition> {
   constructor() {
     super(EventDefinitionRouteMeta);
+  }
+
+  async deleteById(id: string): Promise<boolean> {
+    const index = DummyEventDefinitions.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      DummyEventDefinitions.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 
   async insert(data: IEventDefinition): Promise<IEventDefinition> {

@@ -42,6 +42,8 @@ export const useEventDefinitionDetailsViewModel = (
 
   const onCancel = () => reset();
 
+  const onDelete = () => props.onDelete?.(props.eventDefinition);
+
   const onSave = () => {
     props.eventDefinition.description = description;
     props.eventDefinition.from = DateTime.create(fromDate, fromTime);
@@ -60,6 +62,7 @@ export const useEventDefinitionDetailsViewModel = (
     fromDate,
     fromTime,
     onCancel,
+    onDelete,
     onSave,
     onSelectColor,
     recurrence,

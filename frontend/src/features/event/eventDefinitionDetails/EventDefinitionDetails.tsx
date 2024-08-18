@@ -31,6 +31,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
         displayDelete={true}
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}
+        onDelete={viewModel.onDelete}
         onSave={viewModel.onSave}
         setDisplayMode={viewModel.setDisplayMode}
       >

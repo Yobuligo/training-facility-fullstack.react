@@ -17,6 +17,7 @@ export const EventPlanSection: React.FC = () => {
         <EventDefinitionDetails
           eventDefinition={viewModel.selectedEventDefinition}
           onBack={viewModel.onBack}
+          onDelete={viewModel.onDeleteEventDefinition}
           onSave={viewModel.onSaveEventDefinition}
         />
       ) : (
