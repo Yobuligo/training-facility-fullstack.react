@@ -5,7 +5,6 @@ import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
-import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../shared/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
@@ -115,10 +114,7 @@ const eventDefinitionsToEvent = (
   return events;
 };
 
-export const useEventPlanSectionViewModel = () => {
-  const [selectedEventDefinition, setSelectedEventDefinition] = useState<
-    IEventDefinition | undefined
-  >(undefined);
+export const useEventCalendarSectionViewModel = () => {
   const [view, setView] = useState<View>("week");
   const [events, setEvents] = useState<IEvent[]>([]);
 
@@ -168,10 +164,6 @@ export const useEventPlanSectionViewModel = () => {
     loadEventDefinitions(from, to);
   }, [from, to]);
 
-  const onAdd = () => setSelectedEventDefinition(new DummyEventDefinition());
-
-  const onBack = () => setSelectedEventDefinition(undefined);
-
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined
   ) => {
@@ -192,35 +184,12 @@ export const useEventPlanSectionViewModel = () => {
     throw new NotSupportedError();
   };
 
-  const onEventSelected = (event: IEvent) =>
-    setSelectedEventDefinition(event.eventDefinition);
-
-  const onSaveEventDefinition = async (eventDefinition: IEventDefinition) => {
-    const eventDefinitionApi = new EventDefinitionApi();
-    if (
-      eventDefinition instanceof DummyEventDefinition &&
-      !eventDefinition.isPersisted
-    ) {
-      await eventDefinitionApi.insert(eventDefinition);
-      eventDefinition.setIsPersisted();
-    } else {
-      await eventDefinitionApi.update(eventDefinition);
-    }
-
-    loadEventDefinitions(from, to);
-  };
-
   const onViewChanged = (view: View) => setView(view);
 
   return {
     events,
-    onAdd,
-    onBack,
     onEventRangeChanged,
-    onEventSelected,
-    onSaveEventDefinition,
     onViewChanged,
-    selectedEventDefinition,
     view,
   };
 };

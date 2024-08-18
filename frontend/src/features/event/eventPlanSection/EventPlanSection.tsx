@@ -5,7 +5,7 @@ import { EventCalendar } from "../eventCalendar/EventCalendar";
 import { EventContent } from "../eventContent/EventContent";
 import { EventDefinitionDetails } from "../eventDefinitionDetails/EventDefinitionDetails";
 import styles from "./EventPlanSection.module.scss";
-import { IEvent } from "./IEvent";
+import { IEvent } from "../model/IEvent";
 import { useEventPlanSectionViewModel } from "./useEventPlanSectionViewModel";
 
 export const EventPlanSection: React.FC = () => {
