@@ -120,9 +120,39 @@ export const useEventPlanSectionViewModel = () => {
     IEventDefinition | undefined
   >(undefined);
   const [view, setView] = useState<View>("week");
-  let from: Date = useMemo(() => DateTime.getWeekStartDate(new Date()), []);
-  let to: Date = useMemo(() => DateTime.getWeekEndDate(new Date()), []);
   const [events, setEvents] = useState<IEvent[]>([]);
+
+  let from: Date = useMemo(() => {
+    switch (view) {
+      case "day": {
+        return new Date();
+      }
+      case "week": {
+        return DateTime.getWeekStartDate(new Date());
+      }
+      case "month": {
+        return DateTime.getMonthStartDate(new Date());
+      }
+      default:
+        throw new NotSupportedError();
+    }
+  }, [view]);
+
+  let to: Date = useMemo(() => {
+    switch (view) {
+      case "day": {
+        return new Date();
+      }
+      case "week": {
+        return DateTime.getWeekEndDate(new Date());
+      }
+      case "month": {
+        return DateTime.getMonthEndDate(new Date());
+      }
+      default:
+        throw new NotSupportedError();
+    }
+  }, [view]);
 
   const loadEventDefinitions = async (from: Date, to: Date) => {
     const dateTimeSpan: IDateTimeSpan = { from, to };
