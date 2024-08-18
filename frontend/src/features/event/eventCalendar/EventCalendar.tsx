@@ -66,9 +66,9 @@ export function EventCalendar<TEvent extends Event>(
       }}
       culture="de"
       messages={messages}
-      min={new Date(2024, 7, 16, 17, 15, 0, 0)}
+      min={new Date(2024, 7, 16, 16, 30, 0, 0)}
       // min={props.from}
-      max={new Date(2024, 7, 16, 20, 15, 0, 0)}
+      max={new Date(2024, 7, 16, 22, 0, 0, 0)}
       // max={props.to}
       onSelectEvent={(event) => {
         props.onSelect?.(event);
