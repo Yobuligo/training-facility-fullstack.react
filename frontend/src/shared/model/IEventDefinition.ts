@@ -7,6 +7,7 @@ import { Recurrence } from "../types/Recurrence";
  * This interface represents a specific event, which serves as template for real events
  */
 export interface IEventDefinition extends IEntity, IDateTimeSpan {
+  color: string;
   creator: string;
   description: string;
   recurrence: Recurrence;

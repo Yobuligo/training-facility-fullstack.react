@@ -25,6 +25,9 @@ export const useEventDefinitionDetailsViewModel = (
   const [recurrence, setRecurrence] = useState(
     props.eventDefinition.recurrence
   );
+  const [selectedColor, setSelectedColor] = useState(
+    props.eventDefinition.color
+  );
 
   const reset = () => {
     setTitle(props.eventDefinition.title);
@@ -34,6 +37,7 @@ export const useEventDefinitionDetailsViewModel = (
     setToDate(DateTime.toDate(props.eventDefinition.to));
     setToTime(DateTime.toTime(props.eventDefinition.to));
     setRecurrence(props.eventDefinition.recurrence);
+    setSelectedColor(props.eventDefinition.color);
   };
 
   const onCancel = () => reset();
@@ -44,8 +48,11 @@ export const useEventDefinitionDetailsViewModel = (
     props.eventDefinition.recurrence = recurrence;
     props.eventDefinition.title = title;
     props.eventDefinition.to = DateTime.create(toDate, toTime);
+    props.eventDefinition.color = selectedColor;
     props.onSave?.(props.eventDefinition);
   };
+
+  const onSelectColor = (color: string) => setSelectedColor(color);
 
   return {
     description,
@@ -54,7 +61,9 @@ export const useEventDefinitionDetailsViewModel = (
     fromTime,
     onCancel,
     onSave,
+    onSelectColor,
     recurrence,
+    selectedColor,
     setDescription,
     setDisplayMode,
     setFromDate,

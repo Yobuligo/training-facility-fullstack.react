@@ -28,8 +28,8 @@ export function EventCalendar<TEvent extends Event>(
   ) => {
     return {
       style: {
-        backgroundColor: "#893F61",
-        padding: "10px",
+        backgroundColor: "event",
+        padding: "0.5rem",
       },
     };
   };

@@ -32,7 +32,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
         content: <UserProfileSection />,
       });
       tabItems.push({
-        title: t(texts.dashboard.trainings),
+        title: t(texts.dashboard.planner),
         content: <EventPlanSection />,
       });
     }

@@ -2,6 +2,7 @@ import { Button } from "../../../components/button/Button";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventCalendar } from "../eventCalendar/EventCalendar";
+import { EventContent } from "../eventContent/EventContent";
 import { EventDefinitionDetails } from "../eventDefinitionDetails/EventDefinitionDetails";
 import styles from "./EventPlanSection.module.scss";
 import { useEventPlanSectionViewModel } from "./useEventPlanSectionViewModel";
@@ -29,10 +30,7 @@ export const EventPlanSection: React.FC = () => {
             onSelect={viewModel.onEventSelected}
             onRangeChanged={viewModel.onEventRangeChanged}
             renderEvent={(event) => (
-              <div>
-                {event.title}
-                <button>Click Me</button>
-              </div>
+              <EventContent eventDefinition={event.eventDefinition} />
             )}
             to={new Date()}
             view="week"

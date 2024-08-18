@@ -1,15 +1,15 @@
 @import "../../styles/colors.module.scss";
 @import "../../styles/mixins.scss";
+@import "../../styles/dimensions.scss";
 
 .appointmentForm {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  width: 100%;
   padding-bottom: 1rem;
 
   @include medium-screen {
-    width: 18rem;
+    width: $appointment-form-medium-screen-width;
   }
 }
 
