@@ -1,3 +1,4 @@
+import { DateTime } from "../core/services/date/DateTime";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { Recurrence } from "../shared/types/Recurrence";
 import { uuid } from "../utils/uuid";
@@ -11,6 +12,6 @@ export class DummyEventDefinition extends Dummy implements IEventDefinition {
   id: string = uuid();
   createdAt: Date = new Date();
   updatedAt: Date = new Date();
-  from: Date = new Date();
-  to: Date = new Date();
+  from: Date = DateTime.create(DateTime.toDate(new Date()), "18:00:00");
+  to: Date = DateTime.create(DateTime.toDate(new Date()), "19:00:00");
 }

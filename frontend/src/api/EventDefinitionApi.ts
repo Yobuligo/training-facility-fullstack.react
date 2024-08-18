@@ -21,6 +21,15 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     return data;
   }
 
+  async update(data: IEventDefinition): Promise<void> {
+    const index = DummyEventDefinitions.findIndex(
+      (item) => item.id === data.id
+    );
+    if (index !== -1) {
+      DummyEventDefinitions.splice(index, 1, data);
+    }
+  }
+
   async findByDateTimeSpan(
     dateTimeSpan: IDateTimeSpan
   ): Promise<IEventDefinition[]> {

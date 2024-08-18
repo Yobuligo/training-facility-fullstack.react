@@ -6,6 +6,8 @@ export interface IEventCalendarProps<TEvent extends Event>
   extends IDateTimeSpan {
   events: TEvent[];
   onRangeChanged?: (range: Date[] | { start: Date; end: Date }) => void;
+  onSelect?: (event: TEvent) => void;
+
   /**
    * Renders the {@link event} by returning the content that should be displayed
    */

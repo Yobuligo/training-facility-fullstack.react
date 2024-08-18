@@ -5,6 +5,7 @@ import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
+import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../shared/types/Recurrence";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
@@ -119,7 +120,9 @@ interface IEvent extends Event {
 }
 
 export const useEventPlanSectionViewModel = () => {
-  const [displayDetails, setDisplayDetails] = useState(false);
+  const [selectedEventDefinition, setSelectedEventDefinition] = useState<
+    IEventDefinition | undefined
+  >(undefined);
   let from: Date = useMemo(() => DateTime.getWeekStartDate(new Date()), []);
   let to: Date = useMemo(() => DateTime.getWeekEndDate(new Date()), []);
   const [events, setEvents] = useState<IEvent[]>([]);
@@ -138,9 +141,9 @@ export const useEventPlanSectionViewModel = () => {
     loadEventDefinitions(from, to);
   }, [from, to]);
 
-  const onAdd = () => setDisplayDetails(true);
+  const onAdd = () => setSelectedEventDefinition(new DummyEventDefinition());
 
-  const onBack = () => setDisplayDetails(false);
+  const onBack = () => setSelectedEventDefinition(undefined);
 
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined
@@ -162,18 +165,31 @@ export const useEventPlanSectionViewModel = () => {
     throw new NotSupportedError();
   };
 
+  const onEventSelected = (event: IEvent) =>
+    setSelectedEventDefinition(event.eventDefinition);
+
   const onSaveEventDefinition = async (eventDefinition: IEventDefinition) => {
     const eventDefinitionApi = new EventDefinitionApi();
-    await eventDefinitionApi.insert(eventDefinition);
+    if (
+      eventDefinition instanceof DummyEventDefinition &&
+      !eventDefinition.isPersisted
+    ) {
+      await eventDefinitionApi.insert(eventDefinition);
+      eventDefinition.setIsPersisted();
+    } else {
+      await eventDefinitionApi.update(eventDefinition);
+    }
+
     loadEventDefinitions(from, to);
   };
 
   return {
-    displayDetails,
     events,
     onAdd,
     onBack,
     onEventRangeChanged,
+    onEventSelected,
     onSaveEventDefinition,
+    selectedEventDefinition,
   };
 };
