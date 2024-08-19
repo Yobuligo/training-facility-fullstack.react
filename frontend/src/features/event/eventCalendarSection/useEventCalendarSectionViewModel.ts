@@ -1,12 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { View } from "react-big-calendar";
-import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { Recurrence } from "../../../core/types/Recurrence";
+import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { uuid } from "../../../utils/uuid";
 import { IEvent } from "../model/IEvent";
@@ -153,25 +152,25 @@ export const useEventCalendarSectionViewModel = (
     }
   }, [view]);
 
-  const loadEventDefinitions = async (from: Date, to: Date) => {
-    const dateTimeSpan: IDateTimeSpan = { from, to };
-    const eventDefinitionApi = new EventDefinitionApi();
-    const eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
-      dateTimeSpan
-    );
-    const events = eventDefinitionsToEvent(eventDefinitions, from, to);
-    setEvents(events);
-  };
+  const loadEventDefinitions = useCallback(
+    async (from: Date, to: Date) => {
+      const dateTimeSpan: IDateTimeSpan = { from, to };
+      const eventDefinitions = await props.eventDefinitionLoader(dateTimeSpan);
+      const events = eventDefinitionsToEvent(eventDefinitions, from, to);
+      setEvents(events);
+    },
+    [props]
+  );
 
   useEffect(() => {
     if (props.reloadSignal) {
       loadEventDefinitions(from, to);
     }
-  }, [from, props.reloadSignal, to]);
+  }, [from, loadEventDefinitions, props.reloadSignal, to]);
 
   useEffect(() => {
     loadEventDefinitions(from, to);
-  }, [from, to]);
+  }, [from, loadEventDefinitions, to]);
 
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined

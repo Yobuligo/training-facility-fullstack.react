@@ -1,3 +1,4 @@
+import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { Button } from "../../../components/button/Button";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
@@ -26,6 +27,12 @@ export const EventPlanSection: React.FC = () => {
             {t(texts.EventPlanSection.addTraining)}
           </Button>
           <EventCalendarSection
+            eventDefinitionLoader={async (dateTimeSpan) => {
+              const eventDefinitionApi = new EventDefinitionApi();
+              const eventDefinitions =
+                await eventDefinitionApi.findByDateTimeSpan(dateTimeSpan);
+              return eventDefinitions;
+            }}
             onEventSelected={viewModel.onEventSelected}
             reloadSignal={viewModel.reloadSignal}
             renderEvent={(event) => (

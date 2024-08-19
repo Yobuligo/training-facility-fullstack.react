@@ -1,3 +1,4 @@
+import { EventDefinitionApi } from "../../api/EventDefinitionApi";
 import { Button } from "../../components/button/Button";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
@@ -14,6 +15,13 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
   return (
     <div className={styles.myTrainings}>
       <EventCalendarSection
+        eventDefinitionLoader={async (dateTimeSpan) => {
+          const eventDefinitionApi = new EventDefinitionApi();
+          const eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
+            dateTimeSpan
+          );
+          return eventDefinitions;
+        }}
         renderEvent={(event) => (
           <EventContent
             className={styles.eventContent}
