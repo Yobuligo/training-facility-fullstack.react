@@ -6,6 +6,11 @@
   fill: $color-primary-dark;
 }
 
+.clickableIcon {
+  cursor: pointer;
+  @extend .icon;
+}
+
 .disabledIcon {
   fill: $color-disabled;
 }
@@ -13,7 +18,7 @@
 @mixin border($color) {
   border: 8px solid $color;
   color: $color-secondary;
-  background-color: transparentize($color, $amount: 0.95)
+  background-color: transparentize($color, $amount: 0.95);
 }
 
 .dan {

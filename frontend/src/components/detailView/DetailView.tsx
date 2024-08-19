@@ -1,4 +1,5 @@
 import { ArrowBackIcon } from "../../icons/ArrowBackIcon";
+import componentStyles from "../../styles/components.module.scss";
 import styles from "./DetailView.module.scss";
 import { IDetailViewProps } from "./IDetailViewProps";
 
@@ -8,7 +9,10 @@ import { IDetailViewProps } from "./IDetailViewProps";
 export const DetailView: React.FC<IDetailViewProps> = (props) => {
   return (
     <div className={styles.detailView}>
-      <ArrowBackIcon onClick={props.onBack} />
+      <ArrowBackIcon
+        className={componentStyles.clickableIcon}
+        onClick={props.onBack}
+      />
       {props.children}
     </div>
   );
