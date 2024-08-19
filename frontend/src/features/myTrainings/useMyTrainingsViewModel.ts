@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { IMyTrainingsProps } from "./IMyTrainingsProps";
 
 export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
-  const [registered, setRegistered] = useState(false);
+  const onRegister = () => {};
 
-  const onToggleRegister = () => setRegistered((previous) => !previous);
+  const onUnregister = () => {};
 
   return {
-    onToggleRegister,
-    registered,
+    onRegister,
+    onUnregister,
   };
 };

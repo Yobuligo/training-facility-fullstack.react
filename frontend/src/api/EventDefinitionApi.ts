@@ -10,6 +10,8 @@ import {
 import { matchesDateTimeSpan } from "../utils/matchesDateTimeSpan";
 import { Repository } from "./core/Repository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
+import { DummyEventInstances } from "./DummyEventInstances";
+import { DummyEventRegistrations } from "./DummyEventRegistrations";
 
 export class EventDefinitionApi extends Repository<IEventDefinition> {
   constructor() {
@@ -37,6 +39,39 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     if (index !== -1) {
       DummyEventDefinitions.splice(index, 1, data);
     }
+  }
+
+  async findByDataTimeSpanAndUser(
+    dateTimeSpan: IDateTimeSpan,
+    userId: string
+  ): Promise<IEventDefinition[]> {
+    // find all eventDefinitions
+    const eventDefinitions = await this.findByDateTimeSpan(dateTimeSpan);
+
+    // attach instances
+    eventDefinitions.forEach((eventDefinition) => {
+      const eventInstance = DummyEventInstances.find(
+        (eventInstance) =>
+          eventInstance.eventDefinitionId === eventDefinition.id
+      );
+
+      if (eventInstance) {
+        eventDefinition.eventInstance = eventInstance;
+        eventDefinition.eventInstanceId = eventInstance.id;
+
+        // attach user registration to instance
+        const eventRegistration = DummyEventRegistrations.find(
+          (eventRegistration) =>
+            eventRegistration.eventInstanceId === eventInstance.id &&
+            eventRegistration.userId === userId
+        );
+        if (eventRegistration) {
+          eventInstance.eventRegistrations.push(eventRegistration);
+        }
+      }
+    });
+
+    return eventDefinitions;
   }
 
   async findByDateTimeSpan(

@@ -1,6 +1,7 @@
 import { EventState } from "../types/EventState";
 import { IEntity } from "../types/IEntity";
 import { IHaveUserId } from "../types/IHaveUserId";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { IEventInstance } from "./IEventInstance";
 
 /**
@@ -11,3 +12,7 @@ export interface IEventRegistration extends IEntity, IHaveUserId {
   eventInstanceId: string;
   eventState: EventState;
 }
+
+export const EventRegistrationRouteMeta: IRouteMeta = {
+  path: "/event-registrations",
+};

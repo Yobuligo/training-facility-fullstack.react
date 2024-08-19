@@ -1,5 +1,7 @@
 import { EventDefinitionApi } from "../../api/EventDefinitionApi";
 import { Button } from "../../components/button/Button";
+import { checkNotNull } from "../../core/utils/checkNotNull";
+import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { EventCalendarSection } from "../event/eventCalendarSection/EventCalendarSection";
@@ -10,6 +12,7 @@ import { useMyTrainingsViewModel } from "./useMyTrainingsViewModel";
 
 export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
   const { t } = useTranslation();
+  const [session] = useSession();
   const viewModel = useMyTrainingsViewModel(props);
 
   return (
@@ -17,26 +20,30 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
       <EventCalendarSection
         eventDefinitionLoader={async (dateTimeSpan) => {
           const eventDefinitionApi = new EventDefinitionApi();
-          const eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
-            dateTimeSpan
-          );
+          const eventDefinitions =
+            await eventDefinitionApi.findByDataTimeSpanAndUser(
+              dateTimeSpan,
+              checkNotNull(session).id
+            );
           return eventDefinitions;
         }}
-        renderEvent={(event) => (
-          <EventContent
-            className={styles.eventContent}
-            eventDefinition={event.eventDefinition}
-          >
-            <Button
-              className={styles.registerButton}
-              onClick={viewModel.onToggleRegister}
+        renderEvent={(event) => {
+          const eventRegistration =
+            event.eventDefinition.eventInstance?.eventRegistrations[0];
+
+          return (
+            <EventContent
+              className={styles.eventContent}
+              eventDefinition={event.eventDefinition}
             >
-              {viewModel.registered
-                ? t(texts.myTrainings.unregister)
-                : t(texts.myTrainings.register)}
-            </Button>
-          </EventContent>
-        )}
+              <Button className={styles.registerButton}>
+                {eventRegistration
+                  ? t(texts.myTrainings.unregister)
+                  : t(texts.myTrainings.register)}
+              </Button>
+            </EventContent>
+          );
+        }}
       />
     </div>
   );
