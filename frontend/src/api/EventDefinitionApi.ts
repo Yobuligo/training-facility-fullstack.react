@@ -2,12 +2,11 @@ import { DateTime } from "../core/services/date/DateTime";
 import { DateTimeIterator } from "../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { Lazy } from "../core/services/Lazy";
-import { Dummy } from "../model/Dummy";
+import { Recurrence } from "../core/types/Recurrence";
 import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
-import { Recurrence } from "../core/types/Recurrence";
 import { matchesDateTimeSpan } from "../utils/matchesDateTimeSpan";
 import { Repository } from "./core/Repository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
