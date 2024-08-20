@@ -1,5 +1,3 @@
-import { DateTime } from "../core/services/date/DateTime";
-import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/event/model/IEvent";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
@@ -13,9 +11,9 @@ export class EventInfo {
    * which matches the {@link event} start date.
    */
   static findEventInstance(event: IEvent): IEventInstance | undefined {
-    const eventStartDate = DateTime.toDate(checkNotNull(event.start));
     const eventInstance = event.eventDefinition.eventInstances.find(
-      (eventInstance) => DateTime.toDate(eventInstance.from) === eventStartDate
+      (eventInstance) =>
+        eventInstance.from === event.start && eventInstance.to === event.end
     );
     return eventInstance;
   }

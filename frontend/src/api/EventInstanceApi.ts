@@ -7,6 +7,7 @@ import {
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";
 import { DummyEventInstances } from "./DummyEventInstances";
+import { attach } from "./utils/attach";
 
 export class EventInstanceApi extends Repository<IEventInstance> {
   constructor() {
@@ -35,6 +36,10 @@ export class EventInstanceApi extends Repository<IEventInstance> {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+
+    // attach created eventInstance to eventDefinition
+    attach(event.eventDefinition.eventInstances, eventInstance);
+
     return await this.insert(eventInstance);
   }
 }

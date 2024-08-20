@@ -2,6 +2,7 @@ import { EventInstanceApi } from "../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../api/EventRegistrationApi";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { useSession } from "../../hooks/useSession";
+import { useSignal } from "../../hooks/useSignal";
 import { EventInfo } from "../../services/EventInfo";
 import { IEventInstance } from "../../shared/model/IEventInstance";
 import { IEvent } from "../event/model/IEvent";
@@ -9,6 +10,7 @@ import { IMyTrainingsProps } from "./IMyTrainingsProps";
 
 export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
   const [session] = useSession();
+  const [reloadSignal, triggerReloadSignal] = useSignal();
 
   const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {
     const eventInstance = EventInfo.findEventInstance(event);
@@ -28,6 +30,7 @@ export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
       eventInstance,
       checkNotNull(session).userId
     );
+    triggerReloadSignal();
   };
 
   const onUnregister = async (event: IEvent) => {
@@ -35,11 +38,13 @@ export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
     if (eventRegistration) {
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.delete(eventRegistration);
+      triggerReloadSignal();
     }
   };
 
   return {
     onRegister,
     onUnregister,
+    reloadSignal,
   };
 };

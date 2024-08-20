@@ -1,11 +1,13 @@
 import { DateTime } from "../core/services/date/DateTime";
-import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { Recurrence } from "../core/types/Recurrence";
+import { IEventDefinition } from "../shared/model/IEventDefinition";
+import { IEventInstance } from "../shared/model/IEventInstance";
 import colors from "../styles/colors.module.scss";
 import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";
 
 export class DummyEventDefinition extends Dummy implements IEventDefinition {
+  eventInstances: IEventInstance[] = [];
   color: string = colors.colorPrimary;
   creator: string = "";
   description: string = "";

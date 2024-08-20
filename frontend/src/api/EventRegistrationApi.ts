@@ -7,6 +7,7 @@ import { EventState } from "../shared/types/EventState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
+import { attach } from "./utils/attach";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   constructor() {
@@ -19,6 +20,18 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     );
     if (index !== -1) {
       DummyEventRegistrations.splice(index, 1);
+
+      // detach from eventInstance
+      const indexInstance =
+        eventRegistration.eventInstance.eventRegistrations.findIndex(
+          (item) => item.id === eventRegistration.id
+        );
+      if (indexInstance !== -1) {
+        eventRegistration.eventInstance.eventRegistrations.splice(
+          indexInstance,
+          1
+        );
+      }
       return true;
     }
     return false;
@@ -48,6 +61,9 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+
+    // attach created eventRegistration to eventInstance
+    attach(eventInstance.eventRegistrations, eventRegistration);
 
     return await this.insert(eventRegistration);
   }

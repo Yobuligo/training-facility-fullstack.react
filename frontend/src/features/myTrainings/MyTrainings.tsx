@@ -28,6 +28,7 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
             );
           return eventDefinitions;
         }}
+        reloadSignal={viewModel.reloadSignal}
         renderEvent={(event) => {
           const eventRegistration = EventInfo.findFirstEventRegistration(event);
 
@@ -40,16 +41,16 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
               {eventRegistration ? (
                 <Button
                   className={styles.registerButton}
-                  onClick={() => viewModel.onRegister(event)}
+                  onClick={() => viewModel.onUnregister(event)}
                 >
                   {t(texts.myTrainings.unregister)}
                 </Button>
               ) : (
                 <Button
                   className={styles.registerButton}
-                  onClick={() => viewModel.onUnregister(event)}
+                  onClick={() => viewModel.onRegister(event)}
                 >
-                  {t(texts.myTrainings.unregister)}
+                  {t(texts.myTrainings.register)}
                 </Button>
               )}
             </EventContent>

@@ -13,6 +13,7 @@ import { Repository } from "./core/Repository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
 import { DummyEventInstances } from "./DummyEventInstances";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
+import { attach } from "./utils/attach";
 
 export class EventDefinitionApi extends Repository<IEventDefinition> {
   constructor() {
@@ -62,7 +63,7 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
           eventInstance
         );
         if (matches) {
-          eventDefinition.eventInstances.push(eventInstance);
+          attach(eventDefinition.eventInstances, eventInstance);
 
           // attach all event registration which are belonging to the event instance and to the current user
           const eventRegistration = DummyEventRegistrations.find(
@@ -74,7 +75,7 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
           if (eventRegistration) {
             eventRegistration.eventInstance = eventInstance;
             eventRegistration.eventInstanceId = eventInstance.id;
-            eventInstance.eventRegistrations.push(eventRegistration);
+            attach(eventInstance.eventRegistrations, eventRegistration);
           }
 
           return true;

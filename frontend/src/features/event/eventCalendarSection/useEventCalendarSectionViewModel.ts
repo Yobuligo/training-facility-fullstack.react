@@ -7,7 +7,6 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../../core/types/Recurrence";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
-import { uuid } from "../../../utils/uuid";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 
@@ -26,7 +25,7 @@ const eventDefinitionsToEvent = (
     switch (eventDefinition.recurrence) {
       case Recurrence.ONCE: {
         events.push({
-          id: uuid(),
+          id: eventDefinition.id,
           eventDefinition,
           start: eventDefinition.from,
           end: eventDefinition.to,
@@ -43,7 +42,7 @@ const eventDefinitionsToEvent = (
           }
 
           events.push({
-            id: uuid(),
+            id: eventDefinition.id,
             eventDefinition,
             start: DateTime.create(
               DateTime.toDate(current),
@@ -70,7 +69,7 @@ const eventDefinitionsToEvent = (
           }
           if (current.getDay() === weekday) {
             events.push({
-              id: uuid(),
+              id: eventDefinition.id,
               eventDefinition,
               start: DateTime.create(
                 DateTime.toDate(current),
@@ -93,7 +92,7 @@ const eventDefinitionsToEvent = (
             DateTime.toDay(current) === DateTime.toDay(eventDefinition.from)
           ) {
             events.push({
-              id: uuid(),
+              id: eventDefinition.id,
               eventDefinition,
               start: DateTime.create(
                 DateTime.toDate(current),
