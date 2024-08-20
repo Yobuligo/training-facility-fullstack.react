@@ -1,3 +1,5 @@
+import { DateTime } from "../core/services/date/DateTime";
+import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
@@ -66,5 +68,35 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     attach(eventInstance.eventRegistrations, eventRegistration);
 
     return await this.insert(eventRegistration);
+  }
+
+  /**
+   * Finds all event registrations of the given {@link userId} for the given {@link dateTimeSpan}.
+   */
+  async findByDateTimeAndUser(
+    dateTimeSpan: IDateTimeSpan,
+    userId: string
+  ): Promise<IEventRegistration[]> {
+    const eventRegistrations = DummyEventRegistrations.filter(
+      (eventRegistration) =>
+        DateTime.spanContains(
+          dateTimeSpan,
+          eventRegistration.eventInstance.from
+        ) && eventRegistration.userId === userId
+    );
+    return eventRegistrations;
+  }
+
+  /**
+   * Finds all event registrations of the given {@link userId} for the current week
+   */
+  async findByUserForWeek(userId: string): Promise<IEventRegistration[]> {
+    const today = new Date();
+    const dateTimeSpan: IDateTimeSpan = {
+      from: DateTime.getWeekStartDate(today),
+      to: DateTime.getWeekEndDate(today),
+    };
+    const eventRegistrations = this.findByDateTimeAndUser(dateTimeSpan, userId);
+    return eventRegistrations;
   }
 }

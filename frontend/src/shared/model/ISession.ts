@@ -4,5 +4,6 @@ import { IHaveUserId } from "../types/IHaveUserId";
 
 export interface ISession extends IEntity, IHaveIsAdmin, IHaveUserId {
   expiresAt: Date;
+  firstname: string;
   username: string;
 }

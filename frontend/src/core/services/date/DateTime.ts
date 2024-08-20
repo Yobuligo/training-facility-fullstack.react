@@ -1,6 +1,8 @@
+import { IllegalArgumentError } from "../../errors/IllegalArgumentError";
 import { DateTimeFormatter } from "./DateTimeFormatter";
 import { Duration } from "./Duration";
 import { IDateTimeSpan } from "./IDateTimeSpan";
+import { isDateTimeSpan } from "./isDateTimeSpan";
 
 export class DateTime {
   private static msecInSeconds = 1000;
@@ -311,10 +313,19 @@ export class DateTime {
    * // returns true
    * const contains = DateTime.spanContains(outer, inner);
    */
-  static spanContains(outer: IDateTimeSpan, inner: IDateTimeSpan): boolean {
-    const compareResultFrom = DateTime.compare(outer.from, inner.from);
-    const compareResultTo = DateTime.compare(outer.to, inner.to);
-    return compareResultFrom <= 0 && compareResultTo >= 0;
+  static spanContains(outer: IDateTimeSpan, inner: IDateTimeSpan): boolean;
+  static spanContains(outer: IDateTimeSpan, date: Date): boolean;
+  static spanContains(outer: IDateTimeSpan, inner: unknown): boolean {
+    if (inner instanceof Date) {
+      const compareResultFrom = DateTime.compare(outer.from, inner);
+      const compareResultTo = DateTime.compare(outer.to, inner);
+      return compareResultFrom <= 0 && compareResultTo >= 0;
+    } else if (isDateTimeSpan(inner)) {
+      const compareResultFrom = DateTime.compare(outer.from, inner.from);
+      const compareResultTo = DateTime.compare(outer.to, inner.to);
+      return compareResultFrom <= 0 && compareResultTo >= 0;
+    }
+    throw new IllegalArgumentError();
   }
 
   /**

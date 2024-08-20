@@ -158,5 +158,11 @@
     },
     "userProfileSection": {
         "addUser": "Add user"
+    },
+    "welcome": {
+        "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",
+        "noTrainings": "Currently, you are not registered to any training. Switch to 'My trainings' to register.",
+        "welcome": "Welcome to the members area, {{name}}"
+        
     }
 }

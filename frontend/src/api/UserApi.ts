@@ -34,6 +34,7 @@ export class UserApi extends Repository<any> {
           expiresAt: new Date(),
           updatedAt: new Date(),
           userId: "3d5b322c-71ae-41c6-a336-0976eccca612",
+          firstname: "Frank",
           username: "frank",
           isAdmin: true,
         });
@@ -45,6 +46,7 @@ export class UserApi extends Repository<any> {
         expiresAt: new Date(),
         updatedAt: new Date(),
         userId: "b7c64925-3c0b-404d-acac-66f9c5e03ba3",
+        firstname: "Sonja",
         username: "sonja",
         isAdmin: false,
       });
