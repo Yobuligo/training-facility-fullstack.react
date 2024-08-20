@@ -19,7 +19,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
       />
       <LabeledInput
         classNameInput={styles.input}
-        label={t(texts.eventInstanceItem.startAtDate)}
+        label={t(texts.eventInstanceItem.date)}
         type="date"
         value={DateTime.toDate(props.eventInstance.from)}
       />
@@ -30,12 +30,6 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
         value={DateTime.toTime(props.eventInstance.from)}
       />
       <div className={styles.separator} />
-      <LabeledInput
-        classNameInput={styles.input}
-        label={t(texts.eventInstanceItem.endAtDate)}
-        type="date"
-        value={DateTime.toDate(props.eventInstance.to)}
-      />
       <LabeledInput
         classNameInput={styles.input}
         label={t(texts.eventInstanceItem.endAtTime)}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventRegistrationApi } from "../../api/EventRegistrationApi";
 import { Spinner } from "../../components/spinner/Spinner";
+import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useRequest } from "../../hooks/useRequest";
@@ -9,7 +10,6 @@ import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
-import { DateTime } from "../../core/services/date/DateTime";
 
 export const Welcome: React.FC = () => {
   const [session] = useSession();
@@ -38,6 +38,7 @@ export const Welcome: React.FC = () => {
       <h2>
         {t(texts.welcome.welcome, { name: checkNotNull(session).firstname })}
       </h2>
+
       <p>{t(texts.welcome.explanation)}</p>
       {eventRegistrationRequest.isLoading ? (
         <Spinner />

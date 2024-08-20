@@ -19,10 +19,9 @@
     },
     "eventInstanceItem": {
         "title": "Title",
-        "startAtDate": "Start at date",
-        "startAtTime": "Start at time",
-        "endAtDate": "End at date",
-        "endAtTime": "End at time"
+        "date": "Date",
+        "startAtTime": "Start time",
+        "endAtTime": "End time"
     },
     "eventInstanceList": {
         "noItems": "No events found"
