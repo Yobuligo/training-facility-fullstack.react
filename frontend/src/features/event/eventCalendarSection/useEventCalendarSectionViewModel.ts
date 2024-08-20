@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View } from "react-big-calendar";
 import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -118,8 +118,7 @@ export const useEventCalendarSectionViewModel = (
 ) => {
   const [view, setView] = useState<View>("week");
   const [events, setEvents] = useState<IEvent[]>([]);
-
-  let from: Date = useMemo(() => {
+  const [from, setFrom] = useState<Date>(() => {
     switch (view) {
       case "day": {
         return new Date();
@@ -133,9 +132,8 @@ export const useEventCalendarSectionViewModel = (
       default:
         throw new NotSupportedError();
     }
-  }, [view]);
-
-  let to: Date = useMemo(() => {
+  });
+  const [to, setTo] = useState<Date>(() => {
     switch (view) {
       case "day": {
         return new Date();
@@ -149,7 +147,7 @@ export const useEventCalendarSectionViewModel = (
       default:
         throw new NotSupportedError();
     }
-  }, [view]);
+  });
 
   const loadEventDefinitions = useCallback(
     async (from: Date, to: Date) => {
@@ -162,29 +160,21 @@ export const useEventCalendarSectionViewModel = (
   );
 
   useEffect(() => {
-    if (props.reloadSignal) {
-      loadEventDefinitions(from, to);
-    }
-  }, [from, loadEventDefinitions, props.reloadSignal, to]);
-
-  useEffect(() => {
     loadEventDefinitions(from, to);
-  }, [from, loadEventDefinitions, to]);
+  }, [from, loadEventDefinitions, props.reloadSignal, to]);
 
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined
   ) => {
     if (Array.isArray(eventRange)) {
-      from = eventRange[0];
-      to = eventRange[eventRange.length - 1];
-      loadEventDefinitions(from, to);
+      setFrom(eventRange[0]);
+      setTo(eventRange[eventRange.length - 1]);
       return;
     }
 
     if (typeof eventRange === "object") {
-      from = (eventRange as any).start as Date;
-      to = (eventRange as any).end as Date;
-      loadEventDefinitions(from, to);
+      setFrom(eventRange.start);
+      setTo(eventRange.end);
       return;
     }
 
