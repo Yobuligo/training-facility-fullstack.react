@@ -168,13 +168,14 @@ export const useEventCalendarSectionViewModel = (
   ) => {
     if (Array.isArray(eventRange)) {
       setFrom(eventRange[0]);
-      setTo(eventRange[eventRange.length - 1]);
+      const to = eventRange[eventRange.length - 1];
+      setTo(DateTime.create(DateTime.toDate(to), "23:59:59"));
       return;
     }
 
     if (typeof eventRange === "object") {
       setFrom(eventRange.start);
-      setTo(eventRange.end);
+      setTo(DateTime.create(DateTime.toDate(eventRange.end), "23:59:59"));
       return;
     }
 
