@@ -1,7 +1,7 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
+import { Recurrence } from "../../core/types/Recurrence";
 import { IEntity } from "../types/IEntity";
 import { IRouteMeta } from "../types/IRouteMeta";
-import { Recurrence } from "../../core/types/Recurrence";
 import { IEventInstance } from "./IEventInstance";
 
 /**
@@ -11,8 +11,7 @@ export interface IEventDefinition extends IEntity, IDateTimeSpan {
   color: string;
   creator: string;
   description: string;
-  eventInstance?: IEventInstance;
-  eventInstanceId?: string;
+  eventInstances: IEventInstance[];
   recurrence: Recurrence;
   title: string;
 }

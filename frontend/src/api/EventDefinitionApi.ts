@@ -7,6 +7,7 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
+import { IEventInstance } from "../shared/model/IEventInstance";
 import { matchesDateTimeSpan } from "../utils/matchesDateTimeSpan";
 import { Repository } from "./core/Repository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
@@ -41,6 +42,11 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     }
   }
 
+  /**
+   * Find all event definitions suitable for the given date time span.
+   * Also loads all event instances of the definitions, which are matching the date time span
+   * and corresponding registrations of the current user
+   */
   async findByDataTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
     userId: string
@@ -48,27 +54,34 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     // find all eventDefinitions
     const eventDefinitions = await this.findByDateTimeSpan(dateTimeSpan);
 
-    // attach instances
+    // attach all instances, which are matching the date time span
     eventDefinitions.forEach((eventDefinition) => {
-      const eventInstance = DummyEventInstances.find(
-        (eventInstance) =>
-          eventInstance.eventDefinitionId === eventDefinition.id
-      );
-
-      if (eventInstance) {
-        eventDefinition.eventInstance = eventInstance;
-        eventDefinition.eventInstanceId = eventInstance.id;
-
-        // attach user registration to instance
-        const eventRegistration = DummyEventRegistrations.find(
-          (eventRegistration) =>
-            eventRegistration.eventInstanceId === eventInstance.id &&
-            eventRegistration.userId === userId
+      DummyEventInstances.filter((eventInstance) => {
+        const matches = this.matchesEventDefinition(
+          eventDefinition,
+          eventInstance
         );
-        if (eventRegistration) {
-          eventInstance.eventRegistrations.push(eventRegistration);
+        if (matches) {
+          eventDefinition.eventInstances.push(eventInstance);
+
+          // attach all event registration which are belonging to the event instance and to the current user
+          const eventRegistration = DummyEventRegistrations.find(
+            (eventRegistration) =>
+              eventRegistration.eventInstanceId === eventInstance.id &&
+              eventRegistration.userId === userId
+          );
+
+          if (eventRegistration) {
+            eventRegistration.eventInstance = eventInstance;
+            eventRegistration.eventInstanceId = eventInstance.id;
+            eventInstance.eventRegistrations.push(eventRegistration);
+          }
+
+          return true;
+        } else {
+          return false;
         }
-      }
+      });
     });
 
     return eventDefinitions;
@@ -156,5 +169,12 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
       return false;
     });
     return eventDefinitions;
+  }
+
+  private matchesEventDefinition(
+    eventDefinition: IEventDefinition,
+    eventInstance: IEventInstance
+  ): boolean {
+    return true;
   }
 }
