@@ -59,6 +59,6 @@ export class UserApi extends Repository<any> {
   }
 
   register(credentials: ICredentials): Promise<boolean> {
-    return this.post(`${this.url}/register`, credentials);
+    return this.requestPost(`${this.url}/register`, credentials);
   }
 }

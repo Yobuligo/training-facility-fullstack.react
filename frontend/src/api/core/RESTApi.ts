@@ -5,7 +5,7 @@ import { isError } from "../../shared/utils/isError";
 import { SessionRepo } from "./SessionRepo";
 
 export abstract class RESTApi {
-  protected delete<T>(url: string): Promise<T> {
+  protected requestDelete<T>(url: string): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {
       return await fetch(extendedUrl, {
@@ -18,7 +18,7 @@ export abstract class RESTApi {
     });
   }
 
-  protected get<T>(url: string): Promise<T> {
+  protected requestGet<T>(url: string): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {
       return await fetch(extendedUrl, {
@@ -27,7 +27,7 @@ export abstract class RESTApi {
     });
   }
 
-  protected put<T>(url: string, data: any): Promise<T> {
+  protected requestPut<T>(url: string, data: any): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {
       const body = JSON.stringify(data);
@@ -42,7 +42,7 @@ export abstract class RESTApi {
     });
   }
 
-  protected post<T>(url: string, data: any): Promise<T> {
+  protected requestPost<T>(url: string, data: any): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {
       const body = JSON.stringify(data);
