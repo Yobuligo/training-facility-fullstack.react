@@ -13,7 +13,8 @@ export class EventInfo {
   static findEventInstance(event: IEvent): IEventInstance | undefined {
     const eventInstance = event.eventDefinition.eventInstances.find(
       (eventInstance) =>
-        eventInstance.from === event.start && eventInstance.to === event.end
+        eventInstance.from.getTime() === event.start?.getTime() &&
+        eventInstance.to.getTime() === event.end?.getTime()
     );
     return eventInstance;
   }

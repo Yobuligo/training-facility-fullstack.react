@@ -176,6 +176,6 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
     eventDefinition: IEventDefinition,
     eventInstance: IEventInstance
   ): boolean {
-    return true;
+    return eventInstance.eventDefinitionId === eventDefinition.id;
   }
 }
