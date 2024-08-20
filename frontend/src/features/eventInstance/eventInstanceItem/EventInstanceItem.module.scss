@@ -1,0 +1,27 @@
+@import "../../../styles/dimensions.scss";
+@import "../../../styles/mixins.scss";
+
+.eventInstanceItem {
+  display: flex;
+  flex-direction: column;
+
+  @include medium-screen {
+    flex-direction: row;
+    column-gap: 2rem;
+  }
+}
+
+.input {
+  outline: none;
+  border: none;
+}
+
+.title {
+  width: 20rem;
+}
+
+.separator {
+  border-bottom: 1px solid black;
+  width: 2rem;
+  align-self: center;
+}

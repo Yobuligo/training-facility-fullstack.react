@@ -1,0 +1,7 @@
+@import "../../../styles/dimensions.scss";
+
+.eventInstanceList {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}

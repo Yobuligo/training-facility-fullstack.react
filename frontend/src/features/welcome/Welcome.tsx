@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { EventRegistrationApi } from "../../api/EventRegistrationApi";
-import { Card } from "../../components/card/Card";
 import { Spinner } from "../../components/spinner/Spinner";
-import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useRequest } from "../../hooks/useRequest";
@@ -10,6 +8,8 @@ import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
+import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
+import { DateTime } from "../../core/services/date/DateTime";
 
 export const Welcome: React.FC = () => {
   const [session] = useSession();
@@ -29,17 +29,9 @@ export const Welcome: React.FC = () => {
     });
   }, []);
 
-  const items = eventRegistrations.map((eventRegistration) => (
-    <Card key={eventRegistration.id}>
-      {`${eventRegistration.eventInstance.title} (${DateTime.format(
-        eventRegistration.eventInstance.from,
-        "yyyy-MM-dd hh:mm"
-      )} - ${DateTime.format(
-        eventRegistration.eventInstance.to,
-        "yyyy-MM-dd hh:mm"
-      )})`}
-    </Card>
-  ));
+  const eventInstances = eventRegistrations
+    .map((eventRegistration) => eventRegistration.eventInstance)
+    .sort((left, right) => DateTime.compare(left.from, right.from));
 
   return (
     <div>
@@ -56,7 +48,7 @@ export const Welcome: React.FC = () => {
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
-              {items}
+              <EventInstanceList eventInstances={eventInstances} />
             </>
           )}
         </>
