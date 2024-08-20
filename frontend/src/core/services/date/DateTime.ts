@@ -93,16 +93,60 @@ export class DateTime {
   /**
    * Creates a new Date instance from the given {@link date} and {@link time} string.
    * Considers {@link date} and {@link time} as local time.
+   *
+   * @example
+   * DateTime.create("2024-08-14");
+   * DateTime.create("2024-08-14", "08:45");
+   * DateTime.create("2024-08-14", "08:45:55");
    */
-  static create(date: String, time: string): Date {
+  static create(date: string, time: string = "00:00:00.000"): Date {
     // if a time has no seconds, we have to add them
     let dateString = "";
     if (time.length === 5) {
       dateString = `${date}T${time}:00.000`;
+    } else if (time.length === 12) {
+      dateString = `${date}T${time}`;
     } else {
       dateString = `${date}T${time}.000`;
     }
     return new Date(dateString);
+  }
+
+  /**
+   * Returns true if the {@link left} date time value is equal to the {@link right} date time value, otherwise false.
+   */
+  static equals(left: Date, right: Date): boolean {
+    return (
+      this.toDateInstance(left).getTime() ===
+      this.toDateInstance(right).getTime()
+    );
+  }
+
+  /**
+   * Returns true if the {@link left} date (yyyy-MM-dd) value is equal to the {@link right} date value, otherwise false.
+   */
+  static equalsDate(left: Date, right: Date): boolean {
+    const leftDateInstance = this.toDateInstance(left);
+    const rightDateInstance = this.toDateInstance(right);
+    return (
+      leftDateInstance.getFullYear() === rightDateInstance.getFullYear() &&
+      leftDateInstance.getMonth() === rightDateInstance.getMonth() &&
+      leftDateInstance.getDate() === rightDateInstance.getDate()
+    );
+  }
+
+  /**
+   * Returns true if the {@link left} time (hh:mm:ss.fff) is equal to the {@link right} time value, otherwise false.
+   */
+  static equalsTime(left: Date, right: Date): boolean {
+    const leftDateInstance = this.toDateInstance(left);
+    const rightDateInstance = this.toDateInstance(right);
+    return (
+      leftDateInstance.getHours() === rightDateInstance.getHours() &&
+      leftDateInstance.getMinutes() === rightDateInstance.getMinutes() &&
+      leftDateInstance.getSeconds() === rightDateInstance.getSeconds() &&
+      leftDateInstance.getMilliseconds() === rightDateInstance.getMilliseconds()
+    );
   }
 
   /**
