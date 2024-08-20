@@ -7,12 +7,14 @@
 
 .registerButton {
   background-color: white;
-  outline: $color-primary solid 1px;
+  outline: none;
+  border: none;
   color: $color-primary;
   align-self: flex-end;
   &:hover {
     background-color: white;
-    outline: $color-primary solid 1px;
+    outline: none;
+    border: none;
     color: $color-primary;
   }
 }

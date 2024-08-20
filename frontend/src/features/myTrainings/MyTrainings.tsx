@@ -5,8 +5,10 @@ import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { EventInfo } from "../../services/EventInfo";
+import colors from "../../styles/colors.module.scss";
 import { EventCalendarSection } from "../event/eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../event/eventContent/EventContent";
+import { IEvent } from "../event/model/IEvent";
 import { IMyTrainingsProps } from "./IMyTrainingsProps";
 import styles from "./MyTrainings.module.scss";
 import { useMyTrainingsViewModel } from "./useMyTrainingsViewModel";
@@ -15,6 +17,42 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
   const { t } = useTranslation();
   const [session] = useSession();
   const viewModel = useMyTrainingsViewModel(props);
+
+  const renderEventStyle = (event: IEvent) => {
+    if (EventInfo.findFirstEventRegistration(event)) {
+      return { backgroundColor: colors.colorAccent };
+    } else {
+      return { backgroundColor: event.eventDefinition.color };
+    }
+  };
+
+  const renderEvent = (event: IEvent) => {
+    const eventRegistration = EventInfo.findFirstEventRegistration(event);
+
+    // Render content and show register or unregister, depending on if the user is already registered or not
+    return (
+      <EventContent
+        className={styles.eventContent}
+        eventDefinition={event.eventDefinition}
+      >
+        {eventRegistration ? (
+          <Button
+            className={styles.registerButton}
+            onClick={() => viewModel.onUnregister(event)}
+          >
+            {t(texts.myTrainings.unregister)}
+          </Button>
+        ) : (
+          <Button
+            className={styles.registerButton}
+            onClick={() => viewModel.onRegister(event)}
+          >
+            {t(texts.myTrainings.register)}
+          </Button>
+        )}
+      </EventContent>
+    );
+  };
 
   return (
     <div className={styles.myTrainings}>
@@ -29,33 +67,8 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
           return eventDefinitions;
         }}
         reloadSignal={viewModel.reloadSignal}
-        renderEvent={(event) => {
-          const eventRegistration = EventInfo.findFirstEventRegistration(event);
-
-          // Render content and show register or unregister, depending on if the user is already registered or not
-          return (
-            <EventContent
-              className={styles.eventContent}
-              eventDefinition={event.eventDefinition}
-            >
-              {eventRegistration ? (
-                <Button
-                  className={styles.registerButton}
-                  onClick={() => viewModel.onUnregister(event)}
-                >
-                  {t(texts.myTrainings.unregister)}
-                </Button>
-              ) : (
-                <Button
-                  className={styles.registerButton}
-                  onClick={() => viewModel.onRegister(event)}
-                >
-                  {t(texts.myTrainings.register)}
-                </Button>
-              )}
-            </EventContent>
-          );
-        }}
+        renderEvent={renderEvent}
+        renderEventStyle={renderEventStyle}
       />
     </div>
   );

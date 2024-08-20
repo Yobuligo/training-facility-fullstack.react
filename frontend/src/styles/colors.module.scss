@@ -10,6 +10,7 @@ $color-hover: lighten($color-secondary, 0.5);
 $color-enabled: black;
 $color-disabled: rgba(211, 211, 211, 0.63);
 $box-shadow: 8px 8px 8px $color-disabled;
+$color-accent: #e1a847;
 
 $color-tab-selected: $color-secondary-light;
 $color-tab-unselected: white;
@@ -28,6 +29,7 @@ $color-grade-kup8: #e6e619;
 $color-grade-kup9: rgb(241, 241, 241);
 
 :export {
+  colorAccent: $color-accent;
   colorDisabled: $color-disabled;
   colorPrimary: $color-primary;
   colorPrimaryDark: $color-primary-dark;

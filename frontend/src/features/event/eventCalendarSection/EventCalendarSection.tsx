@@ -9,10 +9,17 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   const viewModel = useEventCalendarSectionViewModel(props);
 
   const styleEvent = (event: IEvent) => {
-    return {
-      backgroundColor: event.eventDefinition.color,
-      padding: "0.5rem",
-    };
+    if (props.renderEventStyle) {
+      return {
+        ...props.renderEventStyle(event),
+        padding: "0.5rem",
+      };
+    } else {
+      return {
+        backgroundColor: event.eventDefinition.color,
+        padding: "0.5rem",
+      };
+    }
   };
 
   return (
