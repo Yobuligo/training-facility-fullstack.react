@@ -24,7 +24,7 @@ export const EventPlanSection: React.FC = () => {
       ) : (
         <div className={styles.eventCalendar}>
           <Button className={styles.button} onClick={viewModel.onAdd}>
-            {t(texts.EventPlanSection.addTraining)}
+            {t(texts.eventPlanSection.addTraining)}
           </Button>
           <EventCalendarSection
             eventDefinitionLoader={async (dateTimeSpan) => {
