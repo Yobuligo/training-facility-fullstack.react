@@ -6,10 +6,29 @@ import {
 import { EventState } from "../shared/types/EventState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
+import { DummyEventRegistrations } from "./DummyEventRegistrations";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   constructor() {
     super(EventRegistrationRouteMeta);
+  }
+
+  async delete(eventRegistration: IEventRegistration): Promise<boolean> {
+    const index = DummyEventRegistrations.findIndex(
+      (item) => item.id === eventRegistration.id
+    );
+    if (index !== -1) {
+      DummyEventRegistrations.splice(index, 1);
+      return true;
+    }
+    return false;
+  }
+
+  async insert(
+    eventRegistration: IEventRegistration
+  ): Promise<IEventRegistration> {
+    DummyEventRegistrations.push(eventRegistration);
+    return eventRegistration;
   }
 
   /**

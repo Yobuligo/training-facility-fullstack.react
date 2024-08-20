@@ -6,10 +6,16 @@ import {
 } from "../shared/model/IEventInstance";
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";
+import { DummyEventInstances } from "./DummyEventInstances";
 
 export class EventInstanceApi extends Repository<IEventInstance> {
   constructor() {
     super(EventInstanceRouteMeta);
+  }
+
+  async insert(eventInstance: IEventInstance): Promise<IEventInstance> {
+    DummyEventInstances.push(eventInstance);
+    return eventInstance;
   }
 
   /**
