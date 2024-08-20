@@ -161,8 +161,8 @@
     },
     "welcome": {
         "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",
-        "noTrainings": "Currently, you are not registered to any training. Switch to 'My trainings' to register.",
+        "noTrainings": "Currently, you are not registered to any training this week. Switch to 'My trainings' to register.",
+        "weekTrainings": "You are registered for the following trainings this week",
         "welcome": "Welcome to the members area, {{name}}"
-        
     }
 }
