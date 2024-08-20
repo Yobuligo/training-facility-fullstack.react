@@ -4,9 +4,6 @@ import { Language } from "../shared/types/Language";
 import { Tariff } from "../shared/types/Tariff";
 import { uuid } from "../utils/uuid";
 
-
-console.log(uuid())
-
 export const DummyUserProfiles: IUserProfile[] = [
     {id:uuid(), userId: uuid(), firstname:"Beatriz", lastname:"Bascon-Wolf", gender:Gender.FEMALE, birthday: new Date("04.01.1969"), street:"Anne-Frank-Straße 21", postalCode:"69221", city:"Dossenheim", email:"bascon@gmx.de", phone:"", joinedOn: new Date(), isAdmin: false, createdAt: new Date(), updatedAt: new Date(), language: Language.en, isDeactivated: false, bankAccountOwner: "", bankAccountIBAN: "", bankAccountBIC: "", bankAccountInstitution: "", memberId: "YT0001", tariff: Tariff.PRINCIPALS, gradings: []},
     {id:uuid(), userId: "3d5b322c-71ae-41c6-a336-0976eccca612", firstname:"Frank", lastname:"Burkart", gender:Gender.MALE, birthday: new Date("04.01.1969"), street:"Richard-Wagner-Straße 29", postalCode:"69221", city:"Dossenheim", email:"frank.burkart@hotmail.de", phone:"", joinedOn: new Date(),  isAdmin: true,createdAt: new Date(), updatedAt: new Date(), language: Language.en, isDeactivated: false, bankAccountOwner: "", bankAccountIBAN: "", bankAccountBIC: "", bankAccountInstitution: "", memberId: "YT0002", tariff: Tariff.PRINCIPALS, gradings: []},

@@ -31,6 +31,7 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
 
   async insert(data: IEventDefinition): Promise<IEventDefinition> {
     DummyEventDefinitions.push(data);
+    console.log(JSON.stringify(data))
     return data;
   }
 
