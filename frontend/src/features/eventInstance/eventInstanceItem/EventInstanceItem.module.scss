@@ -21,7 +21,12 @@
 }
 
 .separator {
-  border-bottom: 1px solid black;
-  width: 2rem;
-  align-self: center;
+  border: none;
+  width: 0;
+
+  @include medium-screen {
+    border-bottom: 1px solid black;
+    width: 2rem;
+    align-self: center;
+  }
 }
