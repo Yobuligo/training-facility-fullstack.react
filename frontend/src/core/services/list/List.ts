@@ -44,6 +44,26 @@ export class List {
   }
 
   /**
+   * Deletes all instances matching the given *{@link predicate}* from the list and returns *true*. Returns *false* if no element was deleted.
+   */
+  static delete<T>(list: T[], predicate: (element: T) => boolean): boolean {
+    let writeIndex = 0;
+    let found = false;
+
+    for (let readIndex = 0; readIndex < list.length; readIndex++) {
+      if (!predicate(list[readIndex])) {
+        list[writeIndex] = list[readIndex];
+        writeIndex++;
+      } else {
+        found = true;
+      }
+    }
+
+    list.length = writeIndex;
+    return found;
+  }
+
+  /**
    * Returns the element at position *{@link index}* or throws a *{@link NoSuchElementException}* if *{@link index}* is not assigned.
    */
   static elementAt<T>(list: T[], index: number): T {
@@ -153,5 +173,15 @@ export class List {
       reversedList.push(list[index]);
     }
     return reversedList;
+  }
+
+  /**
+   * Updates the first instance matching the given *{@link predicate}* from the *{@link list}* by *{@link element}*.
+   */
+  static update<T>(list: T[], element: T, predicate: (item: T) => boolean) {
+    const index = list.findIndex(predicate);
+    if (index !== -1) {
+      list.splice(index, 1, element);
+    }
   }
 }

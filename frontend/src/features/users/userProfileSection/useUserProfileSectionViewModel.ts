@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { UserProfileApi } from "../../../api/UserProfileApi";
-import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
+import { List } from "../../../core/services/list/List";
+import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 
 export const useUserProfileSectionViewModel = () => {
@@ -83,10 +84,7 @@ export const useUserProfileSectionViewModel = () => {
       userProfile.isPersisted === false
     ) {
       setUserProfiles((previous) => {
-        const index = previous.findIndex((item) => item.id === userProfile.id);
-        if (index !== -1) {
-          previous.splice(index, 1);
-        }
+        List.delete(previous, (item) => item.id === userProfile.id);
         return [...previous];
       });
     }

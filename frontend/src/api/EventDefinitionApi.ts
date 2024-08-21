@@ -2,6 +2,7 @@ import { DateTime } from "../core/services/date/DateTime";
 import { DateTimeIterator } from "../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { Lazy } from "../core/services/Lazy";
+import { List } from "../core/services/list/List";
 import { Recurrence } from "../core/types/Recurrence";
 import {
   EventDefinitionRouteMeta,
@@ -21,27 +22,17 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
   }
 
   async deleteById(id: string): Promise<boolean> {
-    const index = DummyEventDefinitions.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      DummyEventDefinitions.splice(index, 1);
-      return true;
-    }
-    return false;
+    return List.delete(DummyEventDefinitions, (item) => item.id === id);
   }
 
   async insert(data: IEventDefinition): Promise<IEventDefinition> {
     DummyEventDefinitions.push(data);
-    console.log(JSON.stringify(data))
+    console.log(JSON.stringify(data));
     return data;
   }
 
   async update(data: IEventDefinition): Promise<void> {
-    const index = DummyEventDefinitions.findIndex(
-      (item) => item.id === data.id
-    );
-    if (index !== -1) {
-      DummyEventDefinitions.splice(index, 1, data);
-    }
+    List.update(DummyEventDefinitions, data, (item) => item.id === data.id);
   }
 
   /**
