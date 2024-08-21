@@ -17,12 +17,6 @@
     "eventDefinitionDetails": {
         "enterTitle": "Please enter a valid title"
     },
-    "eventInstanceItem": {
-        "title": "Title",
-        "date": "Date",
-        "startAtTime": "Start time",
-        "endAtTime": "End time"
-    },
     "eventInstanceList": {
         "noItems": "No events found"
     },
