@@ -5,6 +5,7 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 export interface IEventCalendarProps<TEvent extends Event>
   extends IDateTimeSpan {
   events: TEvent[];
+
   onRangeChanged?: (range: Date[] | { start: Date; end: Date }) => void;
   onSelect?: (event: TEvent) => void;
 
@@ -17,6 +18,15 @@ export interface IEventCalendarProps<TEvent extends Event>
    * Renders the {@link event} by returning the content that should be displayed
    */
   renderEvent: (event: TEvent) => ReactNode;
+
+  /**
+   * Renders the day of {@link date} for the given {@link events}.
+   * Can be used to e.g. hide days
+   */
+  renderDay?: (
+    date: Date,
+    events: TEvent[]
+  ) => React.HTMLAttributes<HTMLDivElement>;
 
   /**
    * Styles the {@link event} by returning the css information

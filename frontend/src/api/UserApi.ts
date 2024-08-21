@@ -1,5 +1,5 @@
 import { ICredentials } from "../shared/model/ICredentials";
-import { IError } from "../shared/model/IError";
+import { IError } from "../core/types/IError";
 import { ISession } from "../shared/model/ISession";
 import { UserMeta } from "../shared/model/UserMeta";
 import { uuid } from "../utils/uuid";

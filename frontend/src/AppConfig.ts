@@ -1,4 +1,4 @@
-import { error } from "./shared/utils/error";
+import { error } from "./core/utils/error";
 
 export const AppConfig = {
   HOST:

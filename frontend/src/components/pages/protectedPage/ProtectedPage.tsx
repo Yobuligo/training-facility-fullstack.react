@@ -5,7 +5,7 @@ import { useSession } from "../../../hooks/useSession";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
-import { isError } from "../../../shared/utils/isError";
+import { isError } from "../../../core/utils/isError";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
 import { PageHeader } from "../pageHeader/PageHeader";

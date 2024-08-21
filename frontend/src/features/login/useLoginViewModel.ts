@@ -7,7 +7,7 @@ import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { AppRoutes } from "../../routes/AppRoutes";
 import { ICredentials } from "../../shared/model/ICredentials";
-import { isError } from "../../shared/utils/isError";
+import { isError } from "../../core/utils/isError";
 
 export const useLoginViewModel = () => {
   const { t } = useTranslation();

@@ -1,3 +1,6 @@
+import { DateTime } from "../../../core/services/date/DateTime";
+import { List } from "../../../core/services/list/List";
+import { Weekday } from "../../../core/types/Weekday";
 import { EventCalendar } from "../eventCalendar/EventCalendar";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
@@ -22,6 +25,21 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
     }
   };
 
+  /**
+   * Renders the days. Hide weekend days, if there are no events
+   */
+  const renderDay = (date: Date, events: IEvent[]) => {
+    const weekday = DateTime.toWeekday(date);
+    if (
+      (weekday === Weekday.SATURDAY || weekday === Weekday.SUNDAY) &&
+      List.isEmpty(events)
+    ) {
+      return { style: { display: "none" } };
+    } else {
+      return {};
+    }
+  };
+
   return (
     <EventCalendar
       events={viewModel.events}
@@ -29,6 +47,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
       onSelect={props.onEventSelected}
       onRangeChanged={viewModel.onEventRangeChanged}
       onViewChanged={viewModel.onViewChanged}
+      renderDay={renderDay}
       renderEvent={props.renderEvent}
       styleEvent={styleEvent}
       to={new Date()}

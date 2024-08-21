@@ -9,9 +9,20 @@ import {
   momentLocalizer,
 } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { DateTime } from "../../../core/services/date/DateTime";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);
+
+const findEventsFromDate = <TEvent extends Event>(
+  date: Date,
+  events: TEvent[]
+): TEvent[] => {
+  return events.filter((event) =>
+    DateTime.equalsDate(checkNotNull(event.start), date)
+  );
+};
 
 export function EventCalendar<TEvent extends Event>(
   props: IEventCalendarProps<TEvent>
@@ -52,30 +63,34 @@ export function EventCalendar<TEvent extends Event>(
 
   return (
     <Calendar
-      localizer={localizer}
-      events={props.events}
-      defaultView={props.view ?? "week"}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: "75vh" }}
-      step={15}
-      timeslots={1}
-      eventPropGetter={eventStyleGetter}
       components={{
         event: customEventComponent,
       }}
       culture="de"
+      dayPropGetter={(date) => {
+        const events = findEventsFromDate(date, props.events);
+        return {
+          ...props.renderDay?.(date, events),
+        };
+      }}
+      defaultView={props.view ?? "week"}
+      endAccessor="end"
+      eventPropGetter={eventStyleGetter}
+      events={props.events}
+      localizer={localizer}
+      max={new Date(2024, 7, 16, 22, 0, 0, 0)}
       messages={messages}
       min={new Date(2024, 7, 16, 16, 30, 0, 0)}
-      // min={props.from}
-      max={new Date(2024, 7, 16, 22, 0, 0, 0)}
-      // max={props.to}
+      onRangeChange={props.onRangeChanged}
       onSelectEvent={(event) => {
         props.onSelect?.(event);
       }}
-      onRangeChange={props.onRangeChanged}
       onView={props.onViewChanged}
-      views={props.views ? props.views : ["day", "week", "month"]}
+      startAccessor="start"
+      step={15}
+      style={{ height: "75vh" }}
+      timeslots={1}
+      views={props.views ? props.views : ["day", "week"]}
     />
   );
 }

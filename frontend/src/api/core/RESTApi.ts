@@ -1,7 +1,7 @@
-import { IError } from "../../shared/model/IError";
+import { IError } from "../../core/types/IError";
 import { HaveTokenMeta } from "../../shared/types/IHaveToken";
-import { createError } from "../../shared/utils/createError";
-import { isError } from "../../shared/utils/isError";
+import { createError } from "../../core/utils/createError";
+import { isError } from "../../core/utils/isError";
 import { SessionRepo } from "./SessionRepo";
 
 export abstract class RESTApi {
