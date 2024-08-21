@@ -88,12 +88,12 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   }
 
   /**
-   * Finds all event registrations of the given {@link userId} for the current week
+   * Finds all upcoming event registrations of the given {@link userId} for the current week
    */
   async findByUserForWeek(userId: string): Promise<IEventRegistration[]> {
     const today = new Date();
     const dateTimeSpan: IDateTimeSpan = {
-      from: DateTime.getWeekStartDate(today),
+      from: DateTime.getDayStartDate(today),
       to: DateTime.getWeekEndDate(today),
     };
     const eventRegistrations = this.findByDateTimeAndUser(dateTimeSpan, userId);

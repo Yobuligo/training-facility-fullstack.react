@@ -184,6 +184,45 @@ export class DateTime {
   }
 
   /**
+   * Returns the date of the last moment of the day (e.g. 2024-08-20 23:59:59.999) derived from the given {@link date}.
+   */
+  static getDayEndDate(date: Date): Date {
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      23,
+      59,
+      59,
+      999
+    );
+  }
+
+  /**
+   * Returns the first and last date moments of the day derived from the given {@link date}.
+   */
+  static getDaySpanDates(date: Date): IDateTimeSpan {
+    const from = this.getDayStartDate(date);
+    const to = this.getDayEndDate(date);
+    return { from, to };
+  }
+
+  /**
+   * Returns the date of the first moment of the day (e.g. 2024-08-20 00:00:00.000) derived from the given {@link date}.
+   */
+  static getDayStartDate(date: Date): Date {
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      0,
+      0,
+      0,
+      0
+    );
+  }
+
+  /**
    * Returns the date of the last day of the month derived from the given {@link date}.
    */
   static getMonthEndDate(date: Date): Date {
@@ -197,7 +236,7 @@ export class DateTime {
   /**
    * Returns the first and last date of a month derived from the given {@link date}.
    *
-   * If {@link date} is a date of 15. january the date of the 1. january and last will be returned
+   * E.g.: If {@link date} is a date of 15. january the date of the 1. january and last will be returned
    */
   static getMonthSpanDates(date: Date): IDateTimeSpan {
     const from = this.getMonthStartDate(date);
@@ -229,7 +268,7 @@ export class DateTime {
   /**
    * Returns the first and last date of a week derived from the given {@link date}.
    *
-   * If {@link date} is a date of wednesday the date of the previous monday and the following sunday will be returned
+   * E.g.: If {@link date} is a date of wednesday the date of the previous monday and the following sunday will be returned
    */
   static getWeekSpanDates(date: Date): IDateTimeSpan {
     const from = this.getWeekStartDate(date);
@@ -314,13 +353,27 @@ export class DateTime {
    * const contains = DateTime.spanContains(outer, inner);
    */
   static spanContains(outer: IDateTimeSpan, inner: IDateTimeSpan): boolean;
+
+  /**
+   * Returns true if the {@link outer} span contains the the {@link date} otherwise false.
+   *
+   * @example
+   * const outer: IDateTimeSpan = {
+   *   from: new Date(2024, 8, 1),
+   *   to: new Date(2024, 8, 31),
+   * };
+   * const date = new Date(2024, 8, 15)
+   *
+   * // returns true
+   * const contains = DateTime.spanContains(outer, date);
+   */
   static spanContains(outer: IDateTimeSpan, date: Date): boolean;
   static spanContains(outer: IDateTimeSpan, inner: unknown): boolean {
     if (inner instanceof Date) {
       const compareResultFrom = DateTime.compare(outer.from, inner);
       const compareResultTo = DateTime.compare(outer.to, inner);
       return compareResultFrom <= 0 && compareResultTo >= 0;
-    } else if (isDateTimeSpan(inner)) {
+    } else if (isDateTimeSpan(inner!)) {
       const compareResultFrom = DateTime.compare(outer.from, inner.from);
       const compareResultTo = DateTime.compare(outer.to, inner.to);
       return compareResultFrom <= 0 && compareResultTo >= 0;
