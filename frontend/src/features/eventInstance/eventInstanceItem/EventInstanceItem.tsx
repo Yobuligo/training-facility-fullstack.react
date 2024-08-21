@@ -17,13 +17,18 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
       />
       <div className={styles.content}>
         <div className={styles.title}>{props.eventInstance.title}</div>
-        <div className={styles.weekday}>
-          {renderWeekday(DateTime.toWeekday(props.eventInstance.from))}
+        <div className={styles.timeContainer}>
+          <div className={styles.weekday}>
+            {renderWeekday(DateTime.toWeekday(props.eventInstance.from), true)}
+          </div>
+
+          <div className={styles.dateTimeContainer}>
+            <div>{DateTime.format(props.eventInstance.from, "dd.MM.yyyy")}</div>
+            <div>{`${DateTime.toTime(
+              props.eventInstance.from
+            )} - ${DateTime.toTime(props.eventInstance.to)}`}</div>
+          </div>
         </div>
-        <div>{DateTime.format(props.eventInstance.from, "dd.MM.yyyy")}</div>
-        <div>{`${DateTime.toTime(props.eventInstance.from)} - ${DateTime.toTime(
-          props.eventInstance.to
-        )}`}</div>
       </div>
     </Card>
   );
