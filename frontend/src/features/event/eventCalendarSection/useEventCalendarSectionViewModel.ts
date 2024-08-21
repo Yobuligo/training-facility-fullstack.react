@@ -5,11 +5,12 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { DateTimeIterator } from "../../../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../../core/types/Recurrence";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { useScreenSize } from "../../../hooks/useScreenSize";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
-import { useScreenSize } from "../../../hooks/useScreenSize";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
@@ -120,7 +121,9 @@ export const useEventCalendarSectionViewModel = (
   const screenSize = useScreenSize();
   const [view, setView] = useState<View>(screenSize.isSmall() ? "day" : "week");
   const [events, setEvents] = useState<IEvent[]>([]);
-  const [from, setFrom] = useState<Date>(() => {
+  const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
+  const [toTime, setToTime] = useState<Date | undefined>(undefined);
+  const [fromDate, setFromDate] = useState<Date>(() => {
     switch (view) {
       case "day": {
         return new Date();
@@ -135,7 +138,7 @@ export const useEventCalendarSectionViewModel = (
         throw new NotSupportedError();
     }
   });
-  const [to, setTo] = useState<Date>(() => {
+  const [toDate, setToDate] = useState<Date>(() => {
     switch (view) {
       case "day": {
         return new Date();
@@ -162,22 +165,52 @@ export const useEventCalendarSectionViewModel = (
   );
 
   useEffect(() => {
-    loadEventDefinitions(from, to);
-  }, [from, loadEventDefinitions, props.reloadSignal, to]);
+    loadEventDefinitions(fromDate, toDate);
+  }, [fromDate, loadEventDefinitions, props.reloadSignal, toDate]);
+
+  /**
+   * Whenever the events change, we calculate the max time span, which should be displayed
+   */
+  useEffect(() => {
+    let newFrom: Date;
+    let newTo: Date;
+
+    // find earliest start and latest end
+    events.forEach((event) => {
+      const start = checkNotNull(event.start);
+      const end = checkNotNull(event.end);
+
+      if (!newFrom) {
+        newFrom = start;
+      } else {
+        if (DateTime.isBefore(start, newFrom)) {
+          newFrom = start;
+        }
+      }
+
+      if (!newTo) {
+        newTo = end;
+      } else {
+        if (DateTime.isAfter(end, newTo)) {
+          newTo = end;
+        }
+      }
+    });
+  }, [events]);
 
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined
   ) => {
     if (Array.isArray(eventRange)) {
-      setFrom(eventRange[0]);
+      setFromDate(eventRange[0]);
       const to = eventRange[eventRange.length - 1];
-      setTo(DateTime.create(DateTime.toDate(to), "23:59:59"));
+      setToDate(DateTime.create(DateTime.toDate(to), "23:59:59"));
       return;
     }
 
     if (typeof eventRange === "object") {
-      setFrom(eventRange.start);
-      setTo(DateTime.create(DateTime.toDate(eventRange.end), "23:59:59"));
+      setFromDate(eventRange.start);
+      setToDate(DateTime.create(DateTime.toDate(eventRange.end), "23:59:59"));
       return;
     }
 
@@ -188,8 +221,10 @@ export const useEventCalendarSectionViewModel = (
 
   return {
     events,
+    fromTime,
     onEventRangeChanged,
     onViewChanged,
+    toTime,
     view,
   };
 };

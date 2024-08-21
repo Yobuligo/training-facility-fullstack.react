@@ -78,9 +78,9 @@ export function EventCalendar<TEvent extends Event>(
       eventPropGetter={eventStyleGetter}
       events={props.events}
       localizer={localizer}
-      max={new Date(2024, 7, 16, 22, 0, 0, 0)}
+      max={props.toTime}
       messages={messages}
-      min={new Date(2024, 7, 16, 16, 30, 0, 0)}
+      min={props.fromTime}
       onRangeChange={props.onRangeChanged}
       onSelectEvent={(event) => {
         props.onSelect?.(event);

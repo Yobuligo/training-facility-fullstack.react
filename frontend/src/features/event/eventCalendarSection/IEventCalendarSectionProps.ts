@@ -12,6 +12,7 @@ export interface IEventCalendarSectionProps {
   eventDefinitionLoader: (
     dateTimeSpan: IDateTimeSpan
   ) => Promise<IEventDefinition[]>;
+
   onEventSelected?: (event: IEvent) => void;
 
   /**

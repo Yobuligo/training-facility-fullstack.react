@@ -43,14 +43,14 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   return (
     <EventCalendar
       events={viewModel.events}
-      from={new Date()}
+      fromTime={viewModel.fromTime}
       onSelect={props.onEventSelected}
       onRangeChanged={viewModel.onEventRangeChanged}
       onViewChanged={viewModel.onViewChanged}
       renderDay={renderDay}
       renderEvent={props.renderEvent}
       styleEvent={styleEvent}
-      to={new Date()}
+      toTime={viewModel.toTime}
       view={viewModel.view}
       views={props.views}
     />

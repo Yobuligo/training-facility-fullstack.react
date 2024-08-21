@@ -1,10 +1,13 @@
 import { ReactNode } from "react";
 import { Event, View, ViewsProps } from "react-big-calendar";
-import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 
-export interface IEventCalendarProps<TEvent extends Event>
-  extends IDateTimeSpan {
+export interface IEventCalendarProps<TEvent extends Event> {
   events: TEvent[];
+
+  /**
+   * Takes the time from {@link fromTime} as starting hour of the calendar
+   */
+  fromTime?: Date;
 
   onRangeChanged?: (range: Date[] | { start: Date; end: Date }) => void;
   onSelect?: (event: TEvent) => void;
@@ -32,6 +35,11 @@ export interface IEventCalendarProps<TEvent extends Event>
    * Styles the {@link event} by returning the css information
    */
   styleEvent?: (event: TEvent) => React.CSSProperties;
+
+  /**
+   * Takes the time from {@link toTime} as ending hour of the calendar
+   */
+  toTime?: Date;
   view?: View;
   views?: ViewsProps<TEvent, any>;
 }
