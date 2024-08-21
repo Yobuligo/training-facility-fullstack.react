@@ -9,6 +9,7 @@ import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
+import { useScreenSize } from "../../../hooks/useScreenSize";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
@@ -116,7 +117,8 @@ const eventDefinitionsToEvent = (
 export const useEventCalendarSectionViewModel = (
   props: IEventCalendarSectionProps
 ) => {
-  const [view, setView] = useState<View>("week");
+  const screenSize = useScreenSize();
+  const [view, setView] = useState<View>(screenSize.isSmall() ? "day" : "week");
   const [events, setEvents] = useState<IEvent[]>([]);
   const [from, setFrom] = useState<Date>(() => {
     switch (view) {
