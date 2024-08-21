@@ -13,9 +13,6 @@
 .content {
   display: flex;
   flex-direction: column;
-  font-size: large;
-
-  font-weight: 500;
   padding: 1rem;
 
   @include medium-screen {
@@ -26,4 +23,10 @@
 
 .title {
   width: 20rem;
+  font-size: large;
+  font-weight: 500;
+}
+
+.weekday {
+  width: 6rem;
 }
