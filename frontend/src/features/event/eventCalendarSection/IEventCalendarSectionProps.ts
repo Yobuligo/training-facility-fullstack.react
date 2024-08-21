@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ViewsProps } from "react-big-calendar";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { ISignal } from "../../../core/services/signal/ISignal";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
@@ -27,4 +28,6 @@ export interface IEventCalendarSectionProps {
    * Renders the {@link event} style if required, uses the default otherwise
    */
   renderEventStyle?: (event: IEvent) => React.CSSProperties;
+
+  views?: ViewsProps<IEvent, any>;
 }

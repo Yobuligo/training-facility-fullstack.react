@@ -33,6 +33,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
       styleEvent={styleEvent}
       to={new Date()}
       view={viewModel.view}
+      views={props.views}
     />
   );
 };

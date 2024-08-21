@@ -75,7 +75,7 @@ export function EventCalendar<TEvent extends Event>(
       }}
       onRangeChange={props.onRangeChanged}
       onView={props.onViewChanged}
-      views={["day", "week", "month"]}
+      views={props.views ? props.views : ["day", "week", "month"]}
     />
   );
 }

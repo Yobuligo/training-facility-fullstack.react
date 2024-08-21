@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Event, View } from "react-big-calendar";
+import { Event, View, ViewsProps } from "react-big-calendar";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 
 export interface IEventCalendarProps<TEvent extends Event>
@@ -23,4 +23,5 @@ export interface IEventCalendarProps<TEvent extends Event>
    */
   styleEvent?: (event: TEvent) => React.CSSProperties;
   view?: View;
+  views?: ViewsProps<TEvent, any>;
 }

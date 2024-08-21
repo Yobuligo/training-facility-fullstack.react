@@ -19,6 +19,7 @@ export const EventOverview: React.FC = () => {
       renderEvent={(event) => (
         <EventContent eventDefinition={event.eventDefinition} />
       )}
+      views={["day", "week"]}
     />
   );
 };
