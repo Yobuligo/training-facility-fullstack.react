@@ -15,13 +15,11 @@ export const useEventRegistrationSectionViewModel = (
 
   const loadRegistrations = useCallback(async () => {
     loadEventRegistrationRequest.send(async () => {
-      if (props.eventInstance) {
-        const eventInstanceApi = new EventInstanceApi();
-        const eventRegistrations = await eventInstanceApi.findRegistrations(
-          props.eventInstance.id
-        );
-        setEventRegistrations(eventRegistrations);
-      }
+      const eventInstanceApi = new EventInstanceApi();
+      const eventRegistrations = await eventInstanceApi.findRegistrations(
+        props.eventInstance.id
+      );
+      setEventRegistrations(eventRegistrations);
     });
   }, [loadEventRegistrationRequest, props.eventInstance]);
 

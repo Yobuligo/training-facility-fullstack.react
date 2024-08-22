@@ -15,16 +15,12 @@ export const EventRegistrationSection: React.FC<
       {viewModel.loadEventRegistrationRequest.isLoading ? (
         <Spinner />
       ) : (
-        <>
-          {props.eventInstance && (
-            <EventInstanceItem eventInstance={props.eventInstance}>
-              <div className={styles.title}>Registered users</div>
-              <EventRegistrationList
-                eventRegistrations={viewModel.eventRegistrations}
-              />
-            </EventInstanceItem>
-          )}
-        </>
+        <EventInstanceItem eventInstance={props.eventInstance}>
+          <div className={styles.title}>Registered users</div>
+          <EventRegistrationList
+            eventRegistrations={viewModel.eventRegistrations}
+          />
+        </EventInstanceItem>
       )}
     </>
   );

@@ -4,6 +4,7 @@ import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useSession } from "../../../hooks/useSession";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { EventInstanceFactory } from "../../../model/EventInstanceFactory";
 import { EventInfo } from "../../../services/EventInfo";
 import colors from "../../../styles/colors.module.scss";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
@@ -64,7 +65,10 @@ export const EventCalendarMyTrainings: React.FC = () => {
     <div>
       {viewModel.selectedEvent ? (
         <EventRegistrationDetails
-          eventInstance={EventInfo.findEventInstance(viewModel.selectedEvent)}
+          eventInstance={
+            EventInfo.findEventInstance(viewModel.selectedEvent) ??
+            new EventInstanceFactory().createFromEvent(viewModel.selectedEvent)
+          }
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
