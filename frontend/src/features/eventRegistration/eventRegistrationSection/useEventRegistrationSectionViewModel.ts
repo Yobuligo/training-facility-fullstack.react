@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { useRequest } from "../../../hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 
@@ -10,15 +11,19 @@ export const useEventRegistrationSectionViewModel = (
     IEventRegistration[]
   >([]);
 
+  const loadEventRegistrationRequest = useRequest();
+
   const loadRegistrations = useCallback(async () => {
-    if (props.eventInstance) {
-      const eventInstanceApi = new EventInstanceApi();
-      const eventRegistrations = await eventInstanceApi.findRegistrations(
-        props.eventInstance.id
-      );
-      setEventRegistrations(eventRegistrations);
-    }
-  }, [props.eventInstance]);
+    loadEventRegistrationRequest.send(async () => {
+      if (props.eventInstance) {
+        const eventInstanceApi = new EventInstanceApi();
+        const eventRegistrations = await eventInstanceApi.findRegistrations(
+          props.eventInstance.id
+        );
+        setEventRegistrations(eventRegistrations);
+      }
+    });
+  }, [loadEventRegistrationRequest, props.eventInstance]);
 
   useEffect(() => {
     loadRegistrations();
@@ -26,5 +31,6 @@ export const useEventRegistrationSectionViewModel = (
 
   return {
     eventRegistrations,
+    loadEventRegistrationRequest,
   };
 };

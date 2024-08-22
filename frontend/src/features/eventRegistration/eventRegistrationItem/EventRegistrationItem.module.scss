@@ -1,0 +1,11 @@
+.eventRegistrationItem {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+}
+
+.name {
+  font-size: large;
+  font-weight: 500;
+  width: 10rem;
+}

@@ -1,5 +1,5 @@
+@use "../../../styles/dimensions.module.scss";
 @import "../../../styles/mixins.scss";
-@import "../../../styles/dimensions.module.scss";
 
 .eventInstanceItem {
   display: flex;
@@ -11,10 +11,16 @@
   width: 1rem;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  padding: 1rem;
+}
+
 .content {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 
   @include medium-screen {
     flex-direction: row;
@@ -44,7 +50,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.25rem;
-  padding: $negative-space;
+  padding: dimensions.$negative-space;
 
   @include medium-screen {
     flex-direction: row;

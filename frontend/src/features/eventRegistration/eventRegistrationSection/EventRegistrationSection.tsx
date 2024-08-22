@@ -1,4 +1,7 @@
+import { Spinner } from "../../../components/spinner/Spinner";
+import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
+import styles from "./EventRegistrationSection.module.scss";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 import { useEventRegistrationSectionViewModel } from "./useEventRegistrationSectionViewModel";
 
@@ -8,6 +11,21 @@ export const EventRegistrationSection: React.FC<
   const viewModel = useEventRegistrationSectionViewModel(props);
 
   return (
-    <EventRegistrationList eventRegistrations={viewModel.eventRegistrations} />
+    <>
+      {viewModel.loadEventRegistrationRequest.isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {props.eventInstance && (
+            <EventInstanceItem eventInstance={props.eventInstance}>
+              <div className={styles.title}>Registered users</div>
+              <EventRegistrationList
+                eventRegistrations={viewModel.eventRegistrations}
+              />
+            </EventInstanceItem>
+          )}
+        </>
+      )}
+    </>
   );
 };

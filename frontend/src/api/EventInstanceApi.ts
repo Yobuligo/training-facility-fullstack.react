@@ -56,7 +56,7 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     // attach user profile
     eventRegistrations?.forEach((eventRegistration) => {
       const userProfile = DummyUserProfiles.find(
-        (userProfile) => userProfile.id === eventRegistration.userId
+        (userProfile) => userProfile.userId === eventRegistration.userId
       );
       eventRegistration.userProfile = userProfile;
     });
