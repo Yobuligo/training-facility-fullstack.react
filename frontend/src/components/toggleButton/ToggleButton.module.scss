@@ -1,0 +1,11 @@
+@import "../../styles/colors.module.scss";
+
+.selected {
+  border: none;
+  background-color: $color-secondary;
+}
+
+.unSelected {
+  border: none;
+  background-color: lighten($color: $color-secondary, $amount: 30);
+}

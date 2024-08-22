@@ -1,13 +1,14 @@
-import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
-import { Toolbar } from "../../../components/toolbar/Toolbar";
+import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
+import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
 
 export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
   props
 ) => {
+  const viewModel = useEventRegistrationItemViewModel(props);
   const userProfile = checkNotNull(props.eventRegistration.userProfile);
 
   return (
@@ -15,10 +16,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
       <div className="styles.name">
         {`${userProfile.firstname} ${userProfile.lastname}`}
       </div>
-      <Toolbar>
-        <Button>Present</Button>
-        <Button>Missing</Button>
-      </Toolbar>
+      <ToggleButtonGroup items={viewModel.toggleButtonOptions} />
     </Card>
   );
 };

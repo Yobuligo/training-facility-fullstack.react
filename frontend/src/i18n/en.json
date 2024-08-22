@@ -37,6 +37,10 @@
     "eventPlanSection": {
         "addTraining": "Add training"
     },
+    "eventRegistrationItem": {
+        "missing": "Missing",
+        "present": "Present"
+    },
     "eventRegistrationList": {
         "noRegistrations": "No users registered yet for this training"
     },
