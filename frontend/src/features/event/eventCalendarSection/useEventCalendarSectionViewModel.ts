@@ -172,30 +172,14 @@ export const useEventCalendarSectionViewModel = (
    * Whenever the events change, we calculate the max time span, which should be displayed
    */
   useEffect(() => {
-    let newFrom: Date;
-    let newTo: Date;
-
-    // find earliest start and latest end
-    events.forEach((event) => {
-      const start = checkNotNull(event.start);
-      const end = checkNotNull(event.end);
-
-      if (!newFrom) {
-        newFrom = start;
-      } else {
-        if (DateTime.isBefore(start, newFrom)) {
-          newFrom = start;
-        }
-      }
-
-      if (!newTo) {
-        newTo = end;
-      } else {
-        if (DateTime.isAfter(end, newTo)) {
-          newTo = end;
-        }
-      }
-    });
+    const fromTime = DateTime.earliest(
+      ...events.map((event) => checkNotNull(event.start))
+    );
+    const toTime = DateTime.latest(
+      ...events.map((event) => checkNotNull(event.end))
+    );
+    setFromTime(fromTime);
+    setToTime(toTime);
   }, [events]);
 
   const onEventRangeChanged = (
