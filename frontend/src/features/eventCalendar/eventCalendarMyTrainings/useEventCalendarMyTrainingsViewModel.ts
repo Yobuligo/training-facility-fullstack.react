@@ -28,7 +28,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
 
   const onEventInstanceUnselect = () => setSelectedEvent(undefined);
 
-  const onEventSelected = async (event: IEvent) => setSelectedEvent(event);
+  const onEventSelected = async (event: IEvent) => {
+    if (session?.isAdmin) {
+      setSelectedEvent(event);
+    }
+  };
 
   const onRegister = async (event: IEvent) => {
     const eventInstance = await fetchEventInstance(event);
