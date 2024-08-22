@@ -1,21 +1,12 @@
+@use "../../../styles/components.module.scss";
 @import "../../../styles/colors.module.scss";
 
-.eventDefinition{
+.eventDefinition {
   justify-content: space-between;
   height: 100%;
 }
 
 .registerButton {
-  background-color: white;
-  outline: none;
-  border: none;
-  color: $color-primary;
   align-self: flex-end;
-  z-index: 100;
-  &:hover {
-    background-color: white;
-    outline: none;
-    border: none;
-    color: $color-primary;
-  }
+  @extend .secondaryButton;
 }

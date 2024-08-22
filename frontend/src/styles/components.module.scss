@@ -21,6 +21,17 @@
   background-color: transparentize($color, $amount: 0.95);
 }
 
+.secondaryButton {
+  background-color: transparent;
+  outline: $color-primary solid 1px;
+  color: $color-primary;
+  &:hover {
+    background-color: transparent;
+    outline: $color-primary solid 1px;
+    color: $color-primary;
+  }
+}
+
 .dan {
   @include border($color-grade-dan);
 }
