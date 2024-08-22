@@ -1,6 +1,7 @@
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { Button } from "../button/Button";
+import { SecondaryButton } from "../secondaryButton/SecondaryButton";
 import { Toolbar } from "../toolbar/Toolbar";
 import styles from "./ChangeableForm.module.scss";
 import { IChangeableFormProps } from "./IChangeableFormProps";
@@ -25,19 +26,13 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
           </Button>
         ) : (
           <>
-            <Button
-              className={styles.secondaryButton}
-              onClick={viewModel.onCancel}
-            >
+            <SecondaryButton onClick={viewModel.onCancel}>
               {t(texts.general.cancel)}
-            </Button>
+            </SecondaryButton>
             {props.displayDelete && (
-              <Button
-                className={styles.secondaryButton}
-                onClick={viewModel.onDelete}
-              >
+              <SecondaryButton onClick={viewModel.onDelete}>
                 {t(texts.general.delete)}
-              </Button>
+              </SecondaryButton>
             )}
             <Button onClick={viewModel.onSave}>{t(texts.general.save)}</Button>
           </>
