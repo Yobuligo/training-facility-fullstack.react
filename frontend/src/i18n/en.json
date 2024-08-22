@@ -44,6 +44,9 @@
     "eventRegistrationList": {
         "noRegistrations": "No users registered yet for this training"
     },
+    "eventRegistrationSection":{
+        "checkInUsers": "Check-in registered users"
+    },
     "general": {
         "cancel": "Cancel",
         "delete": "Delete",

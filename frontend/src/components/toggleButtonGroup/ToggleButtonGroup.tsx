@@ -7,18 +7,25 @@ import styles from "./ToggleButtonGroup.module.scss";
 export function ToggleButtonGroup<T extends IToggleButtonOption<any>>(
   props: IToggleButtonGroupProps<T>
 ) {
-  const [selected, setSelected] = useState(props.selected);
-  const items = props.items.map((item) => (
-    <ToggleButton
-      disabled={props.disabled}
-      item={item}
-      onSelect={() => {
-        setSelected(item);
-        props.onSelect?.(item);
-      }}
-      selected={item === selected}
-    />
-  ));
+  const [selected, setSelected] = useState<T | undefined>(props.selected);
+  const items = props.items.map((item) => {
+    console.log(`selected item is ${selected}`);
+    return (
+      <ToggleButton
+        disabled={props.disabled}
+        item={item}
+        onClick={() => {
+          if (item === selected) {
+            setSelected(undefined);
+          } else {
+            setSelected(item);
+            props.onSelect?.(item);
+          }
+        }}
+        selected={item === selected}
+      />
+    );
+  });
 
   return <div className={styles.toggleButtonGroup}>{items}</div>;
 }

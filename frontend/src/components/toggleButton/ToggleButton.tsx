@@ -9,8 +9,8 @@ export function ToggleButton<T extends IToggleButtonOption<any>>(
   return (
     <Button
       disabled={props.disabled}
-      className={props.selected ? styles.selected : styles.unSelected}
-      onClick={props.onSelect}
+      className={props.selected ? styles.selected : styles.unselected}
+      onClick={props.onClick}
     >
       {props.item.text}
     </Button>

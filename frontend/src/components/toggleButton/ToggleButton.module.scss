@@ -5,7 +5,11 @@
   background-color: $color-secondary;
 }
 
-.unSelected {
+.unselected {
   border: none;
   background-color: lighten($color: $color-secondary, $amount: 30);
+  &:hover{
+    cursor: pointer;
+    background-color: lighten($color: $color-secondary, $amount: 30);
+  }
 }
