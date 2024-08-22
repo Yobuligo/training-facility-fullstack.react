@@ -1,3 +1,4 @@
+import { Banner } from "../../../components/banner/Banner";
 import { Card } from "../../../components/card/Card";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
@@ -9,12 +10,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
 
   return (
     <Card className={styles.eventInstanceItem}>
-      <div
-        className={styles.banner}
-        style={{
-          backgroundColor: `${props.eventInstance.eventDefinition.color}`,
-        }}
-      />
+      <Banner color={props.eventInstance.eventDefinition.color} />
       <div className={styles.body}>
         <div className={styles.content}>
           <div className={styles.title}>{props.eventInstance.title}</div>

@@ -19,7 +19,8 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
       };
     } else {
       return {
-        backgroundColor: event.eventDefinition.color,
+        backgroundColor: "white",
+        color: "black",
         padding: "0.5rem",
       };
     }

@@ -1,11 +1,15 @@
+@use "../../../styles/dimensions.module.scss";
+
 .eventContent {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  column-gap: dimensions.$negative-space;
+  height: 100%;
 }
 
-.body {
+.content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .header {

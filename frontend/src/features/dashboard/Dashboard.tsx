@@ -5,9 +5,9 @@ import { TabStripContent } from "../../components/tabStripContent/TabStripConten
 import { useSession } from "../../hooks/useSession";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { EventCalendarMyTrainings } from "../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
 import { EventCalendarPlanSection } from "../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
 import { MyProfile } from "../myProfile/MyProfile";
-import { EventCalendarMyTrainings } from "../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
 import styles from "./Dashboard.module.scss";
