@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { useAuth } from "../../../hooks/useAuth";
 import { useSession } from "../../../hooks/useSession";
 import { useSignal } from "../../../hooks/useSignal";
 import { EventInfo } from "../../../services/EventInfo";
@@ -12,6 +13,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
     undefined
   );
+  const auth = useAuth();
   const [session] = useSession();
   const [reloadSignal, triggerReloadSignal] = useSignal();
 
@@ -29,7 +31,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const onEventInstanceUnselect = () => setSelectedEvent(undefined);
 
   const onEventSelected = async (event: IEvent) => {
-    if (session?.isAdmin) {
+    if (auth.isAdmin()) {
       setSelectedEvent(event);
     }
   };

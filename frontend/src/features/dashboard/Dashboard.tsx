@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ITabItem } from "../../components/tabStrip/ITabItem";
 import { TabStrip } from "../../components/tabStrip/TabStrip";
 import { TabStripContent } from "../../components/tabStripContent/TabStripContent";
-import { useSession } from "../../hooks/useSession";
+import { useAuth } from "../../hooks/useAuth";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { EventCalendarMyTrainings } from "../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
@@ -16,7 +16,7 @@ import { IDashboardProps } from "./IDashboardProps";
 export const Dashboard: React.FC<IDashboardProps> = (props) => {
   const [selected, setSelected] = useState(-1);
   const { t } = useTranslation();
-  const [session] = useSession();
+  const auth = useAuth();
 
   useEffect(() => {
     if (props.displayWelcomeSignal) {
@@ -27,7 +27,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
   const getTabItems = (): ITabItem[] => {
     const tabItems: ITabItem[] = [];
 
-    if (session?.isAdmin) {
+    if (auth.isAdmin()) {
       tabItems.push({
         title: t(texts.dashboard.users),
         content: <UserProfileSection />,
