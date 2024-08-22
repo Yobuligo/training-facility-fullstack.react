@@ -6,7 +6,6 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInstanceFactory } from "../../../model/EventInstanceFactory";
 import { EventInfo } from "../../../services/EventInfo";
-import colors from "../../../styles/colors.module.scss";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
@@ -19,21 +18,13 @@ export const EventCalendarMyTrainings: React.FC = () => {
   const [session] = useSession();
   const viewModel = useEventCalendarMyTrainingsViewModel();
 
-  const renderEventStyle = (event: IEvent) => {
-    if (EventInfo.findFirstEventRegistration(event)) {
-      return { backgroundColor: colors.colorAccent };
-    } else {
-      return { backgroundColor: event.eventDefinition.color };
-    }
-  };
-
   const renderEvent = (event: IEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistration(event);
 
     // Render content and show register or unregister, depending on if the user is already registered or not
     return (
       <EventContent
-        className={styles.eventContent}
+        className={styles.eventDefinition}
         eventDefinition={event.eventDefinition}
       >
         {eventRegistration ? (
@@ -85,7 +76,6 @@ export const EventCalendarMyTrainings: React.FC = () => {
           onEventSelected={viewModel.onEventSelected}
           reloadSignal={viewModel.reloadSignal}
           renderEvent={renderEvent}
-          renderEventStyle={renderEventStyle}
         />
       )}
     </div>
