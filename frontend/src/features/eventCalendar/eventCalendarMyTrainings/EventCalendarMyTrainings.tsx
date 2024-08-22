@@ -1,22 +1,21 @@
-import { EventDefinitionApi } from "../../api/EventDefinitionApi";
-import { Button } from "../../components/button/Button";
-import { checkNotNull } from "../../core/utils/checkNotNull";
-import { useSession } from "../../hooks/useSession";
-import { texts } from "../../hooks/useTranslation/texts";
-import { useTranslation } from "../../hooks/useTranslation/useTranslation";
-import { EventInfo } from "../../services/EventInfo";
-import colors from "../../styles/colors.module.scss";
-import { EventCalendarSection } from "../event/eventCalendarSection/EventCalendarSection";
-import { EventContent } from "../event/eventContent/EventContent";
-import { IEvent } from "../event/model/IEvent";
-import { IMyTrainingsProps } from "./IMyTrainingsProps";
-import styles from "./MyTrainings.module.scss";
-import { useMyTrainingsViewModel } from "./useMyTrainingsViewModel";
+import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { Button } from "../../../components/button/Button";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { useSession } from "../../../hooks/useSession";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { EventInfo } from "../../../services/EventInfo";
+import colors from "../../../styles/colors.module.scss";
+import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
+import { EventContent } from "../eventContent/EventContent";
+import { IEvent } from "../model/IEvent";
+import styles from "./EventCalendarMyTrainings.module.scss";
+import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
-export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
+export const EventCalendarMyTrainings: React.FC = () => {
   const { t } = useTranslation();
   const [session] = useSession();
-  const viewModel = useMyTrainingsViewModel(props);
+  const viewModel = useEventCalendarMyTrainingsViewModel();
 
   const renderEventStyle = (event: IEvent) => {
     if (EventInfo.findFirstEventRegistration(event)) {
@@ -61,7 +60,7 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
   };
 
   return (
-    <div className={styles.myTrainings}>
+    <div>
       <EventCalendarSection
         eventDefinitionLoader={async (dateTimeSpan) => {
           const eventDefinitionApi = new EventDefinitionApi();
@@ -72,6 +71,7 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
             );
           return eventDefinitions;
         }}
+        onEventSelected={viewModel.onEventSelected}
         reloadSignal={viewModel.reloadSignal}
         renderEvent={renderEvent}
         renderEventStyle={renderEventStyle}

@@ -4,13 +4,13 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
-import { EventDefinitionDetails } from "../eventDefinitionDetails/EventDefinitionDetails";
-import styles from "./EventPlanSection.module.scss";
-import { useEventPlanSectionViewModel } from "./useEventPlanSectionViewModel";
+import { EventDefinitionDetails } from "../../eventDefinition/eventDefinitionDetails/EventDefinitionDetails";
+import styles from "./EventCalendarPlanSection.module.scss";
+import { useEventCalendarPlanSectionViewModel } from "./useEventCalendarPlanSectionViewModel";
 
-export const EventPlanSection: React.FC = () => {
+export const EventCalendarPlanSection: React.FC = () => {
   const { t } = useTranslation();
-  const viewModel = useEventPlanSectionViewModel();
+  const viewModel = useEventCalendarPlanSectionViewModel();
 
   return (
     <div>

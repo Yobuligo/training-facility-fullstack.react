@@ -9,10 +9,10 @@ import {
   momentLocalizer,
 } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { DateTime } from "../../../core/services/date/DateTime";
-import { checkNotNull } from "../../../core/utils/checkNotNull";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { DateTime } from "../../core/services/date/DateTime";
+import { checkNotNull } from "../../core/utils/checkNotNull";
+import { texts } from "../../hooks/useTranslation/texts";
+import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);

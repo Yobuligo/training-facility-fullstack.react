@@ -7,7 +7,7 @@ import { EventContent } from "../eventContent/EventContent";
  * This component is responsible for displaying the events for the current week as calendar.
  * This calendar has no functionality like registration or planning the trainings.
  */
-export const EventOverview: React.FC = () => {
+export const EventCalendarOverview: React.FC = () => {
   return (
     <EventCalendarSection
       eventDefinitionLoader={async () => {

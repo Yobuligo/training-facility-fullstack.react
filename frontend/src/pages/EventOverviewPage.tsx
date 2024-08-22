@@ -1,5 +1,5 @@
-import { EventOverview } from "../features/event/eventOverview/EventOverview";
+import { EventCalendarOverview } from "../features/eventCalendar/eventCalendarOverview/EventCalendarOverview";
 
 export const EventOverviewPage: React.FC = () => {
-  return <EventOverview />;
+  return <EventCalendarOverview />;
 };

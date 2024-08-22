@@ -1,14 +1,17 @@
-import { EventInstanceApi } from "../../api/EventInstanceApi";
-import { EventRegistrationApi } from "../../api/EventRegistrationApi";
-import { checkNotNull } from "../../core/utils/checkNotNull";
-import { useSession } from "../../hooks/useSession";
-import { useSignal } from "../../hooks/useSignal";
-import { EventInfo } from "../../services/EventInfo";
-import { IEventInstance } from "../../shared/model/IEventInstance";
-import { IEvent } from "../event/model/IEvent";
-import { IMyTrainingsProps } from "./IMyTrainingsProps";
+import { useState } from "react";
+import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { useSession } from "../../../hooks/useSession";
+import { useSignal } from "../../../hooks/useSignal";
+import { EventInfo } from "../../../services/EventInfo";
+import { IEventInstance } from "../../../shared/model/IEventInstance";
+import { IEvent } from "../model/IEvent";
 
-export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
+export const useEventCalendarMyTrainingsViewModel = () => {
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
+    undefined
+  );
   const [session] = useSession();
   const [reloadSignal, triggerReloadSignal] = useSignal();
 
@@ -22,6 +25,8 @@ export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
       return eventInstance;
     }
   };
+
+  const onEventSelected = async (event: IEvent) => setSelectedEvent(event);
 
   const onRegister = async (event: IEvent) => {
     const eventInstance = await fetchEventInstance(event);
@@ -43,8 +48,10 @@ export const useMyTrainingsViewModel = (props: IMyTrainingsProps) => {
   };
 
   return {
+    onEventSelected,
     onRegister,
     onUnregister,
     reloadSignal,
+    selectedEvent,
   };
 };

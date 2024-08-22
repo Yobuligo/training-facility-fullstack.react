@@ -1,7 +1,7 @@
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { Weekday } from "../../../core/types/Weekday";
-import { EventCalendar } from "../eventCalendar/EventCalendar";
+import { EventCalendar } from "../../../components/eventCalendar/EventCalendar";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 import { useEventCalendarSectionViewModel } from "./useEventCalendarSectionViewModel";

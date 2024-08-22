@@ -5,7 +5,7 @@ import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEvent } from "../model/IEvent";
 
-export const useEventPlanSectionViewModel = () => {
+export const useEventCalendarPlanSectionViewModel = () => {
   const [selectedEventDefinition, setSelectedEventDefinition] = useState<
     IEventDefinition | undefined
   >(undefined);

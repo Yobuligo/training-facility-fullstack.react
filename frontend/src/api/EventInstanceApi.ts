@@ -1,5 +1,5 @@
 import { checkNotNull } from "../core/utils/checkNotNull";
-import { IEvent } from "../features/event/model/IEvent";
+import { IEvent } from "../features/eventCalendar/model/IEvent";
 import {
   EventInstanceRouteMeta,
   IEventInstance,

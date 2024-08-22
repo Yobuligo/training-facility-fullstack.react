@@ -1,6 +1,6 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
-import { IEvent } from "../features/event/model/IEvent";
+import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 
