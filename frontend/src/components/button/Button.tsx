@@ -3,9 +3,9 @@ import styles from "./Button.module.scss";
 import { IButtonProps } from "./IButtonProps";
 
 export const Button: React.FC<IButtonProps> = (props) => {
-  const onClick = () => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (props.disabled !== true) {
-      props.onClick?.();
+      props.onClick?.(event);
     }
   };
 

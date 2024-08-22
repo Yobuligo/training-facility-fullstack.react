@@ -38,14 +38,20 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
         {eventRegistration ? (
           <Button
             className={styles.registerButton}
-            onClick={() => viewModel.onUnregister(event)}
+            onClick={(clickEvent) => {
+              viewModel.onUnregister(event);
+              clickEvent.stopPropagation();
+            }}
           >
             {t(texts.myTrainings.unregister)}
           </Button>
         ) : (
           <Button
             className={styles.registerButton}
-            onClick={() => viewModel.onRegister(event)}
+            onClick={(clickEvent) => {
+              viewModel.onRegister(event);
+              clickEvent.stopPropagation();
+            }}
           >
             {t(texts.myTrainings.register)}
           </Button>
@@ -62,7 +68,7 @@ export const MyTrainings: React.FC<IMyTrainingsProps> = (props) => {
           const eventDefinitions =
             await eventDefinitionApi.findByDataTimeSpanAndUser(
               dateTimeSpan,
-              checkNotNull(session).id
+              checkNotNull(session).userId
             );
           return eventDefinitions;
         }}

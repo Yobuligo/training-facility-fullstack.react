@@ -30,7 +30,7 @@ export function EventCalendar<TEvent extends Event>(
   props: IEventCalendarProps<TEvent>
 ) {
   const { t } = useTranslation();
-  
+
   const eventStyleGetter: EventPropGetter<TEvent> = (event) => {
     return {
       style: props.styleEvent?.(event),
@@ -79,6 +79,7 @@ export function EventCalendar<TEvent extends Event>(
       min={props.fromTime}
       onRangeChange={props.onRangeChanged}
       onSelectEvent={(event) => {
+        console.log("Event was clicked");
         props.onSelect?.(event);
       }}
       onView={props.onViewChanged}
