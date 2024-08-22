@@ -1,4 +1,7 @@
+@use "../../styles/dimensions.module.scss";
+
 .detailView {
   display: flex;
   flex-direction: column;
+  row-gap: dimensions.$negative-space;
 }

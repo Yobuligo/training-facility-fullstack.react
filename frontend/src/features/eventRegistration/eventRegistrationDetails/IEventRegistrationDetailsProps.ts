@@ -1,5 +1,6 @@
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 
-export interface IEventRegistrationSectionProps {
+export interface IEventRegistrationDetailsProps {
   eventInstance?: IEventInstance;
+  onBack?: () => void;
 }

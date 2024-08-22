@@ -4,6 +4,7 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
+import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";
 import { DummyEventInstances } from "./DummyEventInstances";
@@ -41,5 +42,14 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     attach(event.eventDefinition.eventInstances, eventInstance);
 
     return await this.insert(eventInstance);
+  }
+
+  async findRegistrations(
+    eventInstanceId: string
+  ): Promise<IEventRegistration[]> {
+    const eventInstance = DummyEventInstances.find(
+      (item) => item.id === eventInstanceId
+    );
+    return eventInstance?.eventRegistrations ?? [];
   }
 }

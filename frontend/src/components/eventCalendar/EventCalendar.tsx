@@ -78,10 +78,7 @@ export function EventCalendar<TEvent extends Event>(
       messages={messages}
       min={props.fromTime}
       onRangeChange={props.onRangeChanged}
-      onSelectEvent={(event) => {
-        console.log("Event was clicked");
-        props.onSelect?.(event);
-      }}
+      onSelectEvent={(event) => props.onSelect?.(event)}
       onView={props.onViewChanged}
       startAccessor="start"
       step={15}

@@ -26,6 +26,8 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     }
   };
 
+  const onEventInstanceUnselect = () => setSelectedEvent(undefined);
+
   const onEventSelected = async (event: IEvent) => setSelectedEvent(event);
 
   const onRegister = async (event: IEvent) => {
@@ -48,6 +50,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   };
 
   return {
+    onEventInstanceUnselect,
     onEventSelected,
     onRegister,
     onUnregister,

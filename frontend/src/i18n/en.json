@@ -37,6 +37,9 @@
     "eventPlanSection": {
         "addTraining": "Add training"
     },
+    "eventRegistrationList": {
+        "noRegistrations": "No users registered yet for this training"
+    },
     "general": {
         "cancel": "Cancel",
         "delete": "Delete",

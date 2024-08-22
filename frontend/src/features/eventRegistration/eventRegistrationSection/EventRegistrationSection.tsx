@@ -1,4 +1,4 @@
-import styles from "./EventRegistrationSection.module.scss";
+import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 import { useEventRegistrationSectionViewModel } from "./useEventRegistrationSectionViewModel";
 
@@ -7,5 +7,7 @@ export const EventRegistrationSection: React.FC<
 > = (props) => {
   const viewModel = useEventRegistrationSectionViewModel(props);
 
-  return <div className={styles.eventRegistrationSection}></div>;
+  return (
+    <EventRegistrationList eventRegistrations={viewModel.eventRegistrations} />
+  );
 };

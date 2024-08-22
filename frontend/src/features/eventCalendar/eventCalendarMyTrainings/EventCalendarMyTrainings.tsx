@@ -6,6 +6,7 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import colors from "../../../styles/colors.module.scss";
+import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
 import { IEvent } from "../model/IEvent";
@@ -61,21 +62,28 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      <EventCalendarSection
-        eventDefinitionLoader={async (dateTimeSpan) => {
-          const eventDefinitionApi = new EventDefinitionApi();
-          const eventDefinitions =
-            await eventDefinitionApi.findByDataTimeSpanAndUser(
-              dateTimeSpan,
-              checkNotNull(session).userId
-            );
-          return eventDefinitions;
-        }}
-        onEventSelected={viewModel.onEventSelected}
-        reloadSignal={viewModel.reloadSignal}
-        renderEvent={renderEvent}
-        renderEventStyle={renderEventStyle}
-      />
+      {viewModel.selectedEvent ? (
+        <EventRegistrationDetails
+          eventInstance={EventInfo.findEventInstance(viewModel.selectedEvent)}
+          onBack={viewModel.onEventInstanceUnselect}
+        />
+      ) : (
+        <EventCalendarSection
+          eventDefinitionLoader={async (dateTimeSpan) => {
+            const eventDefinitionApi = new EventDefinitionApi();
+            const eventDefinitions =
+              await eventDefinitionApi.findByDataTimeSpanAndUser(
+                dateTimeSpan,
+                checkNotNull(session).userId
+              );
+            return eventDefinitions;
+          }}
+          onEventSelected={viewModel.onEventSelected}
+          reloadSignal={viewModel.reloadSignal}
+          renderEvent={renderEvent}
+          renderEventStyle={renderEventStyle}
+        />
+      )}
     </div>
   );
 };
