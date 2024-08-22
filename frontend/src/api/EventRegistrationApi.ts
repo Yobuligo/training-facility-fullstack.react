@@ -1,5 +1,6 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
+import { List } from "../core/services/list/List";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
@@ -9,6 +10,7 @@ import { EventState } from "../shared/types/EventState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
+import { DummyUserProfiles } from "./DummyUserProfiles";
 import { attach } from "./utils/attach";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
@@ -66,6 +68,20 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
 
     // attach created eventRegistration to eventInstance
     attach(eventInstance.eventRegistrations, eventRegistration);
+
+    // add Dummy Registration
+    const eventRegistrationDummy: IEventRegistration = {
+      id: uuid(),
+      eventInstance,
+      eventInstanceId: eventInstance.id,
+      eventState: EventState.CHECKED_IN,
+      userId: List.last(DummyUserProfiles).userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    // attach created eventRegistration to eventInstance
+    attach(eventInstance.eventRegistrations, eventRegistrationDummy);
 
     return await this.insert(eventRegistration);
   }
