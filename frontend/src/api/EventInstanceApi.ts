@@ -8,6 +8,7 @@ import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";
 import { DummyEventInstances } from "./DummyEventInstances";
+import { DummyUserProfiles } from "./DummyUserProfiles";
 import { attach } from "./utils/attach";
 
 export class EventInstanceApi extends Repository<IEventInstance> {
@@ -50,6 +51,16 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     const eventInstance = DummyEventInstances.find(
       (item) => item.id === eventInstanceId
     );
+
+    const eventRegistrations = eventInstance?.eventRegistrations;
+    // attach user profile
+    eventRegistrations?.forEach((eventRegistration) => {
+      const userProfile = DummyUserProfiles.find(
+        (userProfile) => userProfile.id === eventRegistration.userId
+      );
+      eventRegistration.userProfile = userProfile;
+    });
+
     return eventInstance?.eventRegistrations ?? [];
   }
 }
