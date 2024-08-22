@@ -8,6 +8,20 @@
         "startTime": "Start time",
         "title": "Title"
     },
+    "calendar": {
+        "agenda": "Agenda",
+        "allDay": "All day",
+        "date": "Date",
+        "day": "Day",
+        "event": "Event",
+        "month": "Month",
+        "next": "Next",
+        "noEventsInRange": "No events in range",
+        "previous": "Previous",
+        "time": "Time",
+        "today": "Today",
+        "week": "Week"
+    },
     "dashboard": {
         "myProfile": "My profile",
         "myTrainings": "My trainings",

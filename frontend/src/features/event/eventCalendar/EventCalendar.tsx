@@ -11,6 +11,8 @@ import {
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);
@@ -27,16 +29,9 @@ const findEventsFromDate = <TEvent extends Event>(
 export function EventCalendar<TEvent extends Event>(
   props: IEventCalendarProps<TEvent>
 ) {
-  const handleRegister = (eventId: number) => {
-    alert(`You registered for event with ID: ${eventId}`);
-  };
-
-  const eventStyleGetter: EventPropGetter<TEvent> = (
-    event,
-    start,
-    end,
-    isSelected
-  ) => {
+  const { t } = useTranslation();
+  
+  const eventStyleGetter: EventPropGetter<TEvent> = (event) => {
     return {
       style: props.styleEvent?.(event),
     };
@@ -46,19 +41,20 @@ export function EventCalendar<TEvent extends Event>(
     event,
   }) => <>{props.renderEvent(event)}</>;
 
+  t(texts.calendar.allDay);
   const messages = {
-    allDay: "Ganztägig",
-    previous: "Zurück",
-    next: "Weiter",
-    today: "Heute",
-    month: "Monat",
-    week: "Woche",
-    day: "Tag",
-    agenda: "Agenda",
-    date: "Datum",
-    time: "Zeit",
-    event: "Ereignis",
-    noEventsInRange: "Keine Ereignisse in diesem Zeitraum.",
+    allDay: t(texts.calendar.allDay),
+    previous: t(texts.calendar.previous),
+    next: t(texts.calendar.next),
+    today: t(texts.calendar.today),
+    month: t(texts.calendar.month),
+    week: t(texts.calendar.week),
+    day: t(texts.calendar.day),
+    agenda: t(texts.calendar.agenda),
+    date: t(texts.calendar.date),
+    time: t(texts.calendar.time),
+    event: t(texts.calendar.event),
+    noEventsInRange: t(texts.calendar.noEventsInRange),
   };
 
   return (
