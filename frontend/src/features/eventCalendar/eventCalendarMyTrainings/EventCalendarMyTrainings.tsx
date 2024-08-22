@@ -6,6 +6,7 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInstanceFactory } from "../../../model/EventInstanceFactory";
 import { EventInfo } from "../../../services/EventInfo";
+import { style } from "../../../utils/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
@@ -29,7 +30,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
       >
         {eventRegistration ? (
           <Button
-            className={styles.registerButton}
+            className={style(styles.registerButton, styles.unregisterButton)}
             onClick={(clickEvent) => {
               viewModel.onUnregister(event);
               clickEvent.stopPropagation();

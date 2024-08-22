@@ -14,11 +14,8 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
   const viewModel = useChangeableFormViewModel(props);
   const { t } = useTranslation();
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
-    event.preventDefault();
-
   return (
-    <form className={styles.changeableForm} onSubmit={onSubmit}>
+    <div className={styles.changeableForm}>
       <Toolbar className={styles.toolbar}>
         {props.displayMode ? (
           <Button onClick={viewModel.onToggleMode}>
@@ -39,6 +36,6 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
         )}
       </Toolbar>
       {props.children}
-    </form>
+    </div>
   );
 };

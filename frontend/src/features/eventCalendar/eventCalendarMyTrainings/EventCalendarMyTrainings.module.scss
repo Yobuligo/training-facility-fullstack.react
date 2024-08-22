@@ -8,5 +8,11 @@
 
 .registerButton {
   align-self: flex-end;
-  @extend .secondaryButton;
+}
+
+.unregisterButton {
+  background-color: $color-accent;
+  &:hover {
+    background-color: $color-accent;
+  }
 }

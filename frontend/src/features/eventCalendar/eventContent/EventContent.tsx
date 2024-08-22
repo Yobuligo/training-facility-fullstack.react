@@ -6,7 +6,7 @@ import { IEventContentProps } from "./IEventContentProps";
 export const EventContent: React.FC<IEventContentProps> = (props) => {
   return (
     <div className={styles.eventContent}>
-      <Banner color={props.eventDefinition.color} />
+      <Banner className={styles.banner} color={props.eventDefinition.color} />
       <div className={style(styles.content, props.className)}>
         <div className={styles.header}>
           <h4 className={styles.title}>{props.eventDefinition.title}</h4>
