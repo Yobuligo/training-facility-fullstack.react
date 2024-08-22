@@ -8,9 +8,10 @@ export function ToggleButtonGroup<T extends IToggleButtonOption<any>>(
   props: IToggleButtonGroupProps<T>
 ) {
   const [selected, setSelected] = useState<T | undefined>(props.selected);
-  const items = props.items.map((item) => {
+  const items = props.items.map((item, index) => {
     return (
       <ToggleButton
+        key={index}
         disabled={props.disabled}
         item={item}
         onClick={() => {
