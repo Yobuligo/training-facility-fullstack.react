@@ -16,7 +16,11 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
       <div className="styles.name">
         {`${userProfile.firstname} ${userProfile.lastname}`}
       </div>
-      <ToggleButtonGroup items={viewModel.toggleButtonOptions} />
+      <ToggleButtonGroup
+        items={viewModel.toggleButtonOptions}
+        onChange={viewModel.onToggleButtonOptionChange}
+        selected={viewModel.selectedToggleButtonOption}
+      />
     </Card>
   );
 };

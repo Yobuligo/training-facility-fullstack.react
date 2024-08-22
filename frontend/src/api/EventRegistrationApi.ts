@@ -60,7 +60,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       id: uuid(),
       eventInstance,
       eventInstanceId: eventInstance.id,
-      eventState: EventState.CHECKED_IN,
+      eventState: EventState.OPEN,
       userId,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -74,7 +74,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       id: uuid(),
       eventInstance,
       eventInstanceId: eventInstance.id,
-      eventState: EventState.CHECKED_IN,
+      eventState: EventState.OPEN,
       userId: List.last(DummyUserProfiles).userId,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -114,5 +114,9 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     };
     const eventRegistrations = this.findByDateTimeAndUser(dateTimeSpan, userId);
     return eventRegistrations;
+  }
+
+  async update(data: IEventRegistration): Promise<void> {
+    List.update(DummyEventRegistrations, data, (item) => item.id === data.id);
   }
 }
