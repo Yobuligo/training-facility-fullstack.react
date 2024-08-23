@@ -3,7 +3,7 @@ import { Collapse } from "../../../components/collapse/Collapse";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { style } from "../../../utils/style";
-import { UserSelectSection } from "../../users/userSelect/userSelectSection/UserSelectSection";
+import { UserSearchSection } from "../../users/userSearch/userSearchSection/UserSearchSection";
 import styles from "./EventRegistrationSearch.module.scss";
 import { IEventRegistrationSearchProps } from "./IEventRegistrationSearchProps";
 
@@ -21,7 +21,7 @@ export const EventRegistrationSearch: React.FC<
         title={t(texts.eventRegistrationSearch.addUsers)}
         titleClassName={styles.collapse}
       />
-      {!searchCollapsed && <UserSelectSection />}
+      {!searchCollapsed && <UserSearchSection />}
     </div>
   );
 };

@@ -196,10 +196,10 @@
     "userProfileSection": {
         "addUser": "Add user"
     },
-    "userSelectItem": {
+    "userSearchItem": {
         "addUser": "Add user"
     },
-    "userSelectList": {
+    "userSearchList": {
         "noEntries": "No entries found"
     },
     "welcome": {

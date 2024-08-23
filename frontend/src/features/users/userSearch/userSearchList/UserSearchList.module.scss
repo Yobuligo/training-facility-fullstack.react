@@ -1,6 +1,6 @@
 @use "../../../../styles/dimensions.module.scss";
 
-.userSelectList {
+.userSearchList {
   display: flex;
   flex-direction: column;
   row-gap: dimensions.$negative-space;
