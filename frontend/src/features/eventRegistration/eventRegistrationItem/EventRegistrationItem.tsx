@@ -17,6 +17,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
         {`${userProfile.firstname} ${userProfile.lastname}`}
       </div>
       <ToggleButtonGroup
+        enableUnselectAll={true}
         items={viewModel.toggleButtonOptions}
         onChange={viewModel.onToggleButtonOptionChange}
         selected={viewModel.selectedToggleButtonOption}

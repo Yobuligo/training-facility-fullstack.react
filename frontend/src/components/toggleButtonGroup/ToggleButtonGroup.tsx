@@ -8,26 +8,27 @@ export function ToggleButtonGroup<T extends IToggleButtonOption<any>>(
   props: IToggleButtonGroupProps<T>
 ) {
   const [selected, setSelected] = useState<T | undefined>(props.selected);
-  const items = props.items.map((item, index) => {
-    return (
-      <ToggleButton
-        key={index}
-        disabled={props.disabled}
-        item={item}
-        onClick={() => {
-          if (item === selected) {
-            setSelected(undefined);
-            props.onChange?.(undefined);
-          } else {
-            setSelected(item);
-            props.onSelect?.(item);
-            props.onChange?.(item);
-          }
-        }}
-        selected={item === selected}
-      />
-    );
-  });
+
+  const onClick = (item: T) => {
+    if (props.enableUnselectAll && item === selected) {
+      setSelected(undefined);
+      props.onChange?.(undefined);
+    } else {
+      setSelected(item);
+      props.onSelect?.(item);
+      props.onChange?.(item);
+    }
+  };
+
+  const items = props.items.map((item, index) => (
+    <ToggleButton
+      key={index}
+      disabled={props.disabled}
+      item={item}
+      onClick={() => onClick(item)}
+      selected={item === selected}
+    />
+  ));
 
   useEffect(() => setSelected(props.selected), [props.selected]);
 
