@@ -1,4 +1,4 @@
-import { EventState } from "../types/EventState";
+import { EventRegistrationState } from "../types/EventRegistrationState";
 import { IEntity } from "../types/IEntity";
 import { IHaveUserId } from "../types/IHaveUserId";
 import { IRouteMeta } from "../types/IRouteMeta";
@@ -11,7 +11,7 @@ import { IUserProfile } from "./IUserProfile";
 export interface IEventRegistration extends IEntity, IHaveUserId {
   eventInstance: IEventInstance;
   eventInstanceId: string;
-  eventState: EventState;
+  state: EventRegistrationState;
   manuallyAdded: boolean;
   userProfile?: IUserProfile;
 }

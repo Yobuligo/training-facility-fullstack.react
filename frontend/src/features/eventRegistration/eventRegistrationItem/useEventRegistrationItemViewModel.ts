@@ -3,7 +3,7 @@ import { IToggleButtonOption } from "../../../components/toggleButtonGroup/ITogg
 import { useRequest } from "../../../hooks/useRequest";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { EventState } from "../../../shared/types/EventState";
+import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 
 export const useEventRegistrationItemViewModel = (
@@ -14,31 +14,31 @@ export const useEventRegistrationItemViewModel = (
 
   // useEffect(() => {}, [props.eventRegistration.eventState]);
 
-  const toggleButtonOptions: IToggleButtonOption<EventState>[] = [
-    { key: EventState.MISSING, text: t(texts.eventRegistrationItem.missing) },
-    { key: EventState.PRESENT, text: t(texts.eventRegistrationItem.present) },
+  const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
+    { key: EventRegistrationState.MISSING, text: t(texts.eventRegistrationItem.missing) },
+    { key: EventRegistrationState.PRESENT, text: t(texts.eventRegistrationItem.present) },
   ];
 
   const selectedToggleButtonOption = toggleButtonOptions.find(
     (toggleButtonOption) =>
-      toggleButtonOption.key === props.eventRegistration.eventState
+      toggleButtonOption.key === props.eventRegistration.state
   );
 
-  const updateEventState = async (eventState: EventState) => {
+  const updateEventState = async (eventState: EventRegistrationState) => {
     updateRequest.send(async () => {
-      props.eventRegistration.eventState = eventState;
+      props.eventRegistration.state = eventState;
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.update(props.eventRegistration);
     });
   };
 
   const onToggleButtonOptionChange = (
-    selected: IToggleButtonOption<EventState> | undefined
+    selected: IToggleButtonOption<EventRegistrationState> | undefined
   ) => {
     // if no toggle button option is selected, return to open state
     // otherwise the selected state
     if (selected === undefined) {
-      updateEventState(EventState.OPEN);
+      updateEventState(EventRegistrationState.OPEN);
     } else {
       updateEventState(selected.key);
     }

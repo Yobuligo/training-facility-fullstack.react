@@ -6,7 +6,7 @@ import {
   EventRegistrationRouteMeta,
   IEventRegistration,
 } from "../shared/model/IEventRegistration";
-import { EventState } from "../shared/types/EventState";
+import { EventRegistrationState } from "../shared/types/EventRegistrationState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
@@ -60,7 +60,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       id: uuid(),
       eventInstance,
       eventInstanceId: eventInstance.id,
-      eventState: EventState.OPEN,
+      state: EventRegistrationState.OPEN,
       manuallyAdded: false,
       userId,
       createdAt: new Date(),

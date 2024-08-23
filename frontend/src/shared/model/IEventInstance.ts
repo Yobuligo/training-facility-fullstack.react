@@ -1,4 +1,5 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
+import { EventInstanceState } from "../types/EventInstanceState";
 import { IEntity } from "../types/IEntity";
 import { IRouteMeta } from "../types/IRouteMeta";
 import { IEventDefinition } from "./IEventDefinition";
@@ -13,6 +14,7 @@ export interface IEventInstance extends IEntity, IDateTimeSpan {
   eventDefinition: IEventDefinition;
   eventDefinitionId: string;
   eventRegistrations: IEventRegistration[];
+  state: EventInstanceState;
 }
 
 export const EventInstanceRouteMeta: IRouteMeta = { path: "/event-instances" };

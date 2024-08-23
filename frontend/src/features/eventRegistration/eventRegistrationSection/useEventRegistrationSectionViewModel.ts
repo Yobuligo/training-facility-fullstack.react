@@ -5,13 +5,17 @@ import { List } from "../../../core/services/list/List";
 import { useRequest } from "../../../hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
-import { EventState } from "../../../shared/types/EventState";
+import { EventInstanceState } from "../../../shared/types/EventInstanceState";
+import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
 ) => {
+  const [eventInstanceState, setEventInstanceState] = useState(
+    props.eventInstance.state
+  );
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
   >([]);
@@ -34,6 +38,8 @@ export const useEventRegistrationSectionViewModel = (
     loadRegistrations();
   }, [loadRegistrations]);
 
+  useEffect(() => {}, [props.eventInstance.state]);
+
   const onAddUserProfile = (userProfile: IUserProfile) => {
     // check if user is already registered, user must not be registered multiple times
     const containsUser = eventRegistrations.find(
@@ -47,7 +53,7 @@ export const useEventRegistrationSectionViewModel = (
       id: uuid(),
       eventInstanceId: props.eventInstance.id,
       eventInstance: props.eventInstance,
-      eventState: EventState.PRESENT,
+      state: EventRegistrationState.PRESENT,
       manuallyAdded: true,
       userId: userProfile.userId,
       userProfile: userProfile,
@@ -81,10 +87,30 @@ export const useEventRegistrationSectionViewModel = (
     });
   };
 
+  const updateEventInstance = async () => {
+    const eventInstanceApi = new EventInstanceApi();
+    await eventInstanceApi.update(props.eventInstance);
+  };
+
+  const onCloseRegistration = () => {
+    props.eventInstance.state = EventInstanceState.CLOSED;
+    setEventInstanceState(EventInstanceState.CLOSED);
+    updateEventInstance();
+  };
+
+  const onReopenRegistration = () => {
+    props.eventInstance.state = EventInstanceState.OPEN;
+    setEventInstanceState(EventInstanceState.OPEN);
+    updateEventInstance();
+  };
+
   return {
+    eventInstanceState,
     eventRegistrations,
     loadEventRegistrationRequest,
     onAddUserProfile,
+    onCloseRegistration,
     onDelete,
+    onReopenRegistration,
   };
 };

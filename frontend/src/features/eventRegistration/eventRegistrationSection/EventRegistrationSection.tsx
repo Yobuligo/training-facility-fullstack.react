@@ -1,6 +1,8 @@
+import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { Spinner } from "../../../components/spinner/Spinner";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
 import { EventRegistrationSearch } from "../eventRegistrationSearch/EventRegistrationSearch";
@@ -20,6 +22,17 @@ export const EventRegistrationSection: React.FC<
         <Spinner />
       ) : (
         <EventInstanceItem eventInstance={props.eventInstance}>
+          <div className={styles.closeButton}>
+            {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
+              <SecondaryButton onClick={viewModel.onCloseRegistration}>
+                {t(texts.eventRegistrationSection.close)}
+              </SecondaryButton>
+            ) : (
+              <SecondaryButton onClick={viewModel.onReopenRegistration}>
+                {t(texts.eventRegistrationSection.open)}
+              </SecondaryButton>
+            )}
+          </div>          
           <div className={styles.title}>
             {t(texts.eventRegistrationSection.checkInUsers)}
           </div>
@@ -27,7 +40,6 @@ export const EventRegistrationSection: React.FC<
             eventRegistrations={viewModel.eventRegistrations}
             onDelete={viewModel.onDelete}
           />
-
           <EventRegistrationSearch
             className={styles.search}
             onAddUserProfile={viewModel.onAddUserProfile}

@@ -1,7 +1,8 @@
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
-import { uuid } from "../utils/uuid";
 import { IEventInstance } from "../shared/model/IEventInstance";
+import { EventInstanceState } from "../shared/types/EventInstanceState";
+import { uuid } from "../utils/uuid";
 
 /**
  * This class is responsible for creating instances of type {@link IEventInstance}.
@@ -17,6 +18,7 @@ export class EventInstanceFactory {
       eventRegistrations: [],
       from: checkNotNull(event.start),
       to: checkNotNull(event.end),
+      state: EventInstanceState.OPEN,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

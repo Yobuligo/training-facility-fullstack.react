@@ -1,3 +1,4 @@
+import { List } from "../core/services/list/List";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceFactory } from "../services/EventInstanceFactory";
 import {
@@ -59,5 +60,13 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     });
 
     return eventInstance?.eventRegistrations ?? [];
+  }
+
+  async update(eventInstance: IEventInstance): Promise<void> {
+    List.update(
+      DummyEventInstances,
+      eventInstance,
+      (item) => item.id === eventInstance.id
+    );
   }
 }
