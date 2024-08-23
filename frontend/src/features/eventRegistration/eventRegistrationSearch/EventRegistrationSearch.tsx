@@ -15,13 +15,12 @@ export const EventRegistrationSearch: React.FC<
 
   return (
     <div className={style(styles.eventRegistrationSearch, props.className)}>
-      <div className={styles.collapse}>
-        {t(texts.eventRegistrationSearch.addUsers)}
-        <Collapse
-          collapsed={searchCollapsed}
-          setCollapsed={setSearchCollapsed}
-        />
-      </div>
+      <Collapse
+        collapsed={searchCollapsed}
+        setCollapsed={setSearchCollapsed}
+        title={t(texts.eventRegistrationSearch.addUsers)}
+        titleClassName={styles.collapse}
+      />
       {!searchCollapsed && <UserSelectSection />}
     </div>
   );

@@ -1,4 +1,10 @@
 .collapse {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
   background-color: transparent;
   border: none;
 }

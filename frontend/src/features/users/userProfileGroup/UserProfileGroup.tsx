@@ -15,12 +15,16 @@ export const UserProfileGroup: React.FC<IUserProfileGroupProps> = (props) => {
         <h4>{props.title}</h4>
         <Collapse
           collapsed={collapsed}
-          setCollapsed={setCollapsed}
           onToggle={props.onToggleCollapse}
+          setCollapsed={setCollapsed}
         />
       </div>
       {!collapsed && (
-        <div className={props.className !== undefined ? props.className : styles.group}>
+        <div
+          className={
+            props.className !== undefined ? props.className : styles.group
+          }
+        >
           {props.children}
         </div>
       )}

@@ -13,18 +13,15 @@ export const Collapse: React.FC<ICollapseProps> = (props) => {
     });
 
   return (
-    <button className={styles.collapse}>
-      {props.collapsed ? (
-        <ExpandedIcon
-          className={componentStyles.clickableIcon}
-          onClick={onToggleCollapsed}
-        />
-      ) : (
-        <CollapsedIcon
-          className={componentStyles.clickableIcon}
-          onClick={onToggleCollapsed}
-        />
-      )}
-    </button>
+    <div className={styles.collapse} onClick={onToggleCollapsed}>
+      {props.title && <div className={props.titleClassName}>{props.title}</div>}
+      <button className={styles.button}>
+        {props.collapsed ? (
+          <ExpandedIcon className={componentStyles.clickableIcon} />
+        ) : (
+          <CollapsedIcon className={componentStyles.clickableIcon} />
+        )}
+      </button>
+    </div>
   );
 };
