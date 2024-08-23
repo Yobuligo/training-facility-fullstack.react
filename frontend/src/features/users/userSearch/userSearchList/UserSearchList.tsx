@@ -9,7 +9,11 @@ export const UserSearchList: React.FC<IUserSearchListProps> = (props) => {
   const { t } = useTranslation();
 
   const items = props.userProfiles.map((userProfile) => (
-    <UserSearchItem key={userProfile.id} userProfile={userProfile} />
+    <UserSearchItem
+      key={userProfile.id}
+      onSelect={props.onSelect}
+      userProfile={userProfile}
+    />
   ));
 
   return (

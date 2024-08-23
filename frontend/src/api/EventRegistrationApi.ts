@@ -43,6 +43,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   async insert(
     eventRegistration: IEventRegistration
   ): Promise<IEventRegistration> {
+    // Todo: Check if user is already registered
     DummyEventRegistrations.push(eventRegistration);
     return eventRegistration;
   }

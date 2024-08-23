@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { useRequest } from "../../../hooks/useRequest";
+import { DummyEventRegistration } from "../../../model/DummyEventRegistration";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
+import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { EventState } from "../../../shared/types/EventState";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 
 export const useEventRegistrationSectionViewModel = (
@@ -12,6 +15,7 @@ export const useEventRegistrationSectionViewModel = (
   >([]);
 
   const loadEventRegistrationRequest = useRequest();
+  const addEventRegistrationRequest = useRequest();
 
   const loadRegistrations = useCallback(async () => {
     loadEventRegistrationRequest.send(async () => {
@@ -27,8 +31,38 @@ export const useEventRegistrationSectionViewModel = (
     loadRegistrations();
   }, [loadRegistrations]);
 
+  const onAddUserProfile = (userProfile: IUserProfile) => {
+    // check if user is already registered, user must not be registered multiple times
+    const containsUser = eventRegistrations.find(
+      (eventRegistration) => eventRegistration.userId === userProfile.userId
+    );
+    if (containsUser) {
+      return;
+    }
+
+    const eventRegistration = new DummyEventRegistration(
+      props.eventInstance,
+      EventState.PRESENT,
+      userProfile
+    );
+
+    setEventRegistrations((previous) => {
+      previous.push(eventRegistration);
+      return [...previous];
+    });
+
+    addEventRegistrationRequest.send(async () => {
+      const eventInstanceApi = new EventInstanceApi();
+      await eventInstanceApi.addEventRegistration(
+        props.eventInstance,
+        eventRegistration
+      );
+    });
+  };
+
   return {
     eventRegistrations,
     loadEventRegistrationRequest,
+    onAddUserProfile,
   };
 };

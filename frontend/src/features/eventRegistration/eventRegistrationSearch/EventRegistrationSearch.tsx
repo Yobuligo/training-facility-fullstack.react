@@ -21,7 +21,9 @@ export const EventRegistrationSearch: React.FC<
         title={t(texts.eventRegistrationSearch.addUsers)}
         titleClassName={styles.collapse}
       />
-      {!searchCollapsed && <UserSearchSection />}
+      {!searchCollapsed && (
+        <UserSearchSection onSelect={props.onAddUserProfile} />
+      )}
     </div>
   );
 };

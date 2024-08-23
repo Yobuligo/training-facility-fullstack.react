@@ -4,7 +4,7 @@ import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useSession } from "../../../hooks/useSession";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { EventInstanceFactory } from "../../../model/EventInstanceFactory";
+import { EventInstanceFactory } from "../../../services/EventInstanceFactory";
 import { EventInfo } from "../../../services/EventInfo";
 import { style } from "../../../utils/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";

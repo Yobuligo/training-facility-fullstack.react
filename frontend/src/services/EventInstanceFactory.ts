@@ -1,7 +1,7 @@
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { uuid } from "../utils/uuid";
-import { IEventInstance } from "./../shared/model/IEventInstance";
+import { IEventInstance } from "../shared/model/IEventInstance";
 
 /**
  * This class is responsible for creating instances of type {@link IEventInstance}.

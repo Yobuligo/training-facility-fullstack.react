@@ -27,7 +27,10 @@ export const EventRegistrationSection: React.FC<
             eventRegistrations={viewModel.eventRegistrations}
           />
 
-          <EventRegistrationSearch className={styles.search} />
+          <EventRegistrationSearch
+            className={styles.search}
+            onAddUserProfile={viewModel.onAddUserProfile}
+          />
         </EventInstanceItem>
       )}
     </>

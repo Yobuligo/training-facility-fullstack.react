@@ -1,5 +1,5 @@
 import { IEvent } from "../features/eventCalendar/model/IEvent";
-import { EventInstanceFactory } from "../model/EventInstanceFactory";
+import { EventInstanceFactory } from "../services/EventInstanceFactory";
 import {
   EventInstanceRouteMeta,
   IEventInstance,
@@ -7,12 +7,21 @@ import {
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { Repository } from "./core/Repository";
 import { DummyEventInstances } from "./DummyEventInstances";
+import { DummyEventRegistrations } from "./DummyEventRegistrations";
 import { DummyUserProfiles } from "./DummyUserProfiles";
 import { attach } from "./utils/attach";
 
 export class EventInstanceApi extends Repository<IEventInstance> {
   constructor() {
     super(EventInstanceRouteMeta);
+  }
+
+  async addEventRegistration(
+    eventInstance: IEventInstance,
+    eventRegistration: IEventRegistration
+  ): Promise<void> {
+    DummyEventRegistrations.push(eventRegistration);
+    attach(eventInstance.eventRegistrations, eventRegistration);
   }
 
   async insert(eventInstance: IEventInstance): Promise<IEventInstance> {

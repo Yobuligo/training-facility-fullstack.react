@@ -1,9 +1,10 @@
 import { Search } from "../../../search/Search";
 import { UserSearchList } from "../userSearchList/UserSearchList";
+import { IUserSearchSectionProps } from "./IUserSearchSectionProps";
 import styles from "./UserSearchSection.module.scss";
 import { useUserSearchSectionViewModel } from "./useUserSearchSectionViewModel";
 
-export const UserSearchSection: React.FC = () => {
+export const UserSearchSection: React.FC<IUserSearchSectionProps> = (props) => {
   const viewModel = useUserSearchSectionViewModel();
 
   return (
@@ -12,7 +13,10 @@ export const UserSearchSection: React.FC = () => {
         inputClassName={styles.inputSearch}
         onSearch={viewModel.onSearch}
       />
-      <UserSearchList userProfiles={viewModel.userProfiles} />
+      <UserSearchList
+        onSelect={props.onSelect}
+        userProfiles={viewModel.userProfiles}
+      />
     </div>
   );
 };
