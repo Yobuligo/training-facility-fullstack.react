@@ -12,6 +12,7 @@ export interface IEventRegistration extends IEntity, IHaveUserId {
   eventInstance: IEventInstance;
   eventInstanceId: string;
   eventState: EventState;
+  manuallyAdded: boolean;
   userProfile?: IUserProfile;
 }
 

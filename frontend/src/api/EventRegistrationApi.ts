@@ -61,6 +61,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       eventInstance,
       eventInstanceId: eventInstance.id,
       eventState: EventState.OPEN,
+      manuallyAdded: false,
       userId,
       createdAt: new Date(),
       updatedAt: new Date(),

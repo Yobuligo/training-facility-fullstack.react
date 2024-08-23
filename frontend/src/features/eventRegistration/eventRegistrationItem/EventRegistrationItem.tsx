@@ -6,7 +6,6 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { DummyEventRegistration } from "../../../model/DummyEventRegistration";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
@@ -21,7 +20,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
   return (
     <Card className={styles.eventRegistrationItem}>
       <div>{`${userProfile.firstname} ${userProfile.lastname}`}</div>
-      {props.eventRegistration instanceof DummyEventRegistration ? (
+      {props.eventRegistration.manuallyAdded ? (
         <Toolbar>
           <SecondaryButton onClick={viewModel.onDelete}>
             {t(texts.general.delete)}

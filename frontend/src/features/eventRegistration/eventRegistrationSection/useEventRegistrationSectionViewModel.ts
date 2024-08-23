@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { List } from "../../../core/services/list/List";
 import { useRequest } from "../../../hooks/useRequest";
-import { DummyEventRegistration } from "../../../model/DummyEventRegistration";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 import { EventState } from "../../../shared/types/EventState";
+import { uuid } from "../../../utils/uuid";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
-import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
@@ -43,11 +43,17 @@ export const useEventRegistrationSectionViewModel = (
       return;
     }
 
-    const eventRegistration = new DummyEventRegistration(
-      props.eventInstance,
-      EventState.PRESENT,
-      userProfile
-    );
+    const eventRegistration: IEventRegistration = {
+      id: uuid(),
+      eventInstanceId: props.eventInstance.id,
+      eventInstance: props.eventInstance,
+      eventState: EventState.PRESENT,
+      manuallyAdded: true,
+      userId: userProfile.userId,
+      userProfile: userProfile,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
 
     setEventRegistrations((previous) => {
       previous.push(eventRegistration);
