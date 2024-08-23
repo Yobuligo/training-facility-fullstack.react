@@ -23,11 +23,27 @@ export class EventInfo {
 
   /**
    * Finds the first event registration, from the attached event definition of the {@link event},
-   * which matches the event start date.
+   * which matches the event start date and belongs to a specific user
    */
-  static findFirstEventRegistration(
-    event: IEvent
+  static findFirstEventRegistrationByUserId(
+    event: IEvent,
+    userId: string
   ): IEventRegistration | undefined {
-    return this.findEventInstance(event)?.eventRegistrations[0];
+    const eventInstances = event.eventDefinition.eventInstances;
+    for (let i = 0; i < eventInstances.length; i++) {
+      const eventInstance = eventInstances[i];
+      for (let k = 0; k < eventInstance.eventRegistrations.length; k++) {
+        const eventRegistration = eventInstances[i].eventRegistrations[k];
+        if (
+          eventRegistration.userId === userId &&
+          DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
+          DateTime.equals(eventInstance.to, checkNotNull(event.end))
+        ) {
+          return eventRegistration;
+        }
+      }
+    }
+
+    return undefined;
   }
 }

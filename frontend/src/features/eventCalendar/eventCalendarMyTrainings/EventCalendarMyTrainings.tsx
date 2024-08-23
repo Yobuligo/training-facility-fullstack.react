@@ -4,8 +4,8 @@ import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useSession } from "../../../hooks/useSession";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { EventInstanceFactory } from "../../../services/EventInstanceFactory";
 import { EventInfo } from "../../../services/EventInfo";
+import { EventInstanceFactory } from "../../../services/EventInstanceFactory";
 import { style } from "../../../utils/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
@@ -20,7 +20,11 @@ export const EventCalendarMyTrainings: React.FC = () => {
   const viewModel = useEventCalendarMyTrainingsViewModel();
 
   const renderEvent = (event: IEvent) => {
-    const eventRegistration = EventInfo.findFirstEventRegistration(event);
+    const userId = checkNotNull(session).userId;
+    const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
+      event,
+      userId
+    );
 
     // Render content and show register or unregister, depending on if the user is already registered or not
     return (

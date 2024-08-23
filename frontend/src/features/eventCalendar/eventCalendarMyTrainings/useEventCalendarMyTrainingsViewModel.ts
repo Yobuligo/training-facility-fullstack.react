@@ -47,7 +47,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   };
 
   const onUnregister = async (event: IEvent) => {
-    const eventRegistration = EventInfo.findFirstEventRegistration(event);
+    const userId = checkNotNull(session).userId;
+    const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
+      event,
+      userId
+    );
     if (eventRegistration) {
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.delete(eventRegistration);
