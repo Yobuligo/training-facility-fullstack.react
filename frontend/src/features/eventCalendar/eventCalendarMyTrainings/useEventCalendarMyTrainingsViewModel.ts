@@ -3,6 +3,7 @@ import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useAuth } from "../../../hooks/useAuth";
+import { useRequest } from "../../../hooks/useRequest";
 import { useSession } from "../../../hooks/useSession";
 import { useSignal } from "../../../hooks/useSignal";
 import { EventInfo } from "../../../services/EventInfo";
@@ -10,29 +11,35 @@ import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { IEvent } from "../model/IEvent";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
-  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
-    undefined
-  );
+  const [selectedEventInstance, setSelectedEventInstance] = useState<
+    IEventInstance | undefined
+  >(undefined);
   const auth = useAuth();
   const [session] = useSession();
   const [reloadSignal, triggerReloadSignal] = useSignal();
 
+  const fetchEventInstanceRequest = useRequest();
+
   const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {
-    const eventInstance = EventInfo.findEventInstance(event);
-    if (eventInstance) {
-      return eventInstance;
-    } else {
-      const eventInstanceApi = new EventInstanceApi();
-      const eventInstance = await eventInstanceApi.insertFromEvent(event);
-      return eventInstance;
-    }
+    let eventInstance: IEventInstance;
+    await fetchEventInstanceRequest.send(async () => {
+      const cachedEventInstance = EventInfo.findEventInstance(event);
+      if (cachedEventInstance) {
+        eventInstance = cachedEventInstance;
+      } else {
+        const eventInstanceApi = new EventInstanceApi();
+        eventInstance = await eventInstanceApi.insertFromEvent(event);
+      }
+    });
+    return eventInstance!;
   };
 
-  const onEventInstanceUnselect = () => setSelectedEvent(undefined);
+  const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
 
   const onEventSelected = async (event: IEvent) => {
     if (auth.isAdmin()) {
-      setSelectedEvent(event);
+      const eventInstance = await fetchEventInstance(event);
+      setSelectedEventInstance(eventInstance);
     }
   };
 
@@ -60,11 +67,12 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   };
 
   return {
+    fetchEventInstance,
     onEventInstanceUnselect,
     onEventSelected,
     onRegister,
     onUnregister,
     reloadSignal,
-    selectedEvent,
+    selectedEventInstance,
   };
 };

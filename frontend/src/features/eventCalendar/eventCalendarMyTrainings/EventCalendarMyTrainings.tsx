@@ -5,7 +5,6 @@ import { useSession } from "../../../hooks/useSession";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
-import { EventInstanceFactory } from "../../../services/EventInstanceFactory";
 import { style } from "../../../utils/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
@@ -59,12 +58,9 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      {viewModel.selectedEvent ? (
+      {viewModel.selectedEventInstance ? (
         <EventRegistrationDetails
-          eventInstance={
-            EventInfo.findEventInstance(viewModel.selectedEvent) ??
-            new EventInstanceFactory().createFromEvent(viewModel.selectedEvent)
-          }
+          eventInstance={viewModel.selectedEventInstance}
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
