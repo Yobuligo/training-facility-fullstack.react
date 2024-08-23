@@ -3,6 +3,7 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
+import { EventRegistrationSearch } from "../eventRegistrationSearch/EventRegistrationSearch";
 import styles from "./EventRegistrationSection.module.scss";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 import { useEventRegistrationSectionViewModel } from "./useEventRegistrationSectionViewModel";
@@ -25,6 +26,8 @@ export const EventRegistrationSection: React.FC<
           <EventRegistrationList
             eventRegistrations={viewModel.eventRegistrations}
           />
+
+          <EventRegistrationSearch className={styles.search} />
         </EventInstanceItem>
       )}
     </>

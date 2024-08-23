@@ -1,5 +1,11 @@
+@use "../../../styles/dimensions.module.scss";
+
 .title {
   font-size: medium;
   font-weight: 500;
   margin-top: 0.5rem;
+}
+
+.search {
+  margin-top: 1rem;
 }

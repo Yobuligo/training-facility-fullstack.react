@@ -44,6 +44,9 @@
     "eventRegistrationList": {
         "noRegistrations": "No users registered yet for this training"
     },
+    "eventRegistrationSearch": {
+        "addUsers": "Add user"
+    },
     "eventRegistrationSection": {
         "checkInUsers": "Check-in registered users"
     },

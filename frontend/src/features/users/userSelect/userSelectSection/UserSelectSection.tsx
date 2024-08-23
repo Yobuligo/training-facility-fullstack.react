@@ -1,7 +1,7 @@
 import { Search } from "../../../search/Search";
 import { UserSelectList } from "../userSelectList/UserSelectList";
 import { IUserSelectSectionProps } from "./IUserSelectSectionProps";
-import styles from "./UserSelection.module.scss";
+import styles from "./UserSelectSection.module.scss";
 import { useUserSelectSectionViewModel } from "./useUserSelectSectionViewModel";
 
 export const UserSelectSection: React.FC<IUserSelectSectionProps> = (props) => {
