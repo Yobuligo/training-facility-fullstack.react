@@ -44,7 +44,7 @@
     "eventRegistrationList": {
         "noRegistrations": "No users registered yet for this training"
     },
-    "eventRegistrationSection":{
+    "eventRegistrationSection": {
         "checkInUsers": "Check-in registered users"
     },
     "general": {
@@ -192,6 +192,9 @@
     },
     "userProfileSection": {
         "addUser": "Add user"
+    },
+    "userSelectList": {
+        "noEntries": "No entries found"
     },
     "welcome": {
         "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",

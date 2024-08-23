@@ -1,3 +1,4 @@
+import { FuzzySearch } from "../core/services/fuzzySearch/FuzzySearch";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
 import { Repository } from "./core/Repository";
 import { DummyUserProfiles } from "./DummyUserProfiles";
@@ -32,6 +33,10 @@ export class UserProfileApi extends Repository<IUserProfile> {
       });
       resolve(DummyUserProfiles);
     });
+  }
+
+  async findByQuery(query: string): Promise<IUserProfile[]> {
+    return new FuzzySearch<IUserProfile>().search(query, DummyUserProfiles);
   }
 
   findByUserId(userId: string): Promise<IUserProfile | undefined> {

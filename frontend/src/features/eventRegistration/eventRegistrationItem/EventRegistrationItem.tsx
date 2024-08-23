@@ -13,9 +13,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
 
   return (
     <Card className={styles.eventRegistrationItem}>
-      <div className="styles.name">
-        {`${userProfile.firstname} ${userProfile.lastname}`}
-      </div>
+      <div>{`${userProfile.firstname} ${userProfile.lastname}`}</div>
       <ToggleButtonGroup
         enableUnselectAll={true}
         items={viewModel.toggleButtonOptions}
