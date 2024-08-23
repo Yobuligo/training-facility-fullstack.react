@@ -14,6 +14,7 @@ export const EventRegistrationList: React.FC<IEventRegistrationListProps> = (
     <EventRegistrationItem
       key={eventRegistration.id}
       eventRegistration={eventRegistration}
+      onDelete={props.onDelete}
     />
   ));
 

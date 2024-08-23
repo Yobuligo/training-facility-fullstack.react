@@ -25,6 +25,7 @@ export const EventRegistrationSection: React.FC<
           </div>
           <EventRegistrationList
             eventRegistrations={viewModel.eventRegistrations}
+            onDelete={viewModel.onDelete}
           />
 
           <EventRegistrationSearch

@@ -44,7 +44,10 @@ export const useEventRegistrationItemViewModel = (
     }
   };
 
+  const onDelete = () => props.onDelete?.(props.eventRegistration);
+
   return {
+    onDelete,
     onToggleButtonOptionChange,
     selectedToggleButtonOption,
     toggleButtonOptions,

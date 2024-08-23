@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { List } from "../../../core/services/list/List";
 import { useRequest } from "../../../hooks/useRequest";
 import { DummyEventRegistration } from "../../../model/DummyEventRegistration";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 import { EventState } from "../../../shared/types/EventState";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
+import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
@@ -16,6 +18,7 @@ export const useEventRegistrationSectionViewModel = (
 
   const loadEventRegistrationRequest = useRequest();
   const addEventRegistrationRequest = useRequest();
+  const deleteEventRegistrationRequest = useRequest();
 
   const loadRegistrations = useCallback(async () => {
     loadEventRegistrationRequest.send(async () => {
@@ -60,9 +63,22 @@ export const useEventRegistrationSectionViewModel = (
     });
   };
 
+  const onDelete = (eventRegistration: IEventRegistration) => {
+    setEventRegistrations((previous) => {
+      List.delete(previous, (item) => item.id === eventRegistration.id);
+      return [...previous];
+    });
+
+    deleteEventRegistrationRequest.send(async () => {
+      const eventRegistrationApi = new EventRegistrationApi();
+      await eventRegistrationApi.delete(eventRegistration);
+    });
+  };
+
   return {
     eventRegistrations,
     loadEventRegistrationRequest,
     onAddUserProfile,
+    onDelete,
   };
 };

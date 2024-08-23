@@ -1,6 +1,12 @@
+import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
+import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
+import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { DummyEventRegistration } from "../../../model/DummyEventRegistration";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
@@ -8,18 +14,28 @@ import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemVie
 export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
   props
 ) => {
+  const { t } = useTranslation();
   const viewModel = useEventRegistrationItemViewModel(props);
   const userProfile = checkNotNull(props.eventRegistration.userProfile);
 
   return (
     <Card className={styles.eventRegistrationItem}>
       <div>{`${userProfile.firstname} ${userProfile.lastname}`}</div>
-      <ToggleButtonGroup
-        enableUnselectAll={true}
-        items={viewModel.toggleButtonOptions}
-        onChange={viewModel.onToggleButtonOptionChange}
-        selected={viewModel.selectedToggleButtonOption}
-      />
+      {props.eventRegistration instanceof DummyEventRegistration ? (
+        <Toolbar>
+          <SecondaryButton onClick={viewModel.onDelete}>
+            {t(texts.general.delete)}
+          </SecondaryButton>
+          <Button>{t(texts.eventRegistrationItem.present)}</Button>
+        </Toolbar>
+      ) : (
+        <ToggleButtonGroup
+          enableUnselectAll={true}
+          items={viewModel.toggleButtonOptions}
+          onChange={viewModel.onToggleButtonOptionChange}
+          selected={viewModel.selectedToggleButtonOption}
+        />
+      )}
     </Card>
   );
 };
