@@ -1,0 +1,11 @@
+@use "../../../../styles/dimensions.module.scss";
+
+.userSelectSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+}
+
+.inputSearch {
+  width: 100%;
+}

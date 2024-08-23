@@ -8,9 +8,12 @@ export const UserSelectSection: React.FC<IUserSelectSectionProps> = (props) => {
   const viewModel = useUserSelectSectionViewModel(props);
 
   return (
-    <div className={styles.userSelection}>
-      <Search onSearch={viewModel.onSearch} />
-      <UserSelectList userProfiles={viewModel.userProfiles}/>
+    <div className={styles.userSelectSection}>
+      <Search
+        inputClassName={styles.inputSearch}
+        onSearch={viewModel.onSearch}
+      />
+      <UserSelectList userProfiles={viewModel.userProfiles} />
     </div>
   );
 };

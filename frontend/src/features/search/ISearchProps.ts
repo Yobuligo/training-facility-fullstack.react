@@ -1,4 +1,5 @@
 export interface ISearchProps {
-  query?: string;
+  inputClassName?: string;
   onSearch?: (query: string) => void;
+  query?: string;
 }
