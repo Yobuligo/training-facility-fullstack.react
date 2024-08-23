@@ -28,6 +28,10 @@
         "planner": "Planner",
         "users": "Users"
     },
+    "eventCalendarMyTrainings": {
+        "registerOnClosed": "Registering is not possible. Registration is closed.",
+        "unregisterOnClosed": "Unregistering is not possible. Registration is closed."
+    },
     "eventDefinitionDetails": {
         "enterTitle": "Please enter a valid title"
     },

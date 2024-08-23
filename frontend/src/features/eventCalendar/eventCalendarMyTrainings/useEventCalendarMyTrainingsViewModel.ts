@@ -6,9 +6,12 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useRequest } from "../../../hooks/useRequest";
 import { useSession } from "../../../hooks/useSession";
 import { useSignal } from "../../../hooks/useSignal";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
+import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
+import { texts } from "./../../../hooks/useTranslation/texts";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
@@ -17,6 +20,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const auth = useAuth();
   const [session] = useSession();
   const [reloadSignal, triggerReloadSignal] = useSignal();
+  const { t } = useTranslation();
 
   const fetchEventInstanceRequest = useRequest();
 
@@ -45,6 +49,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
 
   const onRegister = async (event: IEvent) => {
     const eventInstance = await fetchEventInstance(event);
+    if (eventInstance.state === EventInstanceState.CLOSED) {
+      window.alert(t(texts.eventCalendarMyTrainings.registerOnClosed));
+      return;
+    }
+
     const eventRegistrationApi = new EventRegistrationApi();
     await eventRegistrationApi.insertFromEventInstance(
       eventInstance,
@@ -59,6 +68,12 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       event,
       userId
     );
+
+    if (eventRegistration?.eventInstance.state === EventInstanceState.CLOSED) {
+      window.alert(t(texts.eventCalendarMyTrainings.unregisterOnClosed));
+      return;
+    }
+
     if (eventRegistration) {
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.delete(eventRegistration);
