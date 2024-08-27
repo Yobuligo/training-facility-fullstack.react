@@ -13,5 +13,5 @@ server.use((_, res, next) => {
   next();
 });
 
-server.use(new UserController().router);
+server.use("/api", new UserController().router);
 server.listen(5000);
