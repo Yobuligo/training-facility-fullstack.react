@@ -1,7 +1,7 @@
 import { IllegalArgumentError } from "../core/errors/IllegalArgumentError";
 import { Weekday } from "../core/types/Weekday";
-import { texts } from "../lib/useTranslation/texts";
-import { useTranslation } from "../lib/useTranslation/useTranslation";
+import { texts } from "../lib/translation/texts";
+import { useTranslation } from "../lib/translation/useTranslation";
 
 export const useRenderWeekday = () => {
   const { t } = useTranslation();

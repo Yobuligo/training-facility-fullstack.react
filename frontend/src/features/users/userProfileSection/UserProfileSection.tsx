@@ -1,6 +1,6 @@
 import { Button } from "../../../components/button/Button";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Search } from "../../search/Search";
 import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { UserProfileList } from "../userProfileList/UserProfileList";

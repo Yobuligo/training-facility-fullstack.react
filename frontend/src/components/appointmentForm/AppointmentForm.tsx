@@ -1,6 +1,6 @@
 import { useRenderWeekday } from "../../hooks/useRenderWeekday";
-import { texts } from "../../lib/useTranslation/texts";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { LabeledInput } from "../labeledInput/LabeledInput";
 import { LabeledSelect } from "../labeledSelect/LabeledSelect";
 import styles from "./AppointmentForm.module.scss";

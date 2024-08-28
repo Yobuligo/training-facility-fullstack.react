@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Grade } from "../../../shared/types/Grade";
 import { IGradingAddFormProps } from "./IGradingAddFormProps";
 

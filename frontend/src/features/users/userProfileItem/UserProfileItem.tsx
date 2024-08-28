@@ -1,6 +1,6 @@
 import { Card } from "../../../components/card/Card";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { style } from "../../../core/ui/style";
 import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { IUserProfileItem } from "./IUserProfileItemProps";

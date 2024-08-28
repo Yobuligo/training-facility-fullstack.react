@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Collapse } from "../../../components/collapse/Collapse";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { style } from "../../../core/ui/style";
 import { UserSearchSection } from "../../users/userSearch/userSearchSection/UserSearchSection";
 import styles from "./EventRegistrationSearch.module.scss";

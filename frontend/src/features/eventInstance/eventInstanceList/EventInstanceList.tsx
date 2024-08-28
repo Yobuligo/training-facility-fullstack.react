@@ -1,6 +1,6 @@
 import { isInitial } from "../../../core/utils/isInitial";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
 import styles from "./EventInstanceList.module.scss";
 import { IEventInstanceListProps } from "./IEventInstanceListProps";

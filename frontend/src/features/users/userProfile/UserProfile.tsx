@@ -3,8 +3,8 @@ import { ChangeableForm } from "../../../components/changeableForm/ChangeableFor
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { toDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";

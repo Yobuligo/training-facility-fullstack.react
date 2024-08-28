@@ -6,8 +6,8 @@ import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useRequest } from "../../hooks/useRequest";
 import { useSession } from "../../lib/userSession/hooks/useSession";
-import { texts } from "../../lib/useTranslation/texts";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 

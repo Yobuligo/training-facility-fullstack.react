@@ -1,7 +1,7 @@
 import { Button } from "../../../../components/button/Button";
 import { Card } from "../../../../components/card/Card";
-import { texts } from "../../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../../lib/translation/texts";
+import { useTranslation } from "../../../../lib/translation/useTranslation";
 import { IUserSearchItemProps } from "./IUserSearchItemProps";
 import styles from "./UserSearchItem.module.scss";
 

@@ -1,8 +1,8 @@
 import { Card } from "../../components/card/Card";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
-import { texts } from "../../lib/useTranslation/texts";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { Error } from "../error/Error";
 import styles from "./Login.module.scss";
 import { useLoginViewModel } from "./useLoginViewModel";

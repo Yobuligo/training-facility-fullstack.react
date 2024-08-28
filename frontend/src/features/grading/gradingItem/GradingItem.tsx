@@ -1,6 +1,6 @@
 import { useRenderMonth } from "../../../hooks/useRenderMonth";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { Grade } from "../../../shared/types/Grade";

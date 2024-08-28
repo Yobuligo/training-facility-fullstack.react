@@ -1,6 +1,6 @@
 import { List } from "../../../core/services/list/List";
-import { texts } from "../../../lib/useTranslation/texts";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventRegistrationItem } from "../eventRegistrationItem/EventRegistrationItem";
 import styles from "./EventRegistrationList.module.scss";
 import { IEventRegistrationListProps } from "./IEventRegistrationListProps";

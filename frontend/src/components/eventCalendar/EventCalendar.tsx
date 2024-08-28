@@ -11,8 +11,8 @@ import {
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
-import { texts } from "../../lib/useTranslation/texts";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { IEventCalendarProps } from "./IEventCalendarProps";
 
 const localizer = momentLocalizer(moment);

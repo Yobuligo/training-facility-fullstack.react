@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useSession } from "../../lib/userSession/hooks/useSession";
 import { IUserProfile } from "../../shared/model/IUserProfile";
 import { UserProfileApi } from "../../api/UserProfileApi";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
-import { texts } from "../../lib/useTranslation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
+import { texts } from "../../lib/translation/texts";
 
 export const useMyProfileViewModel = () => {
   const { t } = useTranslation();

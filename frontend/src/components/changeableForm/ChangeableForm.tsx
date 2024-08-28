@@ -1,5 +1,5 @@
-import { texts } from "../../lib/useTranslation/texts";
-import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { Button } from "../button/Button";
 import { SecondaryButton } from "../secondaryButton/SecondaryButton";
 import { Toolbar } from "../toolbar/Toolbar";

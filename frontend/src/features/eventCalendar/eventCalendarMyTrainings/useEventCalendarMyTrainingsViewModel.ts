@@ -6,12 +6,12 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useRequest } from "../../../hooks/useRequest";
 import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { useSignal } from "../../../hooks/useSignal";
-import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
-import { texts } from "../../../lib/useTranslation/texts";
+import { texts } from "../../../lib/translation/texts";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
