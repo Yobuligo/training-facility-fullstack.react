@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserApi } from "../api/UserApi";
-import { AppRoutes } from "../routes/AppRoutes";
-import { useSession } from "../lib/userSession/hooks/useSession";
+import { useSession } from "./useSession";
 
 export const useLogout = () => {
   const [session, setSession] = useSession();
@@ -17,7 +17,7 @@ export const useLogout = () => {
         await userApi.logout(session);
       } catch (error) {
         setIsLoggingOut(false);
-        throw error;
+        console.log(`Error while logging out current user. ${error}`);
       }
     }
     setSession(undefined);

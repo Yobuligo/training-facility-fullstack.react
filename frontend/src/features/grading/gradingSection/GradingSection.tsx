@@ -1,5 +1,5 @@
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { GradingAddForm } from "../gradingAddForm/GradingAddForm";
 import { GradingList } from "../gradingList/GradingList";
 import styles from "./GradingSection.module.scss";

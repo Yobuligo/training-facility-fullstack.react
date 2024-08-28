@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSession } from "../../hooks/useSession";
+import { useSession } from "../../lib/userSession/hooks/useSession";
 import { IUserProfile } from "../../shared/model/IUserProfile";
 import { UserProfileApi } from "../../api/UserProfileApi";
-import { useTranslation } from "../../hooks/useTranslation/useTranslation";
-import { texts } from "../../hooks/useTranslation/texts";
+import { useTranslation } from "../../lib/useTranslation/useTranslation";
+import { texts } from "../../lib/useTranslation/texts";
 
 export const useMyProfileViewModel = () => {
   const { t } = useTranslation();

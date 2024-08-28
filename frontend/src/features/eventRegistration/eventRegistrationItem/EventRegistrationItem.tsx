@@ -4,8 +4,8 @@ import { SecondaryButton } from "../../../components/secondaryButton/SecondaryBu
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";

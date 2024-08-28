@@ -1,5 +1,5 @@
-import { texts } from "./useTranslation/texts";
-import { useTranslation } from "./useTranslation/useTranslation";
+import { texts } from "../lib/useTranslation/texts";
+import { useTranslation } from "../lib/useTranslation/useTranslation";
 
 export const useRenderMonth = () => {
   const { t } = useTranslation();

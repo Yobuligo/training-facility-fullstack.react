@@ -1,6 +1,6 @@
-import { ICredentials } from "../shared/model/ICredentials";
+import { ICredentials } from "../lib/userSession/shared/model/ICredentials";
 import { IError } from "../core/types/IError";
-import { ISession } from "../shared/model/ISession";
+import { ISession } from "../lib/userSession/shared/model/ISession";
 import { UserMeta } from "../shared/model/UserMeta";
 import { uuid } from "../utils/uuid";
 import { Repository } from "./core/Repository";

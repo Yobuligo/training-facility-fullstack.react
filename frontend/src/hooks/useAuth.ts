@@ -1,4 +1,4 @@
-import { useSession } from "./useSession";
+import { useSession } from "../lib/userSession/hooks/useSession";
 
 export const useAuth = () => {
   const [session] = useSession();

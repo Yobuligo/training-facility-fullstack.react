@@ -1,5 +1,5 @@
 import { IProfileDetailsSettings } from "../model/IProfileDetailSettings";
-import { Value } from "../types/Value";
+import { Value } from "../core/types/Value";
 import { useLocalStorage } from "./useLocalStorage";
 
 export const useProfileDetailsSettingsStorage =

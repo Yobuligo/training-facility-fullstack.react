@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IGrading } from "../../../shared/model/IGrading";
 import { Gender } from "../../../shared/types/Gender";

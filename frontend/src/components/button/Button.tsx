@@ -1,4 +1,4 @@
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import styles from "./Button.module.scss";
 import { IButtonProps } from "./IButtonProps";
 

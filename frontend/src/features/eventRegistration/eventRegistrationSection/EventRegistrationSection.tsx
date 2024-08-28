@@ -1,7 +1,7 @@
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { Spinner } from "../../../components/spinner/Spinner";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";

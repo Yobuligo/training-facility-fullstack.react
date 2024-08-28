@@ -1,6 +1,6 @@
 import { List } from "../../../../core/services/list/List";
-import { texts } from "../../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../../lib/useTranslation/useTranslation";
 import { UserSearchItem } from "../userSearchItem/UserSearchItem";
 import { IUserSearchListProps } from "./IUserSearchListProps";
 import styles from "./UserSearchList.module.scss";

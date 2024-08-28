@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { LabeledElement } from "../labeledElement/LabeledElement";
 import { ISelectOption } from "../select/ISelectOption";
 import { Select } from "../select/Select";

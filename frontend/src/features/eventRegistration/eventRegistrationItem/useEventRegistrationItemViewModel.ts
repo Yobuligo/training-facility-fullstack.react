@@ -1,8 +1,8 @@
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { IToggleButtonOption } from "../../../components/toggleButtonGroup/IToggleButtonOption";
 import { useRequest } from "../../../hooks/useRequest";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 

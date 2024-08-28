@@ -1,5 +1,5 @@
 import { Banner } from "../../../components/banner/Banner";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import styles from "./EventContent.module.scss";
 import { IEventContentProps } from "./IEventContentProps";
 

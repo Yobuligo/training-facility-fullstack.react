@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { LabeledElement } from "../labeledElement/LabeledElement";
 import { ILabeledInputProps } from "./ILabeledInputProps";
 import styles from "./LabeledInput.module.scss";

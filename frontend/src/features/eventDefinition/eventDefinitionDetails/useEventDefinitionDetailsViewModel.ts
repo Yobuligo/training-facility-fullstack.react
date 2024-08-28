@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { isInitial } from "../../../core/utils/isInitial";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (

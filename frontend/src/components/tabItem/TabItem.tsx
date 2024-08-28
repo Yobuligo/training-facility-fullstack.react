@@ -1,4 +1,4 @@
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { ITabItemProps } from "./ITabItemProps";
 import styles from "./TabItem.module.scss";
 

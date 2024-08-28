@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { Value } from "../types/Value";
+import { Value } from "../core/types/Value";
 
 export const useErrorMessage = (): Value<string> => {
   const context = useContext(AppContext);

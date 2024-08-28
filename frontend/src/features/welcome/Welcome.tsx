@@ -5,9 +5,9 @@ import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useRequest } from "../../hooks/useRequest";
-import { useSession } from "../../hooks/useSession";
-import { texts } from "../../hooks/useTranslation/texts";
-import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { useSession } from "../../lib/userSession/hooks/useSession";
+import { texts } from "../../lib/useTranslation/texts";
+import { useTranslation } from "../../lib/useTranslation/useTranslation";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 

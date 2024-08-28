@@ -1,7 +1,7 @@
 import { Card } from "../../../components/card/Card";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { style } from "../../../utils/style";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
+import { style } from "../../../core/ui/style";
 import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { IUserProfileItem } from "./IUserProfileItemProps";
 import styles from "./UserProfileItem.module.scss";

@@ -1,4 +1,4 @@
-import { ISession } from "../../lib/userSession/shared/model/ISession";
+import { ISession } from "../shared/model/ISession";
 
 export class SessionRepo {
   private static _instance?: SessionRepo = undefined;

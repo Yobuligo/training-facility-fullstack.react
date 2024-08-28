@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserApi } from "../../api/UserApi";
-import { useSession } from "../../hooks/useSession";
+import { useSession } from "../../lib/userSession/hooks/useSession";
 import { useToggle } from "../../hooks/useToggle";
-import { texts } from "../../hooks/useTranslation/texts";
-import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { texts } from "../../lib/useTranslation/texts";
+import { useTranslation } from "../../lib/useTranslation/useTranslation";
 import { AppRoutes } from "../../routes/AppRoutes";
-import { ICredentials } from "../../shared/model/ICredentials";
+import { ICredentials } from "../../lib/userSession/shared/model/ICredentials";
 import { isError } from "../../core/utils/isError";
 
 export const useLoginViewModel = () => {

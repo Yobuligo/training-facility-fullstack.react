@@ -1,11 +1,11 @@
 import { useRenderMonth } from "../../../hooks/useRenderMonth";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { Grade } from "../../../shared/types/Grade";
 import componentStyles from "../../../styles/components.module.scss";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import styles from "./GradingItem.module.scss";
 import { IGradingItemProps } from "./IGradingItemProps";
 

@@ -4,14 +4,14 @@ import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useAuth } from "../../../hooks/useAuth";
 import { useRequest } from "../../../hooks/useRequest";
-import { useSession } from "../../../hooks/useSession";
+import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { useSignal } from "../../../hooks/useSignal";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
-import { texts } from "./../../../hooks/useTranslation/texts";
+import { texts } from "../../../lib/useTranslation/texts";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<

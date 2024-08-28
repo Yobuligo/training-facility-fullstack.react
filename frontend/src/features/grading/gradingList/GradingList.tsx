@@ -1,5 +1,5 @@
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { GradingItem } from "../gradingItem/GradingItem";
 import styles from "./GradingList.module.scss";

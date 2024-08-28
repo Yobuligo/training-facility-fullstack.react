@@ -4,7 +4,7 @@ import { DetailView } from "../../../components/detailView/DetailView";
 import { ErrorDisplay } from "../../../components/errorDisplay/ErrorDisplay";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import colors from "../../../styles/colors.module.scss";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import styles from "./EventDefinitionDetails.module.scss";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 import { useEventDefinitionDetailsViewModel } from "./useEventDefinitionDetailsViewModel";

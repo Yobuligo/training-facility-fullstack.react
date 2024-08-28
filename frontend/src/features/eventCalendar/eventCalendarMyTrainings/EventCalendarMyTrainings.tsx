@@ -1,11 +1,11 @@
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { Button } from "../../../components/button/Button";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
-import { useSession } from "../../../hooks/useSession";
-import { texts } from "../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { useSession } from "../../../lib/userSession/hooks/useSession";
+import { texts } from "../../../lib/useTranslation/texts";
+import { useTranslation } from "../../../lib/useTranslation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";

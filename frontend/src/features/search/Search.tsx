@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../components/button/Button";
 import { SearchIcon } from "../../icons/SearchIcon";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { ISearchProps } from "./ISearchProps";
 import styles from "./Search.module.scss";
 
