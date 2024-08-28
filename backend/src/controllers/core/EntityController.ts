@@ -1,8 +1,8 @@
 import { Query } from "express-serve-static-core";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
+import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
-import { IEntityRepository } from "../../repositories/core/IEntityRepository";
 import { Controller } from "./Controller";
 import { SessionInterceptor } from "./SessionInterceptor";
 

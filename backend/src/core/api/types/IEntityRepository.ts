@@ -1,10 +1,15 @@
-import { IEntity } from "../../core/api/types/IEntity";
-import { IEntityDetails } from "../../core/api/types/IEntityDetails";
-import { IEntitySubset } from "../../core/api/types/IEntitySubset";
+import { IEntity } from "./IEntity";
+import { IEntityDetails } from "./IEntityDetails";
+import { IEntitySubset } from "./IEntitySubset";
 import { IRepository } from "./IRepository";
 
+/**
+ * An implementation of this interface represents a repository that provides CRUD operations to entities of type {@link TEntity}.
+ */
 export interface IEntityRepository<TEntity extends IEntity>
-  extends IRepository {
+  extends IRepository<TEntity> {
+  delete(entity: TEntity): Promise<boolean>;
+
   deleteById(id: string): Promise<boolean>;
 
   findAll<K extends keyof TEntity>(
