@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { IError } from "../../../core/types/IError";
 import { isError } from "../../../core/utils/isError";
+import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import { texts } from "../../translation/texts";
 import { useTranslation } from "../../translation/useTranslation";
-import { useErrorMessage } from "./useErrorMessage";
 import { useLogout } from "./useLogout";
 
 export const useRequest = () => {
