@@ -1,7 +1,7 @@
 import { EventRegistrationState } from "../types/EventRegistrationState";
-import { IEntity } from "../types/IEntity";
-import { IHaveUserId } from "../types/IHaveUserId";
-import { IRouteMeta } from "../types/IRouteMeta";
+import { IEntity } from "../../core/api/types/IEntity";
+import { IHaveUserId } from "../../core/api/types/IHaveUserId";
+import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { IEventInstance } from "./IEventInstance";
 import { IUserProfile } from "./IUserProfile";
 

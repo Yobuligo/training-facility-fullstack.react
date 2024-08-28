@@ -1,8 +1,8 @@
 import { Gender } from "../types/Gender";
-import { IEntity } from "../types/IEntity";
+import { IEntity } from "../../core/api/types/IEntity";
 import { IHaveIsAdmin } from "../types/IHaveIsAdmin";
-import { IRouteMeta } from "../types/IRouteMeta";
-import { IHaveUserId } from "../types/IHaveUserId";
+import { IRouteMeta } from "../../core/api/types/IRouteMeta";
+import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
 import { IGrading } from "./IGrading";

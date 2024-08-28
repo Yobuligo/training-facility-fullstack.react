@@ -1,7 +1,7 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../core/types/Recurrence";
-import { IEntity } from "../types/IEntity";
-import { IRouteMeta } from "../types/IRouteMeta";
+import { IEntity } from "../../core/api/types/IEntity";
+import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { IEventInstance } from "./IEventInstance";
 
 /**

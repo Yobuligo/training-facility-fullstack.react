@@ -1,6 +1,6 @@
 import { IGrading } from "../../../shared/model/IGrading";
 import { Grade } from "../../../shared/types/Grade";
-import { IHaveUserId } from "../../../shared/types/IHaveUserId";
+import { IHaveUserId } from "../../../core/api/types/IHaveUserId";
 import { IHaveDisplayMode } from "../../../types/IHaveDisplayMode";
 import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserApi } from "../../api/UserApi";
+import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useSession } from "../../lib/userSession/hooks/useSession";
 import { useToggle } from "../../hooks/useToggle";
 import { texts } from "../../lib/useTranslation/texts";

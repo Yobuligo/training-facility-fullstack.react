@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SessionRepo } from "../../../api/core/SessionRepo";
+import { SessionRepo } from "../api/SessionRepo";
 import { Value } from "../../../core/types/Value";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";

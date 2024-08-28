@@ -1,3 +1,4 @@
+import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { List } from "../core/services/list/List";
@@ -103,7 +104,16 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     return eventRegistrations;
   }
 
-  async update(data: IEventRegistration): Promise<void> {
-    List.update(DummyEventRegistrations, data, (item) => item.id === data.id);
+  update<K extends keyof IEventRegistration>(
+    entity: IEventRegistration,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventRegistration, K>>;
+  update(entity: IEventRegistration): Promise<IEventRegistration>;
+  async update(entity: IEventRegistration, fields?: unknown): Promise<unknown> {
+    return List.update(
+      DummyEventRegistrations,
+      entity,
+      (item) => item.id === entity.id
+    );
   }
 }

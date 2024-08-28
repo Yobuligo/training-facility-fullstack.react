@@ -1,7 +1,7 @@
 import { Grade } from "../types/Grade";
-import { IEntity } from "../types/IEntity";
-import { IHaveUserId } from "../types/IHaveUserId";
-import { IRouteMeta } from "../types/IRouteMeta";
+import { IEntity } from "../../core/api/types/IEntity";
+import { IHaveUserId } from "../../core/api/types/IHaveUserId";
+import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 
 export interface IGrading extends IEntity, IHaveUserId {
   achievedAt: Date;

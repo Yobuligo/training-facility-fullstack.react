@@ -1,4 +1,4 @@
-import { IEntity } from "../../shared/types/IEntity";
+import { IEntity } from "../../core/api/types/IEntity";
 
 /**
  * Attaches {@link entity} to {@link list} if not exist.
