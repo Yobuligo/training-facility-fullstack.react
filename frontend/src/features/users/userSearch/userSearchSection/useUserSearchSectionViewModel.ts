@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserProfileApi } from "../../../../api/UserProfileApi";
-import { useRequest } from "../../../../hooks/useRequest";
+import { useRequest } from "../../../../lib/userSession/hooks/useRequest";
 import { IUserProfile } from "../../../../shared/model/IUserProfile";
 
 export const useUserSearchSectionViewModel = () => {

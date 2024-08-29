@@ -1,7 +1,7 @@
-import { IGrading } from "../shared/model/IGrading";
+import { IUserGrading } from "../shared/model/IUserGrading";
 import { IUserProfile } from "../shared/model/IUserProfile";
+import { IUserRole } from "../shared/model/IUserRole";
 import { Gender } from "../shared/types/Gender";
-import { Language } from "../shared/types/Language";
 import { Tariff } from "../shared/types/Tariff";
 import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";
@@ -21,14 +21,9 @@ export class DummyUserProfile extends Dummy implements IUserProfile {
   phone = "";
   tariff: Tariff = Tariff.TEENAGERS_ADULTS;
   joinedOn = new Date();
-  isAdmin = false;
   createdAt = new Date();
   updatedAt = new Date();
-  language = Language.en;
-  bankAccountOwner = "";
-  bankAccountIBAN = "";
-  bankAccountBIC = "";
-  bankAccountInstitution = "";
   isDeactivated = false;
-  gradings: IGrading[] = [];
+  userGradings: IUserGrading[] = [];
+  userRoles: IUserRole[] = [];
 }

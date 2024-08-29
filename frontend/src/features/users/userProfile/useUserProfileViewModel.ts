@@ -4,10 +4,9 @@ import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSetti
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
-import { IGrading } from "../../../shared/model/IGrading";
+import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
-import { Language } from "../../../shared/types/Language";
 import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
 import { IUserProfileProps } from "./IUserProfileProps";
@@ -27,25 +26,24 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [firstname, setFirstname] = useState(props.userProfile.firstname);
   const [lastname, setLastname] = useState(props.userProfile.lastname);
   const [gender, setGender] = useState(props.userProfile.gender);
-  const [language, setLanguage] = useState(props.userProfile.language);
   const [tariff, setTariff] = useState(props.userProfile.tariff);
-  const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
+  // const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
   const [phone, setPhone] = useState(props.userProfile.phone);
   const [street, setStreet] = useState(props.userProfile.street);
   const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
   const [city, setCity] = useState(props.userProfile.city);
-  const [bankAccountOwner, setBankAccountOwner] = useState(
-    props.userProfile.bankAccountOwner
-  );
-  const [bankAccountIBAN, setBankAccountIBAN] = useState(
-    props.userProfile.bankAccountIBAN
-  );
-  const [bankAccountBIC, setBankAccountBIC] = useState(
-    props.userProfile.bankAccountBIC
-  );
-  const [bankAccountInstitution, setBankAccountInstitution] = useState(
-    props.userProfile.bankAccountInstitution
-  );
+  // const [bankAccountOwner, setBankAccountOwner] = useState(
+  //   props.userProfile.bankAccountOwner
+  // );
+  // const [bankAccountIBAN, setBankAccountIBAN] = useState(
+  //   props.userProfile.bankAccountIBAN
+  // );
+  // const [bankAccountBIC, setBankAccountBIC] = useState(
+  //   props.userProfile.bankAccountBIC
+  // );
+  // const [bankAccountInstitution, setBankAccountInstitution] = useState(
+  //   props.userProfile.bankAccountInstitution
+  // );
   const [isDeactivated, setIsDeactivated] = useState(
     props.userProfile.isDeactivated
   );
@@ -53,8 +51,8 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.deactivatedAt
   );
   const [collapseBank, setCollapseBank] = useState(false);
-  const [gradings, setGradings] = useState<IGrading[]>(
-    props.userProfile.gradings
+  const [gradings, setGradings] = useState<IUserGrading[]>(
+    props.userProfile.userGradings
   );
 
   const reset = useCallback(() => {
@@ -63,8 +61,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setFirstname(props.userProfile.firstname);
     setLastname(props.userProfile.lastname);
     setGender(props.userProfile.gender);
-    setLanguage(props.userProfile.language);
-    setIsAdmin(props.userProfile.isAdmin);
+    // setIsAdmin(props.userProfile.isAdmin);
     setPhone(props.userProfile.phone);
     setStreet(props.userProfile.street);
     setPostalCode(props.userProfile.postalCode);
@@ -72,11 +69,11 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setIsDeactivated(props.userProfile.isDeactivated);
     setDeactivatedAt(props.userProfile.deactivatedAt);
     setTariff(props.userProfile.tariff);
-    setBankAccountBIC(props.userProfile.bankAccountBIC);
-    setBankAccountIBAN(props.userProfile.bankAccountIBAN);
-    setBankAccountInstitution(props.userProfile.bankAccountInstitution);
-    setBankAccountOwner(props.userProfile.bankAccountOwner);
-    setGradings(props.userProfile.gradings);
+    // setBankAccountBIC(props.userProfile.bankAccountBIC);
+    // setBankAccountIBAN(props.userProfile.bankAccountIBAN);
+    // setBankAccountInstitution(props.userProfile.bankAccountInstitution);
+    // setBankAccountOwner(props.userProfile.bankAccountOwner);
+    setGradings(props.userProfile.userGradings);
     setDisplayMode(true);
   }, [
     props.userProfile.birthday,
@@ -84,8 +81,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.firstname,
     props.userProfile.lastname,
     props.userProfile.gender,
-    props.userProfile.language,
-    props.userProfile.isAdmin,
+    // props.userProfile.isAdmin,
     props.userProfile.phone,
     props.userProfile.street,
     props.userProfile.postalCode,
@@ -93,11 +89,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.isDeactivated,
     props.userProfile.deactivatedAt,
     props.userProfile.tariff,
-    props.userProfile.bankAccountBIC,
-    props.userProfile.bankAccountIBAN,
-    props.userProfile.bankAccountInstitution,
-    props.userProfile.bankAccountOwner,
-    props.userProfile.gradings,
+    props.userProfile.userGradings,
   ]);
 
   const onCancel = useCallback(() => {
@@ -124,20 +116,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onGenderChange = (option: ISelectOption<Gender>) =>
     setGender(option.key);
-
-  const languageOptions: ISelectOption<Language>[] = useMemo(
-    () => [
-      { key: Language.en, text: t(texts.language.en) },
-      { key: Language.de, text: t(texts.language.de) },
-    ],
-    [t]
-  );
-
-  const selectedLanguageOption =
-    language === Language.en ? languageOptions[0] : languageOptions[1];
-
-  const onLanguageChange = (option: ISelectOption<Language>) =>
-    setLanguage(option.key);
 
   const tariffOptions: ISelectOption<Tariff>[] = useMemo(
     () => [
@@ -171,11 +149,11 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     [t]
   );
 
-  const selectedIsAdminOption =
-    isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
+  // const selectedIsAdminOption =
+  //   isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
 
-  const onIsAdminChange = (option: ISelectOption<boolean>) =>
-    setIsAdmin(option.key);
+  // const onIsAdminChange = (option: ISelectOption<boolean>) =>
+  //   setIsAdmin(option.key);
 
   const onChangeBirthday = (newValue: string) =>
     setBirthday(new Date(newValue));
@@ -186,7 +164,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
 
   const onAddGrading = (achievedAt: Date, grade: Grade, examiners: string) => {
     setGradings((previous) => {
-      const grading: IGrading = {
+      const grading: IUserGrading = {
         id: uuid(),
         userId: props.userProfile.userId,
         achievedAt: achievedAt.toISOString() as unknown as Date,
@@ -199,7 +177,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     });
   };
 
-  const onDeleteGrading = (grading: IGrading) =>
+  const onDeleteGrading = (grading: IUserGrading) =>
     setGradings((previous) => {
       return previous.filter((item) => item.id !== grading.id);
     });
@@ -221,20 +199,19 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.firstname = firstname;
     props.userProfile.lastname = lastname;
     props.userProfile.gender = gender;
-    props.userProfile.language = language;
-    props.userProfile.isAdmin = isAdmin;
+    // props.userProfile.isAdmin = isAdmin;
     props.userProfile.phone = phone;
     props.userProfile.street = street;
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
     props.userProfile.tariff = tariff;
-    props.userProfile.bankAccountBIC = bankAccountBIC;
-    props.userProfile.bankAccountIBAN = bankAccountIBAN;
-    props.userProfile.bankAccountInstitution = bankAccountInstitution;
-    props.userProfile.bankAccountOwner = bankAccountOwner;
+    // props.userProfile.bankAccountBIC = bankAccountBIC;
+    // props.userProfile.bankAccountIBAN = bankAccountIBAN;
+    // props.userProfile.bankAccountInstitution = bankAccountInstitution;
+    // props.userProfile.bankAccountOwner = bankAccountOwner;
     props.userProfile.isDeactivated = isDeactivated;
     props.userProfile.deactivatedAt = deactivatedAt;
-    props.userProfile.gradings = gradings;
+    props.userProfile.userGradings = gradings;
     props.onChange?.(props.userProfile);
   };
 
@@ -269,10 +246,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     });
 
   return {
-    bankAccountBIC,
-    bankAccountIBAN,
-    bankAccountInstitution,
-    bankAccountOwner,
+    // bankAccountBIC,
+    // bankAccountIBAN,
+    // bankAccountInstitution,
+    // bankAccountOwner,
     birthday,
     collapseBank,
     city,
@@ -283,16 +260,14 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     gradings,
     isAdminOptions,
     isDeactivated,
-    languageOptions,
     lastname,
     onAddGrading,
     onCancel,
     onChangeBirthday,
     onChangePostalCode,
     onDeleteGrading,
-    onIsAdminChange,
+    // onIsAdminChange,
     onGenderChange,
-    onLanguageChange,
     onSave,
     onTariffChange,
     onToggleCollapseAddress,
@@ -304,14 +279,13 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     phone,
     postalCode,
     profileDetailsSettings,
-    selectedIsAdminOption,
+    // selectedIsAdminOption,
     selectedGenderOption,
-    selectedLanguageOption,
     selectedTariffOption,
-    setBankAccountBIC,
-    setBankAccountIBAN,
-    setBankAccountInstitution,
-    setBankAccountOwner,
+    // setBankAccountBIC,
+    // setBankAccountIBAN,
+    // setBankAccountInstitution,
+    // setBankAccountOwner,
     setCity,
     setCollapseBank,
     setDisplayMode,

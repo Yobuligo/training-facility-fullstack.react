@@ -1,8 +1,8 @@
-import { IGrading } from "../../../shared/model/IGrading";
+import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { IHaveDisplayMode } from "../../../types/IHaveDisplayMode";
 import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 
 export interface IGradingItemProps extends IHaveIsAdminMode, IHaveDisplayMode {
-  grading: IGrading;
+  grading: IUserGrading;
   onDelete?: () => void;
 }

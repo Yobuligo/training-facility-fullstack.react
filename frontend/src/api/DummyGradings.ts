@@ -1,8 +1,8 @@
-import { IGrading } from "../shared/model/IGrading";
+import { IUserGrading } from "../shared/model/IUserGrading";
 import { Grade } from "../shared/types/Grade";
 import { uuid } from "../utils/uuid";
 
-export const DummyGradings: IGrading[] = [
+export const DummyGradings: IUserGrading[] = [
   {
     id: uuid(),
     userId: "3d5b322c-71ae-41c6-a336-0976eccca612",

@@ -1,4 +1,4 @@
-import { IGrading } from "../../../shared/model/IGrading";
+import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { Grade } from "../../../shared/types/Grade";
 import { IHaveUserId } from "../../../core/api/types/IHaveUserId";
 import { IHaveDisplayMode } from "../../../types/IHaveDisplayMode";
@@ -8,7 +8,7 @@ export interface IGradingSectionProps
   extends IHaveDisplayMode,
     IHaveIsAdminMode,
     IHaveUserId {
-  gradings: IGrading[];
+  gradings: IUserGrading[];
   onAddGrading?: (achievedAt: Date, grade: Grade, examiners: string) => void;
-  onDelete?: (grading: IGrading) => void;
+  onDelete?: (grading: IUserGrading) => void;
 }

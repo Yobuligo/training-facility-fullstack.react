@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { List } from "../../../core/services/list/List";
-import { useRequest } from "../../../hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps

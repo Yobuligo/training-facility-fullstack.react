@@ -4,15 +4,15 @@ import { Spinner } from "../../components/spinner/Spinner";
 import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
-import { useRequest } from "../../hooks/useRequest";
-import { useSession } from "../../lib/userSession/hooks/useSession";
+import { useUserProfile } from "../../hooks/useUserProfile";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
+import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 
 export const Welcome: React.FC = () => {
-  const [session] = useSession();
+  const [userProfile] = useUserProfile();
   const { t } = useTranslation();
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
@@ -23,7 +23,7 @@ export const Welcome: React.FC = () => {
     eventRegistrationRequest.send(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
       const eventRegistrations = await eventRegistrationApi.findByUserForWeek(
-        checkNotNull(session).userId
+        checkNotNull(userProfile).userId
       );
       setEventRegistrations(eventRegistrations);
     });
@@ -36,11 +36,13 @@ export const Welcome: React.FC = () => {
   return (
     <div>
       <h2>
-        {t(texts.welcome.welcome, { name: checkNotNull(session).firstname })}
+        {t(texts.welcome.welcome, {
+          name: checkNotNull(userProfile).firstname,
+        })}
       </h2>
 
       <p>{t(texts.welcome.explanation)}</p>
-      {eventRegistrationRequest.isLoading ? (
+      {eventRegistrationRequest.isProcessing ? (
         <Spinner />
       ) : (
         <>

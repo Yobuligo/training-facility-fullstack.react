@@ -1,9 +1,13 @@
-import { useSession } from "../lib/userSession/hooks/useSession";
+import { UserRole } from "../shared/types/UserRole";
+import { useUserProfile } from "./useUserProfile";
 
 export const useAuth = () => {
-  const [session] = useSession();
+  const [userProfile] = useUserProfile();
 
-  const isAdmin = (): boolean => session?.isAdmin === true;
+  const isAdmin = (): boolean =>
+    userProfile?.userRoles.findIndex(
+      (userRole) => userRole.role === UserRole.ADMIN
+    ) !== -1;
 
   return { isAdmin };
 };

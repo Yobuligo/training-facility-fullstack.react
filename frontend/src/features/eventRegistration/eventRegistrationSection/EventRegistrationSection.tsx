@@ -18,7 +18,7 @@ export const EventRegistrationSection: React.FC<
 
   return (
     <>
-      {viewModel.loadEventRegistrationRequest.isLoading ? (
+      {viewModel.loadEventRegistrationRequest.isProcessing ? (
         <Spinner />
       ) : (
         <EventInstanceItem eventInstance={props.eventInstance}>
@@ -32,7 +32,7 @@ export const EventRegistrationSection: React.FC<
                 {t(texts.eventRegistrationSection.open)}
               </SecondaryButton>
             )}
-          </div>          
+          </div>
           <div className={styles.title}>
             {t(texts.eventRegistrationSection.checkInUsers)}
           </div>

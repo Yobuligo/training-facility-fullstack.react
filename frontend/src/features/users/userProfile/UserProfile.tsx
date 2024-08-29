@@ -78,14 +78,6 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           />
 
           <LabeledSelect
-            disabled={viewModel.displayMode}
-            label={t(texts.userProfile.language)}
-            options={viewModel.languageOptions}
-            onSelect={viewModel.onLanguageChange}
-            selected={viewModel.selectedLanguageOption}
-          />
-
-          <LabeledSelect
             disabled={props.isAdminMode === true ? viewModel.displayMode : true}
             label={t(texts.userProfile.tariff)}
             options={viewModel.tariffOptions}
@@ -126,7 +118,8 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           onToggleCollapse={viewModel.onToggleCollapseBank}
           title={t(texts.userProfile.bank)}
         >
-          <LabeledInput
+          TODO
+          {/* <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.bankAccountOwner)}
             onChange={viewModel.setBankAccountOwner}
@@ -152,7 +145,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             label={t(texts.userProfile.bankAccountInstitution)}
             onChange={viewModel.setBankAccountInstitution}
             value={viewModel.bankAccountInstitution}
-          />
+          /> */}
         </UserProfileGroup>
 
         {props.isAdminMode && (
@@ -191,8 +184,8 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
                   disabled={viewModel.displayMode}
                   label={t(texts.userProfile.isAdmin)}
                   options={viewModel.isAdminOptions}
-                  onSelect={viewModel.onIsAdminChange}
-                  selected={viewModel.selectedIsAdminOption}
+                  // onSelect={viewModel.onIsAdminChange}
+                  // selected={viewModel.selectedIsAdminOption}
                 />
               </div>
               <Toolbar>

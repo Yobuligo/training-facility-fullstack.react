@@ -1,10 +1,13 @@
+import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { FuzzySearch } from "../core/services/fuzzySearch/FuzzySearch";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
-import { Repository } from "./core/Repository";
+import { UserRouteMeta } from "../shared/model/UserRouteMeta";
+import { EntityRepository } from "./core/EntityRepository";
+import { RESTApi } from "./core/RESTApi";
 import { DummyUserProfiles } from "./DummyUserProfiles";
-import { GradingApi } from "./GradingApi";
+import { UserGradingApi } from "./UserGradingApi";
 
-export class UserProfileApi extends Repository<IUserProfile> {
+export class UserProfileApi extends EntityRepository<IUserProfile> {
   constructor() {
     super(UserProfileMeta);
   }
@@ -17,19 +20,13 @@ export class UserProfileApi extends Repository<IUserProfile> {
     });
   }
 
-  update(data: IUserProfile): Promise<void> {
-    return new Promise((resolve) => {
-      resolve();
-    });
-  }
-
   findAll(): Promise<IUserProfile[]> {
     // Todo: replace by productive code
     return new Promise(async (resolve) => {
-      const gradingApi = new GradingApi();
+      const gradingApi = new UserGradingApi();
       await DummyUserProfiles.map(async (userProfile) => {
         const gradings = await gradingApi.findByUserId(userProfile.userId);
-        userProfile.gradings = gradings;
+        userProfile.userGradings = gradings;
       });
       resolve(DummyUserProfiles);
     });
@@ -39,17 +36,16 @@ export class UserProfileApi extends Repository<IUserProfile> {
     return new FuzzySearch<IUserProfile>().search(query, DummyUserProfiles);
   }
 
-  findByUserId(userId: string): Promise<IUserProfile | undefined> {
-    return new Promise(async (resolve) => {
-      const userProfile = DummyUserProfiles.find(
-        (userProfile) => userProfile.userId === userId
-      );
-      if (userProfile) {
-        const gradingApi = new GradingApi();
-        const gradings = await gradingApi.findByUserId(userId);
-        userProfile.gradings = gradings;
-      }
-      resolve(userProfile);
-    });
+  findByUserId<K extends keyof IUserProfile>(
+    userId: string,
+    fields: K[]
+  ): Promise<IEntitySubset<IUserProfile, K> | undefined>;
+  findByUserId(userId: string): Promise<IUserProfile | undefined>;
+  async findByUserId(userId: string, fields?: unknown): Promise<unknown> {
+    const requestedFields = this.getFields(fields);
+    return await RESTApi.get(
+      `${this.host}${UserRouteMeta.path}/${userId}${UserProfileMeta.path}`,
+      { fields: requestedFields }
+    );
   }
 }

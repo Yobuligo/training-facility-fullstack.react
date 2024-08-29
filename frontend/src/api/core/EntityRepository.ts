@@ -72,7 +72,7 @@ export abstract class EntityRepository<TEntity extends IEntity>
     });
   }
 
-  private getFields(fields: unknown): string[] {
+  protected getFields(fields: unknown): string[] {
     if (fields && Array.isArray(fields)) {
       return fields;
     }

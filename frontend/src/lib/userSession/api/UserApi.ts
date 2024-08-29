@@ -17,13 +17,6 @@ export class UserApi extends Repository<any> {
     );
   }
 
-  // login(credentials: ICredentials): Promise<ISession> {
-  //   return RESTApi.post(
-  //     `${this.url}/login`,
-  //     this.createAuthenticationRequest(credentials)
-  //   );
-  // }
-
   logout(session: ISession): Promise<boolean> {
     return RESTApi.post(`${this.url}/logout`, session);
   }
