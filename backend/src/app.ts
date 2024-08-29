@@ -2,9 +2,11 @@ import express from "express";
 import { UserController } from "./controllers/UserController";
 import { Session } from "./model/Session";
 import { User } from "./model/User";
+import { UserRole } from "./model/UserRole";
 
 Session.sync({ alter: true });
 User.sync({ alter: true });
+UserRole.sync({ alter: true });
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));

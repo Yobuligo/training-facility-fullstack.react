@@ -1,0 +1,18 @@
+export enum Grade {
+  KUP9,
+  KUP8,
+  KUP7,
+  KUP6,
+  KUP5,
+  KUP4,
+  KUP3,
+  KUP2,
+  KUP1,
+  DAN1,
+  DAN2,
+  DAN3,
+  DAN4,
+  DAN5,
+  DAN6,
+  DAN7,
+}
