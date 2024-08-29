@@ -16,8 +16,7 @@ UserRole.sync({ alter: true });
 UserGrading.sync({ alter: true });
 UserBankAccount.sync({ alter: true });
 // 
-addAdminUser()
-
+// addAdminUser()
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));

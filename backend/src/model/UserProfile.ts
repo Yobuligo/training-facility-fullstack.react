@@ -25,7 +25,7 @@ const userProfile: ModelStatic<
   tariff: DataTypes.INTEGER,
   joinedOn: DataTypes.DATE,
   isDeactivated: DataTypes.BOOLEAN,
-  deactivatedAt: DataTypes.DATE,
+  deactivatedAt: DataTypes.DATE,  
 });
 
 export class UserProfile extends userProfile {}

@@ -17,6 +17,7 @@ export class UserRole extends userRole {}
 UserRole.belongsTo(UserProfile);
 UserProfile.hasMany(UserRole, {
   onDelete: "CASCADE",
+  as: "userRoles",
   foreignKey: {
     name: "userProfileId",
     allowNull: false,

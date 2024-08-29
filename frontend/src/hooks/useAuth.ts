@@ -4,10 +4,13 @@ import { useUserProfile } from "./useUserProfile";
 export const useAuth = () => {
   const [userProfile] = useUserProfile();
 
-  const isAdmin = (): boolean =>
-    userProfile?.userRoles.findIndex(
-      (userRole) => userRole.role === UserRole.ADMIN
-    ) !== -1;
+  const isAdmin = (): boolean => {
+    return (
+      userProfile?.userRoles.findIndex(
+        (userRole) => userRole.role === UserRole.ADMIN
+      ) !== -1
+    );
+  };
 
   return { isAdmin };
 };
