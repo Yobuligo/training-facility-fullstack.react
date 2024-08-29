@@ -2,11 +2,13 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserGrading } from "../shared/model/IUserGrading";
-import { User } from "./User";
+import { createIdType } from "./createIdType";
+import { UserProfile } from "./UserProfile";
 
 const userGrading: ModelStatic<
   Model<IUserGrading, IEntityDetails<IUserGrading>>
 > = db.define("user-gradings", {
+  id: createIdType(),
   achievedAt: DataTypes.DATE,
   examiners: DataTypes.STRING,
   grade: DataTypes.INTEGER,
@@ -14,11 +16,11 @@ const userGrading: ModelStatic<
 
 export class UserGrading extends userGrading {}
 
-UserGrading.belongsTo(User);
-User.hasMany(UserGrading, {
+UserGrading.belongsTo(UserProfile);
+UserProfile.hasMany(UserGrading, {
   onDelete: "CASCADE",
   foreignKey: {
-    name: "userId",
+    name: "userProfileId",
     allowNull: false,
   },
 });

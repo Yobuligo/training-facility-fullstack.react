@@ -2,15 +2,11 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { ISession } from "../shared/model/ISession";
+import { createIdType } from "./createIdType";
 
 export const Session: ModelStatic<Model<ISession, IEntityDetails<ISession>>> =
   db.define("sessions", {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
+    id: createIdType(),
     expiresAt: DataTypes.DATE,
     userId: DataTypes.UUID,
   });

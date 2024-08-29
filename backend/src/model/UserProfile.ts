@@ -3,10 +3,12 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { User } from "./User";
+import { createIdType } from "./createIdType";
 
 const userProfile: ModelStatic<
   Model<IUserProfile, IEntityDetails<IUserProfile>>
 > = db.define("user-profiles", {
+  id: createIdType(),
   memberId: DataTypes.STRING(10),
   firstname: DataTypes.STRING(50),
   lastname: DataTypes.STRING(50),

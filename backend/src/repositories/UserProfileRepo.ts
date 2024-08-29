@@ -20,8 +20,8 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     const requestedFields = this.getKeyFields(fields);
     const data = await this.model.findOne({
       where: { userId },
-      attributes: requestedFields,
-      include: this.getIncludes(requestedFields),
+      // attributes: requestedFields ? requestedFields : undefined,
+      include: [UserRole],
     });
     return data?.toJSON();
   }

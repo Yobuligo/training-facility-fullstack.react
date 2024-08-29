@@ -2,11 +2,13 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserBankAccount } from "../shared/model/IUserBankAccount";
-import { User } from "./User";
+import { createIdType } from "./createIdType";
+import { UserProfile } from "./UserProfile";
 
 const userBankAccount: ModelStatic<
   Model<IUserBankAccount, IEntityDetails<IUserBankAccount>>
 > = db.define("user-bank-accounts", {
+  id: createIdType(),
   bankAccountBIC: {
     allowNull: true,
     type: DataTypes.STRING(11),
@@ -27,11 +29,11 @@ const userBankAccount: ModelStatic<
 
 export class UserBankAccount extends userBankAccount {}
 
-UserBankAccount.belongsTo(User);
-User.hasOne(UserBankAccount, {
+UserBankAccount.belongsTo(UserProfile);
+UserProfile.hasOne(UserBankAccount, {
   onDelete: "CASCADE",
   foreignKey: {
-    name: "userId",
+    name: "userProfileId",
     allowNull: false,
   },
 });

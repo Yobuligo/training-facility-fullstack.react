@@ -1,4 +1,11 @@
-import { Model, ModelStatic, WhereOptions } from "sequelize";
+import {
+  Attributes,
+  FindOptions,
+  Identifier,
+  Model,
+  ModelStatic,
+  WhereOptions,
+} from "sequelize";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
@@ -47,7 +54,12 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   findById(id: string): Promise<TEntity | undefined>;
   async findById(id: string, fields?: unknown): Promise<unknown> {
     const requestedFields = this.getFields(fields);
-    const data = await this.model.findByPk(id, { attributes: requestedFields });
+    let options: any = undefined;
+    if (requestedFields.length > 0) {
+      options = { attributes: requestedFields };
+    }
+
+    const data = await this.model.findByPk(id, options);
     return data?.toJSON();
   }
 

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserApi } from "../../lib/userSession/api/UserApi";
-import { useSession } from "../../lib/userSession/hooks/useSession";
+import { UserProfileApi } from "../../api/UserProfileApi";
+import { isError } from "../../core/utils/isError";
 import { useToggle } from "../../hooks/useToggle";
+import { useUserProfile } from "../../hooks/useUserProfile";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
-import { AppRoutes } from "../../routes/AppRoutes";
+import { UserApi } from "../../lib/userSession/api/UserApi";
+import { useSession } from "../../lib/userSession/hooks/useSession";
 import { ICredentials } from "../../lib/userSession/shared/model/ICredentials";
-import { isError } from "../../core/utils/isError";
+import { AppRoutes } from "../../routes/AppRoutes";
+import { SessionRepo } from "../../lib/userSession/api/SessionRepo";
 
 export const useLoginViewModel = () => {
   const { t } = useTranslation();
@@ -18,6 +21,7 @@ export const useLoginViewModel = () => {
   const [loginMode, toggleLoginMode] = useToggle(true);
   const [displaySpinner, setDisplaySpinner] = useState(false);
   const [, setSession] = useSession();
+  const [, setUserProfile] = useUserProfile();
   const navigate = useNavigate();
 
   const disableLoginButton = username.length === 0 || password.length === 0;
@@ -51,6 +55,13 @@ export const useLoginViewModel = () => {
       const userApi = new UserApi();
       const session = await userApi.login(credentials);
       setSession(session);
+
+      SessionRepo.instance.setSession(session);
+
+      const userProfileApi = new UserProfileApi();
+      const userProfile = await userProfileApi.findByUserId(session.userId);
+      setUserProfile(userProfile);
+
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
       if (isError(error)) {

@@ -1,9 +1,9 @@
 import { IEntity } from "../../core/api/types/IEntity";
-import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { Grade } from "../types/Grade";
 
-export interface IUserGrading extends IEntity, IHaveUserId {
+export interface IUserGrading extends IEntity {
+  userProfileId: string;
   achievedAt: Date;
   examiners: string;
   grade: Grade;

@@ -166,7 +166,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setGradings((previous) => {
       const grading: IUserGrading = {
         id: uuid(),
-        userId: props.userProfile.userId,
+        userProfileId: props.userProfile.id,
         achievedAt: achievedAt.toISOString() as unknown as Date,
         examiners,
         grade,

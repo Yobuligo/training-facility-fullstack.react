@@ -9,7 +9,7 @@ export class UserGradingApi extends Repository<IUserGrading> {
   }
 
   async findByUserId(userId: string): Promise<IUserGrading[]> {
-    return DummyGradings.filter((grading) => grading.userId === userId).sort(
+    return DummyGradings.filter((grading) => grading.userProfileId === userId).sort(
       (left, right) => DateTime.compare(right.achievedAt, left.achievedAt)
     );
   }

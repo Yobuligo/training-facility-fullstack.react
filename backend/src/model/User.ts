@@ -2,16 +2,12 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUser } from "./IUser";
+import { createIdType } from "./createIdType";
 
 const user: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
   "users",
   {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
+    id: createIdType(),
     username: {
       allowNull: false,
       type: DataTypes.STRING(100),

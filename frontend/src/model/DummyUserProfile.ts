@@ -1,3 +1,4 @@
+import { IUserBankAccount } from "../shared/model/IUserBankAccount";
 import { IUserGrading } from "../shared/model/IUserGrading";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { IUserRole } from "../shared/model/IUserRole";
@@ -7,6 +8,8 @@ import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";
 
 export class DummyUserProfile extends Dummy implements IUserProfile {
+  deactivatedAt?: Date | undefined;
+  userBankAccount?: IUserBankAccount | undefined;
   id = uuid();
   memberId = "";
   userId = uuid();
