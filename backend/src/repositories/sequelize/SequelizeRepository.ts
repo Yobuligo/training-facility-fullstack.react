@@ -3,6 +3,7 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
+import { List } from "../../core/services/list/List";
 
 export abstract class SequelizeRepository<TEntity extends IEntity>
   implements IEntityRepository<TEntity>
