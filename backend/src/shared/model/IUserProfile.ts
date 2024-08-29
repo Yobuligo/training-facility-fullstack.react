@@ -2,9 +2,10 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { Gender } from "../types/Gender";
-import { IGrading } from "./IGrading";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
+import { IUserGrading } from "./IUserGrading";
+import { IUserRole } from "./IUserRole";
 
 export interface IUserProfile extends IEntity, IHaveUserId {
   memberId: string;
@@ -26,7 +27,8 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
-  gradings: IGrading[];
+  userGradings: IUserGrading[];
+  userRoles: IUserRole[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

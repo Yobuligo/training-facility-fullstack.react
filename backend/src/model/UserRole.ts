@@ -12,3 +12,4 @@ const userRole: ModelStatic<Model<IUserRole, IEntityDetails<IUserRole>>> =
 export class UserRole extends userRole {}
 
 UserRole.belongsTo(User);
+User.hasMany(UserRole, { onDelete: "CASCADE" });
