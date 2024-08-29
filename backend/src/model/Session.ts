@@ -13,5 +13,4 @@ export const Session: ModelStatic<Model<ISession, IEntityDetails<ISession>>> =
     },
     expiresAt: DataTypes.DATE,
     userId: DataTypes.STRING,
-    username: DataTypes.STRING,
   });
