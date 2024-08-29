@@ -23,7 +23,6 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       // attributes: requestedFields ? requestedFields : undefined,
       include: [{ model: UserRole, as: "userRoles" }],
     });
-    const entity = data?.toJSON();
-    return entity;
+    return data?.toJSON();
   }
 }
