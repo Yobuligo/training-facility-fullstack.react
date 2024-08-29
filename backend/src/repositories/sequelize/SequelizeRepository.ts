@@ -8,10 +8,15 @@ import { List } from "../../core/services/list/List";
 export abstract class SequelizeRepository<TEntity extends IEntity>
   implements IEntityRepository<TEntity>
 {
+  /**
+   * @param model represents the sequelize model whos data should be handled
+   * @param relatedModelIncludes represents the related sequelize models which should be loaded when loading an entity. Can be redefined with parameter fields of methods.
+   */
   constructor(
     protected readonly model: ModelStatic<
       Model<TEntity, IEntityDetails<TEntity>>
-    >
+    >,
+    protected readonly relatedModelIncludes?: ModelStatic<any>[]
   ) {}
 
   async delete(entity: TEntity): Promise<boolean> {
@@ -100,18 +105,18 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return data.map((model) => this.toJson(model, fields));
   }
 
-  private getFields(fields?: unknown): string[] {
+  protected getFields(fields?: unknown): string[] {
     if (fields && Array.isArray(fields)) {
       return fields;
     }
     return [];
   }
 
-  private getKeyFields(fields?: unknown): (keyof TEntity)[] {
+  protected getKeyFields(fields?: unknown): (keyof TEntity)[] {
     return this.getFields(fields) as (keyof TEntity)[];
   }
 
-  private toJson(
+  protected toJson(
     data: Model<TEntity, IEntityDetails<TEntity>>,
     fields: unknown
   ): TEntity {
@@ -126,5 +131,23 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     } else {
       return data.toJSON();
     }
+  }
+
+  protected getIncludes(fields: string[]): ModelStatic<any>[] {
+    if (!this.relatedModelIncludes) {
+      return [];
+    }
+
+    if (List.isEmpty(fields)) {
+      return this.relatedModelIncludes;
+    }
+
+    // filter includes that are not matching the given fields
+    const relatedModelIncludes = this.relatedModelIncludes.filter(
+      (relatedModelInclude) => {
+        fields.includes(relatedModelInclude.tableName);
+      }
+    );
+    return relatedModelIncludes;
   }
 }
