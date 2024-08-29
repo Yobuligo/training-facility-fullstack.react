@@ -4,10 +4,12 @@ import { Session } from "./model/Session";
 import { User } from "./model/User";
 import { UserBankAccount } from "./model/UserBankAccount";
 import { UserGrading } from "./model/UserGrading";
+import { UserProfile } from "./model/UserProfile";
 import { UserRole } from "./model/UserRole";
 
 Session.sync({ alter: true });
 User.sync({ alter: true });
+UserProfile.sync({ alter: true });
 UserRole.sync({ alter: true });
 UserGrading.sync({ alter: true });
 UserBankAccount.sync({ alter: true });

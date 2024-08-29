@@ -15,4 +15,10 @@ const userGrading: ModelStatic<
 export class UserGrading extends userGrading {}
 
 UserGrading.belongsTo(User);
-User.hasMany(UserGrading, { onDelete: "CASCADE" });
+User.hasMany(UserGrading, {
+  onDelete: "CASCADE",
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+});

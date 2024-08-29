@@ -2,7 +2,6 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { Gender } from "../types/Gender";
-import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserGrading } from "./IUserGrading";
@@ -19,7 +18,6 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   city: string;
   email: string;
   phone: string;
-  language: Language;
   tariff: Tariff;
   isDeactivated: boolean;
   deactivatedAt?: Date;

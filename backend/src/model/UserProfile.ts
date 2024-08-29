@@ -7,13 +7,32 @@ import { User } from "./User";
 const userProfile: ModelStatic<
   Model<IUserProfile, IEntityDetails<IUserProfile>>
 > = db.define("user-profiles", {
+  memberId: DataTypes.STRING(10),
+  firstname: DataTypes.STRING(50),
+  lastname: DataTypes.STRING(50),
+  email: DataTypes.STRING,
   birthday: {
     allowNull: true,
     type: DataTypes.DATE,
   },
+  gender: DataTypes.INTEGER,
+  city: DataTypes.STRING(50),
+  postalCode: DataTypes.STRING(10),
+  street: DataTypes.STRING,
+  phone: DataTypes.STRING(20),
+  tariff: DataTypes.INTEGER,
+  joinedOn: DataTypes.DATE,
+  isDeactivated: DataTypes.BOOLEAN,
+  deactivatedAt: DataTypes.DATE,
 });
 
 export class UserProfile extends userProfile {}
 
 UserProfile.belongsTo(User);
-User.hasOne(UserProfile);
+User.hasOne(UserProfile, {
+  onDelete: "CASCADE",
+  foreignKey: {
+    name: "userId",
+    allowNull: false,
+  },
+});
