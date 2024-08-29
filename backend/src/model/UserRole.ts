@@ -6,7 +6,7 @@ import { User } from "./User";
 
 const userRole: ModelStatic<Model<IUserRole, IEntityDetails<IUserRole>>> =
   db.define("user-roles", {
-    role: DataTypes.STRING,
+    role: DataTypes.STRING(20),
   });
 
 export class UserRole extends userRole {}

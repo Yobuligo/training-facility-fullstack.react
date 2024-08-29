@@ -4,6 +4,7 @@ import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { Gender } from "../types/Gender";
 import { Language } from "../types/Language";
 import { Tariff } from "../types/Tariff";
+import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserGrading } from "./IUserGrading";
 import { IUserRole } from "./IUserRole";
 
@@ -20,13 +21,10 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   phone: string;
   language: Language;
   tariff: Tariff;
-  bankAccountOwner: string;
-  bankAccountIBAN: string;
-  bankAccountBIC: string;
-  bankAccountInstitution: string;
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
+  userBankAccount: IUserBankAccount;
   userGradings: IUserGrading[];
   userRoles: IUserRole[];
 }

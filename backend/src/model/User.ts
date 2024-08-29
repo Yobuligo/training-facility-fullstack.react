@@ -14,13 +14,13 @@ const user: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
     },
     username: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
     },
     password: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
     },
-    salt: DataTypes.STRING,
+    salt: DataTypes.STRING(100),
   }
 );
 
