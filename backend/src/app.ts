@@ -1,5 +1,13 @@
 import express from "express";
 import { UserController } from "./controllers/UserController";
+import { Session } from "./model/Session";
+import { User } from "./model/User";
+import { addAdminUser } from "./utils/addAdminUser";
+
+Session.sync({ alter: true });
+User.sync({ alter: true });
+
+// addAdminUser()
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
