@@ -175,10 +175,15 @@ export const useEventCalendarSectionViewModel = (
     const fromTime = DateTime.earliest(
       ...events.map((event) => checkNotNull(event.start))
     );
-    const toTime = DateTime.latest(
+    setFromTime(fromTime);
+
+    let toTime = DateTime.latest(
       ...events.map((event) => checkNotNull(event.end))
     );
-    setFromTime(fromTime);
+    // display one more hour for to time to get a better overview
+    if (toTime && DateTime.toHours(toTime) < 23) {
+      toTime = DateTime.addMinutes(toTime, 15);
+    }
     setToTime(toTime);
   }, [events]);
 
