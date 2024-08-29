@@ -18,7 +18,6 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   findByUserId(userId: string): Promise<IUserProfile | undefined>;
   async findByUserId(userId: string, fields?: unknown): Promise<unknown> {
     const requestedFields = this.getKeyFields(fields);
-
     const data = await this.model.findOne({
       where: { userId },
       attributes: requestedFields,

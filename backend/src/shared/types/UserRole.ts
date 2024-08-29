@@ -1,7 +1,7 @@
 /**
  * Max 20 characters
  */
-export enum Role {
+export enum UserRole {
   ADMIN = "ADMIN",
   USER = "USER",
 }

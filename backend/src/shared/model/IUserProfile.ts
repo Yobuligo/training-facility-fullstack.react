@@ -22,7 +22,7 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
-  userBankAccount: IUserBankAccount;
+  userBankAccount?: IUserBankAccount;
   userGradings: IUserGrading[];
   userRoles: IUserRole[];
 }
