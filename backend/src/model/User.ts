@@ -12,6 +12,7 @@ const user: ModelStatic<Model<IUserSecure, IEntityDetails<IUserSecure>>> =
       username: {
         allowNull: false,
         type: DataTypes.STRING(100),
+        unique: true,
       },
       password: {
         allowNull: false,
