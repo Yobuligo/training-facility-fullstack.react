@@ -1,6 +1,7 @@
 import {
   FindOptions,
   Includeable,
+  IncludeOptions,
   Model,
   ModelStatic,
   WhereOptions,
@@ -9,7 +10,6 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
-import { NotImplementedError } from "../../core/errors/NotImplementedError";
 import { List } from "../../core/services/list/List";
 
 export abstract class SequelizeRepository<TEntity extends IEntity>
@@ -23,7 +23,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     protected readonly model: ModelStatic<
       Model<TEntity, IEntityDetails<TEntity>>
     >,
-    protected readonly relatedModelIncludes?: Includeable[]
+    protected readonly relatedModelIncludes?: IncludeOptions[]
   ) {}
 
   async delete(entity: TEntity): Promise<boolean> {
@@ -42,8 +42,8 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   ): Promise<IEntitySubset<TEntity, K>[]>;
   findAll(): Promise<TEntity[]>;
   async findAll(fields?: unknown): Promise<unknown> {
-    const requestedFields = this.getFields(fields);
-    const data = await this.model.findAll({ attributes: requestedFields });
+    const options = this.toOptions(fields);
+    const data = await this.model.findAll(options);
     return data.map((model) => model.toJSON());
   }
 
@@ -113,6 +113,9 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return data.map((model) => this.toJson(model, fields));
   }
 
+  /**
+   * Converts the given {@link fields} to a string list.
+   */
   protected getFields(fields?: unknown): string[] {
     if (fields && Array.isArray(fields)) {
       return fields;
@@ -120,10 +123,16 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return [];
   }
 
+  /**
+   * Returns {@link fields} as key fields from {@link TEntity}.
+   */
   protected getKeyFields(fields?: unknown): (keyof TEntity)[] {
     return this.getFields(fields) as (keyof TEntity)[];
   }
 
+  /**
+   * Returns {@link data} as object of type {@link TEntity} by restricting fields to the given {@link fields}.
+   */
   protected toJson(
     data: Model<TEntity, IEntityDetails<TEntity>>,
     fields: unknown
@@ -141,15 +150,20 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     }
   }
 
+  /**
+   * Builds an option object from the given {@link fields}. Reference types will be added as include. Scalar types will be added as attributes.
+   */
   protected toOptions(
     fields?: unknown
   ): Omit<FindOptions<TEntity>, "where"> | undefined {
-    const requestedFields = this.getFields(fields);
     let options: Omit<FindOptions<TEntity>, "where"> | undefined = {};
-    if (requestedFields.length > 0) {
-      options.attributes = requestedFields;
+
+    const attributes = this.getAttributes(fields);
+    if (List.isNotEmpty(attributes)) {
+      options.attributes = attributes;
     }
 
+    const requestedFields = this.getFields(fields);
     const includes = this.getIncludes(requestedFields);
     if (includes.length > 0) {
       options.include = includes;
@@ -157,6 +171,10 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return options;
   }
 
+  /**
+   * Returns the models that should be loaded with the entity depending on the given {@link fields}.
+   * Returns all models if no {@link fields} where provided.
+   */
   protected getIncludes(fields: string[]): Includeable[] {
     if (!this.relatedModelIncludes) {
       return [];
@@ -168,11 +186,31 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
 
     // filter includes that are not matching the given fields
     const relatedModelIncludes = this.relatedModelIncludes.filter(
-      (relatedModelInclude) => {
-        throw new NotImplementedError();
-        fields.includes(relatedModelInclude.toString());
-      }
+      (relatedModelInclude) => List.contains(fields, relatedModelInclude.as)
     );
     return relatedModelIncludes;
+  }
+
+  /**
+   * Returns the attributes that should be loaded explicitly.
+   * Excludes fields which are models
+   */
+  protected getAttributes(fields: unknown): string[] {
+    if (!fields || !Array.isArray(fields)) {
+      return [];
+    }
+
+    if (!this.relatedModelIncludes) {
+      return fields;
+    }
+
+    const attributes = fields.filter((field) => {
+      const index = this.relatedModelIncludes?.findIndex(
+        (relatedModelInclude) => relatedModelInclude.as === field
+      );
+      return index === -1;
+    });
+
+    return attributes;
   }
 }

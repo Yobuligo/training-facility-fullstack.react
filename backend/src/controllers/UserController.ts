@@ -21,7 +21,6 @@ export class UserController extends EntityController<IUser, UserRepo> {
       "/users/login",
       ErrorInterceptor(async (req, res) => {
         const authentication: IAuthentication = req.body;
-
         const userRepo = new UserRepo();
         const user = await userRepo.findByCredentials(
           authentication.credentials

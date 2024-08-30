@@ -1,4 +1,5 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { NotImplementedError } from "../core/errors/NotImplementedError";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
@@ -8,7 +9,7 @@ import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
-    super(UserProfile, [UserBankAccount, UserGrading]);
+    super(UserProfile, [{ model: UserBankAccount }, { model: UserGrading }]);
   }
 
   findByUserId<K extends keyof IUserProfile>(
@@ -24,6 +25,7 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       // Todo
       include: [{ model: UserRole, as: "userRoles" }],
     });
+    throw new NotImplementedError()
     return data?.toJSON();
   }
 }

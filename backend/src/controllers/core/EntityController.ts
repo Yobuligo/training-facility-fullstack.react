@@ -104,7 +104,7 @@ export abstract class EntityController<
    * Returns the fields from the request *{@link query}* that are key fields of *{@link TEntity}*.
    */
   protected getFieldsFromQuery(query: Query): (keyof TEntity)[] {
-    const fields = query.fields ? [String(query.fields).split(",")] : [];
+    const fields = query.fields ? String(query.fields).split(",") : [];
     return fields as unknown as (keyof TEntity)[];
   }
 }
