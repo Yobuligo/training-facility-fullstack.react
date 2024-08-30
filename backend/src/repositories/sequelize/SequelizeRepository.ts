@@ -54,7 +54,6 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   findById(id: string): Promise<TEntity | undefined>;
   async findById(id: string, fields?: unknown): Promise<unknown> {
     const options = this.toOptions(fields);
-    await this.model.findByPk(id);
     const data = await this.model.findByPk(id, options);
     return data?.toJSON();
   }
