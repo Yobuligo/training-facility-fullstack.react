@@ -1,5 +1,4 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
-import { NotImplementedError } from "../core/errors/NotImplementedError";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
@@ -27,7 +26,6 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       attributes: attributes,
       include: includes,
     });
-    throw new NotImplementedError();
     return data?.toJSON();
   }
 }

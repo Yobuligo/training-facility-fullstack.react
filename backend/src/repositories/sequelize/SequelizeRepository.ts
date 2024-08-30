@@ -149,16 +149,8 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     fields?: unknown
   ): Omit<FindOptions<TEntity>, "where"> | undefined {
     let options: Omit<FindOptions<TEntity>, "where"> | undefined = {};
-
-    const attributes = this.getAttributes(fields);
-    if (List.isNotEmpty(attributes)) {
-      options.attributes = attributes;
-    }
-
-    const includes = this.getIncludes(fields);
-    if (includes.length > 0) {
-      options.include = includes;
-    }
+    options.attributes = this.getAttributes(fields);
+    options.include = this.getIncludes(fields);
     return options;
   }
 
@@ -166,16 +158,14 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
    * Returns the models that should be loaded with the entity depending on the given {@link fields}.
    * Returns all models if no {@link fields} where provided.
    */
-  protected getIncludes(fields: unknown): Includeable[] {
-    if (!this.relatedModelIncludes) {
-      return [];
+  protected getIncludes(fields: unknown): Includeable[] | undefined {
+    // No include available or list is empty, return false
+    if (!this.relatedModelIncludes || this.relatedModelIncludes.length === 0) {
+      return undefined;
     }
 
-    if (!fields || !Array.isArray(fields)) {
-      return [];
-    }
-
-    if (List.isEmpty(fields)) {
+    // No fields provided to restrict includes, return all includes
+    if (!fields || !Array.isArray(fields) || fields.length === 0) {
       return this.relatedModelIncludes;
     }
 
@@ -183,16 +173,22 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     const relatedModelIncludes = this.relatedModelIncludes.filter(
       (relatedModelInclude) => List.contains(fields, relatedModelInclude.as)
     );
-    return relatedModelIncludes;
+
+    if (relatedModelIncludes.length === 0) {
+      return undefined;
+    }
+    {
+      return relatedModelIncludes;
+    }
   }
 
   /**
    * Returns the attributes that should be loaded explicitly.
    * Excludes fields which are models
    */
-  protected getAttributes(fields: unknown): string[] {
-    if (!fields || !Array.isArray(fields)) {
-      return [];
+  protected getAttributes(fields: unknown): string[] | undefined {
+    if (!fields || !Array.isArray(fields) || fields.length === 0) {
+      return undefined;
     }
 
     if (!this.relatedModelIncludes) {
@@ -206,6 +202,10 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
       return index === -1;
     });
 
-    return attributes;
+    if (attributes.length === 0) {
+      return undefined;
+    } else {
+      return attributes;
+    }
   }
 }
