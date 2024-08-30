@@ -23,14 +23,14 @@ export const useMyProfileViewModel = () => {
 
     loadUserProfileRequest.send(async () => {
       const userProfileApi = new UserProfileApi();
-      const userProfile = await userProfileApi.findByUserId(session.userId);
-      if (!userProfile) {
+      const readUserProfile = await userProfileApi.findByUserId(session.userId);
+      if (!readUserProfile) {
         setError(t(texts.myProfile.errorLoadingUserSession));
       } else {
-        setUserProfile(userProfile);
+        setUserProfile(readUserProfile);
       }
     });
-  }, [loadUserProfileRequest, session, t]);
+  }, [session]);
 
   useEffect(() => {
     loadUserProfile();

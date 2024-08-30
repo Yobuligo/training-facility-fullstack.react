@@ -1,7 +1,7 @@
 import { Card } from "../../../components/card/Card";
+import { style } from "../../../core/ui/style";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { style } from "../../../core/ui/style";
 import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { IUserProfileItem } from "./IUserProfileItemProps";
 import styles from "./UserProfileItem.module.scss";
@@ -45,7 +45,7 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
           <div>
             {t(texts.userProfile.birthday)}
             {": "}
-            {props.userProfile.birthday.toDateString()}
+            {props.userProfile.birthday?.toString()}
           </div>
           <div>
             {t(texts.userProfile.joinedOn)}

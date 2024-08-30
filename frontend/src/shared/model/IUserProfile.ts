@@ -5,26 +5,24 @@ import { Gender } from "../types/Gender";
 import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserGrading } from "./IUserGrading";
-import { IUserRole } from "./IUserRole";
 
 export interface IUserProfile extends IEntity, IHaveUserId {
   memberId: string;
   firstname: string;
   lastname: string;
   gender: Gender;
-  birthday: Date;
-  street: string;
-  postalCode: string;
-  city: string;
+  birthday?: Date;
+  street?: string;
+  postalCode?: string;
+  city?: string;
   email: string;
-  phone: string;
+  phone?: string;
   tariff: Tariff;
   isDeactivated: boolean;
   deactivatedAt?: Date;
   joinedOn: Date;
   userBankAccount?: IUserBankAccount;
   userGradings: IUserGrading[];
-  userRoles: IUserRole[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

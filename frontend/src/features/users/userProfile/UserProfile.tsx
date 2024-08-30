@@ -3,6 +3,7 @@ import { ChangeableForm } from "../../../components/changeableForm/ChangeableFor
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { toDate } from "../../../utils/toDate";
@@ -74,7 +75,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             label={t(texts.userProfile.birthday)}
             type="date"
             onChange={viewModel.onChangeBirthday}
-            value={toDate(viewModel.birthday)}
+            value={viewModel.birthday ? toDate(viewModel.birthday) : ""}
           />
 
           <LabeledSelect
@@ -102,7 +103,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.postalCode)}
             onChange={viewModel.onChangePostalCode}
-            value={viewModel.postalCode.toString()}
+            value={viewModel.postalCode?.toString()}
           />
 
           <LabeledInput
@@ -175,7 +176,9 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         >
           <div>
             <div>{t(texts.userProfile.joinedOn)}</div>
-            <div>{props.userProfile.joinedOn.toLocaleDateString()}</div>
+            <div>
+              {DateTime.format(props.userProfile.joinedOn, "dd.MM.yyyy")}
+            </div>
           </div>
           {props.isAdminMode && (
             <>
