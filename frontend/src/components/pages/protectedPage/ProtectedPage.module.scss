@@ -1,4 +1,10 @@
+@use "../../../styles/dimensions.module.scss";
+
 .protectedPage {
   display: flex;
   flex-direction: column;
+}
+
+.spinner {
+  margin: dimensions.$negative-space;
 }

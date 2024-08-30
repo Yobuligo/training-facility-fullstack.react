@@ -7,6 +7,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useLogout } from "../../../lib/userSession/hooks/useLogout";
 import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { AppRoutes } from "../../../routes/AppRoutes";
+import colors from "../../../styles/colors.module.scss";
 import { Spinner } from "../../spinner/Spinner";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
@@ -37,21 +38,26 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     }
   };
 
+  const displaySpinner =
+    userLoader.loadRequest.isProcessing || !userLoader.user;
+
   return (
     <Page>
       <div className={styles.protectedPage}>
-        {userLoader.loadRequest.isProcessing || !userLoader.user ? (
-          <Spinner />
+        <PageHeader onAppLogoClick={props.onAppLogoClick}>
+          {!displaySpinner && (
+            <SpinnerButton
+              displaySpinner={isLoggingOut}
+              onClick={onLogout}
+            >{`${t(texts.logout.title)} (TODO)`}</SpinnerButton>
+          )}
+        </PageHeader>
+        {displaySpinner ? (
+          <div className={styles.spinner}>
+            <Spinner color={colors.colorSecondary} />
+          </div>
         ) : (
-          <>
-            <PageHeader onAppLogoClick={props.onAppLogoClick}>
-              <SpinnerButton
-                displaySpinner={isLoggingOut}
-                onClick={onLogout}
-              >{`${t(texts.logout.title)} (TODO)`}</SpinnerButton>
-            </PageHeader>
-            <div>{props.children}</div>
-          </>
+          <div>{props.children}</div>
         )}
       </div>
     </Page>
