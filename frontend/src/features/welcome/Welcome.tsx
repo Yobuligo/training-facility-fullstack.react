@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { EventRegistrationApi } from "../../api/EventRegistrationApi";
 import { Spinner } from "../../components/spinner/Spinner";
 import { DateTime } from "../../core/services/date/DateTime";
-import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
@@ -23,7 +22,7 @@ export const Welcome: React.FC = () => {
     eventRegistrationRequest.send(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
       const eventRegistrations = await eventRegistrationApi.findByUserForWeek(
-        checkNotNull(user).id
+        user.id
       );
       setEventRegistrations(eventRegistrations);
     });
@@ -37,7 +36,7 @@ export const Welcome: React.FC = () => {
     <div>
       <h2>
         {t(texts.welcome.welcome, {
-          name: checkNotNull(user).userProfile.firstname,
+          name: user.userProfile.firstname,
         })}
       </h2>
 

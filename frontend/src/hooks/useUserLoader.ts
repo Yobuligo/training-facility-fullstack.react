@@ -2,14 +2,14 @@ import { UserApi } from "../lib/userSession/api/UserApi";
 import { useRequest } from "../lib/userSession/hooks/useRequest";
 import { useSession } from "../lib/userSession/hooks/useSession";
 import { useInitialize } from "./useInitialize";
-import { useUser } from "./useUser";
+import { useUserOrNull } from "./useUserOrNull";
 
 /**
  * This hook is responsible for loading a user from the current session.
  */
 export const useUserLoader = () => {
   const [session] = useSession();
-  const [user, setUser] = useUser();
+  const [user, setUser] = useUserOrNull();
   const loadRequest = useRequest();
 
   useInitialize(() => {

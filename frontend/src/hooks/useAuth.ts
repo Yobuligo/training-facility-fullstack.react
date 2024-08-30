@@ -6,7 +6,7 @@ export const useAuth = () => {
 
   const isAdmin = (): boolean => {
     return (
-      user?.userRoles.findIndex(
+      user.userRoles.findIndex(
         (userRole) => userRole.role === UserRole.ADMIN
       ) !== -1
     );

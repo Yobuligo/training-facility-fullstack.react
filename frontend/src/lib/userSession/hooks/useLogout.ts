@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../../hooks/useUser";
+import { useUserOrNull } from "../../../hooks/useUserOrNull";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserApi } from "../api/UserApi";
 import { useSession } from "./useSession";
 
 export const useLogout = () => {
   const [session, setSession] = useSession();
-  const [, setUser] = useUser();
+  const [, setUser] = useUserOrNull();
   const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 

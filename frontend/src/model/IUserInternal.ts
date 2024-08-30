@@ -1,5 +1,9 @@
-import { IUser } from "../shared/model/IUser";
+import { IHaveId } from "../core/api/types/IHaveId";
+import { IUserProfile } from "../shared/model/IUserProfile";
+import { IUserRole } from "../shared/model/IUserRole";
 
-export type IUserInternal = Required<
-  Pick<IUser, "id" | "userProfile" | "userRoles" | "username">
->;
+export interface IUserInternal extends IHaveId {
+  username: string;
+  userRoles: IUserRole[];
+  userProfile: IUserProfile;
+}
