@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserApi } from "../api/UserApi";
 import { useSession } from "./useSession";
 
 export const useLogout = () => {
   const [session, setSession] = useSession();
+  const [, setUser] = useUser();
   const navigate = useNavigate();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -21,6 +23,7 @@ export const useLogout = () => {
       }
     }
     setSession(undefined);
+    setUser(undefined);
     navigate(AppRoutes.login.toPath());
     setIsLoggingOut(false);
   };
