@@ -7,7 +7,7 @@ import { UserBankAccount } from "./model/UserBankAccount";
 import { UserGrading } from "./model/UserGrading";
 import { UserProfile } from "./model/UserProfile";
 import { UserRole } from "./model/UserRole";
-import { addAdminUser } from "./utils/addAdminUser";
+import { createRootUser } from "./utils/createRootUser";
 
 Session.sync({ alter: true });
 User.sync({ alter: true });
@@ -15,8 +15,8 @@ UserProfile.sync({ alter: true });
 UserRole.sync({ alter: true });
 UserGrading.sync({ alter: true });
 UserBankAccount.sync({ alter: true });
-// 
-// addAdminUser()
+
+createRootUser();
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));

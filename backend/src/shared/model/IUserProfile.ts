@@ -11,12 +11,12 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   firstname: string;
   lastname: string;
   gender: Gender;
-  birthday: Date;
-  street: string;
-  postalCode: string;
-  city: string;
+  birthday?: Date;
+  street?: string;
+  postalCode?: string;
+  city?: string;
   email: string;
-  phone: string;
+  phone?: string;
   tariff: Tariff;
   isDeactivated: boolean;
   deactivatedAt?: Date;
