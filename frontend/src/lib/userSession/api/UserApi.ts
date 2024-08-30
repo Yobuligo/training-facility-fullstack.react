@@ -1,5 +1,6 @@
 import { EntityRepository } from "../../../api/core/EntityRepository";
 import { RESTApi } from "../../../api/core/RESTApi";
+import { IUserInternal } from "../../../model/IUserInternal";
 import { IUser } from "../../../shared/model/IUser";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
@@ -9,6 +10,15 @@ import { UserRouteMeta } from "../shared/model/UserRouteMeta";
 export class UserApi extends EntityRepository<IUser> {
   constructor() {
     super(UserRouteMeta);
+  }
+
+  async findByIdInternal(userId: string): Promise<IUserInternal | undefined> {
+    return (await this.findById(userId, [
+      "id",
+      "userProfile",
+      "userRoles",
+      "username",
+    ])) as IUserInternal;
   }
 
   login(credentials: ICredentials): Promise<ISession> {

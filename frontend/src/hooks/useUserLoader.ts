@@ -17,7 +17,7 @@ export const useUserLoader = () => {
     if (!user && session) {
       loadRequest.send(async () => {
         const userApi = new UserApi();
-        const user = await userApi.findById(session.userId);
+        const user = await userApi.findByIdInternal(session.userId);
         setUser(user);
       });
     }

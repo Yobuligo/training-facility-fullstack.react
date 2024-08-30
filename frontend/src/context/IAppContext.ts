@@ -1,7 +1,7 @@
 import { Value } from "../core/types/Value";
 import { ISession } from "../lib/userSession/shared/model/ISession";
 import { IProfileDetailsSettings } from "../model/IProfileDetailSettings";
-import { IUser } from "../shared/model/IUser";
+import { IUserInternal } from "../model/IUserInternal";
 
 export interface IAppContext {
   /**
@@ -16,5 +16,5 @@ export interface IAppContext {
    */
   session: Value<ISession | undefined>;
 
-  user: Value<IUser | undefined>;
+  user: Value<IUserInternal | undefined>;
 }
