@@ -1,7 +1,7 @@
 import { DateTime } from "../core/services/date/DateTime";
-import { IUser } from "../model/IUser";
 import { Session } from "../model/Session";
 import { ISession } from "../shared/model/ISession";
+import { IUser } from "../shared/model/IUser";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class SessionRepo extends SequelizeRepository<ISession> {

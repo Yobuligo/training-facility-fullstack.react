@@ -30,13 +30,13 @@ export const addAdminUser = async () => {
   const userProfileRepo = new UserProfileRepo();
   await userProfileRepo.insert(userProfile);
 
-  const userRole = {
+  const userRole: IUserRole = {
     id: uuid(),
-    userProfileId: userProfile.id,
+    userId: user.id,
     role: UserRole.ADMIN,
     createdAt: new Date(),
     updatedAt: new Date(),
-  } as IUserRole;
+  };
   const userRoleRepo = new UserRoleRepo();
   await userRoleRepo.insert(userRole);
 };

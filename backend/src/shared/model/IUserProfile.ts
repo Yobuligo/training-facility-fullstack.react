@@ -5,7 +5,6 @@ import { Gender } from "../types/Gender";
 import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserGrading } from "./IUserGrading";
-import { IUserRole } from "./IUserRole";
 
 export interface IUserProfile extends IEntity, IHaveUserId {
   memberId: string;
@@ -24,7 +23,6 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   joinedOn: Date;
   userBankAccount?: IUserBankAccount;
   userGradings: IUserGrading[];
-  userRoles: IUserRole[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

@@ -21,6 +21,7 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     const data = await this.model.findOne({
       where: { userId },
       // attributes: requestedFields ? requestedFields : undefined,
+      // Todo
       include: [{ model: UserRole, as: "userRoles" }],
     });
     return data?.toJSON();

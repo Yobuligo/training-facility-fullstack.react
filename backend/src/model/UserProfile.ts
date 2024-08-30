@@ -25,7 +25,7 @@ const userProfile: ModelStatic<
   tariff: DataTypes.INTEGER,
   joinedOn: DataTypes.DATE,
   isDeactivated: DataTypes.BOOLEAN,
-  deactivatedAt: DataTypes.DATE,  
+  deactivatedAt: DataTypes.DATE,
 });
 
 export class UserProfile extends userProfile {}
@@ -33,8 +33,5 @@ export class UserProfile extends userProfile {}
 UserProfile.belongsTo(User);
 User.hasOne(UserProfile, {
   onDelete: "CASCADE",
-  foreignKey: {
-    name: "userId",
-    allowNull: false,
-  },
+  foreignKey: "userId",
 });
