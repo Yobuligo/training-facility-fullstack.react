@@ -4,7 +4,7 @@ import { Spinner } from "../../components/spinner/Spinner";
 import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
-import { useUserProfile } from "../../hooks/useUserProfile";
+import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
@@ -12,7 +12,7 @@ import { IEventRegistration } from "../../shared/model/IEventRegistration";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 
 export const Welcome: React.FC = () => {
-  const [userProfile] = useUserProfile();
+  const [user] = useUser();
   const { t } = useTranslation();
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
@@ -23,7 +23,7 @@ export const Welcome: React.FC = () => {
     eventRegistrationRequest.send(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
       const eventRegistrations = await eventRegistrationApi.findByUserForWeek(
-        checkNotNull(userProfile).userId
+        checkNotNull(user).id
       );
       setEventRegistrations(eventRegistrations);
     });
@@ -37,7 +37,7 @@ export const Welcome: React.FC = () => {
     <div>
       <h2>
         {t(texts.welcome.welcome, {
-          name: checkNotNull(userProfile).firstname,
+          name: checkNotNull(user?.userProfile).firstname,
         })}
       </h2>
 

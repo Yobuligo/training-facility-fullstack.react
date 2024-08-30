@@ -1,7 +1,7 @@
 import { createError } from "../core/utils/createError";
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
+import { UserRouteMeta } from "../shared/model/IUser";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
-import { UserRouteMeta } from "../shared/model/UserRouteMeta";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 

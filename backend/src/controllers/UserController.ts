@@ -4,12 +4,13 @@ import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
-import { Controller } from "./core/Controller";
+import { IUser, UserRouteMeta } from "../shared/model/IUser";
+import { EntityController } from "./core/EntityController";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
 
-export class UserController extends Controller {
+export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {
-    super();
+    super(UserRouteMeta, new UserRepo());
     this.login();
     this.logout();
     this.register();

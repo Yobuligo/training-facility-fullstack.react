@@ -1,12 +1,12 @@
 import { UserRole } from "../shared/types/UserRole";
-import { useUserProfile } from "./useUserProfile";
+import { useUser } from "./useUser";
 
 export const useAuth = () => {
-  const [userProfile] = useUserProfile();
+  const [user] = useUser();
 
   const isAdmin = (): boolean => {
     return (
-      userProfile?.userRoles.findIndex(
+      user?.userRoles.findIndex(
         (userRole) => userRole.role === UserRole.ADMIN
       ) !== -1
     );

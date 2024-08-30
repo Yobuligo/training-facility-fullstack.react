@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { UserProfileApi } from "../api/UserProfileApi";
 import { useRequest } from "../lib/userSession/hooks/useRequest";
 import { useSession } from "../lib/userSession/hooks/useSession";
-import { useUserProfile } from "./useUserProfile";
+import { useUser } from "./useUser";
 
 /**
  * This hook is responsible for loading a user profile from a current session.
@@ -10,17 +10,17 @@ import { useUserProfile } from "./useUserProfile";
 export const useUserprofileLoader = () => {
   const [session] = useSession();
   const loadUserProfileRequest = useRequest();
-  const [userProfile, setUserProfile] = useUserProfile();
+  const [user, setUser] = useUser();
 
   useEffect(() => {
     if (session && !loadUserProfileRequest.isProcessing) {
       loadUserProfileRequest.send(async () => {
-        const userProfileApi = new UserProfileApi();
-        const userProfile = await userProfileApi.findByUserId(session.userId);
-        setUserProfile(userProfile);
+        // const userProfileApi = new UserProfileApi();
+        // const userProfile = await userProfileApi.findByUserId(session.userId);
+        // setUser(userProfile);
       });
     }
-  }, [loadUserProfileRequest, session, setUserProfile]);
+  }, [loadUserProfileRequest, session, setUser]);
 
-  return { request: loadUserProfileRequest, userProfile };
+  return { request: loadUserProfileRequest, userProfile: user };
 };

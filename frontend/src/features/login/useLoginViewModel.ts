@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserProfileApi } from "../../api/UserProfileApi";
 import { isError } from "../../core/utils/isError";
 import { useToggle } from "../../hooks/useToggle";
-import { useUserProfile } from "../../hooks/useUserProfile";
+import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
@@ -21,7 +21,7 @@ export const useLoginViewModel = () => {
   const [loginMode, toggleLoginMode] = useToggle(true);
   const [displaySpinner, setDisplaySpinner] = useState(false);
   const [, setSession] = useSession();
-  const [, setUserProfile] = useUserProfile();
+  const [, setUser] = useUser();
   const navigate = useNavigate();
 
   const disableLoginButton = username.length === 0 || password.length === 0;
@@ -58,9 +58,8 @@ export const useLoginViewModel = () => {
 
       SessionRepo.instance.setSession(session);
 
-      const userProfileApi = new UserProfileApi();
-      const userProfile = await userProfileApi.findByUserId(session.userId);
-      setUserProfile(userProfile);
+      const user = await userApi.findById(session.userId);
+      setUser(user)
 
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
