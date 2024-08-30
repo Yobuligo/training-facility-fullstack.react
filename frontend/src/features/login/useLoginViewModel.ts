@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserProfileApi } from "../../api/UserProfileApi";
 import { isError } from "../../core/utils/isError";
 import { useToggle } from "../../hooks/useToggle";
 import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
+import { SessionRepo } from "../../lib/userSession/api/SessionRepo";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useSession } from "../../lib/userSession/hooks/useSession";
 import { ICredentials } from "../../lib/userSession/shared/model/ICredentials";
 import { AppRoutes } from "../../routes/AppRoutes";
-import { SessionRepo } from "../../lib/userSession/api/SessionRepo";
 
 export const useLoginViewModel = () => {
   const { t } = useTranslation();
@@ -59,7 +58,7 @@ export const useLoginViewModel = () => {
       SessionRepo.instance.setSession(session);
 
       const user = await userApi.findById(session.userId);
-      setUser(user)
+      setUser(user);
 
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {

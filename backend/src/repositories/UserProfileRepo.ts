@@ -8,7 +8,7 @@ import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
-    super(UserProfile, [UserBankAccount, UserGrading, UserRole]);
+    super(UserProfile, [UserBankAccount, UserGrading]);
   }
 
   findByUserId<K extends keyof IUserProfile>(

@@ -1,5 +1,7 @@
 import { IUserSecure } from "../model/IUserSecure";
 import { User } from "../model/User";
+import { UserProfile } from "../model/UserProfile";
+import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
 import { hash } from "../utils/hash";
@@ -9,7 +11,10 @@ import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
-    super(User);
+    super(User, [
+      { model: UserRole, as: "userRoles" },
+      { model: UserProfile, as: "userProfiles" },
+    ]);
   }
 
   async createUser(credentials: ICredentials): Promise<IUserSecure> {

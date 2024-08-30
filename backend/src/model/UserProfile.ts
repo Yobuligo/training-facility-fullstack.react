@@ -32,6 +32,7 @@ export class UserProfile extends userProfile {}
 
 UserProfile.belongsTo(User);
 User.hasOne(UserProfile, {
-  onDelete: "CASCADE",
+  as: "userProfiles",
   foreignKey: "userId",
+  onDelete: "CASCADE",
 });

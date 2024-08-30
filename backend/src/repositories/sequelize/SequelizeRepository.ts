@@ -1,7 +1,6 @@
 import {
-  Attributes,
   FindOptions,
-  Identifier,
+  Includeable,
   Model,
   ModelStatic,
   WhereOptions,
@@ -10,6 +9,7 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
+import { NotImplementedError } from "../../core/errors/NotImplementedError";
 import { List } from "../../core/services/list/List";
 
 export abstract class SequelizeRepository<TEntity extends IEntity>
@@ -23,7 +23,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     protected readonly model: ModelStatic<
       Model<TEntity, IEntityDetails<TEntity>>
     >,
-    protected readonly relatedModelIncludes?: ModelStatic<any>[]
+    protected readonly relatedModelIncludes?: Includeable[]
   ) {}
 
   async delete(entity: TEntity): Promise<boolean> {
@@ -53,12 +53,8 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   ): Promise<IEntitySubset<TEntity, K> | undefined>;
   findById(id: string): Promise<TEntity | undefined>;
   async findById(id: string, fields?: unknown): Promise<unknown> {
-    const requestedFields = this.getFields(fields);
-    let options: any = undefined;
-    if (requestedFields.length > 0) {
-      options = { attributes: requestedFields };
-    }
-
+    const options = this.toOptions(fields);
+    await this.model.findByPk(id);
     const data = await this.model.findByPk(id, options);
     return data?.toJSON();
   }
@@ -145,7 +141,23 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     }
   }
 
-  protected getIncludes(fields: string[]): ModelStatic<any>[] {
+  protected toOptions(
+    fields?: unknown
+  ): Omit<FindOptions<TEntity>, "where"> | undefined {
+    const requestedFields = this.getFields(fields);
+    let options: Omit<FindOptions<TEntity>, "where"> | undefined = {};
+    if (requestedFields.length > 0) {
+      options.attributes = requestedFields;
+    }
+
+    const includes = this.getIncludes(requestedFields);
+    if (includes.length > 0) {
+      options.include = includes;
+    }
+    return options;
+  }
+
+  protected getIncludes(fields: string[]): Includeable[] {
     if (!this.relatedModelIncludes) {
       return [];
     }
@@ -157,7 +169,8 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     // filter includes that are not matching the given fields
     const relatedModelIncludes = this.relatedModelIncludes.filter(
       (relatedModelInclude) => {
-        fields.includes(relatedModelInclude.tableName);
+        throw new NotImplementedError();
+        fields.includes(relatedModelInclude.toString());
       }
     );
     return relatedModelIncludes;
