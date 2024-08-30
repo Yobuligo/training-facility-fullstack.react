@@ -37,7 +37,7 @@ export const Welcome: React.FC = () => {
     <div>
       <h2>
         {t(texts.welcome.welcome, {
-          name: checkNotNull(user?.userProfile).firstname,
+          name: checkNotNull(user).userProfile.firstname,
         })}
       </h2>
 

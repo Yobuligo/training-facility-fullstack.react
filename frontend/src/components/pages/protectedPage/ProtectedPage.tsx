@@ -49,7 +49,9 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
             <SpinnerButton
               displaySpinner={isLoggingOut}
               onClick={onLogout}
-            >{`${t(texts.logout.title)} (TODO)`}</SpinnerButton>
+            >{`${t(texts.logout.title)} (${
+              userLoader.user?.userProfile.firstname
+            })`}</SpinnerButton>
           )}
         </PageHeader>
         {displaySpinner ? (

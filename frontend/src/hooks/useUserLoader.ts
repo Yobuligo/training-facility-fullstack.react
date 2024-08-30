@@ -5,7 +5,7 @@ import { useInitialize } from "./useInitialize";
 import { useUser } from "./useUser";
 
 /**
- * This hook is responsible for loading a user from a current session.
+ * This hook is responsible for loading a user from the current session.
  */
 export const useUserLoader = () => {
   const [session] = useSession();
