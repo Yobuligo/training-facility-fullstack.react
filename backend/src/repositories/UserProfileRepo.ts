@@ -3,13 +3,15 @@ import { NotImplementedError } from "../core/errors/NotImplementedError";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
-import { UserRole } from "../model/UserRole";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
-    super(UserProfile, [{ model: UserBankAccount }, { model: UserGrading }]);
+    super(UserProfile, [
+      { model: UserBankAccount, as: "userBankAccount" },
+      { model: UserGrading, as: "userGradings" },
+    ]);
   }
 
   findByUserId<K extends keyof IUserProfile>(
@@ -18,14 +20,14 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   ): Promise<IEntitySubset<IUserProfile, K> | undefined>;
   findByUserId(userId: string): Promise<IUserProfile | undefined>;
   async findByUserId(userId: string, fields?: unknown): Promise<unknown> {
-    const requestedFields = this.getKeyFields(fields);
+    const attributes = this.getAttributes(fields);
+    const includes = this.getIncludes(fields);
     const data = await this.model.findOne({
       where: { userId },
-      // attributes: requestedFields ? requestedFields : undefined,
-      // Todo
-      include: [{ model: UserRole, as: "userRoles" }],
+      attributes: attributes,
+      include: includes,
     });
-    throw new NotImplementedError()
+    throw new NotImplementedError();
     return data?.toJSON();
   }
 }

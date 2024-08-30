@@ -13,10 +13,10 @@ export const ErrorInterceptor = (
       await requestHandler(req, res, next);
     } catch (error) {
       if (isError(error)) {
-        console.log(error.message)
+        console.log(error.message);
         res.status(500).send(error);
       } else {
-        console.log(error)
+        console.log(error);
         res
           .status(500)
           .send(createError("Internal server error", "InternalServerError"));

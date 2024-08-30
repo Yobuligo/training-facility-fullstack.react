@@ -1,11 +1,10 @@
 import { EntityRepository } from "../../../api/core/EntityRepository";
 import { RESTApi } from "../../../api/core/RESTApi";
 import { IUserInternal } from "../../../model/IUserInternal";
-import { IUser } from "../../../shared/model/IUser";
+import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
-import { UserRouteMeta } from "../shared/model/UserRouteMeta";
 
 export class UserApi extends EntityRepository<IUser> {
   constructor() {

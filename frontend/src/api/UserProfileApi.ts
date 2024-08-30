@@ -1,7 +1,7 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { FuzzySearch } from "../core/services/fuzzySearch/FuzzySearch";
+import { UserRouteMeta } from "../shared/model/IUser";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
-import { UserRouteMeta } from "../shared/model/UserRouteMeta";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 import { DummyUserProfiles } from "./DummyUserProfiles";

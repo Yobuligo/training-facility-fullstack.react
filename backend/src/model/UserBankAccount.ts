@@ -31,9 +31,10 @@ export class UserBankAccount extends userBankAccount {}
 
 UserBankAccount.belongsTo(UserProfile);
 UserProfile.hasOne(UserBankAccount, {
+  as: "userBankAccount",
   onDelete: "CASCADE",
   foreignKey: {
-    name: "userProfileId",
     allowNull: false,
+    name: "userProfileId",
   },
 });

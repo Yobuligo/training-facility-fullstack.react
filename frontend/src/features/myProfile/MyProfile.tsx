@@ -9,7 +9,7 @@ export const MyProfile: React.FC = () => {
   return (
     <div>
       {viewModel.error && <Error message={viewModel.error} />}
-      {viewModel.isLoading && <Spinner />}
+      {viewModel.loadUserProfileRequest.isProcessing && <Spinner />}
       {viewModel.userProfile && (
         <UserProfile userProfile={viewModel.userProfile!} isAdminMode={false} />
       )}

@@ -113,20 +113,13 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   }
 
   /**
-   * Converts the given {@link fields} to a string list.
+   * Returns {@link fields} as key fields from {@link TEntity}.
    */
-  protected getFields(fields?: unknown): string[] {
+  protected getKeyFields(fields?: unknown): (keyof TEntity)[] {
     if (fields && Array.isArray(fields)) {
       return fields;
     }
     return [];
-  }
-
-  /**
-   * Returns {@link fields} as key fields from {@link TEntity}.
-   */
-  protected getKeyFields(fields?: unknown): (keyof TEntity)[] {
-    return this.getFields(fields) as (keyof TEntity)[];
   }
 
   /**
@@ -162,8 +155,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
       options.attributes = attributes;
     }
 
-    const requestedFields = this.getFields(fields);
-    const includes = this.getIncludes(requestedFields);
+    const includes = this.getIncludes(fields);
     if (includes.length > 0) {
       options.include = includes;
     }
@@ -174,8 +166,12 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
    * Returns the models that should be loaded with the entity depending on the given {@link fields}.
    * Returns all models if no {@link fields} where provided.
    */
-  protected getIncludes(fields: string[]): Includeable[] {
+  protected getIncludes(fields: unknown): Includeable[] {
     if (!this.relatedModelIncludes) {
+      return [];
+    }
+
+    if (!fields || !Array.isArray(fields)) {
       return [];
     }
 

@@ -18,6 +18,7 @@ export class UserGrading extends userGrading {}
 
 UserGrading.belongsTo(UserProfile);
 UserProfile.hasMany(UserGrading, {
+  as: "userGradings",
   onDelete: "CASCADE",
   foreignKey: {
     name: "userProfileId",
