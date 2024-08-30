@@ -13,7 +13,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
     super(User, [
       { model: UserRole, as: "userRoles" },
-      { model: UserProfile, as: "userProfiles" },
+      { model: UserProfile, as: "userProfile" },
     ]);
   }
 
