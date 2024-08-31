@@ -1,10 +1,10 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { db } from "../db/db";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
-import { UserBankAccountRepo } from "./UserBankAccountRepo";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
@@ -31,12 +31,21 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   }
 
   async update(entity: IUserProfile): Promise<boolean> {
-    const wasUpdated = await super.update(entity);
-    // update bank account
-    if (entity.userBankAccount) {
-      const userBankAccountRepo = new UserBankAccountRepo();
-      await userBankAccountRepo.upsert(entity.userBankAccount);
+    const transaction = await db.transaction();
+    try {
+      const [updatedRows] = await UserProfile.update(entity, {
+        where: { id: entity.id },
+        transaction,
+      });
+
+      if (entity.userBankAccount) {
+        await UserBankAccount.upsert(entity.userBankAccount, { transaction });
+      }
+      transaction.commit();
+      return updatedRows === 1;
+    } catch (error) {
+      transaction.rollback();
+      throw error;
     }
-    return wasUpdated;
   }
 }
