@@ -11,7 +11,11 @@ export const MyProfile: React.FC = () => {
       {viewModel.error && <Error message={viewModel.error} />}
       {viewModel.loadUserProfileRequest.isProcessing && <Spinner />}
       {viewModel.userProfile && (
-        <UserProfile userProfile={viewModel.userProfile!} isAdminMode={false} />
+        <UserProfile
+          isAdminMode={false}
+          onChange={viewModel.onChange}
+          userProfile={viewModel.userProfile!}
+        />
       )}
     </div>
   );

@@ -14,6 +14,7 @@ export const useMyProfileViewModel = () => {
     undefined
   );
   const loadUserProfileRequest = useRequest();
+  const changeUserProfileRequest = useRequest();
 
   const loadUserProfile = useCallback(async () => {
     if (!session) {
@@ -36,9 +37,16 @@ export const useMyProfileViewModel = () => {
     loadUserProfile();
   }, [loadUserProfile]);
 
+  const onChange = (userProfile: IUserProfile) =>
+    changeUserProfileRequest.send(async () => {
+      const userProfileApi = new UserProfileApi();
+      await userProfileApi.update(userProfile);
+    });
+
   return {
     error,
     loadUserProfileRequest,
+    onChange,
     userProfile,
   };
 };

@@ -74,13 +74,13 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   update<K extends keyof TEntity>(
     entity: TEntity,
     fields: K[]
-  ): Promise<IEntitySubset<TEntity, K>>;
-  update(entity: TEntity): Promise<TEntity>;
-  async update(entity: TEntity, fields?: unknown): Promise<unknown> {
-    const entities = [entity];
-    const requestFields = this.getKeyFields(fields);
-    const updatedEntities = await this.updateAll(entities, requestFields);
-    return updatedEntities[0];
+  ): Promise<boolean>;
+  update(entity: TEntity): Promise<boolean>;
+  async update(entity: TEntity, fields?: unknown): Promise<boolean> {
+    const [updatedRows] = await this.model.update(entity, {
+      where: { id: entity.id } as WhereOptions,
+    });
+    return updatedRows === 1;
   }
 
   updateAll<K extends keyof TEntity>(
