@@ -32,8 +32,8 @@ export interface IEntityRepository<TEntity extends IEntity>
   update<K extends keyof TEntity>(
     entity: TEntity,
     fields: K[]
-  ): Promise<IEntitySubset<TEntity, K>>;
-  update(entity: TEntity): Promise<TEntity>;
+  ): Promise<boolean>;
+  update(entity: TEntity): Promise<boolean>;
 
   updateAll<K extends keyof TEntity>(
     entities: TEntity[],

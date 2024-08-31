@@ -51,9 +51,9 @@ export abstract class EntityRepository<TEntity extends IEntity>
   update<K extends keyof TEntity>(
     entity: TEntity,
     fields: K[]
-  ): Promise<IEntitySubset<TEntity, K>>;
-  update(entity: TEntity): Promise<TEntity>;
-  async update(entity: TEntity, fields?: unknown): Promise<unknown> {
+  ): Promise<boolean>;
+  update(entity: TEntity): Promise<boolean>;
+  async update(entity: TEntity, fields?: unknown): Promise<boolean> {
     const requestFields = this.getFields(fields);
     return await RESTApi.put(`${this.url}/${entity.id}`, entity, {
       fields: requestFields,

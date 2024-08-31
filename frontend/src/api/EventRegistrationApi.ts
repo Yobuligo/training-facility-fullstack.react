@@ -107,8 +107,8 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   update<K extends keyof IEventRegistration>(
     entity: IEventRegistration,
     fields: K[]
-  ): Promise<IEntitySubset<IEventRegistration, K>>;
-  update(entity: IEventRegistration): Promise<IEventRegistration>;
+  ): Promise<boolean>;
+  update(entity: IEventRegistration): Promise<boolean>;
   async update(entity: IEventRegistration, fields?: unknown): Promise<unknown> {
     return List.update(
       DummyEventRegistrations,
