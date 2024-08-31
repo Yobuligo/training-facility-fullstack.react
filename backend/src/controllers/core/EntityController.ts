@@ -82,8 +82,8 @@ export abstract class EntityController<
       SessionInterceptor(async (req, res) => {
         const entity: TEntity = req.body;
         const fields = this.getFieldsFromQuery(req.query);
-        const updatedEntity = await this.repo.update(entity, fields);
-        res.status(200).send(updatedEntity);
+        const wasUpdated = await this.repo.update(entity, fields);
+        res.status(200).send(wasUpdated);
       })
     );
   }
