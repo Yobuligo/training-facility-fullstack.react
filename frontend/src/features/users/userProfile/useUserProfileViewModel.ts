@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -37,18 +38,18 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   const [street, setStreet] = useState(props.userProfile.street);
   const [postalCode, setPostalCode] = useState(props.userProfile.postalCode);
   const [city, setCity] = useState(props.userProfile.city);
-  // const [bankAccountOwner, setBankAccountOwner] = useState(
-  //   props.userProfile.bankAccountOwner
-  // );
-  // const [bankAccountIBAN, setBankAccountIBAN] = useState(
-  //   props.userProfile.bankAccountIBAN
-  // );
-  // const [bankAccountBIC, setBankAccountBIC] = useState(
-  //   props.userProfile.bankAccountBIC
-  // );
-  // const [bankAccountInstitution, setBankAccountInstitution] = useState(
-  //   props.userProfile.bankAccountInstitution
-  // );
+  const [bankAccountOwner, setBankAccountOwner] = useState(
+    props.userProfile.userBankAccount?.bankAccountOwner ?? ""
+  );
+  const [bankAccountIBAN, setBankAccountIBAN] = useState(
+    props.userProfile.userBankAccount?.bankAccountIBAN ?? ""
+  );
+  const [bankAccountBIC, setBankAccountBIC] = useState(
+    props.userProfile.userBankAccount?.bankAccountBIC ?? ""
+  );
+  const [bankAccountInstitution, setBankAccountInstitution] = useState(
+    props.userProfile.userBankAccount?.bankAccountInstitution ?? ""
+  );
   const [isDeactivated, setIsDeactivated] = useState(
     props.userProfile.isDeactivated
   );
@@ -78,10 +79,16 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setIsDeactivated(props.userProfile.isDeactivated);
     setDeactivatedAt(props.userProfile.deactivatedAt);
     setTariff(props.userProfile.tariff);
-    // setBankAccountBIC(props.userProfile.bankAccountBIC);
-    // setBankAccountIBAN(props.userProfile.bankAccountIBAN);
-    // setBankAccountInstitution(props.userProfile.bankAccountInstitution);
-    // setBankAccountOwner(props.userProfile.bankAccountOwner);
+    setBankAccountBIC(props.userProfile.userBankAccount?.bankAccountBIC ?? "");
+    setBankAccountIBAN(
+      props.userProfile.userBankAccount?.bankAccountIBAN ?? ""
+    );
+    setBankAccountInstitution(
+      props.userProfile.userBankAccount?.bankAccountInstitution ?? ""
+    );
+    setBankAccountOwner(
+      props.userProfile.userBankAccount?.bankAccountOwner ?? ""
+    );
     setGradings(props.userProfile.userGradings);
     setDisplayMode(true);
   }, [
@@ -90,7 +97,6 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.firstname,
     props.userProfile.lastname,
     props.userProfile.gender,
-    // props.userProfile.isAdmin,
     props.userProfile.phone,
     props.userProfile.street,
     props.userProfile.postalCode,
@@ -98,6 +104,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     props.userProfile.isDeactivated,
     props.userProfile.deactivatedAt,
     props.userProfile.tariff,
+    props.userProfile.userBankAccount?.bankAccountBIC,
+    props.userProfile.userBankAccount?.bankAccountIBAN,
+    props.userProfile.userBankAccount?.bankAccountInstitution,
+    props.userProfile.userBankAccount?.bankAccountOwner,
     props.userProfile.userGradings,
   ]);
 
@@ -201,24 +211,56 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
       return previous;
     });
 
+  const needsCreateUserBankAccount = (): boolean =>
+    isNotInitial(bankAccountBIC) ||
+    isNotInitial(bankAccountIBAN) ||
+    isNotInitial(bankAccountInstitution) ||
+    isNotInitial(bankAccountOwner);
+
+  const updateUserBankAccount = () => {
+    // if userBankAccount was not created yet, check if it is required, create userBankAccount
+    if (!props.userProfile.userBankAccount && needsCreateUserBankAccount()) {
+      props.userProfile.userBankAccount = {
+        id: uuid(),
+        bankAccountBIC,
+        bankAccountIBAN,
+        bankAccountInstitution,
+        bankAccountOwner,
+        userProfileId: props.userProfile.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      return;
+    }
+
+    // if it is not required and still not available return
+    if (!props.userProfile.userBankAccount) {
+      return;
+    }
+
+    // update user bank account
+    props.userProfile.userBankAccount.bankAccountBIC = bankAccountBIC;
+    props.userProfile.userBankAccount.bankAccountIBAN = bankAccountIBAN;
+    props.userProfile.userBankAccount.bankAccountInstitution =
+      bankAccountInstitution;
+    props.userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
+  };
+
   const onSave = () => {
     props.userProfile.birthday = DateTime.create(birthday, "12:00");
     props.userProfile.email = email;
     props.userProfile.firstname = firstname;
     props.userProfile.lastname = lastname;
     props.userProfile.gender = gender;
-    // props.userProfile.isAdmin = isAdmin;
     props.userProfile.phone = phone;
     props.userProfile.street = street;
     props.userProfile.postalCode = postalCode;
     props.userProfile.city = city;
     props.userProfile.tariff = tariff;
-    // props.userProfile.bankAccountBIC = bankAccountBIC;
-    // props.userProfile.bankAccountIBAN = bankAccountIBAN;
-    // props.userProfile.bankAccountInstitution = bankAccountInstitution;
-    // props.userProfile.bankAccountOwner = bankAccountOwner;
     props.userProfile.isDeactivated = isDeactivated;
     props.userProfile.deactivatedAt = deactivatedAt;
+
+    updateUserBankAccount();
     props.userProfile.userGradings = gradings;
     props.onChange?.(props.userProfile);
   };
@@ -254,10 +296,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     });
 
   return {
-    // bankAccountBIC,
-    // bankAccountIBAN,
-    // bankAccountInstitution,
-    // bankAccountOwner,
+    bankAccountBIC,
+    bankAccountIBAN,
+    bankAccountInstitution,
+    bankAccountOwner,
     birthday,
     collapseBank,
     city,
@@ -290,10 +332,10 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     // selectedIsAdminOption,
     selectedGenderOption,
     selectedTariffOption,
-    // setBankAccountBIC,
-    // setBankAccountIBAN,
-    // setBankAccountInstitution,
-    // setBankAccountOwner,
+    setBankAccountBIC,
+    setBankAccountIBAN,
+    setBankAccountInstitution,
+    setBankAccountOwner,
     setCity,
     setCollapseBank,
     setDisplayMode,

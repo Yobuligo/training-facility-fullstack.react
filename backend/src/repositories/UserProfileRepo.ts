@@ -4,6 +4,7 @@ import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { UserBankAccountRepo } from "./UserBankAccountRepo";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
@@ -27,5 +28,15 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       include: includes,
     });
     return data?.toJSON();
+  }
+
+  async update(entity: IUserProfile): Promise<boolean> {
+    const wasUpdated = await super.update(entity);
+    // update bank account
+    if (entity.userBankAccount) {
+      const userBankAccountRepo = new UserBankAccountRepo();
+      await userBankAccountRepo.upsert(entity.userBankAccount);
+    }
+    return wasUpdated;
   }
 }

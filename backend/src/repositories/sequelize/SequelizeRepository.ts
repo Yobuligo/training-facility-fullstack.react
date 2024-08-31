@@ -71,12 +71,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return this.toJson(data, fields);
   }
 
-  update<K extends keyof TEntity>(
-    entity: TEntity,
-    fields: K[]
-  ): Promise<boolean>;
-  update(entity: TEntity): Promise<boolean>;
-  async update(entity: TEntity, fields?: unknown): Promise<boolean> {
+  async update(entity: TEntity): Promise<boolean> {
     const [updatedRows] = await this.model.update(entity, {
       where: { id: entity.id } as WhereOptions,
     });
@@ -110,6 +105,16 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     });
 
     return data.map((model) => this.toJson(model, fields));
+  }
+
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<boolean>;
+  upsert(entity: TEntity): Promise<boolean>;
+  async upsert(entity: TEntity, fields?: unknown): Promise<unknown> {
+    const result = await this.model.upsert(entity as any);
+    return result[1];
   }
 
   /**

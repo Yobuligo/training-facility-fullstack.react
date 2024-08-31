@@ -9,7 +9,7 @@ import { IRepository } from "./IRepository";
 export interface IEntityRepository<TEntity extends IEntity>
   extends IRepository<TEntity> {
   delete(entity: TEntity): Promise<boolean>;
-  
+
   deleteById(id: string): Promise<boolean>;
 
   findAll<K extends keyof TEntity>(
@@ -29,10 +29,6 @@ export interface IEntityRepository<TEntity extends IEntity>
   ): Promise<IEntitySubset<TEntity, K>>;
   insert(entity: IEntityDetails<TEntity>): Promise<TEntity>;
 
-  update<K extends keyof TEntity>(
-    entity: TEntity,
-    fields: K[]
-  ): Promise<boolean>;
   update(entity: TEntity): Promise<boolean>;
 
   updateAll<K extends keyof TEntity>(
@@ -40,4 +36,10 @@ export interface IEntityRepository<TEntity extends IEntity>
     fields: K[]
   ): Promise<IEntitySubset<TEntity, K>[]>;
   updateAll(entities: TEntity[]): Promise<TEntity[]>;
+
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<boolean>;
+  upsert(entity: TEntity): Promise<boolean>;
 }

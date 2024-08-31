@@ -2,6 +2,7 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
+import { NotImplementedError } from "../../core/errors/NotImplementedError";
 import { Repository } from "./Repository";
 import { RESTApi } from "./RESTApi";
 
@@ -70,6 +71,15 @@ export abstract class EntityRepository<TEntity extends IEntity>
     return await RESTApi.put(`${this.url}`, entities, {
       fields: requestFields,
     });
+  }
+
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<boolean>;
+  upsert(entity: TEntity): Promise<boolean>;
+  upsert(entity: unknown, fields?: unknown): Promise<unknown> {
+    throw new NotImplementedError();
   }
 
   protected getFields(fields: unknown): string[] {

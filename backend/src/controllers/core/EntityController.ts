@@ -81,8 +81,7 @@ export abstract class EntityController<
       `${this.routeMeta.path}/:id`,
       SessionInterceptor(async (req, res) => {
         const entity: TEntity = req.body;
-        const fields = this.getFieldsFromQuery(req.query);
-        const wasUpdated = await this.repo.update(entity, fields);
+        const wasUpdated = await this.repo.update(entity);
         res.status(200).send(wasUpdated);
       })
     );

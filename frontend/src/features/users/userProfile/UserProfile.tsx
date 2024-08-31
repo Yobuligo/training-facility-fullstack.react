@@ -118,8 +118,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           onToggleCollapse={viewModel.onToggleCollapseBank}
           title={t(texts.userProfile.bank)}
         >
-          TODO
-          {/* <LabeledInput
+          <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.userProfile.bankAccountOwner)}
             onChange={viewModel.setBankAccountOwner}
@@ -145,7 +144,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             label={t(texts.userProfile.bankAccountInstitution)}
             onChange={viewModel.setBankAccountInstitution}
             value={viewModel.bankAccountInstitution}
-          /> */}
+          />
         </UserProfileGroup>
 
         {props.isAdminMode && (
