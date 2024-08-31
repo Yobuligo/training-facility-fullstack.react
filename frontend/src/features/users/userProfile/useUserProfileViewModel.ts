@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -21,7 +22,11 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
       ? false
       : true
   );
-  const [birthday, setBirthday] = useState(props.userProfile.birthday);
+  const [birthday, setBirthday] = useState(
+    props.userProfile.birthday
+      ? DateTime.toDate(props.userProfile.birthday)
+      : ""
+  );
   const [email, setEmail] = useState(props.userProfile.email);
   const [firstname, setFirstname] = useState(props.userProfile.firstname);
   const [lastname, setLastname] = useState(props.userProfile.lastname);
@@ -56,7 +61,11 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   );
 
   const reset = useCallback(() => {
-    setBirthday(props.userProfile.birthday);
+    setBirthday(
+      props.userProfile.birthday
+        ? DateTime.toDate(props.userProfile.birthday)
+        : ""
+    );
     setEmail(props.userProfile.email);
     setFirstname(props.userProfile.firstname);
     setLastname(props.userProfile.lastname);
@@ -155,8 +164,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
   // const onIsAdminChange = (option: ISelectOption<boolean>) =>
   //   setIsAdmin(option.key);
 
-  const onChangeBirthday = (newValue: string) =>
-    setBirthday(new Date(newValue));
+  const onChangeBirthday = (newValue: string) => setBirthday(newValue);
 
   const onChangePostalCode = (newValue: string) => {
     setPostalCode(parseInt(newValue).toString());
@@ -194,7 +202,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     });
 
   const onSave = () => {
-    props.userProfile.birthday = birthday;
+    props.userProfile.birthday = DateTime.create(birthday, "12:00");
     props.userProfile.email = email;
     props.userProfile.firstname = firstname;
     props.userProfile.lastname = lastname;

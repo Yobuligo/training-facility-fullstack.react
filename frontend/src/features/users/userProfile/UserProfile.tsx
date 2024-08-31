@@ -6,7 +6,6 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { toDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProfileProps } from "./IUserProfileProps";
@@ -75,7 +74,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
             label={t(texts.userProfile.birthday)}
             type="date"
             onChange={viewModel.onChangeBirthday}
-            value={viewModel.birthday ? toDate(viewModel.birthday) : ""}
+            value={viewModel.birthday}
           />
 
           <LabeledSelect
