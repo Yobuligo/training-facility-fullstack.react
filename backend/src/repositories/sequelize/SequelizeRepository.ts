@@ -65,10 +65,10 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   insert(entity: IEntityDetails<TEntity>): Promise<TEntity>;
   async insert(
     entity: IEntityDetails<TEntity>,
-    fields?: unknown
+    second?: unknown
   ): Promise<unknown> {
     const data = await this.model.create(entity as any);
-    return this.toJson(data, fields);
+    return this.toJson(data, second);
   }
 
   async update(entity: TEntity): Promise<boolean> {

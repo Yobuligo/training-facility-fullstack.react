@@ -51,6 +51,40 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
+  // insert<K extends keyof IUserSecure>(
+  //   entity: IEntityDetails<IUserSecure>,
+  //   fields: K[]
+  // ): Promise<IEntitySubset<IUserSecure, K>>;
+  // insert(entity: IEntityDetails<IUserSecure>): Promise<IUserSecure>;
+  // async insert(
+  //   entity: IEntityDetails<IUserSecure>,
+  //   fields?: unknown
+  // ): Promise<unknown> {
+  //   const transaction = await db.transaction();
+  //   try {
+  //     // create user
+  //     const userRepo = new UserRepo();
+  //     const user = await userRepo.createUser({
+  //       username: entity.username,
+  //       password: "initial",
+  //     });
+
+  //     // create profile
+  //     const userProfileRepo = new UserProfileRepo();
+  //     const userProfile = await userProfileRepo.insert(
+  //       checkNotNull(user.userProfile)
+  //     );
+
+  //     // create user roles
+  //     const userRoleRepo = new UserRoleRepo();
+  //     await userRoleRepo.insert({ role: AuthRole.USER, userId: user.id });
+  //     return userProfile;
+  //   } catch (error) {
+  //     transaction.rollback();
+  //     throw error;
+  //   }
+  // }
+
   private async findByUsernameSecure(
     username: string
   ): Promise<IUserSecure | undefined> {

@@ -56,6 +56,14 @@ export class List {
   }
 
   /**
+   * Deletes the last element from the list
+   */
+  static deleteLast<T>(list: T[]): boolean {
+    const deletedElements = list.splice(list.length - 1, 1);
+    return deletedElements.length > 0;
+  }
+
+  /**
    * Returns a newly created list, which contains all elements of the origin list except for duplicates.
    * Duplicates are identified by comparing the line type *{@link T}*, no matter if it is a scalar type or a reference type.
    */
