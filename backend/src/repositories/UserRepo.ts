@@ -1,13 +1,21 @@
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
+import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/IUserSecure";
 import { User } from "../model/User";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
+import { IUserProfile } from "../shared/model/IUserProfile";
+import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
 import { uuid } from "../utils/uuid";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { transaction } from "./sequelize/utils/transaction";
+import { UserProfileRepo } from "./UserProfileRepo";
+import { UserRoleRepo } from "./UserRoleRepo";
 
 export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
@@ -21,7 +29,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     const salt = hash(uuid());
     const password = hashPassword(credentials.password, salt);
 
-    const user = await this.insert({
+    const user = await super.insert({
       password,
       salt,
       username: credentials.username,
@@ -51,39 +59,42 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
-  // insert<K extends keyof IUserSecure>(
-  //   entity: IEntityDetails<IUserSecure>,
-  //   fields: K[]
-  // ): Promise<IEntitySubset<IUserSecure, K>>;
-  // insert(entity: IEntityDetails<IUserSecure>): Promise<IUserSecure>;
-  // async insert(
-  //   entity: IEntityDetails<IUserSecure>,
-  //   fields?: unknown
-  // ): Promise<unknown> {
-  //   const transaction = await db.transaction();
-  //   try {
-  //     // create user
-  //     const userRepo = new UserRepo();
-  //     const user = await userRepo.createUser({
-  //       username: entity.username,
-  //       password: "initial",
-  //     });
+  insert<K extends keyof IUserSecure>(
+    entity: IEntityDetails<IUserSecure>,
+    fields: K[]
+  ): Promise<IEntitySubset<IUserSecure, K>>;
+  insert(entity: IEntityDetails<IUserSecure>): Promise<IUserSecure>;
+  async insert(
+    entity: IEntityDetails<IUserSecure>,
+    fields?: unknown
+  ): Promise<unknown> {
+    let user: IUser | undefined = undefined;
 
-  //     // create profile
-  //     const userProfileRepo = new UserProfileRepo();
-  //     const userProfile = await userProfileRepo.insert(
-  //       checkNotNull(user.userProfile)
-  //     );
+    await transaction(async () => {
+      // create user
+      const userRepo = new UserRepo();
+      user = await userRepo.createUser({
+        username: entity.username,
+        password: "initial",
+      });
 
-  //     // create user roles
-  //     const userRoleRepo = new UserRoleRepo();
-  //     await userRoleRepo.insert({ role: AuthRole.USER, userId: user.id });
-  //     return userProfile;
-  //   } catch (error) {
-  //     transaction.rollback();
-  //     throw error;
-  //   }
-  // }
+      // create profile
+      const userProfileRepo = new UserProfileRepo();
+      user.userProfile = await userProfileRepo.insert(
+        checkNotNull(user.userProfile)
+      );
+
+      // create user roles
+      const userRoleRepo = new UserRoleRepo();
+      const userRole = await userRoleRepo.insert({
+        role: AuthRole.USER,
+        userId: user.id,
+      });
+      user.userRoles.push(userRole);
+    });
+
+    return user;
+  }
 
   private async findByUsernameSecure(
     username: string
