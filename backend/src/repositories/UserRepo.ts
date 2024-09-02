@@ -7,7 +7,6 @@ import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
-import { IUserProfile } from "../shared/model/IUserProfile";
 import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
