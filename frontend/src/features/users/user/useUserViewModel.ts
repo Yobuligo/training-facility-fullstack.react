@@ -62,6 +62,7 @@ export const useUserViewModel = (props: IUserProps) => {
       userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
     );
     setEmail(userProfile.email);
+    setUsername(props.user.username);
     setFirstname(userProfile.firstname);
     setLastname(userProfile.lastname);
     setGender(userProfile.gender);
@@ -82,6 +83,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setGradings(userProfile.userGradings);
     setDisplayMode(true);
   }, [
+    props.user.username,
     userProfile.birthday,
     userProfile.city,
     userProfile.deactivatedAt,
@@ -236,6 +238,7 @@ export const useUserViewModel = (props: IUserProps) => {
   };
 
   const onSave = () => {
+    props.user.username = username;
     userProfile.birthday = DateTime.create(birthday, "12:00");
     userProfile.email = email;
     userProfile.firstname = firstname;
