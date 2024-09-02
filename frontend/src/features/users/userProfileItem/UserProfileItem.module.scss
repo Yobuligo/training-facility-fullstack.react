@@ -5,15 +5,12 @@
   cursor: pointer;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
+  padding: 1rem;
 
   @include medium-screen {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
-}
-
-.selected {
-  background-color: $color-secondary-light;
 }
 
 .deactivated {
@@ -28,8 +25,4 @@
 
 .name {
   font-size: large;
-}
-
-.address {
-  font-size: medium;
 }

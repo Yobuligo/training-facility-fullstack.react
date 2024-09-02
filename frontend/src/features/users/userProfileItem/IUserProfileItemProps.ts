@@ -1,9 +1,6 @@
-import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { IUserProfileShort } from "../userProfileSection/IUserProfileShort";
 
 export interface IUserProfileItem {
-  isSelected?: boolean;
-  onCancel?: () => void;
-  onChange?: () => void;
   onSelect?: () => void;
-  userProfile: IUserProfile;
+  userProfileShort: IUserProfileShort;
 }

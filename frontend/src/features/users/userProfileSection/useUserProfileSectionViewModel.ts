@@ -16,6 +16,7 @@ export const useUserProfileSectionViewModel = () => {
     IUserProfile | undefined
   >();
   const [query, setQuery] = useState("");
+  const loadUserProfilesRequest = useRequest();
   const loadUserProfileRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfileShort[] => {
@@ -27,26 +28,27 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   useInitialize(() =>
-    loadUserProfileRequest.send(async () => {
+    loadUserProfilesRequest.send(async () => {
       const userProfileApi = new UserProfileApi();
-      const userProfilesShort: IUserProfileShort[] = await userProfileApi.findAll([
-        "id",
-        "userId",
-        "firstname",
-        "lastname",
-        "email",
-        "phone",
-      ]);
+      const userProfilesShort: IUserProfileShort[] =
+        await userProfileApi.findAll([
+          "id",
+          "userId",
+          "firstname",
+          "lastname",
+          "email",
+          "phone",
+          "isDeactivated",
+        ]);
       setUserProfilesShort(userProfilesShort);
     })
   );
 
-  const onSelect = (userProfile: IUserProfile) =>
-    setSelectedUserProfile((previous) => {
-      if (previous === userProfile) {
-        return undefined;
-      }
-      return userProfile;
+  const onSelect = (userProfileShort: IUserProfileShort) =>
+    loadUserProfileRequest.send(async () => {
+      const userProfileApi = new UserProfileApi();
+      const userProfile = await userProfileApi.findById(userProfileShort.id);
+      setSelectedUserProfile(userProfile);
     });
 
   const onChange = (userProfile: IUserProfile) =>
@@ -88,14 +90,14 @@ export const useUserProfileSectionViewModel = () => {
    */
   const onBack = () => setSelectedUserProfile(undefined);
 
-  const onCancel = (userProfile: IUserProfile) => {
+  const onCancel = (userProfileShort: IUserProfileShort) => {
     // if user profile is a dummy object (which is not persisted), delete it from the list
     if (
-      userProfile instanceof DummyUserProfile &&
-      userProfile.isPersisted === false
+      userProfileShort instanceof DummyUserProfile &&
+      userProfileShort.isPersisted === false
     ) {
       setUserProfilesShort((previous) => {
-        List.delete(previous, (item) => item.id === userProfile.id);
+        List.delete(previous, (item) => item.id === userProfileShort.id);
         return [...previous];
       });
     }
@@ -104,6 +106,7 @@ export const useUserProfileSectionViewModel = () => {
   return {
     filterUserProfiles,
     loadUserProfileRequest,
+    loadUserProfilesRequest,
     onAppend,
     onBack,
     onCancel,
