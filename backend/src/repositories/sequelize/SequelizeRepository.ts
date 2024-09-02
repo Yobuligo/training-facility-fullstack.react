@@ -1,4 +1,3 @@
-import { transaction } from "./utils/transaction";
 import {
   FindOptions,
   Includeable,
@@ -70,10 +69,9 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     entity: IEntityDetails<TEntity>,
     fields?: unknown
   ): Promise<unknown> {
-    const transaction = findTransaction();
     const data = await this.model.create(entity as any, {
-      transaction,
-    }); 
+      transaction: findTransaction(),
+    });
     return this.toJson(data, fields);
   }
 
@@ -166,7 +164,6 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     let options: Omit<FindOptions<TEntity>, "where"> | undefined = {};
     options.attributes = this.getAttributes(fields);
     options.include = this.getIncludes(fields);
-    options.transaction = findTransaction();
     return options;
   }
 
