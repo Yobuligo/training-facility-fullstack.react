@@ -93,7 +93,7 @@ export const useUserProfileSectionViewModel = () => {
   const onDelete = (user: IUser) => {
     setUserProfilesShort((previous) => {
       setSelectedUser(undefined);
-      List.delete(previous, (item) => item.userId === user.id);
+      List.delete(previous, (item) => item.id === user.userProfile?.id);
       deleteUser(user);
       return [...previous];
     });
