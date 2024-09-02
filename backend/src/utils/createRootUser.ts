@@ -3,7 +3,7 @@ import { UserRepo } from "../repositories/UserRepo";
 import { UserRoleRepo } from "../repositories/UserRoleRepo";
 import { Gender } from "../shared/types/Gender";
 import { Tariff } from "../shared/types/Tariff";
-import { UserRole } from "../shared/types/UserRole";
+import { AuthRole } from "../shared/types/AuthRole";
 
 export const createRootUser = async () => {
   // check if user already exists, otherwise create one
@@ -34,12 +34,12 @@ export const createRootUser = async () => {
 
   const userRoleRepo = new UserRoleRepo();
   await userRoleRepo.insert({
-    role: UserRole.ADMIN,
+    role: AuthRole.ADMIN,
     userId: user.id,
   });
 
   await userRoleRepo.insert({
-    role: UserRole.USER,
+    role: AuthRole.USER,
     userId: user.id,
   });
 };
