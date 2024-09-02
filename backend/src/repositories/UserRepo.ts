@@ -7,6 +7,7 @@ import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
+import { IUserProfile } from "../shared/model/IUserProfile";
 import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
@@ -67,32 +68,40 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     entity: IEntityDetails<IUserSecure>,
     fields?: unknown
   ): Promise<unknown> {
-    let user: IUser | undefined = undefined;
+    let createdUser: IUser | undefined = undefined;
 
-    await transaction(async () => {
+    await transaction(async (transaction) => {
       // create user
-      const userRepo = new UserRepo();
-      user = await userRepo.createUser({
+      const userSecure = await this.createUser({
         username: entity.username,
         password: "initial",
       });
 
+      createdUser = {
+        id: userSecure.id,
+        username: userSecure.username,
+        userRoles: [],
+        createdAt: userSecure.createdAt,
+        updatedAt: userSecure.updatedAt,
+      };
+
       // create profile
+      const userProfile: IUserProfile = checkNotNull(entity.userProfile);
+      userProfile.userId = createdUser.id;
       const userProfileRepo = new UserProfileRepo();
-      user.userProfile = await userProfileRepo.insert(
-        checkNotNull(user.userProfile)
-      );
+      createdUser.userProfile = await userProfileRepo.insert(userProfile);
 
       // create user roles
       const userRoleRepo = new UserRoleRepo();
       const userRole = await userRoleRepo.insert({
         role: AuthRole.USER,
-        userId: user.id,
+        userId: createdUser.id,
       });
-      user.userRoles.push(userRole);
+      createdUser.userRoles.push(userRole);
+      await transaction.commit();
     });
 
-    return user;
+    return createdUser;
   }
 
   private async findByUsernameSecure(

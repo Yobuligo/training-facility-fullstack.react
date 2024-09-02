@@ -10,14 +10,15 @@ import { TransactionStack } from "./TransactionStack";
  * Throws errors and rolls back changes.
  */
 export const transaction = async (
-  block: (transaction: Transaction) => void
+  block: (transaction: Transaction) => Promise<void>
 ) => {
-  const transaction = await db.transaction();
+  let transaction: Transaction | null = await db.transaction();
   TransactionStack.instance.push(transaction);
   try {
-    block(transaction);
+    await block(transaction);
   } catch (error) {
-    transaction.rollback();
+    await transaction.rollback();
+    transaction = null
     throw error;
   }
   TransactionStack.instance.pop();

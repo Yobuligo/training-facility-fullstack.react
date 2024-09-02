@@ -1,3 +1,4 @@
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { createError } from "../core/utils/createError";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
@@ -7,6 +8,7 @@ import { ISession } from "../shared/model/ISession";
 import { IUser, UserRouteMeta } from "../shared/model/IUser";
 import { EntityController } from "./core/EntityController";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {

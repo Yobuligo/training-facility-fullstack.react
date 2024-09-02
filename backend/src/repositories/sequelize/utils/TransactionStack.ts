@@ -24,6 +24,6 @@ export class TransactionStack implements ITransactionStack {
   }
 
   peek(): Transaction | undefined {
-    return List.last(this.stack);
+    return List.lastOrNull(this.stack);
   }
 }

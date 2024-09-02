@@ -1,3 +1,4 @@
+import { transaction } from "./utils/transaction";
 import {
   FindOptions,
   Includeable,
@@ -67,12 +68,13 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   insert(entity: IEntityDetails<TEntity>): Promise<TEntity>;
   async insert(
     entity: IEntityDetails<TEntity>,
-    second?: unknown
+    fields?: unknown
   ): Promise<unknown> {
+    const transaction = findTransaction();
     const data = await this.model.create(entity as any, {
-      transaction: findTransaction(),
-    });
-    return this.toJson(data, second);
+      transaction,
+    }); 
+    return this.toJson(data, fields);
   }
 
   async update(entity: TEntity): Promise<boolean> {
