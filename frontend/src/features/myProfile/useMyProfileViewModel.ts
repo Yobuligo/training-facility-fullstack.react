@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useInitialize } from "../../hooks/useInitialize";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
@@ -14,7 +15,7 @@ export const useMyProfileViewModel = () => {
   const loadUserProfileRequest = useRequest();
   const changeUserProfileRequest = useRequest();
 
-  const loadUser = useCallback(async () => {
+  const loadUser = async () => {
     if (!session) {
       setError(t(texts.myProfile.errorLoadingUserSession));
       return;
@@ -29,11 +30,11 @@ export const useMyProfileViewModel = () => {
         setUser(readUserProfile);
       }
     });
-  }, [session]);
+  };
 
-  useEffect(() => {
+  useInitialize(() => {
     loadUser();
-  }, [loadUser]);
+  });
 
   const onChange = (user: IUser) =>
     changeUserProfileRequest.send(async () => {
