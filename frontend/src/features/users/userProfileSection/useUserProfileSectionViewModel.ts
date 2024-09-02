@@ -6,28 +6,38 @@ import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { IUserProfileShort } from "./IUserProfileShort";
 
 export const useUserProfileSectionViewModel = () => {
-  const [userProfiles, setUserProfiles] = useState<IUserProfile[]>([]);
+  const [userProfilesShort, setUserProfilesShort] = useState<
+    IUserProfileShort[]
+  >([]);
   const [selectedUserProfile, setSelectedUserProfile] = useState<
     IUserProfile | undefined
   >();
   const [query, setQuery] = useState("");
   const loadUserProfileRequest = useRequest();
 
-  const filterUserProfiles = (): IUserProfile[] => {
+  const filterUserProfiles = (): IUserProfileShort[] => {
     if (query.length === 0) {
-      return userProfiles;
+      return userProfilesShort;
     }
-    const fuzzySearch = new FuzzySearch<IUserProfile>();
-    return fuzzySearch.search(query, userProfiles);
+    const fuzzySearch = new FuzzySearch<IUserProfileShort>();
+    return fuzzySearch.search(query, userProfilesShort);
   };
 
   useInitialize(() =>
     loadUserProfileRequest.send(async () => {
       const userProfileApi = new UserProfileApi();
-      const userProfiles = await userProfileApi.findAll();
-      setUserProfiles(userProfiles);
+      const userProfilesShort: IUserProfileShort[] = await userProfileApi.findAll([
+        "id",
+        "userId",
+        "firstname",
+        "lastname",
+        "email",
+        "phone",
+      ]);
+      setUserProfilesShort(userProfilesShort);
     })
   );
 
@@ -40,7 +50,7 @@ export const useUserProfileSectionViewModel = () => {
     });
 
   const onChange = (userProfile: IUserProfile) =>
-    setUserProfiles((previous) => {
+    setUserProfilesShort((previous) => {
       const index = previous.findIndex((item) => item.id === userProfile.id);
 
       // todo: if user profile is a dummy object (which is not persisted), save it to db and mark it as persisted
@@ -66,7 +76,7 @@ export const useUserProfileSectionViewModel = () => {
    * Appends a new user profile, which is not persisted yet
    */
   const onAppend = () => {
-    setUserProfiles((previous) => {
+    setUserProfilesShort((previous) => {
       const userProfile: IUserProfile = new DummyUserProfile();
       setSelectedUserProfile(userProfile);
       return [userProfile, ...previous];
@@ -84,7 +94,7 @@ export const useUserProfileSectionViewModel = () => {
       userProfile instanceof DummyUserProfile &&
       userProfile.isPersisted === false
     ) {
-      setUserProfiles((previous) => {
+      setUserProfilesShort((previous) => {
         List.delete(previous, (item) => item.id === userProfile.id);
         return [...previous];
       });
