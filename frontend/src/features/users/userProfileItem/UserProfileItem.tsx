@@ -1,4 +1,5 @@
 import { Card } from "../../../components/card/Card";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { style } from "../../../core/ui/style";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -45,12 +46,14 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
           <div>
             {t(texts.userProfile.birthday)}
             {": "}
-            {props.userProfile.birthday?.toString()}
+            {props.userProfile.birthday
+              ? DateTime.format(props.userProfile.birthday, "dd.MM.yyyy")
+              : ""}
           </div>
           <div>
             {t(texts.userProfile.joinedOn)}
             {": "}
-            {props.userProfile.joinedOn.toDateString()}
+            {DateTime.format(props.userProfile.joinedOn, "dd.MM.yyyy")}
           </div>
         </div>
       </Card>
