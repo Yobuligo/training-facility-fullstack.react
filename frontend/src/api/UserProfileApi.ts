@@ -11,14 +11,6 @@ export class UserProfileApi extends EntityRepository<IUserProfile> {
     super(UserProfileMeta);
   }
 
-  insert(data: IUserProfile): Promise<IUserProfile> {
-    // Todo: replace by productive code
-    return new Promise((resolve) => {
-      DummyUserProfiles.push(data);
-      resolve(data);
-    });
-  }
-
   async findByQuery(query: string): Promise<IUserProfile[]> {
     return new FuzzySearch<IUserProfile>().search(query, DummyUserProfiles);
   }

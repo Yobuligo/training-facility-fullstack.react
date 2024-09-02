@@ -3,6 +3,7 @@ import { UserProfileApi } from "../../../api/UserProfileApi";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
+import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
@@ -18,6 +19,8 @@ export const useUserProfileSectionViewModel = () => {
   const [query, setQuery] = useState("");
   const loadUserProfilesRequest = useRequest();
   const loadUserProfileRequest = useRequest();
+  const insertUserProfileRequest = useRequest();
+  const updateUserProfileRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfileShort[] => {
     if (query.length === 0) {
@@ -46,26 +49,36 @@ export const useUserProfileSectionViewModel = () => {
 
   const onSelect = (userProfileShort: IUserProfileShort) =>
     loadUserProfileRequest.send(async () => {
+      const userApi = new UserApi();
+      const user = await userApi.findById(userProfileShort.userId);
       const userProfileApi = new UserProfileApi();
       const userProfile = await userProfileApi.findById(userProfileShort.id);
       setSelectedUserProfile(userProfile);
     });
 
+  const insertUserProfile = (userProfile: IUserProfile) =>
+    insertUserProfileRequest.send(async () => {
+      const userProfileApi = new UserProfileApi();
+      await userProfileApi.insert(userProfile);
+    });
+
+  const updateUserProfile = (userProfile: IUserProfile) =>
+    updateUserProfileRequest.send(async () => {
+      const userProfileApi = new UserProfileApi();
+      await userProfileApi.update(userProfile);
+    });
+
   const onChange = (userProfile: IUserProfile) =>
     setUserProfilesShort((previous) => {
       const index = previous.findIndex((item) => item.id === userProfile.id);
-
-      // todo: if user profile is a dummy object (which is not persisted), save it to db and mark it as persisted
-      const userProfileApi = new UserProfileApi();
       if (
         userProfile instanceof DummyUserProfile &&
         userProfile.isPersisted === false
       ) {
         userProfile.setIsPersisted();
-
-        userProfileApi.insert(userProfile);
+        insertUserProfile(userProfile);
       } else {
-        userProfileApi.update(userProfile);
+        updateUserProfile(userProfile);
       }
 
       if (index !== -1) {

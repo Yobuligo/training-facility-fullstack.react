@@ -29,6 +29,7 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
       : ""
   );
   const [email, setEmail] = useState(props.userProfile.email);
+  const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState(props.userProfile.firstname);
   const [lastname, setLastname] = useState(props.userProfile.lastname);
   const [gender, setGender] = useState(props.userProfile.gender);
@@ -345,7 +346,9 @@ export const useUserProfileViewModel = (props: IUserProfileProps) => {
     setGender,
     setPhone,
     setStreet,
+    setUsername,
     street,
     tariffOptions,
+    username,
   };
 };

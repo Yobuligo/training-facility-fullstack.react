@@ -194,7 +194,8 @@
         "sendInvitation": "Send invitation",
         "street": "Street",
         "tariff": "Tariff",
-        "technicalInformation": "Technical Information"
+        "technicalInformation": "Technical Information",
+        "username": "Username"
     },
     "userProfileItem": {
         "deactivated": "Deactivated"

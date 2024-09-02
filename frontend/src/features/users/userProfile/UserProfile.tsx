@@ -35,6 +35,13 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
         >
           <LabeledInput
             disabled={viewModel.displayMode}
+            label={t(texts.userProfile.username)}
+            onChange={viewModel.setUsername}
+            value={viewModel.username}
+          />
+
+          <LabeledInput
+            disabled={viewModel.displayMode}
             label={t(texts.userProfile.firstname)}
             onChange={viewModel.setFirstname}
             value={viewModel.firstname}
