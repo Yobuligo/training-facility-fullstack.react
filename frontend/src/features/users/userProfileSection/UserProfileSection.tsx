@@ -1,6 +1,8 @@
 import { Button } from "../../../components/button/Button";
+import { Spinner } from "../../../components/spinner/Spinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import colors from "../../../styles/colors.module.scss";
 import { Search } from "../../search/Search";
 import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
 import { UserProfileList } from "../userProfileList/UserProfileList";
@@ -27,15 +29,22 @@ export const UserProfileSection: React.FC = () => {
             <Button onClick={viewModel.onAppend}>
               {t(texts.userProfileSection.addUser)}
             </Button>
-            <Search onSearch={(query) => viewModel.setQuery(query)} query={viewModel.query} />
+            <Search
+              onSearch={(query) => viewModel.setQuery(query)}
+              query={viewModel.query}
+            />
           </div>
-          <UserProfileList
-            onCancel={viewModel.onCancel}
-            onChange={viewModel.onChange}
-            onSelect={viewModel.onSelect}
-            selected={viewModel.selectedUserProfile}
-            userProfiles={viewModel.filterUserProfiles()}
-          />
+          {viewModel.loadUserProfileRequest.isProcessing ? (
+            <Spinner color={colors.colorSecondary} />
+          ) : (
+            <UserProfileList
+              onCancel={viewModel.onCancel}
+              onChange={viewModel.onChange}
+              onSelect={viewModel.onSelect}
+              selected={viewModel.selectedUserProfile}
+              userProfiles={viewModel.filterUserProfiles()}
+            />
+          )}
         </>
       )}
     </div>

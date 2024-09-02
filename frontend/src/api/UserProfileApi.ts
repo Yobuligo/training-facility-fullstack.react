@@ -5,7 +5,6 @@ import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 import { DummyUserProfiles } from "./DummyUserProfiles";
-import { UserGradingApi } from "./UserGradingApi";
 
 export class UserProfileApi extends EntityRepository<IUserProfile> {
   constructor() {
@@ -17,18 +16,6 @@ export class UserProfileApi extends EntityRepository<IUserProfile> {
     return new Promise((resolve) => {
       DummyUserProfiles.push(data);
       resolve(data);
-    });
-  }
-
-  findAll(): Promise<IUserProfile[]> {
-    // Todo: replace by productive code
-    return new Promise(async (resolve) => {
-      const gradingApi = new UserGradingApi();
-      await DummyUserProfiles.map(async (userProfile) => {
-        const gradings = await gradingApi.findByUserId(userProfile.userId);
-        userProfile.userGradings = gradings;
-      });
-      resolve(DummyUserProfiles);
     });
   }
 

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserProfileApi } from "../../../api/UserProfileApi";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
+import { useInitialize } from "../../../hooks/useInitialize";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 
@@ -11,12 +13,7 @@ export const useUserProfileSectionViewModel = () => {
     IUserProfile | undefined
   >();
   const [query, setQuery] = useState("");
-
-  const loadUserProfiles = async () => {
-    const userProfileApi = new UserProfileApi();
-    const userProfiles = await userProfileApi.findAll();
-    setUserProfiles(userProfiles);
-  };
+  const loadUserProfileRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfile[] => {
     if (query.length === 0) {
@@ -26,9 +23,13 @@ export const useUserProfileSectionViewModel = () => {
     return fuzzySearch.search(query, userProfiles);
   };
 
-  useEffect(() => {
-    loadUserProfiles();
-  }, []);
+  useInitialize(() =>
+    loadUserProfileRequest.send(async () => {
+      const userProfileApi = new UserProfileApi();
+      const userProfiles = await userProfileApi.findAll();
+      setUserProfiles(userProfiles);
+    })
+  );
 
   const onSelect = (userProfile: IUserProfile) =>
     setSelectedUserProfile((previous) => {
@@ -92,6 +93,7 @@ export const useUserProfileSectionViewModel = () => {
 
   return {
     filterUserProfiles,
+    loadUserProfileRequest,
     onAppend,
     onBack,
     onCancel,
