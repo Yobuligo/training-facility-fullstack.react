@@ -8,23 +8,23 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
-import { IUserProfileProps } from "./IUserProfileProps";
-import styles from "./UserProfile.module.scss";
-import { useUserProfileViewModel } from "./useUserProfileViewModel";
+import { IUserProps } from "./IUserProps";
+import styles from "./User.module.scss";
+import { useUserViewModel } from "./useUserViewModel";
 
-export const UserProfile: React.FC<IUserProfileProps> = (props) => {
-  const viewModel = useUserProfileViewModel(props);
+export const User: React.FC<IUserProps> = (props) => {
+  const viewModel = useUserViewModel(props);
   const { t } = useTranslation();
 
   return (
-    <div className={styles.userProfile}>
+    <div className={styles.user}>
       <ChangeableForm
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}
         onSave={viewModel.onSave}
         setDisplayMode={viewModel.setDisplayMode}
       >
-        <h3>{`${props.userProfile.firstname} ${props.userProfile.lastname} (${props.userProfile.memberId})`}</h3>
+        <h3>{`${props.user.userProfile?.firstname} ${props.user.userProfile?.lastname} (${props.user.userProfile?.memberId})`}</h3>
 
         <UserProfileGroup
           collapsed={
@@ -167,7 +167,7 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
               isAdminMode={props.isAdminMode}
               onAddGrading={viewModel.onAddGrading}
               onDelete={viewModel.onDeleteGrading}
-              userId={props.userProfile.userId}
+              userId={props.user.id}
             />
           </UserProfileGroup>
         )}
@@ -182,7 +182,12 @@ export const UserProfile: React.FC<IUserProfileProps> = (props) => {
           <div>
             <div>{t(texts.userProfile.joinedOn)}</div>
             <div>
-              {DateTime.format(props.userProfile.joinedOn, "dd.MM.yyyy")}
+              {props.user.userProfile
+                ? DateTime.format(
+                    props.user.userProfile?.joinedOn,
+                    "dd.MM.yyyy"
+                  )
+                : ""}
             </div>
           </div>
           {props.isAdminMode && (

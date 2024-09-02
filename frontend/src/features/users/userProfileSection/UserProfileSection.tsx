@@ -4,7 +4,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import colors from "../../../styles/colors.module.scss";
 import { Search } from "../../search/Search";
-import { UserProfileDetails } from "../userProfileDetails/UserProfileDetails";
+import { UserDetails } from "../userDetails/UserDetails";
 import { UserProfileList } from "../userProfileList/UserProfileList";
 import styles from "./UserProfileSection.module.scss";
 import { useUserProfileSectionViewModel } from "./useUserProfileSectionViewModel";
@@ -15,10 +15,10 @@ export const UserProfileSection: React.FC = () => {
 
   return (
     <div className={styles.userProfileSection}>
-      {viewModel.selectedUserProfile ? (
-        <UserProfileDetails
+      {viewModel.selectedUser ? (
+        <UserDetails
           isAdminMode={true}
-          userProfile={viewModel.selectedUserProfile}
+          user={viewModel.selectedUser}
           onBack={viewModel.onBack}
           onCancel={viewModel.onCancel}
           onChange={viewModel.onChange}

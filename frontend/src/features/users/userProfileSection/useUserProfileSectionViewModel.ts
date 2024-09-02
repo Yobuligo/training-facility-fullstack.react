@@ -2,25 +2,24 @@ import { useState } from "react";
 import { UserProfileApi } from "../../../api/UserProfileApi";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { DummyUserProfile } from "../../../model/DummyUserProfile";
-import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { DummyUser } from "../../../model/DummyUser";
+import { IUser } from "../../../shared/model/IUser";
 import { IUserProfileShort } from "./IUserProfileShort";
 
 export const useUserProfileSectionViewModel = () => {
   const [userProfilesShort, setUserProfilesShort] = useState<
     IUserProfileShort[]
   >([]);
-  const [selectedUserProfile, setSelectedUserProfile] = useState<
-    IUserProfile | undefined
-  >();
+  const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
   const loadUserProfilesRequest = useRequest();
-  const loadUserProfileRequest = useRequest();
-  const insertUserProfileRequest = useRequest();
-  const updateUserProfileRequest = useRequest();
+  const loadUserRequest = useRequest();
+  const insertUserRequest = useRequest();
+  const updateUserRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfileShort[] => {
     if (query.length === 0) {
@@ -48,41 +47,38 @@ export const useUserProfileSectionViewModel = () => {
   );
 
   const onSelect = (userProfileShort: IUserProfileShort) =>
-    loadUserProfileRequest.send(async () => {
+    loadUserRequest.send(async () => {
       const userApi = new UserApi();
       const user = await userApi.findById(userProfileShort.userId);
-      const userProfileApi = new UserProfileApi();
-      const userProfile = await userProfileApi.findById(userProfileShort.id);
-      setSelectedUserProfile(userProfile);
+      setSelectedUser(user);
     });
 
-  const insertUserProfile = (userProfile: IUserProfile) =>
-    insertUserProfileRequest.send(async () => {
-      const userProfileApi = new UserProfileApi();
-      await userProfileApi.insert(userProfile);
+  const insertUser = (user: IUser) =>
+    insertUserRequest.send(async () => {
+      const userApi = new UserApi();
+      await userApi.insert(user);
     });
 
-  const updateUserProfile = (userProfile: IUserProfile) =>
-    updateUserProfileRequest.send(async () => {
-      const userProfileApi = new UserProfileApi();
-      await userProfileApi.update(userProfile);
+  const updateUser = (user: IUser) =>
+    updateUserRequest.send(async () => {
+      const userApi = new UserApi();
+      await userApi.update(user);
     });
 
-  const onChange = (userProfile: IUserProfile) =>
+  const onChange = (user: IUser) =>
     setUserProfilesShort((previous) => {
-      const index = previous.findIndex((item) => item.id === userProfile.id);
-      if (
-        userProfile instanceof DummyUserProfile &&
-        userProfile.isPersisted === false
-      ) {
-        userProfile.setIsPersisted();
-        insertUserProfile(userProfile);
+      const index = previous.findIndex(
+        (item) => item.id === user.userProfile?.id
+      );
+      if (user instanceof DummyUser && user.isPersisted === false) {
+        user.setIsPersisted();
+        insertUser(user);
       } else {
-        updateUserProfile(userProfile);
+        updateUser(user);
       }
 
       if (index !== -1) {
-        previous.splice(index, 1, userProfile);
+        previous.splice(index, 1, checkNotNull(user.userProfile));
       }
       return [...previous];
     });
@@ -90,27 +86,23 @@ export const useUserProfileSectionViewModel = () => {
   /**
    * Appends a new user profile, which is not persisted yet
    */
-  const onAppend = () => {
+  const onAppend = () =>
     setUserProfilesShort((previous) => {
-      const userProfile: IUserProfile = new DummyUserProfile();
-      setSelectedUserProfile(userProfile);
-      return [userProfile, ...previous];
+      const user: IUser = new DummyUser();
+      setSelectedUser(user);
+      return [checkNotNull(user.userProfile), ...previous];
     });
-  };
 
   /**
    * Handles event on click back from the user profile detail screen
    */
-  const onBack = () => setSelectedUserProfile(undefined);
+  const onBack = () => setSelectedUser(undefined);
 
-  const onCancel = (userProfileShort: IUserProfileShort) => {
-    // if user profile is a dummy object (which is not persisted), delete it from the list
-    if (
-      userProfileShort instanceof DummyUserProfile &&
-      userProfileShort.isPersisted === false
-    ) {
+  const onCancel = (user: IUser) => {
+    // if user is a dummy object (which is not persisted), delete it from the list
+    if (user instanceof DummyUser && user.isPersisted === false) {
       setUserProfilesShort((previous) => {
-        List.delete(previous, (item) => item.id === userProfileShort.id);
+        List.delete(previous, (item) => item.id === user.userProfile?.id);
         return [...previous];
       });
     }
@@ -118,7 +110,7 @@ export const useUserProfileSectionViewModel = () => {
 
   return {
     filterUserProfiles,
-    loadUserProfileRequest,
+    loadUserProfileRequest: loadUserRequest,
     loadUserProfilesRequest,
     onAppend,
     onBack,
@@ -126,7 +118,7 @@ export const useUserProfileSectionViewModel = () => {
     onChange,
     onSelect,
     query,
-    selectedUserProfile,
+    selectedUser,
     setQuery,
   };
 };
