@@ -12,14 +12,14 @@ import { TransactionStack } from "./TransactionStack";
 export const transaction = async (
   block: (transaction: Transaction) => Promise<void>
 ) => {
-  let transaction: Transaction | null = await db.transaction();
-  TransactionStack.instance.push(transaction);
   try {
-    await block(transaction);
+    await db.transaction(async (transaction) => {
+      TransactionStack.instance.push(transaction);
+      await block(transaction);
+      TransactionStack.instance.pop();
+    });
   } catch (error) {
-    await transaction.rollback();
-    transaction = null
+    TransactionStack.instance.pop();
     throw error;
   }
-  TransactionStack.instance.pop();
 };
