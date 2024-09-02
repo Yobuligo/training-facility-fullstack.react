@@ -3,6 +3,7 @@ import { Session } from "../model/Session";
 import { ISession } from "../shared/model/ISession";
 import { IUser } from "../shared/model/IUser";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { findTransaction } from "./sequelize/utils/findTransaction";
 
 export class SessionRepo extends SequelizeRepository<ISession> {
   constructor() {
@@ -24,7 +25,10 @@ export class SessionRepo extends SequelizeRepository<ISession> {
   }
 
   async deleteUserSession(userId: string) {
-    const count = await this.model.destroy({ where: { userId } });
+    const count = await this.model.destroy({
+      where: { userId },
+      transaction: findTransaction(),
+    });
     return count > 0;
   }
 }

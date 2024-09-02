@@ -1,10 +1,11 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
-import { db } from "../db/db";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { findTransaction } from "./sequelize/utils/findTransaction";
+import { transaction } from "./sequelize/utils/transaction";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
@@ -26,13 +27,14 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       where: { userId },
       attributes: attributes,
       include: includes,
+      transaction: findTransaction(),
     });
     return data?.toJSON();
   }
 
   async update(entity: IUserProfile): Promise<boolean> {
-    const transaction = await db.transaction();
-    try {
+    let wasUpdated = false;
+    await transaction(async (transaction) => {
       const [updatedRows] = await UserProfile.update(entity, {
         where: { id: entity.id },
         transaction,
@@ -41,11 +43,9 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       if (entity.userBankAccount) {
         await UserBankAccount.upsert(entity.userBankAccount, { transaction });
       }
+      wasUpdated = updatedRows === 1;
       transaction.commit();
-      return updatedRows === 1;
-    } catch (error) {
-      transaction.rollback();
-      throw error;
-    }
+    });
+    return wasUpdated;
   }
 }

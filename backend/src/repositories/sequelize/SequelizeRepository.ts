@@ -11,6 +11,7 @@ import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
 import { List } from "../../core/services/list/List";
+import { findTransaction } from "./utils/findTransaction";
 
 export abstract class SequelizeRepository<TEntity extends IEntity>
   implements IEntityRepository<TEntity>
@@ -33,6 +34,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   async deleteById(id: string): Promise<boolean> {
     const count = await this.model.destroy({
       where: { id: id } as WhereOptions<TEntity>,
+      transaction: findTransaction(),
     });
     return count === 1;
   }
@@ -67,13 +69,16 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     entity: IEntityDetails<TEntity>,
     second?: unknown
   ): Promise<unknown> {
-    const data = await this.model.create(entity as any);
+    const data = await this.model.create(entity as any, {
+      transaction: findTransaction(),
+    });
     return this.toJson(data, second);
   }
 
   async update(entity: TEntity): Promise<boolean> {
     const [updatedRows] = await this.model.update(entity, {
       where: { id: entity.id } as WhereOptions,
+      transaction: findTransaction(),
     });
     return updatedRows === 1;
   }
@@ -102,6 +107,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
 
     const data = await this.model.bulkCreate(entities as any, {
       updateOnDuplicate: propNames,
+      transaction: findTransaction(),
     });
 
     return data.map((model) => this.toJson(model, fields));
@@ -113,7 +119,9 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   ): Promise<boolean>;
   upsert(entity: TEntity): Promise<boolean>;
   async upsert(entity: TEntity, fields?: unknown): Promise<unknown> {
-    const result = await this.model.upsert(entity as any);
+    const result = await this.model.upsert(entity as any, {
+      transaction: findTransaction(),
+    });
     return result[1];
   }
 
@@ -156,6 +164,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     let options: Omit<FindOptions<TEntity>, "where"> | undefined = {};
     options.attributes = this.getAttributes(fields);
     options.include = this.getIncludes(fields);
+    options.transaction = findTransaction();
     return options;
   }
 
