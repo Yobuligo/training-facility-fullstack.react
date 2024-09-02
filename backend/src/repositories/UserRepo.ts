@@ -70,8 +70,8 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   ): Promise<unknown> {
     let createdUser: IUser | undefined = undefined;
 
-    await transaction(async (transaction) => {
-      // create user
+    await transaction(async () => {
+      // create User
       const userSecure = await this.createUser({
         username: entity.username,
         password: "initial",
@@ -85,13 +85,13 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         updatedAt: userSecure.updatedAt,
       };
 
-      // create profile
+      // create UserProfile
       const userProfile: IUserProfile = checkNotNull(entity.userProfile);
       userProfile.userId = createdUser.id;
       const userProfileRepo = new UserProfileRepo();
       createdUser.userProfile = await userProfileRepo.insert(userProfile);
 
-      // create user roles
+      // create UserRoles
       const userRoleRepo = new UserRoleRepo();
       const userRole = await userRoleRepo.insert({
         role: AuthRole.USER,
@@ -101,6 +101,21 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     });
 
     return createdUser;
+  }
+
+  async update(entity: IUserSecure): Promise<boolean> {
+    let wasUpdated = false;
+    await transaction(async () => {
+      // update User
+      wasUpdated = await super.update(entity);
+
+      // update UserProfile
+      if (entity.userProfile) {
+        const userProfileRepo = new UserProfileRepo();
+        await userProfileRepo.update(entity.userProfile);
+      }
+    });
+    return wasUpdated;
   }
 
   private async findByUsernameSecure(
