@@ -20,6 +20,7 @@ export const useUserProfileSectionViewModel = () => {
   const loadUserRequest = useRequest();
   const insertUserRequest = useRequest();
   const updateUserRequest = useRequest();
+  const deleteUserRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfileShort[] => {
     if (query.length === 0) {
@@ -53,6 +54,12 @@ export const useUserProfileSectionViewModel = () => {
       setSelectedUser(user);
     });
 
+  const deleteUser = (user: IUser) =>
+    deleteUserRequest.send(async () => {
+      const userApi = new UserApi();
+      await userApi.delete(user);
+    });
+
   const insertUser = (user: IUser) =>
     insertUserRequest.send(async () => {
       const userApi = new UserApi();
@@ -82,6 +89,15 @@ export const useUserProfileSectionViewModel = () => {
       }
       return [...previous];
     });
+
+  const onDelete = (user: IUser) => {
+    setUserProfilesShort((previous) => {
+      setSelectedUser(undefined);
+      List.delete(previous, (item) => item.userId === user.id);
+      deleteUser(user);
+      return [...previous];
+    });
+  };
 
   /**
    * Appends a new user profile, which is not persisted yet
@@ -116,6 +132,7 @@ export const useUserProfileSectionViewModel = () => {
     onBack,
     onCancel,
     onChange,
+    onDelete,
     onSelect,
     query,
     selectedUser,

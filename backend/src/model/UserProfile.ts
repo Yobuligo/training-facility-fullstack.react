@@ -30,9 +30,8 @@ const userProfile: ModelStatic<
 
 export class UserProfile extends userProfile {}
 
-UserProfile.belongsTo(User);
+UserProfile.belongsTo(User, { onDelete: "CASCADE" });
 User.hasOne(UserProfile, {
   as: "userProfile",
   foreignKey: "userId",
-  onDelete: "CASCADE",
 });

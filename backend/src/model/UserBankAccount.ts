@@ -29,10 +29,9 @@ const userBankAccount: ModelStatic<
 
 export class UserBankAccount extends userBankAccount {}
 
-UserBankAccount.belongsTo(UserProfile);
+UserBankAccount.belongsTo(UserProfile, { onDelete: "CASCADE" });
 UserProfile.hasOne(UserBankAccount, {
   as: "userBankAccount",
-  onDelete: "CASCADE",
   foreignKey: {
     allowNull: false,
     name: "userProfileId",

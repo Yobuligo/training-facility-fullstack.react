@@ -30,13 +30,13 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
 
       <div className={styles.group}>
         <div>
-          {t(texts.userProfile.email)}: {props.userProfileShort.email}
+          {t(texts.user.email)}: {props.userProfileShort.email}
         </div>
       </div>
 
       <div className={styles.group}>
         <div>
-          {t(texts.userProfile.phone)}
+          {t(texts.user.phone)}
           {": "}
           {props.userProfileShort.phone ? props.userProfileShort.phone : ""}
         </div>

@@ -21,6 +21,7 @@ export const UserDetails: React.FC<IUserDetails> = (props) => {
         isAdminMode={props.isAdminMode}
         onCancel={props.onCancel}
         onChange={props.onChange}
+        onDelete={props.onDelete}
         user={props.user}
       />
     </DetailView>

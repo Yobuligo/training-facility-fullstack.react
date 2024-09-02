@@ -98,7 +98,6 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         userId: createdUser.id,
       });
       createdUser.userRoles.push(userRole);
-      await transaction.commit();
     });
 
     return createdUser;

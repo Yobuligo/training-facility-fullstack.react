@@ -6,6 +6,7 @@ import { TransactionStack } from "./TransactionStack";
 /**
  * This function creates a Sequelize transaction and wraps the method calls of {@link block} with that transaction.
  * Within these blocks the transaction can be retrieved via {@link findTransaction}.
+ * There is no need to commit the transaction, as it is committed automatically.
  *
  * Throws errors and rolls back changes.
  */

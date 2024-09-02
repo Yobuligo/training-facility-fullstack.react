@@ -11,9 +11,6 @@ export class RESTApi {
       url,
       async (extendedUrl) => {
         return await fetch(extendedUrl, {
-          headers: {
-            "Content-Type": "application/json",
-          },
           method: "DELETE",
           mode: "cors",
         });

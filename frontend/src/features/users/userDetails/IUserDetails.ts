@@ -5,5 +5,6 @@ export interface IUserDetails extends IHaveIsAdminMode {
   onBack?: (user: IUser) => void;
   onCancel?: (user: IUser) => void;
   onChange?: (user: IUser) => void;
+  onDelete?: (user: IUser) => void;
   user: IUser;
 }

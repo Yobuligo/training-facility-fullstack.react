@@ -6,5 +6,6 @@ export interface IUserProps extends IHaveIsAdminMode {
   cancelSignal?: ISignal;
   onCancel?: (user: IUser) => void;
   onChange?: (user: IUser) => void;
+  onDelete?: (user: IUser) => void;
   user: IUser;
 }

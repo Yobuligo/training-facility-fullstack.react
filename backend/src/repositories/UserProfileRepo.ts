@@ -44,7 +44,6 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
         await UserBankAccount.upsert(entity.userBankAccount, { transaction });
       }
       wasUpdated = updatedRows === 1;
-      transaction.commit();
     });
     return wasUpdated;
   }

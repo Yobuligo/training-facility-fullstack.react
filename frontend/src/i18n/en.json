@@ -169,7 +169,7 @@
         "principals": "Principal",
         "relatives": "Relative"
     },
-    "userProfile": {
+    "user": {
         "activate": "Activate",
         "address": "Address",
         "bank": "Bank",
@@ -180,6 +180,8 @@
         "birthday": "Birthday",
         "city": "City",
         "deactivate": "Deactivate",
+        "deleteUser": "Delete user",
+        "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
         "email": "Email",
         "firstname": "Firstname",
         "gender": "Gender",

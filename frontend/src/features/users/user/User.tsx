@@ -31,32 +31,32 @@ export const User: React.FC<IUserProps> = (props) => {
             viewModel.profileDetailsSettings.collapsePersonalInformation
           }
           onToggleCollapse={viewModel.onToggleCollapsePersonalInformation}
-          title={t(texts.userProfile.personalInformation)}
+          title={t(texts.user.personalInformation)}
         >
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.username)}
+            label={t(texts.user.username)}
             onChange={viewModel.setUsername}
             value={viewModel.username}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.firstname)}
+            label={t(texts.user.firstname)}
             onChange={viewModel.setFirstname}
             value={viewModel.firstname}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.lastname)}
+            label={t(texts.user.lastname)}
             onChange={viewModel.setLastname}
             value={viewModel.lastname}
           />
 
           <LabeledSelect
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.gender)}
+            label={t(texts.user.gender)}
             options={viewModel.genderOptions}
             onSelect={viewModel.onGenderChange}
             selected={viewModel.selectedGenderOption}
@@ -64,21 +64,21 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.email)}
+            label={t(texts.user.email)}
             onChange={viewModel.setEmail}
             value={viewModel.email}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.phone)}
+            label={t(texts.user.phone)}
             onChange={viewModel.setPhone}
             value={viewModel.phone}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.birthday)}
+            label={t(texts.user.birthday)}
             type="date"
             onChange={viewModel.onChangeBirthday}
             value={viewModel.birthday}
@@ -86,7 +86,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledSelect
             disabled={props.isAdminMode === true ? viewModel.displayMode : true}
-            label={t(texts.userProfile.tariff)}
+            label={t(texts.user.tariff)}
             options={viewModel.tariffOptions}
             onSelect={viewModel.onTariffChange}
             selected={viewModel.selectedTariffOption}
@@ -96,25 +96,25 @@ export const User: React.FC<IUserProps> = (props) => {
         <UserProfileGroup
           collapsed={viewModel.profileDetailsSettings.collapseAddress}
           onToggleCollapse={viewModel.onToggleCollapseAddress}
-          title={t(texts.userProfile.address)}
+          title={t(texts.user.address)}
         >
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.street)}
+            label={t(texts.user.street)}
             onChange={viewModel.setStreet}
             value={viewModel.street}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.postalCode)}
+            label={t(texts.user.postalCode)}
             onChange={viewModel.onChangePostalCode}
             value={viewModel.postalCode?.toString()}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.city)}
+            label={t(texts.user.city)}
             onChange={viewModel.setCity}
             value={viewModel.city}
           />
@@ -123,32 +123,32 @@ export const User: React.FC<IUserProps> = (props) => {
         <UserProfileGroup
           collapsed={viewModel.profileDetailsSettings.collapseBank}
           onToggleCollapse={viewModel.onToggleCollapseBank}
-          title={t(texts.userProfile.bank)}
+          title={t(texts.user.bank)}
         >
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.bankAccountOwner)}
+            label={t(texts.user.bankAccountOwner)}
             onChange={viewModel.setBankAccountOwner}
             value={viewModel.bankAccountOwner}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.bankAccountIBAN)}
+            label={t(texts.user.bankAccountIBAN)}
             onChange={viewModel.setBankAccountIBAN}
             value={viewModel.bankAccountIBAN}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.bankAccountBIC)}
+            label={t(texts.user.bankAccountBIC)}
             onChange={viewModel.setBankAccountBIC}
             value={viewModel.bankAccountBIC}
           />
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            label={t(texts.userProfile.bankAccountInstitution)}
+            label={t(texts.user.bankAccountInstitution)}
             onChange={viewModel.setBankAccountInstitution}
             value={viewModel.bankAccountInstitution}
           />
@@ -159,7 +159,7 @@ export const User: React.FC<IUserProps> = (props) => {
             className={styles.gradingGroup}
             collapsed={viewModel.profileDetailsSettings.collapseGradings}
             onToggleCollapse={viewModel.onToggleCollapseGradings}
-            title={t(texts.userProfile.gradings)}
+            title={t(texts.user.gradings)}
           >
             <GradingSection
               displayMode={viewModel.displayMode}
@@ -177,10 +177,10 @@ export const User: React.FC<IUserProps> = (props) => {
             viewModel.profileDetailsSettings.collapseTechnicalInformation
           }
           onToggleCollapse={viewModel.onToggleCollapseTechnicalInformation}
-          title={t(texts.userProfile.technicalInformation)}
+          title={t(texts.user.technicalInformation)}
         >
           <div>
-            <div>{t(texts.userProfile.joinedOn)}</div>
+            <div>{t(texts.user.joinedOn)}</div>
             <div>
               {props.user.userProfile
                 ? DateTime.format(
@@ -195,7 +195,7 @@ export const User: React.FC<IUserProps> = (props) => {
               <div>
                 <LabeledSelect
                   disabled={viewModel.displayMode}
-                  label={t(texts.userProfile.isAdmin)}
+                  label={t(texts.user.isAdmin)}
                   options={viewModel.isAdminOptions}
                   // onSelect={viewModel.onIsAdminChange}
                   // selected={viewModel.selectedIsAdminOption}
@@ -203,18 +203,24 @@ export const User: React.FC<IUserProps> = (props) => {
               </div>
               <Toolbar>
                 <Button disabled={viewModel.displayMode}>
-                  {t(texts.userProfile.sendInvitation)}
+                  {t(texts.user.sendInvitation)}
                 </Button>
                 <Button disabled={viewModel.displayMode}>
-                  {t(texts.userProfile.generateNewPassword)}
+                  {t(texts.user.generateNewPassword)}
                 </Button>
                 <Button
                   disabled={viewModel.displayMode}
                   onClick={viewModel.onToggleIsDeactivated}
                 >
                   {viewModel.isDeactivated
-                    ? t(texts.userProfile.activate)
-                    : t(texts.userProfile.deactivate)}
+                    ? t(texts.user.activate)
+                    : t(texts.user.deactivate)}
+                </Button>
+                <Button
+                  disabled={viewModel.displayMode}
+                  onClick={viewModel.onDeleteUser}
+                >
+                  {t(texts.user.deleteUser)}
                 </Button>
               </Toolbar>
             </>

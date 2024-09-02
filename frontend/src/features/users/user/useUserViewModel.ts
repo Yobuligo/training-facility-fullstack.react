@@ -192,6 +192,16 @@ export const useUserViewModel = (props: IUserProps) => {
       return previous.filter((item) => item.id !== grading.id);
     });
 
+  const onDeleteUser = () => {
+    if (
+      window.confirm(
+        t(texts.user.deleteUserQuestion, { username: props.user.username })
+      )
+    ) {
+      props.onDelete?.(props.user);
+    }
+  };
+
   const onToggleIsDeactivated = () =>
     setIsDeactivated((previous) => {
       previous = !previous;
@@ -308,6 +318,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onChangeBirthday,
     onChangePostalCode,
     onDeleteGrading,
+    onDeleteUser,
     // onIsAdminChange,
     onGenderChange,
     onSave,

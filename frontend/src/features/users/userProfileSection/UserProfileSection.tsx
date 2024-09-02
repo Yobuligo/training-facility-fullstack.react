@@ -22,6 +22,7 @@ export const UserProfileSection: React.FC = () => {
           onBack={viewModel.onBack}
           onCancel={viewModel.onCancel}
           onChange={viewModel.onChange}
+          onDelete={viewModel.onDelete}
         />
       ) : (
         <>
