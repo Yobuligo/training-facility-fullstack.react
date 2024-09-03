@@ -24,6 +24,7 @@ export const User: React.FC<IUserProps> = (props) => {
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}
         onSave={viewModel.onSave}
+        onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
         <h3>{`${props.user.userProfile?.firstname} ${props.user.userProfile?.lastname} (${props.user.userProfile?.memberId})`}</h3>
@@ -37,6 +38,7 @@ export const User: React.FC<IUserProps> = (props) => {
         >
           <LabeledInput
             disabled={viewModel.displayMode || !props.isAdminMode}
+            error={viewModel.usernameError}
             label={t(texts.user.username)}
             maxLength={100}
             onChange={viewModel.setUsername}
@@ -45,6 +47,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            error={viewModel.firstnameError}
             label={t(texts.user.firstname)}
             maxLength={50}
             onChange={viewModel.setFirstname}
@@ -53,6 +56,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            error={viewModel.lastnameError}
             label={t(texts.user.lastname)}
             maxLength={50}
             onChange={viewModel.setLastname}
@@ -69,6 +73,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            error={viewModel.emailError}
             label={t(texts.user.email)}
             maxLength={255}
             onChange={viewModel.setEmail}

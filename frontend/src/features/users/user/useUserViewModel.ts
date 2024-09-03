@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
+import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
+import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -13,7 +16,6 @@ import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
 import { IUserProps } from "./IUserProps";
-import { useLabeledElement } from "../../../hooks/useLabeledElement";
 
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
@@ -28,10 +30,15 @@ export const useUserViewModel = (props: IUserProps) => {
   const [birthday, setBirthday] = useState(
     userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
   );
-  const [email, setEmail] = useState(userProfile.email);
-  const [username, setUsername] = useLabeledElement(props.user.username);
-  const [firstname, setFirstname] = useState(userProfile.firstname);
-  const [lastname, setLastname] = useState(userProfile.lastname);
+  const [email, setEmail, emailError, setEmailError] = useLabeledElement(
+    userProfile.email
+  );
+  const [username, setUsername, usernameError, setUsernameError] =
+    useLabeledElement(props.user.username);
+  const [firstname, setFirstname, firstnameError, setFirstnameError] =
+    useLabeledElement(userProfile.firstname);
+  const [lastname, setLastname, lastnameError, setLastnameError] =
+    useLabeledElement(userProfile.lastname);
   const [gender, setGender] = useState(userProfile.gender);
   const [tariff, setTariff] = useState(userProfile.tariff);
   // const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
@@ -91,6 +98,10 @@ export const useUserViewModel = (props: IUserProps) => {
     setDisplayMode(true);
   }, [
     props.user.username,
+    setEmail,
+    setFirstname,
+    setLastname,
+    setUsername,
     userProfile.birthday,
     userProfile.city,
     userProfile.deactivatedAt,
@@ -110,9 +121,6 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount?.bankAccountOwner,
     userProfile.userGradings,
   ]);
-
-  const onValidate = ()=>{
-  }
 
   const onCancel = useCallback(() => {
     reset();
@@ -311,6 +319,33 @@ export const useUserViewModel = (props: IUserProps) => {
       return { ...previous };
     });
 
+  const onValidate = () => {
+    let isValid = true;
+    if (isInitial(username)) {
+      isValid = false;
+      setUsernameError(t(texts.user.errorUsernameRequired));
+    }
+
+    if (isInitial(firstname)) {
+      isValid = false;
+      setFirstnameError(t(texts.user.errorFirstnameRequired));
+    }
+
+    if (isInitial(lastname)) {
+      isValid = false;
+      setLastnameError(t(texts.user.errorLastnameRequired));
+    }
+
+    if (isInitial(email)) {
+      isValid = false;
+      setEmailError(t(texts.user.errorEmailRequired));
+    }
+
+    if (!isValid) {
+      throw new ValidationError();
+    }
+  };
+
   return {
     bankAccountBIC,
     bankAccountIBAN,
@@ -321,13 +356,16 @@ export const useUserViewModel = (props: IUserProps) => {
     city,
     displayMode,
     email,
+    emailError,
     firstname,
+    firstnameError,
     genderOptions,
     gradings,
     isAdminOptions,
     isDeactivated,
     joinedOn,
     lastname,
+    lastnameError,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -345,6 +383,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleCollapsePersonalInformation,
     onToggleCollapseTechnicalInformation,
     onToggleIsDeactivated,
+    onValidate,
     phone,
     postalCode,
     profileDetailsSettings,
@@ -368,5 +407,6 @@ export const useUserViewModel = (props: IUserProps) => {
     street,
     tariffOptions,
     username,
+    usernameError,
   };
 };
