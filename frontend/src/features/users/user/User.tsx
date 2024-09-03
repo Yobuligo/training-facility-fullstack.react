@@ -4,6 +4,7 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
@@ -14,6 +15,7 @@ import { useUserViewModel } from "./useUserViewModel";
 
 export const User: React.FC<IUserProps> = (props) => {
   const viewModel = useUserViewModel(props);
+  const [user] = useUser();
   const { t } = useTranslation();
 
   return (
@@ -216,12 +218,16 @@ export const User: React.FC<IUserProps> = (props) => {
                     ? t(texts.user.activate)
                     : t(texts.user.deactivate)}
                 </Button>
-                <Button
-                  disabled={viewModel.displayMode}
-                  onClick={viewModel.onDeleteUser}
-                >
-                  {t(texts.user.deleteUser)}
-                </Button>
+
+                {/* current user must not be deletable */}
+                {user.id !== props.user.id && (
+                  <Button
+                    disabled={viewModel.displayMode}
+                    onClick={viewModel.onDeleteUser}
+                  >
+                    {t(texts.user.deleteUser)}
+                  </Button>
+                )}
               </Toolbar>
             </>
           )}
