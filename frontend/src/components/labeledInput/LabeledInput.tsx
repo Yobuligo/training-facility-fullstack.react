@@ -19,6 +19,7 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
   return (
     <LabeledElement
       elementId={id}
+      error={props.error}
       isOptional={props.isOptional}
       label={props.label}
     >

@@ -13,6 +13,7 @@ export function LabeledSelect<T extends ISelectOption<any>>(
   return (
     <LabeledElement
       elementId={id}
+      error={props.error}
       isOptional={props.isOptional}
       label={props.label}
     >

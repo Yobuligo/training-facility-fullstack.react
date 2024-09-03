@@ -16,6 +16,7 @@ export const LabeledElement: React.FC<ILabeledElementProps> = (props) => {
         )}
       </div>
       {props.children}
+      <div className={styles.error}>{props.error}</div>
     </div>
   );
 };

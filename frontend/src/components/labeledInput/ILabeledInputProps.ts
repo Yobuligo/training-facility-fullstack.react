@@ -1,6 +1,7 @@
 export interface ILabeledInputProps {
   classNameInput?: string;
   disabled?: boolean;
+  error?: string;
   isOptional?: boolean;
   label: string;
   maxLength?: number;

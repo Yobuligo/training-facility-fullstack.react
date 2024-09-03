@@ -1,4 +1,4 @@
-- User Management
+- User Profile
 	- user must not be creatable without username, firstname, lastname and email
 	- username must be unique
 	- user can be marked as admin
@@ -10,6 +10,9 @@
 	- Refactor Collapsables by collapsing on click on title
 	# Delete user with user profile, bank account, gradings, roles, etc.
 	# Bug: created user cannot be selected from user list
+	
+- User List
+	- user must be sorted by name
 
 - Login
 	- Deactivated user must not be logged in
