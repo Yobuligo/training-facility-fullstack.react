@@ -5,9 +5,10 @@ export interface IChangeableFormProps {
   deleteQuestion?: string;
   displayDelete?: boolean;
   displayMode: boolean;
+  displaySaveSpinner?: boolean;
   onCancel?: () => void;
   onDelete?: () => void;
-  onSave?: () => void;
-  onValidate?: () => void;
+  onSave?: () => Promise<void> | void;
+  onValidate?: () => Promise<void> | void;
   setDisplayMode: (value: React.SetStateAction<boolean>) => void;
 }

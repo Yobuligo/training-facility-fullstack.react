@@ -2,6 +2,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { Button } from "../button/Button";
 import { SecondaryButton } from "../secondaryButton/SecondaryButton";
+import { SpinnerButton } from "../spinnerButton/SpinnerButton";
 import { Toolbar } from "../toolbar/Toolbar";
 import styles from "./ChangeableForm.module.scss";
 import { IChangeableFormProps } from "./IChangeableFormProps";
@@ -31,7 +32,12 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
                 {t(texts.general.delete)}
               </SecondaryButton>
             )}
-            <Button onClick={viewModel.onSave}>{t(texts.general.save)}</Button>
+            <SpinnerButton
+              displaySpinner={props.displaySaveSpinner ?? false}
+              onClick={viewModel.onSave}
+            >
+              {t(texts.general.save)}
+            </SpinnerButton>
           </>
         )}
       </Toolbar>

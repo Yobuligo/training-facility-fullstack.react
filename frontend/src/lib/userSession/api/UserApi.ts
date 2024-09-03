@@ -20,6 +20,10 @@ export class UserApi extends EntityRepository<IUser> {
     ])) as IUserInternal;
   }
 
+  async existsByUsername(username: string): Promise<boolean> {
+    return await RESTApi.get(`${this.url}/exists/${username}`);
+  }
+
   login(credentials: ICredentials): Promise<ISession> {
     return RESTApi.post(
       `${this.url}/login`,

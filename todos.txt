@@ -1,7 +1,8 @@
 - User Profile
-	- user must not be creatable without username, firstname, lastname and email
+	# user must not be creatable without username, firstname, lastname and email
 	- username must be unique
 	- user can be marked as admin
+	- Only a valid email address can be persisted
 	# Joined on must be changeable in admin mode otherwise displayed
 	# inputs are restricted to length of related db fields
 	# Current user must not be deactivatable

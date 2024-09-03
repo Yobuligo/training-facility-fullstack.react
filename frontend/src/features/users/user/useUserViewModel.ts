@@ -9,6 +9,8 @@ import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { UserApi } from "../../../lib/userSession/api/UserApi";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { Gender } from "../../../shared/types/Gender";
@@ -67,6 +69,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [joinedOn, setJoinedOn] = useState(
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
+  const existsByUsernameRequest = useRequest();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -319,17 +322,31 @@ export const useUserViewModel = (props: IUserProps) => {
       return { ...previous };
     });
 
-  const onValidate = () => {
+  const onValidate = async () => {
     let isValid = true;
     if (isInitial(username)) {
       isValid = false;
       setUsernameError(t(texts.user.errorUsernameRequired));
     }
 
-    if (isInitial(firstname)) {
-      isValid = false;
-      setFirstnameError(t(texts.user.errorFirstnameRequired));
+    // if username has changed, check if username is still unique
+    if (isNotInitial(username) && props.user.username !== username) {
+      const userApi = new UserApi();
+      let exists = false;
+      await existsByUsernameRequest.send(async () => {
+        exists = await userApi.existsByUsername(username);
+      });
+      if (exists) {
+        isValid = false;
+        setUsernameError(t(texts.user.errorUsernameExists));
+      }
     }
+
+    if (props.user.username)
+      if (isInitial(firstname)) {
+        isValid = false;
+        setFirstnameError(t(texts.user.errorFirstnameRequired));
+      }
 
     if (isInitial(lastname)) {
       isValid = false;

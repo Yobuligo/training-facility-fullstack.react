@@ -7,6 +7,7 @@ import { ISession } from "../shared/model/ISession";
 import { IUser, UserRouteMeta } from "../shared/model/IUser";
 import { EntityController } from "./core/EntityController";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {
@@ -14,11 +15,12 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.login();
     this.logout();
     this.register();
+    this.existsUsername();
   }
 
   private login() {
     this.router.post(
-      "/users/login",
+      `${this.routeMeta.path}/login`,
       ErrorInterceptor(async (req, res) => {
         const authentication: IAuthentication = req.body;
         const userRepo = new UserRepo();
@@ -40,7 +42,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
 
   private logout() {
     this.router.post(
-      "/users/logout",
+      `${this.routeMeta.path}/logout`,
       ErrorInterceptor(async (req, res) => {
         const session: ISession = req.body;
         const sessionRepo = new SessionRepo();
@@ -52,7 +54,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
 
   private register() {
     this.router.post(
-      "/users/register",
+      `${this.routeMeta.path}/register`,
       ErrorInterceptor(async (req, res) => {
         const credentials: ICredentials = req.body;
 
@@ -63,6 +65,28 @@ export class UserController extends EntityController<IUser, UserRepo> {
         }
         await userRepo.createUser(credentials);
         return res.status(201).send(true);
+      })
+    );
+  }
+
+  private existsUsername() {
+    this.router.get(
+      `${this.routeMeta.path}/exists/:username`,
+      SessionInterceptor(async (req, res) => {
+        const username = req.params.username;
+        if (!username || typeof username !== "string") {
+          return res
+            .status(400)
+            .send(
+              createError(
+                "Error while getting username. Username was not provided."
+              )
+            );
+        }
+
+        const userRepo = new UserRepo();
+        const contains = await userRepo.existsByUsername(username);
+        res.status(200).send(contains);
       })
     );
   }

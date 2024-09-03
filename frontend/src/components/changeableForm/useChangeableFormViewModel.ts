@@ -17,11 +17,11 @@ export const useChangeableFormViewModel = (props: IChangeableFormProps) => {
     }
   };
 
-  const onSave = () => {
+  const onSave = async () => {
     try {
-      props.onValidate?.();
+      await props.onValidate?.();
       props.setDisplayMode(true);
-      props.onSave?.();
+      await props.onSave?.();
     } catch (error) {
       // do nothing
     }

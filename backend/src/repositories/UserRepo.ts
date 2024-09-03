@@ -71,6 +71,20 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
+  async existsByUsername(username: string): Promise<boolean> {
+    const data = await this.model.findOne({
+      where: { username },
+      attributes: ["id"],
+    });
+
+    const entity = data?.toJSON();
+    if (entity) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   insert<K extends keyof IUserSecure>(
     entity: IEntityDetails<IUserSecure>,
     fields: K[]

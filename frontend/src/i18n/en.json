@@ -185,6 +185,7 @@
         "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
         "email": "Email",
         "errorUsernameRequired": "Username is required",
+        "errorUsernameExists": "Username already exists",
         "errorFirstnameRequired": "Firstname is required",
         "errorLastnameRequired": "Lastname is required",
         "errorEmailRequired": "Email is required",
