@@ -1,4 +1,4 @@
 export enum EventInstanceState {
-  OPEN,
-  CLOSED,
+  OPEN = 0,
+  CLOSED = 1,
 }
