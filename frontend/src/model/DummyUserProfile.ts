@@ -11,12 +11,12 @@ export class DummyUserProfile extends Dummy implements IUserProfile {
   deactivatedAt?: Date | undefined;
   userBankAccount?: IUserBankAccount | undefined;
   id = uuid();
-  memberId = "";
+  memberId = 0;
   userId = uuid();
   firstname = "";
   lastname = "";
   gender = Gender.FEMALE;
-  birthday = undefined
+  birthday = undefined;
   street = "";
   postalCode = "";
   city = "";

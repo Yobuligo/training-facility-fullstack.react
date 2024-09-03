@@ -9,7 +9,11 @@ const userProfile: ModelStatic<
   Model<IUserProfile, IEntityDetails<IUserProfile>>
 > = db.define("user-profiles", {
   id: createIdType(),
-  memberId: DataTypes.STRING(10),
+  memberId: {
+    autoIncrement: true,
+    type: DataTypes.INTEGER,
+    unique: true,
+  },
   firstname: DataTypes.STRING(50),
   lastname: DataTypes.STRING(50),
   email: DataTypes.STRING(255),

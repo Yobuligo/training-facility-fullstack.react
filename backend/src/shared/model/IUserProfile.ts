@@ -7,7 +7,7 @@ import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserGrading } from "./IUserGrading";
 
 export interface IUserProfile extends IEntity, IHaveUserId {
-  memberId: string;
+  memberId: number;
   firstname: string;
   lastname: string;
   gender: Gender;
