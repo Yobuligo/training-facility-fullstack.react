@@ -8,6 +8,7 @@
 	# UserBankAccount must be loaded with User
 	- Refactor Collapsables by collapsing on click on title
 	# Delete user with user profile, bank account, gradings, roles, etc.
+	# Bug: created user cannot be selected from user list
 
 - Login
 	- Deactivated user must not be logged in

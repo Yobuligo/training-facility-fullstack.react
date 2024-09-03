@@ -47,6 +47,18 @@ export const useUserProfileSectionViewModel = () => {
     })
   );
 
+  const updateUserProfileShort = (user: IUser) => {
+    setUserProfilesShort((previous) => {
+      const index = previous.findIndex(
+        (item) => item.id === user.userProfile?.id
+      );
+      if (index !== -1) {
+        previous.splice(index, 1, checkNotNull(user.userProfile));
+      }
+      return [...previous];
+    });
+  };
+
   const onSelect = (userProfileShort: IUserProfileShort) =>
     loadUserRequest.send(async () => {
       const userApi = new UserApi();
@@ -60,35 +72,28 @@ export const useUserProfileSectionViewModel = () => {
       await userApi.delete(user);
     });
 
-  const insertUser = (user: IUser) =>
+  const insertUser = async (user: IUser) =>
     insertUserRequest.send(async () => {
       const userApi = new UserApi();
-      await userApi.insert(user);
+      const createdUser = await userApi.insert(user);
+      updateUserProfileShort(createdUser);
     });
 
   const updateUser = (user: IUser) =>
     updateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.update(user);
+      updateUserProfileShort(user);
     });
 
-  const onChange = (user: IUser) =>
-    setUserProfilesShort((previous) => {
-      const index = previous.findIndex(
-        (item) => item.id === user.userProfile?.id
-      );
-      if (user instanceof DummyUser && user.isPersisted === false) {
-        user.setIsPersisted();
-        insertUser(user);
-      } else {
-        updateUser(user);
-      }
-
-      if (index !== -1) {
-        previous.splice(index, 1, checkNotNull(user.userProfile));
-      }
-      return [...previous];
-    });
+  const onChange = (user: IUser) => {
+    if (user instanceof DummyUser && user.isPersisted === false) {
+      user.setIsPersisted();
+      insertUser(user);
+    } else {
+      updateUser(user);
+    }
+  };
 
   const onDelete = (user: IUser) => {
     setUserProfilesShort((previous) => {
@@ -112,7 +117,12 @@ export const useUserProfileSectionViewModel = () => {
   /**
    * Handles event on click back from the user profile detail screen
    */
-  const onBack = () => setSelectedUser(undefined);
+  const onBack = () => {
+    if (selectedUser) {
+      onCancel(selectedUser);
+    }
+    setSelectedUser(undefined);
+  };
 
   const onCancel = (user: IUser) => {
     // if user is a dummy object (which is not persisted), delete it from the list
@@ -128,6 +138,7 @@ export const useUserProfileSectionViewModel = () => {
     filterUserProfiles,
     loadUserRequest,
     loadUserProfilesRequest,
+    insertUserRequest,
     onAppend,
     onBack,
     onCancel,

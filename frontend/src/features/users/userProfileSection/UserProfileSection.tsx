@@ -36,7 +36,8 @@ export const UserProfileSection: React.FC = () => {
             />
           </div>
           {viewModel.loadUserProfilesRequest.isProcessing ||
-          viewModel.loadUserRequest.isProcessing ? (
+          viewModel.loadUserRequest.isProcessing ||
+          viewModel.insertUserRequest.isProcessing ? (
             <Spinner color={colors.colorSecondary} />
           ) : (
             <UserProfileList
