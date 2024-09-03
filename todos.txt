@@ -3,7 +3,7 @@
 	# username must be unique
 	- user can be marked as admin
 	- Only a valid email address can be persisted
-	- Customer Id must be created and displayed
+	# Customer Id must be created and displayed
 	# Joined on must be changeable in admin mode otherwise displayed
 	# inputs are restricted to length of related db fields
 	# Current user must not be deactivatable
@@ -12,6 +12,7 @@
 	- Refactor Collapsables by collapsing on click on title
 	# Delete user with user profile, bank account, gradings, roles, etc.
 	# Bug: created user cannot be selected from user list	
+	# Bug: Customer id is not displayed when user was created in backend
 	
 - User List
 	- user must be sorted by name

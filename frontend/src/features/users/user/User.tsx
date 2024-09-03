@@ -7,6 +7,7 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { formatMemberId } from "../../../utils/formatMemberId";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
@@ -27,7 +28,13 @@ export const User: React.FC<IUserProps> = (props) => {
         onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
-        <h3>{`${props.user.userProfile?.firstname} ${props.user.userProfile?.lastname} (${props.user.userProfile?.memberId})`}</h3>
+        <h3>{`${props.user.userProfile?.firstname} ${
+          props.user.userProfile?.lastname
+        } ${
+          props.user.userProfile && props.user.userProfile.memberId !== 0
+            ? `(${formatMemberId(props.user.userProfile.memberId)})`
+            : ""
+        }`}</h3>
 
         <UserProfileGroup
           collapsed={
