@@ -17,6 +17,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
       <div>
         <LabeledInput
           disabled={props.disabled}
+          error={props.titleError}
+          isOptional={props.titleIsOptional}
           label={t(texts.AppointmentForm.title)}
           onChange={props.setTitle}
           value={props.title}
@@ -25,6 +27,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
       <div>
         <LabeledInput
           disabled={props.disabled}
+          error={props.descriptionError}
+          isOptional={props.descriptionIsOptional}
           label={t(texts.AppointmentForm.description)}
           onChange={props.setDescription}
           value={props.description}

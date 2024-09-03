@@ -1,10 +1,9 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
-import { ErrorDisplay } from "../../../components/errorDisplay/ErrorDisplay";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import colors from "../../../styles/colors.module.scss";
 import { style } from "../../../core/ui/style";
+import colors from "../../../styles/colors.module.scss";
 import styles from "./EventDefinitionDetails.module.scss";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 import { useEventDefinitionDetailsViewModel } from "./useEventDefinitionDetailsViewModel";
@@ -38,9 +37,9 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
         setDisplayMode={viewModel.setDisplayMode}
       >
         <div className={styles.eventDefinitionDetails}>
-          {viewModel.error && <ErrorDisplay error={viewModel.error} />}
           <AppointmentForm
             description={viewModel.description}
+            descriptionIsOptional={true}
             disabled={viewModel.displayMode}
             fromDate={viewModel.fromDate}
             fromTime={viewModel.fromTime}
@@ -53,6 +52,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             setToDate={viewModel.setToDate}
             setToTime={viewModel.setToTime}
             title={viewModel.title}
+            titleError={viewModel.titleError}
             toDate={viewModel.toDate}
             toTime={viewModel.toTime}
           />

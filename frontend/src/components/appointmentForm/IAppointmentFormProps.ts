@@ -3,6 +3,8 @@ import { Recurrence } from "../../core/types/Recurrence";
 export interface IAppointmentFormProps {
   disabled?: boolean;
   description: string;
+  descriptionError?: string;
+  descriptionIsOptional?: boolean;
   fromDate: string;
   fromTime: string;
   recurrence: Recurrence;
@@ -14,6 +16,8 @@ export interface IAppointmentFormProps {
   setToDate: React.Dispatch<React.SetStateAction<string>>;
   setToTime: React.Dispatch<React.SetStateAction<string>>;
   title: string;
+  titleError?: string;
+  titleIsOptional?: boolean;
   toDate: string;
   toTime: string;
 }

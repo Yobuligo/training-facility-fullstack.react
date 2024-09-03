@@ -1,3 +1,7 @@
+- Planner
+	- Title must be mandatory
+	- Description is optional
+
 - User Profile
 	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
@@ -26,7 +30,7 @@
 		- Perhaps it should be sorted directly within the backend
 	# Mark deactivated users
 	# Mark admin users
-	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
+	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled	
 
 - Login
 	# Deactivated user must not be logged in

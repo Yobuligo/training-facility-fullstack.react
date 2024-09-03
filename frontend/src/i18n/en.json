@@ -33,7 +33,7 @@
         "unregisterOnClosed": "Unregistering is not possible. Registration is closed."
     },
     "eventDefinitionDetails": {
-        "enterTitle": "Please enter a valid title"
+        "errorEnterTitle": "Title is required"
     },
     "eventInstanceList": {
         "noItems": "No events found"
