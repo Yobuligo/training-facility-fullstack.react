@@ -1,6 +1,6 @@
 - Planner
-	- Title must be mandatory
-	- Description is optional
+	# Title must be mandatory. Saving must not be possible without title.
+	# Description is optional
 
 - User Profile
 	# User can be deactivated and activated (session must be deleted)

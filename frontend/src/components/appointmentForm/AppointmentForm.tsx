@@ -1,4 +1,3 @@
-import { useRenderWeekday } from "../../hooks/useRenderWeekday";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { LabeledInput } from "../labeledInput/LabeledInput";
@@ -8,7 +7,6 @@ import { IAppointmentFormProps } from "./IAppointmentFormProps";
 import { useAppointmentFormViewModel } from "./useAppointmentFormViewModel";
 
 export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
-  const renderWeekday = useRenderWeekday();
   const { t } = useTranslation();
   const viewModel = useAppointmentFormViewModel(props);
 
@@ -35,18 +33,13 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         />
       </div>
       <div className={styles.dateTime}>
-        <div className={styles.date}>
-          <LabeledInput
-            disabled={props.disabled}
-            label={t(texts.AppointmentForm.startDate)}
-            onChange={viewModel.onChangeFromDate}
-            type="date"
-            value={props.fromDate}
-          />
-          <div className={styles.weekday}>
-            {renderWeekday(viewModel.getFromWeekendDay())}
-          </div>
-        </div>
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.startDate)}
+          onChange={viewModel.onChangeFromDate}
+          type="date"
+          value={props.fromDate}
+        />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.startTime)}
@@ -56,18 +49,13 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         />
       </div>
       <div className={styles.dateTime}>
-        <div className={styles.date}>
-          <LabeledInput
-            disabled={props.disabled}
-            label={t(texts.AppointmentForm.endDate)}
-            onChange={viewModel.onChangeToDate}
-            type="date"
-            value={props.toDate}
-          />
-          <div className={styles.weekday}>
-            {renderWeekday(viewModel.getToWeekendDay())}
-          </div>
-        </div>
+        <LabeledInput
+          disabled={props.disabled}
+          label={t(texts.AppointmentForm.endDate)}
+          onChange={viewModel.onChangeToDate}
+          type="date"
+          value={props.toDate}
+        />
         <LabeledInput
           disabled={props.disabled}
           label={t(texts.AppointmentForm.endTime)}

@@ -1,4 +1,3 @@
-@import "../../styles/colors.module.scss";
 @import "../../styles/mixins.scss";
 @import "../../styles/dimensions.module.scss";
 
@@ -17,14 +16,4 @@
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-}
-
-.date {
-  display: flex;
-  flex-direction: row;
-}
-
-.weekday {
-  align-self: flex-end;
-  margin: 1rem;
 }
