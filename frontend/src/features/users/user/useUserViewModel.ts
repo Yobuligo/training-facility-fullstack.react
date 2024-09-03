@@ -54,7 +54,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [deactivatedAt, setDeactivatedAt] = useState(userProfile.deactivatedAt);
   const [collapseBank, setCollapseBank] = useState(false);
   const [gradings, setGradings] = useState<IUserGrading[]>(
-    userProfile.userGradings
+    userProfile.userGradings ?? []
   );
 
   const reset = useCallback(() => {
@@ -80,7 +80,7 @@ export const useUserViewModel = (props: IUserProps) => {
       userProfile.userBankAccount?.bankAccountInstitution ?? ""
     );
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
-    setGradings(userProfile.userGradings);
+    setGradings(userProfile.userGradings ?? []);
     setDisplayMode(true);
   }, [
     props.user.username,
@@ -228,7 +228,7 @@ export const useUserViewModel = (props: IUserProps) => {
         bankAccountIBAN,
         bankAccountInstitution,
         bankAccountOwner,
-        userProfileId: props.user.id,
+        userProfileId: userProfile.id,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
