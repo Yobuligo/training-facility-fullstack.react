@@ -69,7 +69,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       userId
     );
 
-    if (eventRegistration?.eventInstance.state === EventInstanceState.CLOSED) {
+    if (eventRegistration?.eventInstance?.state === EventInstanceState.CLOSED) {
       window.alert(t(texts.eventCalendarMyTrainings.unregisterOnClosed));
       return;
     }

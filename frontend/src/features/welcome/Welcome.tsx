@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { EventRegistrationApi } from "../../api/EventRegistrationApi";
 import { Spinner } from "../../components/spinner/Spinner";
 import { DateTime } from "../../core/services/date/DateTime";
+import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
@@ -29,8 +30,10 @@ export const Welcome: React.FC = () => {
   }, []);
 
   const eventInstances = eventRegistrations
-    .map((eventRegistration) => eventRegistration.eventInstance)
-    .sort((left, right) => DateTime.compare(left.from, right.from));
+    .map((eventRegistration) => checkNotNull(eventRegistration.eventInstance))
+    .sort((left, right) =>
+      DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
+    );
 
   return (
     <div>

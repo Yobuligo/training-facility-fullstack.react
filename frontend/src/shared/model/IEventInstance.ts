@@ -11,9 +11,9 @@ import { IEventRegistration } from "./IEventRegistration";
 export interface IEventInstance extends IEntity, IDateTimeSpan {
   description: string;
   title: string;
-  eventDefinition: IEventDefinition;
+  eventDefinition?: IEventDefinition;
   eventDefinitionId: string;
-  eventRegistrations: IEventRegistration[];
+  eventRegistrations?: IEventRegistration[];
   state: EventInstanceState;
 }
 

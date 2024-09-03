@@ -54,7 +54,9 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
           eventInstance
         );
         if (matches) {
-          attach(eventDefinition.eventInstances, eventInstance);
+          if (eventDefinition.eventInstances) {
+            attach(eventDefinition.eventInstances, eventInstance);
+          }
 
           // attach all event registration which are belonging to the event instance and to the current user
           const eventRegistration = DummyEventRegistrations.find(
@@ -66,7 +68,9 @@ export class EventDefinitionApi extends Repository<IEventDefinition> {
           if (eventRegistration) {
             eventRegistration.eventInstance = eventInstance;
             eventRegistration.eventInstanceId = eventInstance.id;
-            attach(eventInstance.eventRegistrations, eventRegistration);
+            if (eventInstance.eventRegistrations) {
+              attach(eventInstance.eventRegistrations, eventRegistration);
+            }
           }
 
           return true;

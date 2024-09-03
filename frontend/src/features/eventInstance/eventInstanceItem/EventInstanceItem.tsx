@@ -1,6 +1,7 @@
 import { Banner } from "../../../components/banner/Banner";
 import { Card } from "../../../components/card/Card";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
@@ -10,7 +11,9 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
 
   return (
     <Card className={styles.eventInstanceItem}>
-      <Banner color={props.eventInstance.eventDefinition.color} />
+      <Banner
+        color={checkNotNull(props.eventInstance.eventDefinition).color}
+      />
       <div className={styles.body}>
         <div className={styles.content}>
           <div className={styles.title}>{props.eventInstance.title}</div>

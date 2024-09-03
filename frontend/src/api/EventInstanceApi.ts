@@ -22,7 +22,9 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     eventRegistration: IEventRegistration
   ): Promise<void> {
     DummyEventRegistrations.push(eventRegistration);
-    attach(eventInstance.eventRegistrations, eventRegistration);
+    if (eventInstance.eventRegistrations) {
+      attach(eventInstance.eventRegistrations, eventRegistration);
+    }
   }
 
   async insert(eventInstance: IEventInstance): Promise<IEventInstance> {
@@ -39,7 +41,9 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     const eventInstance = eventInstanceFactory.createFromEvent(event);
 
     // attach created eventInstance to eventDefinition
-    attach(event.eventDefinition.eventInstances, eventInstance);
+    if (event.eventDefinition.eventInstances) {
+      attach(event.eventDefinition.eventInstances, eventInstance);
+    }
     return await this.insert(eventInstance);
   }
 

@@ -13,7 +13,7 @@ export class EventInfo {
    * which matches the {@link event} start date.
    */
   static findEventInstance(event: IEvent): IEventInstance | undefined {
-    const eventInstance = event.eventDefinition.eventInstances.find(
+    const eventInstance = event.eventDefinition.eventInstances?.find(
       (eventInstance) =>
         DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
         DateTime.equals(eventInstance.to, checkNotNull(event.end))
@@ -30,16 +30,24 @@ export class EventInfo {
     userId: string
   ): IEventRegistration | undefined {
     const eventInstances = event.eventDefinition.eventInstances;
+    if (!eventInstances) {
+      return undefined;
+    }
+
     for (let i = 0; i < eventInstances.length; i++) {
       const eventInstance = eventInstances[i];
-      for (let k = 0; k < eventInstance.eventRegistrations.length; k++) {
-        const eventRegistration = eventInstances[i].eventRegistrations[k];
-        if (
-          eventRegistration.userId === userId &&
-          DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
-          DateTime.equals(eventInstance.to, checkNotNull(event.end))
-        ) {
-          return eventRegistration;
+      if (eventInstance.eventRegistrations) {
+        for (let k = 0; k < eventInstance.eventRegistrations.length; k++) {
+          const eventRegistration = checkNotNull(
+            eventInstances[i].eventRegistrations?.[k]
+          );
+          if (
+            eventRegistration.userId === userId &&
+            DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
+            DateTime.equals(eventInstance.to, checkNotNull(event.end))
+          ) {
+            return eventRegistration;
+          }
         }
       }
     }

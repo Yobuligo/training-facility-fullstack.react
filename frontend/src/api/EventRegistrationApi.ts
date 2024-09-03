@@ -1,7 +1,7 @@
-import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { List } from "../core/services/list/List";
+import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
@@ -27,11 +27,11 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
 
       // detach from eventInstance
       const indexInstance =
-        eventRegistration.eventInstance.eventRegistrations.findIndex(
+        eventRegistration.eventInstance?.eventRegistrations?.findIndex(
           (item) => item.id === eventRegistration.id
         );
-      if (indexInstance !== -1) {
-        eventRegistration.eventInstance.eventRegistrations.splice(
+      if (indexInstance !== undefined && indexInstance !== -1) {
+        eventRegistration.eventInstance?.eventRegistrations?.splice(
           indexInstance,
           1
         );
@@ -69,7 +69,9 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     };
 
     // attach created eventRegistration to eventInstance
-    attach(eventInstance.eventRegistrations, eventRegistration);
+    if (eventInstance.eventRegistrations) {
+      attach(eventInstance.eventRegistrations, eventRegistration);
+    }
 
     return await this.insert(eventRegistration);
   }
@@ -85,7 +87,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       (eventRegistration) =>
         DateTime.spanContains(
           dateTimeSpan,
-          eventRegistration.eventInstance.from
+          checkNotNull(eventRegistration.eventInstance?.from)
         ) && eventRegistration.userId === userId
     );
     return eventRegistrations;

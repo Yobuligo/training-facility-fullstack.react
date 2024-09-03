@@ -11,11 +11,11 @@ export interface IEventDefinition extends IEntity, IDateTimeSpan {
   color: string;
   creator: string;
   description: string;
-  eventInstances: IEventInstance[];
+  eventInstances?: IEventInstance[];
   recurrence: Recurrence;
   title: string;
 }
 
 export const EventDefinitionRouteMeta: IRouteMeta = {
-  path: "event-definitions",
+  path: "/event-definitions",
 };
