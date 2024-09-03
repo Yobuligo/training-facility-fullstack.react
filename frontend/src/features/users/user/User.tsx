@@ -34,7 +34,7 @@ export const User: React.FC<IUserProps> = (props) => {
           title={t(texts.user.personalInformation)}
         >
           <LabeledInput
-            disabled={viewModel.displayMode}
+            disabled={viewModel.displayMode || !props.isAdminMode}
             label={t(texts.user.username)}
             onChange={viewModel.setUsername}
             value={viewModel.username}

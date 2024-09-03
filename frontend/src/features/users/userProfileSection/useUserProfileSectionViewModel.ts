@@ -126,7 +126,7 @@ export const useUserProfileSectionViewModel = () => {
 
   return {
     filterUserProfiles,
-    loadUserProfileRequest: loadUserRequest,
+    loadUserRequest,
     loadUserProfilesRequest,
     onAppend,
     onBack,
