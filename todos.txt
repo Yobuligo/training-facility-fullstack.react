@@ -1,0 +1,11 @@
+- User Management
+	- Joined on must be changeable in admin mode
+	- Current user must not be deactivatable
+	# Deletion of current user must not be possible
+	# UserBankAccount must be loaded with User
+- Login
+	- Deactivated user must not be logged in
+	
+	
+Best Practices Sequelize:
+- related objects must be optional in entity interfaces (e.g. IUser has IUserProfile)

@@ -3,6 +3,8 @@ import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/IUserSecure";
 import { User } from "../model/User";
+import { UserBankAccount } from "../model/UserBankAccount";
+import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
@@ -21,7 +23,17 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
     super(User, [
       { model: UserRole, as: "userRoles" },
-      { model: UserProfile, as: "userProfile" },
+      {
+        model: UserProfile,
+        as: "userProfile",
+        include: [
+          { model: UserBankAccount, as: "userBankAccount" },
+          {
+            model: UserGrading,
+            as: "userGradings",
+          },
+        ],
+      },
     ]);
   }
 
@@ -97,6 +109,10 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         role: AuthRole.USER,
         userId: createdUser.id,
       });
+
+      if (!createdUser.userRoles) {
+        createdUser.userRoles = [];
+      }
       createdUser.userRoles.push(userRole);
     });
 

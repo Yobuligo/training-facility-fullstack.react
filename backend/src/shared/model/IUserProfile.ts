@@ -22,7 +22,7 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   deactivatedAt?: Date;
   joinedOn: Date;
   userBankAccount?: IUserBankAccount;
-  userGradings: IUserGrading[];
+  userGradings?: IUserGrading[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

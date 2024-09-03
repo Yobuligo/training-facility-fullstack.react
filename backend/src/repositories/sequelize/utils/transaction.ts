@@ -8,20 +8,10 @@ import { TransactionStack } from "./TransactionStack";
  * Within these blocks the transaction can be retrieved via {@link findTransaction}.
  * There is no need to commit the transaction, as it is committed automatically.
  * Rolls back the transaction in case of errors
- *
- * If the function is called inside of itself, the changes are belonging to the outer transaction. So no new transaction is created.
  */
 export const transaction = async (
   block: (transaction: Transaction) => Promise<void>
 ) => {
-  // check if a transaction was already created and just call block instead of creating a new transaction
-  const transaction = findTransaction();
-  if (transaction) {
-    block(transaction);
-    return;
-  }
-
-  // otherwise create a new transaction
   try {
     await db.transaction(async (transaction) => {
       TransactionStack.instance.push(transaction);

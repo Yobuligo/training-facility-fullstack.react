@@ -210,14 +210,18 @@ export const User: React.FC<IUserProps> = (props) => {
                 <Button disabled={viewModel.displayMode}>
                   {t(texts.user.generateNewPassword)}
                 </Button>
-                <Button
-                  disabled={viewModel.displayMode}
-                  onClick={viewModel.onToggleIsDeactivated}
-                >
-                  {viewModel.isDeactivated
-                    ? t(texts.user.activate)
-                    : t(texts.user.deactivate)}
-                </Button>
+
+                {/* current user must not be deactivatable */}
+                {user.id !== props.user.id && (
+                  <Button
+                    disabled={viewModel.displayMode}
+                    onClick={viewModel.onToggleIsDeactivated}
+                  >
+                    {viewModel.isDeactivated
+                      ? t(texts.user.activate)
+                      : t(texts.user.deactivate)}
+                  </Button>
+                )}
 
                 {/* current user must not be deletable */}
                 {user.id !== props.user.id && (
