@@ -44,7 +44,7 @@ export const UserProfileSection: React.FC = () => {
           ) : (
             <UserProfileList
               onSelect={viewModel.onSelect}
-              userProfilesShort={viewModel.filterUserProfiles()}
+              usersShort={viewModel.filterUserProfiles()}
             />
           )}
         </>

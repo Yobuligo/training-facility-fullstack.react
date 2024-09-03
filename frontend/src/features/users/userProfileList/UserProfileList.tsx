@@ -3,11 +3,11 @@ import { IUserProfileListProps } from "./IUserProfileListProps";
 import styles from "./UserProfileList.module.scss";
 
 export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
-  const items = props.userProfilesShort.map((userProfileShort) => (
+  const items = props.usersShort.map((userShort) => (
     <UserProfileItem
-      key={userProfileShort.id}
-      userProfileShort={userProfileShort}
-      onSelect={() => props.onSelect?.(userProfileShort)}
+      key={userShort.id}
+      userShort={userShort}
+      onSelect={() => props.onSelect?.(userShort)}
     />
   ));
 

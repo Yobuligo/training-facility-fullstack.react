@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { UserProfileApi } from "../../../api/UserProfileApi";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
-import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUser } from "../../../model/DummyUser";
 import { IUser } from "../../../shared/model/IUser";
-import { IUserProfileShort } from "./IUserProfileShort";
+import { IUserShort } from "../../../shared/model/IUserShort";
 
 export const useUserProfileSectionViewModel = () => {
-  const [userProfilesShort, setUserProfilesShort] = useState<
-    IUserProfileShort[]
-  >([]);
+  const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
   const loadUserProfilesRequest = useRequest();
@@ -24,27 +20,19 @@ export const useUserProfileSectionViewModel = () => {
   const activateUserRequest = useRequest();
   const deactivateUserRequest = useRequest();
 
-  const filterUserProfiles = (): IUserProfileShort[] => {
+  const filterUserProfiles = (): IUserShort[] => {
     if (query.length === 0) {
-      return userProfilesShort;
+      return usersShort;
     }
-    const fuzzySearch = new FuzzySearch<IUserProfileShort>();
-    return fuzzySearch.search(query, userProfilesShort);
+    const fuzzySearch = new FuzzySearch<IUserShort>();
+    return fuzzySearch.search(query, usersShort);
   };
 
   useInitialize(() =>
     loadUserProfilesRequest.send(async () => {
-      const userProfileApi = new UserProfileApi();
-      const userProfilesShort: IUserProfileShort[] =
-        await userProfileApi.findAll([
-          "id",
-          "userId",
-          "firstname",
-          "lastname",
-          "email",
-          "phone",
-        ]);
-      const sortedUserProfilesShort = userProfilesShort.sort((left, right) => {
+      const userApi = new UserApi();
+      const usersShort: IUserShort[] = await userApi.findAllShort();
+      const sortedUserProfilesShort = usersShort.sort((left, right) => {
         if (left.firstname < right.firstname) {
           return -1;
         }
@@ -62,26 +50,36 @@ export const useUserProfileSectionViewModel = () => {
         }
         return 0;
       });
-      setUserProfilesShort(sortedUserProfilesShort);
+      setUsersShort(sortedUserProfilesShort);
     })
   );
 
+  const createUserShort = (user: IUser): IUserShort => {
+    return {
+      email: user.userProfile?.email ?? "",
+      firstname: user.userProfile?.firstname ?? "",
+      id: user.id,
+      isDeactivated: user.isDeactivated,
+      lastname: user.userProfile?.lastname ?? "",
+      userRoles: user.userRoles?.map((userRole) => userRole.role) ?? [],
+      phone: user.userProfile?.phone,
+    };
+  };
+
   const updateUserProfileShort = (user: IUser) => {
-    setUserProfilesShort((previous) => {
-      const index = previous.findIndex(
-        (item) => item.id === user.userProfile?.id
-      );
+    setUsersShort((previous) => {
+      const index = previous.findIndex((item) => item.id === user.id);
       if (index !== -1) {
-        previous.splice(index, 1, checkNotNull(user.userProfile));
+        previous.splice(index, 1, createUserShort(user));
       }
       return [...previous];
     });
   };
 
-  const onSelect = (userProfileShort: IUserProfileShort) =>
+  const onSelect = (userShort: IUserShort) =>
     loadUserRequest.send(async () => {
       const userApi = new UserApi();
-      const user = await userApi.findById(userProfileShort.userId);
+      const user = await userApi.findById(userShort.id);
       setSelectedUser(user);
     });
 
@@ -115,7 +113,7 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   const onDelete = (user: IUser) => {
-    setUserProfilesShort((previous) => {
+    setUsersShort((previous) => {
       setSelectedUser(undefined);
       List.delete(previous, (item) => item.id === user.userProfile?.id);
       deleteUser(user);
@@ -127,10 +125,10 @@ export const useUserProfileSectionViewModel = () => {
    * Appends a new user profile, which is not persisted yet
    */
   const onAppend = () =>
-    setUserProfilesShort((previous) => {
+    setUsersShort((previous) => {
       const user: IUser = new DummyUser();
       setSelectedUser(user);
-      return [checkNotNull(user.userProfile), ...previous];
+      return [createUserShort(user), ...previous];
     });
 
   /**
@@ -157,7 +155,7 @@ export const useUserProfileSectionViewModel = () => {
   const onCancel = (user: IUser) => {
     // if user is a dummy object (which is not persisted), delete it from the list
     if (user instanceof DummyUser && user.isPersisted === false) {
-      setUserProfilesShort((previous) => {
+      setUsersShort((previous) => {
         List.delete(previous, (item) => item.id === user.userProfile?.id);
         return [...previous];
       });

@@ -2,6 +2,7 @@ import { EntityRepository } from "../../../api/core/EntityRepository";
 import { RESTApi } from "../../../api/core/RESTApi";
 import { IUserInternal } from "../../../model/IUserInternal";
 import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
+import { IUserShort } from "../../../shared/model/IUserShort";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
@@ -21,6 +22,10 @@ export class UserApi extends EntityRepository<IUser> {
 
   async existsByUsername(username: string): Promise<boolean> {
     return await RESTApi.get(`${this.url}/exists/${username}`);
+  }
+
+  async findAllShort(): Promise<IUserShort[]> {
+    return await RESTApi.get(`${this.url}/short/all`);
   }
 
   async findByIdInternal(userId: string): Promise<IUserInternal | undefined> {

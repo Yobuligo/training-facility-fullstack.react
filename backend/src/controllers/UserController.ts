@@ -1,5 +1,4 @@
 import { createError } from "../core/utils/createError";
-import { User } from "../model/User";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
@@ -16,7 +15,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.activate();
     this.deactivate();
     this.existsUsername();
-    this.findShort();
+    this.findAllShort();
     this.login();
     this.logout();
     this.register();
@@ -68,11 +67,13 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
-  private findShort() {
+  private findAllShort() {
     this.router.get(
-      `${this.routeMeta.path}/short`,
-      SessionInterceptor(async (req, res) => {
-
+      `${this.routeMeta.path}/short/all`,
+      SessionInterceptor(async (_, res) => {
+        const userRepo = new UserRepo();
+        const usersShort = await userRepo.findAllShort();
+        res.status(200).send(usersShort);
       })
     );
   }

@@ -1,6 +1,6 @@
-import { IUserProfileShort } from "../userProfileSection/IUserProfileShort";
+import { IUserShort } from "../../../shared/model/IUserShort";
 
 export interface IUserProfileListProps {
-  onSelect?: (userProfileShort: IUserProfileShort) => void;
-  userProfilesShort: IUserProfileShort[];
+  onSelect?: (userShort: IUserShort) => void;
+  usersShort: IUserShort[];
 }

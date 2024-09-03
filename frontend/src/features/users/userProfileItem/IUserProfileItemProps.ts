@@ -1,6 +1,6 @@
-import { IUserProfileShort } from "../userProfileSection/IUserProfileShort";
+import { IUserShort } from "../../../shared/model/IUserShort";
 
 export interface IUserProfileItem {
   onSelect?: () => void;
-  userProfileShort: IUserProfileShort;
+  userShort: IUserShort;
 }

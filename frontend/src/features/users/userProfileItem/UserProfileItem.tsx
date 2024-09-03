@@ -15,25 +15,23 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
       <Banner color={colors.colorSecondary} />
       <div
         className={style(
-          styles.userProfileItem
-          // props.userProfileShort.isDeactivated ? styles.deactivated : ""
+          styles.userProfileItem,
+          props.userShort.isDeactivated ? styles.deactivated : ""
         )}
       >
         <div className={styles.group}>
           <div className={styles.name}>
-            {`${props.userProfileShort.firstname} ${props.userProfileShort.lastname}`}
-
-            {/*  ${
-             props.userProfileShort.isDeactivated === true
-               ? `(${t(texts.userProfileItem.deactivated)})`
-               : ""
-           } */}
+            {`${props.userShort.firstname} ${props.userShort.lastname} ${
+              props.userShort.isDeactivated === true
+                ? `(${t(texts.userProfileItem.deactivated)})`
+                : ""
+            }`}
           </div>
         </div>
 
         <div className={styles.group}>
           <div>
-            {t(texts.user.email)}: {props.userProfileShort.email}
+            {t(texts.user.email)}: {props.userShort.email}
           </div>
         </div>
 
@@ -41,7 +39,7 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
           <div>
             {t(texts.user.phone)}
             {": "}
-            {props.userProfileShort.phone ? props.userProfileShort.phone : ""}
+            {props.userShort.phone ? props.userShort.phone : ""}
           </div>
         </div>
       </div>

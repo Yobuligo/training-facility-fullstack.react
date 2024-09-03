@@ -107,10 +107,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       include: [
         {
           model: UserProfile,
+          as: "userProfile",
           attributes: ["id", "firstname", "lastname", "email", "phone"],
         },
         {
           model: UserRole,
+          as: "userRoles",
           attributes: ["id", "role"],
         },
       ],
