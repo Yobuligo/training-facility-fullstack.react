@@ -77,6 +77,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.phone)}
             maxLength={20}
             onChange={viewModel.setPhone}
@@ -85,6 +86,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.birthday)}
             type="date"
             onChange={viewModel.onChangeBirthday}
@@ -107,6 +109,7 @@ export const User: React.FC<IUserProps> = (props) => {
         >
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.street)}
             maxLength={100}
             onChange={viewModel.setStreet}
@@ -115,6 +118,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.postalCode)}
             maxLength={10}
             onChange={viewModel.onChangePostalCode}
@@ -123,6 +127,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.city)}
             maxLength={50}
             onChange={viewModel.setCity}
@@ -137,6 +142,7 @@ export const User: React.FC<IUserProps> = (props) => {
         >
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.bankAccountOwner)}
             maxLength={100}
             onChange={viewModel.setBankAccountOwner}
@@ -145,6 +151,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.bankAccountIBAN)}
             maxLength={34}
             onChange={viewModel.setBankAccountIBAN}
@@ -153,6 +160,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.bankAccountBIC)}
             maxLength={11}
             onChange={viewModel.setBankAccountBIC}
@@ -161,6 +169,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
+            isOptional={true}
             label={t(texts.user.bankAccountInstitution)}
             maxLength={50}
             onChange={viewModel.setBankAccountInstitution}

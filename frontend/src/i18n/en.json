@@ -63,6 +63,7 @@
         "edit": "Edit",
         "female": "Female",
         "grade": "Grade",
+        "isOptional": "(optional)",
         "logoutInvalidSession": "Your were logged out due an invalid or expired session",
         "male": "Male",
         "month": {

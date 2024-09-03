@@ -1,5 +1,12 @@
 @import "../../styles/dimensions.module.scss";
-@import '../../styles/colors.module.scss';
+@import "../../styles/colors.module.scss";
+
+.labelContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  justify-content: space-between;
+}
 
 .labeledElement {
   display: flex;
@@ -7,7 +14,11 @@
   row-gap: 0.25rem;
 }
 
-.label{
+.label {
   font-weight: 500;
   color: $color-secondary;
+}
+
+.optional {
+  color: $color-secondary-light;
 }

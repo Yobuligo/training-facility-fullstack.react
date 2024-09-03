@@ -16,7 +16,7 @@ export class DummyUserProfile extends Dummy implements IUserProfile {
   firstname = "";
   lastname = "";
   gender = Gender.FEMALE;
-  birthday = new Date();
+  birthday = undefined
   street = "";
   postalCode = "";
   city = "";
