@@ -13,6 +13,7 @@ import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
 import { IUserProps } from "./IUserProps";
+import { useLabeledElement } from "../../../hooks/useLabeledElement";
 
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
   );
   const [email, setEmail] = useState(userProfile.email);
-  const [username, setUsername] = useState(props.user.username);
+  const [username, setUsername] = useLabeledElement(props.user.username);
   const [firstname, setFirstname] = useState(userProfile.firstname);
   const [lastname, setLastname] = useState(userProfile.lastname);
   const [gender, setGender] = useState(userProfile.gender);
