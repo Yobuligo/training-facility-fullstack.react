@@ -70,9 +70,15 @@ export const useUserProfileSectionViewModel = () => {
     };
   };
 
-  const updateUserShort = (user: IUser) => {
+  /**
+   * Updates the user short list
+   * 
+   * @param userId contains an alternative userId of e.g. obsolete entries
+   */
+  const updateUserShort = (user: IUser, userId?: string) => {
     setUsersShort((previous) => {
-      const index = previous.findIndex((item) => item.id === user.id);
+      const searchUserId = userId ? userId : user.id
+      const index = previous.findIndex((item) => item.id === searchUserId);
       if (index !== -1) {
         previous.splice(index, 1, createUserShort(user));
       }
@@ -97,7 +103,7 @@ export const useUserProfileSectionViewModel = () => {
     insertUserRequest.send(async () => {
       const userApi = new UserApi();
       const createdUser = await userApi.insert(user);
-      updateUserShort(createdUser);
+      updateUserShort(createdUser, user.id);
     });
 
   const updateUser = (user: IUser) =>

@@ -17,6 +17,7 @@
 		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 	# Bug: created user cannot be selected from user list	
 	# Bug: Customer id is not displayed when user was created in backend
+	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	
 - User List
 	- user must be sorted by name
