@@ -138,13 +138,16 @@ export const useUserProfileSectionViewModel = () => {
   /**
    * Activates an user
    */
-  const onActivate = (user: IUser) =>
+  const onActivate = (user: IUser) => {
+    user.isDeactivated = false;
+    user.deactivatedAt = undefined;
     activateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.activate(user.id);
       updateUserProfileShort(user);
       setSelectedUser(undefined);
     });
+  };
 
   /**
    * Handles event on click back from the user profile detail screen
@@ -169,13 +172,16 @@ export const useUserProfileSectionViewModel = () => {
   /**
    * Deactivates an user
    */
-  const onDeactivate = (user: IUser) =>
+  const onDeactivate = (user: IUser) => {
+    user.isDeactivated = true;
+    user.deactivatedAt = new Date();
     deactivateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.deactivate(user.id);
       updateUserProfileShort(user);
       setSelectedUser(undefined);
     });
+  };
 
   return {
     filterUserProfiles,

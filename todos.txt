@@ -22,8 +22,9 @@
 	- user must be sorted by name
 		- Currently it is not sorted, if a user was added
 		- Perhaps it should be sorted directly within the backend
-	- Mark deactivated users
-	- Mark admin users
+	# Mark deactivated users
+	# Mark admin users
+	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
 
 - Login
 	# Deactivated user must not be logged in
