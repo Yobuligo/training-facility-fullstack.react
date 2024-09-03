@@ -38,6 +38,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode || !props.isAdminMode}
             label={t(texts.user.username)}
+            maxLength={100}
             onChange={viewModel.setUsername}
             value={viewModel.username}
           />
@@ -45,6 +46,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.firstname)}
+            maxLength={50}
             onChange={viewModel.setFirstname}
             value={viewModel.firstname}
           />
@@ -52,6 +54,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.lastname)}
+            maxLength={50}
             onChange={viewModel.setLastname}
             value={viewModel.lastname}
           />
@@ -67,6 +70,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.email)}
+            maxLength={255}
             onChange={viewModel.setEmail}
             value={viewModel.email}
           />
@@ -74,6 +78,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.phone)}
+            maxLength={20}
             onChange={viewModel.setPhone}
             value={viewModel.phone}
           />
@@ -103,6 +108,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.street)}
+            maxLength={100}
             onChange={viewModel.setStreet}
             value={viewModel.street}
           />
@@ -110,6 +116,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.postalCode)}
+            maxLength={10}
             onChange={viewModel.onChangePostalCode}
             value={viewModel.postalCode?.toString()}
           />
@@ -117,6 +124,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.city)}
+            maxLength={50}
             onChange={viewModel.setCity}
             value={viewModel.city}
           />
@@ -130,6 +138,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.bankAccountOwner)}
+            maxLength={100}
             onChange={viewModel.setBankAccountOwner}
             value={viewModel.bankAccountOwner}
           />
@@ -137,6 +146,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.bankAccountIBAN)}
+            maxLength={34}
             onChange={viewModel.setBankAccountIBAN}
             value={viewModel.bankAccountIBAN}
           />
@@ -144,6 +154,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.bankAccountBIC)}
+            maxLength={11}
             onChange={viewModel.setBankAccountBIC}
             value={viewModel.bankAccountBIC}
           />
@@ -151,6 +162,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode}
             label={t(texts.user.bankAccountInstitution)}
+            maxLength={50}
             onChange={viewModel.setBankAccountInstitution}
             value={viewModel.bankAccountInstitution}
           />

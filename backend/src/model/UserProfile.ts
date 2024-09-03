@@ -12,7 +12,7 @@ const userProfile: ModelStatic<
   memberId: DataTypes.STRING(10),
   firstname: DataTypes.STRING(50),
   lastname: DataTypes.STRING(50),
-  email: DataTypes.STRING,
+  email: DataTypes.STRING(255),
   birthday: {
     allowNull: true,
     type: DataTypes.DATE,
@@ -20,7 +20,7 @@ const userProfile: ModelStatic<
   gender: DataTypes.INTEGER,
   city: DataTypes.STRING(50),
   postalCode: DataTypes.STRING(10),
-  street: DataTypes.STRING,
+  street: DataTypes.STRING(100),
   phone: DataTypes.STRING(20),
   tariff: DataTypes.INTEGER,
   joinedOn: DataTypes.DATE,

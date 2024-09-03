@@ -26,10 +26,11 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
         )}
         disabled={props.disabled}
         id={id}
+        maxLength={props.maxLength}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         type={props.type ?? "text"}
         value={props.value}
-        onKeyDown={onKeyDown}
       />
     </LabeledElement>
   );

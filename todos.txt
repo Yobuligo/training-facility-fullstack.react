@@ -1,8 +1,11 @@
 - User Management
 	- Joined on must be changeable in admin mode
-	- Current user must not be deactivatable
+	- inputs are restricted to length of related db fields
+	# Current user must not be deactivatable
 	# Deletion of current user must not be possible
 	# UserBankAccount must be loaded with User
+	- Refactor Collapsables by collapsing on click on title
+
 - Login
 	- Deactivated user must not be logged in
 	
