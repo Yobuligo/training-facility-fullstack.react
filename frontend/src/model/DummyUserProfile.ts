@@ -8,7 +8,6 @@ import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";
 
 export class DummyUserProfile extends Dummy implements IUserProfile {
-  deactivatedAt?: Date | undefined;
   userBankAccount?: IUserBankAccount | undefined;
   id = uuid();
   memberId = 0;
@@ -26,7 +25,6 @@ export class DummyUserProfile extends Dummy implements IUserProfile {
   joinedOn = new Date();
   createdAt = new Date();
   updatedAt = new Date();
-  isDeactivated = false;
   userGradings: IUserGrading[] = [];
   userRoles: IUserRole[] = [];
 }

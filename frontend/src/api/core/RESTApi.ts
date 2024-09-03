@@ -55,7 +55,7 @@ export class RESTApi {
 
   static post<T>(
     url: string,
-    data: any,
+    data?: any,
     requestParams?: RequestParams<T>
   ): Promise<T> {
     return this.createPromise(

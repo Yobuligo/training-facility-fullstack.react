@@ -10,12 +10,15 @@ import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
 import { IUserProfile } from "../shared/model/IUserProfile";
+import { IUserRole } from "../shared/model/IUserRole";
 import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
 import { uuid } from "../utils/uuid";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { findTransaction } from "./sequelize/utils/findTransaction";
 import { transaction } from "./sequelize/utils/transaction";
+import { SessionRepo } from "./SessionRepo";
 import { UserProfileRepo } from "./UserProfileRepo";
 import { UserRoleRepo } from "./UserRoleRepo";
 
@@ -37,6 +40,14 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     ]);
   }
 
+  async activate(userId: string): Promise<boolean> {
+    const [updatedRows] = await this.model.update(
+      { isDeactivated: false, deactivatedAt: undefined },
+      { where: { id: userId } }
+    );
+    return updatedRows === 1;
+  }
+
   async createUser(credentials: ICredentials): Promise<IUserSecure> {
     const salt = hash(uuid());
     const password = hashPassword(credentials.password, salt);
@@ -46,8 +57,26 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       salt,
       username: credentials.username,
       userRoles: [],
+      isDeactivated: false,
     });
     return user;
+  }
+
+  async deactivate(userId: string): Promise<boolean> {
+    let updatedRows: [affectedCount: number] = [0];
+    await transaction(async () => {
+      // deactivate user
+      updatedRows = await this.model.update(
+        { isDeactivated: true, deactivatedAt: new Date() },
+        { where: { id: userId } }
+      );
+
+      // delete user sessions
+      const sessionRepo = new SessionRepo();
+      await sessionRepo.deleteUserSession(userId);
+    });
+
+    return updatedRows[0] === 1;
   }
 
   async findByCredentials(
@@ -107,6 +136,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         id: userSecure.id,
         username: userSecure.username,
         userRoles: [],
+        isDeactivated: false,
         createdAt: userSecure.createdAt,
         updatedAt: userSecure.updatedAt,
       };
@@ -118,16 +148,29 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       createdUser.userProfile = await userProfileRepo.insert(userProfile);
 
       // create UserRoles
+      if (!createdUser.userRoles) {
+        createdUser.userRoles = [];
+      }
+
       const userRoleRepo = new UserRoleRepo();
       const userRole = await userRoleRepo.insert({
         role: AuthRole.USER,
         userId: createdUser.id,
       });
-
-      if (!createdUser.userRoles) {
-        createdUser.userRoles = [];
-      }
       createdUser.userRoles.push(userRole);
+
+      if (entity.userRoles) {
+        // find user roles beside "USER", which must be assigned
+        const newUserRoles = entity.userRoles.filter(
+          (userRole) => userRole.role !== AuthRole.USER
+        );
+        for (let i = 0; i < newUserRoles.length; i++) {
+          await userRoleRepo.insert({
+            role: newUserRoles[i].role,
+            userId: createdUser.id,
+          });
+        }
+      }
     });
 
     return createdUser;
@@ -144,8 +187,65 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         const userProfileRepo = new UserProfileRepo();
         await userProfileRepo.update(entity.userProfile);
       }
+
+      // update UserRoles
+      const data = await UserRole.findAll({
+        where: { userId: entity.id },
+      });
+      const dbUserRoles = data.map((model) => model.toJSON());
+
+      await this.addNewUserRoles(entity, dbUserRoles);
+      await this.deleteObsoleteUserRoles(dbUserRoles, entity);
     });
     return wasUpdated;
+  }
+
+  /**
+   * Find user roles, which are persisted but no longer assigned to the user and delete them
+   */
+  private async deleteObsoleteUserRoles(
+    dbUserRoles: IUserRole[],
+    entity: IUserSecure
+  ) {
+    const deleteUserRoles = dbUserRoles.filter(async (userRole) => {
+      const index = entity.userRoles?.findIndex(
+        (item) => item.role === userRole.role
+      );
+      return index === -1;
+    });
+
+    for (let i = 0; i < deleteUserRoles.length; i++) {
+      await UserRole.destroy({
+        where: { id: deleteUserRoles[i].id },
+        transaction: findTransaction(),
+      });
+    }
+  }
+
+  /**
+   * Find user roles, which are not persisted yet and add them
+   */
+  private async addNewUserRoles(entity: IUserSecure, dbUserRoles: IUserRole[]) {
+    const newUserRoles = entity.userRoles?.filter(async (userRole) => {
+      const index = dbUserRoles.findIndex(
+        (item) => item.role === userRole.role
+      );
+      return index === -1;
+    });
+
+    if (newUserRoles) {
+      for (let i = 0; i < newUserRoles.length; i++) {
+        await UserRole.create(
+          {
+            role: newUserRoles[i].role,
+            userId: newUserRoles[i].userId,
+          },
+          {
+            transaction: findTransaction(),
+          }
+        );
+      }
+    }
   }
 
   private async findByUsernameSecure(
@@ -155,11 +255,13 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       where: { username },
       attributes: [
         "id",
-        "createdAt",
-        "updatedAt",
+        "isDeactivated",
+        "deactivatedAt",
         "username",
         "password",
         "salt",
+        "createdAt",
+        "updatedAt",
       ],
     });
     return data?.toJSON();

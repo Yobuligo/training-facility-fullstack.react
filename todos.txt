@@ -1,7 +1,9 @@
 - User Profile
+	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
 	# username must be unique
-	- user can be marked as admin
+	# user can be marked as admin and vice versa
+	- User role Admin is assigned to user, when marked as admin while creating
 	- Only a valid email address can be persisted
 	# Customer Id must be created and displayed
 	# Joined on must be changeable in admin mode otherwise displayed
@@ -9,16 +11,19 @@
 	# Current user must not be deactivatable
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
-	- Refactor Collapsables by collapsing on click on title
 	# Delete user with user profile, bank account, gradings, roles, etc.
+	- Refactor Collapsables by collapsing on click on title
+	- Errors from backend must be translatable or mapped to client errors 
+		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 	# Bug: created user cannot be selected from user list	
 	# Bug: Customer id is not displayed when user was created in backend
 	
 - User List
 	- user must be sorted by name
+	- Mark deactivated users
 
 - Login
-	- Deactivated user must not be logged in
+	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
 	
 - Event Registration
@@ -37,6 +42,10 @@
 
 - User Event Overview
 	# Only display upcoming events
+	
+- LabeledSelect
+	- Bug: Reset input does not reset value correctly
+		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 
 
 Best Practices Sequelize:

@@ -172,6 +172,7 @@
     },
     "user": {
         "activate": "Activate",
+        "activateUserQuestion": "Do you really want to activate user '{{username}}'?",
         "address": "Address",
         "bank": "Bank",
         "bankAccountOwner": "Account owner",
@@ -181,6 +182,7 @@
         "birthday": "Birthday",
         "city": "City",
         "deactivate": "Deactivate",
+        "deactivateUserQuestion": "Do you really want to deactivate user '{{username}}'?",
         "deleteUser": "Delete user",
         "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
         "email": "Email",

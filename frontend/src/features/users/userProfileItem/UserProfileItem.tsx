@@ -11,20 +11,20 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
   return (
     <Card
       className={style(
-        styles.userProfileItem,
-        props.userProfileShort.isDeactivated ? styles.deactivated : ""
+        styles.userProfileItem
+        // props.userProfileShort.isDeactivated ? styles.deactivated : ""
       )}
       onClick={props.onSelect}
     >
       <div className={styles.group}>
         <div className={styles.name}>
-          {`${props.userProfileShort.firstname} ${
-            props.userProfileShort.lastname
-          } ${
-            props.userProfileShort.isDeactivated === true
-              ? `(${t(texts.userProfileItem.deactivated)})`
-              : ""
-          }`}
+          {`${props.userProfileShort.firstname} ${props.userProfileShort.lastname}`}
+
+          {/*  ${
+             props.userProfileShort.isDeactivated === true
+               ? `(${t(texts.userProfileItem.deactivated)})`
+               : ""
+           } */}
         </div>
       </div>
 

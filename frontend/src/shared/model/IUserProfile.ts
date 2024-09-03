@@ -18,8 +18,6 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   email: string;
   phone?: string;
   tariff: Tariff;
-  isDeactivated: boolean;
-  deactivatedAt?: Date;
   joinedOn: Date;
   userBankAccount?: IUserBankAccount;
   userGradings?: IUserGrading[];

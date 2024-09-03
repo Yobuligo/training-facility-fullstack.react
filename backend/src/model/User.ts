@@ -18,6 +18,8 @@ const user: ModelStatic<Model<IUserSecure, IEntityDetails<IUserSecure>>> =
         type: DataTypes.STRING(100),
       },
       salt: DataTypes.STRING(100),
+      isDeactivated: DataTypes.BOOLEAN,
+      deactivatedAt: DataTypes.DATE,
     },
     {
       defaultScope: {

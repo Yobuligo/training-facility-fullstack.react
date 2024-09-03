@@ -21,6 +21,8 @@ export const useUserProfileSectionViewModel = () => {
   const insertUserRequest = useRequest();
   const updateUserRequest = useRequest();
   const deleteUserRequest = useRequest();
+  const activateUserRequest = useRequest();
+  const deactivateUserRequest = useRequest();
 
   const filterUserProfiles = (): IUserProfileShort[] => {
     if (query.length === 0) {
@@ -41,7 +43,6 @@ export const useUserProfileSectionViewModel = () => {
           "lastname",
           "email",
           "phone",
-          "isDeactivated",
         ]);
       setUserProfilesShort(userProfilesShort);
     })
@@ -115,6 +116,17 @@ export const useUserProfileSectionViewModel = () => {
     });
 
   /**
+   * Activates an user
+   */
+  const onActivate = (user: IUser) =>
+    activateUserRequest.send(async () => {
+      const userApi = new UserApi();
+      await userApi.activate(user.id);
+      updateUserProfileShort(user);
+      setSelectedUser(undefined);
+    });
+
+  /**
    * Handles event on click back from the user profile detail screen
    */
   const onBack = () => {
@@ -134,15 +146,28 @@ export const useUserProfileSectionViewModel = () => {
     }
   };
 
+  /**
+   * Deactivates an user
+   */
+  const onDeactivate = (user: IUser) =>
+    deactivateUserRequest.send(async () => {
+      const userApi = new UserApi();
+      await userApi.deactivate(user.id);
+      updateUserProfileShort(user);
+      setSelectedUser(undefined);
+    });
+
   return {
     filterUserProfiles,
     loadUserRequest,
     loadUserProfilesRequest,
     insertUserRequest,
+    onActivate,
     onAppend,
     onBack,
     onCancel,
     onChange,
+    onDeactivate,
     onDelete,
     onSelect,
     query,

@@ -28,8 +28,6 @@ const userProfile: ModelStatic<
   phone: DataTypes.STRING(20),
   tariff: DataTypes.INTEGER,
   joinedOn: DataTypes.DATE,
-  isDeactivated: DataTypes.BOOLEAN,
-  deactivatedAt: DataTypes.DATE,
 });
 
 export class UserProfile extends userProfile {}

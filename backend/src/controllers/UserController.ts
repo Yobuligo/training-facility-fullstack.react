@@ -12,10 +12,58 @@ import { SessionInterceptor } from "./core/SessionInterceptor";
 export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {
     super(UserRouteMeta, new UserRepo());
+    this.activate();
+    this.deactivate();
+    this.existsUsername();
     this.login();
     this.logout();
     this.register();
-    this.existsUsername();
+  }
+
+  private activate() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/activate`,
+      SessionInterceptor(async (req, res) => {
+        const userId = req.params.id;
+        const userRepo = new UserRepo();
+        const wasActivated = await userRepo.activate(userId);
+        res.status(200).send(wasActivated);
+      })
+    );
+  }
+
+  private deactivate() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/deactivate`,
+      SessionInterceptor(async (req, res) => {
+        const userId = req.params.id;
+        const userRepo = new UserRepo();
+        const wasDeactivated = await userRepo.deactivate(userId);
+        res.status(200).send(wasDeactivated);
+      })
+    );
+  }
+
+  private existsUsername() {
+    this.router.get(
+      `${this.routeMeta.path}/exists/:username`,
+      SessionInterceptor(async (req, res) => {
+        const username = req.params.username;
+        if (!username || typeof username !== "string") {
+          return res
+            .status(400)
+            .send(
+              createError(
+                "Error while getting username. Username was not provided."
+              )
+            );
+        }
+
+        const userRepo = new UserRepo();
+        const contains = await userRepo.existsByUsername(username);
+        res.status(200).send(contains);
+      })
+    );
   }
 
   private login() {
@@ -31,6 +79,12 @@ export class UserController extends EntityController<IUser, UserRepo> {
           return res
             .status(404)
             .send(createError(`Incorrect username or password.`));
+        }
+
+        if (user.isDeactivated === true){
+          return res
+            .status(403)
+            .send(createError(`User is deactivated.`));          
         }
 
         const sessionRepo = new SessionRepo();
@@ -65,28 +119,6 @@ export class UserController extends EntityController<IUser, UserRepo> {
         }
         await userRepo.createUser(credentials);
         return res.status(201).send(true);
-      })
-    );
-  }
-
-  private existsUsername() {
-    this.router.get(
-      `${this.routeMeta.path}/exists/:username`,
-      SessionInterceptor(async (req, res) => {
-        const username = req.params.username;
-        if (!username || typeof username !== "string") {
-          return res
-            .status(400)
-            .send(
-              createError(
-                "Error while getting username. Username was not provided."
-              )
-            );
-        }
-
-        const userRepo = new UserRepo();
-        const contains = await userRepo.existsByUsername(username);
-        res.status(200).send(contains);
       })
     );
   }

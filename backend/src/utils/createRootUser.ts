@@ -1,9 +1,9 @@
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { UserRoleRepo } from "../repositories/UserRoleRepo";
+import { AuthRole } from "../shared/types/AuthRole";
 import { Gender } from "../shared/types/Gender";
 import { Tariff } from "../shared/types/Tariff";
-import { AuthRole } from "../shared/types/AuthRole";
 
 export const createRootUser = async () => {
   // check if user already exists, otherwise create one
@@ -23,10 +23,9 @@ export const createRootUser = async () => {
     email: "",
     firstname: "Root",
     gender: Gender.MALE,
-    isDeactivated: false,
     joinedOn: new Date(),
     lastname: "",
-    memberId: "",
+    memberId: 0,
     tariff: Tariff.TRAINEES_STUDENTS_PENSIONERS,
     userGradings: [],
     userId: user.id,

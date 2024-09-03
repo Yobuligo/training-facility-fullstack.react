@@ -242,8 +242,8 @@ export const User: React.FC<IUserProps> = (props) => {
                   disabled={viewModel.displayMode}
                   label={t(texts.user.isAdmin)}
                   options={viewModel.isAdminOptions}
-                  // onSelect={viewModel.onIsAdminChange}
-                  // selected={viewModel.selectedIsAdminOption}
+                  onSelect={viewModel.onIsAdminChange}
+                  selected={viewModel.selectedIsAdminOption}
                 />
               </div>
               <Toolbar>

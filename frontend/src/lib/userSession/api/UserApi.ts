@@ -11,6 +11,18 @@ export class UserApi extends EntityRepository<IUser> {
     super(UserRouteMeta);
   }
 
+  async activate(userId: string): Promise<boolean> {
+    return await RESTApi.post(`${this.url}/${userId}/activate`);
+  }
+
+  async deactivate(userId: string): Promise<boolean> {
+    return await RESTApi.post(`${this.url}/${userId}/deactivate`);
+  }
+
+  async existsByUsername(username: string): Promise<boolean> {
+    return await RESTApi.get(`${this.url}/exists/${username}`);
+  }
+
   async findByIdInternal(userId: string): Promise<IUserInternal | undefined> {
     return (await this.findById(userId, [
       "id",
@@ -18,10 +30,6 @@ export class UserApi extends EntityRepository<IUser> {
       "userRoles",
       "username",
     ])) as IUserInternal;
-  }
-
-  async existsByUsername(username: string): Promise<boolean> {
-    return await RESTApi.get(`${this.url}/exists/${username}`);
   }
 
   login(credentials: ICredentials): Promise<ISession> {

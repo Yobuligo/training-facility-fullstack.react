@@ -9,14 +9,19 @@ import { UserProfile } from "./model/UserProfile";
 import { UserRole } from "./model/UserRole";
 import { createRootUser } from "./utils/createRootUser";
 
-Session.sync({ alter: true });
-User.sync({ alter: true });
-UserProfile.sync({ alter: true });
-UserRole.sync({ alter: true });
-UserGrading.sync({ alter: true });
-UserBankAccount.sync({ alter: true });
+const initialize = async () => {
+  const alter: boolean = false;
+  Session.sync({ alter: alter });
+  User.sync({ alter: alter });
+  UserProfile.sync({ alter: alter });
+  UserRole.sync({ alter: alter });
+  UserGrading.sync({ alter: alter });
+  UserBankAccount.sync({ alter: alter });
 
-createRootUser();
+  createRootUser();
+};
+
+initialize();
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));

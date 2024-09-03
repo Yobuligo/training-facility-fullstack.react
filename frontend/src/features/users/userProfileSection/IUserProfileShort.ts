@@ -6,5 +6,4 @@ export interface IUserProfileShort extends IHaveId, IHaveUserId {
   lastname: string;
   email: string;
   phone?: string;
-  isDeactivated: boolean;
 }

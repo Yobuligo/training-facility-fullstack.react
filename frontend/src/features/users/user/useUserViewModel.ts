@@ -12,7 +12,9 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
+import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
+import { AuthRole } from "../../../shared/types/AuthRole";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
@@ -22,6 +24,7 @@ import { IUserProps } from "./IUserProps";
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
   const userProfile = checkNotNull(props.user.userProfile);
+  const userRoles = checkNotNull(props.user.userRoles);
   const [profileDetailsSettings, setProfileDetailsSettings] =
     useProfileDetailsSettings();
   const [displayMode, setDisplayMode] = useState(
@@ -43,7 +46,7 @@ export const useUserViewModel = (props: IUserProps) => {
     useLabeledElement(userProfile.lastname);
   const [gender, setGender] = useState(userProfile.gender);
   const [tariff, setTariff] = useState(userProfile.tariff);
-  // const [isAdmin, setIsAdmin] = useState(props.userProfile.isAdmin);
+  const [isAdmin, setIsAdmin] = useState(UserInfo.containsAdminRole(userRoles));
   const [phone, setPhone] = useState(userProfile.phone);
   const [street, setStreet] = useState(userProfile.street);
   const [postalCode, setPostalCode] = useState(userProfile.postalCode);
@@ -60,8 +63,8 @@ export const useUserViewModel = (props: IUserProps) => {
   const [bankAccountInstitution, setBankAccountInstitution] = useState(
     userProfile.userBankAccount?.bankAccountInstitution ?? ""
   );
-  const [isDeactivated, setIsDeactivated] = useState(userProfile.isDeactivated);
-  const [deactivatedAt, setDeactivatedAt] = useState(userProfile.deactivatedAt);
+  const [isDeactivated, setIsDeactivated] = useState(props.user.isDeactivated);
+  const [deactivatedAt, setDeactivatedAt] = useState(props.user.deactivatedAt);
   const [collapseBank, setCollapseBank] = useState(false);
   const [gradings, setGradings] = useState<IUserGrading[]>(
     userProfile.userGradings ?? []
@@ -80,13 +83,13 @@ export const useUserViewModel = (props: IUserProps) => {
     setFirstname(userProfile.firstname);
     setLastname(userProfile.lastname);
     setGender(userProfile.gender);
-    // setIsAdmin(props.userProfile.isAdmin);
+    setIsAdmin(UserInfo.containsAdminRole(userRoles));
     setPhone(userProfile.phone);
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
     setCity(userProfile.city);
-    setIsDeactivated(userProfile.isDeactivated);
-    setDeactivatedAt(userProfile.deactivatedAt);
+    setIsDeactivated(props.user.isDeactivated);
+    setDeactivatedAt(props.user.deactivatedAt);
     setTariff(userProfile.tariff);
     setBankAccountBIC(userProfile.userBankAccount?.bankAccountBIC ?? "");
     setBankAccountIBAN(userProfile.userBankAccount?.bankAccountIBAN ?? "");
@@ -100,6 +103,8 @@ export const useUserViewModel = (props: IUserProps) => {
     );
     setDisplayMode(true);
   }, [
+    props.user.deactivatedAt,
+    props.user.isDeactivated,
     props.user.username,
     setEmail,
     setFirstname,
@@ -107,11 +112,9 @@ export const useUserViewModel = (props: IUserProps) => {
     setUsername,
     userProfile.birthday,
     userProfile.city,
-    userProfile.deactivatedAt,
     userProfile.email,
     userProfile.firstname,
     userProfile.gender,
-    userProfile.isDeactivated,
     userProfile.joinedOn,
     userProfile.lastname,
     userProfile.phone,
@@ -123,6 +126,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount?.bankAccountInstitution,
     userProfile.userBankAccount?.bankAccountOwner,
     userProfile.userGradings,
+    userRoles,
   ]);
 
   const onCancel = useCallback(() => {
@@ -182,11 +186,11 @@ export const useUserViewModel = (props: IUserProps) => {
     [t]
   );
 
-  // const selectedIsAdminOption =
-  //   isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
+  const selectedIsAdminOption =
+    isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
 
-  // const onIsAdminChange = (option: ISelectOption<boolean>) =>
-  //   setIsAdmin(option.key);
+  const onIsAdminChange = (option: ISelectOption<boolean>) =>
+    setIsAdmin(option.key);
 
   const onChangeBirthday = (newValue: string) => setBirthday(newValue);
 
@@ -226,16 +230,33 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
-  const onToggleIsDeactivated = () =>
-    setIsDeactivated((previous) => {
-      previous = !previous;
-      if (previous === true) {
-        setDeactivatedAt(new Date());
-      } else {
-        setDeactivatedAt(undefined);
-      }
-      return previous;
-    });
+  const onActivate = () => {
+    if (
+      window.confirm(
+        t(texts.user.activateUserQuestion, { username: props.user.username })
+      )
+    ) {
+      props.onActivate?.(props.user);
+    }
+  };
+
+  const onDeactivate = () => {
+    if (
+      window.confirm(
+        t(texts.user.deactivateUserQuestion, { username: props.user.username })
+      )
+    ) {
+      props.onDeactivate?.(props.user);
+    }
+  };
+
+  const onToggleIsDeactivated = () => {
+    if (isDeactivated === false) {
+      onDeactivate();
+    } else {
+      onActivate();
+    }
+  };
 
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||
@@ -271,6 +292,31 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
   };
 
+  const updateUserRoles = () => {
+    // find admin role index
+    const index = userRoles.findIndex(
+      (userRole) => userRole.role === AuthRole.ADMIN
+    );
+
+    if (isAdmin === false) {
+      // delete if exist
+      if (index !== -1) {
+        userRoles.splice(index, 1);
+      }
+    } else {
+      // add if not exist
+      if (index === -1) {
+        userRoles.push({
+          id: uuid(),
+          role: AuthRole.ADMIN,
+          userId: props.user.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+      }
+    }
+  };
+
   const onSave = () => {
     props.user.username = username;
     userProfile.birthday = DateTime.create(birthday, "12:00");
@@ -283,11 +329,12 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.postalCode = postalCode;
     userProfile.city = city;
     userProfile.tariff = tariff;
-    userProfile.isDeactivated = isDeactivated;
-    userProfile.deactivatedAt = deactivatedAt;
     userProfile.joinedOn = DateTime.create(joinedOn, "12:00");
+    props.user.isDeactivated = isDeactivated;
+    props.user.deactivatedAt = deactivatedAt;
 
     updateUserBankAccount();
+    updateUserRoles();
     userProfile.userGradings = gradings;
     props.onChange?.(props.user);
   };
@@ -389,7 +436,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onChangePostalCode,
     onDeleteGrading,
     onDeleteUser,
-    // onIsAdminChange,
+    onIsAdminChange,
     onGenderChange,
     onSave,
     onTariffChange,
@@ -403,7 +450,7 @@ export const useUserViewModel = (props: IUserProps) => {
     phone,
     postalCode,
     profileDetailsSettings,
-    // selectedIsAdminOption,
+    selectedIsAdminOption,
     selectedGenderOption,
     selectedTariffOption,
     setBankAccountBIC,
