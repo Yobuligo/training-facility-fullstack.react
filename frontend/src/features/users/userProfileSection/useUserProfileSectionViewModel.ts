@@ -44,7 +44,25 @@ export const useUserProfileSectionViewModel = () => {
           "email",
           "phone",
         ]);
-      setUserProfilesShort(userProfilesShort);
+      const sortedUserProfilesShort = userProfilesShort.sort((left, right) => {
+        if (left.firstname < right.firstname) {
+          return -1;
+        }
+
+        if (left.firstname > right.firstname) {
+          return 1;
+        }
+
+        if (left.lastname < right.lastname) {
+          return -1;
+        }
+
+        if (left.lastname > right.lastname) {
+          return 1;
+        }
+        return 0;
+      });
+      setUserProfilesShort(sortedUserProfilesShort);
     })
   );
 
