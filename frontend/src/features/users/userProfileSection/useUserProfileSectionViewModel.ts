@@ -12,7 +12,7 @@ export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
-  const loadUserProfilesRequest = useRequest();
+  const loadUsersShortRequest = useRequest();
   const loadUserRequest = useRequest();
   const insertUserRequest = useRequest();
   const updateUserRequest = useRequest();
@@ -20,7 +20,7 @@ export const useUserProfileSectionViewModel = () => {
   const activateUserRequest = useRequest();
   const deactivateUserRequest = useRequest();
 
-  const filterUserProfiles = (): IUserShort[] => {
+  const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
       return usersShort;
     }
@@ -29,10 +29,10 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   useInitialize(() =>
-    loadUserProfilesRequest.send(async () => {
+    loadUsersShortRequest.send(async () => {
       const userApi = new UserApi();
       const usersShort: IUserShort[] = await userApi.findAllShort();
-      const sortedUserProfilesShort = usersShort.sort((left, right) => {
+      const sortedUsersShort = usersShort.sort((left, right) => {
         if (left.firstname < right.firstname) {
           return -1;
         }
@@ -50,7 +50,7 @@ export const useUserProfileSectionViewModel = () => {
         }
         return 0;
       });
-      setUsersShort(sortedUserProfilesShort);
+      setUsersShort(sortedUsersShort);
     })
   );
 
@@ -70,7 +70,7 @@ export const useUserProfileSectionViewModel = () => {
     };
   };
 
-  const updateUserProfileShort = (user: IUser) => {
+  const updateUserShort = (user: IUser) => {
     setUsersShort((previous) => {
       const index = previous.findIndex((item) => item.id === user.id);
       if (index !== -1) {
@@ -97,14 +97,14 @@ export const useUserProfileSectionViewModel = () => {
     insertUserRequest.send(async () => {
       const userApi = new UserApi();
       const createdUser = await userApi.insert(user);
-      updateUserProfileShort(createdUser);
+      updateUserShort(createdUser);
     });
 
   const updateUser = (user: IUser) =>
     updateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.update(user);
-      updateUserProfileShort(user);
+      updateUserShort(user);
     });
 
   const onChange = (user: IUser) => {
@@ -119,7 +119,7 @@ export const useUserProfileSectionViewModel = () => {
   const onDelete = (user: IUser) => {
     setUsersShort((previous) => {
       setSelectedUser(undefined);
-      List.delete(previous, (item) => item.id === user.userProfile?.id);
+      List.delete(previous, (item) => item.id === user.id);
       deleteUser(user);
       return [...previous];
     });
@@ -144,7 +144,7 @@ export const useUserProfileSectionViewModel = () => {
     activateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.activate(user.id);
-      updateUserProfileShort(user);
+      updateUserShort(user);
       setSelectedUser(undefined);
     });
   };
@@ -163,7 +163,7 @@ export const useUserProfileSectionViewModel = () => {
     // if user is a dummy object (which is not persisted), delete it from the list
     if (user instanceof DummyUser && user.isPersisted === false) {
       setUsersShort((previous) => {
-        List.delete(previous, (item) => item.id === user.userProfile?.id);
+        List.delete(previous, (item) => item.id === user.id);
         return [...previous];
       });
     }
@@ -178,15 +178,15 @@ export const useUserProfileSectionViewModel = () => {
     deactivateUserRequest.send(async () => {
       const userApi = new UserApi();
       await userApi.deactivate(user.id);
-      updateUserProfileShort(user);
+      updateUserShort(user);
       setSelectedUser(undefined);
     });
   };
 
   return {
-    filterUserProfiles,
+    filterUserProfiles: filterUsers,
     loadUserRequest,
-    loadUserProfilesRequest,
+    loadUserProfilesRequest: loadUsersShortRequest,
     insertUserRequest,
     onActivate,
     onAppend,
