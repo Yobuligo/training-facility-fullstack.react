@@ -11,12 +11,13 @@ export const UserProfileGroup: React.FC<IUserProfileGroupProps> = (props) => {
 
   return (
     <Card className={styles.userProfileGroup}>
-      <div className={styles.groupHeadline}>
-        <h4>{props.title}</h4>
+      <div className={styles.collapse}>
         <Collapse
           collapsed={collapsed}
           onToggle={props.onToggleCollapse}
           setCollapsed={setCollapsed}
+          title={props.title}
+          titleClassName={styles.title}
         />
       </div>
       {!collapsed && (

@@ -7,12 +7,15 @@
   row-gap: $negative-space;
 }
 
-.groupHeadline {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.collapse {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
   padding-left: 1rem;
+}
+
+.title {
+  font-size: medium;
+  font-weight: 700;
 }
 
 .group {
