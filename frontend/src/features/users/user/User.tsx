@@ -193,17 +193,27 @@ export const User: React.FC<IUserProps> = (props) => {
           onToggleCollapse={viewModel.onToggleCollapseTechnicalInformation}
           title={t(texts.user.technicalInformation)}
         >
-          <div>
-            <div>{t(texts.user.joinedOn)}</div>
+          {props.isAdminMode ? (
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              label={t(texts.user.joinedOn)}
+              type="date"
+              onChange={viewModel.onChangeJoinedOn}
+              value={viewModel.joinedOn}
+            />
+          ) : (
             <div>
-              {props.user.userProfile
-                ? DateTime.format(
-                    props.user.userProfile?.joinedOn,
-                    "dd.MM.yyyy"
-                  )
-                : ""}
+              <div>{t(texts.user.joinedOn)}</div>
+              <div>
+                {props.user.userProfile
+                  ? DateTime.format(
+                      props.user.userProfile?.joinedOn,
+                      "dd.MM.yyyy"
+                    )
+                  : ""}
+              </div>
             </div>
-          </div>
+          )}
           {props.isAdminMode && (
             <>
               <div>

@@ -56,6 +56,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [gradings, setGradings] = useState<IUserGrading[]>(
     userProfile.userGradings ?? []
   );
+  const [joinedOn, setJoinedOn] = useState(
+    userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
+  );
 
   const reset = useCallback(() => {
     setBirthday(
@@ -81,6 +84,9 @@ export const useUserViewModel = (props: IUserProps) => {
     );
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
     setGradings(userProfile.userGradings ?? []);
+    setJoinedOn(
+      userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
+    );
     setDisplayMode(true);
   }, [
     props.user.username,
@@ -91,6 +97,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.firstname,
     userProfile.gender,
     userProfile.isDeactivated,
+    userProfile.joinedOn,
     userProfile.lastname,
     userProfile.phone,
     userProfile.postalCode,
@@ -167,6 +174,8 @@ export const useUserViewModel = (props: IUserProps) => {
   //   setIsAdmin(option.key);
 
   const onChangeBirthday = (newValue: string) => setBirthday(newValue);
+
+  const onChangeJoinedOn = (newValue: string) => setJoinedOn(newValue);
 
   const onChangePostalCode = (newValue: string) => {
     setPostalCode(parseInt(newValue).toString());
@@ -261,6 +270,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.tariff = tariff;
     userProfile.isDeactivated = isDeactivated;
     userProfile.deactivatedAt = deactivatedAt;
+    userProfile.joinedOn = DateTime.create(joinedOn, "12:00");
 
     updateUserBankAccount();
     userProfile.userGradings = gradings;
@@ -312,10 +322,12 @@ export const useUserViewModel = (props: IUserProps) => {
     gradings,
     isAdminOptions,
     isDeactivated,
+    joinedOn,
     lastname,
     onAddGrading,
     onCancel,
     onChangeBirthday,
+    onChangeJoinedOn,
     onChangePostalCode,
     onDeleteGrading,
     onDeleteUser,
