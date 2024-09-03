@@ -8,3 +8,7 @@
 .selectDisabled {
   color: $color-secondary-light;
 }
+
+.error {
+  border: 1px solid $color-error;
+}

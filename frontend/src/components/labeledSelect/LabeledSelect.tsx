@@ -20,7 +20,8 @@ export function LabeledSelect<T extends ISelectOption<any>>(
       <Select
         className={style(
           styles.select,
-          props.disabled ? styles.selectDisabled : ""
+          props.disabled ? styles.selectDisabled : "",
+          props.error ? styles.error : ""
         )}
         disabled={props.disabled}
         onSelect={props.onSelect}

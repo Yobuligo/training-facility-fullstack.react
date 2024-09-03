@@ -27,7 +27,8 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
         className={style(
           props.classNameInput,
           styles.labeledInput,
-          props.disabled ? styles.inputDisabled : ""
+          props.disabled ? styles.inputDisabled : "",
+          props.error ? styles.error : ""
         )}
         disabled={props.disabled}
         id={id}
