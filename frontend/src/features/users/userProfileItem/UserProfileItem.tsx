@@ -12,7 +12,7 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
 
   return (
     <Card className={styles.card} onClick={props.onSelect}>
-      <Banner color={colors.colorSecondary} />
+      <Banner color={props.isAdmin ? colors.colorSecondary : "white"} />
       <div
         className={style(
           styles.userProfileItem,

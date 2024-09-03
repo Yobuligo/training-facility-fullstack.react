@@ -61,7 +61,11 @@ export const useUserProfileSectionViewModel = () => {
       id: user.id,
       isDeactivated: user.isDeactivated,
       lastname: user.userProfile?.lastname ?? "",
-      userRoles: user.userRoles?.map((userRole) => userRole.role) ?? [],
+      userRoles:
+        user.userRoles?.map((userRole) => ({
+          id: userRole.id,
+          role: userRole.role,
+        })) ?? [],
       phone: user.userProfile?.phone,
     };
   };
