@@ -110,6 +110,9 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userGradings,
   ]);
 
+  const onValidate = ()=>{
+  }
+
   const onCancel = useCallback(() => {
     reset();
     props.onCancel?.(props.user);
