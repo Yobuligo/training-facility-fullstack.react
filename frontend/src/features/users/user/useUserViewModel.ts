@@ -342,11 +342,10 @@ export const useUserViewModel = (props: IUserProps) => {
       }
     }
 
-    if (props.user.username)
-      if (isInitial(firstname)) {
-        isValid = false;
-        setFirstnameError(t(texts.user.errorFirstnameRequired));
-      }
+    if (isInitial(firstname)) {
+      isValid = false;
+      setFirstnameError(t(texts.user.errorFirstnameRequired));
+    }
 
     if (isInitial(lastname)) {
       isValid = false;
