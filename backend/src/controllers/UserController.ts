@@ -1,4 +1,5 @@
 import { createError } from "../core/utils/createError";
+import { User } from "../model/User";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
@@ -15,6 +16,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.activate();
     this.deactivate();
     this.existsUsername();
+    this.findShort();
     this.login();
     this.logout();
     this.register();
@@ -66,6 +68,15 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
+  private findShort() {
+    this.router.get(
+      `${this.routeMeta.path}/short`,
+      SessionInterceptor(async (req, res) => {
+
+      })
+    );
+  }
+
   private login() {
     this.router.post(
       `${this.routeMeta.path}/login`,
@@ -81,10 +92,8 @@ export class UserController extends EntityController<IUser, UserRepo> {
             .send(createError(`Incorrect username or password.`));
         }
 
-        if (user.isDeactivated === true){
-          return res
-            .status(403)
-            .send(createError(`User is deactivated.`));          
+        if (user.isDeactivated === true) {
+          return res.status(403).send(createError(`User is deactivated.`));
         }
 
         const sessionRepo = new SessionRepo();

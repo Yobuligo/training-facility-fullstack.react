@@ -1,6 +1,12 @@
 @import "../../../styles/mixins.scss";
 @import "../../../styles/colors.module.scss";
 
+.card {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
 .userProfileItem {
   cursor: pointer;
   display: grid;
@@ -10,6 +16,7 @@
   @include medium-screen {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
   }
 }
 

@@ -11,6 +11,7 @@ import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { IUserRole } from "../shared/model/IUserRole";
+import { IUserShort } from "../shared/model/IUserShort";
 import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
@@ -98,6 +99,37 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   async findByUsername(username: string): Promise<IUser | undefined> {
     const data = await this.model.findOne({ where: { username } });
     return data?.toJSON();
+  }
+
+  async findAllShort(): Promise<IUserShort[]> {
+    const data = await User.findAll({
+      attributes: ["id", "isDeactivated"],
+      include: [
+        {
+          model: UserProfile,
+          attributes: ["id", "firstname", "lastname", "email", "phone"],
+        },
+        {
+          model: UserRole,
+          attributes: ["id", "role"],
+        },
+      ],
+      transaction: findTransaction(),
+    });
+
+    const userShorts: IUserShort[] = data.map((model) => {
+      const user = model.toJSON();
+      return {
+        id: user.id,
+        email: user.userProfile?.email ?? "",
+        firstname: user.userProfile?.firstname ?? "",
+        isDeactivated: user.isDeactivated,
+        lastname: user.userProfile?.lastname ?? "",
+        userRoles: user.userRoles?.map((userRole) => userRole.role) ?? [],
+        phone: user.userProfile?.phone,
+      };
+    });
+    return userShorts;
   }
 
   async existsByUsername(username: string): Promise<boolean> {
