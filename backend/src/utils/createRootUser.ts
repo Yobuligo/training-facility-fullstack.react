@@ -42,3 +42,34 @@ export const createRootUser = async () => {
     userId: user.id,
   });
 };
+
+export const createDummyUsers = async () => {
+  // check if user already exists, otherwise create one
+
+  for (let i = 0; i < 200; i++) {
+    const userRepo = new UserRepo();
+    const user = await userRepo.createUser({
+      password: "initial",
+      username: `dummy-${i.toString().padStart(3, "0")}`,
+    });
+
+    const userProfileRepo = new UserProfileRepo();
+    await userProfileRepo.insert({
+      email: "",
+      firstname: user.username,
+      gender: Gender.MALE,
+      joinedOn: new Date(),
+      lastname: "",
+      memberId: 0,
+      tariff: Tariff.TRAINEES_STUDENTS_PENSIONERS,
+      userGradings: [],
+      userId: user.id,
+    });
+
+    const userRoleRepo = new UserRoleRepo();
+    await userRoleRepo.insert({
+      role: AuthRole.USER,
+      userId: user.id,
+    });
+  }
+};
