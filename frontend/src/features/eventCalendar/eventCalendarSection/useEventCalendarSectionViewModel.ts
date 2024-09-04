@@ -173,12 +173,12 @@ export const useEventCalendarSectionViewModel = (
    * Whenever the events change, we calculate the max time span, which should be displayed
    */
   useEffect(() => {
-    const fromTime = DateTime.earliest(
+    const fromTime = DateTime.earliestTime(
       ...events.map((event) => checkNotNull(event.start))
     );
     setFromTime(fromTime);
 
-    let toTime = DateTime.latest(
+    let toTime = DateTime.latestTime(
       ...events.map((event) => checkNotNull(event.end))
     );
     // display one more hour for to time to get a better overview
