@@ -1,6 +1,8 @@
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
+	- Title is restricted to 100 characters
+	- Description is restricted to 100 characters
 
 - User Profile
 	# User can be deactivated and activated (session must be deleted)
@@ -63,4 +65,5 @@
 
 
 Best Practices Sequelize:
+- DTO types do contain properties for ids of referenced objects and for the reference itself
 - related objects must be optional in entity interfaces (e.g. IUser has IUserProfile)

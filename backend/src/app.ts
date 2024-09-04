@@ -1,6 +1,9 @@
 import express from "express";
 import { UserController } from "./controllers/UserController";
 import { UserProfileController } from "./controllers/UserProfileController";
+import { EventDefinition } from "./model/EventDefinition";
+import { EventInstance } from "./model/EventInstance";
+import { EventRegistration } from "./model/EventRegistration";
 import { Session } from "./model/Session";
 import { User } from "./model/User";
 import { UserBankAccount } from "./model/UserBankAccount";
@@ -17,6 +20,10 @@ const initialize = async () => {
   UserRole.sync({ alter: alter });
   UserGrading.sync({ alter: alter });
   UserBankAccount.sync({ alter: alter });
+
+  EventDefinition.sync({ alter: alter });
+  EventInstance.sync({ alter: alter });
+  EventRegistration.sync({ alter: alter });
 
   createRootUser();
 };

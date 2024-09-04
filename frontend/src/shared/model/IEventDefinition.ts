@@ -9,7 +9,7 @@ import { IEventInstance } from "./IEventInstance";
  */
 export interface IEventDefinition extends IEntity, IDateTimeSpan {
   color: string;
-  creator: string;
+  creatorUserId: string;
   description: string;
   eventInstances?: IEventInstance[];
   recurrence: Recurrence;

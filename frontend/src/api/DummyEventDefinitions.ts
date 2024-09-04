@@ -4,7 +4,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#b492a0",
-    creator: "",
+    creatorUserId: "",
     description: "(7 - 12 Jahre)",
     recurrence: 2,
     title: "Kinder",
@@ -17,7 +17,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#742053",
-    creator: "",
+    creatorUserId: "",
     description: "(ab 13 Jahre)",
     recurrence: 2,
     title: "Training für alle",
@@ -30,7 +30,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#742053",
-    creator: "",
+    creatorUserId: "",
     description: "",
     recurrence: 2,
     title: "Themenblock",
@@ -43,7 +43,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#acae9b",
-    creator: "",
+    creatorUserId: "",
     description: "(ab 13 Jahre)",
     recurrence: 2,
     title: "Training für Anfänger",
@@ -56,7 +56,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#687857",
-    creator: "",
+    creatorUserId: "",
     description: "(ab 13 Jahre)",
     recurrence: 2,
     title: "Training für Fortgeschrittene",
@@ -69,7 +69,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#b492a0",
-    creator: "",
+    creatorUserId: "",
     description: "(7 - 12 Jahre)",
     recurrence: 2,
     title: "Kinder",
@@ -82,7 +82,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#687857",
-    creator: "",
+    creatorUserId: "",
     description: "(ab 13 Jahre)",
     recurrence: 2,
     title: "Training für Fortgeschrittene",
@@ -95,7 +95,7 @@ export const DummyEventDefinitions: IEventDefinition[] = [
   {
     eventInstances: [],
     color: "#acae9b",
-    creator: "",
+    creatorUserId: "",
     description: "(ab 13 Jahre)",
     recurrence: 2,
     title: "Training für Anfänger",

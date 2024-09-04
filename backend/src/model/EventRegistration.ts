@@ -1,0 +1,23 @@
+import { DataTypes, Model, ModelStatic } from "sequelize";
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
+import { db } from "../db/db";
+import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { createIdType } from "./createIdType";
+import { EventInstance } from "./EventInstance";
+
+const eventRegistration: ModelStatic<
+  Model<IEventRegistration, IEntityDetails<IEventRegistration>>
+> = db.define("event-registrations", {
+  id: createIdType(),
+  manuallyAdded: DataTypes.BOOLEAN,
+  state: DataTypes.INTEGER,
+  userId: DataTypes.UUID,
+});
+
+export class EventRegistration extends eventRegistration {}
+
+EventRegistration.belongsTo(EventInstance, { onDelete: "CASCADE" });
+EventInstance.hasMany(EventRegistration, {
+  as: "eventRegistrations",
+  foreignKey: "eventInstanceId",
+});
