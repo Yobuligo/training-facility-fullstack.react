@@ -37,7 +37,10 @@ export const useEventCalendarPlanSectionViewModel = () => {
       eventDefinition instanceof DummyEventDefinition &&
       !eventDefinition.isPersisted
     ) {
-      await eventDefinitionApi.insert(eventDefinition);
+      const createdEventDefinition = await eventDefinitionApi.insert(
+        eventDefinition
+      );
+      eventDefinition.id = createdEventDefinition.id;
       eventDefinition.setIsPersisted();
     } else {
       await eventDefinitionApi.update(eventDefinition);

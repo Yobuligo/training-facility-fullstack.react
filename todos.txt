@@ -24,6 +24,10 @@
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	
+	- User Gradings
+		- Gradings can be added, saved and reloaded
+		- Gradings can be deleted
+	
 - User List
 	- user must be sorted by name
 		- Currently it is not sorted, if a user was added

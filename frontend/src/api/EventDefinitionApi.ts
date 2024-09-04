@@ -2,7 +2,6 @@ import { DateTime } from "../core/services/date/DateTime";
 import { DateTimeIterator } from "../core/services/date/DateTimeIterator";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { Lazy } from "../core/services/Lazy";
-import { List } from "../core/services/list/List";
 import { Recurrence } from "../core/types/Recurrence";
 import {
   EventDefinitionRouteMeta,
@@ -10,28 +9,15 @@ import {
 } from "../shared/model/IEventDefinition";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { matchesDateTimeSpan } from "../utils/matchesDateTimeSpan";
-import { Repository } from "./core/Repository";
+import { EntityRepository } from "./core/EntityRepository";
 import { DummyEventDefinitions } from "./DummyEventDefinitions";
 import { DummyEventInstances } from "./DummyEventInstances";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
 import { attach } from "./utils/attach";
 
-export class EventDefinitionApi extends Repository<IEventDefinition> {
+export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
   constructor() {
     super(EventDefinitionRouteMeta);
-  }
-
-  async deleteById(id: string): Promise<boolean> {
-    return List.delete(DummyEventDefinitions, (item) => item.id === id);
-  }
-
-  async insert(data: IEventDefinition): Promise<IEventDefinition> {
-    DummyEventDefinitions.push(data);
-    return data;
-  }
-
-  async update(data: IEventDefinition): Promise<void> {
-    List.update(DummyEventDefinitions, data, (item) => item.id === data.id);
   }
 
   /**
