@@ -25,13 +25,13 @@ export abstract class EntityController<
   protected deleteById() {
     this.router.delete(
       `${this.routeMeta.path}/:id`,
-      SessionInterceptor((req, res) => {
+      SessionInterceptor(async (req, res) => {
         const id = req.params.id;
-        const success = this.repo.deleteById(id);
+        const success = await this.repo.deleteById(id);
         if (!success) {
           res.status(404).end();
         } else {
-          res.status(204).end();
+          res.status(200).send(true);
         }
       })
     );
