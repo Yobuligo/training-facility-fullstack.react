@@ -1,18 +1,19 @@
-import { List } from "../core/services/list/List";
+import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
-import { EventInstanceFactory } from "../services/EventInstanceFactory";
 import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
-import { Repository } from "./core/Repository";
+import { EventInstanceState } from "../shared/types/EventInstanceState";
+import { uuid } from "../utils/uuid";
+import { EntityRepository } from "./core/EntityRepository";
 import { DummyEventInstances } from "./DummyEventInstances";
 import { DummyEventRegistrations } from "./DummyEventRegistrations";
 import { DummyUserProfiles } from "./DummyUserProfiles";
 import { attach } from "./utils/attach";
 
-export class EventInstanceApi extends Repository<IEventInstance> {
+export class EventInstanceApi extends EntityRepository<IEventInstance> {
   constructor() {
     super(EventInstanceRouteMeta);
   }
@@ -27,23 +28,24 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     }
   }
 
-  async insert(eventInstance: IEventInstance): Promise<IEventInstance> {
-    DummyEventInstances.push(eventInstance);
-    return eventInstance;
-  }
-
   /**
    * Creates a new event instance from the given {@link event}, inserts it to the persistance
    * and returns it.
    */
   async insertFromEvent(event: IEvent): Promise<IEventInstance> {
-    const eventInstanceFactory = new EventInstanceFactory();
-    const eventInstance = eventInstanceFactory.createFromEvent(event);
-
-    // attach created eventInstance to eventDefinition
-    if (event.eventDefinition.eventInstances) {
-      attach(event.eventDefinition.eventInstances, eventInstance);
-    }
+    const eventInstance: IEventInstance = {
+      id: uuid(),
+      description: event.eventDefinition.description,
+      title: event.eventDefinition.title,
+      eventDefinition: event.eventDefinition,
+      eventDefinitionId: event.eventDefinition.id,
+      eventRegistrations: [],
+      from: checkNotNull(event.start),
+      to: checkNotNull(event.end),
+      state: EventInstanceState.OPEN,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     return await this.insert(eventInstance);
   }
 
@@ -64,13 +66,5 @@ export class EventInstanceApi extends Repository<IEventInstance> {
     });
 
     return eventInstance?.eventRegistrations ?? [];
-  }
-
-  async update(eventInstance: IEventInstance): Promise<void> {
-    List.update(
-      DummyEventInstances,
-      eventInstance,
-      (item) => item.id === eventInstance.id
-    );
   }
 }

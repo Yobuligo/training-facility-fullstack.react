@@ -33,8 +33,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       } else {
         const eventInstanceApi = new EventInstanceApi();
         eventInstance = await eventInstanceApi.insertFromEvent(event);
+        eventInstance.eventDefinition = event.eventDefinition;
+        eventInstance.eventDefinitionId = event.eventDefinition.id;
       }
     });
+
     return eventInstance!;
   };
 
