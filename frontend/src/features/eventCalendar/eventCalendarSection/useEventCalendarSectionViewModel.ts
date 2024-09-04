@@ -166,7 +166,8 @@ export const useEventCalendarSectionViewModel = (
 
   useEffect(() => {
     loadEventDefinitions(fromDate, toDate);
-  }, [fromDate, loadEventDefinitions, props.reloadSignal, toDate]);
+    // loadEventDefinitions is not part of the dependent objects, as we get an infinite loop otherwise
+  }, [fromDate, props.reloadSignal, toDate]);
 
   /**
    * Whenever the events change, we calculate the max time span, which should be displayed
