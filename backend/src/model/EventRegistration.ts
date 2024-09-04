@@ -12,7 +12,6 @@ const eventRegistration: ModelStatic<
   id: createIdType(),
   manuallyAdded: DataTypes.BOOLEAN,
   state: DataTypes.INTEGER,
-  userId: DataTypes.UUID,
 });
 
 export class EventRegistration extends eventRegistration {}
