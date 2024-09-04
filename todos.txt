@@ -4,6 +4,7 @@
 	# inputs are restricted to length of related db fields		
 		# Title is restricted to 100 characters
 		# Description is restricted to 100 characters
+	- Bug: Calendar doesn't show earlier event e.g. from 16 - 18
 
 - User Profile
 	# User can be deactivated and activated (session must be deleted)
