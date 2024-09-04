@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { useSignal } from "../../../hooks/useSignal";
+import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
@@ -10,11 +11,13 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [selectedEventDefinition, setSelectedEventDefinition] = useState<
     IEventDefinition | undefined
   >(undefined);
+  const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
   const insertEventDefinitionRequest = useRequest();
   const updateEventDefinitionRequest = useRequest();
 
-  const onAdd = () => setSelectedEventDefinition(new DummyEventDefinition());
+  const onAdd = () =>
+    setSelectedEventDefinition(new DummyEventDefinition(user.id));
 
   const onBack = () => setSelectedEventDefinition(undefined);
 

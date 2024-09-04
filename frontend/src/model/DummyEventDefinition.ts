@@ -9,7 +9,6 @@ import { Dummy } from "./Dummy";
 export class DummyEventDefinition extends Dummy implements IEventDefinition {
   eventInstances: IEventInstance[] = [];
   color: string = colors.colorPrimary;
-  creatorUserId: string = "";
   description: string = "";
   recurrence: Recurrence = Recurrence.ONCE;
   title: string = "";
@@ -18,4 +17,8 @@ export class DummyEventDefinition extends Dummy implements IEventDefinition {
   updatedAt: Date = new Date();
   from: Date = DateTime.create(DateTime.toDate(new Date()), "18:00:00");
   to: Date = DateTime.create(DateTime.toDate(new Date()), "19:00:00");
+
+  constructor(public creatorUserId: string) {
+    super();
+  }
 }
