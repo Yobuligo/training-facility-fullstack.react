@@ -4,6 +4,7 @@ import { db } from "../db/db";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { createIdType } from "./createIdType";
 import { EventInstance } from "./EventInstance";
+import { User } from "./User";
 
 const eventRegistration: ModelStatic<
   Model<IEventRegistration, IEntityDetails<IEventRegistration>>
@@ -21,3 +22,6 @@ EventInstance.hasMany(EventRegistration, {
   as: "eventRegistrations",
   foreignKey: "eventInstanceId",
 });
+
+EventRegistration.belongsTo(User);
+User.hasMany(EventRegistration, { foreignKey: "userId" });

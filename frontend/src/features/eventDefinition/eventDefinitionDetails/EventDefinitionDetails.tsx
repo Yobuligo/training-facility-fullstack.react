@@ -8,6 +8,9 @@ import styles from "./EventDefinitionDetails.module.scss";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 import { useEventDefinitionDetailsViewModel } from "./useEventDefinitionDetailsViewModel";
 
+/**
+ * This component is responsible for displaying and changing an event definition.
+ */
 export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
   props
 ) => {
