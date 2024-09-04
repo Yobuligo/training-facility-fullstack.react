@@ -19,11 +19,11 @@ export class EventDefinitionController extends EntityController<
     this.router.get(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
+        const fields = this.getFieldsFromQuery(req.query);
         const from = req.query.from;
         const to = req.query.to;
 
         if (from && typeof from === "string" && to && typeof to === "string") {
-          const fields = this.getFieldsFromQuery(req.query);
           const dateTimeSpan: IDateTimeSpan = {
             from: new Date(from),
             to: new Date(to),
@@ -34,7 +34,6 @@ export class EventDefinitionController extends EntityController<
           );
           res.status(200).send(entities);
         } else {
-          const fields = this.getFieldsFromQuery(req.query);
           const entities = await this.repo.findAll(fields);
           res.status(200).send(entities);
         }

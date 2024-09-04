@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -15,6 +16,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [reloadSignal, triggerReloadSignal] = useSignal();
   const insertEventDefinitionRequest = useRequest();
   const updateEventDefinitionRequest = useRequest();
+  const loadEventDefinitionRequest = useRequest();
 
   const onAdd = () =>
     setSelectedEventDefinition(new DummyEventDefinition(user.id));
@@ -65,11 +67,25 @@ export const useEventCalendarPlanSectionViewModel = () => {
     triggerReloadSignal();
   };
 
+  const onLoadEventDefinitions = useCallback(async (
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IEventDefinition[]> => {
+    let eventDefinitions: IEventDefinition[] = [];
+    await loadEventDefinitionRequest.send(async () => {
+      const eventDefinitionApi = new EventDefinitionApi();
+      eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
+        dateTimeSpan
+      );
+    });
+    return eventDefinitions;
+  },[loadEventDefinitionRequest]);
+
   return {
     onAdd,
     onBack,
     onEventSelected,
     onDeleteEventDefinition,
+    onLoadEventDefinitions,
     onSaveEventDefinition,
     reloadSignal,
     selectedEventDefinition,
