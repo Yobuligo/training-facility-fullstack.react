@@ -35,6 +35,10 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         eventInstance = await eventInstanceApi.insertFromEvent(event);
         eventInstance.eventDefinition = event.eventDefinition;
         eventInstance.eventDefinitionId = event.eventDefinition.id;
+        if (!event.eventDefinition.eventInstances) {
+          event.eventDefinition.eventInstances = [];
+        }
+        event.eventDefinition.eventInstances.push(eventInstance);
       }
     });
 

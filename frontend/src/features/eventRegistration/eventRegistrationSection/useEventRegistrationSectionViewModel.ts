@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { List } from "../../../core/services/list/List";
+import { useInitialize } from "../../../hooks/useInitialize";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUserProfile } from "../../../shared/model/IUserProfile";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
@@ -24,7 +25,7 @@ export const useEventRegistrationSectionViewModel = (
   const addEventRegistrationRequest = useRequest();
   const deleteEventRegistrationRequest = useRequest();
 
-  const loadRegistrations = useCallback(async () => {
+  const loadRegistrations = async () => {
     loadEventRegistrationRequest.send(async () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventRegistrations = await eventInstanceApi.findRegistrations(
@@ -32,11 +33,11 @@ export const useEventRegistrationSectionViewModel = (
       );
       setEventRegistrations(eventRegistrations);
     });
-  }, [loadEventRegistrationRequest, props.eventInstance]);
+  };
 
-  useEffect(() => {
+  useInitialize(() => {
     loadRegistrations();
-  }, [loadRegistrations]);
+  });
 
   useEffect(() => {}, [props.eventInstance.state]);
 
