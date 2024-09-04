@@ -10,6 +10,7 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
+import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { List } from "../../core/services/list/List";
 import { findTransaction } from "./utils/findTransaction";
 
@@ -45,6 +46,21 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   findAll(): Promise<TEntity[]>;
   async findAll(fields?: unknown): Promise<unknown> {
     const options = this.toOptions(fields);
+    const data = await this.model.findAll(options);
+    return data.map((model) => model.toJSON());
+  }
+
+  findByDateTimeSpan<K extends keyof TEntity>(
+    dateTimeSpan: IDateTimeSpan,
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>[]>;
+  findByDateTimeSpan(dateTimeSpan: IDateTimeSpan): Promise<TEntity[]>;
+  async findByDateTimeSpan(
+    dateTimeSpan: IDateTimeSpan,
+    fields?: unknown
+  ): Promise<unknown> {
+    const options = this.toOptions(fields);
+
     const data = await this.model.findAll(options);
     return data.map((model) => model.toJSON());
   }
