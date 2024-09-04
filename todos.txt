@@ -4,8 +4,12 @@
 	# inputs are restricted to length of related db fields		
 		# Title is restricted to 100 characters
 		# Description is restricted to 100 characters
-	# EventDefinition must be updated
+	# EventDefinition can be updated
+	# EventDefinition can be deleted
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
+	
+- My Trainings
+	- 
 
 - User Profile
 	# User can be deactivated and activated (session must be deleted)

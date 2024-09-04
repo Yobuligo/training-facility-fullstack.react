@@ -56,6 +56,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
   return (
     <div>
       <TabStrip
+        className={styles.dashboard}
         onSelect={onSelect}
         selected={selected}
         tabItems={getTabItems()}

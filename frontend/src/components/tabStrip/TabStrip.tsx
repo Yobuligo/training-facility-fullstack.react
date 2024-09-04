@@ -1,3 +1,4 @@
+import { style } from "../../core/ui/style";
 import { TabItem } from "../tabItem/TabItem";
 import { ITabStripProps } from "./ITabStripProps";
 import styles from "./TabStrip.module.scss";
@@ -12,5 +13,7 @@ export const TabStrip: React.FC<ITabStripProps> = (props) => {
     />
   ));
 
-  return <header className={styles.header}>{items}</header>;
+  return (
+    <header className={style(styles.header, props.className)}>{items}</header>
+  );
 };
