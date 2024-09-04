@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { useSignal } from "../../../hooks/useSignal";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEvent } from "../model/IEvent";
@@ -10,6 +11,8 @@ export const useEventCalendarPlanSectionViewModel = () => {
     IEventDefinition | undefined
   >(undefined);
   const [reloadSignal, triggerReloadSignal] = useSignal();
+  const insertEventDefinitionRequest = useRequest();
+  const updateEventDefinitionRequest = useRequest();
 
   const onAdd = () => setSelectedEventDefinition(new DummyEventDefinition());
 
@@ -31,19 +34,30 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const onEventSelected = (event: IEvent) =>
     setSelectedEventDefinition(event.eventDefinition);
 
-  const onSaveEventDefinition = async (eventDefinition: IEventDefinition) => {
-    const eventDefinitionApi = new EventDefinitionApi();
-    if (
-      eventDefinition instanceof DummyEventDefinition &&
-      !eventDefinition.isPersisted
-    ) {
+  const insertEventDefinition = (eventDefinition: DummyEventDefinition) =>
+    insertEventDefinitionRequest.send(async () => {
+      const eventDefinitionApi = new EventDefinitionApi();
       const createdEventDefinition = await eventDefinitionApi.insert(
         eventDefinition
       );
       eventDefinition.id = createdEventDefinition.id;
       eventDefinition.setIsPersisted();
-    } else {
+    });
+
+  const updateEventDefinition = (eventDefinition: IEventDefinition) =>
+    updateEventDefinitionRequest.send(async () => {
+      const eventDefinitionApi = new EventDefinitionApi();
       await eventDefinitionApi.update(eventDefinition);
+    });
+
+  const onSaveEventDefinition = async (eventDefinition: IEventDefinition) => {
+    if (
+      eventDefinition instanceof DummyEventDefinition &&
+      !eventDefinition.isPersisted
+    ) {
+      await insertEventDefinition(eventDefinition);
+    } else {
+      await updateEventDefinition(eventDefinition);
     }
     triggerReloadSignal();
   };

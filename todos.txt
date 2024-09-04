@@ -1,8 +1,9 @@
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
-	- Title is restricted to 100 characters
-	- Description is restricted to 100 characters
+	# inputs are restricted to length of related db fields		
+		# Title is restricted to 100 characters
+		# Description is restricted to 100 characters
 
 - User Profile
 	# User can be deactivated and activated (session must be deleted)
@@ -14,6 +15,17 @@
 	# Customer Id must be created and displayed
 	# Joined on must be changeable in admin mode otherwise displayed
 	# inputs are restricted to length of related db fields
+		# Firstname 50
+		# Lastname 50
+		# Email 255
+		# City 50
+		# Postal Code 10
+		# Street 100
+		# Phone 20
+		# Bank Account BIC 11
+		# Bank Account IBAN 34
+		# Bank Account Institution 50
+		# Bank Account Owner 100		
 	# Current user must not be deactivatable
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
