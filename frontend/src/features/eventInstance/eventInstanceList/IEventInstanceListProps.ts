@@ -1,5 +1,5 @@
-import { IEventInstance } from "../../../shared/model/IEventInstance";
+import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 
 export interface IEventInstanceListProps {
-  eventInstances: IEventInstance[];
+  eventDefinition: IEventDefinition;
 }

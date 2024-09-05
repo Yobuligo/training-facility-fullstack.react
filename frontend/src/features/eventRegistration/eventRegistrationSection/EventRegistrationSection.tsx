@@ -21,7 +21,10 @@ export const EventRegistrationSection: React.FC<
       {viewModel.isLoadEventRegistrationRequestProcessing ? (
         <Spinner />
       ) : (
-        <EventInstanceItem eventInstance={props.eventInstance}>
+        <EventInstanceItem
+          eventDefinition={props.eventDefinition}
+          eventInstance={props.eventInstance}
+        >
           <div className={styles.closeButton}>
             {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
               <SecondaryButton onClick={viewModel.onCloseRegistration}>

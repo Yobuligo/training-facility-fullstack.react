@@ -54,7 +54,8 @@ export const Welcome: React.FC = () => {
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
-              <EventInstanceList eventInstances={eventInstances} />
+              {/* Todo */}
+              {/* <EventInstanceList  eventInstances={eventInstances} /> */}
             </>
           )}
         </>

@@ -37,7 +37,6 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
       id: uuid(),
       description: event.eventDefinition.description,
       title: event.eventDefinition.title,
-      eventDefinition: event.eventDefinition,
       eventDefinitionId: event.eventDefinition.id,
       eventRegistrations: [],
       from: checkNotNull(event.start),

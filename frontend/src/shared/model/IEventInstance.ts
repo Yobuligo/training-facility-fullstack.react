@@ -1,8 +1,7 @@
-import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
-import { EventInstanceState } from "../types/EventInstanceState";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
-import { IEventDefinition } from "./IEventDefinition";
+import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
+import { EventInstanceState } from "../types/EventInstanceState";
 import { IEventRegistration } from "./IEventRegistration";
 
 /**
@@ -11,7 +10,6 @@ import { IEventRegistration } from "./IEventRegistration";
 export interface IEventInstance extends IEntity, IDateTimeSpan {
   description: string;
   title: string;
-  eventDefinition?: IEventDefinition;
   eventDefinitionId: string;
   eventRegistrations?: IEventRegistration[];
   state: EventInstanceState;

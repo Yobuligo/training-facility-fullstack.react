@@ -1,11 +1,11 @@
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { Button } from "../../../components/button/Button";
+import { style } from "../../../core/ui/style";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
-import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { EventInfo } from "../../../services/EventInfo";
-import { style } from "../../../core/ui/style";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
@@ -58,8 +58,9 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      {viewModel.selectedEventInstance ? (
+      {viewModel.selectedEventInstance && viewModel.selectedEventDefinition ? (
         <EventRegistrationDetails
+          eventDefinition={viewModel.selectedEventDefinition}
           eventInstance={viewModel.selectedEventInstance}
           onBack={viewModel.onEventInstanceUnselect}
         />
