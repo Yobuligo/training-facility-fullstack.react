@@ -30,7 +30,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     userId: string,
     fields?: unknown
   ): Promise<unknown> {
-    return await this.selectEventDefinitionsAndInstances(dateTimeSpan);
+    return await this.selectEventDefinitionsAndInstances(dateTimeSpan, userId);
   }
 
   findByDateTimeSpan<K extends keyof IEventDefinition>(
@@ -280,9 +280,12 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           userId: rowAny.reg_userId,
         };
 
-        (
-          eventDefinitionsDb[row.id][rowAny.inst_id] as IEventInstance
-        ).eventRegistrations?.push(eventRegistration);
+        const eventInstance = (
+          eventDefinitionsDb[row.id] as IEventDefinition
+        ).eventInstances?.find(
+          (eventInstance) => eventInstance.id === rowAny.inst_id
+        );
+        eventInstance?.eventRegistrations?.push(eventRegistration);
       }
     });
 

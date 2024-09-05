@@ -21,6 +21,7 @@
 			- must be displayed endless if start and end date are equal
 			- must only be displayed at the specific weekday
 		- Appointments of recurrence monthly
+		- Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 		
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	

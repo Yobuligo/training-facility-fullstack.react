@@ -8,7 +8,6 @@ import {
 import { EventRegistrationState } from "../shared/types/EventRegistrationState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
-import { attach } from "./utils/attach";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   constructor() {
@@ -39,14 +38,6 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     return false;
   }
 
-  async insert(
-    eventRegistration: IEventRegistration
-  ): Promise<IEventRegistration> {
-    // Todo: Check if user is already registered
-    // DummyEventRegistrations.push(eventRegistration);
-    return eventRegistration;
-  }
-
   /**
    * Creates a new event registration from the given {@link eventInstance} and {@link userId}, inserts it to the persistance
    * and returns it.
@@ -64,12 +55,6 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-
-    // attach created eventRegistration to eventInstance
-    if (eventInstance.eventRegistrations) {
-      attach(eventInstance.eventRegistrations, eventRegistration);
-    }
-
     return await this.insert(eventRegistration);
   }
 
