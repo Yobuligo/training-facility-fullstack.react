@@ -37,14 +37,14 @@ export const UserProfileSection: React.FC = () => {
               query={viewModel.query}
             />
           </div>
-          {viewModel.loadUserProfilesRequest.isProcessing ||
-          viewModel.loadUserRequest.isProcessing ||
-          viewModel.insertUserRequest.isProcessing ? (
+          {viewModel.isLoadUsersShortRequestProcessing ||
+          viewModel.isLoadUserRequestProcessing ||
+          viewModel.isInsertUserRequestProcessing ? (
             <Spinner color={colors.colorSecondary} />
           ) : (
             <UserProfileList
               onSelect={viewModel.onSelect}
-              usersShort={viewModel.filterUserProfiles()}
+              usersShort={viewModel.filterUsers()}
             />
           )}
         </>

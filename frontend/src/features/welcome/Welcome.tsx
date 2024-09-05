@@ -17,10 +17,11 @@ export const Welcome: React.FC = () => {
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
   >([]);
-  const eventRegistrationRequest = useRequest();
+  const [eventRegistrationRequest, isEventRegistrationRequestProcessing] =
+    useRequest();
 
   useEffect(() => {
-    eventRegistrationRequest.send(async () => {
+    eventRegistrationRequest(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
       const eventRegistrations = await eventRegistrationApi.findByUserForWeek(
         user.id
@@ -44,7 +45,7 @@ export const Welcome: React.FC = () => {
       </h2>
 
       <p>{t(texts.welcome.explanation)}</p>
-      {eventRegistrationRequest.isProcessing ? (
+      {isEventRegistrationRequestProcessing ? (
         <Spinner />
       ) : (
         <>

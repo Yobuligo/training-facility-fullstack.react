@@ -72,7 +72,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [joinedOn, setJoinedOn] = useState(
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
-  const existsByUsernameRequest = useRequest();
+  const [existsByUsernameRequest] = useRequest();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -380,7 +380,7 @@ export const useUserViewModel = (props: IUserProps) => {
     if (isNotInitial(username) && props.user.username !== username) {
       const userApi = new UserApi();
       let exists = false;
-      await existsByUsernameRequest.send(async () => {
+      await existsByUsernameRequest(async () => {
         exists = await userApi.existsByUsername(username);
       });
       if (exists) {

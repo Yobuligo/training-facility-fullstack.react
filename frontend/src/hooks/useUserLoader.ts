@@ -10,12 +10,12 @@ import { useUserOrNull } from "./useUserOrNull";
 export const useUserLoader = () => {
   const [session] = useSession();
   const [user, setUser] = useUserOrNull();
-  const loadRequest = useRequest();
+  const [loadRequest, isLoadRequestProcessing] = useRequest();
 
   useInitialize(() => {
     // check if user was already loaded and not reload each time
     if (!user && session) {
-      loadRequest.send(async () => {
+      loadRequest(async () => {
         const userApi = new UserApi();
         const user = await userApi.findByIdInternal(session.userId);
         setUser(user);
@@ -23,5 +23,5 @@ export const useUserLoader = () => {
     }
   });
 
-  return { loadRequest, user };
+  return { isProcessing: isLoadRequestProcessing, user };
 };

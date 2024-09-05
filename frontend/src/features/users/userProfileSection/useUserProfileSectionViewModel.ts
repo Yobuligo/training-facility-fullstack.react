@@ -12,13 +12,14 @@ export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
-  const loadUsersShortRequest = useRequest();
-  const loadUserRequest = useRequest();
-  const insertUserRequest = useRequest();
-  const updateUserRequest = useRequest();
-  const deleteUserRequest = useRequest();
-  const activateUserRequest = useRequest();
-  const deactivateUserRequest = useRequest();
+  const [loadUsersShortRequest, isLoadUsersShortRequestProcessing] =
+    useRequest();
+  const [loadUserRequest, isLoadUserRequestProcessing] = useRequest();
+  const [insertUserRequest, isInsertUserRequestProcessing] = useRequest();
+  const [updateUserRequest] = useRequest();
+  const [deleteUserRequest] = useRequest();
+  const [activateUserRequest] = useRequest();
+  const [deactivateUserRequest] = useRequest();
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
@@ -29,7 +30,7 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   useInitialize(() =>
-    loadUsersShortRequest.send(async () => {
+    loadUsersShortRequest(async () => {
       const userApi = new UserApi();
       const usersShort: IUserShort[] = await userApi.findAllShort();
       const sortedUsersShort = usersShort.sort((left, right) => {
@@ -72,12 +73,12 @@ export const useUserProfileSectionViewModel = () => {
 
   /**
    * Updates the user short list
-   * 
+   *
    * @param userId contains an alternative userId of e.g. obsolete entries
    */
   const updateUserShort = (user: IUser, userId?: string) => {
     setUsersShort((previous) => {
-      const searchUserId = userId ? userId : user.id
+      const searchUserId = userId ? userId : user.id;
       const index = previous.findIndex((item) => item.id === searchUserId);
       if (index !== -1) {
         previous.splice(index, 1, createUserShort(user));
@@ -87,27 +88,27 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   const onSelect = (userShort: IUserShort) =>
-    loadUserRequest.send(async () => {
+    loadUserRequest(async () => {
       const userApi = new UserApi();
       const user = await userApi.findById(userShort.id);
       setSelectedUser(user);
     });
 
   const deleteUser = (user: IUser) =>
-    deleteUserRequest.send(async () => {
+    deleteUserRequest(async () => {
       const userApi = new UserApi();
       await userApi.delete(user);
     });
 
   const insertUser = async (user: IUser) =>
-    insertUserRequest.send(async () => {
+    insertUserRequest(async () => {
       const userApi = new UserApi();
       const createdUser = await userApi.insert(user);
       updateUserShort(createdUser, user.id);
     });
 
   const updateUser = (user: IUser) =>
-    updateUserRequest.send(async () => {
+    updateUserRequest(async () => {
       const userApi = new UserApi();
       await userApi.update(user);
       updateUserShort(user);
@@ -147,7 +148,7 @@ export const useUserProfileSectionViewModel = () => {
   const onActivate = (user: IUser) => {
     user.isDeactivated = false;
     user.deactivatedAt = undefined;
-    activateUserRequest.send(async () => {
+    activateUserRequest(async () => {
       const userApi = new UserApi();
       await userApi.activate(user.id);
       updateUserShort(user);
@@ -181,7 +182,7 @@ export const useUserProfileSectionViewModel = () => {
   const onDeactivate = (user: IUser) => {
     user.isDeactivated = true;
     user.deactivatedAt = new Date();
-    deactivateUserRequest.send(async () => {
+    deactivateUserRequest(async () => {
       const userApi = new UserApi();
       await userApi.deactivate(user.id);
       updateUserShort(user);
@@ -190,10 +191,10 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   return {
-    filterUserProfiles: filterUsers,
-    loadUserRequest,
-    loadUserProfilesRequest: loadUsersShortRequest,
-    insertUserRequest,
+    filterUsers,
+    isLoadUserRequestProcessing,
+    isLoadUsersShortRequestProcessing,
+    isInsertUserRequestProcessing,
     onActivate,
     onAppend,
     onBack,

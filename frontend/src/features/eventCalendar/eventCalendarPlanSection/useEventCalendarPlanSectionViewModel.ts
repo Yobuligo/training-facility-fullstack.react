@@ -14,9 +14,9 @@ export const useEventCalendarPlanSectionViewModel = () => {
   >(undefined);
   const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
-  const insertEventDefinitionRequest = useRequest();
-  const updateEventDefinitionRequest = useRequest();
-  const loadEventDefinitionRequest = useRequest();
+  const [insertEventDefinitionRequest] = useRequest();
+  const [updateEventDefinitionRequest] = useRequest();
+  const [loadEventDefinitionRequest] = useRequest();
 
   const onAdd = () =>
     setSelectedEventDefinition(new DummyEventDefinition(user.id));
@@ -40,7 +40,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
     setSelectedEventDefinition(event.eventDefinition);
 
   const insertEventDefinition = (eventDefinition: DummyEventDefinition) =>
-    insertEventDefinitionRequest.send(async () => {
+    insertEventDefinitionRequest(async () => {
       const eventDefinitionApi = new EventDefinitionApi();
       const createdEventDefinition = await eventDefinitionApi.insert(
         eventDefinition
@@ -50,7 +50,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
     });
 
   const updateEventDefinition = (eventDefinition: IEventDefinition) =>
-    updateEventDefinitionRequest.send(async () => {
+    updateEventDefinitionRequest(async () => {
       const eventDefinitionApi = new EventDefinitionApi();
       await eventDefinitionApi.update(eventDefinition);
     });
@@ -67,18 +67,19 @@ export const useEventCalendarPlanSectionViewModel = () => {
     triggerReloadSignal();
   };
 
-  const onLoadEventDefinitions = useCallback(async (
-    dateTimeSpan: IDateTimeSpan
-  ): Promise<IEventDefinition[]> => {
-    let eventDefinitions: IEventDefinition[] = [];
-    await loadEventDefinitionRequest.send(async () => {
-      const eventDefinitionApi = new EventDefinitionApi();
-      eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
-        dateTimeSpan
-      );
-    });
-    return eventDefinitions;
-  },[loadEventDefinitionRequest]);
+  const onLoadEventDefinitions = useCallback(
+    async (dateTimeSpan: IDateTimeSpan): Promise<IEventDefinition[]> => {
+      let eventDefinitions: IEventDefinition[] = [];
+      await loadEventDefinitionRequest(async () => {
+        const eventDefinitionApi = new EventDefinitionApi();
+        eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
+          dateTimeSpan
+        );
+      });
+      return eventDefinitions;
+    },
+    [loadEventDefinitionRequest]
+  );
 
   return {
     onAdd,

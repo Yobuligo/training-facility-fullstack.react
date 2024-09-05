@@ -10,13 +10,17 @@ export const useEventRegistrationItemViewModel = (
   props: IEventRegistrationItemProps
 ) => {
   const { t } = useTranslation();
-  const updateRequest = useRequest();
-
-  // useEffect(() => {}, [props.eventRegistration.eventState]);
+  const [updateRequest] = useRequest();
 
   const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
-    { key: EventRegistrationState.MISSING, text: t(texts.eventRegistrationItem.missing) },
-    { key: EventRegistrationState.PRESENT, text: t(texts.eventRegistrationItem.present) },
+    {
+      key: EventRegistrationState.MISSING,
+      text: t(texts.eventRegistrationItem.missing),
+    },
+    {
+      key: EventRegistrationState.PRESENT,
+      text: t(texts.eventRegistrationItem.present),
+    },
   ];
 
   const selectedToggleButtonOption = toggleButtonOptions.find(
@@ -25,7 +29,7 @@ export const useEventRegistrationItemViewModel = (
   );
 
   const updateEventState = async (eventState: EventRegistrationState) => {
-    updateRequest.send(async () => {
+    updateRequest(async () => {
       props.eventRegistration.state = eventState;
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.update(props.eventRegistration);

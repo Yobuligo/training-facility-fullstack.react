@@ -38,8 +38,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     }
   };
 
-  const displaySpinner =
-    userLoader.loadRequest.isProcessing || !userLoader.user;
+  const displaySpinner = userLoader.isProcessing || !userLoader.user;
 
   return (
     <Page>

@@ -12,8 +12,9 @@ export const useMyProfileViewModel = () => {
   const [session] = useSession();
   const [error, setError] = useState("");
   const [user, setUser] = useState<IUser | undefined>(undefined);
-  const loadUserProfileRequest = useRequest();
-  const changeUserProfileRequest = useRequest();
+  const [loadUserProfileRequest, isLoadUserProfileRequestProcessing] =
+    useRequest();
+  const [changeUserProfileRequest] = useRequest();
 
   const loadUser = async () => {
     if (!session) {
@@ -21,7 +22,7 @@ export const useMyProfileViewModel = () => {
       return;
     }
 
-    loadUserProfileRequest.send(async () => {
+    loadUserProfileRequest(async () => {
       const userApi = new UserApi();
       const readUserProfile = await userApi.findById(session.userId);
       if (!readUserProfile) {
@@ -37,14 +38,14 @@ export const useMyProfileViewModel = () => {
   });
 
   const onChange = (user: IUser) =>
-    changeUserProfileRequest.send(async () => {
+    changeUserProfileRequest(async () => {
       const userApi = new UserApi();
       await userApi.update(user);
     });
 
   return {
     error,
-    loadUserProfileRequest,
+    isLoadUserProfileRequestProcessing,
     onChange,
     userProfile: user,
   };

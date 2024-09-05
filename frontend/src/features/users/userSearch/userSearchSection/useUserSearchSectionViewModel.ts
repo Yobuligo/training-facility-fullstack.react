@@ -5,10 +5,10 @@ import { IUserProfile } from "../../../../shared/model/IUserProfile";
 
 export const useUserSearchSectionViewModel = () => {
   const [userProfiles, setUserProfiles] = useState<IUserProfile[]>([]);
-  const searchRequest = useRequest();
+  const [searchRequest] = useRequest();
 
   const onSearch = (query: string) => {
-    searchRequest.send(async () => {
+    searchRequest(async () => {
       const userProfileApi = new UserProfileApi();
       const userProfiles = await userProfileApi.findByQuery(query);
       setUserProfiles(userProfiles);

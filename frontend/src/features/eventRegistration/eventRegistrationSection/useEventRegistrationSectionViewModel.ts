@@ -21,12 +21,15 @@ export const useEventRegistrationSectionViewModel = (
     IEventRegistration[]
   >([]);
 
-  const loadEventRegistrationRequest = useRequest();
-  const addEventRegistrationRequest = useRequest();
-  const deleteEventRegistrationRequest = useRequest();
+  const [
+    loadEventRegistrationRequest,
+    isLoadEventRegistrationRequestProcessing,
+  ] = useRequest();
+  const [addEventRegistrationRequest] = useRequest();
+  const [deleteEventRegistrationRequest] = useRequest();
 
   const loadRegistrations = async () => {
-    loadEventRegistrationRequest.send(async () => {
+    loadEventRegistrationRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventRegistrations = await eventInstanceApi.findRegistrations(
         props.eventInstance.id
@@ -67,7 +70,7 @@ export const useEventRegistrationSectionViewModel = (
       return [...previous];
     });
 
-    addEventRegistrationRequest.send(async () => {
+    addEventRegistrationRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
       await eventInstanceApi.addEventRegistration(
         props.eventInstance,
@@ -82,7 +85,7 @@ export const useEventRegistrationSectionViewModel = (
       return [...previous];
     });
 
-    deleteEventRegistrationRequest.send(async () => {
+    deleteEventRegistrationRequest(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
       await eventRegistrationApi.delete(eventRegistration);
     });
@@ -108,7 +111,7 @@ export const useEventRegistrationSectionViewModel = (
   return {
     eventInstanceState,
     eventRegistrations,
-    loadEventRegistrationRequest,
+    isLoadEventRegistrationRequestProcessing,
     onAddUserProfile,
     onCloseRegistration,
     onDelete,

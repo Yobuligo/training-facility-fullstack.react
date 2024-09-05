@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { IError } from "../../../core/types/IError";
 import { isError } from "../../../core/utils/isError";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
@@ -6,7 +6,13 @@ import { texts } from "../../translation/texts";
 import { useTranslation } from "../../translation/useTranslation";
 import { useLogout } from "./useLogout";
 
-export const useRequest = () => {
+export const useRequest = (): [
+  send: (
+    block: () => Promise<void>,
+    errorHandler?: (error: any) => string
+  ) => Promise<void>,
+  isProcessing: boolean
+] => {
   const [isProcessing, setIsLoading] = useState(false);
   const [, setErrorMessage] = useErrorMessage();
   const logout = useLogout();
@@ -54,7 +60,5 @@ export const useRequest = () => {
     [handleError, setErrorMessage]
   );
 
-  const request = useMemo(() => ({ isProcessing, send }), [isProcessing, send]);
-
-  return request;
+  return [send, isProcessing];
 };

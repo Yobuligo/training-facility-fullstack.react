@@ -22,11 +22,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [reloadSignal, triggerReloadSignal] = useSignal();
   const { t } = useTranslation();
 
-  const fetchEventInstanceRequest = useRequest();
+  const [fetchEventInstanceRequest] = useRequest();
 
   const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {
     let eventInstance: IEventInstance;
-    await fetchEventInstanceRequest.send(async () => {
+    await fetchEventInstanceRequest(async () => {
       const cachedEventInstance = EventInfo.findEventInstance(event);
       if (cachedEventInstance) {
         eventInstance = cachedEventInstance;
