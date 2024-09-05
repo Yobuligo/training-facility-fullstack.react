@@ -1,10 +1,9 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
-import { FuzzySearch } from "../core/services/fuzzySearch/FuzzySearch";
+import { NotImplementedError } from "../core/errors/NotImplementedError";
 import { UserRouteMeta } from "../shared/model/IUser";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
-import { DummyUserProfiles } from "./DummyUserProfiles";
 
 export class UserProfileApi extends EntityRepository<IUserProfile> {
   constructor() {
@@ -12,7 +11,7 @@ export class UserProfileApi extends EntityRepository<IUserProfile> {
   }
 
   async findByQuery(query: string): Promise<IUserProfile[]> {
-    return new FuzzySearch<IUserProfile>().search(query, DummyUserProfiles);
+    throw new NotImplementedError();
   }
 
   findByUserId<K extends keyof IUserProfile>(

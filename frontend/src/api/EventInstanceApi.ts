@@ -8,10 +8,6 @@ import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
-import { DummyEventInstances } from "./DummyEventInstances";
-import { DummyEventRegistrations } from "./DummyEventRegistrations";
-import { DummyUserProfiles } from "./DummyUserProfiles";
-import { attach } from "./utils/attach";
 
 export class EventInstanceApi extends EntityRepository<IEventInstance> {
   constructor() {
@@ -22,10 +18,10 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     eventInstance: IEventInstance,
     eventRegistration: IEventRegistration
   ): Promise<void> {
-    DummyEventRegistrations.push(eventRegistration);
-    if (eventInstance.eventRegistrations) {
-      attach(eventInstance.eventRegistrations, eventRegistration);
-    }
+    // DummyEventRegistrations.push(eventRegistration);
+    // if (eventInstance.eventRegistrations) {
+    //   attach(eventInstance.eventRegistrations, eventRegistration);
+    // }
   }
 
   /**
@@ -51,19 +47,6 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   async findRegistrations(
     eventInstanceId: string
   ): Promise<IEventRegistration[]> {
-    const eventInstance = DummyEventInstances.find(
-      (item) => item.id === eventInstanceId
-    );
-
-    const eventRegistrations = eventInstance?.eventRegistrations;
-    // attach user profile
-    eventRegistrations?.forEach((eventRegistration) => {
-      const userProfile = DummyUserProfiles.find(
-        (userProfile) => userProfile.userId === eventRegistration.userId
-      );
-      eventRegistration.userProfile = userProfile;
-    });
-
-    return eventInstance?.eventRegistrations ?? [];
+    return [];
   }
 }

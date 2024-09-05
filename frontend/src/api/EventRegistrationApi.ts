@@ -1,7 +1,5 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { List } from "../core/services/list/List";
-import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
@@ -10,7 +8,6 @@ import {
 import { EventRegistrationState } from "../shared/types/EventRegistrationState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
-import { DummyEventRegistrations } from "./DummyEventRegistrations";
 import { attach } from "./utils/attach";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
@@ -19,25 +16,26 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   }
 
   async delete(eventRegistration: IEventRegistration): Promise<boolean> {
-    const index = DummyEventRegistrations.findIndex(
-      (item) => item.id === eventRegistration.id
-    );
-    if (index !== -1) {
-      DummyEventRegistrations.splice(index, 1);
+    // const index = DummyEventRegistrations.findIndex(
+    //   (item) => item.id === eventRegistration.id
+    // );
+    // if (index !== -1) {
+    //   DummyEventRegistrations.splice(index, 1);
 
-      // detach from eventInstance
-      const indexInstance =
-        eventRegistration.eventInstance?.eventRegistrations?.findIndex(
-          (item) => item.id === eventRegistration.id
-        );
-      if (indexInstance !== undefined && indexInstance !== -1) {
-        eventRegistration.eventInstance?.eventRegistrations?.splice(
-          indexInstance,
-          1
-        );
-      }
-      return true;
-    }
+    //   // detach from eventInstance
+    //   const indexInstance =
+    //     eventRegistration.eventInstance?.eventRegistrations?.findIndex(
+    //       (item) => item.id === eventRegistration.id
+    //     );
+    //   if (indexInstance !== undefined && indexInstance !== -1) {
+    //     eventRegistration.eventInstance?.eventRegistrations?.splice(
+    //       indexInstance,
+    //       1
+    //     );
+    //   }
+    //   return true;
+    // }
+    // return false;
     return false;
   }
 
@@ -45,7 +43,7 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     eventRegistration: IEventRegistration
   ): Promise<IEventRegistration> {
     // Todo: Check if user is already registered
-    DummyEventRegistrations.push(eventRegistration);
+    // DummyEventRegistrations.push(eventRegistration);
     return eventRegistration;
   }
 
@@ -59,7 +57,6 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   ): Promise<IEventRegistration> {
     const eventRegistration: IEventRegistration = {
       id: uuid(),
-      eventInstance,
       eventInstanceId: eventInstance.id,
       state: EventRegistrationState.OPEN,
       manuallyAdded: false,
@@ -83,14 +80,15 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     dateTimeSpan: IDateTimeSpan,
     userId: string
   ): Promise<IEventRegistration[]> {
-    const eventRegistrations = DummyEventRegistrations.filter(
-      (eventRegistration) =>
-        DateTime.spanContains(
-          dateTimeSpan,
-          checkNotNull(eventRegistration.eventInstance?.from)
-        ) && eventRegistration.userId === userId
-    );
-    return eventRegistrations;
+    // const eventRegistrations = DummyEventRegistrations.filter(
+    //   (eventRegistration) =>
+    //     DateTime.spanContains(
+    //       dateTimeSpan,
+    //       checkNotNull(eventRegistration.eventInstance?.from)
+    //     ) && eventRegistration.userId === userId
+    // );
+    // return eventRegistrations;
+    return [];
   }
 
   /**
@@ -112,10 +110,11 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   ): Promise<boolean>;
   update(entity: IEventRegistration): Promise<boolean>;
   async update(entity: IEventRegistration, fields?: unknown): Promise<unknown> {
-    return List.update(
-      DummyEventRegistrations,
-      entity,
-      (item) => item.id === entity.id
-    );
+    return entity;
+    //   return List.update(
+    //     DummyEventRegistrations,
+    //     entity,
+    //     (item) => item.id === entity.id
+    //   );
   }
 }

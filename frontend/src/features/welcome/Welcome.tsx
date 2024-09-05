@@ -9,7 +9,6 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
-import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
@@ -30,11 +29,11 @@ export const Welcome: React.FC = () => {
     });
   }, []);
 
-  const eventInstances = eventRegistrations
-    .map((eventRegistration) => checkNotNull(eventRegistration.eventInstance))
-    .sort((left, right) =>
-      DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
-    );
+  // const eventInstances = eventRegistrations
+  //   .map((eventRegistration) => checkNotNull(eventRegistration.eventInstance))
+  //   .sort((left, right) =>
+  //     DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
+  //   );
 
   return (
     <div>

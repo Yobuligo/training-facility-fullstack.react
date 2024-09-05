@@ -56,7 +56,6 @@ export const useEventRegistrationSectionViewModel = (
     const eventRegistration: IEventRegistration = {
       id: uuid(),
       eventInstanceId: props.eventInstance.id,
-      eventInstance: props.eventInstance,
       state: EventRegistrationState.PRESENT,
       manuallyAdded: true,
       userId: userProfile.userId,
