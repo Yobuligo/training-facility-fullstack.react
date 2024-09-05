@@ -137,7 +137,8 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
   }
 
   private async selectEventDefinitionsAndInstances(
-    dateTimeSpan: IDateTimeSpan
+    dateTimeSpan: IDateTimeSpan,
+    userId?: string
   ): Promise<IEventDefinition[]> {
     const query = `
         # get dates of range
@@ -159,13 +160,22 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           inst.\`to\` AS inst_to,
           inst.createdAt AS inst_createdAt,
           inst.updatedAt AS inst_updatedAt,
-          inst.eventDefinitionId AS inst_eventDefinitionId
+          inst.eventDefinitionId AS inst_eventDefinitionId,
+          reg.id AS reg_id,
+          reg.manuallyAdded AS reg_manuallyAdded,
+          reg.state AS reg_state,
+          reg.userId AS reg_userId,
+          reg.createdAt AS reg_createdAt,
+          reg.updatedAt AS reg_updatedAt,
+          reg.eventInstanceId AS reg_eventInstanceId
         FROM \`event-definitions\` AS def
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
+        LEFT JOIN \`event-registrations\` AS reg
+        ON inst.id = reg.eventInstanceId
         WHERE 
         # once
-        (recurrence = 0 && (
+        ((recurrence = 0 && (
           DATE(def.\`from\`) >= DATE(:from) && DATE(def.\`to\`) <= DATE(:to)
         )) OR 
 
@@ -197,7 +207,8 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           
           # matches the weekdays of the date time span
           DAY(def.\`from\`) IN (SELECT DAY(datum) FROM date_range)
-        ))
+        )))
+        ${userId ? `AND reg.userId = "${userId}"` : ""}
     `;
 
     const data = await db.query<IEventDefinition>(query, {
