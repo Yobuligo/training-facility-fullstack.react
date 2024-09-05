@@ -6,11 +6,28 @@
 		# Description is restricted to 100 characters
 	# EventDefinition can be updated
 	# EventDefinition can be deleted
-	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
+	- Calendar
+		- Appointments of recurrence once 
+			- must be displayed once at the specific date
+		- Appointments of recurrence daily 
+			- must be displayed daily
+			- must not be displayed before the start date
+			- must not be displayed after the end date
+			- must be displayed endless if start and end date are equal
+		- Appointments of recurrence weekly
+			- must be displayed weekly
+			- must not be displayed before the start date
+			- must not be displayed after the end date
+			- must be displayed endless if start and end date are equal
+			- must only be displayed at the specific weekday
+		- Appointments of recurrence monthly
+		
+	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	
 - My Trainings
 	- User can register and unregister on trainings
 	- Click on event instance displays registered users
+	- Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
 	
 - Welcome
 	# Display upcoming events of the current week	
