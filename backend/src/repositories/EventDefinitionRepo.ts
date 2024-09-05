@@ -8,6 +8,7 @@ import { EventDefinition } from "../model/EventDefinition";
 import { EventInstance } from "../model/EventInstance";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { IEventInstance } from "../shared/model/IEventInstance";
+import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
@@ -265,6 +266,23 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         (eventDefinitionsDb[row.id] as IEventDefinition).eventInstances?.push(
           eventInstance
         );
+      }
+
+      // create and add event registration if available
+      if (rowAny.reg_id) {
+        const eventRegistration: IEventRegistration = {
+          id: rowAny.reg_id,
+          createdAt: rowAny.reg_createdAt,
+          updatedAt: rowAny.reg_updatedAt,
+          eventInstanceId: rowAny.reg_eventInstanceId,
+          manuallyAdded: rowAny.reg_manuallyAdded,
+          state: rowAny.reg_state,
+          userId: rowAny.reg_userId,
+        };
+
+        (
+          eventDefinitionsDb[row.id][rowAny.inst_id] as IEventInstance
+        ).eventRegistrations?.push(eventRegistration);
       }
     });
 
