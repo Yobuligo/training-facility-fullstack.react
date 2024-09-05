@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
+import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useAuth } from "../../../hooks/useAuth";
 import { useSignal } from "../../../hooks/useSignal";
@@ -83,16 +84,18 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       userId
     );
 
-    if (eventRegistration?.eventInstance?.state === EventInstanceState.CLOSED) {
+    if (!eventRegistration) {
+      throw new NotSupportedError();
+    }
+
+    if (eventRegistration.eventInstance.state === EventInstanceState.CLOSED) {
       window.alert(t(texts.eventCalendarMyTrainings.unregisterOnClosed));
       return;
     }
 
-    if (eventRegistration) {
-      const eventRegistrationApi = new EventRegistrationApi();
-      await eventRegistrationApi.delete(eventRegistration);
-      triggerReloadSignal();
-    }
+    const eventRegistrationApi = new EventRegistrationApi();
+    await eventRegistrationApi.delete(eventRegistration.instance);
+    triggerReloadSignal();
   };
 
   return {

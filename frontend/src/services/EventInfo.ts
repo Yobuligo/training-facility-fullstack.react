@@ -28,7 +28,12 @@ export class EventInfo {
   static findFirstEventRegistrationByUserId(
     event: IEvent,
     userId: string
-  ): IEventRegistration | undefined {
+  ):
+    | {
+        instance: IEventRegistration;
+        eventInstance: IEventInstance;
+      }
+    | undefined {
     const eventInstances = event.eventDefinition.eventInstances;
     if (!eventInstances) {
       return undefined;
@@ -46,7 +51,7 @@ export class EventInfo {
             DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
             DateTime.equals(eventInstance.to, checkNotNull(event.end))
           ) {
-            return eventRegistration;
+            return { instance: eventRegistration, eventInstance };
           }
         }
       }
