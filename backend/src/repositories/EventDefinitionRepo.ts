@@ -184,6 +184,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         FROM \`event-definitions\` AS def
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
+        AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
         LEFT JOIN \`event-registrations\` AS reg
         ON inst.id = reg.eventInstanceId
         ${userId ? `AND reg.userId = "${userId}"` : ""}
