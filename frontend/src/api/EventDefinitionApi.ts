@@ -6,9 +6,6 @@ import {
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
-import { DummyEventInstances } from "./DummyEventInstances";
-import { DummyEventRegistrations } from "./DummyEventRegistrations";
-import { attach } from "./utils/attach";
 
 export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
   constructor() {
@@ -24,43 +21,18 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
     dateTimeSpan: IDateTimeSpan,
     userId: string
   ): Promise<IEventDefinition[]> {
-    // find all eventDefinitions
-    const eventDefinitions = await this.findByDateTimeSpan(dateTimeSpan);
+    const eventDefinitions = await RESTApi.get<IEventDefinition[]>(
+      `${this.url}`,
+      {
+        urlParams: {
+          from: dateTimeSpan.from.toString(),
+          to: dateTimeSpan.to.toString(),
+          userId: userId,
+        },
+      }
+    );
 
-    // attach all instances, which are matching the date time span
-    eventDefinitions.forEach((eventDefinition) => {
-      DummyEventInstances.filter((eventInstance) => {
-        const matches = this.matchesEventDefinition(
-          eventDefinition,
-          eventInstance
-        );
-        if (matches) {
-          if (eventDefinition.eventInstances) {
-            attach(eventDefinition.eventInstances, eventInstance);
-          }
-
-          // attach all event registration which are belonging to the event instance and to the current user
-          const eventRegistration = DummyEventRegistrations.find(
-            (eventRegistration) =>
-              eventRegistration.eventInstanceId === eventInstance.id &&
-              eventRegistration.userId === userId
-          );
-
-          if (eventRegistration) {
-            eventRegistration.eventInstance = eventInstance;
-            eventRegistration.eventInstanceId = eventInstance.id;
-            if (eventInstance.eventRegistrations) {
-              attach(eventInstance.eventRegistrations, eventRegistration);
-            }
-          }
-
-          return true;
-        } else {
-          return false;
-        }
-      });
-    });
-
+    this.fillDates(eventDefinitions);
     return eventDefinitions;
   }
 
@@ -77,13 +49,7 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
       }
     );
 
-    // Provide Dates as object
-    eventDefinitions.forEach((eventDefinition) => {
-      eventDefinition.createdAt = new Date(eventDefinition.createdAt);
-      eventDefinition.updatedAt = new Date(eventDefinition.updatedAt);
-      eventDefinition.from = new Date(eventDefinition.from);
-      eventDefinition.to = new Date(eventDefinition.to);
-    });
+    this.fillDates(eventDefinitions);
     return eventDefinitions;
   }
 
@@ -92,5 +58,18 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
     eventInstance: IEventInstance
   ): boolean {
     return eventInstance.eventDefinitionId === eventDefinition.id;
+  }
+
+  /**
+   * Provides a date object for each date property.
+   */
+  private fillDates(eventDefinitions: IEventDefinition[]): IEventDefinition[] {
+    eventDefinitions.forEach((eventDefinition) => {
+      eventDefinition.createdAt = new Date(eventDefinition.createdAt);
+      eventDefinition.updatedAt = new Date(eventDefinition.updatedAt);
+      eventDefinition.from = new Date(eventDefinition.from);
+      eventDefinition.to = new Date(eventDefinition.to);
+    });
+    return eventDefinitions;
   }
 }
