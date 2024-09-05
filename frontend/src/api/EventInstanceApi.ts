@@ -4,7 +4,6 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
-import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
@@ -32,11 +31,5 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
       updatedAt: new Date(),
     };
     return await this.insert(eventInstance);
-  }
-
-  async findRegistrations(
-    eventInstanceId: string
-  ): Promise<IEventRegistration[]> {
-    return [];
   }
 }

@@ -45,7 +45,7 @@ export const EventRegistrationSection: React.FC<
           />
           <EventRegistrationSearch
             className={styles.search}
-            onAddUserProfile={viewModel.onAddUserProfile}
+            onAddUser={viewModel.onAddUser}
           />
         </EventInstanceItem>
       )}

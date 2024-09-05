@@ -1,6 +1,6 @@
-import { IUserProfile } from "../../../../shared/model/IUserProfile";
+import { IUser } from "../../../../shared/model/IUser";
 import { IHaveOnSelect } from "../types/IHaveOnSelect";
 
 export interface IUserSearchListProps extends IHaveOnSelect {
-  userProfiles: IUserProfile[];
+  users: IUser[];
 }

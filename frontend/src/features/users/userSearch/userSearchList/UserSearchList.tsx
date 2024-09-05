@@ -8,11 +8,11 @@ import styles from "./UserSearchList.module.scss";
 export const UserSearchList: React.FC<IUserSearchListProps> = (props) => {
   const { t } = useTranslation();
 
-  const items = props.userProfiles.map((userProfile) => (
+  const items = props.users.map((user) => (
     <UserSearchItem
-      key={userProfile.id}
+      key={user.id}
       onSelect={props.onSelect}
-      userProfile={userProfile}
+      user={user}
     />
   ));
 

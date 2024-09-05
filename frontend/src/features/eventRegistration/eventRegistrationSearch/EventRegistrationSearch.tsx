@@ -22,7 +22,7 @@ export const EventRegistrationSearch: React.FC<
         titleClassName={styles.collapse}
       />
       {!searchCollapsed && (
-        <UserSearchSection onSelect={props.onAddUserProfile} />
+        <UserSearchSection onSelect={props.onAddUser} />
       )}
     </div>
   );

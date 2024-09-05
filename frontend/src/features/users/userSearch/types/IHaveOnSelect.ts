@@ -1,5 +1,5 @@
-import { IUserProfile } from "../../../../shared/model/IUserProfile";
+import { IUser } from "../../../../shared/model/IUser";
 
 export interface IHaveOnSelect {
-  onSelect?: (userProfile: IUserProfile) => void;
+  onSelect?: (user: IUser) => void;
 }

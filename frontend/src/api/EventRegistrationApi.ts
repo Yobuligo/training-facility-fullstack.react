@@ -1,6 +1,9 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { IEventInstance } from "../shared/model/IEventInstance";
+import {
+  EventInstanceRouteMeta,
+  IEventInstance,
+} from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
   IEventRegistration,
@@ -8,10 +11,19 @@ import {
 import { EventRegistrationState } from "../shared/types/EventRegistrationState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
+import { RESTApi } from "./core/RESTApi";
 
 export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
   constructor() {
     super(EventRegistrationRouteMeta);
+  }
+
+  async findByEventInstanceId(
+    eventInstanceId: string
+  ): Promise<IEventRegistration[]> {
+    return await RESTApi.get(
+      `${this.host}${EventInstanceRouteMeta.path}/${eventInstanceId}${EventRegistrationRouteMeta.path}`
+    );
   }
 
   /**

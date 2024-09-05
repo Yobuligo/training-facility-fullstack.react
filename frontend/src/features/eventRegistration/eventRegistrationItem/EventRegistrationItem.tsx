@@ -15,7 +15,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
 ) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationItemViewModel(props);
-  const userProfile = checkNotNull(props.eventRegistration.userProfile);
+  const userProfile = checkNotNull(props.eventRegistration.user?.userProfile);
 
   return (
     <Card className={styles.eventRegistrationItem}>

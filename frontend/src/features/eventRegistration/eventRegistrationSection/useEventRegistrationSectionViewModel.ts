@@ -5,7 +5,7 @@ import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
-import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { IUser } from "../../../shared/model/IUser";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
@@ -30,10 +30,11 @@ export const useEventRegistrationSectionViewModel = (
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
-      const eventInstanceApi = new EventInstanceApi();
-      const eventRegistrations = await eventInstanceApi.findRegistrations(
-        props.eventInstance.id
-      );
+      const eventRegistrationApi = new EventRegistrationApi();
+      const eventRegistrations =
+        await eventRegistrationApi.findByEventInstanceId(
+          props.eventInstance.id
+        );
       setEventRegistrations(eventRegistrations);
     });
   };
@@ -44,10 +45,10 @@ export const useEventRegistrationSectionViewModel = (
 
   useEffect(() => {}, [props.eventInstance.state]);
 
-  const onAddUserProfile = (userProfile: IUserProfile) => {
+  const onAddUser = (user: IUser) => {
     // check if user is already registered, user must not be registered multiple times
     const containsUser = eventRegistrations.find(
-      (eventRegistration) => eventRegistration.userId === userProfile.userId
+      (eventRegistration) => eventRegistration.userId === user.id
     );
     if (containsUser) {
       return;
@@ -58,8 +59,8 @@ export const useEventRegistrationSectionViewModel = (
       eventInstanceId: props.eventInstance.id,
       state: EventRegistrationState.PRESENT,
       manuallyAdded: true,
-      userId: userProfile.userId,
-      userProfile: userProfile,
+      userId: user.id,
+      user: user,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -111,7 +112,7 @@ export const useEventRegistrationSectionViewModel = (
     eventInstanceState,
     eventRegistrations,
     isLoadEventRegistrationRequestProcessing,
-    onAddUserProfile,
+    onAddUser,
     onCloseRegistration,
     onDelete,
     onReopenRegistration,

@@ -8,11 +8,11 @@ import styles from "./UserSearchItem.module.scss";
 export const UserSearchItem: React.FC<IUserSearchItemProps> = (props) => {
   const { t } = useTranslation();
 
-  const onSelectUser = () => props.onSelect?.(props.userProfile);
+  const onSelectUser = () => props.onSelect?.(props.user);
 
   return (
     <Card className={styles.userSearchItem}>
-      <div>{`${props.userProfile.firstname} ${props.userProfile.lastname}`}</div>
+      <div>{`${props.user.userProfile?.firstname} ${props.user.userProfile?.lastname}`}</div>
       <Button onClick={onSelectUser}>{t(texts.userSearchItem.addUser)}</Button>
     </Card>
   );

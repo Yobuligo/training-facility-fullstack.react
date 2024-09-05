@@ -1,6 +1,6 @@
-import { IUserProfile } from "../../../shared/model/IUserProfile";
+import { IUser } from "../../../shared/model/IUser";
 
 export interface IEventRegistrationSearchProps {
   className?: string;
-  onAddUserProfile?: (userProfile: IUserProfile) => void;
+  onAddUser?: (user: IUser) => void;
 }

@@ -15,7 +15,7 @@ export const UserSearchSection: React.FC<IUserSearchSectionProps> = (props) => {
       />
       <UserSearchList
         onSelect={props.onSelect}
-        userProfiles={viewModel.userProfiles}
+        users={viewModel.user}
       />
     </div>
   );
