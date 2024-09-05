@@ -1,7 +1,5 @@
-import { DateTime } from "../core/services/date/DateTime";
-import { UserGradingMeta, IUserGrading } from "../shared/model/IUserGrading";
+import { IUserGrading, UserGradingMeta } from "../shared/model/IUserGrading";
 import { Repository } from "./core/Repository";
-import { DummyGradings } from "./DummyGradings";
 
 export class UserGradingApi extends Repository<IUserGrading> {
   constructor() {
@@ -9,8 +7,9 @@ export class UserGradingApi extends Repository<IUserGrading> {
   }
 
   async findByUserId(userId: string): Promise<IUserGrading[]> {
-    return DummyGradings.filter((grading) => grading.userProfileId === userId).sort(
-      (left, right) => DateTime.compare(right.achievedAt, left.achievedAt)
-    );
+    // return DummyGradings.filter((grading) => grading.userProfileId === userId).sort(
+    //   (left, right) => DateTime.compare(right.achievedAt, left.achievedAt)
+    // );
+    throw new Error();
   }
 }

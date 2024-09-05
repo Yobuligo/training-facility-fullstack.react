@@ -33,6 +33,7 @@
 	# Display upcoming events of the current week	
 
 - User Profile
+	- Dummy objects are removed
 	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
 	# username must be unique
