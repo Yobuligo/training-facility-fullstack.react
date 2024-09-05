@@ -31,10 +31,24 @@
 	
 - My Trainings
 	- User can register on and unregister from trainings
+		- Display loading spinner when register on or unregister from a training
 	- Click on event instance displays registered users
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
-	- Display loading spinner when register on or unregister from a training
+	
+- Event Registration
+	# Registered user must be displayed
+	- State for registered user can be set (either missing or present)
+		- Display loading spinner when changing state
+	- Registration can be closed 
+		- Display loading spinner
+	- Registration can be reopened
+		- Display loading spinner
+	- It must not be possible to register on past events
+	- It must not be possible to unregister if event instance was closed
+	- Event instance can be closed
+	- Add user to event instance manually
+	- Check in users		
 	
 - Welcome
 	# Display upcoming events of the current week	
@@ -88,13 +102,6 @@
 - Login
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
-	
-- Event Registration
-	# It must not be possible to register on past events
-	# It must not be possible to unregister if event instance was closed
-	# Event instance can be closed
-	# Add user to event instance manually
-	# Check in users
 	
 - Event Calendar
 	# Start display of calender hours of first event and end hours of end of last event
