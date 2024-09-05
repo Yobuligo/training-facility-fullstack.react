@@ -3,7 +3,6 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
-import { IEventInstance } from "../shared/model/IEventInstance";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -51,13 +50,6 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
 
     this.fillDates(eventDefinitions);
     return eventDefinitions;
-  }
-
-  private matchesEventDefinition(
-    eventDefinition: IEventDefinition,
-    eventInstance: IEventInstance
-  ): boolean {
-    return eventInstance.eventDefinitionId === eventDefinition.id;
   }
 
   /**

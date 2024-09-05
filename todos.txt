@@ -21,14 +21,21 @@
 			- must be displayed endless if start and end date are equal
 			- must only be displayed at the specific weekday
 		- Appointments of recurrence monthly
+			- must be displayed monthly
+			- must not be displayed before the start date
+			- must not be displayed after the end date
+			- must be displayed endless if start and end date are equal
+			- must only be displayed at the specific day of month
 		- Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 		
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	
 - My Trainings
-	- User can register and unregister on trainings
+	- User can register on and unregister from trainings
 	- Click on event instance displays registered users
-	- Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
+	- User must not be registered twice on a training (check in db if user is already registered)
+	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
+	- Display loading spinner when register on or unregister from a training
 	
 - Welcome
 	# Display upcoming events of the current week	

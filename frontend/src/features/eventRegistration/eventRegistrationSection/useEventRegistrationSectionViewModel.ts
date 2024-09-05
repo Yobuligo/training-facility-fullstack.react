@@ -70,11 +70,11 @@ export const useEventRegistrationSectionViewModel = (
     });
 
     addEventRegistrationRequest(async () => {
-      const eventInstanceApi = new EventInstanceApi();
-      await eventInstanceApi.addEventRegistration(
-        props.eventInstance,
+      const eventRegistryApi = new EventRegistrationApi();
+      const createdEventRegistration = await eventRegistryApi.insert(
         eventRegistration
       );
+      props.eventInstance.eventRegistrations?.push(createdEventRegistration);
     });
   };
 

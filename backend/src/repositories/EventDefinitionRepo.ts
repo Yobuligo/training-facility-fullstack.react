@@ -30,7 +30,19 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     userId: string,
     fields?: unknown
   ): Promise<unknown> {
-    return await this.selectEventDefinitionsAndInstances(dateTimeSpan, userId);
+    let eventDefinitions = await this.selectEventDefinitionsAndInstances(
+      dateTimeSpan,
+      userId
+    );
+
+    // restrict properties to given fields
+    const keyFields = this.getKeyFields(fields);
+    if (List.isNotEmpty(keyFields)) {
+      eventDefinitions = eventDefinitions.map((eventDefinition) =>
+        this.restrictFields(eventDefinition, keyFields)
+      );
+    }
+    return eventDefinitions;
   }
 
   findByDateTimeSpan<K extends keyof IEventDefinition>(
@@ -174,6 +186,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         ON def.id = inst.eventDefinitionId
         LEFT JOIN \`event-registrations\` AS reg
         ON inst.id = reg.eventInstanceId
+        ${userId ? `AND reg.userId = "${userId}"` : ""}
         WHERE 
         # once
         ((recurrence = 0 && (
@@ -209,7 +222,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           # matches the weekdays of the date time span
           DAY(def.\`from\`) IN (SELECT DAY(datum) FROM date_range)
         )))
-        ${userId ? `AND reg.userId = "${userId}"` : ""}
+
     `;
 
     const data = await db.query<IEventDefinition>(query, {

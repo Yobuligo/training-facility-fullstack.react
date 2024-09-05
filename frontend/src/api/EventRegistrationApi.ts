@@ -14,30 +14,6 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     super(EventRegistrationRouteMeta);
   }
 
-  async delete(eventRegistration: IEventRegistration): Promise<boolean> {
-    // const index = DummyEventRegistrations.findIndex(
-    //   (item) => item.id === eventRegistration.id
-    // );
-    // if (index !== -1) {
-    //   DummyEventRegistrations.splice(index, 1);
-
-    //   // detach from eventInstance
-    //   const indexInstance =
-    //     eventRegistration.eventInstance?.eventRegistrations?.findIndex(
-    //       (item) => item.id === eventRegistration.id
-    //     );
-    //   if (indexInstance !== undefined && indexInstance !== -1) {
-    //     eventRegistration.eventInstance?.eventRegistrations?.splice(
-    //       indexInstance,
-    //       1
-    //     );
-    //   }
-    //   return true;
-    // }
-    // return false;
-    return false;
-  }
-
   /**
    * Creates a new event registration from the given {@link eventInstance} and {@link userId}, inserts it to the persistance
    * and returns it.

@@ -14,16 +14,6 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     super(EventInstanceRouteMeta);
   }
 
-  async addEventRegistration(
-    eventInstance: IEventInstance,
-    eventRegistration: IEventRegistration
-  ): Promise<void> {
-    // DummyEventRegistrations.push(eventRegistration);
-    // if (eventInstance.eventRegistrations) {
-    //   attach(eventInstance.eventRegistrations, eventRegistration);
-    // }
-  }
-
   /**
    * Creates a new event instance from the given {@link event}, inserts it to the persistance
    * and returns it.
