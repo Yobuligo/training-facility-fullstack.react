@@ -223,7 +223,6 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           # matches the weekdays of the date time span
           DAY(def.\`from\`) IN (SELECT DAY(datum) FROM date_range)
         )))
-
     `;
 
     const data = await db.query<IEventDefinition>(query, {

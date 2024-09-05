@@ -26,8 +26,7 @@
 			- must not be displayed after the end date
 			- must be displayed endless if start and end date are equal
 			- must only be displayed at the specific day of month
-		- Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
-		
+	- Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition	
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	
 - My Trainings
