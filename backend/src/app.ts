@@ -25,7 +25,7 @@ const initialize = async () => {
   UserBankAccount.sync({ alter: alter });
 
   EventDefinition.sync({ alter: alter });
-  EventInstance.sync({ alter: true });
+  EventInstance.sync({ alter: alter });
   EventRegistration.sync({ alter: alter });
 
   createRootUser();

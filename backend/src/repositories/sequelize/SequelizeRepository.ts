@@ -128,7 +128,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   /**
    * Returns {@link fields} as key fields from {@link TEntity}.
    */
-  protected getKeyFields(fields?: unknown): (keyof TEntity)[] {
+  protected getKeyFields<T>(fields?: unknown): (keyof T)[] {
     if (fields && Array.isArray(fields)) {
       return fields;
     }
@@ -145,7 +145,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     const requestFields = this.getKeyFields(fields);
     if (List.isNotEmpty(requestFields)) {
       const entity = data.toJSON();
-      return this.restrictFields(entity, requestFields);
+      return this.restrictEntityFields(entity, requestFields);
     } else {
       return data.toJSON();
     }
@@ -154,12 +154,23 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
   /**
    * Creates a new instance of {@link T} and restricts the properties to the given {@link keyFields}.
    */
-  protected restrictFields<T>(entity: T, keyFields: (keyof T)[]): T {
+  protected restrictEntityFields<T>(entity: T, keyFields: (keyof T)[]): T {
     const newEntity = {} as T;
     keyFields.forEach((field) => {
       newEntity[field] = entity[field];
     });
     return newEntity;
+  }
+
+  protected restrictEntitiesFields<T>(entities: T[], fields: unknown): T[] {
+    const keyFields = this.getKeyFields(fields);
+    if (List.isNotEmpty(keyFields)) {
+      const mappedEntities = entities.map((entity) =>
+        this.restrictEntityFields(entity, keyFields)
+      );
+      return mappedEntities;
+    }
+    return entities;
   }
 
   /**

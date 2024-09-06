@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { EventInstance } from "../model/EventInstance";
 import { EventRegistration } from "../model/EventRegistration";
@@ -11,11 +12,29 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
     ]);
   }
 
-  findByDateTimeSpanAndUser(
+  async findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
     userId: string,
-    field: (keyof IEventInstance)[]
+    fields: (keyof IEventInstance)[]
   ): Promise<IEventInstance[]> {
-    throw new Error();
+    const data = await this.model.findAll({
+      where: {
+        from: { [Op.gte]: dateTimeSpan.from },
+        to: { [Op.lte]: dateTimeSpan.to },
+      },
+      include: [
+        {
+          model: EventRegistration,
+          as: "eventRegistrations",
+          where: {
+            userId: userId,
+          },
+        },
+      ],
+    });
+
+    let eventInstances = data.map((model) => model.toJSON());
+    eventInstances = this.restrictEntitiesFields(eventInstances, fields);
+    return eventInstances;
   }
 }

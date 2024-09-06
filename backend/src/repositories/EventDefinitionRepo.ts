@@ -2,7 +2,6 @@ import sequelize from "sequelize";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { List } from "../core/services/list/List";
 import { db } from "../db/db";
 import { EventDefinition } from "../model/EventDefinition";
 import { EventInstance } from "../model/EventInstance";
@@ -34,14 +33,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       dateTimeSpan,
       userId
     );
-
-    // restrict properties to given fields
-    const keyFields = this.getKeyFields(fields);
-    if (List.isNotEmpty(keyFields)) {
-      eventDefinitions = eventDefinitions.map((eventDefinition) =>
-        this.restrictFields(eventDefinition, keyFields)
-      );
-    }
+    eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
     return eventDefinitions;
   }
 
@@ -55,14 +47,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     fields?: unknown
   ): Promise<unknown> {
     let eventDefinitions = await this.selectEventDefinitions(dateTimeSpan);
-
-    // restrict properties to given fields
-    const keyFields = this.getKeyFields(fields);
-    if (List.isNotEmpty(keyFields)) {
-      eventDefinitions = eventDefinitions.map((eventDefinition) =>
-        this.restrictFields(eventDefinition, keyFields)
-      );
-    }
+    eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
     return eventDefinitions;
   }
 
