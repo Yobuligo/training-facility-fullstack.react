@@ -30,20 +30,23 @@ export class EventDefinitionController extends EntityController<
             to: new Date(to),
           };
 
-          let entities: IEventDefinition[];
+          let eventDefinitions: IEventDefinition[];
           if (userId && typeof userId === "string") {
-            entities = await this.repo.findByDateTimeSpanAndUser(
+            eventDefinitions = await this.repo.findByDateTimeSpanAndUser(
               dateTimeSpan,
               userId,
               fields
             );
           } else {
-            entities = await this.repo.findByDateTimeSpan(dateTimeSpan, fields);
+            eventDefinitions = await this.repo.findByDateTimeSpan(
+              dateTimeSpan,
+              fields
+            );
           }
-          res.status(200).send(entities);
+          res.status(200).send(eventDefinitions);
         } else {
-          const entities = await this.repo.findAll(fields);
-          res.status(200).send(entities);
+          const eventInstances = await this.repo.findAll(fields);
+          res.status(200).send(eventInstances);
         }
       })
     );
