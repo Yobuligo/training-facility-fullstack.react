@@ -5,7 +5,7 @@ import { IUser } from "../../../../shared/model/IUser";
 
 export const useUserSearchSectionViewModel = () => {
   const [user, setUser] = useState<IUser[]>([]);
-  const [searchRequest] = useRequest();
+  const [searchRequest, isSearchRequestProcessing] = useRequest();
 
   const onSearch = (query: string) => {
     searchRequest(async () => {
@@ -15,5 +15,5 @@ export const useUserSearchSectionViewModel = () => {
     });
   };
 
-  return { onSearch, user };
+  return { isSearchRequestProcessing, onSearch, user };
 };

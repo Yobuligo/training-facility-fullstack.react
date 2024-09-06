@@ -30,8 +30,9 @@
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	
 - My Trainings
-	- User can register on and unregister from trainings
-		- Display loading spinner when register on or unregister from a training
+	# User can register on and unregister from trainings
+	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
+	- Display loading spinner when register on or unregister from a training
 	- Click on event instance displays registered users
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
@@ -47,10 +48,15 @@
 	# It must not be possible to register if event instance was closed
 	# It must not be possible to unregister if event instance was closed
 	- User can be added to EventInstance manually by search and add	
+	- Display loading spinner when searching for users
+	- Display loading spinner when adding user
+	- Manually added user can be deleted from EventInstance (needs to confirm the deletion)
+	- Display loading spinner when deleting user
 	
 - Welcome
 	# Display upcoming events of the current week
 	# Upcoming events are sorted chronologically
+	- Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
 
 - User Profile
 	- Dummy objects are removed

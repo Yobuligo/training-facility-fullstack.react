@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "../../components/button/Button";
-import { SearchIcon } from "../../icons/SearchIcon";
+import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { style } from "../../core/ui/style";
+import { SearchIcon } from "../../icons/SearchIcon";
 import { ISearchProps } from "./ISearchProps";
 import styles from "./Search.module.scss";
 
@@ -29,9 +29,9 @@ export const Search: React.FC<ISearchProps> = (props) => {
         type="text"
         value={query}
       />
-      <Button>
+      <SpinnerButton displaySpinner={props.displaySpinner ?? false}>
         <SearchIcon className={styles.icon} onClick={onSearch} />
-      </Button>
+      </SpinnerButton>
     </div>
   );
 };
