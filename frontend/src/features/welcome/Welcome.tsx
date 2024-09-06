@@ -9,14 +9,14 @@ import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { IEventInstanceShort } from "../../shared/model/IEventInstanceShort";
+import { IEventInstanceItemModel } from "../eventInstance/eventInstanceItem/IEventInstanceItemModel";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
   const { t } = useTranslation();
-  const [eventInstancesShort, setEventInstancesShort] = useState<
-    IEventInstanceShort[]
+  const [eventInstanceItemModels, setEventInstanceItemModels] = useState<
+    IEventInstanceItemModel[]
   >([]);
   const [loadEventInstancesRequest, isLoadEventInstancesRequestProcessing] =
     useRequest();
@@ -24,17 +24,17 @@ export const Welcome: React.FC = () => {
   useInitialize(() =>
     loadEventInstancesRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
-      const eventInstancesShort: IEventInstanceShort[] =
+      const eventInstanceItemModels: IEventInstanceItemModel[] =
         await eventInstanceApi.findByUserForWeek(user.id, [
           "color",
           "from",
           "to",
           "title",
         ]);
-      eventInstancesShort.sort((left, right) =>
+      eventInstanceItemModels.sort((left, right) =>
         DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
       );
-      setEventInstancesShort(eventInstancesShort);
+      setEventInstanceItemModels(eventInstanceItemModels);
     })
   );
 
@@ -51,12 +51,14 @@ export const Welcome: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          {isInitial(eventInstancesShort) ? (
+          {isInitial(eventInstanceItemModels) ? (
             <p>{t(texts.welcome.noTrainings)}</p>
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
-              <EventInstanceList eventInstancesShort={eventInstancesShort} />
+              <EventInstanceList
+                eventInstanceItemModels={eventInstanceItemModels}
+              />
             </>
           )}
         </>

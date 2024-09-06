@@ -117,7 +117,8 @@
 		
 - Check all ui endpoints and delete which are not required anymore
 - Check all backend endpoints and add authorization checks
-- Acutally we have to check the behavior if each REST request fails
+- We have to check the behavior for each REST request if it fails
+- We have to check the transmitted data for each REST request if can be reduced to only required information
 
 Best Practices Sequelize:
 - DTO types do contain properties for ids of referenced objects and for the reference itself

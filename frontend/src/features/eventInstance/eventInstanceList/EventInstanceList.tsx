@@ -8,10 +8,10 @@ import { IEventInstanceListProps } from "./IEventInstanceListProps";
 export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
   const { t } = useTranslation();
 
-  const items = props.eventInstancesShort.map((eventInstance) => (
+  const items = props.eventInstanceItemModels.map((eventInstance) => (
     <EventInstanceItem
       key={eventInstance.id}
-      eventInstanceShort={eventInstance}
+      eventInstanceItemModel={eventInstance}
     />
   ));
 
