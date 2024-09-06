@@ -58,9 +58,8 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      {viewModel.selectedEventInstance && viewModel.selectedEventDefinition ? (
+      {viewModel.selectedEventInstance ? (
         <EventRegistrationDetails
-          eventDefinition={viewModel.selectedEventDefinition}
           eventInstance={viewModel.selectedEventInstance}
           onBack={viewModel.onEventInstanceUnselect}
         />

@@ -52,6 +52,7 @@
 	
 - Welcome
 	- Display upcoming events of the current week
+	- Upcoming events are sorted by chronologically
 
 - User Profile
 	- Dummy objects are removed
@@ -113,6 +114,8 @@
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
+		
+- Check all endpoints and delete which are not required anymore
 
 
 Best Practices Sequelize:

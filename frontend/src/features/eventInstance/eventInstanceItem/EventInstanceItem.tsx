@@ -10,7 +10,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
 
   return (
     <Card className={styles.eventInstanceItem}>
-      <Banner color={props.eventDefinition.color} />
+      <Banner color={props.eventInstance.color} />
       <div className={styles.body}>
         <div className={styles.content}>
           <div className={styles.title}>{props.eventInstance.title}</div>

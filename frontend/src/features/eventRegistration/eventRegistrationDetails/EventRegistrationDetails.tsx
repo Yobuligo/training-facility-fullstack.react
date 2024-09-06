@@ -7,10 +7,7 @@ export const EventRegistrationDetails: React.FC<
 > = (props) => {
   return (
     <DetailView onBack={props.onBack}>
-      <EventRegistrationSection
-        eventDefinition={props.eventDefinition}
-        eventInstance={props.eventInstance}
-      />
+      <EventRegistrationSection eventInstance={props.eventInstance} />
     </DetailView>
   );
 };

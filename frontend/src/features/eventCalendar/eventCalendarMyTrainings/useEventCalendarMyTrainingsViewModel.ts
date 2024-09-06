@@ -10,7 +10,6 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { EventInfo } from "../../../services/EventInfo";
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
@@ -18,9 +17,6 @@ import { IEvent } from "../model/IEvent";
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
     IEventInstance | undefined
-  >(undefined);
-  const [selectedEventDefinition, setSelectedEventDefinition] = useState<
-    IEventDefinition | undefined
   >(undefined);
   const auth = useAuth();
   const [session] = useSession();
@@ -49,16 +45,12 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     return eventInstance!;
   };
 
-  const onEventInstanceUnselect = () => {
-    setSelectedEventDefinition(undefined);
-    setSelectedEventInstance(undefined);
-  };
+  const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
 
   const onEventSelected = async (event: IEvent) => {
     if (auth.isAdmin()) {
       const eventInstance = await fetchEventInstance(event);
       setSelectedEventInstance(eventInstance);
-      setSelectedEventDefinition(event.eventDefinition);
     }
   };
 
@@ -105,7 +97,6 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     onRegister,
     onUnregister,
     reloadSignal,
-    selectedEventDefinition,
     selectedEventInstance,
   };
 };
