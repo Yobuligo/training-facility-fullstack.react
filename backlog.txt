@@ -38,16 +38,15 @@
 	
 - Event Registration
 	# Registered user must be displayed
-	# EventRegistrationState for registered user can be set (either missing, present or back to open)
-	- Display loading spinner when changing EventRegistrationState
-	- Registration can be closed
-	- Registration can be reopened
-	- Display loading spinner when closing or reopening an EventInstance	
-	- It must not be possible to register on past events
-	- It must not be possible to unregister if event instance was closed
-	- Event instance can be closed
-	- Add user to event instance manually
-	- Check in users		
+	# EventRegistrationState for registered user can be set (either present, missing or back to open)
+	- Display loading spinner when changing EventRegistrationState (present, missing, open
+	# Registration can be closed
+	# Registration can be reopened
+	# Display loading spinner when closing or reopening an EventInstance	
+	- It must not be possible to register on past events	
+	# It must not be possible to register if event instance was closed
+	# It must not be possible to unregister if event instance was closed
+	- User can be added to EventInstance manually by search and add	
 	
 - Welcome
 	# Display upcoming events of the current week

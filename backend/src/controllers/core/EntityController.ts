@@ -43,7 +43,7 @@ export abstract class EntityController<
       SessionInterceptor(async (req, res) => {
         const fields = this.getFieldsFromQuery(req.query);
         const entities = await this.repo.findAll(fields);
-        res.status(200).send(entities);
+        return res.status(200).send(entities);
       })
     );
   }

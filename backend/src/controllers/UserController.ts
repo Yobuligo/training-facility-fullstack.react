@@ -67,6 +67,23 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
+  protected findAll(): void {
+    this.router.get(
+      this.routeMeta.path,
+      SessionInterceptor(async (req, res) => {
+        const fields = this.getFieldsFromQuery(req.query);
+        const query = req.query.query
+        if (query && typeof query === "string"){
+          const users = await this.repo.findAllByQuery(query, fields);
+          return res.status(200).send(users);          
+        }
+
+        const users = await this.repo.findAll(fields);
+        return res.status(200).send(users);
+      })
+    );
+  }
+
   private findAllShort() {
     this.router.get(
       `${this.routeMeta.path}/short/all`,

@@ -37,6 +37,10 @@ export class UserApi extends EntityRepository<IUser> {
     ])) as IUserInternal;
   }
 
+  async findByQuery(query: string): Promise<IUser[]> {
+    return await RESTApi.get(`${this.url}`, { urlParams: { query } });
+  }
+
   login(credentials: ICredentials): Promise<ISession> {
     return RESTApi.post(
       `${this.url}/login`,
