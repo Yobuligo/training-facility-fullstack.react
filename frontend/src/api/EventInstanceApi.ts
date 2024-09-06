@@ -20,6 +20,7 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   async insertFromEvent(event: IEvent): Promise<IEventInstance> {
     const eventInstance: IEventInstance = {
       id: uuid(),
+      color: event.eventDefinition.color,
       description: event.eventDefinition.description,
       title: event.eventDefinition.title,
       eventDefinitionId: event.eventDefinition.id,

@@ -9,6 +9,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../shared/model/IEventRegistration";
+import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
@@ -53,7 +54,6 @@ export const Welcome: React.FC = () => {
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
-              {/* Todo */}
               {/* <EventInstanceList  eventInstances={eventInstances} /> */}
             </>
           )}

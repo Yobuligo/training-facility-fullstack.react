@@ -1,7 +1,7 @@
 import { DataTypes, Model, ModelStatic } from "sequelize";
-import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
+import { IEventInstance } from "../shared/model/IEventInstance";
 import { createIdType } from "./createIdType";
 import { EventDefinition } from "./EventDefinition";
 
@@ -9,6 +9,9 @@ const eventInstance: ModelStatic<
   Model<IEventInstance, IEntityDetails<IEventInstance>>
 > = db.define("event-instances", {
   id: createIdType(),
+  color: {
+    type: DataTypes.STRING(10),
+  },
   description: DataTypes.STRING(100),
   from: DataTypes.DATE,
   state: DataTypes.INTEGER,
@@ -18,8 +21,8 @@ const eventInstance: ModelStatic<
 
 export class EventInstance extends eventInstance {}
 
-EventInstance.belongsTo(EventDefinition)
+EventInstance.belongsTo(EventDefinition);
 EventDefinition.hasMany(EventInstance, {
-    as: "eventInstances",
-    foreignKey: "eventDefinitionId"
-})
+  as: "eventInstances",
+  foreignKey: "eventDefinitionId",
+});

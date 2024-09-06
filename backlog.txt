@@ -51,7 +51,7 @@
 	- Check in users		
 	
 - Welcome
-	# Display upcoming events of the current week	
+	- Display upcoming events of the current week
 
 - User Profile
 	- Dummy objects are removed

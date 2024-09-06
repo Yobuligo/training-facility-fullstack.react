@@ -8,6 +8,7 @@ import { IEventRegistration } from "./IEventRegistration";
  * This interface represents a specific event instance based on an event definition
  */
 export interface IEventInstance extends IEntity, IDateTimeSpan {
+  color: string;
   description: string;
   title: string;
   eventDefinitionId: string;

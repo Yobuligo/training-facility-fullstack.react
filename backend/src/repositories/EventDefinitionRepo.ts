@@ -166,6 +166,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         SELECT 
           def.*,
           inst.id AS inst_id,
+          inst.color AS inst_color,
           inst.\`description\` AS inst_description,
           inst.\`from\` AS inst_from,
           inst.state AS inst_state,
@@ -265,6 +266,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,
+          color: rowAny.inst_color,
           createdAt: rowAny.inst_createdAt,
           updatedAt: rowAny.inst_updatedAt,
           description: rowAny.inst_description,
