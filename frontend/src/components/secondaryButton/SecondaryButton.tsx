@@ -1,7 +1,15 @@
+import colors from "../../styles/colors.module.scss";
 import componentStyles from "../../styles/components.module.scss";
-import { Button } from "../button/Button";
+import { SpinnerButton } from "../spinnerButton/SpinnerButton";
 import { ISecondaryButtonProps } from "./ISecondaryButtonProps";
 
 export const SecondaryButton: React.FC<ISecondaryButtonProps> = (props) => {
-  return <Button {...props} className={componentStyles.secondaryButton} />;
+  return (
+    <SpinnerButton
+      {...props}
+      className={componentStyles.secondaryButton}
+      displaySpinner={props.displaySpinner ?? false}
+      spinnerColor={colors.colorPrimary}
+    />
+  );
 };

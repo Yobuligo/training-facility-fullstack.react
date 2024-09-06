@@ -43,18 +43,4 @@ export class EventRegistrationApi extends EntityRepository<IEventRegistration> {
     };
     return await this.insert(eventRegistration);
   }
-
-  update<K extends keyof IEventRegistration>(
-    entity: IEventRegistration,
-    fields: K[]
-  ): Promise<boolean>;
-  update(entity: IEventRegistration): Promise<boolean>;
-  async update(entity: IEventRegistration, fields?: unknown): Promise<unknown> {
-    return entity;
-    //   return List.update(
-    //     DummyEventRegistrations,
-    //     entity,
-    //     (item) => item.id === entity.id
-    //   );
-  }
 }

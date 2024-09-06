@@ -27,6 +27,8 @@ export const useEventRegistrationSectionViewModel = (
   ] = useRequest();
   const [addEventRegistrationRequest] = useRequest();
   const [deleteEventRegistrationRequest] = useRequest();
+  const [updateEventInstanceRequest, isUpdateEventInstanceRequestProcessing] =
+    useRequest();
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -91,10 +93,11 @@ export const useEventRegistrationSectionViewModel = (
     });
   };
 
-  const updateEventInstance = async () => {
-    const eventInstanceApi = new EventInstanceApi();
-    await eventInstanceApi.update(props.eventInstance);
-  };
+  const updateEventInstance = async () =>
+    updateEventInstanceRequest(async () => {
+      const eventInstanceApi = new EventInstanceApi();
+      await eventInstanceApi.update(props.eventInstance);
+    });
 
   const onCloseRegistration = () => {
     props.eventInstance.state = EventInstanceState.CLOSED;
@@ -112,6 +115,7 @@ export const useEventRegistrationSectionViewModel = (
     eventInstanceState,
     eventRegistrations,
     isLoadEventRegistrationRequestProcessing,
+    isUpdateEventInstanceRequestProcessing,
     onAddUser,
     onCloseRegistration,
     onDelete,

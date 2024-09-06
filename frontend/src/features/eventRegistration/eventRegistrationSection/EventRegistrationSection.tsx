@@ -24,11 +24,21 @@ export const EventRegistrationSection: React.FC<
         <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
           <div className={styles.closeButton}>
             {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
-              <SecondaryButton onClick={viewModel.onCloseRegistration}>
+              <SecondaryButton
+                onClick={viewModel.onCloseRegistration}
+                displaySpinner={
+                  viewModel.isUpdateEventInstanceRequestProcessing
+                }
+              >
                 {t(texts.eventRegistrationSection.close)}
               </SecondaryButton>
             ) : (
-              <SecondaryButton onClick={viewModel.onReopenRegistration}>
+              <SecondaryButton
+                onClick={viewModel.onReopenRegistration}
+                displaySpinner={
+                  viewModel.isUpdateEventInstanceRequestProcessing
+                }
+              >
                 {t(texts.eventRegistrationSection.open)}
               </SecondaryButton>
             )}

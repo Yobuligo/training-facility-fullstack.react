@@ -6,27 +6,27 @@
 		# Description is restricted to 100 characters
 	# EventDefinition can be updated
 	# EventDefinition can be deleted
-	- Calendar
-		- Appointments of recurrence once 
-			- must be displayed once at the specific date
-		- Appointments of recurrence daily 
-			- must be displayed daily
-			- must not be displayed before the start date
-			- must not be displayed after the end date
-			- must be displayed endless if start and end date are equal
-		- Appointments of recurrence weekly
-			- must be displayed weekly
-			- must not be displayed before the start date
-			- must not be displayed after the end date
-			- must be displayed endless if start and end date are equal
-			- must only be displayed at the specific weekday
-		- Appointments of recurrence monthly
-			- must be displayed monthly
-			- must not be displayed before the start date
-			- must not be displayed after the end date
-			- must be displayed endless if start and end date are equal
-			- must only be displayed at the specific day of month
-	- Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition	
+	# Calendar
+		# Appointments of recurrence once 
+			# must be displayed once at the specific date
+		# Appointments of recurrence daily 
+			# must be displayed daily
+			# must not be displayed before the start date
+			# must not be displayed after the end date
+			# must be displayed endless if start and end date are equal
+		# Appointments of recurrence weekly
+			# must be displayed weekly
+			# must not be displayed before the start date
+			# must not be displayed after the end date
+			# must be displayed endless if start and end date are equal
+			# must only be displayed at the specific weekday
+		# Appointments of recurrence monthly
+			# must be displayed monthly
+			# must not be displayed before the start date
+			# must not be displayed after the end date
+			# must be displayed endless if start and end date are equal
+			# must only be displayed at the specific day of month
+	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
 	
 - My Trainings
@@ -38,12 +38,11 @@
 	
 - Event Registration
 	# Registered user must be displayed
-	- State for registered user can be set (either missing or present)
-		- Display loading spinner when changing state
-	- Registration can be closed 
-		- Display loading spinner
+	# EventRegistrationState for registered user can be set (either missing, present or back to open)
+	- Display loading spinner when changing EventRegistrationState
+	- Registration can be closed
 	- Registration can be reopened
-		- Display loading spinner
+	- Display loading spinner when closing or reopening an EventInstance	
 	- It must not be possible to register on past events
 	- It must not be possible to unregister if event instance was closed
 	- Event instance can be closed
@@ -119,6 +118,8 @@
 - Check all backend endpoints and add authorization checks
 - We have to check the behavior for each REST request if it fails
 - We have to check the transmitted data for each REST request if can be reduced to only required information
+- Edge Cases
+	- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted?
 
 Best Practices Sequelize:
 - DTO types do contain properties for ids of referenced objects and for the reference itself

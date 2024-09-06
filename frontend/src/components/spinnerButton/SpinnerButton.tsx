@@ -9,7 +9,9 @@ export const SpinnerButton: React.FC<ISpinnerButtonProps> = (props) => {
   return (
     <Button {...buttonProps}>
       <div className={styles.spinnerButton}>
-        {props.displaySpinner && <Spinner size={SpinnerSize.SMALL} />}
+        {props.displaySpinner && (
+          <Spinner color={props.spinnerColor} size={SpinnerSize.SMALL} />
+        )}
         {buttonProps.children}
       </div>
     </Button>
