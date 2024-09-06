@@ -1,13 +1,12 @@
+import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
-import {
-  EventInstanceRouteMeta,
-  IEventInstance,
-} from "../shared/model/IEventInstance";
+import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
+import { IEventInstance } from "./../shared/model/IEventInstance";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -16,11 +15,26 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     super(EventInstanceRouteMeta);
   }
 
-  async findByDateTimeSpanAndUser(
+  findByDateTimeSpanAndUser<K extends keyof IEventInstance>(
+    dateTimeSpan: IDateTimeSpan,
+    userId: string,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventInstance, K>>;
+  findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
     userId: string
-  ): Promise<IEventInstance[]> {
+  ): Promise<IEventInstance[]>;
+  async findByDateTimeSpanAndUser(
+    dateTimeSpan: IDateTimeSpan,
+    userId: string,
+    fields?: unknown
+  ): Promise<unknown> {
+    let requestedFields: string[] = [];
+    if (fields && Array.isArray(fields)) {
+      requestedFields = fields;
+    }
     return await RESTApi.get(`${this.url}`, {
+      fields: requestedFields,
       urlParams: {
         from: dateTimeSpan.from.toString(),
         to: dateTimeSpan.to.toString(),
@@ -29,7 +43,15 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     });
   }
 
-  async findByUserForWeek(userId: string): Promise<IEventInstance[]> {
+  findByUserForWeek<K extends keyof IEventInstance>(
+    userId: string,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventInstance, K>[]>;
+  findByUserForWeek(userId: string): Promise<IEventInstance[]>;
+  async findByUserForWeek<K extends keyof IEventInstance>(
+    userId: string,
+    fields?: K[]
+  ): Promise<unknown> {
     const today = new Date();
     const dateTimeSpan: IDateTimeSpan = {
       from: DateTime.getDayStartDate(today),
@@ -37,10 +59,8 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     };
     const eventInstances = await this.findByDateTimeSpanAndUser(
       dateTimeSpan,
-      userId
-    );
-    eventInstances.sort((left, right) =>
-      DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
+      userId,
+      fields as any
     );
     return eventInstances;
   }

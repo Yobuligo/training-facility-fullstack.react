@@ -22,6 +22,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
         from: { [Op.gte]: dateTimeSpan.from },
         to: { [Op.lte]: dateTimeSpan.to },
       },
+      attributes: this.getAttributes(fields),
       include: [
         {
           model: EventRegistration,
