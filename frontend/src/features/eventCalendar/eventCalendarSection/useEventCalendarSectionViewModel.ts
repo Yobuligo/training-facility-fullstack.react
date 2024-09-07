@@ -126,7 +126,7 @@ export const useEventCalendarSectionViewModel = (
   const [fromDate, setFromDate] = useState<Date>(() => {
     switch (view) {
       case "day": {
-        return new Date();
+        return DateTime.getDayStartDate(new Date());
       }
       case "week": {
         return DateTime.getWeekStartDate(new Date());
@@ -141,7 +141,7 @@ export const useEventCalendarSectionViewModel = (
   const [toDate, setToDate] = useState<Date>(() => {
     switch (view) {
       case "day": {
-        return new Date();
+        return DateTime.getDayEndDate(new Date());
       }
       case "week": {
         return DateTime.getWeekEndDate(new Date());
@@ -166,7 +166,7 @@ export const useEventCalendarSectionViewModel = (
 
   useEffect(() => {
     loadEventDefinitions(fromDate, toDate);
-    // loadEventDefinitions is not part of the dependent objects, as we get an infinite loop otherwise
+    // loadEventDefinitions must not be part of the dependencies, otherwise we get an infinite loop
   }, [fromDate, props.reloadSignal, toDate]);
 
   /**

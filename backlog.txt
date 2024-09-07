@@ -42,13 +42,13 @@
 	# User can register on and unregister from trainings
 	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
 	# Display loading spinner when register on or unregister from a training
-	- Click on event instance displays registered users
+	# Click on event instance displays registered users
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
 	- Bug: it seems that event-instances for the same date are created multiple times - when upset (insert / update) and event-instance we must check only the from and to timestamp but not everything
 	# Bug: click very fast register / unregister - at some time I will get an error
 	- Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent
-	- Bug: when pressing register for one event instance the spinner button for all register buttons is displayed
+	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed
 	
 - Event Registration
 	# Registered user must be displayed
@@ -71,7 +71,7 @@
 - Welcome
 	# Display upcoming events of the current week
 	# Upcoming events are sorted chronologically
-	- Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
+	# Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
 
 - User Profile
 	- Dummy objects are removed
@@ -102,7 +102,7 @@
 	# Refactor Collapsables can be toggled on click at title
 	- Errors from backend must be translatable or mapped to client errors 
 		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
-	- Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
+	# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
 	# Bug: created user cannot be selected from user list	
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
@@ -119,9 +119,9 @@
 	# Mark admin users
 	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
 	# Users can be searched
-	- Display loading spinner when searching
+	* Display loading spinner when searching - not required as it on clientside
 
-- Login
+# Login
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
 	
