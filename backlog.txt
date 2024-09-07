@@ -5,6 +5,7 @@
 	- Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
 	- Unknown server errors are handled in an ErrorBoundaryPage
 	- Display an ErrorBoundaryPage when calling an unknown url
+	# useRequest must not call block, if the block is currently running
 
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.
@@ -44,6 +45,9 @@
 	- Click on event instance displays registered users
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
+	- Bug: it seems that event-instances for the same date are created multiple times - when upset (insert / update) and event-instance we must check only the from and to timestamp but not everything
+	- Bug: click very fast register / unregister - at some time I will get an error
+	- Bug: when pressing reload at the error page and navigating to My trainings, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent
 	
 - Event Registration
 	# Registered user must be displayed

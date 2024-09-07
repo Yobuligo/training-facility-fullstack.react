@@ -15,7 +15,7 @@ export const useRequest = (): [
   ) => Promise<void>,
   isProcessing: boolean
 ] => {
-  const [isProcessing, setIsLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const logout = useLogout();
   const { t } = useTranslation();
   const toast = useToast();
@@ -44,7 +44,12 @@ export const useRequest = (): [
       block: () => Promise<void>,
       errorHandler?: (error: any) => string
     ) => {
-      setIsLoading(true);
+      // leave, if request is already running,
+      if (isProcessing === true) {
+        return;
+      }
+
+      setIsProcessing(true);
       try {
         await block();
       } catch (error) {
@@ -60,9 +65,9 @@ export const useRequest = (): [
           }
         }
       }
-      setIsLoading(false);
+      setIsProcessing(false);
     },
-    [handleError, navigate, toast]
+    [handleError, isProcessing, navigate, toast]
   );
 
   return [send, isProcessing];
