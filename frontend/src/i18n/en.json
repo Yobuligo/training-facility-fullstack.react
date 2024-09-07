@@ -164,7 +164,7 @@
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
     },
-    "myTrainings": {
+    "myTrainingsContent": {
         "register": "Register",
         "unregister": "Unregister"
     },

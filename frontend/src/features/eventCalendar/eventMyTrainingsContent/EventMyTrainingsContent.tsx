@@ -27,7 +27,7 @@ export const EventMyTrainingsContent: React.FC<
             clickEvent.stopPropagation();
           }}
         >
-          {t(texts.myTrainings.unregister)}
+          {t(texts.myTrainingsContent.unregister)}
         </SpinnerButton>
       ) : (
         <SpinnerButton
@@ -38,7 +38,7 @@ export const EventMyTrainingsContent: React.FC<
             clickEvent.stopPropagation();
           }}
         >
-          {t(texts.myTrainings.register)}
+          {t(texts.myTrainingsContent.register)}
         </SpinnerButton>
       )}
     </EventContent>
