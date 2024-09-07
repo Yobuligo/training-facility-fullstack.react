@@ -7,6 +7,8 @@ $color-secondary-lighter: #c1c2b8;
 $color-copy: white;
 $color-error: #d95f59;
 $color-success: rgba(63, 150, 13, 0.493);
+$color-warning: #e6e619;
+$color-info: #2626d9;
 $color-hover: lighten($color-secondary, 0.5);
 $color-enabled: black;
 $color-disabled: rgba(211, 211, 211, 0.63);
@@ -37,4 +39,8 @@ $color-grade-kup9: rgb(241, 241, 241);
   colorPrimaryLight: $color-primary-light;
   colorSecondary: $color-secondary;
   colorSecondaryLight: $color-secondary-light;
+  colorError: $color-error;
+  colorInfo: $color-info;
+  colorSuccess: $color-success;
+  colorWarning: $color-warning;
 }

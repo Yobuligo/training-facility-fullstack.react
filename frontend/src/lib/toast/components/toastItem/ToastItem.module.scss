@@ -1,0 +1,74 @@
+@use "../../../../styles/colors.module.scss";
+
+.toastItem {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 23rem;
+}
+
+.banner {
+  width: 1rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.closeButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  &:hover {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+}
+
+.type {
+  font-size: large;
+  font-weight: 600;
+}
+
+.bannerError {
+  background-color: colors.$color-error;
+}
+
+.bannerInfo {
+  background-color: colors.$color-info;
+}
+
+.bannerSuccess {
+  background-color: colors.$color-success;
+}
+
+.bannerWarning {
+  background-color: colors.$color-warning;
+}
+
+.bodyError {
+  background-color: lighten($color: colors.$color-error, $amount: 20);
+}
+
+.bodyInfo {
+  background-color: lighten($color: colors.$color-info, $amount: 40);
+}
+
+.bodySuccess {
+  background-color: lighten($color: colors.$color-success, $amount: 40);
+}
+
+.bodyWarning {
+  background-color: lighten($color: colors.$color-warning, $amount: 40);
+}

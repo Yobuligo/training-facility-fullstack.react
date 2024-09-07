@@ -89,6 +89,12 @@
             "weekly": "Weekly"
         },
         "save": "Save",
+        "toastSeverity": {
+            "error": "Error",
+            "info": "Info",
+            "success": " Success",
+            "warning": "Warning"
+        },
         "weekdays": {
             "monday": "Monday",
             "mondayShort": "Mon",
