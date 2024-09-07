@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { IError } from "../../../core/types/IError";
 import { isError } from "../../../core/utils/isError";
-import { useErrorMessage } from "../../../hooks/useErrorMessage";
+import { useToast } from "../../toast/hooks/useToast";
 import { texts } from "../../translation/texts";
 import { useTranslation } from "../../translation/useTranslation";
 import { useLogout } from "./useLogout";
@@ -14,9 +14,9 @@ export const useRequest = (): [
   isProcessing: boolean
 ] => {
   const [isProcessing, setIsLoading] = useState(false);
-  const [, setErrorMessage] = useErrorMessage();
   const logout = useLogout();
   const { t } = useTranslation();
+  const toast = useToast();
 
   const handleError = useCallback(
     (error: IError) => {
@@ -25,13 +25,14 @@ export const useRequest = (): [
         error.type === "InvalidSessionError" ||
         error.type === "ExpiredSessionError"
       ) {
-        setErrorMessage(t(texts.general.logoutInvalidSession));
+        toast.error(t(texts.general.logoutInvalidSession));
         logout.logout();
         return;
+      } else {
+        toast.error(t(texts.general.errorUnknownDueREST));
       }
-      setErrorMessage(error.message);
     },
-    [logout, setErrorMessage, t]
+    [logout, toast, t]
   );
 
   const send = useCallback(
@@ -40,24 +41,23 @@ export const useRequest = (): [
       errorHandler?: (error: any) => string
     ) => {
       setIsLoading(true);
-      setErrorMessage("");
       try {
         await block();
       } catch (error) {
         // does an error handler handles the error?
         if (errorHandler) {
-          setErrorMessage(errorHandler(error));
+          toast.error(errorHandler(error));
         } else {
           if (isError(error)) {
             handleError(error);
           } else {
-            setErrorMessage("Unknown error while sending REST request.");
+            toast.error(t(texts.general.errorUnknownDueREST));
           }
         }
       }
       setIsLoading(false);
     },
-    [handleError, setErrorMessage]
+    [handleError, t, toast]
   );
 
   return [send, isProcessing];

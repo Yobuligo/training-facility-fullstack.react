@@ -50,7 +50,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     return tabItems;
   };
 
-  const onSelect = (tabItem: ITabItem, index: number): void =>
+  const onSelect = (_tabItem: ITabItem, index: number): void =>
     setSelected(index);
 
   return (

@@ -62,6 +62,7 @@
         "delete": "Delete",
         "deleteQuestion": "Do you really want to delete?",
         "edit": "Edit",
+        "errorUnknownDueREST": "Unknown error while sending REST request.",
         "female": "Female",
         "grade": "Grade",
         "isOptional": "(optional)",

@@ -4,11 +4,6 @@ import { IProfileDetailsSettings } from "../model/IProfileDetailSettings";
 import { IUserInternal } from "../model/IUserInternal";
 
 export interface IAppContext {
-  /**
-   * This value can be used to display error messages
-   */
-  errorMessage: Value<string>;
-
   profileDetailsSettings: Value<IProfileDetailsSettings>;
 
   /**
