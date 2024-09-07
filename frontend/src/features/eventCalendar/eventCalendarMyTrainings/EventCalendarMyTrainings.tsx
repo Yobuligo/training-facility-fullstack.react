@@ -1,5 +1,5 @@
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
-import { Button } from "../../../components/button/Button";
+import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { style } from "../../../core/ui/style";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { texts } from "../../../lib/translation/texts";
@@ -32,25 +32,27 @@ export const EventCalendarMyTrainings: React.FC = () => {
         eventDefinition={event.eventDefinition}
       >
         {eventRegistration ? (
-          <Button
+          <SpinnerButton
             className={style(styles.registerButton, styles.unregisterButton)}
+            displaySpinner={viewModel.isUnregisterRequestProcessing}
             onClick={(clickEvent) => {
               viewModel.onUnregister(event);
               clickEvent.stopPropagation();
             }}
           >
             {t(texts.myTrainings.unregister)}
-          </Button>
+          </SpinnerButton>
         ) : (
-          <Button
+          <SpinnerButton
             className={styles.registerButton}
+            displaySpinner={viewModel.isRegisterRequestProcessing}
             onClick={(clickEvent) => {
               viewModel.onRegister(event);
               clickEvent.stopPropagation();
             }}
           >
             {t(texts.myTrainings.register)}
-          </Button>
+          </SpinnerButton>
         )}
       </EventContent>
     );

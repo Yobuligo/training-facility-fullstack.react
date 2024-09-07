@@ -22,6 +22,8 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [session] = useSession();
   const [reloadSignal, triggerReloadSignal] = useSignal();
   const { t } = useTranslation();
+  const [registerRequest, isRegisterRequestProcessing] = useRequest();
+  const [unregisterRequest, isUnregisterRequestProcessing] = useRequest();
 
   const [fetchEventInstanceRequest] = useRequest();
 
@@ -61,12 +63,14 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       return;
     }
 
-    const eventRegistrationApi = new EventRegistrationApi();
-    await eventRegistrationApi.insertFromEventInstance(
-      eventInstance,
-      checkNotNull(session).userId
-    );
-    triggerReloadSignal();
+    registerRequest(async () => {
+      const eventRegistrationApi = new EventRegistrationApi();
+      await eventRegistrationApi.insertFromEventInstance(
+        eventInstance,
+        checkNotNull(session).userId
+      );
+      triggerReloadSignal();
+    });
   };
 
   const onUnregister = async (event: IEvent) => {
@@ -85,13 +89,17 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       return;
     }
 
-    const eventRegistrationApi = new EventRegistrationApi();
-    await eventRegistrationApi.delete(eventRegistration.instance);
-    triggerReloadSignal();
+    unregisterRequest(async () => {
+      const eventRegistrationApi = new EventRegistrationApi();
+      await eventRegistrationApi.delete(eventRegistration.instance);
+      triggerReloadSignal();
+    });
   };
 
   return {
     fetchEventInstance,
+    isRegisterRequestProcessing,
+    isUnregisterRequestProcessing,
     onEventInstanceUnselect,
     onEventSelected,
     onRegister,
