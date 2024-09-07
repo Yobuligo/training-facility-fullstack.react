@@ -102,7 +102,9 @@
 		- Perhaps it should be sorted directly within the backend
 	# Mark deactivated users
 	# Mark admin users
-	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled	
+	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
+	- Users can be searched
+	- Display loading spinner when searching
 
 - Login
 	# Deactivated user must not be logged in
