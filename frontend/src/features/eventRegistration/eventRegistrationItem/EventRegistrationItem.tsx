@@ -3,7 +3,6 @@ import { Card } from "../../../components/card/Card";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import styles from "./EventRegistrationItem.module.scss";
@@ -15,11 +14,10 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
 ) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationItemViewModel(props);
-  const userProfile = checkNotNull(props.eventRegistration.user?.userProfile);
 
   return (
     <Card className={styles.eventRegistrationItem}>
-      <div>{`${userProfile.firstname} ${userProfile.lastname}`}</div>
+      <div>{viewModel.fullName}</div>
       {props.eventRegistration.manuallyAdded ? (
         <Toolbar>
           <SecondaryButton onClick={viewModel.onDelete}>

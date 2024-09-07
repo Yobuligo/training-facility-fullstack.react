@@ -2,6 +2,7 @@
 	- Refactor layout and display edges only in WQHD but not Full-HD
 	- Improve repsonsive design for smaller devides (e.g. Tablets)
 	- Language can be switched
+	- Errors are displayed as toasts
 
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.
@@ -45,18 +46,20 @@
 - Event Registration
 	# Registered user must be displayed
 	# EventRegistrationState for registered user can be set (either present, missing or back to open)
-	- Display loading spinner when changing EventRegistrationState (present, missing, open
+	* Display loading spinner when changing EventRegistrationState (present, missing, open)
 	# Registration can be closed
 	# Registration can be reopened
 	# Display loading spinner when closing or reopening an EventInstance	
 	- It must not be possible to register on past events	
 	# It must not be possible to register if event instance was closed
 	# It must not be possible to unregister if event instance was closed
-	# User can be added to EventInstance manually by search and add	
-	- Display loading spinner when searching for users
+	# User can be added to EventInstance manually by search and add
+	- Manually added users are added sorted
+	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
-	- Manually added user can be deleted from EventInstance (needs to confirm the deletion)
+	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
 	- Display loading spinner when deleting user
+	- Registered users are displayed in the order they registered
 	
 - Welcome
 	# Display upcoming events of the current week

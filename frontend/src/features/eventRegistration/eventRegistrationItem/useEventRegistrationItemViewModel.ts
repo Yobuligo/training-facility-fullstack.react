@@ -11,6 +11,7 @@ export const useEventRegistrationItemViewModel = (
 ) => {
   const { t } = useTranslation();
   const [updateRequest] = useRequest();
+  const fullName = `${props.eventRegistration.user?.userProfile?.firstname} ${props.eventRegistration.user?.userProfile?.lastname}`;
 
   const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
     {
@@ -48,9 +49,18 @@ export const useEventRegistrationItemViewModel = (
     }
   };
 
-  const onDelete = () => props.onDelete?.(props.eventRegistration);
+  const onDelete = () => {
+    if (
+      window.confirm(
+        t(texts.eventRegistrationItem.deleteQuestion, { user: fullName })
+      )
+    ) {
+      props.onDelete?.(props.eventRegistration);
+    }
+  };
 
   return {
+    fullName,
     onDelete,
     onToggleButtonOptionChange,
     selectedToggleButtonOption,
