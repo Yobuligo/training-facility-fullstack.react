@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IError } from "../../../core/types/IError";
 import { isError } from "../../../core/utils/isError";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { useToast } from "../../toast/hooks/useToast";
 import { texts } from "../../translation/texts";
 import { useTranslation } from "../../translation/useTranslation";
@@ -17,6 +19,7 @@ export const useRequest = (): [
   const logout = useLogout();
   const { t } = useTranslation();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleError = useCallback(
     (error: IError) => {
@@ -29,10 +32,11 @@ export const useRequest = (): [
         logout.logout();
         return;
       } else {
-        toast.error(t(texts.general.errorUnknownDueREST));
+        console.log("Unknown error due REST request.");
+        navigate(AppRoutes.error.toPath());
       }
     },
-    [logout, toast, t]
+    [toast, t, logout, navigate]
   );
 
   const send = useCallback(
@@ -51,13 +55,14 @@ export const useRequest = (): [
           if (isError(error)) {
             handleError(error);
           } else {
-            toast.error(t(texts.general.errorUnknownDueREST));
+            console.log("Unknown error due REST request.");
+            navigate(AppRoutes.error.toPath());
           }
         }
       }
       setIsLoading(false);
     },
-    [handleError, t, toast]
+    [handleError, navigate, toast]
   );
 
   return [send, isProcessing];
