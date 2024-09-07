@@ -3,6 +3,8 @@
 	- Improve repsonsive design for smaller devides (e.g. Tablets)
 	- Language can be switched
 	- Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
+	- Unknown server errors are handled in an ErrorBoundaryPage
+	- Display an ErrorBoundaryPage when calling an unknown url
 
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.

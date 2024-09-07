@@ -1,0 +1,60 @@
+@use "../../styles/colors.module.scss";
+@use "../../styles/mixins.scss";
+
+.error {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.logo {
+  color: black;
+  width: 15rem;
+  height: auto;
+  flex-shrink: 0;
+  margin-bottom: 2rem;
+}
+
+.h1 {
+  font-size: x-large;
+  font-weight: 700;
+
+  @include mixins.medium-screen {
+    font-size: xx-large;
+    font-weight: 700;
+  }
+}
+
+.h2 {
+  font-size: large;
+  font-weight: 700;
+
+  @include mixins.medium-screen {
+    font-size: x-large;
+    font-weight: 700;
+  }
+}
+
+.h3 {
+  font-size: medium;
+  font-weight: 700;
+
+  @include mixins.medium-screen {
+    font-size: large;
+    font-weight: 700;
+  }
+}
+
+.headline {
+  margin: 0;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: colors.$color-secondary;
+}
