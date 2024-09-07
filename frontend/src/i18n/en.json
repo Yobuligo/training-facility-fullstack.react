@@ -55,7 +55,8 @@
     "eventRegistrationSection": {
         "checkInUsers": "Check-in registered users",
         "close": "Close registration",
-        "open": "Reopen registration"
+        "open": "Reopen registration",
+        "questionCloseRegistration": "Do you really want to close the registration? No other user can register or unregister anymore."
     },
     "general": {
         "cancel": "Cancel",

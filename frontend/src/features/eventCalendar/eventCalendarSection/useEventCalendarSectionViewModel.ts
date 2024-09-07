@@ -167,6 +167,7 @@ export const useEventCalendarSectionViewModel = (
   useEffect(() => {
     loadEventDefinitions(fromDate, toDate);
     // loadEventDefinitions must not be part of the dependencies, otherwise we get an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fromDate, props.reloadSignal, toDate]);
 
   /**

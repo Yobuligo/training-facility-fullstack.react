@@ -3,6 +3,8 @@ import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
@@ -14,6 +16,7 @@ import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
 ) => {
+  const { t } = useTranslation();
   const [eventInstanceState, setEventInstanceState] = useState(
     props.eventInstance.state
   );
@@ -100,6 +103,14 @@ export const useEventRegistrationSectionViewModel = (
     });
 
   const onCloseRegistration = () => {
+    if (
+      !window.confirm(
+        t(texts.eventRegistrationSection.questionCloseRegistration)
+      )
+    ) {
+      return;
+    }
+
     props.eventInstance.state = EventInstanceState.CLOSED;
     setEventInstanceState(EventInstanceState.CLOSED);
     updateEventInstance();
