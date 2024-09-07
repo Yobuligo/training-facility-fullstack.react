@@ -55,9 +55,10 @@
 	# EventRegistrationState for registered user can be set (either present, missing or back to open)
 	* Display loading spinner when changing EventRegistrationState (present, missing, open)
 	# Registration can be closed
+	# Display confirm dialog before closing event registration
 	# Registration can be reopened
 	# Display loading spinner when closing or reopening an EventInstance	
-	- It must not be possible to register on past events	
+	- It must not be possible to register on past events
 	# It must not be possible to register if event instance was closed
 	# It must not be possible to unregister if event instance was closed
 	# User can be added to EventInstance manually by search and add
