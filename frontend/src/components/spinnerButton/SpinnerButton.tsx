@@ -6,15 +6,13 @@ import styles from "./SpinnerButton.module.scss";
 
 export const SpinnerButton: React.FC<ISpinnerButtonProps> = (props) => {
   const { displaySpinner, ...buttonProps } = props;
-
   return (
     <Button {...buttonProps}>
       <div className={styles.spinnerButton}>
-        {props.displaySpinner ? (
+        {props.displaySpinner && (
           <Spinner color={props.spinnerColor} size={SpinnerSize.SMALL} />
-        ) : (
-          <>{buttonProps.children}</>
         )}
+        {buttonProps.children}
       </div>
     </Button>
   );

@@ -8,7 +8,6 @@ export const Button: React.FC<IButtonProps> = (props) => {
       props.onClick?.(event);
     }
   };
-
   return (
     <button
       className={style(

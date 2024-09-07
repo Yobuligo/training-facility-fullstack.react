@@ -1,3 +1,8 @@
+- App
+	- Refactor layout and display edges only in WQHD but not Full-HD
+	- Improve repsonsive design for smaller devides (e.g. Tablets)
+	- Language can be switched
+
 - Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
@@ -103,12 +108,15 @@
 	# Mark deactivated users
 	# Mark admin users
 	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
-	- Users can be searched
+	# Users can be searched
 	- Display loading spinner when searching
 
 - Login
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
+	
+- Passwort
+	- User must be able to change password
 	
 - Event Calendar
 	# Start display of calender hours of first event and end hours of end of last event
