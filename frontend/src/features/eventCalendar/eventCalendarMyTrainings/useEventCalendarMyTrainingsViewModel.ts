@@ -24,7 +24,6 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const { t } = useTranslation();
   const [registerRequest, isRegisterRequestProcessing] = useRequest();
   const [unregisterRequest, isUnregisterRequestProcessing] = useRequest();
-
   const [fetchEventInstanceRequest] = useRequest();
 
   const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {

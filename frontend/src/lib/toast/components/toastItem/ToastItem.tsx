@@ -1,6 +1,7 @@
 import { Button } from "../../../../components/button/Button";
 import { NotSupportedError } from "../../../../core/errors/NotSupportedError";
 import { style } from "../../../../core/ui/style";
+import { useInitialize } from "../../../../hooks/useInitialize";
 import { CloseIcon } from "../../../../icons/CloseIcon";
 import { useRenderToastSeverity } from "../../hooks/useRenderToastSeverity";
 import { ToastSeverity } from "../../types/ToastSeverity";
@@ -41,6 +42,12 @@ export const ToastItem: React.FC<IToastItemProps> = (props) => {
   };
 
   const onClose = () => props.onClose?.(props.toast);
+
+  useInitialize(() => {
+    if (props.toast.severity !== ToastSeverity.ERROR) {
+      setTimeout(() => onClose(), 3000);
+    }
+  });
 
   return (
     <div className={styles.toastItem}>
