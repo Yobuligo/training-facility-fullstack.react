@@ -1,0 +1,17 @@
+@use "../../../styles/colors.module.scss";
+
+.eventMyTrainingsContent {
+  justify-content: space-between;
+  height: 100%;
+}
+
+.registerButton {
+  align-self: flex-end;
+}
+
+.unregisterButton {
+  background-color: colors.$color-accent;
+  &:hover {
+    background-color: colors.$color-accent;
+  }
+}

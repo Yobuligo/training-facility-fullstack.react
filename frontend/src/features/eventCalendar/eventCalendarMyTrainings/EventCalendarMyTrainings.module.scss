@@ -1,18 +1,18 @@
-@use "../../../styles/components.module.scss";
-@import "../../../styles/colors.module.scss";
+// @use "../../../styles/components.module.scss";
+// @import "../../../styles/colors.module.scss";
 
-.eventDefinition {
-  justify-content: space-between;
-  height: 100%;
-}
+// .eventDefinition {
+//   justify-content: space-between;
+//   height: 100%;
+// }
 
-.registerButton {
-  align-self: flex-end;
-}
+// .registerButton {
+//   align-self: flex-end;
+// }
 
-.unregisterButton {
-  background-color: $color-accent;
-  &:hover {
-    background-color: $color-accent;
-  }
-}
+// .unregisterButton {
+//   background-color: $color-accent;
+//   &:hover {
+//     background-color: $color-accent;
+//   }
+// }
