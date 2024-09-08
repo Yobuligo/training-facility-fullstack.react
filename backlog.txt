@@ -45,6 +45,7 @@
 	# Click on event instance displays registered users
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
+	- Display event description on hover
 	- Bug: it seems that event-instances for the same date are created multiple times - when upset (insert / update) and event-instance we must check only the from and to timestamp but not everything
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
@@ -140,6 +141,9 @@
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
+- Security
+	- Add authority checks to backend functions (e.g. a normaler must not be able to create or delete users)
+
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
 - Check all backend endpoints and add authorization checks
