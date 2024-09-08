@@ -17,24 +17,26 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [insertEventDefinitionRequest] = useRequest();
   const [updateEventDefinitionRequest] = useRequest();
   const [loadEventDefinitionRequest] = useRequest();
+  const [deleteEventDefinitionRequest] = useRequest();
 
   const onAdd = () =>
     setSelectedEventDefinition(new DummyEventDefinition(user.id));
 
   const onBack = () => setSelectedEventDefinition(undefined);
 
-  const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) => {
-    if (
-      !(eventDefinition instanceof DummyEventDefinition) ||
-      (eventDefinition instanceof DummyEventDefinition &&
-        eventDefinition.isPersisted)
-    ) {
-      const eventDefinitionApi = new EventDefinitionApi();
-      await eventDefinitionApi.deleteById(eventDefinition.id);
-    }
-    setSelectedEventDefinition(undefined);
-    triggerReloadSignal();
-  };
+  const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) =>
+    deleteEventDefinitionRequest(async () => {
+      if (
+        !(eventDefinition instanceof DummyEventDefinition) ||
+        (eventDefinition instanceof DummyEventDefinition &&
+          eventDefinition.isPersisted)
+      ) {
+        const eventDefinitionApi = new EventDefinitionApi();
+        await eventDefinitionApi.deleteById(eventDefinition.id);
+      }
+      setSelectedEventDefinition(undefined);
+      triggerReloadSignal();
+    });
 
   const onEventSelected = (event: IEvent) =>
     setSelectedEventDefinition(event.eventDefinition);

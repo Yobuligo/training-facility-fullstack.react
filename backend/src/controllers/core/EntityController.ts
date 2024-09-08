@@ -3,6 +3,7 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
+import { AuthRole } from "../../shared/types/AuthRole";
 import { Controller } from "./Controller";
 import { SessionInterceptor } from "./SessionInterceptor";
 
@@ -22,7 +23,7 @@ export abstract class EntityController<
     this.update();
   }
 
-  protected deleteById() {
+  protected deleteById(authRoles?: AuthRole[]) {
     this.router.delete(
       `${this.routeMeta.path}/:id`,
       SessionInterceptor(async (req, res) => {
@@ -33,22 +34,22 @@ export abstract class EntityController<
         } else {
           res.status(200).send(true);
         }
-      })
+      }, authRoles)
     );
   }
 
-  protected findAll() {
+  protected findAll(authRoles?: AuthRole[]) {
     this.router.get(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
         const fields = this.getFieldsFromQuery(req.query);
         const entities = await this.repo.findAll(fields);
         return res.status(200).send(entities);
-      })
+      }, authRoles)
     );
   }
 
-  protected findById() {
+  protected findById(authRoles?: AuthRole[]) {
     this.router.get(
       `${this.routeMeta.path}/:id`,
       SessionInterceptor(async (req, res) => {
@@ -60,11 +61,11 @@ export abstract class EntityController<
         } else {
           res.status(404).end();
         }
-      })
+      }, authRoles)
     );
   }
 
-  protected insert() {
+  protected insert(authRoles?: AuthRole[]) {
     this.router.post(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
@@ -72,22 +73,22 @@ export abstract class EntityController<
         const fields = this.getFieldsFromQuery(req.query);
         const createdEntity = await this.repo.insert(entity, fields);
         res.status(201).send(createdEntity);
-      })
+      }, authRoles)
     );
   }
 
-  protected update() {
+  protected update(authRoles?: AuthRole[]) {
     this.router.put(
       `${this.routeMeta.path}/:id`,
       SessionInterceptor(async (req, res) => {
         const entity: TEntity = req.body;
         const wasUpdated = await this.repo.update(entity);
         res.status(200).send(wasUpdated);
-      })
+      }, authRoles)
     );
   }
 
-  protected updateAll() {
+  protected updateAll(authRoles?: AuthRole[]) {
     this.router.put(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
@@ -95,7 +96,7 @@ export abstract class EntityController<
         const fields = this.getFieldsFromQuery(req.query);
         const updatedEntities = await this.repo.updateAll(entities, fields);
         res.status(200).send(updatedEntities);
-      })
+      }, authRoles)
     );
   }
 

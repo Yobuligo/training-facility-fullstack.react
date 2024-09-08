@@ -7,7 +7,7 @@
 	# Display an ErrorBoundaryPage when calling an unknown url
 	# useRequest must not call block, if the block is currently running
 
-- Planner
+- Event Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
 	# inputs are restricted to length of related db fields		
@@ -15,6 +15,7 @@
 		# Description is restricted to 100 characters
 	# EventDefinition can be updated
 	# EventDefinition can be deleted
+	# Create, delete, update operations must be only allowed with ADMIN role
 	# Calendar
 		# Appointments of recurrence once 
 			# must be displayed once at the specific date

@@ -64,6 +64,7 @@
         "deleteQuestion": "Do you really want to delete?",
         "edit": "Edit",
         "errorUnknownDueREST": "Unknown error while sending REST request.",
+        "errorMissingAuthority": "Sorry, you are not authorized for this action.",
         "female": "Female",
         "grade": "Grade",
         "isOptional": "(optional)",

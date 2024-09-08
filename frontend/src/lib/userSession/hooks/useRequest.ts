@@ -31,7 +31,10 @@ export const useRequest = (): [
         toast.error(t(texts.general.logoutInvalidSession));
         logout.logout();
         return;
+      } else if (error.type === "MissingAuthorityError") {
+        toast.error(t(texts.general.errorMissingAuthority));
       } else {
+        // unknown error navigate to error boundary page
         console.log("Unknown error due REST request.");
         navigate(AppRoutes.error.toPath());
       }
@@ -60,6 +63,7 @@ export const useRequest = (): [
           if (isError(error)) {
             handleError(error);
           } else {
+            // unknown error navigate to error boundary page
             console.log("Unknown error due REST request.");
             navigate(AppRoutes.error.toPath());
           }
