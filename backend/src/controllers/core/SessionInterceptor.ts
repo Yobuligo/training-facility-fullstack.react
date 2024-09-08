@@ -49,9 +49,11 @@ export const SessionInterceptor = (
         authRoles
       );
 
-      return res
-        .status(403)
-        .send(createError("Missing authority", "MissingAuthorityError"));
+      if (!hasAuthRole) {
+        return res
+          .status(403)
+          .send(createError("Missing authority", "MissingAuthorityError"));
+      }
     }
 
     const sessionRequest = req as ISessionRequest;
