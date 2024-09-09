@@ -1,4 +1,3 @@
-import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
@@ -36,15 +35,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
         />
       ) : (
         <EventCalendarSection
-          eventDefinitionLoader={async (dateTimeSpan) => {
-            const eventDefinitionApi = new EventDefinitionApi();
-            const eventDefinitions =
-              await eventDefinitionApi.findByDataTimeSpanAndUser(
-                dateTimeSpan,
-                viewModel.userId
-              );
-            return eventDefinitions;
-          }}
+          eventDefinitionLoader={viewModel.loadEventDefinitions}
           onEventSelected={viewModel.onEventSelected}
           reloadSignal={viewModel.reloadSignal}
           renderEvent={renderEvent}

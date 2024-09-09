@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useAuth } from "../../../hooks/useAuth";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { useFetchEventInstance } from "../hooks/useFetchEventInstance";
 import { IEvent } from "../model/IEvent";
@@ -13,6 +17,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const auth = useAuth();
   const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
+  const [loadEventDefinitionsRequest] = useRequest();
   const fetchEventInstance = useFetchEventInstance();
 
   const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
@@ -24,7 +29,22 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     }
   };
 
+  const loadEventDefinitions = async (
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IEventDefinition[]> => {
+    let eventDefinitions: IEventDefinition[] = [];
+    await loadEventDefinitionsRequest(async () => {
+      const eventDefinitionApi = new EventDefinitionApi();
+      eventDefinitions = await eventDefinitionApi.findByDataTimeSpanAndUser(
+        dateTimeSpan,
+        user.id
+      );
+    });
+    return eventDefinitions;
+  };
+
   return {
+    loadEventDefinitions,
     onEventInstanceUnselect,
     onEventSelected,
     reloadSignal,

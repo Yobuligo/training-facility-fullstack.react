@@ -1,7 +1,6 @@
 import { Response } from "express";
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { createError } from "../core/utils/createError";
 import { EventDefinitionRepo } from "../repositories/EventDefinitionRepo";
 import {
   EventDefinitionRouteMeta,
@@ -96,11 +95,11 @@ export class EventDefinitionController extends EntityController<
     requestedUserId: string,
     fields: (keyof IEventDefinition)[]
   ) {
-    const isAdminOrYourSelf = await req.isAdminOrYourself(requestedUserId);
+    const isAdminOrYourSelf = await req.sessionInfo.isAdminOrYourself(
+      requestedUserId
+    );
     if (!isAdminOrYourSelf) {
-      return res
-        .status(HttpStatusCode.FORBIDDEN_403)
-        .send(createError("Missing authority", "MissingAuthorityError"));
+      return this.sendMissingAuthorityError(res);
     }
 
     const eventDefinitions = await this.repo.findByDateTimeSpanAndUser(

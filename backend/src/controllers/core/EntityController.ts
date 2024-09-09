@@ -1,9 +1,11 @@
+import { Response } from "express";
 import { Query } from "express-serve-static-core";
 import { HttpStatusCode } from "../../core/api/types/HttpStatusCode";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
+import { createError } from "../../core/utils/createError";
 import { AuthRole } from "../../shared/types/AuthRole";
 import { Controller } from "./Controller";
 import { SessionInterceptor } from "./SessionInterceptor";
@@ -107,5 +109,11 @@ export abstract class EntityController<
   protected getFieldsFromQuery(query: Query): (keyof TEntity)[] {
     const fields = query.fields ? String(query.fields).split(",") : [];
     return fields as unknown as (keyof TEntity)[];
+  }
+
+  protected sendMissingAuthorityError(res: Response): Response {
+    return res
+      .status(HttpStatusCode.FORBIDDEN_403)
+      .send(createError("Missing authority", "MissingAuthorityError"));
   }
 }
