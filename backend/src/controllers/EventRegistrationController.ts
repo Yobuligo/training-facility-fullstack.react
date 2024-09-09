@@ -4,6 +4,7 @@ import {
   EventRegistrationRouteMeta,
   IEventRegistration,
 } from "../shared/model/IEventRegistration";
+import { AuthRole } from "../shared/types/AuthRole";
 import { EventRegistrationRepo } from "./../repositories/EventRegistrationRepo";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -13,8 +14,20 @@ export class EventRegistrationController extends EntityController<
   EventRegistrationRepo
 > {
   constructor() {
-    super(EventRegistrationRouteMeta, new EventRegistrationRepo());
+    super(EventRegistrationRouteMeta, new EventRegistrationRepo(), [
+      AuthRole.ADMIN,
+    ]);
     this.findByInstanceId();
+  }
+
+  protected deleteById(): void {
+    // no authorities required
+    super.deleteById();
+  }
+
+  protected insert(): void {
+    // no authorities required
+    super.insert();
   }
 
   private findByInstanceId() {

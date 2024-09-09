@@ -16,14 +16,15 @@ export abstract class EntityController<
 > extends Controller {
   constructor(
     protected readonly routeMeta: IRouteMeta,
-    protected readonly repo: TEntityRepository
+    protected readonly repo: TEntityRepository,
+    protected readonly authRoles?: AuthRole[] // provide auth roles, which must be available for each endpoint
   ) {
     super();
-    this.deleteById();
-    this.insert();
-    this.findAll();
-    this.findById();
-    this.update();
+    this.deleteById(authRoles);
+    this.findAll(authRoles);
+    this.findById(authRoles);
+    this.insert(authRoles);
+    this.update(authRoles);
   }
 
   protected deleteById(authRoles?: AuthRole[]) {

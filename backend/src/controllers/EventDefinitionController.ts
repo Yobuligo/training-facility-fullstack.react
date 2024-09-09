@@ -16,11 +16,9 @@ export class EventDefinitionController extends EntityController<
   EventDefinitionRepo
 > {
   constructor() {
-    super(EventDefinitionRouteMeta, new EventDefinitionRepo());
-  }
-
-  protected deleteById(): void {
-    super.deleteById([AuthRole.ADMIN]);
+    super(EventDefinitionRouteMeta, new EventDefinitionRepo(), [
+      AuthRole.ADMIN,
+    ]);
   }
 
   protected findAll(): void {
@@ -47,14 +45,6 @@ export class EventDefinitionController extends EntityController<
         }
       })
     );
-  }
-
-  protected insert(): void {
-    super.insert([AuthRole.ADMIN]);
-  }
-
-  protected update(): void {
-    super.update([AuthRole.ADMIN]);
   }
 
   private async findByDateTimeSpan(

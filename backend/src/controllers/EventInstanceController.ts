@@ -14,11 +14,7 @@ export class EventInstanceController extends EntityController<
   EventInstanceRepo
 > {
   constructor() {
-    super(EventInstanceRouteMeta, new EventInstanceRepo());
-  }
-
-  protected deleteById(): void {
-    super.deleteById([AuthRole.ADMIN]);
+    super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
   }
 
   protected findAll(): void {
@@ -55,6 +51,10 @@ export class EventInstanceController extends EntityController<
 
           res.status(HttpStatusCode.OK_200).send(eventInstances);
         } else {
+          if (!(await req.sessionInfo.isAdmin())) {
+            return this.sendMissingAuthorityError(res);
+          }
+
           const eventInstances = await this.repo.findAll(fields);
           res.status(HttpStatusCode.OK_200).send(eventInstances);
         }
@@ -62,11 +62,8 @@ export class EventInstanceController extends EntityController<
     );
   }
 
-  protected findById(): void {
-    super.findById([AuthRole.ADMIN]);
-  }
-
-  protected update(): void {
-    super.update([AuthRole.ADMIN]);
+  protected insert(): void {
+    // no authorities required
+    super.insert();
   }
 }
