@@ -21,6 +21,26 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.logout();
   }
 
+  protected findById(): void {
+    this.router.get(
+      `${this.routeMeta.path}/:id`,
+      SessionInterceptor(async (req, res) => {
+        const userId = req.params.id;
+        if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
+          return this.sendMissingAuthorityError(res);
+        }
+
+        const fields = this.getFieldsFromQuery(req.query);
+        const entity = await this.repo.findById(userId, fields);
+        if (entity) {
+          res.status(HttpStatusCode.OK_200).send(entity);
+        } else {
+          res.status(HttpStatusCode.NOT_FOUND_404).end();
+        }
+      })
+    );
+  }
+
   private activate() {
     this.router.post(
       `${this.routeMeta.path}/:id/activate`,
