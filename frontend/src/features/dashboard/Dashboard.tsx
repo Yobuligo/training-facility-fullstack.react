@@ -39,12 +39,12 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     }
 
     tabItems.push({
-      title: t(texts.dashboard.myTrainings),
+      title: t(texts.dashboard.trainings),
       content: <EventCalendarMyTrainings />,
     });
 
     tabItems.push({
-      title: t(texts.dashboard.myProfile),
+      title: t(texts.dashboard.profile),
       content: <MyProfile />,
     });
     return tabItems;

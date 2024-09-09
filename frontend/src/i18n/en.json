@@ -23,8 +23,8 @@
         "week": "Week"
     },
     "dashboard": {
-        "myProfile": "My profile",
-        "myTrainings": "My trainings",
+        "profile": "Profile",
+        "trainings": "Trainings",
         "planner": "Planner",
         "users": "Users"
     },

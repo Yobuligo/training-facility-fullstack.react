@@ -1,5 +1,5 @@
 - App
-	- Refactor layout and display edges only in WQHD but not Full-HD
+	- Refactor page style and display edges only in WQHD but not Full-HD
 	- Improve repsonsive design for smaller devices (e.g. Tablets)
 	- Language can be switched
 	# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
@@ -129,7 +129,7 @@
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
 	
-- Passwort
+- Password
 	- User must be able to change password
 	
 - Event Calendar
@@ -144,16 +144,16 @@
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
 - Security
-	- Add authority checks to backend functions (e.g. a normaler must not be able to create or delete users)
+	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
-- Check all backend endpoints and add authorization checks
+# Check all backend endpoints and add authorization checks
 - We have to check the behavior for each REST request if it fails
-- We have to check the transmitted data for each REST request if can be reduced to only required information
+- We have to check the transmitted data for each REST request if it can be reduced to only required information
 - Edge Cases
-	- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted?
+	- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
 
 Best Practices Sequelize:
 - DTO types do contain properties for ids of referenced objects and for the reference itself
-- related objects must be optional in entity interfaces (e.g. IUser has IUserProfile)
+- related objects in DTO types must be optional in entity interfaces (e.g. IUser has IUserProfile)
