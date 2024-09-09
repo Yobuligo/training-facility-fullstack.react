@@ -35,6 +35,7 @@ export const SessionInterceptor = (
         .send(createError("Invalid session", "InvalidSessionError"));
     }
 
+    // check session expired
     if (DateTime.isBefore(session.expiresAt)) {
       return res
         .status(401)
@@ -42,12 +43,20 @@ export const SessionInterceptor = (
     }
 
     // check authority roles
+    let userAuthRoles: AuthRole[] | undefined = undefined;
     if (authRoles && authRoles.length > 0) {
+      // find all auth roles of the given user
       const userRoleRepo = new UserRoleRepo();
-      const hasAuthRole = await userRoleRepo.hasAuthRole(
-        session.userId,
-        authRoles
-      );
+      userAuthRoles = await userRoleRepo.findByUserId(session.userId);
+
+      // check if user has at least one of the required role
+      let hasAuthRole = false;
+      for (let i = 0; i < authRoles.length; i++) {
+        if (userAuthRoles.includes(authRoles[i])) {
+          hasAuthRole = true;
+          break;
+        }
+      }
 
       if (!hasAuthRole) {
         return res
@@ -56,8 +65,34 @@ export const SessionInterceptor = (
       }
     }
 
+    // Attach session and functions to find auth roles of users and return if user is an admin
     const sessionRequest = req as ISessionRequest;
     sessionRequest.session = session;
+    sessionRequest.findAuthRoles = async (): Promise<AuthRole[]> => {
+      // if user auth roles are already loaded return directly, otherwise select them
+      if (userAuthRoles) {
+        return userAuthRoles;
+      } else {
+        const userRoleRepo = new UserRoleRepo();
+        const authRoles = await userRoleRepo.findByUserId(session.userId);
+        return authRoles;
+      }
+    };
+    sessionRequest.isAdmin = async () => {
+      const authRoles = await sessionRequest.findAuthRoles();
+      const includes = authRoles.includes(AuthRole.ADMIN);
+      return includes;
+    };
+
+    sessionRequest.isAdminOrYourself = async (
+      requestedUserId: string
+    ): Promise<boolean> => {
+      if (session.userId === requestedUserId) {
+        return true;
+      }
+      return await sessionRequest.isAdmin();
+    };
+
     await requestHandler(sessionRequest, res, next);
   });
 };

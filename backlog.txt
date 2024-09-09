@@ -6,6 +6,7 @@
 	# Unknown server errors are handled in an ErrorBoundaryPage
 	# Display an ErrorBoundaryPage when calling an unknown url
 	# useRequest must not call block, if the block is currently running
+	- Introduce HttpStatusCodes
 
 - Event Planner
 	# Title must be mandatory. Saving must not be possible without title.

@@ -10,6 +10,15 @@ export class UserRoleRepo extends SequelizeRepository<IUserRole> {
   }
 
   /**
+   * Finds all auth roles of the user with the given {@link userId}.
+   */
+  async findByUserId(userId: string): Promise<AuthRole[]> {
+    const data = await this.model.findAll({ where: { userId } });
+    const authRoles = data.map((model) => model.toJSON().role);
+    return authRoles;
+  }
+
+  /**
    * Returns if the user of the given {@link userId}, has at least one of the given {@link authRoles}.
    */
   async hasAuthRole(userId: string, authRoles: AuthRole[]): Promise<boolean> {
@@ -20,7 +29,7 @@ export class UserRoleRepo extends SequelizeRepository<IUserRole> {
           [Op.in]: authRoles,
         },
       },
-      attributes: ["role"]
+      attributes: ["role"],
     });
     return data ? true : false;
   }
