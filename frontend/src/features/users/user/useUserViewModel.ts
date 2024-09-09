@@ -11,7 +11,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { DummyUserProfile } from "../../../model/DummyUserProfile";
+import { DummyUser } from "../../../model/DummyUser";
 import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { AuthRole } from "../../../shared/types/AuthRole";
@@ -28,7 +28,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [profileDetailsSettings, setProfileDetailsSettings] =
     useProfileDetailsSettings();
   const [displayMode, setDisplayMode] = useState(
-    props.user instanceof DummyUserProfile && props.user.isPersisted === false
+    props.user instanceof DummyUser && props.user.isPersisted === false
       ? false
       : true
   );
