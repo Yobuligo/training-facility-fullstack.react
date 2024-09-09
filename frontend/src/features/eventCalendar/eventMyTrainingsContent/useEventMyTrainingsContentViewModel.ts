@@ -19,6 +19,10 @@ export const useEventMyTrainingsContentViewModel = (
 
   const onRegister = async (event: IEvent) => {
     const eventInstance = await fetchEventInstance(event);
+    if (!eventInstance) {
+      return;
+    }
+
     if (eventInstance.state === EventInstanceState.CLOSED) {
       window.alert(t(texts.eventCalendarMyTrainings.registerOnClosed));
       return;

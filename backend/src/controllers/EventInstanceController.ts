@@ -5,6 +5,7 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
+import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
@@ -14,6 +15,10 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo());
+  }
+
+  protected deleteById(): void {
+    super.deleteById([AuthRole.ADMIN]);
   }
 
   protected findAll(): void {
@@ -33,6 +38,10 @@ export class EventInstanceController extends EntityController<
           userId &&
           typeof userId === "string"
         ) {
+          if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
+            return this.sendMissingAuthorityError(res);
+          }
+
           const dateTimeSpan: IDateTimeSpan = {
             from: new Date(from),
             to: new Date(to),
@@ -51,5 +60,13 @@ export class EventInstanceController extends EntityController<
         }
       })
     );
+  }
+
+  protected findById(): void {
+    super.findById([AuthRole.ADMIN]);
+  }
+
+  protected update(): void {
+    super.update([AuthRole.ADMIN]);
   }
 }

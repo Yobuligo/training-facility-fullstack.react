@@ -7,8 +7,10 @@ import { IEvent } from "../model/IEvent";
 export const useFetchEventInstance = () => {
   const [fetchEventInstanceRequest] = useRequest();
 
-  const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {
-    let eventInstance: IEventInstance;
+  const fetchEventInstance = async (
+    event: IEvent
+  ): Promise<IEventInstance | undefined> => {
+    let eventInstance: IEventInstance | undefined;
     await fetchEventInstanceRequest(async () => {
       const cachedEventInstance = EventInfo.findEventInstance(event);
       if (cachedEventInstance) {
@@ -24,7 +26,7 @@ export const useFetchEventInstance = () => {
       }
     });
 
-    return eventInstance!;
+    return eventInstance;
   };
 
   return fetchEventInstance;
