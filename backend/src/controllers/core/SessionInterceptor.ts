@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import { HttpStatusCode } from "../../core/api/types/HttpStatusCode";
 import { DateTime } from "../../core/services/date/DateTime";
 import { createError } from "../../core/utils/createError";
 import { SessionRepo } from "../../repositories/SessionRepo";
@@ -22,7 +23,7 @@ export const SessionInterceptor = (
     const sessionId = req.query.token?.toString();
     if (!sessionId) {
       return res
-        .status(401)
+        .status(HttpStatusCode.UNAUTHORIZED_401)
         .send(createError("No session found", "NoSessionError"));
     }
 
@@ -31,14 +32,14 @@ export const SessionInterceptor = (
     const session = await sessionRepo.findById(sessionId);
     if (!session) {
       return res
-        .status(401)
+        .status(HttpStatusCode.UNAUTHORIZED_401)
         .send(createError("Invalid session", "InvalidSessionError"));
     }
 
     // check session expired
     if (DateTime.isBefore(session.expiresAt)) {
       return res
-        .status(401)
+        .status(HttpStatusCode.UNAUTHORIZED_401)
         .send(createError("Session expired", "ExpiredSessionError"));
     }
 
@@ -60,7 +61,7 @@ export const SessionInterceptor = (
 
       if (!hasAuthRole) {
         return res
-          .status(403)
+          .status(HttpStatusCode.FORBIDDEN_403)
           .send(createError("Missing authority", "MissingAuthorityError"));
       }
     }

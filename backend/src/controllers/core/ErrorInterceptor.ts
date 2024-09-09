@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../core/api/types/HttpStatusCode";
 import { createError } from "../../core/utils/createError";
 import { isError } from "../../core/utils/isError";
 
@@ -14,11 +15,11 @@ export const ErrorInterceptor = (
     } catch (error) {
       if (isError(error)) {
         console.log(error.message);
-        res.status(500).send(error);
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR_500).send(error);
       } else {
         console.log(error);
         res
-          .status(500)
+          .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)
           .send(createError("Internal server error", "InternalServerError"));
       }
     }

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import {
   EventRegistrationRouteMeta,
@@ -24,7 +25,7 @@ export class EventRegistrationController extends EntityController<
         const eventRegistrationRepo = new EventRegistrationRepo();
         const eventRegistrations =
           await eventRegistrationRepo.findByEventInstanceId(eventInstanceId);
-        res.status(200).send(eventRegistrations);
+        res.status(HttpStatusCode.OK_200).send(eventRegistrations);
       })
     );
   }

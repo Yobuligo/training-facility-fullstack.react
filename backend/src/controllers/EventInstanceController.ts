@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { EventInstanceRepo } from "../repositories/EventInstanceRepo";
 import {
@@ -43,10 +44,10 @@ export class EventInstanceController extends EntityController<
             fields
           );
 
-          res.status(200).send(eventInstances);
+          res.status(HttpStatusCode.OK_200).send(eventInstances);
         } else {
           const eventInstances = await this.repo.findAll(fields);
-          res.status(200).send(eventInstances);
+          res.status(HttpStatusCode.OK_200).send(eventInstances);
         }
       })
     );

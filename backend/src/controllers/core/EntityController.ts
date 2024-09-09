@@ -1,4 +1,5 @@
 import { Query } from "express-serve-static-core";
+import { HttpStatusCode } from "../../core/api/types/HttpStatusCode";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
@@ -30,9 +31,9 @@ export abstract class EntityController<
         const id = req.params.id;
         const success = await this.repo.deleteById(id);
         if (!success) {
-          res.status(404).end();
+          res.status(HttpStatusCode.NOT_FOUND_404).end();
         } else {
-          res.status(200).send(true);
+          res.status(HttpStatusCode.OK_200).send(true);
         }
       }, authRoles)
     );
@@ -44,7 +45,7 @@ export abstract class EntityController<
       SessionInterceptor(async (req, res) => {
         const fields = this.getFieldsFromQuery(req.query);
         const entities = await this.repo.findAll(fields);
-        return res.status(200).send(entities);
+        return res.status(HttpStatusCode.OK_200).send(entities);
       }, authRoles)
     );
   }
@@ -57,9 +58,9 @@ export abstract class EntityController<
         const fields = this.getFieldsFromQuery(req.query);
         const entity = await this.repo.findById(id, fields);
         if (entity) {
-          res.status(200).send(entity);
+          res.status(HttpStatusCode.OK_200).send(entity);
         } else {
-          res.status(404).end();
+          res.status(HttpStatusCode.NOT_FOUND_404).end();
         }
       }, authRoles)
     );
@@ -72,7 +73,7 @@ export abstract class EntityController<
         const entity: IEntityDetails<TEntity> = req.body;
         const fields = this.getFieldsFromQuery(req.query);
         const createdEntity = await this.repo.insert(entity, fields);
-        res.status(201).send(createdEntity);
+        res.status(HttpStatusCode.CREATED_201).send(createdEntity);
       }, authRoles)
     );
   }
@@ -83,7 +84,7 @@ export abstract class EntityController<
       SessionInterceptor(async (req, res) => {
         const entity: TEntity = req.body;
         const wasUpdated = await this.repo.update(entity);
-        res.status(200).send(wasUpdated);
+        res.status(HttpStatusCode.OK_200).send(wasUpdated);
       }, authRoles)
     );
   }
@@ -95,7 +96,7 @@ export abstract class EntityController<
         const entities: TEntity[] = req.body;
         const fields = this.getFieldsFromQuery(req.query);
         const updatedEntities = await this.repo.updateAll(entities, fields);
-        res.status(200).send(updatedEntities);
+        res.status(HttpStatusCode.OK_200).send(updatedEntities);
       }, authRoles)
     );
   }

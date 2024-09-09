@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { createError } from "../core/utils/createError";
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { UserRouteMeta } from "../shared/model/IUser";
@@ -26,10 +27,10 @@ export class UserProfileController extends EntityController<
         );
 
         if (userProfile) {
-          return res.status(200).send(userProfile);
+          return res.status(HttpStatusCode.OK_200).send(userProfile);
         }
         return res
-          .status(404)
+          .status(HttpStatusCode.NOT_FOUND_404)
           .send(
             createError(
               "Error loading user profile by user id. User profile not found."

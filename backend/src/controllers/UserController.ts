@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { createError } from "../core/utils/createError";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
@@ -28,7 +29,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const userId = req.params.id;
         const userRepo = new UserRepo();
         const wasActivated = await userRepo.activate(userId);
-        res.status(200).send(wasActivated);
+        res.status(HttpStatusCode.OK_200).send(wasActivated);
       })
     );
   }
@@ -40,7 +41,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const userId = req.params.id;
         const userRepo = new UserRepo();
         const wasDeactivated = await userRepo.deactivate(userId);
-        res.status(200).send(wasDeactivated);
+        res.status(HttpStatusCode.OK_200).send(wasDeactivated);
       })
     );
   }
@@ -52,7 +53,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const username = req.params.username;
         if (!username || typeof username !== "string") {
           return res
-            .status(400)
+            .status(HttpStatusCode.BAD_REQUEST_400)
             .send(
               createError(
                 "Error while getting username. Username was not provided."
@@ -62,7 +63,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
 
         const userRepo = new UserRepo();
         const contains = await userRepo.existsByUsername(username);
-        res.status(200).send(contains);
+        res.status(HttpStatusCode.OK_200).send(contains);
       })
     );
   }
@@ -75,11 +76,11 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const query = req.query.query;
         if (query && typeof query === "string") {
           const users = await this.repo.findAllByQuery(query, fields);
-          return res.status(200).send(users);
+          return res.status(HttpStatusCode.OK_200).send(users);
         }
 
         const users = await this.repo.findAll(fields);
-        return res.status(200).send(users);
+        return res.status(HttpStatusCode.OK_200).send(users);
       })
     );
   }
@@ -90,7 +91,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
       SessionInterceptor(async (_, res) => {
         const userRepo = new UserRepo();
         const usersShort = await userRepo.findAllShort();
-        res.status(200).send(usersShort);
+        res.status(HttpStatusCode.OK_200).send(usersShort);
       })
     );
   }
@@ -106,17 +107,19 @@ export class UserController extends EntityController<IUser, UserRepo> {
         );
         if (!user) {
           return res
-            .status(404)
+            .status(HttpStatusCode.NOT_FOUND_404)
             .send(createError(`Incorrect username or password.`));
         }
 
         if (user.isDeactivated === true) {
-          return res.status(403).send(createError(`User is deactivated.`));
+          return res
+            .status(HttpStatusCode.FORBIDDEN_403)
+            .send(createError(`User is deactivated.`));
         }
 
         const sessionRepo = new SessionRepo();
         const session = await sessionRepo.createUserSession(user);
-        res.status(201).send(session);
+        res.status(HttpStatusCode.CREATED_201).send(session);
       })
     );
   }
@@ -128,7 +131,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const session: ISession = req.body;
         const sessionRepo = new SessionRepo();
         const success = await sessionRepo.deleteSession(session);
-        res.status(200).send(success);
+        res.status(HttpStatusCode.OK_200).send(success);
       })
     );
   }
@@ -142,10 +145,12 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const userRepo = new UserRepo();
         const user = await userRepo.findByUsername(credentials.username);
         if (user) {
-          return res.status(409).send(createError(`User already exists.`));
+          return res
+            .status(HttpStatusCode.CONFLICT_409)
+            .send(createError(`User already exists.`));
         }
         await userRepo.createUser(credentials);
-        return res.status(201).send(true);
+        return res.status(HttpStatusCode.CREATED_201).send(true);
       })
     );
   }

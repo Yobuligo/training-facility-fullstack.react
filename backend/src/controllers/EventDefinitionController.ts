@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { createError } from "../core/utils/createError";
 import { EventDefinitionRepo } from "../repositories/EventDefinitionRepo";
@@ -43,7 +44,7 @@ export class EventDefinitionController extends EntityController<
           );
         } else {
           const eventInstances = await this.repo.findAll(fields);
-          res.status(200).send(eventInstances);
+          res.status(HttpStatusCode.OK_200).send(eventInstances);
         }
       })
     );
@@ -84,7 +85,7 @@ export class EventDefinitionController extends EntityController<
         dateTimeSpan,
         fields
       );
-      res.status(200).send(eventDefinitions);
+      res.status(HttpStatusCode.OK_200).send(eventDefinitions);
     }
   }
 
@@ -98,7 +99,7 @@ export class EventDefinitionController extends EntityController<
     const isAdminOrYourSelf = await req.isAdminOrYourself(requestedUserId);
     if (!isAdminOrYourSelf) {
       return res
-        .status(403)
+        .status(HttpStatusCode.FORBIDDEN_403)
         .send(createError("Missing authority", "MissingAuthorityError"));
     }
 
@@ -107,6 +108,6 @@ export class EventDefinitionController extends EntityController<
       requestedUserId,
       fields
     );
-    res.status(200).send(eventDefinitions);
+    res.status(HttpStatusCode.OK_200).send(eventDefinitions);
   }
 }
