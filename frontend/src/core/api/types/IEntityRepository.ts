@@ -37,5 +37,15 @@ export interface IEntityRepository<TEntity extends IEntity>
   ): Promise<IEntitySubset<TEntity, K>[]>;
   updateAll(entities: TEntity[]): Promise<TEntity[]>;
 
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>>;
   upsert(entity: TEntity): Promise<boolean>;
+
+  upsertAll<K extends keyof TEntity>(
+    entities: TEntity[],
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>[]>;
+  upsertAll(entities: TEntity[]): Promise<TEntity[]>;
 }

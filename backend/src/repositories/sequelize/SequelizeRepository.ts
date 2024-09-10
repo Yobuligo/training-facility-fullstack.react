@@ -113,11 +113,47 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return data.map((model) => this.toJson(model, fields));
   }
 
-  async upsert(entity: TEntity): Promise<boolean> {
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>>;
+  upsert(entity: TEntity): Promise<TEntity>;
+  async upsert(entity: unknown, fields?: unknown): Promise<unknown> {
     const result = await this.model.upsert(entity as any, {
       transaction: findTransaction(),
     });
-    return result[1] ?? false;
+
+    return this.toJson(result[0], fields);
+  }
+
+  upsertAll<K extends keyof TEntity>(
+    entities: TEntity[],
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>[]>;
+  upsertAll(entities: TEntity[]): Promise<TEntity[]>;
+  async upsertAll(entities: TEntity[], fields?: unknown): Promise<unknown> {
+    if (entities.length === 0) {
+      return [];
+    }
+
+    const entity = entities[0];
+    const propNames: (keyof TEntity)[] = [];
+    for (const propName in entity) {
+      if (
+        propName !== "id" &&
+        propName !== "createdAt" &&
+        propName !== "updatedAt"
+      ) {
+        propNames.push(propName);
+      }
+    }
+
+    const data = await this.model.bulkCreate(entities as any, {
+      updateOnDuplicate: propNames,
+    });
+
+    const result = data.map((model) => this.toJson(model, fields));
+    return result;
   }
 
   /**

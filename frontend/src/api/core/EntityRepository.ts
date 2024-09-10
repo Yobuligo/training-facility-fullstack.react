@@ -73,7 +73,21 @@ export abstract class EntityRepository<TEntity extends IEntity>
     });
   }
 
-  upsert(entity: TEntity): Promise<boolean> {
+  upsert<K extends keyof TEntity>(
+    entity: TEntity,
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>>;
+  upsert(entity: TEntity): Promise<boolean>;
+  upsert(entity: unknown, fields?: unknown): Promise<unknown> {
+    throw new NotImplementedError();
+  }
+
+  upsertAll<K extends keyof TEntity>(
+    entities: TEntity[],
+    fields: K[]
+  ): Promise<IEntitySubset<TEntity, K>[]>;
+  upsertAll(entities: TEntity[]): Promise<TEntity[]>;
+  upsertAll(entities: unknown, fields?: unknown): Promise<unknown> {
     throw new NotImplementedError();
   }
 
