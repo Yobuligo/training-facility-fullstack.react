@@ -7,6 +7,9 @@
 	# Display an ErrorBoundaryPage when calling an unknown url
 	# useRequest must not call block, if the block is currently running
 	# Introduce HttpStatusCodes
+	
+- ErrorPage
+	# Clicking the Yeoljeong logo navigates to the dashboard
 
 - Event Planner
 	# Title must be mandatory. Saving must not be possible without title.
@@ -111,20 +114,21 @@
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	
-	- User Gradings
-		- Gradings can be added, saved and reloaded
+	# User Gradings
+		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 	
-- User List
-	- user must be sorted by name
-		- Currently it is not sorted, if a user was added
-		- Perhaps it should be sorted directly within the backend
+# User List
+	# user must be sorted by name
+		# Currently it is not sorted, if a user was added
+		# Perhaps it should be sorted directly within the backend
 	# Mark deactivated users
 	# Mark admin users
 	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
 	# Users can be searched
 	* Display loading spinner when searching - not required as it on clientside
+	# Bug: As admin created user is shown as normal user.
 
 # Login
 	# Deactivated user must not be logged in
