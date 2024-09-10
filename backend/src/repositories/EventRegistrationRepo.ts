@@ -1,3 +1,8 @@
+import { Transaction } from "sequelize";
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
+import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { checkNotNull } from "../core/utils/checkNotNull";
+import { db } from "../db/db";
 import { EventRegistration } from "../model/EventRegistration";
 import { User } from "../model/User";
 import { UserProfile } from "../model/UserProfile";
@@ -29,5 +34,40 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
       ],
     });
     return data.map((model) => model.toJSON());
+  }
+
+  insert<K extends keyof IEventRegistration>(
+    entity: IEntityDetails<IEventRegistration>,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventRegistration, K>>;
+  insert(
+    entity: IEntityDetails<IEventRegistration>
+  ): Promise<IEventRegistration>;
+  async insert(
+    entity: IEntityDetails<IEventRegistration>,
+    fields?: unknown
+  ): Promise<unknown> {
+    let entityRegistration: IEventRegistration | undefined = undefined;
+    await db.transaction(
+      { isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE },
+      async (transaction) => {
+        // check if user is already registered
+        const data = await this.model.findOne({
+          where: {
+            eventInstanceId: entity.eventInstanceId,
+            userId: entity.userId,
+          },
+          transaction,
+        });
+
+        if (data) {
+          entityRegistration = this.toJson(data, fields);
+        } else {
+          const data = await this.model.create(entity, { transaction });
+          entityRegistration = this.toJson(data, fields);
+        }
+      }
+    );
+    return checkNotNull(entityRegistration);
   }
 }

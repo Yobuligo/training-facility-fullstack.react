@@ -48,7 +48,7 @@
 	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
 	# Display loading spinner when register on or unregister from a training
 	# Click on event instance displays registered users
-	- User must not be registered twice on a training (check in db if user is already registered)
+	# User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
 	- Display event description on hover
 	# Bug: Race condition error when creating event instances by different users at the same moment
@@ -69,8 +69,8 @@
 	# It must not be possible to register if event instance was closed
 	# It must not be possible to unregister if event instance was closed
 	# User can be added to EventInstance manually by search and add
-	- Manually added users are added sorted
-	- Registered users are displayed in the order they registered
+	# Manually added users are added sorted
+	# Registered users are displayed in the order they registered
 	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
@@ -161,7 +161,7 @@
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
 # Check all backend endpoints and add authorization checks
-- We have to check the behavior for each REST request if it fails
+- We have to check the behavior for each REST request when it fails
 - We have to check the transmitted data for each REST request if it can be reduced to only required information
 - Edge Cases
 	- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
