@@ -195,7 +195,6 @@
         "deactivateUserQuestion": "Do you really want to deactivate user '{{username}}'?",
         "deleteUser": "Delete user",
         "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
-        "deleteGradingQuestion": "Do you really want to delete the grading?",
         "email": "Email",
         "errorUsernameRequired": "Username is required",
         "errorUsernameExists": "Username already exists",

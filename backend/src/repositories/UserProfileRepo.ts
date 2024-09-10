@@ -6,6 +6,7 @@ import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 import { findTransaction } from "./sequelize/utils/findTransaction";
 import { transaction } from "./sequelize/utils/transaction";
+import { UserGradingRepo } from "./UserGradingRepo";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
@@ -45,7 +46,11 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       }
 
       if (entity.userGradings) {
-        // await UserGrading.upsert(entity.userGradings, { transaction });
+        const userGradingRepo = new UserGradingRepo();
+        entity.userGradings.forEach(
+          (userGrading) => (userGrading.userProfileId = entity.id)
+        );
+        await userGradingRepo.upsertAll(entity.userGradings);
       }
       wasUpdated = updatedRows === 1;
     });

@@ -215,13 +215,10 @@ export const useUserViewModel = (props: IUserProps) => {
     });
   };
 
-  const onDeleteGrading = (grading: IUserGrading) => {
-    if (window.confirm(t(texts.user.deleteGradingQuestion))) {
-      setGradings((previous) => {
-        return previous.filter((item) => item.id !== grading.id);
-      });
-    }
-  };
+  const onDeleteGrading = (grading: IUserGrading) =>
+    setGradings((previous) => {
+      return previous.filter((item) => item.id !== grading.id);
+    });
 
   const onDeleteUser = () => {
     if (

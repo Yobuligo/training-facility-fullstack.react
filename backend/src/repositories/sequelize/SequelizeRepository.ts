@@ -150,6 +150,7 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
 
     const data = await this.model.bulkCreate(entities as any, {
       updateOnDuplicate: propNames,
+      transaction: findTransaction(),
     });
 
     const result = data.map((model) => this.toJson(model, fields));
