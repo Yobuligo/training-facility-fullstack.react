@@ -29,7 +29,7 @@ export const useUserProfileSectionViewModel = () => {
     return fuzzySearch.search(query, usersShort);
   };
 
-  useInitialize(() =>
+  const loadUsersShort = () =>
     loadUsersShortRequest(async () => {
       const userApi = new UserApi();
       const usersShort: IUserShort[] = await userApi.findAllShort();
@@ -52,8 +52,9 @@ export const useUserProfileSectionViewModel = () => {
         return 0;
       });
       setUsersShort(sortedUsersShort);
-    })
-  );
+    });
+
+  useInitialize(() => loadUsersShort());
 
   const createUserShort = (user: IUser): IUserShort => {
     return {
@@ -164,6 +165,9 @@ export const useUserProfileSectionViewModel = () => {
       onCancel(selectedUser);
     }
     setSelectedUser(undefined);
+
+    // reload users
+    loadUsersShort();
   };
 
   const onCancel = (user: IUser) => {
