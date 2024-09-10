@@ -8,7 +8,7 @@
 	# useRequest must not call block, if the block is currently running
 	# Introduce HttpStatusCodes
 	
-- ErrorPage
+# ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard
 
 - Event Planner
@@ -51,7 +51,7 @@
 	- User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
 	- Display event description on hover
-	- Bug: it seems that event-instances for the same date are created multiple times - when upset (insert / update) and event-instance we must check only the from and to timestamp but not everything
+	# Bug: Race condition error when creating event instances by different users at the same moment
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
@@ -74,6 +74,9 @@
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
 	- Display loading spinner when deleting user
 	- Registered users are displayed in the order they registered
+	- Trainer can be assigned to a training
+	- Assigned trainer can be deleted
+	- Assigned trainer is displayed in the calendar
 	
 - Welcome
 	# Display upcoming events of the current week
@@ -90,6 +93,7 @@
 	- Only a valid email address can be persisted
 	# Customer Id must be created and displayed
 	# Joined on must be changeable in admin mode otherwise displayed
+	# Joined on can be changed by entering values instead of using value help
 	# inputs are restricted to length of related db fields
 		# Firstname 50
 		# Lastname 50
@@ -118,6 +122,7 @@
 		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
+		# Bug: Error when entering achievedAt date manually
 	
 # User List
 	# user must be sorted by name
