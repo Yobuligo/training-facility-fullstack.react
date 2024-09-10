@@ -78,6 +78,7 @@
 	- Trainer can be assigned to a training
 	- Assigned trainer can be deleted
 	- Assigned trainer is displayed in the calendar
+	- Performance: Add indices to columns from and to of event-instances
 	
 - Welcome
 	# Display upcoming events of the current week
