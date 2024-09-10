@@ -11,6 +11,8 @@ import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
 import { List } from "../../core/services/list/List";
+import { SequelizeSynchronizer } from "./SequelizeSynchronizer";
+import { findEntityPropNames } from "./utils/findEntityPropNames";
 import { findTransaction } from "./utils/findTransaction";
 
 export abstract class SequelizeRepository<TEntity extends IEntity>
@@ -75,6 +77,18 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return this.toJson(data, fields);
   }
 
+  async synchronize(
+    entities: TEntity[],
+    where: WhereOptions<TEntity>
+  ): Promise<TEntity[]> {
+    const sequelizeSynchronizer = new SequelizeSynchronizer(this.model);
+    const synchronizedEntities = await sequelizeSynchronizer.synchronize(
+      entities,
+      where
+    );
+    return synchronizedEntities;
+  }
+
   async update(entity: TEntity): Promise<boolean> {
     const [updatedRows] = await this.model.update(entity, {
       where: { id: entity.id } as WhereOptions,
@@ -93,20 +107,9 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
       return [];
     }
 
-    const entity = entities[0];
-    const propNames: (keyof TEntity)[] = [];
-    for (const propName in entity) {
-      if (
-        propName !== "id" &&
-        propName !== "createdAt" &&
-        propName !== "updatedAt"
-      ) {
-        propNames.push(propName);
-      }
-    }
-
+    const entityPropNames = findEntityPropNames(entities[0]);
     const data = await this.model.bulkCreate(entities as any, {
-      updateOnDuplicate: propNames,
+      updateOnDuplicate: entityPropNames,
       transaction: findTransaction(),
     });
 
@@ -136,20 +139,9 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
       return [];
     }
 
-    const entity = entities[0];
-    const propNames: (keyof TEntity)[] = [];
-    for (const propName in entity) {
-      if (
-        propName !== "id" &&
-        propName !== "createdAt" &&
-        propName !== "updatedAt"
-      ) {
-        propNames.push(propName);
-      }
-    }
-
+    const entityPropNames = findEntityPropNames(entities[0]);
     const data = await this.model.bulkCreate(entities as any, {
-      updateOnDuplicate: propNames,
+      updateOnDuplicate: entityPropNames,
       transaction: findTransaction(),
     });
 

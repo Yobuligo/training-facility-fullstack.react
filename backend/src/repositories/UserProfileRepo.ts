@@ -46,11 +46,15 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       }
 
       if (entity.userGradings) {
-        const userGradingRepo = new UserGradingRepo();
+        // update user profile id
         entity.userGradings.forEach(
           (userGrading) => (userGrading.userProfileId = entity.id)
         );
-        await userGradingRepo.upsertAll(entity.userGradings);
+
+        const userGradingRepo = new UserGradingRepo();
+        await userGradingRepo.synchronize(entity.userGradings, {
+          userProfileId: entity.id,
+        });
       }
       wasUpdated = updatedRows === 1;
     });
