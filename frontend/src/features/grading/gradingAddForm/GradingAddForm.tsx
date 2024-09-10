@@ -4,7 +4,6 @@ import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { toDate } from "../../../utils/toDate";
 import styles from "./GradingAddForm.module.scss";
 import { IGradingAddFormProps } from "./IGradingAddFormProps";
 import { useGradingAddFormViewModel } from "./userGradingAddFormViewModel";
@@ -21,7 +20,6 @@ export const GradingAddForm: React.FC<IGradingAddFormProps> = (props) => {
           label={t(texts.gradingItem.achievedAt)}
           type="date"
           onChange={viewModel.onChangeAchievedAt}
-          value={toDate(viewModel.achievedAt)}
         />
 
         <LabeledSelect
