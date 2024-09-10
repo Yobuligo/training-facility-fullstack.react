@@ -3,11 +3,14 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
 import { NotSupportedError } from "../../core/errors/NotSupportedError";
+import { DateTime } from "../../core/services/date/DateTime";
 import { List } from "../../core/services/list/List";
 import { findEntityPropNames } from "./utils/findEntityPropNames";
 import { findTransaction } from "./utils/findTransaction";
 
 export class SequelizeSynchronizer<TEntity extends IEntity> {
+  private entityPropNames: (keyof TEntity)[] | undefined = undefined;
+
   constructor(
     private model: ModelStatic<Model<TEntity, IEntityDetails<TEntity>>>
   ) {}
@@ -25,15 +28,15 @@ export class SequelizeSynchronizer<TEntity extends IEntity> {
 
     // find entities, which are not persisted yet
     const insertEntities = entities.filter((entity) => {
-      const index = selectedEntities.findIndex(
+      const selectedEntity = selectedEntities.find(
         (selectedEntity) => selectedEntity.id === entity.id
       );
 
-      // if entity is already persisted, we have to update it
-      if (index !== -1) {
+      // if entity is already persisted, we have to update it, if required
+      if (selectedEntity && this.needsUpdate(entity, selectedEntity)) {
         updateEntities.push(entity);
       }
-      return index === -1;
+      return selectedEntity === undefined;
     });
 
     // find entities, which have to be deleted
@@ -74,7 +77,7 @@ export class SequelizeSynchronizer<TEntity extends IEntity> {
       return [];
     }
 
-    const entityPropNames = findEntityPropNames(entities[0]);
+    const entityPropNames = this.findEntityPropNames(entities[0]);
     if (List.isEmpty(entityPropNames)) {
       throw new NotSupportedError();
     }
@@ -113,5 +116,38 @@ export class SequelizeSynchronizer<TEntity extends IEntity> {
       updateObject[entityPropName] = entity[entityPropName];
     });
     return updateObject;
+  }
+
+  private needsUpdate(entity: TEntity, persisted: TEntity): boolean {
+    const entityPropNames = this.findEntityPropNames(entity);
+
+    for (const entityPropName of entityPropNames) {
+      const entityPropValue = entity[entityPropName];
+      const persistedPropValue = persisted[entityPropName];
+      // if one of the dates is of type date, we have to convert it to string to compare it.
+      if (
+        entityPropValue instanceof Date ||
+        persistedPropValue instanceof Date
+      ) {
+        if (
+          DateTime.toDateInstance(entityPropValue as Date).toISOString() !==
+          DateTime.toDateInstance(persistedPropValue as Date).toISOString()
+        ) {
+          return true;
+        }
+      } else {
+        if (entityPropValue !== persistedPropValue) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private findEntityPropNames(entity: TEntity): (keyof TEntity)[] {
+    if (!this.entityPropNames) {
+      this.entityPropNames = findEntityPropNames(entity);
+    }
+    return this.entityPropNames;
   }
 }

@@ -11,7 +11,6 @@ import { UserRole } from "../model/UserRole";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
 import { IUserProfile } from "../shared/model/IUserProfile";
-import { IUserRole } from "../shared/model/IUserRole";
 import { IUserShort } from "../shared/model/IUserShort";
 import { AuthRole } from "../shared/types/AuthRole";
 import { hash } from "../utils/hash";
@@ -261,64 +260,15 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         await userProfileRepo.update(entity.userProfile);
       }
 
-      // update UserRoles
-      const data = await UserRole.findAll({
-        where: { userId: entity.id },
-      });
-      const dbUserRoles = data.map((model) => model.toJSON());
-
-      await this.addNewUserRoles(entity, dbUserRoles);
-      await this.deleteObsoleteUserRoles(dbUserRoles, entity);
+      // Synchronize (insert, update, delete) UserRoles
+      if (entity.userRoles) {
+        // update user id
+        entity.userRoles.forEach((userRole) => userRole.userId === entity.id);
+        const userRoleRepo = new UserRoleRepo();
+        userRoleRepo.synchronize(entity.userRoles, { userId: entity.id });
+      }
     });
     return wasUpdated;
-  }
-
-  /**
-   * Find user roles, which are persisted but no longer assigned to the user and delete them
-   */
-  private async deleteObsoleteUserRoles(
-    dbUserRoles: IUserRole[],
-    entity: IUserSecure
-  ) {
-    const deleteUserRoles = dbUserRoles.filter(async (userRole) => {
-      const index = entity.userRoles?.findIndex(
-        (item) => item.role === userRole.role
-      );
-      return index === -1;
-    });
-
-    for (let i = 0; i < deleteUserRoles.length; i++) {
-      await UserRole.destroy({
-        where: { id: deleteUserRoles[i].id },
-        transaction: findTransaction(),
-      });
-    }
-  }
-
-  /**
-   * Find user roles, which are not persisted yet and add them
-   */
-  private async addNewUserRoles(entity: IUserSecure, dbUserRoles: IUserRole[]) {
-    const newUserRoles = entity.userRoles?.filter(async (userRole) => {
-      const index = dbUserRoles.findIndex(
-        (item) => item.role === userRole.role
-      );
-      return index === -1;
-    });
-
-    if (newUserRoles) {
-      for (let i = 0; i < newUserRoles.length; i++) {
-        await UserRole.create(
-          {
-            role: newUserRoles[i].role,
-            userId: newUserRoles[i].userId,
-          },
-          {
-            transaction: findTransaction(),
-          }
-        );
-      }
-    }
   }
 
   private async findByUsernameSecure(
