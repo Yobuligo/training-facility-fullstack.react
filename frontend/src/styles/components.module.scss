@@ -15,10 +15,12 @@
   fill: $color-disabled;
 }
 
-@mixin border($color) {
+@mixin border($color, $color-top) {
   border: 8px solid $color;
+  border-top: 8px solid $color-top;
   color: $color-secondary;
   background-color: transparentize($color, $amount: 0.95);
+  position: relative;
 }
 
 .secondaryButton {
@@ -33,41 +35,41 @@
 }
 
 .dan {
-  @include border($color-grade-dan);
+  @include border($color-grade-dan, $color-grade-dan);
 }
 
 .kup1 {
-  @include border($color-grade-kup1);
+  @include border($color-grade-kup1, $color-grade-dan);
 }
 
 .kup2 {
-  @include border($color-grade-kup2);
+  @include border($color-grade-kup2, $color-grade-kup1);
 }
 
 .kup3 {
-  @include border($color-grade-kup3);
+  @include border($color-grade-kup3, $color-grade-kup2);
 }
 
 .kup4 {
-  @include border($color-grade-kup4);
+  @include border($color-grade-kup4, $color-grade-kup3);
 }
 
 .kup5 {
-  @include border($color-grade-kup5);
+  @include border($color-grade-kup5, $color-grade-kup4);
 }
 
 .kup6 {
-  @include border($color-grade-kup6);
+  @include border($color-grade-kup6, $color-grade-kup5);
 }
 
 .kup7 {
-  @include border($color-grade-kup7);
+  @include border($color-grade-kup7, $color-grade-kup6);
 }
 
 .kup8 {
-  @include border($color-grade-kup8);
+  @include border($color-grade-kup8, $color-grade-kup7);
 }
 
 .kup9 {
-  @include border($color-grade-kup9);
+  @include border($color-grade-kup9, $color-grade-kup8);
 }
