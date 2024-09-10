@@ -63,17 +63,18 @@
 	# Registration can be closed
 	# Display confirm dialog before closing event registration
 	# Registration can be reopened
+	# Closing and opening must be considered in multiple sessions (2 sessions, 1. closes, 2. tries to registers -> registrations must fail)
 	# Display loading spinner when closing or reopening an EventInstance	
 	- It must not be possible to register on past events
 	# It must not be possible to register if event instance was closed
 	# It must not be possible to unregister if event instance was closed
 	# User can be added to EventInstance manually by search and add
 	- Manually added users are added sorted
+	- Registered users are displayed in the order they registered
 	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
 	- Display loading spinner when deleting user
-	- Registered users are displayed in the order they registered
 	- Trainer can be assigned to a training
 	- Assigned trainer can be deleted
 	- Assigned trainer is displayed in the calendar

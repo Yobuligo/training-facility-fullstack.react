@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { texts } from "../../../lib/translation/texts";
@@ -36,10 +37,12 @@ export const useEventRegistrationSectionViewModel = (
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
       const eventRegistrationApi = new EventRegistrationApi();
-      const eventRegistrations =
-        await eventRegistrationApi.findByEventInstanceId(
-          props.eventInstance.id
-        );
+      let eventRegistrations = await eventRegistrationApi.findByEventInstanceId(
+        props.eventInstance.id
+      );
+      eventRegistrations = eventRegistrations.sort((left, right) =>
+        DateTime.compare(left.createdAt, right.createdAt)
+      );
       setEventRegistrations(eventRegistrations);
     });
   };
