@@ -43,6 +43,10 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       if (entity.userBankAccount) {
         await UserBankAccount.upsert(entity.userBankAccount, { transaction });
       }
+
+      if (entity.userGradings) {
+        // await UserGrading.upsert(entity.userGradings, { transaction });
+      }
       wasUpdated = updatedRows === 1;
     });
     return wasUpdated;

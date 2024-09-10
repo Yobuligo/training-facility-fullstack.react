@@ -113,16 +113,11 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return data.map((model) => this.toJson(model, fields));
   }
 
-  upsert<K extends keyof TEntity>(
-    entity: TEntity,
-    fields: K[]
-  ): Promise<boolean>;
-  upsert(entity: TEntity): Promise<boolean>;
-  async upsert(entity: TEntity, fields?: unknown): Promise<unknown> {
+  async upsert(entity: TEntity): Promise<boolean> {
     const result = await this.model.upsert(entity as any, {
       transaction: findTransaction(),
     });
-    return result[1];
+    return result[1] ?? false;
   }
 
   /**

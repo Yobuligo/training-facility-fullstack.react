@@ -113,7 +113,8 @@
 	
 	- User Gradings
 		- Gradings can be added, saved and reloaded
-		- Gradings can be deleted
+		# Gradings can be deleted
+		# Display confirm dialog before deleting a grading
 	
 - User List
 	- user must be sorted by name
