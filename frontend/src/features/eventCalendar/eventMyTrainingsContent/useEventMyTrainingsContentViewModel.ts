@@ -26,7 +26,11 @@ export const useEventMyTrainingsContentViewModel = (
     }
 
     if (eventInstance.state === EventInstanceState.CLOSED) {
-      window.alert(t(texts.eventCalendarMyTrainings.registerOnClosed));
+      confirmDialog.show(
+        t(texts.eventCalendarMyTrainings.registerTitle),
+        t(texts.eventCalendarMyTrainings.registerOnClosed),
+        { displayCancelButton: false }
+      );
       return;
     }
 
@@ -51,7 +55,11 @@ export const useEventMyTrainingsContentViewModel = (
     }
 
     if (eventRegistration.eventInstance.state === EventInstanceState.CLOSED) {
-      window.alert(t(texts.eventCalendarMyTrainings.unregisterOnClosed));
+      confirmDialog.show(
+        t(texts.eventCalendarMyTrainings.unregisterTitle),
+        t(texts.eventCalendarMyTrainings.unregisterOnClosed),
+        { displayCancelButton: false }
+      );
       return;
     }
 

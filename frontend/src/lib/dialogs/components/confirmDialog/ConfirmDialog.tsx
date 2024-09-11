@@ -10,13 +10,25 @@ import { IConfirmDialogProps } from "./IConfirmDialogProps";
 export const ConfirmDialog: React.FC<IConfirmDialogProps> = (props) => {
   const { t } = useTranslation();
 
+  const onCancel = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    props.onCancel?.();
+    event.stopPropagation();
+  };
+
+  const onOkay = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    props.onOkay?.();
+    event.stopPropagation();
+  };
+
   const footer = (
     <div className={styles.footer}>
       <Toolbar>
-        <SecondaryButton onClick={props.onCancel}>
-          {t(texts.general.cancel)}
-        </SecondaryButton>
-        <Button onClick={props.onOkay}>{t(texts.general.ok)}</Button>
+        {props.displayCancelButton !== false && (
+          <SecondaryButton onClick={onCancel}>
+            {t(texts.general.cancel)}
+          </SecondaryButton>
+        )}
+        <Button onClick={onOkay}>{t(texts.general.ok)}</Button>
       </Toolbar>
     </div>
   );

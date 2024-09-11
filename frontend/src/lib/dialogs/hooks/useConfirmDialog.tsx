@@ -8,7 +8,6 @@ export const useConfirmDialog = () => {
   const [dialogContent, setDialogContent] = useState<ReactNode | undefined>(
     undefined
   );
-  //   let confirmDialogOptions: IConfirmDialogOptions = useMemo(() => ({}), []);
   const [confirmDialogOptions, setConfirmDialogOptions] = useState<
     IConfirmDialogOptions | undefined
   >(undefined);
@@ -33,7 +32,12 @@ export const useConfirmDialog = () => {
   const content = (
     <>
       {display && (
-        <ConfirmDialog title={title} onCancel={onCancel} onOkay={onOkay}>
+        <ConfirmDialog
+          displayCancelButton={confirmDialogOptions?.displayCancelButton}
+          onCancel={onCancel}
+          onOkay={onOkay}
+          title={title}
+        >
           {dialogContent}
         </ConfirmDialog>
       )}
@@ -43,12 +47,11 @@ export const useConfirmDialog = () => {
   const show = (
     title: string,
     content: ReactNode,
-    options: IConfirmDialogOptions
+    options?: IConfirmDialogOptions
   ) => {
     setTitle(title);
     setDialogContent(content);
     setConfirmDialogOptions(options);
-    // confirmDialogOptions = options;
     setDisplay(true);
   };
 

@@ -18,29 +18,32 @@ export const EventMyTrainingsContent: React.FC<
       className={styles.eventMyTrainingsContent}
       eventDefinition={props.event.eventDefinition}
     >
-      {props.isRegistered === true ? (
-        <SpinnerButton
-          className={style(styles.registerButton, styles.unregisterButton)}
-          displaySpinner={viewModel.isUnregisterRequestProcessing}
-          onClick={(clickEvent) => {
-            viewModel.onUnregister(props.event);
-            clickEvent.stopPropagation();
-          }}
-        >
-          {t(texts.myTrainingsContent.unregister)}
-        </SpinnerButton>
-      ) : (
-        <SpinnerButton
-          className={styles.registerButton}
-          displaySpinner={viewModel.isRegisterRequestProcessing}
-          onClick={(clickEvent) => {
-            viewModel.onRegister(props.event);
-            clickEvent.stopPropagation();
-          }}
-        >
-          {t(texts.myTrainingsContent.register)}
-        </SpinnerButton>
-      )}
+      <>
+        {viewModel.confirmDialog.content}
+        {props.isRegistered === true ? (
+          <SpinnerButton
+            className={style(styles.registerButton, styles.unregisterButton)}
+            displaySpinner={viewModel.isUnregisterRequestProcessing}
+            onClick={(clickEvent) => {
+              viewModel.onUnregister(props.event);
+              clickEvent.stopPropagation();
+            }}
+          >
+            {t(texts.myTrainingsContent.unregister)}
+          </SpinnerButton>
+        ) : (
+          <SpinnerButton
+            className={styles.registerButton}
+            displaySpinner={viewModel.isRegisterRequestProcessing}
+            onClick={(clickEvent) => {
+              viewModel.onRegister(props.event);
+              clickEvent.stopPropagation();
+            }}
+          >
+            {t(texts.myTrainingsContent.register)}
+          </SpinnerButton>
+        )}
+      </>
     </EventContent>
   );
 };

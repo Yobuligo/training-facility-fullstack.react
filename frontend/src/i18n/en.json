@@ -29,7 +29,9 @@
         "users": "Users"
     },
     "eventCalendarMyTrainings": {
+        "registerTitle": "Register",
         "registerOnClosed": "Registering is not possible. Registration is closed.",
+        "unregisterTitle": "Unregister",
         "unregisterOnClosed": "Unregistering is not possible. Registration is closed."
     },
     "eventDefinitionDetails": {
