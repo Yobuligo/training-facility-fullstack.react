@@ -9,6 +9,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
+import { NewPassword } from "../../newPassword/NewPassword";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
@@ -19,8 +20,42 @@ export const User: React.FC<IUserProps> = (props) => {
   const [user] = useUser();
   const { t } = useTranslation();
 
+  const adminModeButtons = (
+    <>
+      <Button disabled={viewModel.displayMode}>
+        {t(texts.user.sendInvitation)}
+      </Button>
+      <Button disabled={viewModel.displayMode}>
+        {t(texts.user.generateNewPassword)}
+      </Button>
+
+      {/* current user must not be deactivatable */}
+      {user.id !== props.user.id && (
+        <Button
+          disabled={viewModel.displayMode}
+          onClick={viewModel.onToggleIsDeactivated}
+        >
+          {viewModel.isDeactivated
+            ? t(texts.user.activate)
+            : t(texts.user.deactivate)}
+        </Button>
+      )}
+
+      {/* current user must not be deletable */}
+      {user.id !== props.user.id && (
+        <Button
+          disabled={viewModel.displayMode}
+          onClick={viewModel.onDeleteUser}
+        >
+          {t(texts.user.deleteUser)}
+        </Button>
+      )}
+    </>
+  );
+
   return (
     <div className={styles.user}>
+      <NewPassword />
       <ChangeableForm
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}
@@ -236,48 +271,25 @@ export const User: React.FC<IUserProps> = (props) => {
             </div>
           )}
           {props.isAdminMode && (
-            <>
-              <div>
-                <LabeledSelect
-                  disabled={viewModel.displayMode}
-                  label={t(texts.user.isAdmin)}
-                  options={viewModel.isAdminOptions}
-                  onSelect={viewModel.onIsAdminChange}
-                  selected={viewModel.selectedIsAdminOption}
-                />
-              </div>
-              <Toolbar>
-                <Button disabled={viewModel.displayMode}>
-                  {t(texts.user.sendInvitation)}
-                </Button>
-                <Button disabled={viewModel.displayMode}>
-                  {t(texts.user.generateNewPassword)}
-                </Button>
-
-                {/* current user must not be deactivatable */}
-                {user.id !== props.user.id && (
-                  <Button
-                    disabled={viewModel.displayMode}
-                    onClick={viewModel.onToggleIsDeactivated}
-                  >
-                    {viewModel.isDeactivated
-                      ? t(texts.user.activate)
-                      : t(texts.user.deactivate)}
-                  </Button>
-                )}
-
-                {/* current user must not be deletable */}
-                {user.id !== props.user.id && (
-                  <Button
-                    disabled={viewModel.displayMode}
-                    onClick={viewModel.onDeleteUser}
-                  >
-                    {t(texts.user.deleteUser)}
-                  </Button>
-                )}
-              </Toolbar>
-            </>
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.isAdmin)}
+              options={viewModel.isAdminOptions}
+              onSelect={viewModel.onIsAdminChange}
+              selected={viewModel.selectedIsAdminOption}
+            />
           )}
+          <Toolbar>
+            {props.isAdminMode && adminModeButtons}
+            {!props.isAdminMode && (
+              <Button
+                disabled={viewModel.displayMode}
+                onClick={viewModel.onChangePassword}
+              >
+                {t(texts.user.changePassword)}
+              </Button>
+            )}
+          </Toolbar>
         </UserProfileGroup>
       </ChangeableForm>
     </div>

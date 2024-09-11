@@ -258,6 +258,10 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
+  const onChangePassword = () => {
+    console.log("request change password");
+  };
+
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||
     isNotInitial(bankAccountIBAN) ||
@@ -450,6 +454,7 @@ export const useUserViewModel = (props: IUserProps) => {
     phone,
     postalCode,
     profileDetailsSettings,
+    onChangePassword,
     selectedIsAdminOption,
     selectedGenderOption,
     selectedTariffOption,

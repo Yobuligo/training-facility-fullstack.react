@@ -170,6 +170,13 @@
         "register": "Register",
         "unregister": "Unregister"
     },
+    "newPassword": {
+        "changePassword": "Change password",
+        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "passwordsNotIdentical": "Your new passwords are not identical"
+    },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
         "children": "Children",
@@ -211,6 +218,7 @@
         "personalInformation": "Personal Information",
         "phone": "Phone",
         "postalCode": "Postal Code",
+        "changePassword": "Change password",
         "sendInvitation": "Send invitation",
         "street": "Street",
         "tariff": "Tariff",

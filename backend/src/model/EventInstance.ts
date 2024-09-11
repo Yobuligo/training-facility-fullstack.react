@@ -13,16 +13,10 @@ const eventInstance: ModelStatic<
     type: DataTypes.STRING(10),
   },
   description: DataTypes.STRING(100),
-  from: {
-    allowNull: false,
-    type: DataTypes.DATE,
-  },
+  from: DataTypes.DATE,
   state: DataTypes.INTEGER,
   title: DataTypes.STRING(100),
-  to: {
-    allowNull: false,
-    type: DataTypes.DATE,
-  },
+  to: DataTypes.DATE,
 });
 
 export class EventInstance extends eventInstance {}

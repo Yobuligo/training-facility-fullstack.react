@@ -11,7 +11,7 @@ import { useLogout } from "./useLogout";
 export const useRequest = (): [
   send: (
     block: () => Promise<void>,
-    errorHandler?: (error: any) => string
+    errorHandler?: (error: any) => boolean
   ) => Promise<void>,
   isProcessing: boolean
 ] => {
@@ -35,7 +35,7 @@ export const useRequest = (): [
         toast.error(t(texts.general.errorMissingAuthority));
       } else {
         // unknown error navigate to error boundary page
-        console.log("Unknown error due REST request.");
+        console.log("Unknown error due to REST request.");
         navigate(AppRoutes.error.toPath());
       }
     },
@@ -45,7 +45,7 @@ export const useRequest = (): [
   const send = useCallback(
     async (
       block: () => Promise<void>,
-      errorHandler?: (error: any) => string
+      errorHandler?: (error: any) => boolean
     ) => {
       // leave, if request is already running,
       if (isProcessing === true) {
@@ -57,21 +57,19 @@ export const useRequest = (): [
         await block();
       } catch (error) {
         // does an error handler handles the error?
-        if (errorHandler) {
-          toast.error(errorHandler(error));
-        } else {
+        if (!errorHandler || !errorHandler(error)) {
           if (isError(error)) {
             handleError(error);
           } else {
             // unknown error navigate to error boundary page
-            console.log("Unknown error due REST request.");
+            console.log("Unknown error due to REST request.");
             navigate(AppRoutes.error.toPath());
           }
         }
       }
       setIsProcessing(false);
     },
-    [handleError, isProcessing, navigate, toast]
+    [handleError, isProcessing, navigate]
   );
 
   return [send, isProcessing];
