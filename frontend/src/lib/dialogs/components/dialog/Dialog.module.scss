@@ -1,5 +1,5 @@
-@use "../../../styles/colors.module.scss";
-@use "../../../styles/dimensions.module.scss";
+@use "../../../../styles/colors.module.scss";
+@use "../../../../styles/dimensions.module.scss";
 
 .container {
   display: flex;
@@ -18,6 +18,7 @@
   background-color: white;
   box-shadow: colors.$box-shadow;
   border: 1px solid rgba(128, 128, 128, 0.178);
+  width: 20rem;
 }
 
 .header {

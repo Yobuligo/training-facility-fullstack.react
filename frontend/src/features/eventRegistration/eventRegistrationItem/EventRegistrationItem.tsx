@@ -17,6 +17,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
 
   return (
     <Card className={styles.eventRegistrationItem}>
+      {viewModel.confirmDialog.content}
       <div>{viewModel.fullName}</div>
       {props.eventRegistration.manuallyAdded ? (
         <Toolbar>

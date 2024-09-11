@@ -1,4 +1,3 @@
-import { ConfirmDialog } from "../../../components/dialog/confirmDialog/ConfirmDialog";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { texts } from "../../../lib/translation/texts";
@@ -23,9 +22,6 @@ export const EventRegistrationSection: React.FC<
         <PageSpinner />
       ) : (
         <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
-          <ConfirmDialog title="Delete User">
-            Do you really want to delete the user?
-          </ConfirmDialog>
           <div className={styles.closeButton}>
             {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
               <SecondaryButton

@@ -1,8 +1,8 @@
-import { texts } from "../../../lib/translation/texts";
-import { useTranslation } from "../../../lib/translation/useTranslation";
-import { Button } from "../../button/Button";
-import { SecondaryButton } from "../../secondaryButton/SecondaryButton";
-import { Toolbar } from "../../toolbar/Toolbar";
+import { Button } from "../../../../components/button/Button";
+import { SecondaryButton } from "../../../../components/secondaryButton/SecondaryButton";
+import { Toolbar } from "../../../../components/toolbar/Toolbar";
+import { texts } from "../../../translation/texts";
+import { useTranslation } from "../../../translation/useTranslation";
 import { ModalDialog } from "../modalDialog/ModalDialog";
 import styles from "./ConfirmDialog.module.scss";
 import { IConfirmDialogProps } from "./IConfirmDialogProps";

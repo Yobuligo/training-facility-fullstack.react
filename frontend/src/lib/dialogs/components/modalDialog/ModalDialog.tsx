@@ -1,4 +1,4 @@
-import { Backdrop } from "../../backdrop/Backdrop";
+import { Backdrop } from "../backdrop/Backdrop";
 import { Dialog } from "../dialog/Dialog";
 import { IModalDialogProps } from "./IModalDialogProps";
 
