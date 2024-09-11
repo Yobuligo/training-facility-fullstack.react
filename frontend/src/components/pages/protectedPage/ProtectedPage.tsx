@@ -7,8 +7,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useLogout } from "../../../lib/userSession/hooks/useLogout";
 import { useSession } from "../../../lib/userSession/hooks/useSession";
 import { AppRoutes } from "../../../routes/AppRoutes";
-import colors from "../../../styles/colors.module.scss";
-import { Spinner } from "../../spinner/Spinner";
+import { PageSpinner } from "../../pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
 import { PageHeader } from "../pageHeader/PageHeader";
@@ -55,7 +54,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
         </PageHeader>
         {displaySpinner ? (
           <div className={styles.spinner}>
-            <Spinner color={colors.colorSecondary} />
+            <PageSpinner />
           </div>
         ) : (
           <div>{props.children}</div>

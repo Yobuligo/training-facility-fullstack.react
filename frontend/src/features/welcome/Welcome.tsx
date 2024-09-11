@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../api/EventInstanceApi";
-import { Spinner } from "../../components/spinner/Spinner";
+import { PageSpinner } from "../../components/pageSpinner/PageSpinner";
 import { DateTime } from "../../core/services/date/DateTime";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
@@ -48,7 +48,7 @@ export const Welcome: React.FC = () => {
 
       <p>{t(texts.welcome.explanation)}</p>
       {isLoadEventInstancesRequestProcessing ? (
-        <Spinner />
+        <PageSpinner />
       ) : (
         <>
           {isInitial(eventInstanceItemModels) ? (

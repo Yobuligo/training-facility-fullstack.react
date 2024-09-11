@@ -1,5 +1,5 @@
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
-import { Spinner } from "../../../components/spinner/Spinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
@@ -19,7 +19,7 @@ export const EventRegistrationSection: React.FC<
   return (
     <>
       {viewModel.isLoadEventRegistrationRequestProcessing ? (
-        <Spinner />
+        <PageSpinner />
       ) : (
         <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
           <div className={styles.closeButton}>

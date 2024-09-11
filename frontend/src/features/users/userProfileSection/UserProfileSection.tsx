@@ -1,8 +1,7 @@
 import { Button } from "../../../components/button/Button";
-import { Spinner } from "../../../components/spinner/Spinner";
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import colors from "../../../styles/colors.module.scss";
 import { Search } from "../../search/Search";
 import { UserDetails } from "../userDetails/UserDetails";
 import { UserProfileList } from "../userProfileList/UserProfileList";
@@ -40,7 +39,7 @@ export const UserProfileSection: React.FC = () => {
           {viewModel.isLoadUsersShortRequestProcessing ||
           viewModel.isLoadUserRequestProcessing ||
           viewModel.isInsertUserRequestProcessing ? (
-            <Spinner color={colors.colorSecondary} />
+            <PageSpinner />
           ) : (
             <UserProfileList
               onSelect={viewModel.onSelect}

@@ -1,4 +1,4 @@
-import { Spinner } from "../../components/spinner/Spinner";
+import { PageSpinner } from "../../components/pageSpinner/PageSpinner";
 import { Error } from "../error/Error";
 import { User } from "../users/user/User";
 import { useMyProfileViewModel } from "./useMyProfileViewModel";
@@ -9,13 +9,16 @@ export const MyProfile: React.FC = () => {
   return (
     <div>
       {viewModel.error && <Error message={viewModel.error} />}
-      {viewModel.isLoadUserProfileRequestProcessing && <Spinner />}
-      {viewModel.userProfile && (
-        <User
-          isAdminMode={false}
-          onChange={viewModel.onChange}
-          user={viewModel.userProfile!}
-        />
+      {viewModel.isLoadUserProfileRequestProcessing ? (
+        <PageSpinner />
+      ) : (
+        viewModel.userProfile && (
+          <User
+            isAdminMode={false}
+            onChange={viewModel.onChange}
+            user={viewModel.userProfile!}
+          />
+        )
       )}
     </div>
   );
