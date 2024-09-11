@@ -1,5 +1,6 @@
 @use "../../../../styles/colors.module.scss";
 @use "../../../../styles/dimensions.module.scss";
+@use "../../../../styles/mixins.scss";
 
 .container {
   display: flex;
@@ -19,6 +20,10 @@
   box-shadow: colors.$box-shadow;
   border: 1px solid rgba(128, 128, 128, 0.178);
   width: 20rem;
+
+  @include mixins.medium-screen {
+    width: 30rem;
+  }
 }
 
 .header {
