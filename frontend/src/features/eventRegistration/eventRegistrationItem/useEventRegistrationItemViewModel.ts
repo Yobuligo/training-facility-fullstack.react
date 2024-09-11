@@ -51,15 +51,12 @@ export const useEventRegistrationItemViewModel = (
     }
   };
 
-  const onDelete = () => {
+  const onDelete = () =>
     confirmDialog.show(
-      "Delete User",
+      t(texts.eventRegistrationItem.deleteTitle),
       t(texts.eventRegistrationItem.deleteQuestion, { user: fullName }),
-      () => {
-        props.onDelete?.(props.eventRegistration);
-      }
+      () => props.onDelete?.(props.eventRegistration)
     );
-  };
 
   return {
     confirmDialog,

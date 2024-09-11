@@ -1,21 +1,23 @@
+import { useConfirmDialog } from "../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { IChangeableFormProps } from "./IChangeableFormProps";
 
 export const useChangeableFormViewModel = (props: IChangeableFormProps) => {
   const { t } = useTranslation();
+  const confirmDialog = useConfirmDialog();
+
   const onCancel = () => {
     props.setDisplayMode(true);
     props.onCancel?.();
   };
 
-  const onDelete = () => {
-    if (
-      window.confirm(props.deleteQuestion ?? t(texts.general.deleteQuestion))
-    ) {
-      props.onDelete?.();
-    }
-  };
+  const onDelete = () =>
+    confirmDialog.show(
+      t(texts.general.deleteTitle),
+      t(texts.general.deleteQuestion),
+      () => props.onDelete?.()
+    );
 
   const onSave = async () => {
     try {
@@ -29,5 +31,5 @@ export const useChangeableFormViewModel = (props: IChangeableFormProps) => {
 
   const onToggleMode = () => props.setDisplayMode((previous) => !previous);
 
-  return { onCancel, onDelete, onToggleMode, onSave };
+  return { confirmDialog, onCancel, onDelete, onToggleMode, onSave };
 };

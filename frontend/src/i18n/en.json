@@ -43,6 +43,7 @@
     },
     "eventRegistrationItem": {
         "deleteQuestion": "Do you really want to delete '{{user}}' from this event?",
+        "deleteTitle": "Delete user",
         "missing": "Missing",
         "present": "Present"
     },
@@ -55,13 +56,15 @@
     "eventRegistrationSection": {
         "checkInUsers": "Check-in registered users",
         "close": "Close registration",
-        "open": "Reopen registration",
-        "questionCloseRegistration": "Do you really want to close the registration? No other user can register or unregister anymore."
+        "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",
+        "closeRegistrationTitle": "Close registration",
+        "open": "Reopen registration"
     },
     "general": {
         "cancel": "Cancel",
         "delete": "Delete",
         "deleteQuestion": "Do you really want to delete?",
+        "deleteTitle": "Delete",
         "edit": "Edit",
         "errorUnknownDueREST": "Unknown error while sending REST request.",
         "errorMissingAuthority": "Sorry, you are not authorized for this action.",
@@ -184,6 +187,7 @@
     "user": {
         "activate": "Activate",
         "activateUserQuestion": "Do you really want to activate user '{{username}}'?",
+        "activateUserTitle": "Activate user",
         "address": "Address",
         "bank": "Bank",
         "bankAccountOwner": "Account owner",
@@ -193,9 +197,11 @@
         "birthday": "Birthday",
         "city": "City",
         "deactivate": "Deactivate",
-        "deactivateUserQuestion": "Do you really want to deactivate user '{{username}}'?",
+        "deactivateUserQuestion": "Do you really want to deactivate the user '{{username}}'? He won't be able to login anymore.",
+        "deactivateUserTitle": "Deactivate user",
         "deleteUser": "Delete user",
         "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
+        "deleteUserTitle": "Delete user",
         "email": "Email",
         "errorUsernameRequired": "Username is required",
         "errorUsernameExists": "Username already exists",

@@ -18,6 +18,7 @@ export const EventRegistrationSection: React.FC<
 
   return (
     <>
+      {viewModel.confirmDialog.content}
       {viewModel.isLoadEventRegistrationRequestProcessing ? (
         <PageSpinner />
       ) : (
