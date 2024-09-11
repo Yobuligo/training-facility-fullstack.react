@@ -1,0 +1,40 @@
+@use "../../styles/colors.module.scss";
+@use "../../styles/dimensions.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dialog {
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  box-shadow: colors.$box-shadow;
+  border: 1px solid rgba(128, 128, 128, 0.178);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: colors.$color-primary;
+  justify-content: center;
+  align-items: center;
+  color: colors.$color-copy;
+  height: 3rem;
+  font-size: large;
+  font-weight: 600;
+}
+
+.body {
+  padding: dimensions.$negative-space;
+}
+
+.footer {
+}
