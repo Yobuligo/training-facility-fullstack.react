@@ -186,7 +186,7 @@
     },
     "user": {
         "activate": "Activate",
-        "activateUserQuestion": "Do you really want to activate user '{{username}}'?",
+        "activateUserQuestion": "Do you really want to activate the user '{{username}}'?",
         "activateUserTitle": "Activate user",
         "address": "Address",
         "bank": "Bank",
@@ -200,7 +200,7 @@
         "deactivateUserQuestion": "Do you really want to deactivate the user '{{username}}'? He won't be able to login anymore.",
         "deactivateUserTitle": "Deactivate user",
         "deleteUser": "Delete user",
-        "deleteUserQuestion": "Do you really want to delete user '{{username}}'?",
+        "deleteUserQuestion": "Do you really want to delete the user '{{username}}'?",
         "deleteUserTitle": "Delete user",
         "email": "Email",
         "errorUsernameRequired": "Username is required",
