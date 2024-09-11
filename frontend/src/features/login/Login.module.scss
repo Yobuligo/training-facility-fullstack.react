@@ -1,20 +1,10 @@
 @import "../../styles/dimensions.module.scss";
 @import "../../styles/colors.module.scss";
 @import "../../styles/mixins.scss";
+@import "../../styles/components.module.scss";
 
 .login {
-  margin-top: 10rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20rem;
-
-  @include medium-screen {
-    width: 25rem;
-  }
-
-  @include large-screen {
-    width: 30rem;
-  }
+  @extend .preLoginLayout;
 }
 
 .loginCard {
@@ -36,6 +26,7 @@
   outline: none;
   color: white;
   justify-content: right;
+
   &:hover {
     cursor: pointer;
   }

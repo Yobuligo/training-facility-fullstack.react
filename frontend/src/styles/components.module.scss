@@ -27,6 +27,7 @@
   background-color: transparent;
   outline: $color-primary solid 1px;
   color: $color-primary;
+
   &:hover {
     background-color: transparent;
     outline: $color-primary solid 1px;
@@ -72,4 +73,20 @@
 
 .kup9 {
   @include border($color-grade-kup9, $color-grade-kup8);
+}
+
+
+.preLoginLayout {
+  margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20rem;
+
+  @include medium-screen {
+    width: 25rem;
+  }
+
+  @include large-screen {
+    width: 30rem;
+  }
 }

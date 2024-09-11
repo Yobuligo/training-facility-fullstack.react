@@ -10,6 +10,9 @@ export const useNewPasswordViewModel = (props: INewPasswordProps) => {
   const [newConfirmPassword, setNewConfirmPassword] = useState("");
   const [showNewConfirmPasswordError, setShowNewConfirmPasswordError] =
     useState(false);
+  const [changePasswordError, setChangePasswordError] = useState<
+    string | undefined
+  >(undefined);
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
     useRequest();
 
@@ -43,6 +46,7 @@ export const useNewPasswordViewModel = (props: INewPasswordProps) => {
     );
 
   return {
+    changePasswordError,
     confirmButtonDisabled,
     displaySpinner: isChangePasswordRequestProcessing,
     showNewConfirmPasswordError,

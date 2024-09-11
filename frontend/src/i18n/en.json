@@ -175,7 +175,8 @@
         "confirmNewPassword": "Confirm new password",
         "currentPassword": "Current password",
         "newPassword": "New password",
-        "passwordsNotIdentical": "Your new passwords are not identical"
+        "passwordsNotIdentical": "Your new passwords are not identical",
+        "title": "Change password"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
