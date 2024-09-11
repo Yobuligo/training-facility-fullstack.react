@@ -1,9 +1,6 @@
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useState } from "react";
 import { ConfirmDialog } from "../components/confirmDialog/ConfirmDialog";
-
-interface IHandlerTray {
-  handler: (() => void) | undefined;
-}
+import { IConfirmDialogOptions } from "../components/confirmDialog/IConfirmDialogOptions";
 
 export const useConfirmDialog = () => {
   const [display, setDisplay] = useState(false);
@@ -11,12 +8,10 @@ export const useConfirmDialog = () => {
   const [dialogContent, setDialogContent] = useState<ReactNode | undefined>(
     undefined
   );
-  let dialogOnOkay: IHandlerTray = useMemo(
-    () => ({
-      handler: undefined,
-    }),
-    []
-  );
+  //   let confirmDialogOptions: IConfirmDialogOptions = useMemo(() => ({}), []);
+  const [confirmDialogOptions, setConfirmDialogOptions] = useState<
+    IConfirmDialogOptions | undefined
+  >(undefined);
 
   const reset = () => {
     setTitle("");
@@ -27,7 +22,7 @@ export const useConfirmDialog = () => {
   const onCancel = () => reset();
 
   const onOkay = () => {
-    dialogOnOkay.handler?.();
+    confirmDialogOptions?.onOkay?.();
     reset();
   };
 
@@ -45,10 +40,15 @@ export const useConfirmDialog = () => {
     </>
   );
 
-  const show = (title: string, content: ReactNode, onOkay?: () => void) => {
+  const show = (
+    title: string,
+    content: ReactNode,
+    options: IConfirmDialogOptions
+  ) => {
     setTitle(title);
     setDialogContent(content);
-    dialogOnOkay.handler = onOkay;
+    setConfirmDialogOptions(options);
+    // confirmDialogOptions = options;
     setDisplay(true);
   };
 

@@ -111,10 +111,12 @@ export const useEventRegistrationSectionViewModel = (
     confirmDialog.show(
       t(texts.eventRegistrationSection.closeRegistrationTitle),
       t(texts.eventRegistrationSection.closeRegistrationQuestion),
-      () => {
-        props.eventInstance.state = EventInstanceState.CLOSED;
-        setEventInstanceState(EventInstanceState.CLOSED);
-        updateEventInstance();
+      {
+        onOkay: () => {
+          props.eventInstance.state = EventInstanceState.CLOSED;
+          setEventInstanceState(EventInstanceState.CLOSED);
+          updateEventInstance();
+        },
       }
     );
 

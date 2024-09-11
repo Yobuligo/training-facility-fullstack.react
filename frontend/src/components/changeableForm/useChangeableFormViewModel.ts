@@ -16,7 +16,9 @@ export const useChangeableFormViewModel = (props: IChangeableFormProps) => {
     confirmDialog.show(
       t(texts.general.deleteTitle),
       t(texts.general.deleteQuestion),
-      () => props.onDelete?.()
+      {
+        onOkay: () => props.onDelete?.(),
+      }
     );
 
   const onSave = async () => {

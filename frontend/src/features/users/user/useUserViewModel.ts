@@ -226,21 +226,27 @@ export const useUserViewModel = (props: IUserProps) => {
     confirmDialog.show(
       t(texts.user.deleteUserTitle),
       t(texts.user.deleteUserQuestion, { username: props.user.username }),
-      () => props.onDelete?.(props.user)
+      {
+        onOkay: () => props.onDelete?.(props.user),
+      }
     );
 
   const onActivate = () =>
     confirmDialog.show(
       t(texts.user.activateUserTitle),
       t(texts.user.activateUserQuestion, { username: props.user.username }),
-      () => props.onActivate?.(props.user)
+      {
+        onOkay: () => props.onActivate?.(props.user),
+      }
     );
 
   const onDeactivate = () =>
     confirmDialog.show(
       t(texts.user.deactivateUserTitle),
       t(texts.user.deactivateUserQuestion, { username: props.user.username }),
-      () => props.onDeactivate?.(props.user)
+      {
+        onOkay: () => props.onDeactivate?.(props.user),
+      }
     );
 
   const onToggleIsDeactivated = () => {
