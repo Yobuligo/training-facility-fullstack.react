@@ -1,0 +1,8 @@
+@use "../../../styles/dimensions.module.scss";
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  padding: dimensions.$negative-space;
+}
