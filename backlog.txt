@@ -137,6 +137,11 @@
 	- User can be forced to change his password
 		- An admin can mark a user to change his password
 		- With the next backend request an error thrown to trigger changing the password
+		
+	# Change password
+		# The user must be able to change his password
+		# The salt must be changed with the password
+		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
 	
 # User List
 	# Display loading spinner, when loading users
