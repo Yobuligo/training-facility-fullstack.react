@@ -2,7 +2,8 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { createIdType } from "./core/createIdType";
-import { IUserSecure } from "./IUserSecure";
+import { SequelizeModel } from "./core/SequelizeModel";
+import { IUserSecure } from "./types/IUserSecure";
 
 const user: ModelStatic<Model<IUserSecure, IEntityDetails<IUserSecure>>> =
   db.define(
@@ -29,4 +30,4 @@ const user: ModelStatic<Model<IUserSecure, IEntityDetails<IUserSecure>>> =
     }
   );
 
-export class User extends user {}
+export class User extends SequelizeModel(user, () => {}) {}

@@ -3,6 +3,7 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserGrading } from "../shared/model/IUserGrading";
 import { createIdType } from "./core/createIdType";
+import { SequelizeModel } from "./core/SequelizeModel";
 import { UserProfile } from "./UserProfile";
 
 const userGrading: ModelStatic<
@@ -14,13 +15,13 @@ const userGrading: ModelStatic<
   grade: DataTypes.INTEGER,
 });
 
-export class UserGrading extends userGrading {}
-
-UserGrading.belongsTo(UserProfile, { onDelete: "CASCADE" });
-UserProfile.hasMany(UserGrading, {
-  as: "userGradings",
-  foreignKey: {
-    name: "userProfileId",
-    allowNull: false,
-  },
-});
+export class UserGrading extends SequelizeModel(userGrading, () => {
+  UserGrading.belongsTo(UserProfile, { onDelete: "CASCADE" });
+  UserProfile.hasMany(UserGrading, {
+    as: "userGradings",
+    foreignKey: {
+      name: "userProfileId",
+      allowNull: false,
+    },
+  });
+}) {}

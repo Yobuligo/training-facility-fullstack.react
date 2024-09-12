@@ -4,30 +4,11 @@ import { EventInstanceController } from "./controllers/EventInstanceController";
 import { EventRegistrationController } from "./controllers/EventRegistrationController";
 import { UserController } from "./controllers/UserController";
 import { UserProfileController } from "./controllers/UserProfileController";
-import { EventDefinition } from "./model/EventDefinition";
-import { EventInstance } from "./model/EventInstance";
-import { EventRegistration } from "./model/EventRegistration";
-import { Session } from "./model/Session";
-import { User } from "./model/User";
-import { UserBankAccount } from "./model/UserBankAccount";
-import { UserGrading } from "./model/UserGrading";
-import { UserProfile } from "./model/UserProfile";
-import { UserRole } from "./model/UserRole";
+import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
 
 const initialize = async () => {
-  const alter: boolean = false;
-  Session.sync({ alter: alter });
-  User.sync({ alter: alter });
-  UserProfile.sync({ alter: alter });
-  UserRole.sync({ alter: alter });
-  UserGrading.sync({ alter: alter });
-  UserBankAccount.sync({ alter: alter });
-
-  EventDefinition.sync({ alter: alter });
-  EventInstance.sync({ alter: alter });
-  EventRegistration.sync({ alter: alter });
-
+  await initializeModels(false);
   createRootUser();
 };
 

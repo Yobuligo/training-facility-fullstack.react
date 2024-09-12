@@ -2,8 +2,9 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserProfile } from "../shared/model/IUserProfile";
-import { User } from "./User";
 import { createIdType } from "./core/createIdType";
+import { SequelizeModel } from "./core/SequelizeModel";
+import { User } from "./User";
 
 const userProfile: ModelStatic<
   Model<IUserProfile, IEntityDetails<IUserProfile>>
@@ -30,10 +31,10 @@ const userProfile: ModelStatic<
   joinedOn: DataTypes.DATE,
 });
 
-export class UserProfile extends userProfile {}
-
-UserProfile.belongsTo(User, { onDelete: "CASCADE" });
-User.hasOne(UserProfile, {
-  as: "userProfile",
-  foreignKey: "userId",
-});
+export class UserProfile extends SequelizeModel(userProfile, () => {
+  UserProfile.belongsTo(User, { onDelete: "CASCADE" });
+  User.hasOne(UserProfile, {
+    as: "userProfile",
+    foreignKey: "userId",
+  });
+}) {}
