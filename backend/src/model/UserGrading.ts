@@ -2,7 +2,7 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserGrading } from "../shared/model/IUserGrading";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
 import { UserProfile } from "./UserProfile";
 
 const userGrading: ModelStatic<

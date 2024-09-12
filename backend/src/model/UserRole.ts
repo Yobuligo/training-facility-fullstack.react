@@ -2,7 +2,7 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserRole } from "../shared/model/IUserRole";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
 import { User } from "./User";
 
 const userRole: ModelStatic<Model<IUserRole, IEntityDetails<IUserRole>>> =

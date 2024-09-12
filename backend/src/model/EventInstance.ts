@@ -2,7 +2,7 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IEventInstance } from "../shared/model/IEventInstance";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
 import { EventDefinition } from "./EventDefinition";
 
 const eventInstance: ModelStatic<

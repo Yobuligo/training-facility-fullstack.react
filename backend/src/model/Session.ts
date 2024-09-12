@@ -2,7 +2,7 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { ISession } from "../shared/model/ISession";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
 import { User } from "./User";
 
 export const Session: ModelStatic<Model<ISession, IEntityDetails<ISession>>> =

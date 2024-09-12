@@ -3,7 +3,7 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { User } from "./User";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
 
 const userProfile: ModelStatic<
   Model<IUserProfile, IEntityDetails<IUserProfile>>
