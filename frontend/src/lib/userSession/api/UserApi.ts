@@ -20,7 +20,7 @@ export class UserApi extends EntityRepository<IUser> {
     userId: string,
     currentPassword: string,
     newPassword: string
-  ) {
+  ): Promise<boolean> {
     return RESTApi.post(`${this.url}/${userId}/changePassword`, {
       urlParams: {
         currentPassword,

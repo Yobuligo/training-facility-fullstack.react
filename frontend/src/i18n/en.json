@@ -176,6 +176,7 @@
         "currentPassword": "Current password",
         "errorCurrentPasswordInvalid": "The current password is not correct. Re-enter your current password.",
         "errorNewPasswordNotPolicyConfirm": "The new password password does not comply with the password policy. Ensure to follow the policy stated under 'Policy requirements'",
+        "errorNotLoggedIn": "Password can only be changed when logged in. Log in first",
         "newPassword": "New password",
         "passwordsNotIdentical": "Your new passwords are not identical",
         "title": "Change password"

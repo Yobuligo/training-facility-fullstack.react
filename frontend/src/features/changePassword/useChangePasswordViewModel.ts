@@ -5,6 +5,8 @@ import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IChangePasswordProps } from "./IChangePasswordProps";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { texts } from "../../lib/translation/texts";
+import { UserApi } from "../../lib/userSession/api/UserApi";
+import { useSession } from "../../lib/userSession/hooks/useSession";
 
 export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -17,6 +19,7 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   >(undefined);
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
     useRequest();
+  const [session] = useSession();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -40,8 +43,15 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const onChangePasswordConfirm = () =>
     changePasswordRequest(
       async () => {
-        // await
-
+        if (session) {
+          await new UserApi().changePassword(
+            session?.userId,
+            currentPassword,
+            newPassword
+          );
+        } else {
+          setChangePasswordError(t(texts.changePassword.errorNotLoggedIn));
+        }
       },
       (error) => {
         if (isError(error)) {
