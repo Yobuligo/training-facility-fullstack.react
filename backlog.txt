@@ -64,7 +64,7 @@
 	# Registration can be closed
 	# Display confirm dialog before closing event registration
 	# Registration can be reopened
-	# Closing and opening must be considered in multiple sessions (2 sessions, 1. closes, 2. tries to registers -> registrations must fail)
+	# Closing and opening must be considered in multiple sessions (2 sessions, 1. session closes, 2. session tries to registers -> registrations must fail)
 	# Display loading spinner when closing or reopening an EventInstance	
 	- It must not be possible to register on past events
 	# It must not be possible to register if event instance was closed
@@ -83,6 +83,7 @@
 	- Event Instance must be deletable
 		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
 		- Event definitions of deleted event instances must not be displayed
+	- Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
 - Welcome
 	# Display spinner when loading registrations I am registered on

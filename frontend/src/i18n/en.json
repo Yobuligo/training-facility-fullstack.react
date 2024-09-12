@@ -60,6 +60,7 @@
         "close": "Close registration",
         "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",
         "closeRegistrationTitle": "Close registration",
+        "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
         "open": "Reopen registration"
     },
     "general": {
