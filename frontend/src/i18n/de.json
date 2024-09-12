@@ -1,0 +1,261 @@
+{
+    "AppointmentForm": {
+        "description": "Beschreibung",
+        "endDate": "Enddatum",
+        "endTime": "Endzeit",
+        "recurrence": "Wiederholung",
+        "startDate": "Startdatum",
+        "startTime": "Startzeit",
+        "title": "Titel"
+    },
+    "calendar": {
+        "agenda": "Agenda",
+        "allDay": "Ganztägig",
+        "date": "Datum",
+        "day": "Tag",
+        "event": "Ereignis",
+        "month": "Monat",
+        "next": "Nächste",
+        "noEventsInRange": "Keine Ereignisse im Zeitraum",
+        "previous": "Vorherige",
+        "time": "Zeit",
+        "today": "Heute",
+        "week": "Woche"
+    },
+    "dashboard": {
+        "profile": "Profil",
+        "trainings": "Trainings",
+        "planner": "Planer",
+        "users": "Benutzer"
+    },
+    "eventCalendarMyTrainings": {
+        "registerTitle": "Anmelden",
+        "registerOnClosed": "Anmelden nicht möglich. Anmeldung ist geschlossen.",
+        "unregisterTitle": "Abmelden",
+        "unregisterOnClosed": "Abmeldung nicht möglich. Anmeldung ist geschlossen."
+    },
+    "eventDefinitionDetails": {
+        "errorEnterTitle": "Titel ist erforderlich"
+    },
+    "eventInstanceList": {
+        "noItems": "Keine Ereignisse gefunden"
+    },
+    "eventPlanSection": {
+        "addTraining": "Training hinzufügen"
+    },
+    "eventRegistrationItem": {
+        "deleteQuestion": "Soll '{{user}}' wirklich von diesem Ereignis entfernt werden?",
+        "deleteTitle": "Benutzer löschen",
+        "missing": "Fehlend",
+        "present": "Anwesend"
+    },
+    "eventRegistrationList": {
+        "noRegistrations": "Noch keine Benutzer für dieses Training angemeldet"
+    },
+    "eventRegistrationSearch": {
+        "addUsers": "Benutzer hinzufügen"
+    },
+    "eventRegistrationSection": {
+        "checkInUsers": "Angemeldete Benutzer einchecken",
+        "close": "Anmeldung schließen",
+        "closeRegistrationQuestion": "Soll die Anmeldung wirklich geschlossen werden? Kein weiterer Benutzer kann sich mehr für dieses Training an- oder abmelden.",
+        "closeRegistrationTitle": "Anmeldung schließen",
+        "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
+        "open": "Anmeldung wieder öffnen"
+    },
+    "general": {
+        "cancel": "Abbrechen",
+        "delete": "Löschen",
+        "deleteQuestion": "Möchten Sie wirklich löschen?",
+        "deleteTitle": "Löschen",
+        "edit": "Bearbeiten",
+        "errorUnknownDueREST": "Unbekannter Fehler beim Senden der REST-Anfrage.",
+        "errorMissingAuthority": "Leider bist du für diese Aktion nicht autorisiert.",
+        "female": "Weiblich",
+        "grade": "Grad",
+        "isOptional": "(optional)",
+        "logoutInvalidSession": "Du wurdest aufgrund einer ungültigen oder abgelaufenen Sitzung abgemeldet",
+        "male": "Männlich",
+        "month": {
+            "jan": "Jan",
+            "feb": "Feb",
+            "mar": "März",
+            "apr": "Apr",
+            "may": "Mai",
+            "jun": "Jun",
+            "july": "Jul",
+            "aug": "Aug",
+            "sept": "Sept",
+            "oct": "Okt",
+            "nov": "Nov",
+            "dec": "Dez"
+        },
+        "no": "Nein",
+        "ok": "Ok",
+        "recurrence": {
+            "daily": "Täglich",
+            "monthly": "Monatlich",
+            "once": "Einmalig",
+            "weekly": "Wöchentlich"
+        },
+        "save": "Speichern",
+        "search": "Suche",
+        "toastSeverity": {
+            "error": "Fehler",
+            "info": "Info",
+            "success": "Erfolg",
+            "warning": "Warnung"
+        },
+        "weekdays": {
+            "monday": "Montag",
+            "mondayShort": "Mo",
+            "tuesday": "Dienstag",
+            "tuesdayShort": "Di",
+            "wednesday": "Mittwoch",
+            "wednesdayShort": "Mi",
+            "thursday": "Donnerstag",
+            "thursdayShort": "Do",
+            "friday": "Freitag",
+            "fridayShort": "Fr",
+            "saturday": "Samstag",
+            "saturdayShort": "Sa",
+            "sunday": "Sonntag",
+            "sundayShort": "So"
+        },
+        "yes": "Ja"
+    },
+    "gradingAddForm": {
+        "addGrading": "Prüfung hinzufügen"
+    },
+    "gradingItem": {
+        "achievedAt": "Erreicht am",
+        "examiners": "Prüfer:",
+        "kup9": "9. Kup",
+        "kup8": "8. Kup",
+        "kup7": "7. Kup",
+        "kup6": "6. Kup",
+        "kup5": "5. Kup",
+        "kup4": "4. Kup",
+        "kup3": "3. Kup",
+        "kup2": "2. Kup",
+        "kup1": "1. Kup",
+        "dan1": "1. Dan",
+        "dan2": "2. Dan",
+        "dan3": "3. Dan",
+        "dan4": "4. Dan",
+        "dan5": "5. Dan",
+        "dan6": "6. Dan",
+        "dan7": "7. Dan"
+    },
+    "gradingList": {
+        "noGradingsAvailable": "Derzeit hast du noch keine Prüfungen absolviert"
+    },
+    "gradingSection": {
+        "title": "Prüfung hinzufügen"
+    },
+    "language": {
+        "de": "Deutsch",
+        "en": "Englisch"
+    },
+    "login": {
+        "errorLogin": "Unbekannter Fehler beim Login",
+        "errorRegister": "Unbekannter Fehler bei der Registrierung",
+        "login": "Login",
+        "password": "Passwort",
+        "register": "Registrieren",
+        "registerText": "Stattdessen registrieren",
+        "successUserCreated": "Benutzer wurde erstellt. Bitte loggen Sie sich ein.",
+        "title": "Login",
+        "username": "Benutzername"
+    },
+    "logout": {
+        "title": "Abmelden"
+    },
+    "myProfile": {
+        "errorLoadingUserSession": "Fehler beim Laden der Benutzersitzung"
+    },
+    "myTrainingsContent": {
+        "register": "Anmelden",
+        "unregister": "Abmelden"
+    },
+    "changePassword": {
+        "changePassword": "Passwort ändern",
+        "confirmNewPassword": "Neues Passwort bestätigen",
+        "currentPassword": "Aktuelles Passwort",
+        "errorCurrentPasswordInvalid": "Das aktuelle Passwort ist nicht korrekt. Bitte gib Dein aktuelles Passwort erneut ein.",
+        "errorNewPasswordNotPolicyConfirm": "Das neue Passwort entspricht nicht den Richtlinien. Stelle sicher, dass die unter 'Richtlinienanforderungen' angegebenen Richtlinien eingehalten werden.",
+        "newPassword": "Neues Passwort",
+        "passwordsNotIdentical": "Deine neuen Passwörter sind nicht identisch",
+        "successMessage": "Passwort erfolgreich geändert",
+        "title": "Passwort ändern"
+    },
+    "tariff": {
+        "teenagersAdults": "Jugendliche, Erwachsene",
+        "children": "Kinder",
+        "traineeStudentsPensioner": "Auszubildende, Studenten, Rentner",
+        "family1": "Familie 1",
+        "family2": "Familie 2",
+        "family3": "Familie 3",
+        "principals": "Leitung",
+        "relatives": "Angehörige"
+    },
+    "user": {
+        "activate": "Aktivieren",
+        "activateUserQuestion": "Soll der Benutzer '{{username}}' wirklich aktiviert werden?",
+        "activateUserTitle": "Benutzer aktivieren",
+        "address": "Adresse",
+        "bank": "Bank",
+        "bankAccountOwner": "Kontoinhaber",
+        "bankAccountIBAN": "IBAN",
+        "bankAccountBIC": "BIC",
+        "bankAccountInstitution": "Institut",
+        "birthday": "Geburtstag",
+        "city": "Stadt",
+        "deactivate": "Deaktivieren",
+        "deactivateUserQuestion": "Soll der Benutzer '{{username}}' wirklich deaktiviert werden? Er wird sich nicht mehr einloggen können.",
+        "deactivateUserTitle": "Benutzer deaktivieren",
+        "deleteUser": "Benutzer löschen",
+        "deleteUserQuestion": "Soll der Benutzer '{{username}}' wirklich gelöscht werden?",
+        "deleteUserTitle": "Benutzer löschen",
+        "email": "E-Mail",
+        "errorUsernameRequired": "Benutzername ist erforderlich",
+        "errorUsernameExists": "Benutzername existiert bereits",
+        "errorFirstnameRequired": "Vorname ist erforderlich",
+        "errorLastnameRequired": "Nachname ist erforderlich",
+        "errorEmailRequired": "E-Mail ist erforderlich",
+        "firstname": "Vorname",
+        "gender": "Geschlecht",
+        "generateNewPassword": "Neues Passwort generieren",
+        "gradings": "Prüfungen",
+        "isAdmin": "Ist Admin",
+        "joinedOn": "Beigetreten am",
+        "lastname": "Nachname",
+        "personalInformation": "Persönliche Informationen",
+        "phone": "Telefon",
+        "postalCode": "Postleitzahl",
+        "changePassword": "Passwort ändern",
+        "sendInvitation": "Einladung senden",
+        "street": "Straße",
+        "tariff": "Tarif",
+        "technicalInformation": "Technische Informationen",
+        "username": "Benutzername"
+    },
+    "userProfileItem": {
+        "deactivated": "Deaktiviert"
+    },
+    "userProfileSection": {
+        "addUser": "Benutzer hinzufügen"
+    },
+    "userSearchItem": {
+        "addUser": "Benutzer hinzufügen"
+    },
+    "userSearchList": {
+        "noEntries": "Keine Einträge gefunden"
+    },
+    "welcome": {
+        "explanation": "Im Yeoljeong-Mitgliederbereich kannst Du Deine Trainings planen und Dein Benutzerprofil pflegen.",
+        "noTrainings": "Derzeit bist Du für kein Training diese Woche angemeldet. Wechsele zu 'Meine Trainings', um Dich anzumelden.",
+        "weekTrainings": "Du bist für die folgenden kommenden Trainings diese Woche angemeldet",
+        "welcome": "Willkommen im Mitgliederbereich, {{name}}"
+    }
+}

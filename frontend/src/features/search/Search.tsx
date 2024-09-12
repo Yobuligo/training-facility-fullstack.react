@@ -2,11 +2,14 @@ import { useState } from "react";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { style } from "../../core/ui/style";
 import { SearchIcon } from "../../icons/SearchIcon";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { ISearchProps } from "./ISearchProps";
 import styles from "./Search.module.scss";
 
 export const Search: React.FC<ISearchProps> = (props) => {
   const [query, setQuery] = useState(props.query ?? "");
+  const { t } = useTranslation();
 
   const onSearch = () => props.onSearch?.(query);
 
@@ -25,7 +28,7 @@ export const Search: React.FC<ISearchProps> = (props) => {
         className={style(styles.input, props.inputClassName)}
         onChange={onChange}
         onKeyDown={onEnter}
-        placeholder="Search"
+        placeholder={t(texts.general.search)}
         type="text"
         value={query}
       />

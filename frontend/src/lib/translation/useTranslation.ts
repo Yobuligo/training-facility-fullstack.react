@@ -1,4 +1,5 @@
 import * as translations from "../../i18n";
+import { useLanguage } from "../language/useLanguage";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { texts } from "./texts";
 import { ITranslation } from "./types/ITranslation";
@@ -20,7 +21,7 @@ import { fillPlaceholders } from "./utils/fillPlaceholders";
  *
  */
 export const useTranslation = () => {
-  const language = "en";
+  const [language] = useLanguage();
 
   const getTranslations = <T extends Placeholder>(
     keys: string[],

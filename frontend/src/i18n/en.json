@@ -99,6 +99,7 @@
             "weekly": "Weekly"
         },
         "save": "Save",
+        "search": "Search",
         "toastSeverity": {
             "error": "Error",
             "info": "Info",
