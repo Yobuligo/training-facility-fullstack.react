@@ -80,6 +80,9 @@
 	- Assigned trainer can be deleted
 	- Assigned trainer is displayed in the calendar
 	- Performance: Add indices to columns from and to of event-instances
+	- Event Instance must be deletable
+		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
+		- Event definitions of deleted event instances must not be displayed
 	
 - Welcome
 	# Display spinner when loading registrations I am registered on
@@ -128,6 +131,10 @@
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 		# Bug: Error when entering achievedAt date manually
+		
+	- User can be forced to change his password
+		- An admin can mark a user to change his password
+		- With the next backend request an error thrown to trigger changing the password
 	
 # User List
 	# Display loading spinner, when loading users

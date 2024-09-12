@@ -22,5 +22,5 @@ EventInstance.hasMany(EventRegistration, {
   foreignKey: "eventInstanceId",
 });
 
-EventRegistration.belongsTo(User);
+EventRegistration.belongsTo(User, { onDelete: "CASCADE" });
 User.hasMany(EventRegistration, { foreignKey: "userId" });
