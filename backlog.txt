@@ -41,7 +41,7 @@
 			# must be displayed endless if start and end date are equal
 			# must only be displayed at the specific day of month
 	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
-	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18	
+	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
 	
 - My Trainings
 	# User can register on and unregister from trainings
@@ -126,6 +126,7 @@
 	# Bug: created user cannot be selected from user list	
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
+	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
 	
 	# User Gradings
 		# Gradings can be added, saved and reloaded
