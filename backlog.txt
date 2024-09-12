@@ -1,7 +1,8 @@
 - App
 	- Refactor page style and display edges only in WQHD but not Full-HD
 	- Improve repsonsive design for smaller devices (e.g. Tablets)
-	- Language can be switched
+	# Language can be switched
+		# Selected language must be persisted and loaded when reloading page
 	# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
 	# Unknown server errors are handled in an ErrorBoundaryPage
 	# Display an ErrorBoundaryPage when calling an unknown url
