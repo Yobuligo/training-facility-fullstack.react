@@ -4,6 +4,7 @@ import { IUserInternal } from "../../../model/IUserInternal";
 import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { IAuthentication } from "../shared/model/IAuthentication";
+import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
 
@@ -18,15 +19,12 @@ export class UserApi extends EntityRepository<IUser> {
 
   async changePassword(
     userId: string,
-    currentPassword: string,
-    newPassword: string
+    changeCredentials: IChangeCredentials
   ): Promise<boolean> {
-    return RESTApi.post(`${this.url}/${userId}/changePassword`, {
-      urlParams: {
-        currentPassword,
-        newPassword,
-      },
-    });
+    return await RESTApi.post(
+      `${this.url}/${userId}/changePassword`,
+      changeCredentials
+    );
   }
 
   async deactivate(userId: string): Promise<boolean> {

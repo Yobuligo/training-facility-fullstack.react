@@ -8,6 +8,8 @@ import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
+import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
+import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
 import { IUser } from "../shared/model/IUser";
 import { IUserProfile } from "../shared/model/IUserProfile";
@@ -22,6 +24,7 @@ import { transaction } from "./sequelize/utils/transaction";
 import { SessionRepo } from "./SessionRepo";
 import { UserProfileRepo } from "./UserProfileRepo";
 import { UserRoleRepo } from "./UserRoleRepo";
+import { IllegalStateError } from "../core/errors/IllegalStateError";
 
 export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
@@ -47,6 +50,30 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       { where: { id: userId } }
     );
     return updatedRows === 1;
+  }
+
+  async changePassword(
+    userId: string,
+    changeCredentials: IChangeCredentials
+  ): Promise<boolean> {
+    const user = await this.findByCredentialsSecure(changeCredentials);
+    if (!user) {
+      throw new InvalidCredentialsError("InvalidCredentialsError");
+    }
+
+    // do we check credentials for different user?
+    if (user.id !== userId) {
+      throw new IllegalStateError(
+        "Error during changing password. The parameter `userId` does not match the user credentials."
+      );
+    }
+
+    const password = hashPassword(changeCredentials.password, user.salt);
+    const updatedRows = await this.model.update(
+      { password },
+      { where: { id: user.id } }
+    );
+    return updatedRows[0] === 1;
   }
 
   async createUser(credentials: ICredentials): Promise<IUserSecure> {
@@ -117,17 +144,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   async findByCredentials(
     credentials: ICredentials
   ): Promise<IUser | undefined> {
-    const user = await this.findByUsernameSecure(credentials.username);
-    if (!user) {
-      return undefined;
-    }
-
-    const password = hashPassword(credentials.password, user.salt);
-    if (password === user.password) {
-      return user;
-    }
-
-    return undefined;
+    return this.findByCredentialsSecure(credentials);
   }
 
   async findByUsername(username: string): Promise<IUser | undefined> {
@@ -269,6 +286,22 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       }
     });
     return wasUpdated;
+  }
+
+  private async findByCredentialsSecure(
+    credentials: ICredentials
+  ): Promise<IUserSecure | undefined> {
+    const user = await this.findByUsernameSecure(credentials.username);
+    if (!user) {
+      return undefined;
+    }
+
+    const password = hashPassword(credentials.password, user.salt);
+    if (password === user.password) {
+      return user;
+    }
+
+    return undefined;
   }
 
   private async findByUsernameSecure(

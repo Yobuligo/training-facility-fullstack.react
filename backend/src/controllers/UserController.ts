@@ -3,6 +3,7 @@ import { createError } from "../core/utils/createError";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
+import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ISession } from "../shared/model/ISession";
 import { IUser, UserRouteMeta } from "../shared/model/IUser";
 import { AuthRole } from "../shared/types/AuthRole";
@@ -14,6 +15,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {
     super(UserRouteMeta, new UserRepo(), [AuthRole.ADMIN]);
     this.activate();
+    this.changePassword();
     this.deactivate();
     this.existsUsername();
     this.findAllShort();
@@ -53,6 +55,28 @@ export class UserController extends EntityController<IUser, UserRepo> {
         },
         [AuthRole.ADMIN]
       )
+    );
+  }
+
+  private changePassword() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/changePassword`,
+      SessionInterceptor(async (req, res) => {
+        const userId = req.params.id;
+        if (!userId || typeof userId !== "string") {
+          return res.status(HttpStatusCode.BAD_REQUEST_400).send();
+        }
+        if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
+          return this.sendMissingAuthorityError(res);
+        }
+        const changeCredentials: IChangeCredentials = req.body;
+        const userRepo = new UserRepo();
+        const wasChanged = await userRepo.changePassword(
+          userId,
+          changeCredentials
+        );
+        res.status(HttpStatusCode.OK_200).send(wasChanged);
+      })
     );
   }
 

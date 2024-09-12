@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { isError } from "../../core/utils/isError";
 import { isInitial } from "../../core/utils/isInitial";
+import { useUser } from "../../hooks/useUser";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
+import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IChangePasswordProps } from "./IChangePasswordProps";
-import { useTranslation } from "../../lib/translation/useTranslation";
-import { texts } from "../../lib/translation/texts";
-import { UserApi } from "../../lib/userSession/api/UserApi";
-import { useSession } from "../../lib/userSession/hooks/useSession";
 
 export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -19,7 +19,7 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   >(undefined);
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
     useRequest();
-  const [session] = useSession();
+  const [user] = useUser();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -43,26 +43,25 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const onChangePasswordConfirm = () =>
     changePasswordRequest(
       async () => {
-        if (session) {
-          await new UserApi().changePassword(
-            session?.userId,
-            currentPassword,
-            newPassword
-          );
-        } else {
-          setChangePasswordError(t(texts.changePassword.errorNotLoggedIn));
+        const result = await new UserApi().changePassword(user.id, {
+          username: user.username,
+          password: currentPassword,
+          newPassword,
+        });
+        if(result){
+
         }
       },
       (error) => {
         if (isError(error)) {
           switch (error.type) {
-            case "CurrentPasswordInvalidError": {
+            case "InvalidCredentialsError": {
               setChangePasswordError(
                 t(texts.changePassword.errorCurrentPasswordInvalid)
               );
               return true;
             }
-            case "NewPasswordNotPolicyConform": {
+            case "NewPasswordNotPolicyConformError": {
               setChangePasswordError(
                 t(texts.changePassword.errorNewPasswordNotPolicyConfirm)
               );

@@ -9,7 +9,6 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
-import { ChangePassword } from "../../changePassword/ChangePassword";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
@@ -281,10 +280,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <Toolbar>
             {props.isAdminMode && adminModeButtons}
             {!props.isAdminMode && (
-              <Button
-                disabled={viewModel.displayMode}
-                onClick={viewModel.onChangePassword}
-              >
+              <Button onClick={viewModel.onChangePassword}>
                 {t(texts.user.changePassword)}
               </Button>
             )}
