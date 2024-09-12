@@ -7,6 +7,7 @@ import { EventRegistration } from "../model/EventRegistration";
 import { User } from "../model/User";
 import { UserProfile } from "../model/UserProfile";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { UserNotFoundError } from "./../shared/errors/UserNotFoundError";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class EventRegistrationRepo extends SequelizeRepository<IEventRegistration> {
@@ -52,10 +53,13 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
       { isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE },
       async (transaction) => {
         // check if user still exists
-        // const user = await        User.findByPk(entity.userId)
-        // if (!user){
-
-        // }
+        const user = await User.findByPk(entity.userId);
+        if (!user) {
+          throw new UserNotFoundError(
+            "UserNotFoundError",
+            "Error while register user. User does not exist anymore."
+          );
+        }
 
         // check if user is already registered
         const data = await this.model.findOne({

@@ -3,11 +3,14 @@ import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
+import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
+import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { UserInfo } from "../../../services/UserInfo";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
@@ -25,7 +28,6 @@ export const useEventRegistrationSectionViewModel = (
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
   >([]);
-
   const [
     loadEventRegistrationRequest,
     isLoadEventRegistrationRequestProcessing,
@@ -35,6 +37,7 @@ export const useEventRegistrationSectionViewModel = (
   const [updateEventInstanceRequest, isUpdateEventInstanceRequestProcessing] =
     useRequest();
   const confirmDialog = useConfirmDialog();
+  const toast = useToast();
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -75,18 +78,31 @@ export const useEventRegistrationSectionViewModel = (
       updatedAt: new Date(),
     };
 
-    setEventRegistrations((previous) => {
-      previous.push(eventRegistration);
-      return [...previous];
-    });
+    addEventRegistrationRequest(
+      async () => {
+        const eventRegistryApi = new EventRegistrationApi();
+        const createdEventRegistration = await eventRegistryApi.insert(
+          eventRegistration
+        );
 
-    addEventRegistrationRequest(async () => {
-      const eventRegistryApi = new EventRegistrationApi();
-      const createdEventRegistration = await eventRegistryApi.insert(
-        eventRegistration
-      );
-      props.eventInstance.eventRegistrations?.push(createdEventRegistration);
-    });
+        setEventRegistrations((previous) => {
+          previous.push(eventRegistration);
+          return [...previous];
+        });
+        props.eventInstance.eventRegistrations?.push(createdEventRegistration);
+      },
+      (error) => {
+        if (isError(error) && error.type === "UserNotFoundError") {
+          toast.error(
+            t(texts.eventRegistrationSection.errorUserNotFound, {
+              user: UserInfo.toFullName(user),
+            })
+          );
+          return true;
+        }
+        return false;
+      }
+    );
   };
 
   const onDelete = (eventRegistration: IEventRegistration) => {

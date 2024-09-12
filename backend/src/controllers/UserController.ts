@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { createError } from "../core/utils/createError";
+import { IUserSecure } from "../model/types/IUserSecure";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
@@ -134,6 +135,21 @@ export class UserController extends EntityController<IUser, UserRepo> {
         },
         [AuthRole.ADMIN]
       )
+    );
+  }
+
+  protected update(): void {
+    this.router.put(
+      `${this.routeMeta.path}/:id`,
+      SessionInterceptor(async (req, res) => {
+        const user: IUser = req.body;
+        if (!(await req.sessionInfo.isAdminOrYourself(user.id))) {
+          return this.sendMissingAuthorityError(res);
+        }
+
+        const wasUpdated = await this.repo.update(user as IUserSecure);
+        res.status(HttpStatusCode.OK_200).send(wasUpdated);
+      })
     );
   }
 
