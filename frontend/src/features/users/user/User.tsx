@@ -9,7 +9,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
-import { NewPassword } from "../../newPassword/NewPassword";
+import { ChangePassword } from "../../changePassword/ChangePassword";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
@@ -55,7 +55,6 @@ export const User: React.FC<IUserProps> = (props) => {
 
   return (
     <div className={styles.user}>
-      <NewPassword />
       <ChangeableForm
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}

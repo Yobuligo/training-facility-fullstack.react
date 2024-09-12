@@ -20,6 +20,8 @@ import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
 import { IUserProps } from "./IUserProps";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../routes/AppRoutes";
 
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
@@ -73,6 +75,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
   const [existsByUsernameRequest] = useRequest();
+  const navigate = useNavigate();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -258,9 +261,7 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
-  const onChangePassword = () => {
-    console.log("request change password");
-  };
+  const onChangePassword = () => navigate(AppRoutes.changePassword.toPath());
 
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||

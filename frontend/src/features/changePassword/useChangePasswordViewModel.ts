@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { isError } from "../../core/utils/isError";
 import { isInitial } from "../../core/utils/isInitial";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { INewPasswordProps } from "./INewPasswordProps";
+import { IChangePasswordProps } from "./IChangePasswordProps";
+import { useTranslation } from "../../lib/translation/useTranslation";
+import { texts } from "../../lib/translation/texts";
 
-export const useNewPasswordViewModel = (props: INewPasswordProps) => {
+export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newConfirmPassword, setNewConfirmPassword] = useState("");
@@ -15,6 +17,7 @@ export const useNewPasswordViewModel = (props: INewPasswordProps) => {
   >(undefined);
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
     useRequest();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (newConfirmPassword !== "") {
@@ -32,14 +35,32 @@ export const useNewPasswordViewModel = (props: INewPasswordProps) => {
     isInitial(newPassword) ||
     isInitial(newConfirmPassword);
 
+  const onCancel = () => {};
+
   const onChangePasswordConfirm = () =>
     changePasswordRequest(
       async () => {
         // await
+
       },
       (error) => {
         if (isError(error)) {
-          return true;
+          switch (error.type) {
+            case "CurrentPasswordInvalidError": {
+              setChangePasswordError(
+                t(texts.changePassword.errorCurrentPasswordInvalid)
+              );
+              return true;
+            }
+            case "NewPasswordNotPolicyConform": {
+              setChangePasswordError(
+                t(texts.changePassword.errorNewPasswordNotPolicyConfirm)
+              );
+              return true;
+            }
+            default:
+              return false;
+          }
         }
         return false;
       }
@@ -50,6 +71,7 @@ export const useNewPasswordViewModel = (props: INewPasswordProps) => {
     confirmButtonDisabled,
     displaySpinner: isChangePasswordRequestProcessing,
     showNewConfirmPasswordError,
+    onCancel,
     onChangePasswordConfirm,
     onCurrentPassword: setCurrentPassword,
     onNewPassword: setNewPassword,

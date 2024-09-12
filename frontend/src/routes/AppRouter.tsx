@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { ChangePasswordPage } from "../pages/ChangePasswordPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { ErrorPage } from "../pages/ErrorPage";
 import { EventOverviewPage } from "../pages/EventOverviewPage";
@@ -11,6 +12,11 @@ export const AppRouter = createBrowserRouter(
     {
       path: AppRoutes.login.origin,
       element: <LoginPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: AppRoutes.changePassword.origin,
+      element: <ChangePasswordPage />,
       errorElement: <ErrorPage />,
     },
     {

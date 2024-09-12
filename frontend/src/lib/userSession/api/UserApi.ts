@@ -16,6 +16,19 @@ export class UserApi extends EntityRepository<IUser> {
     return await RESTApi.post(`${this.url}/${userId}/activate`);
   }
 
+  async changePassword(
+    userId: string,
+    currentPassword: string,
+    newPassword: string
+  ) {
+    return RESTApi.post(`${this.url}/${userId}/changePassword`, {
+      urlParams: {
+        currentPassword,
+        newPassword,
+      },
+    });
+  }
+
   async deactivate(userId: string): Promise<boolean> {
     return await RESTApi.post(`${this.url}/${userId}/deactivate`);
   }
