@@ -68,7 +68,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       );
     }
 
-    const password = hashPassword(changeCredentials.password, user.salt);
+    const password = hashPassword(changeCredentials.newPassword, user.salt);
     const updatedRows = await this.model.update(
       { password },
       { where: { id: user.id } }

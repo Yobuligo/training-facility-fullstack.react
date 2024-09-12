@@ -42,7 +42,9 @@ export const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
           }
         />
         <Toolbar className={styles.toolbar}>
-          <SecondaryButton>Cancel</SecondaryButton>
+          <SecondaryButton onClick={viewModel.onCancel}>
+            {t(texts.general.cancel)}
+          </SecondaryButton>
           <SpinnerButton
             disabled={viewModel.confirmButtonDisabled}
             displaySpinner={viewModel.displaySpinner}

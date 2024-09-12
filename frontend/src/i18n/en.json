@@ -184,6 +184,7 @@
         "errorNewPasswordNotPolicyConfirm": "The new password password does not comply with the password policy. Ensure to follow the policy stated under 'Policy requirements'",
         "newPassword": "New password",
         "passwordsNotIdentical": "Your new passwords are not identical",
+        "successMessage": "Password changed successfully",
         "title": "Change password"
     },
     "tariff": {

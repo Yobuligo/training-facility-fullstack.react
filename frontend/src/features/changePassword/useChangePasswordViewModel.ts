@@ -7,6 +7,9 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IChangePasswordProps } from "./IChangePasswordProps";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../routes/AppRoutes";
+import { useToast } from "../../lib/toast/hooks/useToast";
 
 export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -20,7 +23,9 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
     useRequest();
   const [user] = useUser();
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const toast = useToast();
 
   useEffect(() => {
     if (newConfirmPassword !== "") {
@@ -38,9 +43,10 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
     isInitial(newPassword) ||
     isInitial(newConfirmPassword);
 
-  const onCancel = () => {};
+  const onCancel = () => navigate(AppRoutes.dashboard.toPath());
 
-  const onChangePasswordConfirm = () =>
+  const onChangePasswordConfirm = () => {
+    setChangePasswordError(undefined);
     changePasswordRequest(
       async () => {
         const result = await new UserApi().changePassword(user.id, {
@@ -48,9 +54,10 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
           password: currentPassword,
           newPassword,
         });
-        if(result){
-
+        if (result) {
         }
+        toast.success(t(texts.changePassword.successMessage));
+        navigate(AppRoutes.dashboard.toPath());
       },
       (error) => {
         if (isError(error)) {
@@ -74,6 +81,7 @@ export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
         return false;
       }
     );
+  };
 
   return {
     changePasswordError,
