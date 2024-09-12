@@ -1,0 +1,13 @@
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
+
+.languageSelect {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.25rem;
+  color: colors.$color-language-select;
+}
+
+.selected {
+  font-weight: 600;
+}
