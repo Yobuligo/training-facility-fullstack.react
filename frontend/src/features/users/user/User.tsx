@@ -54,6 +54,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
   return (
     <div className={styles.user}>
+      {viewModel.confirmDialog.content}
       <ChangeableForm
         displayMode={viewModel.displayMode}
         onCancel={viewModel.onCancel}

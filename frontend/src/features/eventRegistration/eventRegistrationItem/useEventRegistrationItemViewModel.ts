@@ -1,5 +1,6 @@
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { IToggleButtonOption } from "../../../components/toggleButtonGroup/IToggleButtonOption";
+import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -12,6 +13,7 @@ export const useEventRegistrationItemViewModel = (
   const { t } = useTranslation();
   const [updateRequest] = useRequest();
   const fullName = `${props.eventRegistration.user?.userProfile?.firstname} ${props.eventRegistration.user?.userProfile?.lastname}`;
+  const confirmDialog = useConfirmDialog();
 
   const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
     {
@@ -49,17 +51,17 @@ export const useEventRegistrationItemViewModel = (
     }
   };
 
-  const onDelete = () => {
-    if (
-      window.confirm(
-        t(texts.eventRegistrationItem.deleteQuestion, { user: fullName })
-      )
-    ) {
-      props.onDelete?.(props.eventRegistration);
-    }
-  };
+  const onDelete = () =>
+    confirmDialog.show(
+      t(texts.eventRegistrationItem.deleteTitle),
+      t(texts.eventRegistrationItem.deleteQuestion, { user: fullName }),
+      {
+        onOkay: () => props.onDelete?.(props.eventRegistration),
+      }
+    );
 
   return {
+    confirmDialog,
     fullName,
     onDelete,
     onToggleButtonOptionChange,

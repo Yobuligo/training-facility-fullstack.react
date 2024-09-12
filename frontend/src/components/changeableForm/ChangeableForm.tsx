@@ -17,6 +17,7 @@ export const ChangeableForm: React.FC<IChangeableFormProps> = (props) => {
 
   return (
     <div className={styles.changeableForm}>
+      {viewModel.confirmDialog.content}
       <Toolbar className={styles.toolbar}>
         {props.displayMode ? (
           <Button onClick={viewModel.onToggleMode}>

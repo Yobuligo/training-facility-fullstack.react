@@ -2,7 +2,7 @@ import { Op } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { checkNotNull } from "../core/utils/checkNotNull";
-import { IUserSecure } from "../model/IUserSecure";
+import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";

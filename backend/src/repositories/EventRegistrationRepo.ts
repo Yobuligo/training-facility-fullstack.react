@@ -51,6 +51,12 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
     await db.transaction(
       { isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE },
       async (transaction) => {
+        // check if user still exists
+        // const user = await        User.findByPk(entity.userId)
+        // if (!user){
+
+        // }
+
         // check if user is already registered
         const data = await this.model.findOne({
           where: {

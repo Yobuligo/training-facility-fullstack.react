@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+
 import { UserRole } from "../model/UserRole";
 import { IUserRole } from "../shared/model/IUserRole";
 import { AuthRole } from "../shared/types/AuthRole";

@@ -57,6 +57,7 @@
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
 	
 - Event Registration
+	# Display spinner when loading registrations
 	# Registered user must be displayed
 	# EventRegistrationState for registered user can be set (either present, missing or back to open)
 	* Display loading spinner when changing EventRegistrationState (present, missing, open)
@@ -79,13 +80,18 @@
 	- Assigned trainer can be deleted
 	- Assigned trainer is displayed in the calendar
 	- Performance: Add indices to columns from and to of event-instances
+	- Event Instance must be deletable
+		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
+		- Event definitions of deleted event instances must not be displayed
 	
 - Welcome
+	# Display spinner when loading registrations I am registered on
 	# Display upcoming events of the current week
 	# Upcoming events are sorted chronologically
 	# Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
 
 - User Profile
+	# Display loading spinner when loading user profile
 	- Dummy objects are removed
 	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
@@ -125,8 +131,13 @@
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 		# Bug: Error when entering achievedAt date manually
+		
+	- User can be forced to change his password
+		- An admin can mark a user to change his password
+		- With the next backend request an error thrown to trigger changing the password
 	
 # User List
+	# Display loading spinner, when loading users
 	# user must be sorted by name
 		# Currently it is not sorted, if a user was added
 		# Perhaps it should be sorted directly within the backend
@@ -138,8 +149,11 @@
 	# Bug: As admin created user is shown as normal user.
 
 # Login
+	# Login must only be possible with valid username and password
+	# Session expires after a certain time
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
+	- Display less technical error when login fails for an unknown reason
 	
 - Password
 	- User must be able to change password

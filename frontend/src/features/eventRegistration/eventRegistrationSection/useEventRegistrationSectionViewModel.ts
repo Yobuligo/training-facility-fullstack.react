@@ -4,6 +4,7 @@ import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
+import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -33,6 +34,7 @@ export const useEventRegistrationSectionViewModel = (
   const [deleteEventRegistrationRequest] = useRequest();
   const [updateEventInstanceRequest, isUpdateEventInstanceRequestProcessing] =
     useRequest();
+  const confirmDialog = useConfirmDialog();
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -105,19 +107,18 @@ export const useEventRegistrationSectionViewModel = (
       await eventInstanceApi.update(props.eventInstance);
     });
 
-  const onCloseRegistration = () => {
-    if (
-      !window.confirm(
-        t(texts.eventRegistrationSection.questionCloseRegistration)
-      )
-    ) {
-      return;
-    }
-
-    props.eventInstance.state = EventInstanceState.CLOSED;
-    setEventInstanceState(EventInstanceState.CLOSED);
-    updateEventInstance();
-  };
+  const onCloseRegistration = () =>
+    confirmDialog.show(
+      t(texts.eventRegistrationSection.closeRegistrationTitle),
+      t(texts.eventRegistrationSection.closeRegistrationQuestion),
+      {
+        onOkay: () => {
+          props.eventInstance.state = EventInstanceState.CLOSED;
+          setEventInstanceState(EventInstanceState.CLOSED);
+          updateEventInstance();
+        },
+      }
+    );
 
   const onReopenRegistration = () => {
     props.eventInstance.state = EventInstanceState.OPEN;
@@ -126,6 +127,7 @@ export const useEventRegistrationSectionViewModel = (
   };
 
   return {
+    confirmDialog,
     eventInstanceState,
     eventRegistrations,
     isLoadEventRegistrationRequestProcessing,

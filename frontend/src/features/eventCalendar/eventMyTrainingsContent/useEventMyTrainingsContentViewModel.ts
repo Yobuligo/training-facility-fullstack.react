@@ -1,5 +1,6 @@
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { NotSupportedError } from "../../../core/errors/NotSupportedError";
+import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -16,6 +17,7 @@ export const useEventMyTrainingsContentViewModel = (
   const [registerRequest, isRegisterRequestProcessing] = useRequest();
   const [unregisterRequest, isUnregisterRequestProcessing] = useRequest();
   const fetchEventInstance = useFetchEventInstance();
+  const confirmDialog = useConfirmDialog();
 
   const onRegister = async (event: IEvent) => {
     const eventInstance = await fetchEventInstance(event);
@@ -24,7 +26,11 @@ export const useEventMyTrainingsContentViewModel = (
     }
 
     if (eventInstance.state === EventInstanceState.CLOSED) {
-      window.alert(t(texts.eventCalendarMyTrainings.registerOnClosed));
+      confirmDialog.show(
+        t(texts.eventCalendarMyTrainings.registerTitle),
+        t(texts.eventCalendarMyTrainings.registerOnClosed),
+        { displayCancelButton: false }
+      );
       return;
     }
 
@@ -49,7 +55,11 @@ export const useEventMyTrainingsContentViewModel = (
     }
 
     if (eventRegistration.eventInstance.state === EventInstanceState.CLOSED) {
-      window.alert(t(texts.eventCalendarMyTrainings.unregisterOnClosed));
+      confirmDialog.show(
+        t(texts.eventCalendarMyTrainings.unregisterTitle),
+        t(texts.eventCalendarMyTrainings.unregisterOnClosed),
+        { displayCancelButton: false }
+      );
       return;
     }
 
@@ -61,6 +71,7 @@ export const useEventMyTrainingsContentViewModel = (
   };
 
   return {
+    confirmDialog,
     isRegisterRequestProcessing,
     isUnregisterRequestProcessing,
     onRegister,

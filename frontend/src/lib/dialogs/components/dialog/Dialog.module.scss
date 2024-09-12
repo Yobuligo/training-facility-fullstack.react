@@ -1,0 +1,43 @@
+@use "../../../../styles/colors.module.scss";
+@use "../../../../styles/dimensions.module.scss";
+@use "../../../../styles/mixins.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.dialog {
+  position: fixed;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  box-shadow: colors.$box-shadow;
+  border: 1px solid rgba(128, 128, 128, 0.178);
+  width: 20rem;
+
+  @include mixins.medium-screen {
+    width: 30rem;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: colors.$color-primary;
+  justify-content: center;
+  align-items: center;
+  color: colors.$color-copy;
+  height: 3rem;
+  font-size: large;
+  font-weight: 600;
+}
+
+.body {
+  padding: 2rem;
+}

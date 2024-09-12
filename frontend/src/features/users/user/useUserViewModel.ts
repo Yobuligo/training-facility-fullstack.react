@@ -7,6 +7,7 @@ import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
+import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
@@ -76,6 +77,7 @@ export const useUserViewModel = (props: IUserProps) => {
   );
   const [existsByUsernameRequest] = useRequest();
   const navigate = useNavigate();
+  const confirmDialog = useConfirmDialog();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -223,35 +225,32 @@ export const useUserViewModel = (props: IUserProps) => {
       return previous.filter((item) => item.id !== grading.id);
     });
 
-  const onDeleteUser = () => {
-    if (
-      window.confirm(
-        t(texts.user.deleteUserQuestion, { username: props.user.username })
-      )
-    ) {
-      props.onDelete?.(props.user);
-    }
-  };
+  const onDeleteUser = () =>
+    confirmDialog.show(
+      t(texts.user.deleteUserTitle),
+      t(texts.user.deleteUserQuestion, { username: props.user.username }),
+      {
+        onOkay: () => props.onDelete?.(props.user),
+      }
+    );
 
-  const onActivate = () => {
-    if (
-      window.confirm(
-        t(texts.user.activateUserQuestion, { username: props.user.username })
-      )
-    ) {
-      props.onActivate?.(props.user);
-    }
-  };
+  const onActivate = () =>
+    confirmDialog.show(
+      t(texts.user.activateUserTitle),
+      t(texts.user.activateUserQuestion, { username: props.user.username }),
+      {
+        onOkay: () => props.onActivate?.(props.user),
+      }
+    );
 
-  const onDeactivate = () => {
-    if (
-      window.confirm(
-        t(texts.user.deactivateUserQuestion, { username: props.user.username })
-      )
-    ) {
-      props.onDeactivate?.(props.user);
-    }
-  };
+  const onDeactivate = () =>
+    confirmDialog.show(
+      t(texts.user.deactivateUserTitle),
+      t(texts.user.deactivateUserQuestion, { username: props.user.username }),
+      {
+        onOkay: () => props.onDeactivate?.(props.user),
+      }
+    );
 
   const onToggleIsDeactivated = () => {
     if (isDeactivated === false) {
@@ -420,8 +419,9 @@ export const useUserViewModel = (props: IUserProps) => {
     bankAccountInstitution,
     bankAccountOwner,
     birthday,
-    collapseBank,
     city,
+    collapseBank,
+    confirmDialog,
     displayMode,
     email,
     emailError,

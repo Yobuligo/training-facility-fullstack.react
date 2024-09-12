@@ -2,7 +2,8 @@ import { DataTypes, Model, ModelStatic } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
-import { createIdType } from "./createIdType";
+import { createIdType } from "./core/createIdType";
+import { SequelizeModel } from "./core/SequelizeModel";
 import { EventInstance } from "./EventInstance";
 import { User } from "./User";
 
@@ -14,13 +15,13 @@ const eventRegistration: ModelStatic<
   state: DataTypes.INTEGER,
 });
 
-export class EventRegistration extends eventRegistration {}
+export class EventRegistration extends SequelizeModel(eventRegistration, () => {
+  EventRegistration.belongsTo(EventInstance, { onDelete: "CASCADE" });
+  EventInstance.hasMany(EventRegistration, {
+    as: "eventRegistrations",
+    foreignKey: "eventInstanceId",
+  });
 
-EventRegistration.belongsTo(EventInstance, { onDelete: "CASCADE" });
-EventInstance.hasMany(EventRegistration, {
-  as: "eventRegistrations",
-  foreignKey: "eventInstanceId",
-});
-
-EventRegistration.belongsTo(User);
-User.hasMany(EventRegistration, { foreignKey: "userId" });
+  EventRegistration.belongsTo(User, { onDelete: "CASCADE" });
+  User.hasMany(EventRegistration, { foreignKey: "userId" });
+}) {}

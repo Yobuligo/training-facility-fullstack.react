@@ -1,5 +1,5 @@
 @use "./dimensions.module.scss";
-@import "./colors.module.scss";
+@use "./colors.module.scss";
 
 @mixin medium-screen {
   @media (min-width: dimensions.$medium-screen-min-width-in-rem) {
@@ -15,13 +15,21 @@
 
 @mixin hoverIcon {
   &:hover {
-    fill: $color-hover;
+    fill: colors.$color-hover;
   }
 }
 
 @mixin hoverButton {
   &:hover {
-    background-color: $color-hover;
+    background-color: colors.$color-hover;
     @content;
   }
+}
+
+@mixin glassy {
+  background-color: transparentize(
+    $color: colors.$color-backdrop,
+    $amount: 0.4
+  );
+  backdrop-filter: blur(2px);
 }
