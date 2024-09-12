@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { IllegalStateError } from "../core/errors/IllegalStateError";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
@@ -24,7 +25,6 @@ import { transaction } from "./sequelize/utils/transaction";
 import { SessionRepo } from "./SessionRepo";
 import { UserProfileRepo } from "./UserProfileRepo";
 import { UserRoleRepo } from "./UserRoleRepo";
-import { IllegalStateError } from "../core/errors/IllegalStateError";
 
 export class UserRepo extends SequelizeRepository<IUserSecure> {
   constructor() {
@@ -56,7 +56,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     userId: string,
     changeCredentials: IChangeCredentials
   ): Promise<boolean> {
-    const user = await this.findByCredentialsSecure(changeCredentials);
+    const user = await this.findByCredentials(changeCredentials);
     if (!user) {
       throw new InvalidCredentialsError("InvalidCredentialsError");
     }
@@ -68,16 +68,17 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       );
     }
 
-    const password = hashPassword(changeCredentials.newPassword, user.salt);
+    const salt = this.createSalt();
+    const password = hashPassword(changeCredentials.newPassword, salt);
     const updatedRows = await this.model.update(
-      { password },
+      { password, salt },
       { where: { id: user.id } }
     );
     return updatedRows[0] === 1;
   }
 
   async createUser(credentials: ICredentials): Promise<IUserSecure> {
-    const salt = hash(uuid());
+    const salt = this.createSalt();
     const password = hashPassword(credentials.password, salt);
 
     const user = await super.insert({
@@ -321,5 +322,9 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       ],
     });
     return data?.toJSON();
+  }
+
+  private createSalt(): string {
+    return hash(uuid());
   }
 }
