@@ -1,21 +1,25 @@
 import { AppConfig } from "../AppConfig";
+import { SendEmailError } from "../shared/errors/SendEmailError";
 import { smtp } from "./smtp";
 
 export class EmailService {
-  sendInvite(recipient: string, userInviteId: string) {
+  async sendInvite(recipient: string, userInviteId: string) {
     // create invite link
     const linkInvite = `${AppConfig.clientHost}/user-invite/${userInviteId}`;
 
-    smtp.sendMail(
-      {
+    try {
+      await smtp.sendMail({
         from: AppConfig.smtpSender,
         to: recipient,
         subject: "Einladung zu Yeoljeong",
         text: `Du wurdest eingeladen. Melde dich bitte unter folgendem Link an ${linkInvite}`,
-      },
-      (error) => {
-        // todo
+      });
+    } catch (error) {
+      let message = "";
+      if (error instanceof Error) {
+        message = error.message;
       }
-    );
+      throw new SendEmailError(message);
+    }
   }
 }

@@ -7,7 +7,13 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
   const viewModel = useUserInviteViewModel();
   return (
     <div className={styles.userInvite}>
-      {viewModel.isVerifyUserInviteRequestProcessing ? <PageSpinner /> : <></>}
+      {viewModel.isVerifyUserInviteRequestProcessing ? (
+        <PageSpinner />
+      ) : (
+        <>
+          <div>{viewModel.userInvite?.username}</div>
+        </>
+      )}
     </div>
   );
 };

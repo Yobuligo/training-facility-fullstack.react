@@ -1,9 +1,11 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
+import { createError } from "../core/utils/createError";
 import { EmailService } from "../email/EmailService";
 import { UserInviteRepo } from "../repositories/UserInviteRepo";
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
+import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IUserInvite, UserInviteRouteMeta } from "../shared/model/IUserInvite";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
@@ -40,9 +42,25 @@ export class UserInviteController extends EntityController<
           }
 
           // send invite
-          const emailService = new EmailService();
-          emailService.sendInvite(userProfile.email, createdUserInvite.id);
-          res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
+          try {
+            const emailService = new EmailService();
+            await emailService.sendInvite(
+              userProfile.email,
+              createdUserInvite.id
+            );
+            res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
+          } catch (error) {
+            res
+              .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)
+              .send(
+                createError(
+                  `Error while sending email. ${
+                    error instanceof SendEmailError ? error.message : ""
+                  }`,
+                  "SendEmailError"
+                )
+              );
+          }
         },
         [AuthRole.ADMIN]
       )

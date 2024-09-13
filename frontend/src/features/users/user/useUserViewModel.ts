@@ -5,6 +5,7 @@ import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { isError } from "../../../core/utils/isError";
 import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
@@ -351,23 +352,33 @@ export const useUserViewModel = (props: IUserProps) => {
   };
 
   const onSendUserInvite = () =>
-    sendUserInviteRequest(async () => {
-      const userInvite: IUserInvite = {
-        id: uuid(),
-        expiresAt: DateTime.addDays(new Date(), 5),
-        type: UserInviteType.REGISTER,
-        userId: props.user.id,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      const userInviteApi = new UserInviteApi();
-      await userInviteApi.insert(userInvite);
-      toast.success(
-        t(texts.user.successSendUserInvite, {
-          user: UserInfo.toFullName(props.user),
-        })
-      );
-    });
+    sendUserInviteRequest(
+      async () => {
+        const userInvite: IUserInvite = {
+          id: uuid(),
+          expiresAt: DateTime.addDays(new Date(), 5),
+          type: UserInviteType.REGISTER,
+          userId: props.user.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+        const userInviteApi = new UserInviteApi();
+        await userInviteApi.insert(userInvite);
+        toast.success(
+          t(texts.user.successSendUserInvite, {
+            user: UserInfo.toFullName(props.user),
+          })
+        );
+      },
+      (error) => {
+        if (isError(error) && error.type === "SendEmailError") {
+          toast.error(t(texts.user.errorSendEmail));
+          return true;
+        } else {
+          return false;
+        }
+      }
+    );
 
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {

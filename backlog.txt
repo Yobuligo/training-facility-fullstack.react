@@ -145,9 +145,17 @@
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
 		
 	- Send invite mail to user
+		- Display loading spinner when sending mail
+		- User must be forwarded to invite route
+			- Invite must be checked, display error in case of expired or invalid invite
+			- User must set a password
+			- throw error if email could not be send because of an invalid email
+			- throw error if email could not be send because of technical issues
+			# previous inivites of a user must be deleted
+			- User invitation must be deleted with user
+		- Invite must expire
 	
-	- Send reset password mail to user 	
-		
+	- Send reset password mail to user		
 		
 	- Mark user as canceled / quit
 	
@@ -172,15 +180,6 @@
 	
 # Password
 	# User must be able to change password
-	
-- Invite
-	- User must be forwarded to invite route
-		- Invite must be checked
-		- User must set a password
-		- throw error if email could not be send because of an invalid email
-		- throw error if email could not be send because of technical issues
-		- previous inivites of a user must be deleted
-	- Invite must expire
 	
 - Reset Password
 	- User must be forwarded to reset password route

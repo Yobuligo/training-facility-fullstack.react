@@ -43,5 +43,5 @@ export const useUserInviteViewModel = () => {
     )
   );
 
-  return { isVerifyUserInviteRequestProcessing };
+  return { isVerifyUserInviteRequestProcessing, userInvite };
 };
