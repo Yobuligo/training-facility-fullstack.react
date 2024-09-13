@@ -51,7 +51,7 @@ export const Welcome: React.FC = () => {
       {isLoadEventInstancesRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <>
+        <div className={styles.upcomingTrainings}>
           {isInitial(eventInstanceItemModels) ? (
             <div>
               {t(texts.welcome.noTrainings, {
@@ -70,7 +70,7 @@ export const Welcome: React.FC = () => {
               />
             </>
           )}
-        </>
+        </div>
       )}
     </div>
   );
