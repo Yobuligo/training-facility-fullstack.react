@@ -2,6 +2,7 @@ import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { useUser } from "../../../hooks/useUser";
@@ -21,12 +22,13 @@ export const User: React.FC<IUserProps> = (props) => {
 
   const adminModeButtons = (
     <>
-      <Button
+      <SpinnerButton
         disabled={viewModel.displayMode}
+        displaySpinner={viewModel.isSendUserInviteRequestProcessing}
         onClick={viewModel.onSendUserInvite}
       >
         {t(texts.user.sendInvitation)}
-      </Button>
+      </SpinnerButton>
       <Button disabled={viewModel.displayMode}>
         {t(texts.user.generateNewPassword)}
       </Button>
