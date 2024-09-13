@@ -177,6 +177,9 @@
 	- User must be forwarded to invite route
 		- Invite must be checked
 		- User must set a password
+		- throw error if email could not be send because of an invalid email
+		- throw error if email could not be send because of technical issues
+		- previous inivites of a user must be deleted
 	- Invite must expire
 	
 - Reset Password

@@ -20,7 +20,6 @@ export class UserInviteController extends EntityController<
   }
 
   protected insert(): void {
-    super.insert();
     this.router.post(
       this.routeMeta.path,
       SessionInterceptor(
@@ -57,7 +56,7 @@ export class UserInviteController extends EntityController<
         const userInviteId = req.params.id;
         const userInviteRepo = new UserInviteRepo();
         const userInvite = await userInviteRepo.verify(userInviteId);
-        res.send(HttpStatusCode.OK_200).send(userInvite);
+        res.status(HttpStatusCode.OK_200).send(userInvite);
       })
     );
   }

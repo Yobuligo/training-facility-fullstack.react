@@ -5,13 +5,13 @@ import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { IUserInvite } from "../../../shared/model/IUserInvite";
+import { IUserInviteShort } from "../../../shared/model/IUserInviteShort";
 
 export const useUserInviteViewModel = () => {
   const params = useParams<{ userInviteId: string }>();
   const [verifyUserInviteRequest, isVerifyUserInviteRequestProcessing] =
     useRequest();
-  const [userInvite, setUserInvite] = useState<IUserInvite | undefined>(
+  const [userInvite, setUserInvite] = useState<IUserInviteShort | undefined>(
     undefined
   );
   const [error, setError] = useState("");

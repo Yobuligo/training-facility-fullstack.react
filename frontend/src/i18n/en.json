@@ -234,8 +234,9 @@
         "phone": "Phone",
         "postalCode": "Postal Code",
         "changePassword": "Change password",
-        "sendInvitation": "Send invitation",
+        "sendInvitation": "Send invitation",        
         "street": "Street",
+        "successSendUserInvite": "Invitation was send to {{user}}.",
         "tariff": "Tariff",
         "technicalInformation": "Technical Information",
         "username": "Username"

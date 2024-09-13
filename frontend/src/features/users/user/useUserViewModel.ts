@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserInviteApi } from "../../../api/UserInviteApi";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -8,21 +10,23 @@ import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
+import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUser } from "../../../model/DummyUser";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
+import { IUserInvite } from "../../../shared/model/IUserInvite";
 import { AuthRole } from "../../../shared/types/AuthRole";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
+import { UserInviteType } from "../../../shared/types/UserInviteType";
 import { uuid } from "../../../utils/uuid";
 import { IUserProps } from "./IUserProps";
-import { useNavigate } from "react-router-dom";
-import { AppRoutes } from "../../../routes/AppRoutes";
 
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
@@ -76,8 +80,11 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
   const [existsByUsernameRequest] = useRequest();
+  const [sendUserInviteRequest, isSendUserInviteRequestProcessing] =
+    useRequest();
   const navigate = useNavigate();
   const confirmDialog = useConfirmDialog();
+  const toast = useToast();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -343,6 +350,25 @@ export const useUserViewModel = (props: IUserProps) => {
     props.onChange?.(props.user);
   };
 
+  const onSendUserInvite = () =>
+    sendUserInviteRequest(async () => {
+      const userInvite: IUserInvite = {
+        id: uuid(),
+        expiresAt: DateTime.addDays(new Date(), 5),
+        type: UserInviteType.REGISTER,
+        userId: props.user.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const userInviteApi = new UserInviteApi();
+      await userInviteApi.insert(userInvite);
+      toast.success(
+        t(texts.user.successSendUserInvite, {
+          user: UserInfo.toFullName(props.user),
+        })
+      );
+    });
+
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
       previous.collapseAddress = collapsed;
@@ -431,6 +457,7 @@ export const useUserViewModel = (props: IUserProps) => {
     gradings,
     isAdminOptions,
     isDeactivated,
+    isSendUserInviteRequestProcessing,
     joinedOn,
     lastname,
     lastnameError,
@@ -444,6 +471,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onIsAdminChange,
     onGenderChange,
     onSave,
+    onSendUserInvite,
     onTariffChange,
     onToggleCollapseAddress,
     onToggleCollapseBank,

@@ -21,7 +21,10 @@ export const User: React.FC<IUserProps> = (props) => {
 
   const adminModeButtons = (
     <>
-      <Button disabled={viewModel.displayMode}>
+      <Button
+        disabled={viewModel.displayMode}
+        onClick={viewModel.onSendUserInvite}
+      >
         {t(texts.user.sendInvitation)}
       </Button>
       <Button disabled={viewModel.displayMode}>
