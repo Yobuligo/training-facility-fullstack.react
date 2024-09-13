@@ -3,6 +3,7 @@ import { EventDefinitionController } from "./controllers/EventDefinitionControll
 import { EventInstanceController } from "./controllers/EventInstanceController";
 import { EventRegistrationController } from "./controllers/EventRegistrationController";
 import { UserController } from "./controllers/UserController";
+import { UserInviteController } from "./controllers/UserInviteController";
 import { UserProfileController } from "./controllers/UserProfileController";
 import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
@@ -31,4 +32,5 @@ server.use("/api", new EventInstanceController().router);
 server.use("/api", new EventRegistrationController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProfileController().router);
+server.use("/api", new UserInviteController().router);
 server.listen(5000);
