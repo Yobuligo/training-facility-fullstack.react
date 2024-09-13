@@ -254,8 +254,8 @@
     },
     "welcome": {
         "explanation": "Im Yeoljeong-Mitgliederbereich kannst Du Deine Trainings planen und Dein Benutzerprofil pflegen.",
-        "noTrainings": "Derzeit bist Du für kein Training diese Woche angemeldet. Wechsele zu 'Meine Trainings', um Dich anzumelden.",
-        "weekTrainings": "Du bist für die folgenden kommenden Trainings diese Woche angemeldet",
-        "welcome": "Willkommen im Mitgliederbereich, {{name}}"
+        "noTrainings": "Du hast dich für diese Woche noch nicht für ein Training eingetragen. Gehe zu '{{trainings}}' um Dich einzutragen.",
+        "weekTrainings": "Du hast dich für diese Woche noch für die folgenden Trainings eingetragen:",
+        "welcome": "Hallo {{name}}, Willkommen im Mitgliederbereich"
     }
 }

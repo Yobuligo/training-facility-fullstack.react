@@ -52,7 +52,11 @@ export const Welcome: React.FC = () => {
       ) : (
         <>
           {isInitial(eventInstanceItemModels) ? (
-            <p>{t(texts.welcome.noTrainings)}</p>
+            <p>
+              {t(texts.welcome.noTrainings, {
+                trainings: t(texts.dashboard.trainings),
+              })}
+            </p>
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
