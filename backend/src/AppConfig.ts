@@ -14,5 +14,10 @@ export const AppConfig = {
   dbName: process.env.DB_NAME,
   dbUsername: process.env.DB_USERNAME,
   dbPassword: process.env.DB_PASSWORD,
+  smtpHost: process.env.EMAIL_SMTP_HOST,
+  smtpPort: process.env.EMAIL_SMTP_PORT,
+  smtpUsername: process.env.EMAIL_SMTP_USERNAME,
+  smtpPassword: process.env.EMAIL_SMTP_PASSWORD,
+  smtpSender: process.env.EMAIL_SMTP_SENDER,
   PEPPER: process.env.DB_PEPPER,
 };
