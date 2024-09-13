@@ -6,7 +6,6 @@ import { UserController } from "./controllers/UserController";
 import { UserProfileController } from "./controllers/UserProfileController";
 import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
-import { DemoController } from "./controllers/DemoController";
 
 const initialize = async () => {
   await initializeModels(false);
@@ -32,5 +31,4 @@ server.use("/api", new EventInstanceController().router);
 server.use("/api", new EventRegistrationController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProfileController().router);
-server.use("/api", new DemoController().router);
 server.listen(5000);
