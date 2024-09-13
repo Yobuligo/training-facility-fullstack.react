@@ -7,4 +7,5 @@ export const AppRoutes = configureRoutes({
   error: route("/error"),
   login: route("/login"),
   eventOverview: route("/training-times"),
+  userInvite: route("/user-invite/:userInviteId"),
 });

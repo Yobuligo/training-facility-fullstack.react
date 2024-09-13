@@ -4,6 +4,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { ErrorPage } from "../pages/ErrorPage";
 import { EventOverviewPage } from "../pages/EventOverviewPage";
 import { LoginPage } from "../pages/LoginPage";
+import { UserInvitePage } from "../pages/UserInvitePage";
 import { AppRoutes } from "./AppRoutes";
 
 export const AppRouter = createBrowserRouter(
@@ -27,6 +28,11 @@ export const AppRouter = createBrowserRouter(
     {
       path: AppRoutes.eventOverview.origin,
       element: <EventOverviewPage />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: AppRoutes.userInvite.origin,
+      element: <UserInvitePage />,
       errorElement: <ErrorPage />,
     },
   ],
