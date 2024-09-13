@@ -10,15 +10,15 @@ export class UserInviteController extends EntityController<
 > {
   constructor() {
     super(UserInviteRouteMeta, new UserInviteRepo(), [AuthRole.ADMIN]);
-    this.check();
+    this.verify();
   }
 
-  private check() {
-    this.router.get(`${this.routeMeta.path}/:id/check`, async (req, res) => {
+  private verify() {
+    this.router.get(`${this.routeMeta.path}/:id/verify`, async (req, res) => {
       const userInviteId = req.params.id;
       const userInviteRepo = new UserInviteRepo();
-      await userInviteRepo.check(userInviteId);
-      res.send(HttpStatusCode.OK_200).send(true);
+      const userInvite = await userInviteRepo.verify(userInviteId);
+      res.send(HttpStatusCode.OK_200).send(userInvite);
     });
   }
 }

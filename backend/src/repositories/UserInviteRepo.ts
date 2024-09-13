@@ -10,19 +10,20 @@ export class UserInviteRepo extends SequelizeRepository<IUserInvite> {
     super(UserInvite);
   }
 
-  async check(userInviteId: string) {
+  async verify(userInviteId: string): Promise<IUserInvite> {
     const data = await this.model.findByPk(userInviteId);
     if (!data) {
       throw new NotFoundError(
-        "Error while finding user invite. Invite not found."
+        "Error while verifying user invite. Invite not found."
       );
     }
 
     const userInvite = data.toJSON();
     if (DateTime.isBefore(userInvite.expiresAt)) {
       throw new ExpiredError(
-        "Error while checking invite. Invite is already expired"
+        "Error while verifying user invite. Invite has already expired"
       );
     }
+    return userInvite;
   }
 }
