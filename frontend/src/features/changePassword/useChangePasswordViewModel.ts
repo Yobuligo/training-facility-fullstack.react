@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { isError } from "../../core/utils/isError";
 import { isInitial } from "../../core/utils/isInitial";
 import { useUser } from "../../hooks/useUser";
+import { useToast } from "../../lib/toast/hooks/useToast";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { IChangePasswordProps } from "./IChangePasswordProps";
-import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../routes/AppRoutes";
-import { useToast } from "../../lib/toast/hooks/useToast";
 
-export const useChangePasswordViewModel = (props: IChangePasswordProps) => {
+export const useChangePasswordViewModel = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newConfirmPassword, setNewConfirmPassword] = useState("");

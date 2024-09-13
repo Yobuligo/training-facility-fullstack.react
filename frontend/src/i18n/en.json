@@ -106,6 +106,7 @@
             "success": " Success",
             "warning": "Warning"
         },
+        "username": "Username",
         "weekdays": {
             "monday": "Monday",
             "mondayShort": "Mon",
@@ -165,8 +166,7 @@
         "register": "Register",
         "registerText": "Register instead",
         "successUserCreated": "User was created. Please login.",
-        "title": "Login",
-        "username": "Username"
+        "title": "Login"
     },
     "logout": {
         "title": "Logout"
@@ -239,8 +239,19 @@
         "street": "Street",
         "successSendUserInvite": "Invitation was send to {{user}}.",
         "tariff": "Tariff",
-        "technicalInformation": "Technical Information",
-        "username": "Username"
+        "technicalInformation": "Technical Information"        
+    },
+    "userInvite": {
+        "changePassword": "Change password",
+        "confirmNewPassword": "Confirm new password",
+        "currentPassword": "Current password",
+        "errorCurrentPasswordInvalid": "The current password is not correct. Re-enter your current password.",
+        "errorInviteExpiredOrInvalid": "User invite is already expired or invalid.",
+        "errorNewPasswordNotPolicyConfirm": "The new password password does not comply with the password policy. Ensure to follow the policy stated under 'Policy requirements'",
+        "newPassword": "New password",
+        "passwordsNotIdentical": "Your new passwords are not identical",
+        "successMessage": "Password changed successfully",
+        "title": "Change password"
     },
     "userProfileItem": {
         "deactivated": "Deactivated"

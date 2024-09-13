@@ -85,7 +85,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode || !props.isAdminMode}
             error={viewModel.usernameError}
-            label={t(texts.user.username)}
+            label={t(texts.general.username)}
             maxLength={100}
             onChange={viewModel.setUsername}
             value={viewModel.username}

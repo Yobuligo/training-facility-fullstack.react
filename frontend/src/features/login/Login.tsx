@@ -24,7 +24,7 @@ export const Login: React.FC = () => {
           </Card>
         )}
         <LabeledInput
-          label={t(texts.login.username)}
+          label={t(texts.general.username)}
           onChange={viewModel.setUsername}
           onEnter={viewModel.onEnter}
           value={viewModel.username}

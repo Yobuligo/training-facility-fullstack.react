@@ -1,0 +1,28 @@
+@use "../../../styles/dimensions.module.scss";
+@use "../../../styles/components.module.scss";
+
+.userInvite {
+  @extend .preLoginLayout;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  padding: 1rem;
+}
+
+.headline {
+  margin-bottom: 0;
+}
+
+.toolbar {
+  align-self: end;
+}
+
+.username {
+  font-size: x-large;
+  font-weight: 400;
+  margin-top: dimensions.$negative-space;
+  margin-bottom: dimensions.$negative-space;
+}

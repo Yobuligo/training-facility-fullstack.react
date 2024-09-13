@@ -1,17 +1,16 @@
 import { Card } from "../../components/card/Card";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
+import { SecondaryButton } from "../../components/secondaryButton/SecondaryButton";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
+import { Toolbar } from "../../components/toolbar/Toolbar";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
-import { IChangePasswordProps } from "./IChangePasswordProps";
+import { Error } from "../error/Error";
 import styles from "./ChangePassword.module.scss";
 import { useChangePasswordViewModel } from "./useChangePasswordViewModel";
-import { Error } from "../error/Error";
-import { SecondaryButton } from "../../components/secondaryButton/SecondaryButton";
-import { Toolbar } from "../../components/toolbar/Toolbar";
 
-export const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
-  const viewModel = useChangePasswordViewModel(props);
+export const ChangePassword: React.FC = () => {
+  const viewModel = useChangePasswordViewModel();
   const { t } = useTranslation();
 
   return (
