@@ -1,10 +1,14 @@
-@import "../../../styles/dimensions.module.scss";
-@import "../../../styles/colors.module.scss";
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
 
 .user {
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
+}
+
+.username {
+  font-family: "MerriweatherSans";
 }
 
 .gradingGroup {
@@ -15,11 +19,12 @@
 
 .cancelButton {
   background-color: transparent;
-  outline: $color-primary solid 1px;
-  color: $color-primary;
+  outline: colors.$color-primary solid 1px;
+  color: colors.$color-primary;
+
   &:hover {
     background-color: transparent;
-    outline: $color-primary solid 1px;
-    color: $color-primary;
+    outline: colors.$color-primary solid 1px;
+    color: colors.$color-primary;
   }
 }

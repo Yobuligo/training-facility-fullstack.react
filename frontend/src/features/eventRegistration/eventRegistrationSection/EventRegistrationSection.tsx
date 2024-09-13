@@ -44,9 +44,9 @@ export const EventRegistrationSection: React.FC<
               </SecondaryButton>
             )}
           </div>
-          <div className={styles.title}>
+          <h3 className={styles.title}>
             {t(texts.eventRegistrationSection.checkInUsers)}
-          </div>
+          </h3>
           <EventRegistrationList
             eventRegistrations={viewModel.eventRegistrations}
             onDelete={viewModel.onDelete}

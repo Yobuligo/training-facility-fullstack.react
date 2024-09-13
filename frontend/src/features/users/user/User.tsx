@@ -65,11 +65,11 @@ export const User: React.FC<IUserProps> = (props) => {
         onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
-        <h3>{`${props.user.userProfile?.firstname} ${
+        <h3 className={styles.username}>{`${props.user.userProfile?.firstname} ${
           props.user.userProfile?.lastname
         } ${
           props.user.userProfile && props.user.userProfile.memberId !== 0
-            ? `(${formatMemberId(props.user.userProfile.memberId)})`
+            ? `| ${formatMemberId(props.user.userProfile.memberId)}`
             : ""
         }`}</h3>
 
