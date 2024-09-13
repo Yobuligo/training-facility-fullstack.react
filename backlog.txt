@@ -143,6 +143,13 @@
 		# The user must be able to change his password
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
+		
+	- Send invite mail to user
+	
+	- Send reset password mail to user 	
+		
+		
+	- Mark user as canceled / quit
 	
 # User List
 	# Display loading spinner, when loading users
@@ -163,14 +170,24 @@
 	# Display error if user credentials invalid
 	- Display less technical error when login fails for an unknown reason
 	
-- Password
-	- User must be able to change password
+# Password
+	# User must be able to change password
 	
-- Event Calendar
+- Invite
+	- User must be forwarded to invite route
+		- Invite must be checked
+		- User must set a password
+	- Invite must expire
+	
+- Reset Password
+	- User must be forwarded to reset password route
+	- Reset password must expire
+	
+# Event Calendar
 	# Start display of calender hours of first event and end hours of end of last event
 	# Remove month view
 	
-- Event Calendar Overview
+# Event Calendar Overview
 	# Provide separate route to calendar overview in display mode
 	
 - LabeledSelect
@@ -180,6 +197,7 @@
 - Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
 	- Move session persistence from local storage to cookies (http only)
+	- user is logged after a certain times of login fails
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest

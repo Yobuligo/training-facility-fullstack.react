@@ -1,5 +1,4 @@
 import { ModelStatic } from "sequelize";
-import { SequelizeModelType } from "../model/core/SequelizeModelType";
 import { EventDefinition } from "../model/EventDefinition";
 import { EventInstance } from "../model/EventInstance";
 import { EventRegistration } from "../model/EventRegistration";
@@ -9,9 +8,10 @@ import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
+import { IHaveStaticAssociate } from "../model/core/IHaveStaticAssociate";
 
 export const initializeModels = async (alter: boolean) => {
-  const models: SequelizeModelType[] = [
+  const models: IHaveStaticAssociate[] = [
     Session,
     User,
     UserProfile,

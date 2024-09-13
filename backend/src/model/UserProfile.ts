@@ -3,7 +3,6 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { createIdType } from "./core/createIdType";
-import { SequelizeModel } from "./core/SequelizeModel";
 import { User } from "./User";
 
 const userProfile: ModelStatic<
@@ -31,10 +30,12 @@ const userProfile: ModelStatic<
   joinedOn: DataTypes.DATE,
 });
 
-export class UserProfile extends SequelizeModel(userProfile, () => {
-  UserProfile.belongsTo(User, { onDelete: "CASCADE" });
-  User.hasOne(UserProfile, {
-    as: "userProfile",
-    foreignKey: "userId",
-  });
-}) {}
+export class UserProfile extends userProfile {
+  static associate() {
+    UserProfile.belongsTo(User, { onDelete: "CASCADE" });
+    User.hasOne(UserProfile, {
+      as: "userProfile",
+      foreignKey: "userId",
+    });
+  }
+}
