@@ -11,6 +11,7 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IEventInstanceItemModel } from "../eventInstance/eventInstanceItem/IEventInstanceItemModel";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
+import styles from "./Welcome.module.scss";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
@@ -40,7 +41,7 @@ export const Welcome: React.FC = () => {
 
   return (
     <div>
-      <h2>
+      <h2 className={styles.greeting}>
         {t(texts.welcome.welcome, {
           name: user.userProfile.firstname,
         })}
