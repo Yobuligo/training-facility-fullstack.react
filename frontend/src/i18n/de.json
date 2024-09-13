@@ -204,7 +204,7 @@
         "activateUserQuestion": "Soll der Benutzer '{{username}}' wirklich aktiviert werden?",
         "activateUserTitle": "Benutzer aktivieren",
         "address": "Adresse",
-        "bank": "Bank",
+        "bank": "Bankverbindung",
         "bankAccountOwner": "Kontoinhaber",
         "bankAccountIBAN": "IBAN",
         "bankAccountBIC": "BIC",
