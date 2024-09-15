@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ProtectedPage } from "../components/pages/protectedPage/ProtectedPage";
-import { ChangePassword } from "../features/changePassword/ChangePassword";
+import { PasswordChange } from "../features/password/passwordChange/PasswordChange";
 import { AppRoutes } from "../routes/AppRoutes";
 
 export const ChangePasswordPage: React.FC = () => {
@@ -10,7 +10,7 @@ export const ChangePasswordPage: React.FC = () => {
     <ProtectedPage
       onAppLogoClick={() => navigate(AppRoutes.dashboard.toPath())}
     >
-      <ChangePassword />
+      <PasswordChange />
     </ProtectedPage>
   );
 };

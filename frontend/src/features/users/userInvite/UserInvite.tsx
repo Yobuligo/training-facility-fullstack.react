@@ -6,6 +6,7 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Error } from "../../error/Error";
+import { PasswordConfirmForm } from "../../password/passwordConfirmForm/PasswordConfirmForm";
 import { IUserInviteProps } from "./IUserInviteProps";
 import styles from "./UserInvite.module.scss";
 import { useUserInviteViewModel } from "./useUserInviteViewModel";
@@ -30,16 +31,13 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
                 value={viewModel.userInvite.username}
               />
             )}
-            <LabeledInput
-              label={t(texts.userInvite.newPassword)}
-              type="password"
-              onChange={viewModel.setNewPassword}
-            />
-            <LabeledInput
-              label={t(texts.changePassword.confirmNewPassword)}
-              type="password"
-              onChange={viewModel.setNewConfirmPassword}
-              error={viewModel.newConfirmPasswordError}
+            <PasswordConfirmForm
+              newConfirmPassword={viewModel.newConfirmPassword}
+              newConfirmPasswordError={viewModel.newConfirmPasswordError}
+              newPassword={viewModel.newPassword}
+              setNewConfirmPassword={viewModel.setNewConfirmPassword}
+              setNewConfirmPasswordError={viewModel.setNewConfirmPasswordError}
+              setNewPassword={viewModel.setNewPassword}
             />
             <Toolbar className={styles.toolbar}>
               <SpinnerButton

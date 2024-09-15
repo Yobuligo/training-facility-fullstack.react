@@ -1,4 +1,4 @@
-export interface IPasswordConfirmProps {
+export interface IPasswordConfirmFormProps {
   newConfirmPassword: string;
   newConfirmPasswordError: string;
   newPassword: string;

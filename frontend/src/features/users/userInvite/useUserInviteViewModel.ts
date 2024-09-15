@@ -14,6 +14,7 @@ import { IUserInviteShort } from "../../../shared/model/IUserInviteShort";
 
 export const useUserInviteViewModel = () => {
   const params = useParams<{ userInviteId: string }>();
+  const { t } = useTranslation();
   const [verifyUserInviteRequest, isVerifyUserInviteRequestProcessing] =
     useRequest();
   const [userInvite, setUserInvite] = useState<IUserInviteShort | undefined>(
@@ -27,7 +28,6 @@ export const useUserInviteViewModel = () => {
     newConfirmPasswordError,
     setNewConfirmPasswordError,
   ] = useLabeledElement("");
-  const { t } = useTranslation();
 
   useInitialize(() =>
     verifyUserInviteRequest(

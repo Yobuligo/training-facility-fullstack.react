@@ -2,16 +2,18 @@ import { useEffect } from "react";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { IPasswordConfirmProps } from "./IPasswordConfirmProps";
+import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
 
-export const PasswordConfirm: React.FC<IPasswordConfirmProps> = (props) => {
+export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
+  props
+) => {
   const { t } = useTranslation();
 
   useEffect(() => {
     if (props.newConfirmPassword !== "") {
       if (props.newPassword !== props.newConfirmPassword) {
         props.setNewConfirmPasswordError(
-          t(texts.changePassword.passwordsNotIdentical)
+          t(texts.passwordConfirmForm.passwordsNotIdentical)
         );
       } else {
         props.setNewConfirmPasswordError("");
@@ -22,12 +24,12 @@ export const PasswordConfirm: React.FC<IPasswordConfirmProps> = (props) => {
   return (
     <>
       <LabeledInput
-        label={t(texts.passwordConfirm.newPassword)}
+        label={t(texts.passwordConfirmForm.newPassword)}
         type="password"
         onChange={props.setNewPassword}
       />
       <LabeledInput
-        label={t(texts.changePassword.confirmNewPassword)}
+        label={t(texts.passwordConfirmForm.confirmNewPassword)}
         type="password"
         onChange={props.setNewConfirmPassword}
         error={props.newConfirmPasswordError}

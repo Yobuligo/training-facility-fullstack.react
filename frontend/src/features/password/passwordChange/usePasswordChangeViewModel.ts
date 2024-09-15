@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isError } from "../../core/utils/isError";
-import { isInitial } from "../../core/utils/isInitial";
-import { useUser } from "../../hooks/useUser";
-import { useToast } from "../../lib/toast/hooks/useToast";
-import { texts } from "../../lib/translation/texts";
-import { useTranslation } from "../../lib/translation/useTranslation";
-import { UserApi } from "../../lib/userSession/api/UserApi";
-import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { AppRoutes } from "../../routes/AppRoutes";
+import { isError } from "../../../core/utils/isError";
+import { isInitial } from "../../../core/utils/isInitial";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
+import { useLabeledElement } from "../../../hooks/useLabeledElement";
+import { useUser } from "../../../hooks/useUser";
+import { useToast } from "../../../lib/toast/hooks/useToast";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
+import { UserApi } from "../../../lib/userSession/api/UserApi";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { AppRoutes } from "../../../routes/AppRoutes";
 
-export const useChangePasswordViewModel = () => {
+export const usePasswordChangeViewModel = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [newConfirmPassword, setNewConfirmPassword] = useState("");
-  const [showNewConfirmPasswordError, setShowNewConfirmPasswordError] =
-    useState(false);
+  const [
+    newConfirmPassword,
+    setNewConfirmPassword,
+    newConfirmPasswordError,
+    setNewConfirmPasswordError,
+  ] = useLabeledElement("");
   const [changePasswordError, setChangePasswordError] = useState<
     string | undefined
   >(undefined);
@@ -26,18 +31,8 @@ export const useChangePasswordViewModel = () => {
   const { t } = useTranslation();
   const toast = useToast();
 
-  useEffect(() => {
-    if (newConfirmPassword !== "") {
-      if (newPassword !== newConfirmPassword) {
-        setShowNewConfirmPasswordError(true);
-      } else {
-        setShowNewConfirmPasswordError(false);
-      }
-    }
-  }, [newPassword, newConfirmPassword]);
-
   const confirmButtonDisabled =
-    showNewConfirmPasswordError ||
+    isNotInitial(newConfirmPasswordError) ||
     isInitial(currentPassword) ||
     isInitial(newPassword) ||
     isInitial(newConfirmPassword);
@@ -86,11 +81,14 @@ export const useChangePasswordViewModel = () => {
     changePasswordError,
     confirmButtonDisabled,
     displaySpinner: isChangePasswordRequestProcessing,
-    showNewConfirmPasswordError,
+    newConfirmPassword,
+    newConfirmPasswordError,
+    newPassword,
     onCancel,
     onChangePasswordConfirm,
-    onCurrentPassword: setCurrentPassword,
-    onNewPassword: setNewPassword,
-    onNewConfirmPassword: setNewConfirmPassword,
+    setCurrentPassword,
+    setNewConfirmPasswordError,
+    setNewPassword,
+    setNewConfirmPassword,
   };
 };
