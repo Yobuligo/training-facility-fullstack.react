@@ -22,7 +22,7 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
       ) : (
         <div className={styles.userInvite}>
           <Card className={styles.card}>
-            <h3 className={styles.headline}>{t(texts.changePassword.title)}</h3>
+            <h3 className={styles.headline}>{t(texts.passwordChange.title)}</h3>
             {viewModel.error && <Error message={viewModel.error} />}
             {viewModel.userInvite?.username && (
               <LabeledInput
@@ -42,10 +42,10 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
             <Toolbar className={styles.toolbar}>
               <SpinnerButton
                 disabled={viewModel.isConfirmButtonDisabled}
-                displaySpinner={false}
+                displaySpinner={viewModel.isChangePasswordRequestProcessing}
                 onClick={viewModel.onChangePasswordConfirm}
               >
-                {t(texts.changePassword.changePassword)}
+                {t(texts.passwordChange.changePassword)}
               </SpinnerButton>
             </Toolbar>
           </Card>

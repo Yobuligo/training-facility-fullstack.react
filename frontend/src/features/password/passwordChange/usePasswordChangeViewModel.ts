@@ -43,14 +43,12 @@ export const usePasswordChangeViewModel = () => {
     setChangePasswordError(undefined);
     changePasswordRequest(
       async () => {
-        const result = await new UserApi().changePassword(user.id, {
+        await new UserApi().changePassword(user.id, {
           username: user.username,
           password: currentPassword,
           newPassword,
         });
-        if (result) {
-        }
-        toast.success(t(texts.changePassword.successMessage));
+        toast.success(t(texts.passwordChange.successPasswordChanged));
         navigate(AppRoutes.dashboard.toPath());
       },
       (error) => {
@@ -58,13 +56,13 @@ export const usePasswordChangeViewModel = () => {
           switch (error.type) {
             case "InvalidCredentialsError": {
               setChangePasswordError(
-                t(texts.changePassword.errorCurrentPasswordInvalid)
+                t(texts.passwordChange.errorCurrentPasswordInvalid)
               );
               return true;
             }
             case "NewPasswordNotPolicyConformError": {
               setChangePasswordError(
-                t(texts.changePassword.errorNewPasswordNotPolicyConfirm)
+                t(texts.passwordChange.errorNewPasswordNotPolicyConfirm)
               );
               return true;
             }

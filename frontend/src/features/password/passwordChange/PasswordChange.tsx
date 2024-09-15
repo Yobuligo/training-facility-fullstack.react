@@ -17,12 +17,12 @@ export const PasswordChange: React.FC = () => {
   return (
     <div className={styles.passwordChange}>
       <Card className={styles.card}>
-        <h3 className={styles.headline}>{t(texts.changePassword.title)}</h3>
+        <h3 className={styles.headline}>{t(texts.passwordChange.title)}</h3>
         {viewModel.changePasswordError && (
           <Error message={viewModel.changePasswordError} />
         )}
         <LabeledInput
-          label={t(texts.changePassword.currentPassword)}
+          label={t(texts.passwordChange.currentPassword)}
           type="password"
           onChange={viewModel.setCurrentPassword}
         />
@@ -43,7 +43,7 @@ export const PasswordChange: React.FC = () => {
             displaySpinner={viewModel.displaySpinner}
             onClick={viewModel.onChangePasswordConfirm}
           >
-            {t(texts.changePassword.changePassword)}
+            {t(texts.passwordChange.changePassword)}
           </SpinnerButton>
         </Toolbar>
       </Card>

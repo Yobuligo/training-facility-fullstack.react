@@ -178,12 +178,12 @@
         "register": "Register",
         "unregister": "Unregister"
     },
-    "changePassword": {
+    "passwordChange": {
         "changePassword": "Change password",
         "currentPassword": "Current password",
         "errorCurrentPasswordInvalid": "The current password is not correct. Re-enter your current password.",
         "errorNewPasswordNotPolicyConfirm": "The new password password does not comply with the password policy. Ensure to follow the policy stated under 'Policy requirements'",
-        "successMessage": "Password changed successfully",
+        "successPasswordChanged": "Password changed successfully",
         "title": "Change password"
     },
     "passwordConfirmForm": {
