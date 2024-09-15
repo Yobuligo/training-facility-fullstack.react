@@ -35,6 +35,24 @@ export const useUserInviteViewModel = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
+  const handleError = (error: any): boolean => {
+    if (isError(error)) {
+      switch (error.type) {
+        case "ExpiredError": {
+          setError(t(texts.userInvite.errorInviteExpiredOrInvalid));
+          return true;
+        }
+        case "NotFoundError": {
+          setError(t(texts.userInvite.errorInviteExpiredOrInvalid));
+          return true;
+        }
+        default:
+          return false;
+      }
+    }
+    return false;
+  };
+
   useInitialize(() =>
     verifyUserInviteRequest(
       async () => {
@@ -44,23 +62,7 @@ export const useUserInviteViewModel = () => {
         );
         setUserInvite(userInvite);
       },
-      (error) => {
-        if (isError(error)) {
-          switch (error.type) {
-            case "ExpiredError": {
-              setError(t(texts.userInvite.errorInviteExpiredOrInvalid));
-              return true;
-            }
-            case "NotFoundError": {
-              setError(t(texts.userInvite.errorInviteExpiredOrInvalid));
-              return true;
-            }
-            default:
-              return false;
-          }
-        }
-        return false;
-      }
+      (error) => handleError(error)
     )
   );
 
@@ -70,18 +72,21 @@ export const useUserInviteViewModel = () => {
     isInitial(newConfirmPassword);
 
   const onChangePasswordConfirm = () =>
-    changePasswordRequest(async () => {
-      setError("");
-      // navigate to login page
-      const userInviteApi = new UserInviteApi();
-      await userInviteApi.changePassword(
-        checkNotNull(userInvite?.id),
-        checkNotNull(userInvite?.userId),
-        newPassword
-      );
-      toast.success(t(texts.passwordChange.successPasswordChanged));
-      navigate(AppRoutes.login.toPath());
-    });
+    changePasswordRequest(
+      async () => {
+        setError("");
+        // navigate to login page
+        const userInviteApi = new UserInviteApi();
+        await userInviteApi.changePassword(
+          checkNotNull(userInvite?.id),
+          checkNotNull(userInvite?.userId),
+          newPassword
+        );
+        toast.success(t(texts.passwordChange.successPasswordChanged));
+        navigate(AppRoutes.login.toPath());
+      },
+      (error) => handleError(error)
+    );
 
   return {
     error,

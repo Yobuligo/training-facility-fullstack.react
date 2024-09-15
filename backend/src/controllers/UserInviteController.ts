@@ -4,9 +4,11 @@ import { createError } from "../core/utils/createError";
 import { EmailService } from "../email/EmailService";
 import { UserInviteRepo } from "../repositories/UserInviteRepo";
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
+import { UserRepo } from "../repositories/UserRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IUserInvite, UserInviteRouteMeta } from "../shared/model/IUserInvite";
+import { IUserInviteRequestPasswordChange } from "../shared/model/IUserInviteRequestPasswordChange";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
@@ -18,6 +20,7 @@ export class UserInviteController extends EntityController<
 > {
   constructor() {
     super(UserInviteRouteMeta, new UserInviteRepo(), [AuthRole.ADMIN]);
+    this.changePassword();
     this.verify();
   }
 
@@ -64,6 +67,30 @@ export class UserInviteController extends EntityController<
         },
         [AuthRole.ADMIN]
       )
+    );
+  }
+
+  private changePassword() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/change-password`,
+      ErrorInterceptor(async (req, res) => {
+        // first verify userInvite
+        const userInviteId = req.params.id;
+        const userInviteRepo = new UserInviteRepo();
+        await userInviteRepo.verify(userInviteId);
+
+        // change password and delete user invite
+        const userInviteRequestPasswordChange: IUserInviteRequestPasswordChange =
+          req.body;
+        const userRepo = new UserRepo();
+        const wasChanged = await userRepo.setPassword(
+          userInviteRequestPasswordChange.userId,
+          userInviteRequestPasswordChange.newPassword
+        );
+
+        await userInviteRepo.deleteById(userInviteId);
+        res.status(HttpStatusCode.OK_200).send(wasChanged);
+      })
     );
   }
 
