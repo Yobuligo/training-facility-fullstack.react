@@ -189,6 +189,11 @@
         "successMessage": "Password changed successfully",
         "title": "Change password"
     },
+    "passwordConfirm": {
+        "confirmNewPassword": "Confirm new password",
+        "newPassword": "New password",
+        "passwordsNotIdentical": "Your new passwords are not identical"
+    },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
         "children": "Children",

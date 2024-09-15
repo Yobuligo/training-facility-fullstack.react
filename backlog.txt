@@ -150,11 +150,9 @@
 			# throw error if email could not be send because of an invalid email
 			# throw error if email could not be send because of technical issues
 			# previous inivites of a user must be deleted
-			- User invitation must be deleted with user
-		- Invite must expire
-	
-	- Send reset password mail to user		
-		
+			# User invitation must be deleted with user
+		# Invite must expire
+	- Send reset password mail to user
 	- Mark user as canceled / quit
 	
 # User List
@@ -179,9 +177,10 @@
 # Password
 	# User must be able to change password
 	
-- User Invite
+- User Invite Screen
 	- Invite must be checked, display error in case of expired or invalid invite
-	- User must set a password	
+	- User must set a password
+	- User invite must be deleted when password was changed to not use it twice
 	
 - Reset Password
 	- User must be forwarded to reset password route
