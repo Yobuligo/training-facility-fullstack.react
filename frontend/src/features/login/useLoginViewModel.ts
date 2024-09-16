@@ -28,12 +28,8 @@ export const useLoginViewModel = () => {
   };
 
   const handleError = (error: any) => {
-    if (isError(error)) {
-      if (error.type === "InvalidCredentialsError") {
-        updateErrorMessage(t(texts.login.errorInvalidCredentials));
-      } else {
-        updateErrorMessage(error.message);
-      }
+    if (isError(error) && error.type === "InvalidCredentialsError") {
+      updateErrorMessage(t(texts.login.errorInvalidCredentials));
     } else {
       updateErrorMessage(t(texts.login.errorLogin));
     }
