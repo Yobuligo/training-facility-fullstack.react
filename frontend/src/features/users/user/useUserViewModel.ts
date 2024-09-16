@@ -5,6 +5,7 @@ import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { isEmailInvalid } from "../../../core/utils/isEmailInvalid";
 import { isError } from "../../../core/utils/isError";
 import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
@@ -465,6 +466,11 @@ export const useUserViewModel = (props: IUserProps) => {
     if (isInitial(email)) {
       isValid = false;
       setEmailError(t(texts.user.errorEmailRequired));
+    } else {
+      if (isEmailInvalid(email)) {
+        isValid = false;
+        setEmailError(t(texts.user.errorEmailInvalid));
+      }
     }
 
     if (!isValid) {

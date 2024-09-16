@@ -225,6 +225,7 @@
         "errorFirstnameRequired": "Vorname ist erforderlich",
         "errorLastnameRequired": "Nachname ist erforderlich",
         "errorEmailRequired": "E-Mail ist erforderlich",
+        "errorEmailInvalid": "E-Mail ist ungültig",
         "errorSendEmail": "Fehler beim Versenden der E-Mail",
         "firstname": "Vorname",
         "gender": "Geschlecht",

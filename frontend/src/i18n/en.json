@@ -225,6 +225,7 @@
         "errorFirstnameRequired": "Firstname is required",
         "errorLastnameRequired": "Lastname is required",
         "errorEmailRequired": "Email is required",
+        "errorEmailInvalid": "Email is invalid",
         "errorSendEmail": "Error send invitation email",
         "firstname": "Firstname",
         "gender": "Gender",
