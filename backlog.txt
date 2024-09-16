@@ -43,6 +43,7 @@
 			# must only be displayed at the specific day of month
 	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
+	- Display event planner as list
 	
 - My Trainings
 	# User can register on and unregister from trainings
