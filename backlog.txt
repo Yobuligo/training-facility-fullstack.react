@@ -124,26 +124,18 @@
 	- Errors from backend must be translatable or mapped to client errors 
 		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 	# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
-	# Bug: created user cannot be selected from user list	
-	# Bug: Customer id is not displayed when user was created in backend
-	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
-	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
-	
 	# User Gradings
 		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 		# Bug: Error when entering achievedAt date manually
-		
 	- User can be forced to change his password
 		- An admin can mark a user to change his password
 		- With the next backend request an error thrown to trigger changing the password
-		
 	# Change password
 		# The user must be able to change his password
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
-		
 	- Send invite mail to user
 		# Display loading spinner when sending mail
 		# User must be forwarded to invite route
@@ -154,6 +146,11 @@
 		# Invite must expire
 	- Send reset password mail to user
 	- Mark user as canceled / quit
+	# Bug: created user cannot be selected from user list
+	# Bug: Customer id is not displayed when user was created in backend
+	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
+	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
+	- Bug: Buttons for inviting users and changing password must be active in display mode
 	
 # User List
 	# Display loading spinner, when loading users
@@ -180,6 +177,7 @@
 - User Invite Screen
 	- Invite must be checked, display error in case of expired or invalid invite
 	- User must set a password
+	- User will be navigated to login page after changing the password
 	- User invite must be deleted when password was changed to not use it twice
 	
 - Reset Password

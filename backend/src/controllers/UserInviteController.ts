@@ -38,7 +38,7 @@ export class UserInviteController extends EntityController<
           const userProfileRepo = new UserProfileRepo();
           const userProfile = await userProfileRepo.findByUserId(
             createdUserInvite.userId,
-            ["email"]
+            ["email", "firstname"]
           );
           if (!userProfile) {
             throw new NotFoundError("NotFoundError");
@@ -49,7 +49,8 @@ export class UserInviteController extends EntityController<
             const emailService = new EmailService();
             await emailService.sendInvite(
               userProfile.email,
-              createdUserInvite.id
+              createdUserInvite.id,
+              userProfile.firstname
             );
             res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
           } catch (error) {
