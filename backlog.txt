@@ -145,14 +145,20 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
-	- Send reset password mail to user
-	- Mark user as canceled / quit
+	- Send reset password mail to user -> equal to send invite with different mail text
+		- Display loading spinner when sending mail
+		- User must be forwarded to invite route
+			- throw error if email could not be send because of an invalid email
+			- throw error if email could not be send because of technical issues
+			- previous inivites of a user must be deleted
+			- User invitation must be deleted with user
+		- Invite must expire
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
 	# Bug: Buttons for inviting users and changing password must be active in display mode
-	# Bug: Sending user invite which is not created yet, fails (create new user -> don't save -> send invite)
+	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	
 # User List
 	# Display loading spinner, when loading users
@@ -199,9 +205,9 @@
 		
 - Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
-	- Hash passwords before transferring
+	# Hash passwords before transferring them from client to server
 	- Move session persistence from local storage to cookies (http only)
-	- user is logged after a certain times of login fails
+	- user is locked after a certain times of login fails
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
