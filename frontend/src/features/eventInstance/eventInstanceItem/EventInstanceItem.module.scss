@@ -1,6 +1,8 @@
 @use "../../../styles/dimensions.module.scss";
 @import "../../../styles/mixins.scss";
 
+$medium-screen-width: 46rem;
+
 .card {
   padding: 0;
 }
@@ -22,7 +24,7 @@
   flex-direction: column;
   padding: 1rem 0.5rem;
 
-  @include medium-screen {
+  @include medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
   }
@@ -52,7 +54,7 @@
   row-gap: 0.25rem;
   padding: dimensions.$negative-space;
 
-  @include medium-screen {
+  @include medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
     padding: 0rem;
@@ -60,6 +62,5 @@
 }
 
 .children {
-  // padding: dimensions.$negative-space;
   padding: 1rem;
 }

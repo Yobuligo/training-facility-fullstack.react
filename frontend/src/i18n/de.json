@@ -45,6 +45,7 @@
         "addTraining": "Training hinzufügen"
     },
     "eventRegistrationItem": {
+        "addedByTrainer": "(von Trainer hinzugefügt)",
         "deleteQuestion": "Soll '{{user}}' wirklich von diesem Ereignis entfernt werden?",
         "deleteTitle": "Benutzer löschen",
         "missing": "Fehlend",

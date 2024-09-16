@@ -42,7 +42,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
 
       {/* current user must not be deactivatable */}
-      {user.id !== props.user.id && (
+      {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button
           disabled={viewModel.displayMode}
           onClick={viewModel.onToggleIsDeactivated}
@@ -54,7 +54,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
 
       {/* current user must not be deletable */}
-      {user.id !== props.user.id && (
+      {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button
           disabled={viewModel.displayMode}
           onClick={viewModel.onDeleteUser}
