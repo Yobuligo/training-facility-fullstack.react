@@ -107,7 +107,7 @@
             "success": "Erfolg",
             "warning": "Warnung"
         },
-        "username": "Username",
+        "username": "Benutzername",
         "weekdays": {
             "monday": "Montag",
             "mondayShort": "Mo",
@@ -161,11 +161,9 @@
     },
     "login": {
         "errorLogin": "Unbekannter Fehler beim Login",
-        "errorRegister": "Unbekannter Fehler bei der Registrierung",
+        "errorInvalidCredentials": "Benutzername oder Passwort ungültig",
         "login": "Login",
         "password": "Passwort",
-        "register": "Registrieren",
-        "registerText": "Stattdessen registrieren",
         "successUserCreated": "Benutzer wurde erstellt. Bitte loggen Sie sich ein.",
         "title": "Login"
     },
