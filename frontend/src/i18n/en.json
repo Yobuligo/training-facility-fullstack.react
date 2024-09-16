@@ -162,11 +162,9 @@
     },
     "login": {
         "errorLogin": "Unknown error while login",
-        "errorRegister": "Unknown error while register",
+        "errorInvalidCredentials": "Incorrect username or password",
         "login": "Login",
         "password": "Password",
-        "register": "Register",
-        "registerText": "Register instead",
         "successUserCreated": "User was created. Please login.",
         "title": "Login"
     },

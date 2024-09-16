@@ -176,16 +176,15 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const user = await userRepo.findByCredentials(
           authentication.credentials
         );
-        if (!user) {
+        if (!user || user.isDeactivated === true) {
           return res
             .status(HttpStatusCode.NOT_FOUND_404)
-            .send(createError(`Incorrect username or password.`));
-        }
-
-        if (user.isDeactivated === true) {
-          return res
-            .status(HttpStatusCode.FORBIDDEN_403)
-            .send(createError(`User is deactivated.`));
+            .send(
+              createError(
+                `Incorrect username or password.`,
+                "InvalidCredentialsError"
+              )
+            );
         }
 
         const sessionRepo = new SessionRepo();

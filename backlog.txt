@@ -117,8 +117,8 @@
 	# UserBankAccount must be loaded with User
 	# Delete user with user profile, bank account, gradings, roles, etc.
 	# Refactor Collapsables can be toggled on click at title
-	- Errors from backend must be translatable or mapped to client errors 
-		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
+	# Errors from backend must be translatable or mapped to client errors
+		# e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 	# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
 	# User Gradings
 		# Gradings can be added, saved and reloaded
@@ -170,7 +170,7 @@
 	# Session expires after a certain time
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
-	- Display less technical error when login fails for an unknown reason
+	# Display less technical error when login fails for an unknown reason
 	
 # Password
 	# User must be able to change password
