@@ -3,7 +3,6 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { createError } from "../core/utils/createError";
 import { EmailService } from "../email/EmailService";
 import { UserInviteRepo } from "../repositories/UserInviteRepo";
-import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { SendEmailError } from "../shared/errors/SendEmailError";
@@ -35,12 +34,11 @@ export class UserInviteController extends EntityController<
           const createdUserInvite = await this.repo.insert(userInvite, fields);
 
           // find user email
-          const userProfileRepo = new UserProfileRepo();
-          const userProfile = await userProfileRepo.findByUserId(
-            createdUserInvite.userId,
-            ["email", "firstname"]
+          const userRepo = new UserRepo();
+          const userShort = await userRepo.findByIdShort(
+            createdUserInvite.userId
           );
-          if (!userProfile) {
+          if (!userShort) {
             throw new NotFoundError("NotFoundError");
           }
 
@@ -48,9 +46,10 @@ export class UserInviteController extends EntityController<
           try {
             const emailService = new EmailService();
             await emailService.sendInvite(
-              userProfile.email,
+              userShort.email,
               createdUserInvite.id,
-              userProfile.firstname
+              userShort.firstname,
+              userShort.username
             );
             res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
           } catch (error) {

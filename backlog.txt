@@ -136,6 +136,7 @@
 		# The user must be able to change his password
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
+		- Change default password from simple initial to a strong password
 	- Send invite mail to user
 		# Display loading spinner when sending mail
 		# User must be forwarded to invite route
@@ -151,6 +152,7 @@
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
 	- Bug: Buttons for inviting users and changing password must be active in display mode
+	- Bug: Sending user invite which is not created yet, fails (create new user -> don't save -> send invite)
 	
 # User List
 	# Display loading spinner, when loading users

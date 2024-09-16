@@ -4,6 +4,7 @@ import { UserRoleRepo } from "../repositories/UserRoleRepo";
 import { AuthRole } from "../shared/types/AuthRole";
 import { Gender } from "../shared/types/Gender";
 import { Tariff } from "../shared/types/Tariff";
+import { hash } from "./hash";
 
 export const createRootUser = async () => {
   // check if user already exists, otherwise create one
@@ -14,7 +15,7 @@ export const createRootUser = async () => {
   }
 
   const user = await userRepo.createUser({
-    password: "admin",
+    password: hash("admin"),
     username: "root",
   });
 
@@ -41,35 +42,4 @@ export const createRootUser = async () => {
     role: AuthRole.USER,
     userId: user.id,
   });
-};
-
-export const createDummyUsers = async () => {
-  // check if user already exists, otherwise create one
-
-  for (let i = 0; i < 200; i++) {
-    const userRepo = new UserRepo();
-    const user = await userRepo.createUser({
-      password: "initial",
-      username: `dummy-${i.toString().padStart(3, "0")}`,
-    });
-
-    const userProfileRepo = new UserProfileRepo();
-    await userProfileRepo.insert({
-      email: "",
-      firstname: user.username,
-      gender: Gender.MALE,
-      joinedOn: new Date(),
-      lastname: "",
-      memberId: 0,
-      tariff: Tariff.TRAINEES_STUDENTS_PENSIONERS,
-      userGradings: [],
-      userId: user.id,
-    });
-
-    const userRoleRepo = new UserRoleRepo();
-    await userRoleRepo.insert({
-      role: AuthRole.USER,
-      userId: user.id,
-    });
-  }
 };

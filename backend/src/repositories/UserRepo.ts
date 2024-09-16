@@ -152,6 +152,30 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
+  async findByIdShort(userId: string): Promise<IUserShort | undefined> {
+    const data = await User.findByPk(userId, {
+      attributes: ["id", "isDeactivated", "username"],
+      include: [
+        {
+          model: UserProfile,
+          as: "userProfile",
+          attributes: ["id", "firstname", "lastname", "email", "phone"],
+        },
+        {
+          model: UserRole,
+          as: "userRoles",
+          attributes: ["id", "role"],
+        },
+      ],
+    });
+
+    if (!data) {
+      return undefined;
+    }
+
+    return this.toUserShort(data);
+  }
+
   async findAllShort(): Promise<IUserShort[]> {
     const data = await User.findAll({
       attributes: ["id", "isDeactivated"],
@@ -170,22 +194,9 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       transaction: findTransaction(),
     });
 
-    const userShorts: IUserShort[] = data.map((model) => {
-      const user = model.toJSON();
-      return {
-        id: user.id,
-        email: user.userProfile?.email ?? "",
-        firstname: user.userProfile?.firstname ?? "",
-        isDeactivated: user.isDeactivated,
-        lastname: user.userProfile?.lastname ?? "",
-        userRoles:
-          user.userRoles?.map((userRole) => ({
-            id: userRole.id,
-            role: userRole.role,
-          })) ?? [],
-        phone: user.userProfile?.phone,
-      };
-    });
+    const userShorts: IUserShort[] = data.map((model) =>
+      this.toUserShort(model)
+    );
     return userShorts;
   }
 
@@ -229,7 +240,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       // create User
       const userSecure = await this.createUser({
         username: entity.username,
-        password: "initial",
+        password: hash("initial"),
       });
 
       createdUser = {
@@ -360,5 +371,23 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
   private createSalt(): string {
     return hash(uuid());
+  }
+
+  private toUserShort(model: User): IUserShort {
+    const user = model.toJSON();
+    return {
+      id: user.id,
+      email: user.userProfile?.email ?? "",
+      firstname: user.userProfile?.firstname ?? "",
+      isDeactivated: user.isDeactivated,
+      lastname: user.userProfile?.lastname ?? "",
+      userRoles:
+        user.userRoles?.map((userRole) => ({
+          id: userRole.id,
+          role: userRole.role,
+        })) ?? [],
+      phone: user.userProfile?.phone,
+      username: user.username,
+    };
   }
 }
