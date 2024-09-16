@@ -192,6 +192,9 @@
 # Event Calendar Overview
 	# Provide separate route to calendar overview in display mode
 	
+# Gradings
+	# Gradings are displayed in a separate tabitem
+	
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
