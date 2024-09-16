@@ -43,11 +43,12 @@ export const usePasswordChangeViewModel = () => {
     setChangePasswordError(undefined);
     changePasswordRequest(
       async () => {
-        await new UserApi().changePassword(user.id, {
-          username: user.username,
-          password: currentPassword,
-          newPassword,
-        });
+        await new UserApi().changePassword(
+          user.id,
+          user.username,
+          currentPassword,
+          newPassword
+        );
         toast.success(t(texts.passwordChange.successPasswordChanged));
         navigate(AppRoutes.dashboard.toPath());
       },

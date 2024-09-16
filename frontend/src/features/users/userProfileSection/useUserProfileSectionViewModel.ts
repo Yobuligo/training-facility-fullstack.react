@@ -69,6 +69,7 @@ export const useUserProfileSectionViewModel = () => {
           role: userRole.role,
         })) ?? [],
       phone: user.userProfile?.phone,
+      username: user.username,
     };
   };
 

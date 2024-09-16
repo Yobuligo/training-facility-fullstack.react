@@ -1,6 +1,7 @@
 import { IUserInvite, UserInviteRouteMeta } from "../shared/model/IUserInvite";
 import { IUserInviteRequestPasswordChange } from "../shared/model/IUserInviteRequestPasswordChange";
 import { IUserInviteShort } from "../shared/model/IUserInviteShort";
+import { hashPassword } from "../utils/hashPassword";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -15,7 +16,7 @@ export class UserInviteApi extends EntityRepository<IUserInvite> {
     newPassword: string
   ): Promise<boolean> {
     const userInviteRequestPasswordChange: IUserInviteRequestPasswordChange = {
-      newPassword,
+      newPassword: hashPassword(newPassword),
       userId,
       userInviteId,
     };

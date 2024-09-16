@@ -3,6 +3,7 @@ import { RESTApi } from "../../../api/core/RESTApi";
 import { IUserInternal } from "../../../model/IUserInternal";
 import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
+import { hashPassword } from "../../../utils/hashPassword";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
@@ -19,8 +20,15 @@ export class UserApi extends EntityRepository<IUser> {
 
   async changePassword(
     userId: string,
-    changeCredentials: IChangeCredentials
+    username: string,
+    password: string,
+    newPassword: string
   ): Promise<boolean> {
+    const changeCredentials: IChangeCredentials = {
+      username,
+      password: hashPassword(password),
+      newPassword: hashPassword(newPassword),
+    };
     return await RESTApi.post(
       `${this.url}/${userId}/changePassword`,
       changeCredentials
@@ -52,7 +60,12 @@ export class UserApi extends EntityRepository<IUser> {
     return await RESTApi.get(`${this.url}`, { urlParams: { query } });
   }
 
-  login(credentials: ICredentials): Promise<ISession> {
+  login(username: string, password: string): Promise<ISession> {
+    const credentials: ICredentials = {
+      username,
+      password: hashPassword(password),
+    };
+
     return RESTApi.post(
       `${this.url}/login`,
       this.createAuthenticationRequest(credentials)
@@ -63,7 +76,11 @@ export class UserApi extends EntityRepository<IUser> {
     return RESTApi.post(`${this.url}/logout`, session);
   }
 
-  register(credentials: ICredentials): Promise<boolean> {
+  register(username: string, password: string): Promise<boolean> {
+    const credentials: ICredentials = {
+      username,
+      password: hashPassword(password),
+    };
     return RESTApi.post(`${this.url}/register`, credentials);
   }
 

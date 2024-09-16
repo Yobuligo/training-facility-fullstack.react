@@ -7,7 +7,6 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { SessionRepo } from "../../lib/userSession/api/SessionRepo";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useSession } from "../../lib/userSession/hooks/useSession";
-import { ICredentials } from "../../lib/userSession/shared/model/ICredentials";
 import { AppRoutes } from "../../routes/AppRoutes";
 
 export const useLoginViewModel = () => {
@@ -47,10 +46,9 @@ export const useLoginViewModel = () => {
 
   const onLogin = async () => {
     setDisplaySpinner(true);
-    const credentials: ICredentials = { password, username };
     try {
       const userApi = new UserApi();
-      const session = await userApi.login(credentials);
+      const session = await userApi.login(username, password);
       setSession(session);
       SessionRepo.instance.setSession(session);
       navigate(AppRoutes.dashboard.toPath());
@@ -72,10 +70,9 @@ export const useLoginViewModel = () => {
 
   const onRegister = async () => {
     setDisplaySpinner(true);
-    const credentials: ICredentials = { password, username };
     try {
       const userApi = new UserApi();
-      await userApi.register(credentials);
+      await userApi.register(username, password);
       updateSuccessMessage(t(texts.login.successUserCreated));
       toggleLoginMode(true);
       setPassword("");
