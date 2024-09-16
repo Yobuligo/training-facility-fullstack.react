@@ -1,14 +1,14 @@
 @use "./dimensions.module.scss";
 @use "./colors.module.scss";
 
-@mixin medium-screen {
-  @media (min-width: dimensions.$medium-screen-min-width-in-rem) {
+@mixin medium-screen($width: dimensions.$medium-screen-min-width-in-rem) {
+  @media (min-width: $width) {
     @content;
   }
 }
 
-@mixin large-screen {
-  @media (min-width: dimensions.$large-screen-min-width-in-rem) {
+@mixin large-screen($width: dimensions.$large-screen-min-width-in-rem) {
+  @media (min-width: $width) {
     @content;
   }
 }
@@ -27,9 +27,7 @@
 }
 
 @mixin glassy {
-  background-color: transparentize(
-    $color: colors.$color-backdrop,
-    $amount: 0.4
-  );
+  background-color: transparentize($color: colors.$color-backdrop,
+      $amount: 0.4);
   backdrop-filter: blur(2px);
 }
