@@ -83,6 +83,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [existsByUsernameRequest] = useRequest();
   const [sendUserInviteRequest, isSendUserInviteRequestProcessing] =
     useRequest();
+  const [passwordResetRequest, isPasswordResetRequestProcessing] = useRequest();
   const navigate = useNavigate();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
@@ -204,6 +205,9 @@ export const useUserViewModel = (props: IUserProps) => {
 
   const onIsAdminChange = (option: ISelectOption<boolean>) =>
     setIsAdmin(option.key);
+
+  const isPersistedUser =
+    !(props.user instanceof DummyUser) || props.user.isPersisted === true;
 
   const onChangeBirthday = (newValue: string) => setBirthday(newValue);
 
@@ -351,34 +355,52 @@ export const useUserViewModel = (props: IUserProps) => {
     props.onChange?.(props.user);
   };
 
+  const handleSendMailError = (error: any): boolean => {
+    if (isError(error) && error.type === "SendEmailError") {
+      toast.error(t(texts.user.errorSendEmail));
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onPasswordReset = () =>
+    passwordResetRequest(async () => {
+      const userInvite: IUserInvite = {
+        id: uuid(),
+        expiresAt: DateTime.addDays(new Date(), 5),
+        type: UserInviteType.CHANGE_PASSWORD,
+        userId: props.user.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const userInviteApi = new UserInviteApi();
+      await userInviteApi.insert(userInvite);
+      toast.success(
+        t(texts.user.successResetPassword, {
+          user: UserInfo.toFullName(props.user),
+        })
+      );
+    }, handleSendMailError);
+
   const onSendUserInvite = () =>
-    sendUserInviteRequest(
-      async () => {
-        const userInvite: IUserInvite = {
-          id: uuid(),
-          expiresAt: DateTime.addDays(new Date(), 5),
-          type: UserInviteType.REGISTER,
-          userId: props.user.id,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        };
-        const userInviteApi = new UserInviteApi();
-        await userInviteApi.insert(userInvite);
-        toast.success(
-          t(texts.user.successSendUserInvite, {
-            user: UserInfo.toFullName(props.user),
-          })
-        );
-      },
-      (error) => {
-        if (isError(error) && error.type === "SendEmailError") {
-          toast.error(t(texts.user.errorSendEmail));
-          return true;
-        } else {
-          return false;
-        }
-      }
-    );
+    sendUserInviteRequest(async () => {
+      const userInvite: IUserInvite = {
+        id: uuid(),
+        expiresAt: DateTime.addDays(new Date(), 5),
+        type: UserInviteType.REGISTER,
+        userId: props.user.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const userInviteApi = new UserInviteApi();
+      await userInviteApi.insert(userInvite);
+      toast.success(
+        t(texts.user.successSendUserInvite, {
+          user: UserInfo.toFullName(props.user),
+        })
+      );
+    }, handleSendMailError);
 
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
@@ -468,7 +490,9 @@ export const useUserViewModel = (props: IUserProps) => {
     gradings,
     isAdminOptions,
     isDeactivated,
+    isPersistedUser,
     isSendUserInviteRequestProcessing,
+    isPasswordResetRequestProcessing,
     joinedOn,
     lastname,
     lastnameError,
@@ -481,6 +505,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onDeleteUser,
     onIsAdminChange,
     onGenderChange,
+    onPasswordReset,
     onSave,
     onSendUserInvite,
     onTariffChange,

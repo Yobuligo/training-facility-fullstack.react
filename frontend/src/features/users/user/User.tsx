@@ -2,8 +2,10 @@ import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { useScreenSize } from "../../../hooks/useScreenSize";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -18,18 +20,26 @@ export const User: React.FC<IUserProps> = (props) => {
   const viewModel = useUserViewModel(props);
   const [user] = useUser();
   const { t } = useTranslation();
+  const screenSize = useScreenSize(45);
 
   const adminModeButtons = (
     <>
-      <Button
-        disabled={viewModel.displayMode}
-        onClick={viewModel.onSendUserInvite}
-      >
-        {t(texts.user.sendInvitation)}
-      </Button>
-      <Button disabled={viewModel.displayMode}>
-        {t(texts.user.generateNewPassword)}
-      </Button>
+      {viewModel.isPersistedUser && (
+        <SpinnerButton
+          displaySpinner={viewModel.isSendUserInviteRequestProcessing}
+          onClick={viewModel.onSendUserInvite}
+        >
+          {t(texts.user.sendInvitation)}
+        </SpinnerButton>
+      )}
+      {viewModel.isPersistedUser && (
+        <SpinnerButton
+          displaySpinner={viewModel.isPasswordResetRequestProcessing}
+          onClick={viewModel.onPasswordReset}
+        >
+          {t(texts.user.resetPassword)}
+        </SpinnerButton>
+      )}
 
       {/* current user must not be deactivatable */}
       {user.id !== props.user.id && (
@@ -83,7 +93,7 @@ export const User: React.FC<IUserProps> = (props) => {
           <LabeledInput
             disabled={viewModel.displayMode || !props.isAdminMode}
             error={viewModel.usernameError}
-            label={t(texts.user.username)}
+            label={t(texts.general.username)}
             maxLength={100}
             onChange={viewModel.setUsername}
             value={viewModel.username}
@@ -281,7 +291,7 @@ export const User: React.FC<IUserProps> = (props) => {
               selected={viewModel.selectedIsAdminOption}
             />
           )}
-          <Toolbar>
+          <Toolbar className={screenSize.isSmall() ? styles.toolbar : ""}>
             {props.isAdminMode && adminModeButtons}
             {!props.isAdminMode && (
               <Button onClick={viewModel.onChangePassword}>

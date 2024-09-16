@@ -23,6 +23,7 @@
         "week": "Woche"
     },
     "dashboard": {
+        "gradings": "Prüfungen",
         "profile": "Profil",
         "trainings": "Trainings",
         "planner": "Planer",
@@ -106,6 +107,7 @@
             "success": "Erfolg",
             "warning": "Warnung"
         },
+        "username": "Username",
         "weekdays": {
             "monday": "Montag",
             "mondayShort": "Mo",
@@ -148,7 +150,7 @@
         "dan7": "7. Dan"
     },
     "gradingList": {
-        "noGradingsAvailable": "Derzeit hast du noch keine Prüfungen absolviert"
+        "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
     },
     "gradingSection": {
         "title": "Prüfung hinzufügen"
@@ -165,8 +167,7 @@
         "register": "Registrieren",
         "registerText": "Stattdessen registrieren",
         "successUserCreated": "Benutzer wurde erstellt. Bitte loggen Sie sich ein.",
-        "title": "Login",
-        "username": "Benutzername"
+        "title": "Login"
     },
     "logout": {
         "title": "Abmelden"
@@ -178,16 +179,18 @@
         "register": "Anmelden",
         "unregister": "Abmelden"
     },
-    "changePassword": {
+    "passwordChange": {
         "changePassword": "Passwort ändern",
-        "confirmNewPassword": "Neues Passwort bestätigen",
         "currentPassword": "Aktuelles Passwort",
         "errorCurrentPasswordInvalid": "Das aktuelle Passwort ist nicht korrekt. Bitte gib Dein aktuelles Passwort erneut ein.",
         "errorNewPasswordNotPolicyConfirm": "Das neue Passwort entspricht nicht den Richtlinien. Stelle sicher, dass die unter 'Richtlinienanforderungen' angegebenen Richtlinien eingehalten werden.",
-        "newPassword": "Neues Passwort",
-        "passwordsNotIdentical": "Deine neuen Passwörter sind nicht identisch",
-        "successMessage": "Passwort erfolgreich geändert",
+        "successPasswordChanged": "Passwort erfolgreich geändert",
         "title": "Passwort ändern"
+    },
+    "passwordConfirmForm": {
+        "confirmNewPassword": "Neues Passwort bestätigen",
+        "newPassword": "Neues Passwort",
+        "passwordsNotIdentical": "Deine neuen Passwörter sind nicht identisch"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",
@@ -223,9 +226,10 @@
         "errorFirstnameRequired": "Vorname ist erforderlich",
         "errorLastnameRequired": "Nachname ist erforderlich",
         "errorEmailRequired": "E-Mail ist erforderlich",
+        "errorSendEmail": "Fehler beim Versenden der E-Mail",
         "firstname": "Vorname",
         "gender": "Geschlecht",
-        "generateNewPassword": "Neues Passwort generieren",
+        "resetPassword": "Passwort zurücksetzen",
         "gradings": "Prüfungen",
         "isAdmin": "Ist Admin",
         "joinedOn": "Beigetreten am",
@@ -236,9 +240,13 @@
         "changePassword": "Passwort ändern",
         "sendInvitation": "Einladung senden",
         "street": "Straße",
+        "successResetPassword": "E-Mail zum Zurücksetzen des Passwortes wurde an {{user}} verschickt",
+        "successSendUserInvite": "Einladung wurde an {{user}} verschickt.",
         "tariff": "Tarif",
-        "technicalInformation": "Technische Informationen",
-        "username": "Benutzername"
+        "technicalInformation": "Technische Informationen"
+    },
+    "userInvite": {
+        "errorInviteExpiredOrInvalid": "Einladung ist bereits abgelaufen oder ungültig."
     },
     "userProfileItem": {
         "deactivated": "Deaktiviert"

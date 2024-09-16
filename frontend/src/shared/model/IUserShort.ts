@@ -9,4 +9,5 @@ export interface IUserShort extends IHaveId {
   phone?: string;
   isDeactivated: boolean;
   userRoles: Subset<IUserRole, "id" | "role">[];
+  username: string;
 }

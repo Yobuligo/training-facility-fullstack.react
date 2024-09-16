@@ -23,6 +23,7 @@
         "week": "Week"
     },
     "dashboard": {
+        "gradings": "Gradings",
         "profile": "Profile",
         "trainings": "Trainings",
         "planner": "Planner",
@@ -107,6 +108,7 @@
             "success": " Success",
             "warning": "Warning"
         },
+        "username": "Username",
         "weekdays": {
             "monday": "Monday",
             "mondayShort": "Mon",
@@ -149,7 +151,7 @@
         "dan7": "7. Dan"
     },
     "gradingList": {
-        "noGradingsAvailable": "Currently you have no gradings"
+        "noGradingsAvailable": "No gradings found yet."
     },
     "gradingSection": {
         "title": "Add new Grading"
@@ -166,8 +168,7 @@
         "register": "Register",
         "registerText": "Register instead",
         "successUserCreated": "User was created. Please login.",
-        "title": "Login",
-        "username": "Username"
+        "title": "Login"
     },
     "logout": {
         "title": "Logout"
@@ -179,16 +180,18 @@
         "register": "Register",
         "unregister": "Unregister"
     },
-    "changePassword": {
+    "passwordChange": {
         "changePassword": "Change password",
-        "confirmNewPassword": "Confirm new password",
         "currentPassword": "Current password",
         "errorCurrentPasswordInvalid": "The current password is not correct. Re-enter your current password.",
         "errorNewPasswordNotPolicyConfirm": "The new password password does not comply with the password policy. Ensure to follow the policy stated under 'Policy requirements'",
-        "newPassword": "New password",
-        "passwordsNotIdentical": "Your new passwords are not identical",
-        "successMessage": "Password changed successfully",
+        "successPasswordChanged": "Password changed successfully",
         "title": "Change password"
+    },
+    "passwordConfirmForm": {
+        "confirmNewPassword": "Confirm new password",
+        "newPassword": "New password",
+        "passwordsNotIdentical": "Your new passwords are not identical"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
@@ -227,7 +230,7 @@
         "errorSendEmail": "Error send invitation email",
         "firstname": "Firstname",
         "gender": "Gender",
-        "generateNewPassword": "Generate new Password",
+        "resetPassword": "Reset Password",
         "gradings": "Gradings",
         "isAdmin": "Is Admin",
         "joinedOn": "Joined On",
@@ -238,10 +241,13 @@
         "changePassword": "Change password",
         "sendInvitation": "Send invitation",
         "street": "Street",
+        "successResetPassword": "Reset password request was send to {{user}}",
         "successSendUserInvite": "Invitation was send to {{user}}.",
         "tariff": "Tariff",
-        "technicalInformation": "Technical Information",
-        "username": "Username"
+        "technicalInformation": "Technical Information"
+    },
+    "userInvite": {
+        "errorInviteExpiredOrInvalid": "User invite is already expired or invalid."
     },
     "userProfileItem": {
         "deactivated": "Deactivated"

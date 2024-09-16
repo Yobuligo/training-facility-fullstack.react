@@ -12,7 +12,7 @@
 # ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard
 
-- Event Planner
+# Event Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
 	# inputs are restricted to length of related db fields		
@@ -76,17 +76,13 @@
 	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
-	- Display loading spinner when deleting user
-	- Trainer can be assigned to a training
-	- Assigned trainer can be deleted
-	- Assigned trainer is displayed in the calendar
-	- Performance: Add indices to columns from and to of event-instances
+	- Display loading spinner when deleting user	
 	- Event Instance must be deletable
 		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
 		- Event definitions of deleted event instances must not be displayed
-	- Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
+	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
-- Welcome
+# Welcome
 	# Display spinner when loading registrations I am registered on
 	# Display upcoming events of the current week
 	# Upcoming events are sorted chronologically
@@ -94,7 +90,7 @@
 
 - User Profile
 	# Display loading spinner when loading user profile
-	- Dummy objects are removed
+	# Dummy objects are removed
 	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
 	# username must be unique
@@ -124,40 +120,38 @@
 	- Errors from backend must be translatable or mapped to client errors 
 		- e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 	# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
-	# Bug: created user cannot be selected from user list	
-	# Bug: Customer id is not displayed when user was created in backend
-	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
-	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
-	
 	# User Gradings
 		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 		# Bug: Error when entering achievedAt date manually
-		
-	- User can be forced to change his password
-		- An admin can mark a user to change his password
-		- With the next backend request an error thrown to trigger changing the password
-		
 	# Change password
 		# The user must be able to change his password
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
-		
-	- Send invite mail to user
-		- Display loading spinner when sending mail
-		- User must be forwarded to invite route
-			- Invite must be checked, display error in case of expired or invalid invite
-			- User must set a password
-			- throw error if email could not be send because of an invalid email
-			- throw error if email could not be send because of technical issues
+		- Change default password from simple initial to a strong password
+	# Send invite mail to user
+		# Display loading spinner when sending mail
+		# User must be forwarded to invite route
+			# throw error if email could not be send because of an invalid email
+			# throw error if email could not be send because of technical issues
 			# previous inivites of a user must be deleted
-			- User invitation must be deleted with user
-		- Invite must expire
-	
-	- Send reset password mail to user		
-		
-	- Mark user as canceled / quit
+			# User invitation must be deleted with user
+		# Invite must expire
+	# Send reset password mail to user -> equal to send invite with different mail text
+		# Display loading spinner when sending mail
+		# User must be forwarded to invite route
+			# throw error if email could not be send because of an invalid email
+			# throw error if email could not be send because of technical issues
+			# previous inivites of a user must be deleted
+			# User invitation must be deleted with user
+		# Invite must expire
+	# Bug: created user cannot be selected from user list
+	# Bug: Customer id is not displayed when user was created in backend
+	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
+	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
+	# Bug: Buttons for inviting users and changing password must be active in display mode
+	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	
 # User List
 	# Display loading spinner, when loading users
@@ -181,9 +175,15 @@
 # Password
 	# User must be able to change password
 	
-- Reset Password
-	- User must be forwarded to reset password route
-	- Reset password must expire
+# User Invite Screen
+	# Invite must be checked, display error in case of expired or invalid invite
+	# User must set a password
+	# User will be navigated to login page after changing the password
+	# User invite must be deleted when password was changed to not use it twice
+	
+# Reset Password
+	# User must be forwarded to reset password route
+	# Reset password must expire
 	
 # Event Calendar
 	# Start display of calender hours of first event and end hours of end of last event
@@ -192,14 +192,18 @@
 # Event Calendar Overview
 	# Provide separate route to calendar overview in display mode
 	
+# Gradings
+	# Gradings are displayed in a separate tabitem
+	
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
 - Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
+	# Hash passwords before transferring them from client to server
 	- Move session persistence from local storage to cookies (http only)
-	- user is logged after a certain times of login fails
+	- user is locked after a certain times of login fails
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest

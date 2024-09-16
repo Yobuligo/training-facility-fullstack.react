@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import dimensions from "../styles/dimensions.module.scss";
 
-export const useScreenSize = () => {
+export const useScreenSize = (
+  mediumScreenWidthInRem?: number,
+  largeScreenWidthInRem?: number
+) => {
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
   );
@@ -15,8 +18,13 @@ export const useScreenSize = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const mediumScreenWidth =
+    (mediumScreenWidthInRem || +dimensions.mediumScreenWidth) * 16;
+  const largeScreenWidth =
+    (largeScreenWidthInRem || +dimensions.largeScreenWidth) * 16;
+
   const isSmall = () => {
-    if (windowDimensions.width < +dimensions.mediumScreenMinWidth) {
+    if (windowDimensions.width < mediumScreenWidth) {
       return true;
     }
     return false;
@@ -24,15 +32,15 @@ export const useScreenSize = () => {
 
   const isMedium = () => {
     if (
-      windowDimensions.width >= +dimensions.mediumScreenMinWidth &&
-      windowDimensions.width < +dimensions.largeScreenMinWidth
+      windowDimensions.width >= mediumScreenWidth &&
+      windowDimensions.width < largeScreenWidth
     ) {
       return true;
     }
   };
 
   const isLarge = () => {
-    if (windowDimensions.width >= +dimensions.largeScreenMinWidth) {
+    if (windowDimensions.width >= largeScreenWidth) {
       return true;
     }
   };

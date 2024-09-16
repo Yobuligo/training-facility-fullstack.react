@@ -28,3 +28,11 @@
     color: colors.$color-primary;
   }
 }
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
