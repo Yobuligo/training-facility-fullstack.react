@@ -1,4 +1,4 @@
-@import "../../styles/colors.module.scss";
+@use "../../styles/colors.module.scss";
 
 .header {
   display: flex;
@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   column-gap: 1rem;
-  background-color: $color-primary;
+  background-color: colors.$color-tabstrip-background;
   height: 4rem;
   margin-top: 0.1rem;
 }

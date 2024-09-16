@@ -8,10 +8,11 @@
   align-items: center;
   justify-content: center;
   height: 70vh;
+  color: colors.$color-error-page;
 }
 
 .logo {
-  color: black;
+  fill: colors.$color-error-page;
   width: 15rem;
   height: auto;
   flex-shrink: 0;
@@ -56,5 +57,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: colors.$color-secondary;
+  color: colors.$color-error-page-link;
 }

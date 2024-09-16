@@ -1,5 +1,5 @@
-@import "../../../styles/colors.module.scss";
-@import "../../../styles/dimensions.module.scss";
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
 
 .pageHeader {
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   height: 6rem;
-  background-color: $color-primary;
+  background-color: colors.$color-page-header-background;
 }
 
 .right {
@@ -16,13 +16,13 @@
   column-gap: 1.5rem;
   justify-content: center;
   align-items: center;
-  margin-right: $negative-space;
+  margin-right: dimensions.$negative-space;
 }
 
 .appLogo {
   cursor: pointer;
-  fill: white;
+  fill: colors.$color-app-logo;
   width: 10rem;
   height: 5rem;
-  margin-left: $negative-space;
+  margin-left: dimensions.$negative-space;
 }

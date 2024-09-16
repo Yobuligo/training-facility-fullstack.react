@@ -1,9 +1,9 @@
-@import "../styles/mixins.scss";
 @import "../styles/colors.module.scss";
+@import "../styles/mixins.scss";
 
 .icon {
   @include hoverIcon;
-  fill: $color-primary-dark;
+  fill: $color-icon;
 }
 
 .clickableIcon {
@@ -12,26 +12,26 @@
 }
 
 .disabledIcon {
-  fill: $color-disabled;
+  fill: $color-icon-disabled;
 }
 
 @mixin border($color, $color-top) {
   border: 8px solid $color;
   border-top: 8px solid $color-top;
-  color: $color-secondary;
+  color: $color-grade-kup-text;
   background-color: transparentize($color, $amount: 0.95);
   position: relative;
 }
 
 .secondaryButton {
   background-color: transparent;
-  outline: $color-primary solid 1px;
-  color: $color-primary;
+  outline: $color-secondary-button solid 1px;
+  color: $color-secondary-button;
 
   &:hover {
     background-color: transparent;
-    outline: $color-primary solid 1px;
-    color: $color-primary;
+    outline: $color-secondary-button solid 1px;
+    color: $color-secondary-button;
   }
 }
 

@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.scss";
+@use "../../../styles/colors.module.scss";
 @import "../../../styles/dimensions.module.scss";
 @import "../../../styles/mixins.scss";
 
@@ -26,30 +26,30 @@
 }
 
 .button0 {
-  background-color: $color-primary-light;
+  background-color: colors.$color-event-definition-button-background-0;
   @extend .button;
 }
 
 .button1 {
-  background-color: $color-primary;
+  background-color: colors.$color-event-definition-button-background-1;
   @extend .button;
 }
 
 .button2 {
-  background-color: $color-primary-dark;
+  background-color: colors.$color-event-definition-button-background-2;
   @extend .button;
 }
 
 .button3 {
-  background-color: $color-secondary-light;
+  background-color: colors.$color-event-definition-button-background-3;
   @extend .button;
 }
 
 .button4 {
-  background-color: $color-secondary;
+  background-color: colors.$color-event-definition-button-background-4;
   @extend .button;
 }
 
 .selectedButton {
-  border: 3px solid black;
+  border: 3px solid colors.$color-event-definition-color-selection-border;
 }

@@ -1,5 +1,5 @@
+@use "../../styles/colors.module.scss";
 @import "../../styles/dimensions.module.scss";
-@import "../../styles/colors.module.scss";
 
 .labelContainer {
   display: flex;
@@ -16,14 +16,14 @@
 
 .label {
   font-weight: 500;
-  color: $color-secondary;
+  color: colors.$color-labeled-element-label;
 }
 
 .optional {
-  color: $color-secondary-light;
+  color: colors.$color-labeled-element-optional;
 }
 
 .error {
-  color: $color-error;
+  color: colors.$color-error;
   height: 1.25rem;
 }

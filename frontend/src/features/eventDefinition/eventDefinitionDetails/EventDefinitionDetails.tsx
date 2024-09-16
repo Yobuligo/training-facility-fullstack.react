@@ -61,11 +61,11 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
           />
 
           <Toolbar className={styles.buttonContainer}>
-            {renderButton(colors.colorPrimaryLight, styles.button0)}
-            {renderButton(colors.colorPrimary, styles.button1)}
-            {renderButton(colors.colorPrimaryDark, styles.button2)}
-            {renderButton(colors.colorSecondaryLight, styles.button3)}
-            {renderButton(colors.colorSecondary, styles.button4)}
+            {renderButton(colors.colorEventDefinition0, styles.button0)}
+            {renderButton(colors.colorEventDefinition1, styles.button1)}
+            {renderButton(colors.colorEventDefinition2, styles.button2)}
+            {renderButton(colors.colorEventDefinition3, styles.button3)}
+            {renderButton(colors.colorEventDefinition4, styles.button4)}
           </Toolbar>
         </div>
       </ChangeableForm>

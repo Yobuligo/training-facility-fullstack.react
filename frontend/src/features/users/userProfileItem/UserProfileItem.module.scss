@@ -22,8 +22,8 @@
 }
 
 .deactivated {
-  background-color: colors.$color-secondary-lighter;
-  color: rgba(0, 0, 0, 0.425);
+  background-color: colors.$color-user-deactivated-background;
+  color: colors.$color-user-deactivated-text;
 }
 
 .group {

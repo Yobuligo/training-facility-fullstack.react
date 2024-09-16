@@ -2,9 +2,9 @@
 
 label {
   --switchWidth: 2rem;
-  --colorOffState: $color-disabled;
-  --colorOnState: $color-primary;
-  --sliderColor: $color-primary-dark;
+  --colorOffState: $color-switch-state-off;
+  --colorOnState: $color-switch-state-on;
+  --sliderColor: $color-switch-slider;
 }
 
 .switch {
@@ -49,19 +49,20 @@ label {
   transition: 0.4s;
 }
 
-.checkbox:checked + .slider {
+.checkbox:checked+.slider {
   background-color: var(--colorOnState);
 }
 
-.checkbox:focus + .slider {
+.checkbox:focus+.slider {
   box-shadow: 0 0 1px var(--colorOnState);
 }
 
-.checkbox:checked + .slider:before {
+.checkbox:checked+.slider:before {
   -webkit-transform: translateX(var(--transformLength));
   -ms-transform: translateX(var(--transformLength));
   transform: translateX(var(--transformLength));
 }
+
 .slider.round {
   border-radius: var(--switchBorderRadius);
 }

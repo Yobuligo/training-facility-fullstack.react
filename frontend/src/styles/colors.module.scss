@@ -5,22 +5,81 @@ $color-secondary-dark: #435234;
 $color-secondary: #687857;
 $color-secondary-light: #acae9b;
 $color-secondary-lighter: #c1c2b8;
-$color-copy: white;
-$color-text: $color-secondary-dark;
-$color-error: #d95f59;
-$color-success: rgba(63, 150, 13, 0.493);
-$color-warning: #e6e619;
-$color-info: #2626d9;
-$color-hover: lighten($color-secondary, 0.5);
-$color-enabled: black;
-$color-disabled: rgba(211, 211, 211, 0.63);
-$box-shadow: 8px 8px 8px $color-disabled;
 $color-accent: #e1a847;
 
-$color-tab-selected: $color-secondary-light;
-$color-tab-unselected: white;
+$color-error: #d95f59;
+$color-error-light: lighten($color: $color-error, $amount: 20);
+$color-success: rgba(63, 150, 13, 0.493);
+$color-success-light: lighten($color: $color-success, $amount: 40);
+$color-warning: #e6e619;
+$color-warning-light: lighten($color: $color-warning, $amount: 40);
+$color-info: #2626d9;
+$color-info-light: lighten($color: $color-info, $amount: 40);
 
-$color-button-text: white;
+$color-hover: lighten($color-secondary, 0.5);
+$color-disabled: rgba(211, 211, 211, 0.63);
+
+$color-text: $color-secondary-dark;
+$color-text-light: white;
+
+// components
+$color-backdrop: white;
+
+$color-border: rgba(128, 128, 128, 0.178); //for dialogs and cards
+$color-box-shadow: 8px 8px 8px $color-disabled; //for dialogs and cards
+
+$color-button-background: $color-secondary;
+$color-button-text-disabled: $color-disabled;
+
+$color-card-border: $color-border;
+
+$color-dialog-background: white;
+$color-dialog-header-background: $color-primary;
+$color-dialog-header-text: $color-text-light;
+
+$color-error-page: $color-text;
+$color-error-page-link: $color-secondary;
+
+$color-icon: $color-primary-dark;
+$color-icon-disabled: $color-disabled;
+
+$color-labeled-element-label: $color-secondary;
+$color-labeled-element-optional: $color-secondary-light;
+
+$color-labeled-input-disabled: $color-secondary-light;
+
+$color-labeled-select-disabled: $color-secondary-light;
+
+$color-page-header-background: $color-primary;
+
+$color-search-button-text: $color-text-light;
+
+$color-secondary-button: $color-primary;
+
+$color-switch-state-off: $color-disabled;
+$color-switch-state-on: $color-primary;
+$color-switch-slider: $color-primary-dark;
+
+$color-tabstrip-background: $color-primary;
+$color-tab-selected: $color-secondary-light;
+$color-tab-unselected: $color-text-light;
+
+$color-toast-background: white;
+
+$color-toggle-button-background-selected: $color-secondary;
+$color-toggle-button-background-unselected: lighten($color: $color-secondary, $amount: 30);
+
+// features
+$color-app-logo: white;
+
+$color-event-definition-color-selection-border: black;
+$color-event-definition-button-background-0: $color-primary-light;
+$color-event-definition-button-background-1: $color-primary;
+$color-event-definition-button-background-2: $color-primary-dark;
+$color-event-definition-button-background-3: $color-secondary-light;
+$color-event-definition-button-background-4: $color-secondary;
+
+$color-event-my-trainings-button-registered: $color-accent;
 
 $color-grade-dan: hsl(0, 0%, 13%);
 $color-grade-kup1: #d92626;
@@ -32,20 +91,28 @@ $color-grade-kup6: #136c13;
 $color-grade-kup7: #e6e619;
 $color-grade-kup8: #e6e619;
 $color-grade-kup9: rgb(241, 241, 241);
+$color-grade-kup-text: $color-secondary;
 
-$color-backdrop: white;
-$color-language-select: white;
+$color-grading-item-examiner-text: $color-secondary-light;
+
+$color-language-select: $color-text-light;
+
+$color-user-deactivated-background: $color-disabled;
+$color-user-deactivated-text: $color-primary-light;
 
 :export {
-  colorAccent: $color-accent;
-  colorDisabled: $color-disabled;
-  colorPrimary: $color-primary;
-  colorPrimaryDark: $color-primary-dark;
-  colorPrimaryLight: $color-primary-light;
-  colorSecondary: $color-secondary;
-  colorSecondaryLight: $color-secondary-light;
-  colorError: $color-error;
-  colorInfo: $color-info;
-  colorSuccess: $color-success;
-  colorWarning: $color-warning;
+  colorBannerAdmin: $color-secondary;
+  colorBannerNeutral: white;
+  colorEventBackground: white;
+  colorEventText: $color-text;
+  colorEventDefinition0: $color-primary-light;
+  colorEventDefinition1: $color-primary;
+  colorEventDefinition2: $color-primary-dark;
+  colorEventDefinition3: $color-secondary-light;
+  colorEventDefinition4: $color-secondary;
+  colorSecondaryButtonSpinner: $color-primary;
+  colorSlider: $color-primary-dark;
+  colorSliderOffState: $color-disabled;
+  colorSliderOnState: $color-primary;
+  colorPageSpinnerText: $color-secondary;
 }

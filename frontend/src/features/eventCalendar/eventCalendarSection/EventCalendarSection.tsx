@@ -5,6 +5,7 @@ import { EventCalendar } from "../../../components/eventCalendar/EventCalendar";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 import { useEventCalendarSectionViewModel } from "./useEventCalendarSectionViewModel";
+import colors from "../../../styles/colors.module.scss";
 
 export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   props
@@ -19,8 +20,8 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
       };
     } else {
       return {
-        backgroundColor: "white",
-        color: "black",
+        backgroundColor: colors.colorEventBackground,
+        color: colors.colorEventText,
         padding: "0.5rem",
       };
     }

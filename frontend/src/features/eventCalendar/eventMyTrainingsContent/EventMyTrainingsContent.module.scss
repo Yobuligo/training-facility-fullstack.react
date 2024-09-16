@@ -10,8 +10,9 @@
 }
 
 .unregisterButton {
-  background-color: colors.$color-accent;
+  background-color: colors.$color-event-my-trainings-button-registered;
+
   &:hover {
-    background-color: colors.$color-accent;
+    background-color: colors.$color-event-my-trainings-button-registered;
   }
 }

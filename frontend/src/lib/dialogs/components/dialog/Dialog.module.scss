@@ -16,9 +16,9 @@
   top: 20%;
   margin-left: auto;
   margin-right: auto;
-  background-color: white;
-  box-shadow: colors.$box-shadow;
-  border: 1px solid rgba(128, 128, 128, 0.178);
+  background-color: colors.$color-dialog-background;
+  box-shadow: colors.$color-box-shadow;
+  border: 1px solid colors.$color-border;
   width: 20rem;
 
   @include mixins.medium-screen {
@@ -29,10 +29,10 @@
 .header {
   display: flex;
   flex-direction: row;
-  background-color: colors.$color-primary;
+  background-color: colors.$color-dialog-header-background;
   justify-content: center;
   align-items: center;
-  color: colors.$color-copy;
+  color: colors.$color-dialog-header-text;
   height: 3rem;
   font-size: large;
   font-weight: 600;

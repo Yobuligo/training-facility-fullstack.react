@@ -17,18 +17,6 @@
   padding-bottom: 1rem;
 }
 
-.cancelButton {
-  background-color: transparent;
-  outline: colors.$color-primary solid 1px;
-  color: colors.$color-primary;
-
-  &:hover {
-    background-color: transparent;
-    outline: colors.$color-primary solid 1px;
-    color: colors.$color-primary;
-  }
-}
-
 .joinedOnReadonly {
   color: colors.$color-text;
 }

@@ -1,33 +1,34 @@
-@import "../../styles/colors.module.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/dimensions.module.scss";
+@use "../../styles/colors.module.scss";
+@use "../../styles/mixins.scss";
+@use "../../styles/dimensions.module.scss";
 
 .button {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   margin: 0;
-  background-color: $color-secondary;
+  background-color: colors.$color-button-background;
   outline: none;
   border: 0;
   font-size: medium;
   font-weight: 400;
-  padding: $negative-space;
+  padding: dimensions.$negative-space;
 
-  @include medium-screen {
-    padding: $negative-space 1rem;
+  @include mixins.medium-screen {
+    padding: dimensions.$negative-space 1rem;
   }
 }
 
 .buttonEnabled {
-  color: white;
-  @include hoverButton {
+  color: colors.$color-text-light;
+
+  @include mixins.hoverButton {
     cursor: pointer;
   }
 }
 
 .buttonDisabled {
-  color: $color-disabled;
+  color: colors.$color-button-text-disabled;
 }

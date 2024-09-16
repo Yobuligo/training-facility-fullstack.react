@@ -19,13 +19,9 @@ export const useScreenSize = (
   }, []);
 
   const mediumScreenWidth =
-    (mediumScreenWidthInRem
-      ? mediumScreenWidthInRem
-      : +dimensions.mediumScreenMinWidth) * 16;
+    (mediumScreenWidthInRem ?? +dimensions.mediumScreenMinWidth) * 16;
   const largeScreenWidth =
-    (largeScreenWidthInRem
-      ? largeScreenWidthInRem
-      : +dimensions.largeScreenMinWidth) * 16;
+    (largeScreenWidthInRem ?? +dimensions.largeScreenMinWidth) * 16;
 
   const isSmall = () => {
     if (windowDimensions.width < mediumScreenWidth) {

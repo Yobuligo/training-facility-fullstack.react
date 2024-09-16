@@ -8,7 +8,7 @@ import { Dummy } from "./Dummy";
 
 export class DummyEventDefinition extends Dummy implements IEventDefinition {
   eventInstances: IEventInstance[] = [];
-  color: string = colors.colorPrimary;
+  color: string = colors.colorEventDefinition1;
   description: string = "";
   recurrence: Recurrence = Recurrence.ONCE;
   title: string = "";

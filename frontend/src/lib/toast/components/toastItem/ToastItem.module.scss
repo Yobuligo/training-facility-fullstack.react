@@ -3,7 +3,7 @@
 .toastItem {
   display: flex;
   flex-direction: row;
-  background-color: white;
+  background-color: colors.$color-toast-background;
   width: 23rem;
 }
 
@@ -29,6 +29,7 @@
   background-color: transparent;
   border: none;
   outline: none;
+
   &:hover {
     background-color: transparent;
     border: none;
@@ -58,17 +59,17 @@
 }
 
 .bodyError {
-  background-color: lighten($color: colors.$color-error, $amount: 20);
+  background-color: colors.$color-error-light;
 }
 
 .bodyInfo {
-  background-color: lighten($color: colors.$color-info, $amount: 40);
+  background-color: colors.$color-info-light;
 }
 
 .bodySuccess {
-  background-color: lighten($color: colors.$color-success, $amount: 40);
+  background-color: colors.$color-success-light;
 }
 
 .bodyWarning {
-  background-color: lighten($color: colors.$color-warning, $amount: 40);
+  background-color: colors.$color-warning-light;
 }

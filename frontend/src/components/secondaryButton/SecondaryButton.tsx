@@ -9,7 +9,7 @@ export const SecondaryButton: React.FC<ISecondaryButtonProps> = (props) => {
       {...props}
       className={componentStyles.secondaryButton}
       displaySpinner={props.displaySpinner ?? false}
-      spinnerColor={colors.colorPrimary}
+      spinnerColor={colors.colorSecondaryButtonSpinner}
     />
   );
 };

@@ -20,13 +20,13 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
   props.width && addCSSProperty({ "--switchWidth": props.width });
   props.sliderColor
     ? addCSSProperty({ "--sliderColor": props.sliderColor })
-    : addCSSProperty({ "--sliderColor": colors.colorPrimaryDark });
+    : addCSSProperty({ "--sliderColor": colors.colorSlider });
   props.colorOffState
     ? addCSSProperty({ "--colorOffState": props.colorOffState })
-    : addCSSProperty({ "--colorOffState": colors.colorDisabled });
+    : addCSSProperty({ "--colorOffState": colors.colorSliderOffState });
   props.colorOnState
     ? addCSSProperty({ "--colorOnState": props.colorOnState })
-    : addCSSProperty({ "--colorOnState": colors.colorPrimary });
+    : addCSSProperty({ "--colorOnState": colors.colorSliderOnState });
 
   return (
     <label style={style} className={`${props.className} ${styles.switch}`}>
