@@ -28,7 +28,7 @@ export const useRequest = (): [
         error.type === "InvalidSessionError" ||
         error.type === "ExpiredSessionError"
       ) {
-        toast.error(t(texts.general.logoutInvalidSession));
+        toast.info(t(texts.general.logoutInvalidSession));
         logout.logout();
         return;
       } else if (error.type === "MissingAuthorityError") {

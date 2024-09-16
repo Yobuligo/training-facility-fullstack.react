@@ -1,3 +1,4 @@
+@use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
 
 .eventContent {
@@ -6,6 +7,7 @@
   column-gap: dimensions.$negative-space;
   height: 100%;
   width: 100%;
+  color: colors.$color-text;
 }
 
 .banner {

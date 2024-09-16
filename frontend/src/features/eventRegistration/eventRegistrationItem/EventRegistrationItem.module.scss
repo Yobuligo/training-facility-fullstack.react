@@ -1,7 +1,31 @@
+@use '../../../styles/mixins.scss';
+
 .eventRegistrationItem {
   display: flex;
   flex-direction: row;
   column-gap: 2rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.manuallyAddedSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+
+  @include mixins.medium-screen {
+    flex-direction: row;
+    column-gap: 1rem;
+  }
+
+}
+
+.addedByTrainerInfo {
+  font-style: italic;
+  align-self: end;
+
+  @include mixins.medium-screen {
+    align-self: center;
+  }
+
 }

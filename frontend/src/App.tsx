@@ -9,6 +9,7 @@ import { IToast } from "./lib/toast/model/IToast";
 import { useSessionStorage } from "./lib/userSession/hooks/useSessionStorage";
 import { IUserInternal } from "./model/IUserInternal";
 import { AppRouter } from "./routes/AppRouter";
+import "./index.scss";
 
 export const App: React.FC = () => {
   const [user, setUser] = useState<IUserInternal | undefined>(undefined);

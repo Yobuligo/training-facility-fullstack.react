@@ -1,5 +1,5 @@
-@import "../../../styles/mixins.scss";
-@import "../../../styles/colors.module.scss";
+@use "../../../styles/mixins.scss";
+@use "../../../styles/colors.module.scss";
 
 .card {
   display: flex;
@@ -12,8 +12,9 @@
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   padding: 1rem;
+  color: colors.$color-text;
 
-  @include medium-screen {
+  @include mixins.medium-screen(45rem) {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
@@ -21,7 +22,7 @@
 }
 
 .deactivated {
-  background-color: $color-secondary-lighter;
+  background-color: colors.$color-secondary-lighter;
   color: rgba(0, 0, 0, 0.425);
 }
 

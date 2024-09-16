@@ -1,0 +1,17 @@
+@use '../../styles/colors.module.scss';
+
+.welcome {
+    color: colors.$color-text;
+}
+
+.greeting {
+    font-family: "MerriweatherSans";
+}
+
+.trainingsLinkInfo {
+    font-weight: 600;
+}
+
+.upcomingTrainings {
+    margin-top: 2rem;
+}

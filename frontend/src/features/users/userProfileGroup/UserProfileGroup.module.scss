@@ -23,11 +23,11 @@
   grid-template-columns: 1fr;
   row-gap: $negative-space;
 
-  @include medium-screen {
+  @include medium-screen(43rem) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @include large-screen {
+  @include large-screen(86rem) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 

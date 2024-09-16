@@ -1,0 +1,11 @@
+@use './styles/typography.scss';
+@use './styles/colors.module.scss';
+
+h3,
+h4 {
+    color: colors.$color-text;
+}
+
+h3 {
+    font-family: "MerriweatherSans";
+}

@@ -1,7 +1,8 @@
-@import "../../../styles/dimensions.module.scss";
+@use "../../../styles/colors.module.scss";
 
 .gradingList {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
+  color: colors.$color-text;
 }

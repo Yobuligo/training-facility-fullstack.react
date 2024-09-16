@@ -1,28 +1,32 @@
+@use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
-@import "../../../styles/mixins.scss";
+@use "../../../styles/mixins.scss";
 
-.eventInstanceItem {
-  display: flex;
-  flex-direction: row;
+$medium-screen-width: 46rem;
+
+.card {
   padding: 0;
 }
 
-.body {
+.eventInstanceItem {
   display: flex;
   flex-direction: column;
   row-gap: dimensions.$negative-space;
   width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  color: colors.$color-text;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  padding: 1rem 0.5rem;
 
-  @include medium-screen {
+  @include mixins.medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
   }
@@ -52,9 +56,13 @@
   row-gap: 0.25rem;
   padding: dimensions.$negative-space;
 
-  @include medium-screen {
+  @include mixins.medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
     padding: 0rem;
   }
+}
+
+.children {
+  padding: 1rem;
 }

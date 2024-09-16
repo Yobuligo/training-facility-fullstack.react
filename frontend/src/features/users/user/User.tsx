@@ -20,7 +20,7 @@ export const User: React.FC<IUserProps> = (props) => {
   const viewModel = useUserViewModel(props);
   const [user] = useUser();
   const { t } = useTranslation();
-  const screenSize = useScreenSize();
+  const screenSize = useScreenSize(45);
 
   const adminModeButtons = (
     <>
@@ -42,7 +42,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
 
       {/* current user must not be deactivatable */}
-      {user.id !== props.user.id && (
+      {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button
           disabled={viewModel.displayMode}
           onClick={viewModel.onToggleIsDeactivated}
@@ -54,7 +54,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
 
       {/* current user must not be deletable */}
-      {user.id !== props.user.id && (
+      {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button
           disabled={viewModel.displayMode}
           onClick={viewModel.onDeleteUser}
@@ -75,11 +75,11 @@ export const User: React.FC<IUserProps> = (props) => {
         onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
-        <h3>{`${props.user.userProfile?.firstname} ${
-          props.user.userProfile?.lastname
-        } ${
+        <h3 className={styles.username}>{`${
+          props.user.userProfile?.firstname
+        } ${props.user.userProfile?.lastname} ${
           props.user.userProfile && props.user.userProfile.memberId !== 0
-            ? `(${formatMemberId(props.user.userProfile.memberId)})`
+            ? `| ${formatMemberId(props.user.userProfile.memberId)}`
             : ""
         }`}</h3>
 
@@ -270,7 +270,7 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.joinedOn}
             />
           ) : (
-            <div>
+            <div className={styles.joinedOnReadonly}>
               <div>{t(texts.user.joinedOn)}</div>
               <div>
                 {props.user.userProfile

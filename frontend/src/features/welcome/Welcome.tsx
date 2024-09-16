@@ -11,6 +11,7 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IEventInstanceItemModel } from "../eventInstance/eventInstanceItem/IEventInstanceItemModel";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
+import styles from "./Welcome.module.scss";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
@@ -39,8 +40,8 @@ export const Welcome: React.FC = () => {
   );
 
   return (
-    <div>
-      <h2>
+    <div className={styles.welcome}>
+      <h2 className={styles.greeting}>
         {t(texts.welcome.welcome, {
           name: user.userProfile.firstname,
         })}
@@ -50,9 +51,17 @@ export const Welcome: React.FC = () => {
       {isLoadEventInstancesRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <>
+        <div className={styles.upcomingTrainings}>
           {isInitial(eventInstanceItemModels) ? (
-            <p>{t(texts.welcome.noTrainings)}</p>
+            <div>
+              {t(texts.welcome.noTrainings, {
+                trainings: (
+                  <span className={styles.trainingsLinkInfo}>
+                    {t(texts.dashboard.trainings)}
+                  </span>
+                ),
+              })}
+            </div>
           ) : (
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
@@ -61,7 +70,7 @@ export const Welcome: React.FC = () => {
               />
             </>
           )}
-        </>
+        </div>
       )}
     </div>
   );
