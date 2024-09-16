@@ -19,9 +19,13 @@ export const useScreenSize = (
   }, []);
 
   const mediumScreenWidth =
-    (mediumScreenWidthInRem || +dimensions.mediumScreenWidth) * 16;
+    (mediumScreenWidthInRem
+      ? mediumScreenWidthInRem
+      : +dimensions.mediumScreenMinWidth) * 16;
   const largeScreenWidth =
-    (largeScreenWidthInRem || +dimensions.largeScreenWidth) * 16;
+    (largeScreenWidthInRem
+      ? largeScreenWidthInRem
+      : +dimensions.largeScreenMinWidth) * 16;
 
   const isSmall = () => {
     if (windowDimensions.width < mediumScreenWidth) {
@@ -37,12 +41,14 @@ export const useScreenSize = (
     ) {
       return true;
     }
+    return false;
   };
 
   const isLarge = () => {
     if (windowDimensions.width >= largeScreenWidth) {
       return true;
     }
+    return false;
   };
 
   return { isLarge, isMedium, isSmall };
