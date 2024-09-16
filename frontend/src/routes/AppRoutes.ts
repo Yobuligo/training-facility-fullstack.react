@@ -3,9 +3,9 @@ import { route } from "./core/route";
 
 export const AppRoutes = configureRoutes({
   changePassword: route("/changePassword"),
+  eventOverview: route("/training-times"),
   dashboard: route("/"),
   error: route("/error"),
   login: route("/login"),
-  eventOverview: route("/training-times"),
   userInvite: route("/user-invite/:userInviteId"),
 });

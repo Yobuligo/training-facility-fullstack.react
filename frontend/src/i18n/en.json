@@ -228,7 +228,7 @@
         "errorSendEmail": "Error send invitation email",
         "firstname": "Firstname",
         "gender": "Gender",
-        "generateNewPassword": "Generate new Password",
+        "resetPassword": "Reset Password",
         "gradings": "Gradings",
         "isAdmin": "Is Admin",
         "joinedOn": "Joined On",
@@ -239,6 +239,7 @@
         "changePassword": "Change password",
         "sendInvitation": "Send invitation",
         "street": "Street",
+        "successResetPassword": "Reset password request was send to {{user}}",
         "successSendUserInvite": "Invitation was send to {{user}}.",
         "tariff": "Tariff",
         "technicalInformation": "Technical Information"

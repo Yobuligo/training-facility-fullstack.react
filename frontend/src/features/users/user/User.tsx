@@ -31,7 +31,12 @@ export const User: React.FC<IUserProps> = (props) => {
         </SpinnerButton>
       )}
       {viewModel.isPersistedUser && (
-        <Button>{t(texts.user.generateNewPassword)}</Button>
+        <SpinnerButton
+          displaySpinner={viewModel.isPasswordResetRequestProcessing}
+          onClick={viewModel.onPasswordReset}
+        >
+          {t(texts.user.resetPassword)}
+        </SpinnerButton>
       )}
 
       {/* current user must not be deactivatable */}

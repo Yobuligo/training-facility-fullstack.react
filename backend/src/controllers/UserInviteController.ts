@@ -9,6 +9,7 @@ import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IUserInvite, UserInviteRouteMeta } from "../shared/model/IUserInvite";
 import { IUserInviteRequestPasswordChange } from "../shared/model/IUserInviteRequestPasswordChange";
 import { AuthRole } from "../shared/types/AuthRole";
+import { UserInviteType } from "../shared/types/UserInviteType";
 import { EntityController } from "./core/EntityController";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -45,13 +46,23 @@ export class UserInviteController extends EntityController<
           // send invite
           try {
             const emailService = new EmailService();
-            await emailService.sendInvite(
-              userShort.email,
-              createdUserInvite.id,
-              userShort.firstname,
-              userShort.username
-            );
-            res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
+
+            if (userInvite.type === UserInviteType.REGISTER) {
+              await emailService.sendInvite(
+                userShort.email,
+                createdUserInvite.id,
+                userShort.firstname,
+                userShort.username
+              );
+              res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
+            } else {
+              await emailService.resetPassword(
+                userShort.email,
+                createdUserInvite.id,
+                userShort.firstname
+              );
+              res.status(HttpStatusCode.CREATED_201).send(createdUserInvite);
+            }
           } catch (error) {
             res
               .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)

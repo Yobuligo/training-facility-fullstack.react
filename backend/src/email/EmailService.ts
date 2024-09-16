@@ -4,7 +4,7 @@ import { smtp } from "./smtp";
 
 export class EmailService {
   async resetPassword(
-    recipient: string,
+    recipientEmail: string,
     userInviteId: string,
     firstname: string
   ) {
@@ -13,7 +13,7 @@ export class EmailService {
     try {
       await smtp.sendMail({
         from: AppConfig.smtpSender,
-        to: recipient,
+        to: recipientEmail,
         subject:
           "Zurücksetzen deines Passwortes für den Taekwon-Do Mitgliederbereich",
         html: `
@@ -36,7 +36,7 @@ export class EmailService {
   }
 
   async sendInvite(
-    recipient: string,
+    recipientEmail: string,
     userInviteId: string,
     firstname: string,
     username: string
@@ -46,7 +46,7 @@ export class EmailService {
     try {
       await smtp.sendMail({
         from: AppConfig.smtpSender,
-        to: recipient,
+        to: recipientEmail,
         subject: "Willkommen im Taekwon-Do Mitgliederbereich!",
         html: `
           <p>Hallo ${firstname},</p>

@@ -137,7 +137,7 @@
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
 		- Change default password from simple initial to a strong password
-	- Send invite mail to user
+	# Send invite mail to user
 		# Display loading spinner when sending mail
 		# User must be forwarded to invite route
 			# throw error if email could not be send because of an invalid email
@@ -145,14 +145,14 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
-	- Send reset password mail to user -> equal to send invite with different mail text
-		- Display loading spinner when sending mail
-		- User must be forwarded to invite route
-			- throw error if email could not be send because of an invalid email
-			- throw error if email could not be send because of technical issues
-			- previous inivites of a user must be deleted
-			- User invitation must be deleted with user
-		- Invite must expire
+	# Send reset password mail to user -> equal to send invite with different mail text
+		# Display loading spinner when sending mail
+		# User must be forwarded to invite route
+			# throw error if email could not be send because of an invalid email
+			# throw error if email could not be send because of technical issues
+			# previous inivites of a user must be deleted
+			# User invitation must be deleted with user
+		# Invite must expire
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
