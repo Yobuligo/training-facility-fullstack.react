@@ -170,7 +170,7 @@
 	# Session expires after a certain time
 	# Deactivated user must not be logged in
 	# Display error if user credentials invalid
-	- Display less technical error when login fails for an unknown reason
+	# Display less technical error when login fails for an unknown reason
 	
 # Password
 	# User must be able to change password
