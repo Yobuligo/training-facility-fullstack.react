@@ -40,7 +40,7 @@ export const Welcome: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className={styles.welcome}>
       <h2 className={styles.greeting}>
         {t(texts.welcome.welcome, {
           name: user.userProfile.firstname,

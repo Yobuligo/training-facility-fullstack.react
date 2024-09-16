@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.scss";
+@use "../../../styles/colors.module.scss";
 
 .gradingItem {
   display: flex;
@@ -37,6 +37,7 @@
 }
 
 .title {
+  color: colors.$color-text;
   font-weight: 500;
   font-size: large;
   font-family: "MerriweatherSans";
@@ -44,7 +45,7 @@
 }
 
 .examiners {
-  color: $color-secondary-light;
+  color: colors.$color-secondary-light;
 }
 
 .deleteIcon {

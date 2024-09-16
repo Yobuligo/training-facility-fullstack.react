@@ -270,7 +270,7 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.joinedOn}
             />
           ) : (
-            <div>
+            <div className={styles.joinedOnReadonly}>
               <div>{t(texts.user.joinedOn)}</div>
               <div>
                 {props.user.userProfile

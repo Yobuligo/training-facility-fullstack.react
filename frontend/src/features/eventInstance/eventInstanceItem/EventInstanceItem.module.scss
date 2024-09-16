@@ -1,5 +1,6 @@
+@use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
-@import "../../../styles/mixins.scss";
+@use "../../../styles/mixins.scss";
 
 $medium-screen-width: 46rem;
 
@@ -12,6 +13,7 @@ $medium-screen-width: 46rem;
   flex-direction: column;
   row-gap: dimensions.$negative-space;
   width: 100%;
+  color: colors.$color-text;
 }
 
 .header {
@@ -24,7 +26,7 @@ $medium-screen-width: 46rem;
   flex-direction: column;
   padding: 1rem 0.5rem;
 
-  @include medium-screen($medium-screen-width) {
+  @include mixins.medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
   }
@@ -54,7 +56,7 @@ $medium-screen-width: 46rem;
   row-gap: 0.25rem;
   padding: dimensions.$negative-space;
 
-  @include medium-screen($medium-screen-width) {
+  @include mixins.medium-screen($medium-screen-width) {
     flex-direction: row;
     column-gap: 2rem;
     padding: 0rem;

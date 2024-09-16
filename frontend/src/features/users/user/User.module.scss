@@ -29,6 +29,11 @@
   }
 }
 
+.joinedOnReadonly {
+  color: colors.$color-text;
+}
+
+
 .toolbar {
   display: flex;
   flex-direction: column;

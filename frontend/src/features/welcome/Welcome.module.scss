@@ -1,3 +1,9 @@
+@use '../../styles/colors.module.scss';
+
+.welcome {
+    color: colors.$color-text;
+}
+
 .greeting {
     font-family: "MerriweatherSans";
 }
