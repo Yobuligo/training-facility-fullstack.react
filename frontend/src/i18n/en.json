@@ -44,6 +44,7 @@
         "addTraining": "Add training"
     },
     "eventRegistrationItem": {
+        "addedByTrainer": "(added by trainer)",
         "deleteQuestion": "Do you really want to delete '{{user}}' from this event?",
         "deleteTitle": "Delete user",
         "missing": "Missing",

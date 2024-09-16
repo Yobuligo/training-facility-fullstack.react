@@ -20,12 +20,17 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
       {viewModel.confirmDialog.content}
       <div>{viewModel.fullName}</div>
       {props.eventRegistration.manuallyAdded ? (
-        <Toolbar>
-          <SecondaryButton onClick={viewModel.onDelete}>
-            {t(texts.general.delete)}
-          </SecondaryButton>
-          <Button>{t(texts.eventRegistrationItem.present)}</Button>
-        </Toolbar>
+        <div className={styles.manuallyAddedSection}>
+          <div className={styles.addedByTrainerInfo}>
+            {t(texts.eventRegistrationItem.addedByTrainer)}
+          </div>
+          <Toolbar>
+            <SecondaryButton onClick={viewModel.onDelete}>
+              {t(texts.general.delete)}
+            </SecondaryButton>
+            <Button>{t(texts.eventRegistrationItem.present)}</Button>
+          </Toolbar>
+        </div>
       ) : (
         <ToggleButtonGroup
           enableUnselectAll={true}
