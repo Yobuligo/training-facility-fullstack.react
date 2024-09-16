@@ -205,6 +205,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const onIsAdminChange = (option: ISelectOption<boolean>) =>
     setIsAdmin(option.key);
 
+  const isPersistedUser =
+    !(props.user instanceof DummyUser) || props.user.isPersisted === true;
+
   const onChangeBirthday = (newValue: string) => setBirthday(newValue);
 
   const onChangeJoinedOn = (newValue: string) => setJoinedOn(newValue);
@@ -468,6 +471,7 @@ export const useUserViewModel = (props: IUserProps) => {
     gradings,
     isAdminOptions,
     isDeactivated,
+    isPersistedUser,
     isSendUserInviteRequestProcessing,
     joinedOn,
     lastname,

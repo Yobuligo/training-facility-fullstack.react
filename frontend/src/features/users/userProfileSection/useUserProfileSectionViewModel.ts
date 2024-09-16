@@ -107,6 +107,9 @@ export const useUserProfileSectionViewModel = () => {
       const userApi = new UserApi();
       const createdUser = await userApi.insert(user);
       updateUserShort(createdUser, user.id);
+
+      // if created user is selected, replace by new created instance, which has an valid uuid
+      setSelectedUser(createdUser);
     });
 
   const updateUser = (user: IUser) =>

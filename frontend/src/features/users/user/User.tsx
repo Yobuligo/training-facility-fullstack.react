@@ -22,16 +22,17 @@ export const User: React.FC<IUserProps> = (props) => {
 
   const adminModeButtons = (
     <>
-      <SpinnerButton
-        disabled={viewModel.displayMode}
-        displaySpinner={viewModel.isSendUserInviteRequestProcessing}
-        onClick={viewModel.onSendUserInvite}
-      >
-        {t(texts.user.sendInvitation)}
-      </SpinnerButton>
-      <Button disabled={viewModel.displayMode}>
-        {t(texts.user.generateNewPassword)}
-      </Button>
+      {viewModel.isPersistedUser && (
+        <SpinnerButton
+          displaySpinner={viewModel.isSendUserInviteRequestProcessing}
+          onClick={viewModel.onSendUserInvite}
+        >
+          {t(texts.user.sendInvitation)}
+        </SpinnerButton>
+      )}
+      {viewModel.isPersistedUser && (
+        <Button>{t(texts.user.generateNewPassword)}</Button>
+      )}
 
       {/* current user must not be deactivatable */}
       {user.id !== props.user.id && (

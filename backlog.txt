@@ -84,7 +84,7 @@
 	- Event Instance must be deletable
 		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
 		- Event definitions of deleted event instances must not be displayed
-	- Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
+	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
 - Welcome
 	# Display spinner when loading registrations I am registered on
@@ -151,8 +151,8 @@
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
 	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
-	- Bug: Buttons for inviting users and changing password must be active in display mode
-	- Bug: Sending user invite which is not created yet, fails (create new user -> don't save -> send invite)
+	# Bug: Buttons for inviting users and changing password must be active in display mode
+	# Bug: Sending user invite which is not created yet, fails (create new user -> don't save -> send invite)
 	
 # User List
 	# Display loading spinner, when loading users
