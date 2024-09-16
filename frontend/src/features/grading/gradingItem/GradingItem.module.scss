@@ -22,6 +22,7 @@
   height: 5rem;
   border-radius: 50%;
   padding: 0.5rem;
+  font-family: "MerriweatherSans";
 }
 
 .year {
@@ -38,7 +39,8 @@
 .title {
   font-weight: 500;
   font-size: large;
-  text-transform: uppercase;
+  font-family: "MerriweatherSans";
+  letter-spacing: 0.1rem;
 }
 
 .examiners {
