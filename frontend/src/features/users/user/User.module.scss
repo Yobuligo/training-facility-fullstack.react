@@ -23,3 +23,9 @@
     color: $color-primary;
   }
 }
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;  
+}
