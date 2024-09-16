@@ -23,6 +23,7 @@
         "week": "Woche"
     },
     "dashboard": {
+        "gradings": "Prüfungen",
         "profile": "Profil",
         "trainings": "Trainings",
         "planner": "Planer",
@@ -149,7 +150,7 @@
         "dan7": "7. Dan"
     },
     "gradingList": {
-        "noGradingsAvailable": "Derzeit hast du noch keine Prüfungen absolviert"
+        "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
     },
     "gradingSection": {
         "title": "Prüfung hinzufügen"

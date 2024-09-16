@@ -7,6 +7,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { EventCalendarMyTrainings } from "../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
 import { EventCalendarPlanSection } from "../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
+import { MyGradingList } from "../grading/myGradingList/MyGradingList";
 import { MyProfile } from "../myProfile/MyProfile";
 import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../welcome/Welcome";
@@ -41,6 +42,11 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     tabItems.push({
       title: t(texts.dashboard.trainings),
       content: <EventCalendarMyTrainings />,
+    });
+
+    tabItems.push({
+      title: t(texts.dashboard.gradings),
+      content: <MyGradingList />,
     });
 
     tabItems.push({

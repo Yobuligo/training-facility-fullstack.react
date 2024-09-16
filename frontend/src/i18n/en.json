@@ -23,6 +23,7 @@
         "week": "Week"
     },
     "dashboard": {
+        "gradings": "Gradings",
         "profile": "Profile",
         "trainings": "Trainings",
         "planner": "Planner",
@@ -149,7 +150,7 @@
         "dan7": "7. Dan"
     },
     "gradingList": {
-        "noGradingsAvailable": "Currently you have no gradings"
+        "noGradingsAvailable": "No gradings found yet."
     },
     "gradingSection": {
         "title": "Add new Grading"
