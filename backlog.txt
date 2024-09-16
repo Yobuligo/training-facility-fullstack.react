@@ -12,7 +12,7 @@
 # ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard
 
-- Event Planner
+# Event Planner
 	# Title must be mandatory. Saving must not be possible without title.
 	# Description is optional
 	# inputs are restricted to length of related db fields		
@@ -76,17 +76,13 @@
 	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
-	- Display loading spinner when deleting user
-	- Trainer can be assigned to a training
-	- Assigned trainer can be deleted
-	- Assigned trainer is displayed in the calendar
-	- Performance: Add indices to columns from and to of event-instances
+	- Display loading spinner when deleting user	
 	- Event Instance must be deletable
 		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
 		- Event definitions of deleted event instances must not be displayed
 	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
-- Welcome
+# Welcome
 	# Display spinner when loading registrations I am registered on
 	# Display upcoming events of the current week
 	# Upcoming events are sorted chronologically
@@ -94,7 +90,7 @@
 
 - User Profile
 	# Display loading spinner when loading user profile
-	- Dummy objects are removed
+	# Dummy objects are removed
 	# User can be deactivated and activated (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
 	# username must be unique
@@ -129,9 +125,6 @@
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
 		# Bug: Error when entering achievedAt date manually
-	- User can be forced to change his password
-		- An admin can mark a user to change his password
-		- With the next backend request an error thrown to trigger changing the password
 	# Change password
 		# The user must be able to change his password
 		# The salt must be changed with the password
@@ -182,7 +175,7 @@
 # Password
 	# User must be able to change password
 	
-- User Invite Screen
+# User Invite Screen
 	# Invite must be checked, display error in case of expired or invalid invite
 	# User must set a password
 	# User will be navigated to login page after changing the password
