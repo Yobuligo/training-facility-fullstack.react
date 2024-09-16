@@ -97,7 +97,7 @@
 	# username must be unique
 	# User can be marked as admin and vice versa
 	# User role Admin is assigned to user, when marked as admin while creating
-	- Only a valid email address can be persisted
+	# Only a valid email address can be persisted
 	# Customer Id must be created and displayed
 	# Joined on must be changeable in admin mode otherwise displayed
 	# Joined on can be changed by entering values instead of using value help
@@ -196,6 +196,9 @@
 # Gradings
 	# Gradings are displayed in a separate tabitem
 	
+- Display Courses / seminars
+	- Courses can be displayed in user profile
+
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
@@ -205,6 +208,9 @@
 	# Hash passwords before transferring them from client to server
 	- Move session persistence from local storage to cookies (http only)
 	- user is locked after a certain times of login fails
+	
+- Performance
+	- Admin tabs are loaded asynchronously
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
