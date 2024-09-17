@@ -1,9 +1,7 @@
 import { Op } from "sequelize";
-import { AppConfig } from "../AppConfig";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IllegalStateError } from "../core/errors/IllegalStateError";
-import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
@@ -12,8 +10,8 @@ import { UserGrading } from "../model/UserGrading";
 import { UserLoginAttempt } from "../model/UserLoginAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
+import { UserLoginAttemptService } from "../services/UserLoginAttemptService";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
-import { LoginNotPossibleError } from "../shared/errors/LoginNotPossibleError";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
@@ -325,37 +323,6 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return wasUpdated;
   }
 
-  private checkUserLoginAttempt(user: IUserSecure) {
-    // check if user has fail attempts, otherwise return
-    if (!user.userLoginAttempt) {
-      return;
-    }
-
-    // check if the user is below the number of allowed tries, which is fine
-    if (
-      user.userLoginAttempt.numberFailAttempts <
-      AppConfig.userNumberAttemptsToTemporaryBlock
-    ) {
-      return;
-    }
-
-    // otherwise, check if the user is temporarily blocked
-    if (
-      user.userLoginAttempt.lockedUntil &&
-      DateTime.isBefore(user.userLoginAttempt.lockedUntil)
-    ) {
-      throw new LoginNotPossibleError();
-    }
-
-    // finally check if the user is permanently locked
-    if (
-      user.userLoginAttempt.numberFailAttempts <
-      AppConfig.userNumberAttemptsToPermanentlyLock
-    ) {
-      throw new LoginNotPossibleError();
-    }
-  }
-
   private createSalt(): string {
     return hash(uuid());
   }
@@ -368,7 +335,8 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       return undefined;
     }
 
-    this.checkUserLoginAttempt(user);
+    const userLoginAttemptService = new UserLoginAttemptService();
+    userLoginAttemptService.check(user.userLoginAttempt);
 
     const password = hashPassword(credentials.password, user.salt);
     if (password === user.password) {
