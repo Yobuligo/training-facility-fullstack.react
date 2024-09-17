@@ -295,12 +295,18 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
   }
 
   async unlock(userId: string): Promise<boolean> {
-    const [updatedRows] = await this.model.update(
-      { isLocked: false, lockedAt: undefined },
-      { where: { id: userId } }
-    );
-    return updatedRows === 1;
-  }  
+    let wasUpdated = false;
+    transaction(async () => {
+      // unlock user and delete user login fail attempts
+      const [updatedRows] = await this.model.update(
+        { isLocked: false, lockedAt: undefined },
+        { where: { id: userId } }
+      );
+      wasUpdated = updatedRows === 1;
+      await UserLoginFailAttempt.destroy({ where: { userId: userId } });
+    });
+    return wasUpdated;
+  }
 
   async update(entity: IUserSecure): Promise<boolean> {
     let wasUpdated = false;
@@ -377,7 +383,10 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     if (!user.userLoginFailAttempt) {
       return;
     }
-    await UserLoginFailAttempt.destroy({ where: { userId: user.id } });
+    await UserLoginFailAttempt.destroy({
+      where: { userId: user.id },
+      transaction: findTransaction(),
+    });
   }
 
   private toUserShort(model: User): IUserShort {
@@ -437,7 +446,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         numberFailAttempts,
         lockedUntil,
       },
-      { where: { userId: user.id } }
+      { where: { userId: user.id }, transaction: findTransaction() }
     );
+
+    // lock user if max fail attempts are reached
+    if (numberFailAttempts === AppConfig.userNumberAttemptsToPermanentlyLock) {
+      await this.lock(user.id);
+    }
   }
 }

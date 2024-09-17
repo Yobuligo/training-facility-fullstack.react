@@ -44,80 +44,6 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
-  private unlock() {
-    this.router.post(
-      `${this.routeMeta.path}/:id/unlock`,
-      SessionInterceptor(
-        async (req, res) => {
-          const userId = req.params.id;
-          const userRepo = new UserRepo();
-          const wasUnlocked = await userRepo.unlock(userId);
-          res.status(HttpStatusCode.OK_200).send(wasUnlocked);
-        },
-        [AuthRole.ADMIN]
-      )
-    );
-  }
-
-  private changePassword() {
-    this.router.post(
-      `${this.routeMeta.path}/:id/changePassword`,
-      SessionInterceptor(async (req, res) => {
-        const userId = req.params.id;
-        if (!userId || typeof userId !== "string") {
-          return res.status(HttpStatusCode.BAD_REQUEST_400).send();
-        }
-        if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
-          return this.sendMissingAuthorityError(res);
-        }
-        const changeCredentials: IChangeCredentials = req.body;
-        const userRepo = new UserRepo();
-        const wasChanged = await userRepo.changePassword(
-          userId,
-          changeCredentials
-        );
-        res.status(HttpStatusCode.OK_200).send(wasChanged);
-      })
-    );
-  }
-
-  private lock() {
-    this.router.post(
-      `${this.routeMeta.path}/:id/lock`,
-      SessionInterceptor(
-        async (req, res) => {
-          const userId = req.params.id;
-          const userRepo = new UserRepo();
-          const wasLocked = await userRepo.lock(userId);
-          res.status(HttpStatusCode.OK_200).send(wasLocked);
-        },
-        [AuthRole.ADMIN]
-      )
-    );
-  }
-
-  private existsUsername() {
-    this.router.get(
-      `${this.routeMeta.path}/exists/:username`,
-      SessionInterceptor(async (req, res) => {
-        const username = req.params.username;
-        if (!username || typeof username !== "string") {
-          return res
-            .status(HttpStatusCode.BAD_REQUEST_400)
-            .send(
-              createError(
-                "Error while getting username. Username was not provided."
-              )
-            );
-        }
-
-        const userRepo = new UserRepo();
-        const contains = await userRepo.existsByUsername(username);
-        res.status(HttpStatusCode.OK_200).send(contains);
-      })
-    );
-  }
-
   protected findAll(): void {
     this.router.get(
       this.routeMeta.path,
@@ -153,6 +79,50 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
+  private changePassword() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/changePassword`,
+      SessionInterceptor(async (req, res) => {
+        const userId = req.params.id;
+        if (!userId || typeof userId !== "string") {
+          return res.status(HttpStatusCode.BAD_REQUEST_400).send();
+        }
+        if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
+          return this.sendMissingAuthorityError(res);
+        }
+        const changeCredentials: IChangeCredentials = req.body;
+        const userRepo = new UserRepo();
+        const wasChanged = await userRepo.changePassword(
+          userId,
+          changeCredentials
+        );
+        res.status(HttpStatusCode.OK_200).send(wasChanged);
+      })
+    );
+  }
+
+  private existsUsername() {
+    this.router.get(
+      `${this.routeMeta.path}/exists/:username`,
+      SessionInterceptor(async (req, res) => {
+        const username = req.params.username;
+        if (!username || typeof username !== "string") {
+          return res
+            .status(HttpStatusCode.BAD_REQUEST_400)
+            .send(
+              createError(
+                "Error while getting username. Username was not provided."
+              )
+            );
+        }
+
+        const userRepo = new UserRepo();
+        const contains = await userRepo.existsByUsername(username);
+        res.status(HttpStatusCode.OK_200).send(contains);
+      })
+    );
+  }
+
   private findAllShort() {
     this.router.get(
       `${this.routeMeta.path}/short/all`,
@@ -161,6 +131,21 @@ export class UserController extends EntityController<IUser, UserRepo> {
           const userRepo = new UserRepo();
           const usersShort = await userRepo.findAllShort();
           res.status(HttpStatusCode.OK_200).send(usersShort);
+        },
+        [AuthRole.ADMIN]
+      )
+    );
+  }
+
+  private lock() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/lock`,
+      SessionInterceptor(
+        async (req, res) => {
+          const userId = req.params.id;
+          const userRepo = new UserRepo();
+          const wasLocked = await userRepo.lock(userId);
+          res.status(HttpStatusCode.OK_200).send(wasLocked);
         },
         [AuthRole.ADMIN]
       )
@@ -203,6 +188,21 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const success = await sessionRepo.deleteSession(session);
         res.status(HttpStatusCode.OK_200).send(success);
       })
+    );
+  }
+
+  private unlock() {
+    this.router.post(
+      `${this.routeMeta.path}/:id/unlock`,
+      SessionInterceptor(
+        async (req, res) => {
+          const userId = req.params.id;
+          const userRepo = new UserRepo();
+          const wasUnlocked = await userRepo.unlock(userId);
+          res.status(HttpStatusCode.OK_200).send(wasUnlocked);
+        },
+        [AuthRole.ADMIN]
+      )
     );
   }
 }
