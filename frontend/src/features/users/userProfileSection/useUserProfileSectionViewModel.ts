@@ -18,8 +18,8 @@ export const useUserProfileSectionViewModel = () => {
   const [insertUserRequest, isInsertUserRequestProcessing] = useRequest();
   const [updateUserRequest] = useRequest();
   const [deleteUserRequest] = useRequest();
-  const [activateUserRequest] = useRequest();
-  const [deactivateUserRequest] = useRequest();
+  const [unlockUserRequest] = useRequest();
+  const [lockUserRequest] = useRequest();
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
@@ -61,7 +61,7 @@ export const useUserProfileSectionViewModel = () => {
       email: user.userProfile?.email ?? "",
       firstname: user.userProfile?.firstname ?? "",
       id: user.id,
-      isDeactivated: user.isDeactivated,
+      isLocked: user.isLocked,
       lastname: user.userProfile?.lastname ?? "",
       userRoles:
         user.userRoles?.map((userRole) => ({
@@ -148,14 +148,14 @@ export const useUserProfileSectionViewModel = () => {
     });
 
   /**
-   * Activates an user
+   * Unlock an user
    */
-  const onActivate = (user: IUser) => {
-    user.isDeactivated = false;
-    user.deactivatedAt = undefined;
-    activateUserRequest(async () => {
+  const onUnlock = (user: IUser) => {
+    user.isLocked = false;
+    user.lockedAt = undefined;
+    unlockUserRequest(async () => {
       const userApi = new UserApi();
-      await userApi.activate(user.id);
+      await userApi.unlock(user.id);
       updateUserShort(user);
       setSelectedUser(undefined);
     });
@@ -185,14 +185,14 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   /**
-   * Deactivates an user
+   * Lock an user
    */
-  const onDeactivate = (user: IUser) => {
-    user.isDeactivated = true;
-    user.deactivatedAt = new Date();
-    deactivateUserRequest(async () => {
+  const onLock = (user: IUser) => {
+    user.isLocked = true;
+    user.lockedAt = new Date();
+    lockUserRequest(async () => {
       const userApi = new UserApi();
-      await userApi.deactivate(user.id);
+      await userApi.lock(user.id);
       updateUserShort(user);
       setSelectedUser(undefined);
     });
@@ -203,12 +203,12 @@ export const useUserProfileSectionViewModel = () => {
     isLoadUserRequestProcessing,
     isLoadUsersShortRequestProcessing,
     isInsertUserRequestProcessing,
-    onActivate,
+    onUnlock,
     onAppend,
     onBack,
     onCancel,
     onChange,
-    onDeactivate,
+    onLock,
     onDelete,
     onSelect,
     query,

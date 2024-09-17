@@ -7,7 +7,7 @@ export interface IUserShort extends IHaveId {
   lastname: string;
   email: string;
   phone?: string;
-  isDeactivated: boolean;
+  isLocked: boolean;
   userRoles: Subset<IUserRole, "id" | "role">[];
   username: string;
 }

@@ -6,8 +6,8 @@ import { Dummy } from "./Dummy";
 import { DummyUserProfile } from "./DummyUserProfile";
 
 export class DummyUser extends Dummy implements IUser {
-  deactivatedAt?: Date | undefined;
-  isDeactivated: boolean = false;
+  lockedAt?: Date | undefined;
+  isLocked: boolean = false;
   username: string = "";
   userRoles: IUserRole[] = [];
   userProfile?: IUserProfile = new DummyUserProfile();

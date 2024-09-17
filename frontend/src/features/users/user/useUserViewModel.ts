@@ -72,8 +72,8 @@ export const useUserViewModel = (props: IUserProps) => {
   const [bankAccountInstitution, setBankAccountInstitution] = useState(
     userProfile.userBankAccount?.bankAccountInstitution ?? ""
   );
-  const [isDeactivated, setIsDeactivated] = useState(props.user.isDeactivated);
-  const [deactivatedAt, setDeactivatedAt] = useState(props.user.deactivatedAt);
+  const [isLocked, setIsLocked] = useState(props.user.isLocked);
+  const [lockedAt, setLockedAt] = useState(props.user.lockedAt);
   const [collapseBank, setCollapseBank] = useState(false);
   const [gradings, setGradings] = useState<IUserGrading[]>(
     userProfile.userGradings ?? []
@@ -103,8 +103,8 @@ export const useUserViewModel = (props: IUserProps) => {
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
     setCity(userProfile.city);
-    setIsDeactivated(props.user.isDeactivated);
-    setDeactivatedAt(props.user.deactivatedAt);
+    setIsLocked(props.user.isLocked);
+    setLockedAt(props.user.lockedAt);
     setTariff(userProfile.tariff);
     setBankAccountBIC(userProfile.userBankAccount?.bankAccountBIC ?? "");
     setBankAccountIBAN(userProfile.userBankAccount?.bankAccountIBAN ?? "");
@@ -118,8 +118,8 @@ export const useUserViewModel = (props: IUserProps) => {
     );
     setDisplayMode(true);
   }, [
-    props.user.deactivatedAt,
-    props.user.isDeactivated,
+    props.user.lockedAt,
+    props.user.isLocked,
     props.user.username,
     setEmail,
     setFirstname,
@@ -247,29 +247,29 @@ export const useUserViewModel = (props: IUserProps) => {
       }
     );
 
-  const onActivate = () =>
+  const onUnlock = () =>
     confirmDialog.show(
-      t(texts.user.activateUserTitle),
-      t(texts.user.activateUserQuestion, { username: props.user.username }),
+      t(texts.user.unlockUserTitle),
+      t(texts.user.unlockUserQuestion, { username: props.user.username }),
       {
-        onOkay: () => props.onActivate?.(props.user),
+        onOkay: () => props.onUnlock?.(props.user),
       }
     );
 
-  const onDeactivate = () =>
+  const onLock = () =>
     confirmDialog.show(
-      t(texts.user.deactivateUserTitle),
-      t(texts.user.deactivateUserQuestion, { username: props.user.username }),
+      t(texts.user.lockUserTitle),
+      t(texts.user.lockUserQuestion, { username: props.user.username }),
       {
-        onOkay: () => props.onDeactivate?.(props.user),
+        onOkay: () => props.onLock?.(props.user),
       }
     );
 
-  const onToggleIsDeactivated = () => {
-    if (isDeactivated === false) {
-      onDeactivate();
+  const onToggleIsLocked = () => {
+    if (isLocked === false) {
+      onLock();
     } else {
-      onActivate();
+      onUnlock();
     }
   };
 
@@ -347,8 +347,8 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.city = city;
     userProfile.tariff = tariff;
     userProfile.joinedOn = DateTime.create(joinedOn, "12:00");
-    props.user.isDeactivated = isDeactivated;
-    props.user.deactivatedAt = deactivatedAt;
+    props.user.isLocked = isLocked;
+    props.user.lockedAt = lockedAt;
 
     updateUserBankAccount();
     updateUserRoles();
@@ -495,7 +495,7 @@ export const useUserViewModel = (props: IUserProps) => {
     genderOptions,
     gradings,
     isAdminOptions,
-    isDeactivated,
+    isLocked,
     isPersistedUser,
     isSendUserInviteRequestProcessing,
     isPasswordResetRequestProcessing,
@@ -520,7 +520,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleCollapseGradings,
     onToggleCollapsePersonalInformation,
     onToggleCollapseTechnicalInformation,
-    onToggleIsDeactivated,
+    onToggleIsLocked,
     onValidate,
     phone,
     postalCode,

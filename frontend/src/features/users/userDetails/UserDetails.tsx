@@ -19,10 +19,10 @@ export const UserDetails: React.FC<IUserDetails> = (props) => {
       <User
         cancelSignal={cancelSignal}
         isAdminMode={props.isAdminMode}
-        onActivate={props.onActivate}
+        onUnlock={props.onUnlock}
         onCancel={props.onCancel}
         onChange={props.onChange}
-        onDeactivate={props.onDeactivate}
+        onLock={props.onLock}
         onDelete={props.onDelete}
         user={props.user}
       />

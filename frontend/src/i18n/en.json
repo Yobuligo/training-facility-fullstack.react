@@ -163,6 +163,7 @@
     "login": {
         "errorLogin": "Unknown error while login",
         "errorInvalidCredentials": "Incorrect username or password",
+        "errorLoginNotPossible": "Login currently not possible. Please try again later.",
         "login": "Login",
         "password": "Password",
         "successUserCreated": "User was created. Please login.",
@@ -205,9 +206,9 @@
         "relatives": "Relative"
     },
     "user": {
-        "activate": "Activate",
-        "activateUserQuestion": "Do you really want to activate the user '{{username}}'?",
-        "activateUserTitle": "Activate user",
+        "unlock": "Unlock",
+        "unlockUserQuestion": "Do you really want to unlock the user '{{username}}'?",
+        "unlockUserTitle": "Unlock user",
         "address": "Address",
         "bank": "Bank",
         "bankAccountOwner": "Account owner",
@@ -216,9 +217,9 @@
         "bankAccountInstitution": "Institution",
         "birthday": "Birthday",
         "city": "City",
-        "deactivate": "Deactivate",
-        "deactivateUserQuestion": "Do you really want to deactivate the user '{{username}}'? He won't be able to login anymore.",
-        "deactivateUserTitle": "Deactivate user",
+        "lock": "Lock",
+        "lockUserQuestion": "Do you really want to lock the user '{{username}}'? He won't be able to login anymore.",
+        "lockUserTitle": "Lock user",
         "deleteUser": "Delete user",
         "deleteUserQuestion": "Do you really want to delete the user '{{username}}'?",
         "deleteUserTitle": "Delete user",
@@ -252,7 +253,7 @@
         "errorInviteExpiredOrInvalid": "User invite is already expired or invalid."
     },
     "userProfileItem": {
-        "deactivated": "Deactivated"
+        "locked": "Locked"
     },
     "userProfileSection": {
         "addUser": "Add user"

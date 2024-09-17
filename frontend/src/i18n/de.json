@@ -163,6 +163,7 @@
     "login": {
         "errorLogin": "Unbekannter Fehler beim Login",
         "errorInvalidCredentials": "Benutzername oder Passwort ungültig",
+        "errorLoginNotPossible": "Anmeldung aktuell nicht möglich. Bitte versuche es später noch einmal.",
         "login": "Login",
         "password": "Passwort",
         "successUserCreated": "Benutzer wurde erstellt. Bitte loggen Sie sich ein.",
@@ -205,9 +206,9 @@
         "relatives": "Angehörige"
     },
     "user": {
-        "activate": "Aktivieren",
-        "activateUserQuestion": "Soll der Benutzer '{{username}}' wirklich aktiviert werden?",
-        "activateUserTitle": "Benutzer aktivieren",
+        "unlock": "Entsperren",
+        "unlockUserQuestion": "Soll der Benutzer '{{username}}' wirklich entsperrt werden?",
+        "unlockUserTitle": "Benutzer entsperren",
         "address": "Adresse",
         "bank": "Bankverbindung",
         "bankAccountOwner": "Kontoinhaber",
@@ -216,9 +217,9 @@
         "bankAccountInstitution": "Institut",
         "birthday": "Geburtstag",
         "city": "Stadt",
-        "deactivate": "Deaktivieren",
-        "deactivateUserQuestion": "Soll der Benutzer '{{username}}' wirklich deaktiviert werden? Er wird sich nicht mehr einloggen können.",
-        "deactivateUserTitle": "Benutzer deaktivieren",
+        "lock": "Sperren",
+        "lockUserQuestion": "Soll der Benutzer '{{username}}' wirklich gesperrt werden? Er wird sich nicht mehr einloggen können.",
+        "lockUserTitle": "Benutzer sperren",
         "deleteUser": "Benutzer löschen",
         "deleteUserQuestion": "Soll der Benutzer '{{username}}' wirklich gelöscht werden?",
         "deleteUserTitle": "Benutzer löschen",
@@ -252,7 +253,7 @@
         "errorInviteExpiredOrInvalid": "Einladung ist bereits abgelaufen oder ungültig."
     },
     "userProfileItem": {
-        "deactivated": "Deaktiviert"
+        "locked": "Gesperrt"
     },
     "userProfileSection": {
         "addUser": "Benutzer hinzufügen"

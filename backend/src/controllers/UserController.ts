@@ -15,9 +15,9 @@ import { SessionInterceptor } from "./core/SessionInterceptor";
 export class UserController extends EntityController<IUser, UserRepo> {
   constructor() {
     super(UserRouteMeta, new UserRepo(), [AuthRole.ADMIN]);
-    this.activate();
+    this.unlock();
     this.changePassword();
-    this.deactivate();
+    this.lock();
     this.existsUsername();
     this.findAllShort();
     this.login();
@@ -44,15 +44,15 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
-  private activate() {
+  private unlock() {
     this.router.post(
-      `${this.routeMeta.path}/:id/activate`,
+      `${this.routeMeta.path}/:id/unlock`,
       SessionInterceptor(
         async (req, res) => {
           const userId = req.params.id;
           const userRepo = new UserRepo();
-          const wasActivated = await userRepo.activate(userId);
-          res.status(HttpStatusCode.OK_200).send(wasActivated);
+          const wasUnlocked = await userRepo.unlock(userId);
+          res.status(HttpStatusCode.OK_200).send(wasUnlocked);
         },
         [AuthRole.ADMIN]
       )
@@ -81,15 +81,15 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
-  private deactivate() {
+  private lock() {
     this.router.post(
-      `${this.routeMeta.path}/:id/deactivate`,
+      `${this.routeMeta.path}/:id/lock`,
       SessionInterceptor(
         async (req, res) => {
           const userId = req.params.id;
           const userRepo = new UserRepo();
-          const wasDeactivated = await userRepo.deactivate(userId);
-          res.status(HttpStatusCode.OK_200).send(wasDeactivated);
+          const wasLocked = await userRepo.lock(userId);
+          res.status(HttpStatusCode.OK_200).send(wasLocked);
         },
         [AuthRole.ADMIN]
       )
@@ -176,7 +176,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const user = await userRepo.findByCredentials(
           authentication.credentials
         );
-        if (!user || user.isDeactivated === true) {
+        if (!user || user.isLocked === true) {
           return res
             .status(HttpStatusCode.NOT_FOUND_404)
             .send(

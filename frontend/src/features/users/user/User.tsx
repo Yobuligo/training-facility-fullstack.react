@@ -41,15 +41,15 @@ export const User: React.FC<IUserProps> = (props) => {
         </SpinnerButton>
       )}
 
-      {/* current user must not be deactivatable */}
+      {/* current user must not be lockable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button
           disabled={viewModel.displayMode}
-          onClick={viewModel.onToggleIsDeactivated}
+          onClick={viewModel.onToggleIsLocked}
         >
-          {viewModel.isDeactivated
-            ? t(texts.user.activate)
-            : t(texts.user.deactivate)}
+          {viewModel.isLocked
+            ? t(texts.user.unlock)
+            : t(texts.user.lock)}
         </Button>
       )}
 

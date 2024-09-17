@@ -4,8 +4,8 @@ import { IUserProfile } from "./IUserProfile";
 import { IUserRole } from "./IUserRole";
 
 export interface IUser extends IEntity {
-  deactivatedAt?: Date;
-  isDeactivated: boolean;
+  lockedAt?: Date;
+  isLocked: boolean;
   username: string;
   userRoles?: IUserRole[];
   userProfile?: IUserProfile;

@@ -49,14 +49,6 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     ]);
   }
 
-  async activate(userId: string): Promise<boolean> {
-    const [updatedRows] = await this.model.update(
-      { isDeactivated: false, deactivatedAt: undefined },
-      { where: { id: userId } }
-    );
-    return updatedRows === 1;
-  }
-
   async changePassword(
     userId: string,
     changeCredentials: IChangeCredentials
@@ -89,17 +81,17 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       salt,
       username: credentials.username,
       userRoles: [],
-      isDeactivated: false,
+      isLocked: false,
     });
     return user;
   }
 
-  async deactivate(userId: string): Promise<boolean> {
+  async lock(userId: string): Promise<boolean> {
     let updatedRows: [affectedCount: number] = [0];
     await transaction(async () => {
-      // deactivate user
+      // lock user
       updatedRows = await this.model.update(
-        { isDeactivated: true, deactivatedAt: new Date() },
+        { isLocked: true, lockedAt: new Date() },
         { where: { id: userId } }
       );
 
@@ -158,7 +150,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
   async findByIdShort(userId: string): Promise<IUserShort | undefined> {
     const data = await User.findByPk(userId, {
-      attributes: ["id", "isDeactivated", "username"],
+      attributes: ["id", "isLocked", "username"],
       include: [
         {
           model: UserProfile,
@@ -182,7 +174,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
   async findAllShort(): Promise<IUserShort[]> {
     const data = await User.findAll({
-      attributes: ["id", "isDeactivated"],
+      attributes: ["id", "isLocked"],
       include: [
         {
           model: UserProfile,
@@ -251,7 +243,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         id: userSecure.id,
         username: userSecure.username,
         userRoles: [],
-        isDeactivated: false,
+        isLocked: false,
         createdAt: userSecure.createdAt,
         updatedAt: userSecure.updatedAt,
       };
@@ -301,6 +293,14 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     const wasChanged = await this.updatePassword(userId, newPassword);
     return wasChanged;
   }
+
+  async unlock(userId: string): Promise<boolean> {
+    const [updatedRows] = await this.model.update(
+      { isLocked: false, lockedAt: undefined },
+      { where: { id: userId } }
+    );
+    return updatedRows === 1;
+  }  
 
   async update(entity: IUserSecure): Promise<boolean> {
     let wasUpdated = false;
@@ -357,8 +357,8 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       where: { username },
       attributes: [
         "id",
-        "isDeactivated",
-        "deactivatedAt",
+        "isLocked",
+        "lockedAt",
         "username",
         "password",
         "salt",
@@ -386,7 +386,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       id: user.id,
       email: user.userProfile?.email ?? "",
       firstname: user.userProfile?.firstname ?? "",
-      isDeactivated: user.isDeactivated,
+      isLocked: user.isLocked,
       lastname: user.userProfile?.lastname ?? "",
       userRoles:
         user.userRoles?.map((userRole) => ({

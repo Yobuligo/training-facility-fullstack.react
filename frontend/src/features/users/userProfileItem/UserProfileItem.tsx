@@ -20,14 +20,14 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
       <div
         className={style(
           styles.userProfileItem,
-          props.userShort.isDeactivated ? styles.deactivated : ""
+          props.userShort.isLocked ? styles.locked : ""
         )}
       >
         <div className={styles.group}>
           <div className={styles.name}>
             {`${props.userShort.firstname} ${props.userShort.lastname} ${
-              props.userShort.isDeactivated === true
-                ? `(${t(texts.userProfileItem.deactivated)})`
+              props.userShort.isLocked === true
+                ? `(${t(texts.userProfileItem.locked)})`
                 : ""
             }`}
           </div>

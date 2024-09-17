@@ -92,7 +92,7 @@
 - User Profile
 	# Display loading spinner when loading user profile
 	# Dummy objects are removed
-	# User can be deactivated and activated (session must be deleted)
+	# User can be locked or unlocked (session must be deleted)
 	# user must not be creatable without username, firstname, lastname and email
 	# username must be unique
 	# User can be marked as admin and vice versa
@@ -113,7 +113,7 @@
 		# Bank Account IBAN 34
 		# Bank Account Institution 50
 		# Bank Account Owner 100		
-	# Current user must not be deactivatable
+	# Current user must not be lockable
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
 	# Delete user with user profile, bank account, gradings, roles, etc.
@@ -159,9 +159,9 @@
 	# user must be sorted by name
 		# Currently it is not sorted, if a user was added
 		# Perhaps it should be sorted directly within the backend
-	# Mark deactivated users
+	# Mark locked users
 	# Mark admin users
-	# Deactivated user must be displayed as deactivated otherwise it must be displayed as enabled
+	# Locked user must be displayed as locked otherwise it must be displayed as enabled
 	# Users can be searched
 	* Display loading spinner when searching - not required as it on clientside
 	# Bug: As admin created user is shown as normal user.
@@ -169,7 +169,7 @@
 # Login
 	# Login must only be possible with valid username and password
 	# Session expires after a certain time
-	# Deactivated user must not be logged in
+	# Locked user must not be logged in
 	# Display error if user credentials invalid
 	# Display less technical error when login fails for an unknown reason
 	
@@ -202,16 +202,22 @@
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
-		
+
 - Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
 	# Hash passwords before transferring them from client to server
+	- Lock user after to many login fails
+		- User can login for 5 times
+		- User is blocked after a certain number of login fails (e.g. 5)
+		- User gets a different message (Login currently not possible. Please try later.)
+		- User can retry after e.g. 15 min for the next 5 times
+		- User is locked after a certain number of login fails (e.g. 10). Send mail to user.
+		- User Login Fail Attempts must be deleted with user
 	- Move session persistence from local storage to cookies (http only)
-	- user is locked after a certain times of login fails
-	
+
 - Performance
 	- Admin tabs are loaded asynchronously
-	
+
 - Gamification
 
 - Check all ui endpoints and delete which are not required anymore

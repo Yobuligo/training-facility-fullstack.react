@@ -14,8 +14,8 @@ export class UserApi extends EntityRepository<IUser> {
     super(UserRouteMeta);
   }
 
-  async activate(userId: string): Promise<boolean> {
-    return await RESTApi.post(`${this.url}/${userId}/activate`);
+  async unlock(userId: string): Promise<boolean> {
+    return await RESTApi.post(`${this.url}/${userId}/unlock`);
   }
 
   async changePassword(
@@ -35,8 +35,8 @@ export class UserApi extends EntityRepository<IUser> {
     );
   }
 
-  async deactivate(userId: string): Promise<boolean> {
-    return await RESTApi.post(`${this.url}/${userId}/deactivate`);
+  async lock(userId: string): Promise<boolean> {
+    return await RESTApi.post(`${this.url}/${userId}/lock`);
   }
 
   async existsByUsername(username: string): Promise<boolean> {
