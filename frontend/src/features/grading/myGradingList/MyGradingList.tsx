@@ -7,11 +7,14 @@ import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { GradingList } from "../gradingList/GradingList";
+import { useTranslation } from "../../../lib/translation/useTranslation";
+import { texts } from "../../../lib/translation/texts";
 
 export const MyGradingList: React.FC = () => {
   const [gradings, setGradings] = useState<IUserGrading[]>([]);
   const [loadGradingRequest, isLoadGradingRequestProcessing] = useRequest();
   const [user] = useUser();
+  const { t } = useTranslation();
 
   useInitialize(() =>
     loadGradingRequest(async () => {
@@ -26,11 +29,14 @@ export const MyGradingList: React.FC = () => {
       {isLoadGradingRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <GradingList
-          displayMode={true}
-          isAdminMode={false}
-          gradings={gradings}
-        />
+        <>
+          <p>{t(texts.myGradingList.introduction)}</p>
+          <GradingList
+            displayMode={true}
+            isAdminMode={false}
+            gradings={gradings}
+          />
+        </>
       )}
     </>
   );
