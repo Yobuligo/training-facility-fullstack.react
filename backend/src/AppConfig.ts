@@ -27,5 +27,8 @@ export const AppConfig = {
   userNumberAttemptsToPermanentlyLock: parseInt(
     checkNotNull(process.env.USER_NUMBER_ATTEMPTS_TO_PERMANENTLY_LOCK)
   ),
+  userTemporaryBlockInMinutes: parseInt(
+    checkNotNull(process.env.USER_TEMPORARY_BLOCK_IN_MINUTES)
+  ),
   PEPPER: process.env.DB_PEPPER,
 };

@@ -1,4 +1,4 @@
-export interface IUserLoginAttempt {
+export interface IUserLoginFailAttempt {
   lastFailAttempt: Date;
   lockedUntil?: Date;
   numberFailAttempts: number;

@@ -1,24 +1,24 @@
 import { AppConfig } from "../AppConfig";
 import { DateTime } from "../core/services/date/DateTime";
-import { IUserLoginAttempt } from "../model/types/IUserLoginAttempt";
+import { IUserLoginFailAttempt } from "../model/types/IUserLoginFailAttempt";
 import { LoginNotPossibleError } from "../shared/errors/LoginNotPossibleError";
 
-export class UserLoginAttemptService {
-  check(userLoginAttempt?: IUserLoginAttempt) {
+export class UserLoginFailAttemptService {
+  check(userLoginFailAttempt?: IUserLoginFailAttempt) {
     // check if we have fail attempts
-    if (!userLoginAttempt) {
+    if (!userLoginFailAttempt) {
       return;
     }
 
-    if (this.isBelowTemporaryBlocked(userLoginAttempt)) {
+    if (this.isBelowTemporaryBlocked(userLoginFailAttempt)) {
       return;
     }
 
-    if (this.isTemporaryBlocked(userLoginAttempt)) {
+    if (this.isTemporaryBlocked(userLoginFailAttempt)) {
       throw new LoginNotPossibleError();
     }
 
-    if (this.isBelowPermanentlyBlocked(userLoginAttempt)) {
+    if (this.isBelowPermanentlyBlocked(userLoginFailAttempt)) {
       return;
     }
 
@@ -26,7 +26,7 @@ export class UserLoginAttemptService {
   }
 
   private isBelowTemporaryBlocked(
-    userLoginAttempt: IUserLoginAttempt
+    userLoginAttempt: IUserLoginFailAttempt
   ): boolean {
     return (
       userLoginAttempt.numberFailAttempts <
@@ -34,15 +34,15 @@ export class UserLoginAttemptService {
     );
   }
 
-  private isTemporaryBlocked(userLoginAttempt: IUserLoginAttempt): boolean {
+  private isTemporaryBlocked(userLoginAttempt: IUserLoginFailAttempt): boolean {
     return (
       userLoginAttempt.lockedUntil !== undefined &&
-      DateTime.isBefore(userLoginAttempt.lockedUntil)
+      DateTime.isAfter(userLoginAttempt.lockedUntil)
     );
   }
 
   private isBelowPermanentlyBlocked(
-    userLoginAttempt: IUserLoginAttempt
+    userLoginAttempt: IUserLoginFailAttempt
   ): boolean {
     return (
       userLoginAttempt.numberFailAttempts <

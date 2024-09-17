@@ -1,16 +1,18 @@
 import { Op } from "sequelize";
+import { AppConfig } from "../AppConfig";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IllegalStateError } from "../core/errors/IllegalStateError";
+import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
-import { UserLoginAttempt } from "../model/UserLoginAttempt";
+import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
-import { UserLoginAttemptService } from "../services/UserLoginAttemptService";
+import { UserLoginFailAttemptService } from "../services/UserLoginFailAttemptService";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
@@ -335,14 +337,16 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       return undefined;
     }
 
-    const userLoginAttemptService = new UserLoginAttemptService();
-    userLoginAttemptService.check(user.userLoginAttempt);
+    const userLoginFailAttemptService = new UserLoginFailAttemptService();
+    userLoginFailAttemptService.check(user.userLoginFailAttempt);
 
     const password = hashPassword(credentials.password, user.salt);
     if (password === user.password) {
+      await this.deleteUserLoginFailAttempt(user);
       return user;
     }
 
+    await this.updateUserLoginFailAttempt(user);
     return undefined;
   }
 
@@ -361,9 +365,19 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         "createdAt",
         "updatedAt",
       ],
-      include: [UserLoginAttempt],
+      include: [{ as: "userLoginFailAttempt", model: UserLoginFailAttempt }],
     });
     return data?.toJSON();
+  }
+
+  /**
+   * Deletes login fail attempts of a user.
+   */
+  private async deleteUserLoginFailAttempt(user: IUserSecure) {
+    if (!user.userLoginFailAttempt) {
+      return;
+    }
+    await UserLoginFailAttempt.destroy({ where: { userId: user.id } });
   }
 
   private toUserShort(model: User): IUserShort {
@@ -395,5 +409,35 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       { where: { id: userId } }
     );
     return updatedRows[0] === 1;
+  }
+
+  private async updateUserLoginFailAttempt(user: IUserSecure) {
+    // first fail attempt? Create entry
+    if (!user.userLoginFailAttempt) {
+      return await UserLoginFailAttempt.create({
+        lastFailAttempt: new Date(),
+        numberFailAttempts: 1,
+        userId: user.id,
+      });
+    }
+
+    const numberFailAttempts = user.userLoginFailAttempt.numberFailAttempts + 1;
+
+    let lockedUntil: Date | undefined = undefined;
+    if (numberFailAttempts === AppConfig.userNumberAttemptsToTemporaryBlock) {
+      lockedUntil = DateTime.addMinutes(
+        new Date(),
+        AppConfig.userTemporaryBlockInMinutes
+      );
+    }
+
+    await UserLoginFailAttempt.update(
+      {
+        lastFailAttempt: new Date(),
+        numberFailAttempts,
+        lockedUntil,
+      },
+      { where: { userId: user.id } }
+    );
   }
 }

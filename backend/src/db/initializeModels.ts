@@ -8,6 +8,7 @@ import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
 import { UserInvite } from "../model/UserInvite";
+import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 
@@ -19,6 +20,7 @@ export const initializeModels = async (alter: boolean) => {
     UserRole,
     UserGrading,
     UserBankAccount,
+    UserLoginFailAttempt,
     UserInvite,
     EventDefinition,
     EventInstance,

@@ -1,8 +1,8 @@
 import { ICredentials } from "../../shared/model/ICredentials";
 import { IUser } from "../../shared/model/IUser";
-import { IUserLoginAttempt } from "./IUserLoginAttempt";
+import { IUserLoginFailAttempt } from "./IUserLoginFailAttempt";
 
 export interface IUserSecure extends IUser, ICredentials {
   salt: string;
-  userLoginAttempt?: IUserLoginAttempt;
+  userLoginFailAttempt?: IUserLoginFailAttempt;
 }
