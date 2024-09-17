@@ -211,6 +211,8 @@
 	
 - Performance
 	- Admin tabs are loaded asynchronously
+	
+- Gamification
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
