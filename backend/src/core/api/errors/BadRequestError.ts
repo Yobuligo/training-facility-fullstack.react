@@ -1,13 +1,8 @@
-import { IError } from "../../types/IError";
+import { HttpStatusCode } from "../types/HttpStatusCode";
+import { RestRequestError } from "./RestRequestError";
 
-export class BadRequestError extends Error {
-  readonly error: IError;
+export class BadRequestError extends RestRequestError {
   constructor(type: string, message?: string) {
-    super(message);
-    this.error = {
-      createdAt: new Date(),
-      message: message ?? "",
-      type,
-    };
+    super(type, HttpStatusCode.BAD_REQUEST_400, message);
   }
 }
