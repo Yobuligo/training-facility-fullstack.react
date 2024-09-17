@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import * as path from "path";
+import { checkNotNull } from "./core/utils/checkNotNull";
 
 const envFile =
   process.env.NODE_ENV === "production"
@@ -20,5 +21,11 @@ export const AppConfig = {
   smtpUsername: process.env.EMAIL_SMTP_USERNAME,
   smtpPassword: process.env.EMAIL_SMTP_PASSWORD,
   smtpSender: process.env.EMAIL_SMTP_SENDER,
+  userNumberAttemptsToTemporaryBlock: parseInt(
+    checkNotNull(process.env.USER_NUMBER_ATTEMPTS_TO_TEMPORARY_BLOCK)
+  ),
+  userNumberAttemptsToPermanentlyLock: parseInt(
+    checkNotNull(process.env.USER_NUMBER_ATTEMPTS_TO_PERMANENTLY_LOCK)
+  ),
   PEPPER: process.env.DB_PEPPER,
 };

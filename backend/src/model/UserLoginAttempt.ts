@@ -10,6 +10,7 @@ const userLoginAttempt: ModelStatic<
     allowNull: false,
     type: DataTypes.DATE,
   },
+  lockedUntil: DataTypes.DATE,
   numberFailAttempts: {
     allowNull: false,
     type: DataTypes.INTEGER,

@@ -1,5 +1,6 @@
 export interface IUserLoginAttempt {
-  userId: string;
-  numberFailAttempts: number;
   lastFailAttempt: Date;
+  lockedUntil?: Date;
+  numberFailAttempts: number;
+  userId: string;
 }

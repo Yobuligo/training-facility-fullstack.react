@@ -1,15 +1,19 @@
 import { Op } from "sequelize";
+import { AppConfig } from "../AppConfig";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IllegalStateError } from "../core/errors/IllegalStateError";
+import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserGrading } from "../model/UserGrading";
+import { UserLoginAttempt } from "../model/UserLoginAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
+import { LoginNotPossibleError } from "../shared/errors/LoginNotPossibleError";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
@@ -321,17 +325,39 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return wasUpdated;
   }
 
-  private async updatePassword(
-    userId: string,
-    newPassword: string
-  ): Promise<boolean> {
-    const salt = this.createSalt();
-    const password = hashPassword(newPassword, salt);
-    const updatedRows = await this.model.update(
-      { password, salt },
-      { where: { id: userId } }
-    );
-    return updatedRows[0] === 1;
+  private checkUserLoginAttempt(user: IUserSecure) {
+    // check if user has fail attempts, otherwise return
+    if (!user.userLoginAttempt) {
+      return;
+    }
+
+    // check if the user is below the number of allowed tries, which is fine
+    if (
+      user.userLoginAttempt.numberFailAttempts <
+      AppConfig.userNumberAttemptsToTemporaryBlock
+    ) {
+      return;
+    }
+
+    // otherwise, check if the user is temporarily blocked
+    if (
+      user.userLoginAttempt.lockedUntil &&
+      DateTime.isBefore(user.userLoginAttempt.lockedUntil)
+    ) {
+      throw new LoginNotPossibleError();
+    }
+
+    // finally check if the user is permanently locked
+    if (
+      user.userLoginAttempt.numberFailAttempts <
+      AppConfig.userNumberAttemptsToPermanentlyLock
+    ) {
+      throw new LoginNotPossibleError();
+    }
+  }
+
+  private createSalt(): string {
+    return hash(uuid());
   }
 
   private async findByCredentialsSecure(
@@ -341,6 +367,8 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     if (!user) {
       return undefined;
     }
+
+    this.checkUserLoginAttempt(user);
 
     const password = hashPassword(credentials.password, user.salt);
     if (password === user.password) {
@@ -365,12 +393,9 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         "createdAt",
         "updatedAt",
       ],
+      include: [UserLoginAttempt],
     });
     return data?.toJSON();
-  }
-
-  private createSalt(): string {
-    return hash(uuid());
   }
 
   private toUserShort(model: User): IUserShort {
@@ -389,5 +414,18 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       phone: user.userProfile?.phone,
       username: user.username,
     };
+  }
+
+  private async updatePassword(
+    userId: string,
+    newPassword: string
+  ): Promise<boolean> {
+    const salt = this.createSalt();
+    const password = hashPassword(newPassword, salt);
+    const updatedRows = await this.model.update(
+      { password, salt },
+      { where: { id: userId } }
+    );
+    return updatedRows[0] === 1;
   }
 }
