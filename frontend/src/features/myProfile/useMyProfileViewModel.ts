@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkNotNull } from "../../core/utils/checkNotNull";
 import { useInitialize } from "../../hooks/useInitialize";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
@@ -17,14 +18,11 @@ export const useMyProfileViewModel = () => {
   const [changeUserProfileRequest] = useRequest();
 
   const loadUser = async () => {
-    if (!session) {
-      setError(t(texts.myProfile.errorLoadingUserSession));
-      return;
-    }
-
     loadUserProfileRequest(async () => {
       const userApi = new UserApi();
-      const readUserProfile = await userApi.findById(session.userId);
+      const readUserProfile = await userApi.findById(
+        checkNotNull(session).userId
+      );
       if (!readUserProfile) {
         setError(t(texts.myProfile.errorLoadingUserSession));
       } else {
