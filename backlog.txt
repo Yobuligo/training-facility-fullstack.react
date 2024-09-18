@@ -224,10 +224,10 @@
 		# Session is transmitted with each request from the client (RESTApi)
 		# Session / Cookie is destroyed when logging out
 		# Session Token must not be transmitted anymore
-		- Session information are not persisted at clientside anymore
-			- UserApi.login() doesn't return the session anymore, but instead the user
-			- UserApi.lgout() doesn't need the session anymore
-			- delete ISession?			
+		# Session information are not persisted at clientside anymore
+			# UserApi.login() doesn't return the session anymore, but instead the user
+			# UserApi.logout() doesn't need the session anymore
+			# delete ISession on client side
 
 - Performance
 	- Admin tabs are loaded asynchronously
