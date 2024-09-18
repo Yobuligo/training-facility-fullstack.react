@@ -202,6 +202,9 @@
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
+		
+- Emails
+	- Send mails must create an email at the send mail folder of the mail account
 
 - Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
@@ -211,8 +214,9 @@
 		# User is blocked after a certain number of login fails (e.g. 5)
 		# User gets a different message (Login currently not possible. Please try later.)
 		# User can retry after e.g. 15 min for the next 5 times
+		# UserLoginFailAttemps will be deleted with the next valid login
 		# User is locked after a certain number of login fails (e.g. 10), lock flag is set, lockedAt is set and session is deleted
-		# User can be unlocked from user profile (user login fail attempts must be deleted)
+		# User can be unlocked from user profile (user login fail attempts must be deleted)		
 		# User Login Fail Attempts must be deleted with user
 	- Move session persistence from local storage to cookies (http only)
 
