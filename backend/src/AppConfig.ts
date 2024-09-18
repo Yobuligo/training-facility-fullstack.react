@@ -10,12 +10,12 @@ const envFile =
 dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export const AppConfig = {
+  clientHost: process.env.CLIENT_HOST,
   dbHost: process.env.DB_HOST,
   dbPort: parseInt(process.env.DB_PORT!),
   dbName: process.env.DB_NAME,
   dbUsername: process.env.DB_USERNAME,
   dbPassword: process.env.DB_PASSWORD,
-  clientHost: process.env.CLIENT_HOST,
   smtpHost: process.env.EMAIL_SMTP_HOST,
   smtpPort: process.env.EMAIL_SMTP_PORT,
   smtpUsername: process.env.EMAIL_SMTP_USERNAME,
@@ -30,5 +30,6 @@ export const AppConfig = {
   userTemporaryBlockInMinutes: parseInt(
     checkNotNull(process.env.USER_TEMPORARY_BLOCK_IN_MINUTES)
   ),
-  PEPPER: process.env.DB_PEPPER,
+  serverPepper: process.env.SERVER_PEPPER,
+  serverSessionSecret: process.env.SERVER_SESSION_SECRET,
 };
