@@ -5,7 +5,6 @@ import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
-import { ISession } from "../shared/model/ISession";
 import { IUser, UserRouteMeta } from "../shared/model/IUser";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
@@ -20,6 +19,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.lock();
     this.existsUsername();
     this.findAllShort();
+    this.findSession();
     this.login();
     this.logout();
   }
@@ -137,6 +137,23 @@ export class UserController extends EntityController<IUser, UserRepo> {
     );
   }
 
+  private findSession() {
+    this.router.get(
+      `${this.routeMeta.path}/auth/session`,
+      SessionInterceptor(async (req, res) => {
+        const entity = await this.repo.findById(
+          req.sessionInfo.session.userId,
+          ["id", "userProfile", "userRoles", "username"]
+        );
+        if (entity) {
+          res.status(HttpStatusCode.OK_200).send(entity);
+        } else {
+          res.status(HttpStatusCode.NOT_FOUND_404).end();
+        }
+      })
+    );
+  }
+
   private lock() {
     this.router.post(
       `${this.routeMeta.path}/:id/lock`,
@@ -186,11 +203,10 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.router.post(
       `${this.routeMeta.path}/logout`,
       ErrorInterceptor(async (req, res) => {
-        const session: ISession = req.body;
         const sessionRepo = new SessionRepo();
-        const success = await sessionRepo.deleteSession(session);
+        const wasDeleted = await sessionRepo.deleteById(req.session.id);
         res.clearCookie("connect.sid"); // connect.sid is the default cookie name of express-session
-        res.status(HttpStatusCode.OK_200).send(success);
+        res.status(HttpStatusCode.OK_200).send(wasDeleted);
       })
     );
   }

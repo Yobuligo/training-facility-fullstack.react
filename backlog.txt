@@ -219,10 +219,15 @@
 		# User is locked after a certain number of login fails (e.g. 10), lock flag is set, lockedAt is set and session is deleted
 		# User can be unlocked from user profile (user login fail attempts must be deleted)		
 		# User Login Fail Attempts must be deleted with user
-	- Move session persistence from local storage to cookies (http only)
-		- Session must be added with the login
-		- Session is transmitted with each request from the client (RESTApi)
-		- Session is destroyed when logging out
+	# Move session persistence from local storage to cookies (http only)
+		# Session must be added with the login
+		# Session is transmitted with each request from the client (RESTApi)
+		# Session / Cookie is destroyed when logging out
+		# Session Token must not be transmitted anymore
+		- Session information are not persisted at clientside anymore
+			- UserApi.login() doesn't return the session anymore, but instead the user
+			- UserApi.lgout() doesn't need the session anymore
+			- delete ISession?			
 
 - Performance
 	- Admin tabs are loaded asynchronously

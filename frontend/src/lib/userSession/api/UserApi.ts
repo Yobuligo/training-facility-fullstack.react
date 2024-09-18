@@ -7,7 +7,6 @@ import { hashPassword } from "../../../utils/hashPassword";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
 import { ICredentials } from "../shared/model/ICredentials";
-import { ISession } from "../shared/model/ISession";
 
 export class UserApi extends EntityRepository<IUser> {
   constructor() {
@@ -52,10 +51,10 @@ export class UserApi extends EntityRepository<IUser> {
   }
 
   async findSession(): Promise<IUserInternal | undefined> {
-    return await RESTApi.get(`${this.url}/session`);
+    return await RESTApi.get(`${this.url}/auth/session`);
   }
 
-  async login(username: string, password: string): Promise<ISession> {
+  async login(username: string, password: string): Promise<IUserInternal> {
     const credentials: ICredentials = {
       username,
       password: hashPassword(password),

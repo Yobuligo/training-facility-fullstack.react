@@ -4,5 +4,3 @@ import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 export interface ISession extends IEntity, IHaveUserId {
   expiresAt: Date;
 }
-
-export const SessionTokenParamMeta = "token";

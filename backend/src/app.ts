@@ -30,7 +30,11 @@ server.use(
     cookie: {
       httpOnly: true,
       secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
-      maxAge: 1000 * 60 * 60 * 24, // expires in (here 24 hours)
+      maxAge:
+        1000 *
+        60 *
+        60 *
+        parseInt(checkNotNull(AppConfig.serverSessionExpirationInHours)), // expires in (here e.g. 24 hours)
     },
   })
 );

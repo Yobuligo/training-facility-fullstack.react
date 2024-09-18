@@ -32,5 +32,7 @@ export const AppConfig = {
     checkNotNull(process.env.USER_TEMPORARY_BLOCK_IN_MINUTES)
   ),
   serverPepper: process.env.SERVER_PEPPER,
+  serverSessionExpirationInHours:
+    process.env.SERVER_SESSION_EXPIRATION_IN_HOURS,
   serverSessionSecret: process.env.SERVER_SESSION_SECRET,
 };

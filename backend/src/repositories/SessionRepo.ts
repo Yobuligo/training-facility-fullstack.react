@@ -1,6 +1,8 @@
+import { AppConfig } from "../AppConfig";
 import { DateTime } from "../core/services/date/DateTime";
+import { checkNotNull } from "../core/utils/checkNotNull";
 import { Session } from "../model/Session";
-import { ISession } from "../shared/model/ISession";
+import { ISession } from "../model/types/ISession";
 import { IUser } from "../shared/model/IUser";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 import { findTransaction } from "./sequelize/utils/findTransaction";
@@ -15,7 +17,10 @@ export class SessionRepo extends SequelizeRepository<ISession> {
     const data = await Session.create(
       {
         id: sessionId,
-        expiresAt: DateTime.addHours(new Date(), 24),
+        expiresAt: DateTime.addHours(
+          new Date(),
+          parseInt(checkNotNull(AppConfig.serverSessionExpirationInHours))
+        ),
         createdAt: new Date(),
         updatedAt: new Date(),
         userId: user.id,

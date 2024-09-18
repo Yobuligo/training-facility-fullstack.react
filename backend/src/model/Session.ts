@@ -1,6 +1,6 @@
 import { DataTypes, Model, ModelStatic } from "sequelize";
 import { db } from "../db/db";
-import { ISession } from "../shared/model/ISession";
+import { ISession } from "./types/ISession";
 import { User } from "./User";
 
 const session: ModelStatic<Model<ISession, ISession>> = db.define("sessions", {

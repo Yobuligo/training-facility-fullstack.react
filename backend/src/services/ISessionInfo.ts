@@ -1,4 +1,4 @@
-import { ISession } from "../shared/model/ISession";
+import { ISession } from "../model/types/ISession";
 import { AuthRole } from "../shared/types/AuthRole";
 
 export interface ISessionInfo {
