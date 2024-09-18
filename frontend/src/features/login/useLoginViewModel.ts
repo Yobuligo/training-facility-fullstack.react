@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { isError } from "../../core/utils/isError";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
-import { SessionRepo } from "../../lib/userSession/api/SessionRepo";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useSession } from "../../lib/userSession/hooks/useSession";
 import { AppRoutes } from "../../routes/AppRoutes";
@@ -43,7 +42,6 @@ export const useLoginViewModel = () => {
       const userApi = new UserApi();
       const session = await userApi.login(username, password);
       setSession(session);
-      SessionRepo.instance.setSession(session);
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
       handleError(error);

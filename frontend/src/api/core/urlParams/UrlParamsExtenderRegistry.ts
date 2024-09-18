@@ -1,5 +1,4 @@
 import { IUrlParamsExtender } from "../../../lib/urlParamsExtender/IUrlParamsExtender";
-import { UrlSessionExtender } from "../../../lib/userSession/api/UrlSessionExtender";
 import { UrlParamsExtender } from "./UrlParamsExtender";
 
 /**
@@ -7,5 +6,4 @@ import { UrlParamsExtender } from "./UrlParamsExtender";
  */
 export const UrlParamsExtenderRegistry: IUrlParamsExtender[] = [
   new UrlParamsExtender(),
-  new UrlSessionExtender(),
 ];
