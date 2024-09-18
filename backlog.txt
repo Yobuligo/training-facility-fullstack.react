@@ -221,7 +221,7 @@
 		# User Login Fail Attempts must be deleted with user
 	- Move session persistence from local storage to cookies (http only)
 		- Session must be added with the login
-		- Session is transmitted with each request from the client
+		- Session is transmitted with each request from the client (RESTApi)
 		- Session is destroyed when logging out
 
 - Performance

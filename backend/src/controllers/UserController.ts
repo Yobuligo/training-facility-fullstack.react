@@ -177,9 +177,6 @@ export class UserController extends EntityController<IUser, UserRepo> {
           user,
           req.session.id
         );
-
-        // attach userId to login response
-        // (res as any).session.userId = session.userId;
         res.status(HttpStatusCode.CREATED_201).send(session);
       })
     );
@@ -192,6 +189,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
         const session: ISession = req.body;
         const sessionRepo = new SessionRepo();
         const success = await sessionRepo.deleteSession(session);
+        res.clearCookie("connect.sid"); // connect.sid is the default cookie name of express-session
         res.status(HttpStatusCode.OK_200).send(success);
       })
     );

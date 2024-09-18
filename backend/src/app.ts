@@ -20,6 +20,8 @@ initialize();
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
+
+// add user session
 server.use(
   session({
     secret: checkNotNull(AppConfig.serverSessionSecret),
