@@ -11,6 +11,7 @@ export class RESTApi {
       url,
       async (extendedUrl) => {
         return await fetch(extendedUrl, {
+          credentials: "include",
           method: "DELETE",
           mode: "cors",
         });
@@ -24,6 +25,7 @@ export class RESTApi {
       url,
       async (extendedUrl) => {
         return await fetch(extendedUrl, {
+          credentials: "include",
           method: "GET",
         });
       },
@@ -42,6 +44,7 @@ export class RESTApi {
         const body = JSON.stringify(data);
         return await fetch(extendedUrl, {
           body: body,
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -64,6 +67,7 @@ export class RESTApi {
         const body = JSON.stringify(data);
         return await fetch(extendedUrl, {
           body: body,
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

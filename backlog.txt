@@ -165,6 +165,7 @@
 	# Users can be searched
 	* Display loading spinner when searching - not required as it on clientside
 	# Bug: As admin created user is shown as normal user.
+	- Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 
 # Login
 	# Login must only be possible with valid username and password
@@ -219,6 +220,9 @@
 		# User can be unlocked from user profile (user login fail attempts must be deleted)		
 		# User Login Fail Attempts must be deleted with user
 	- Move session persistence from local storage to cookies (http only)
+		- Session must be added with the login
+		- Session is transmitted with each request from the client
+		- Session is destroyed when logging out
 
 - Performance
 	- Admin tabs are loaded asynchronously

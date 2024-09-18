@@ -172,12 +172,14 @@ export class UserController extends EntityController<IUser, UserRepo> {
             );
         }
 
-        
         const sessionRepo = new SessionRepo();
-        const session = await sessionRepo.createUserSession(user, req.session.id);
+        const session = await sessionRepo.createUserSession(
+          user,
+          req.session.id
+        );
 
-        // attach session to login response
-        // (res as any).session = session;
+        // attach userId to login response
+        // (res as any).session.userId = session.userId;
         res.status(HttpStatusCode.CREATED_201).send(session);
       })
     );

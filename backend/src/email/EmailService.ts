@@ -63,7 +63,7 @@ export class EmailService {
           <p>Um deine Anmeldung abzuschließen, klicke bitte auf folgenden Link: <a href="${linkInvite}">Anmelde-Link</a></p>
       
           <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${
-          AppConfig.clientHost
+          AppConfig.clientAppUrl
         }">Portal-Link</a></p>
       
           <p>Bei Fragen oder Problemen stehen wir dir natürlich gerne zur Verfügung.</p>
@@ -77,7 +77,7 @@ export class EmailService {
   }
 
   private createInviteLink(userInviteId: string): string {
-    return `${AppConfig.clientHost}/user-invite/${userInviteId}`;
+    return `${AppConfig.clientAppUrl}/user-invite/${userInviteId}`;
   }
 
   private handleError(error: any) {
