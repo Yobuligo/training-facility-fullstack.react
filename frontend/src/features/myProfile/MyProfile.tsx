@@ -12,11 +12,11 @@ export const MyProfile: React.FC = () => {
       {viewModel.isLoadUserProfileRequestProcessing ? (
         <PageSpinner />
       ) : (
-        viewModel.userProfile && (
+        viewModel.user && (
           <User
             isAdminMode={false}
             onChange={viewModel.onChange}
-            user={viewModel.userProfile!}
+            user={viewModel.user!}
           />
         )
       )}

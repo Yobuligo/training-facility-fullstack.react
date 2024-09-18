@@ -47,41 +47,36 @@ export class UserApi extends EntityRepository<IUser> {
     return await RESTApi.get(`${this.url}/short/all`);
   }
 
-  async findByIdInternal(userId: string): Promise<IUserInternal | undefined> {
-    return (await this.findById(userId, [
-      "id",
-      "userProfile",
-      "userRoles",
-      "username",
-    ])) as IUserInternal;
-  }
-
   async findByQuery(query: string): Promise<IUser[]> {
     return await RESTApi.get(`${this.url}`, { urlParams: { query } });
   }
 
-  login(username: string, password: string): Promise<ISession> {
+  async findSession(): Promise<IUserInternal | undefined> {
+    return await RESTApi.get(`${this.url}/session`);
+  }
+
+  async login(username: string, password: string): Promise<ISession> {
     const credentials: ICredentials = {
       username,
       password: hashPassword(password),
     };
 
-    return RESTApi.post(
+    return await RESTApi.post(
       `${this.url}/login`,
       this.createAuthenticationRequest(credentials)
     );
   }
 
-  logout(session: ISession): Promise<boolean> {
-    return RESTApi.post(`${this.url}/logout`, session);
+  async logout(): Promise<boolean> {
+    return await RESTApi.post(`${this.url}/logout`);
   }
 
-  register(username: string, password: string): Promise<boolean> {
+  async register(username: string, password: string): Promise<boolean> {
     const credentials: ICredentials = {
       username,
       password: hashPassword(password),
     };
-    return RESTApi.post(`${this.url}/register`, credentials);
+    return await RESTApi.post(`${this.url}/register`, credentials);
   }
 
   private createAuthenticationRequest(

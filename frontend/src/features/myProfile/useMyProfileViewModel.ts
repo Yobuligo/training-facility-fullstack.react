@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { checkNotNull } from "../../core/utils/checkNotNull";
 import { useInitialize } from "../../hooks/useInitialize";
+import { useUser } from "../../hooks/useUser";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { useSession } from "../../lib/userSession/hooks/useSession";
 import { IUser } from "../../shared/model/IUser";
 
 export const useMyProfileViewModel = () => {
   const { t } = useTranslation();
-  const [session] = useSession();
   const [error, setError] = useState("");
+  const [sessionUser] = useUser();
   const [user, setUser] = useState<IUser | undefined>(undefined);
   const [loadUserProfileRequest, isLoadUserProfileRequestProcessing] =
     useRequest();
@@ -20,9 +19,7 @@ export const useMyProfileViewModel = () => {
   const loadUser = async () => {
     loadUserProfileRequest(async () => {
       const userApi = new UserApi();
-      const readUserProfile = await userApi.findById(
-        checkNotNull(session).userId
-      );
+      const readUserProfile = await userApi.findById(sessionUser.id);
       if (!readUserProfile) {
         setError(t(texts.myProfile.errorLoadingUserSession));
       } else {
@@ -45,6 +42,6 @@ export const useMyProfileViewModel = () => {
     error,
     isLoadUserProfileRequestProcessing,
     onChange,
-    userProfile: user,
+    user,
   };
 };

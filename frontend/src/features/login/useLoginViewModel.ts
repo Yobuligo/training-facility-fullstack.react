@@ -4,7 +4,6 @@ import { isError } from "../../core/utils/isError";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { UserApi } from "../../lib/userSession/api/UserApi";
-import { useSession } from "../../lib/userSession/hooks/useSession";
 import { AppRoutes } from "../../routes/AppRoutes";
 
 export const useLoginViewModel = () => {
@@ -14,7 +13,6 @@ export const useLoginViewModel = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [displaySpinner, setDisplaySpinner] = useState(false);
-  const [, setSession] = useSession();
   const navigate = useNavigate();
 
   const disableLoginButton = username.length === 0 || password.length === 0;
@@ -40,8 +38,7 @@ export const useLoginViewModel = () => {
     setDisplaySpinner(true);
     try {
       const userApi = new UserApi();
-      const session = await userApi.login(username, password);
-      setSession(session);
+      await userApi.login(username, password);
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
       handleError(error);
