@@ -20,7 +20,8 @@ export const SessionInterceptor = (
   authRoles?: AuthRole[]
 ) => {
   return ErrorInterceptor(async (req, res, next) => {
-    const sessionId = req.query.token?.toString();
+    // req.session
+    const sessionId = req.session.id;
     if (!sessionId) {
       return res
         .status(HttpStatusCode.UNAUTHORIZED_401)

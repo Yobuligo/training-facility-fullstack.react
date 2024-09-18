@@ -1,10 +1,13 @@
 import express from "express";
+import session from "express-session";
+import { AppConfig } from "./AppConfig";
 import { EventDefinitionController } from "./controllers/EventDefinitionController";
 import { EventInstanceController } from "./controllers/EventInstanceController";
 import { EventRegistrationController } from "./controllers/EventRegistrationController";
 import { UserController } from "./controllers/UserController";
 import { UserInviteController } from "./controllers/UserInviteController";
 import { UserProfileController } from "./controllers/UserProfileController";
+import { checkNotNull } from "./core/utils/checkNotNull";
 import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
 
@@ -17,6 +20,19 @@ initialize();
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
+server.use(
+  session({
+    secret: checkNotNull(AppConfig.serverSessionSecret),
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,
+      secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
+      maxAge: 1000 * 60 * 60 * 24, // expires in (here 24 hours)
+    },
+  })
+);
+
 server.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

@@ -10,14 +10,19 @@ export class SessionRepo extends SequelizeRepository<ISession> {
     super(Session);
   }
 
-  async createUserSession(user: IUser): Promise<ISession> {
+  async createUserSession(user: IUser, sessionId: string): Promise<ISession> {
     await this.deleteUserSession(user.id);
-    const session = await this.insert({
-      expiresAt: DateTime.addHours(new Date(), 24),
-      userId: user.id,
-    });
-
-    return session;
+    const data = await Session.create(
+      {
+        id: sessionId,
+        expiresAt: DateTime.addHours(new Date(), 24),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userId: user.id,
+      },
+      { transaction: findTransaction() }
+    );
+    return data.toJSON();
   }
 
   async deleteSession(session: ISession): Promise<boolean> {
