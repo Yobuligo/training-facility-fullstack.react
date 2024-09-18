@@ -4,12 +4,14 @@ import { ISession } from "./types/ISession";
 import { User } from "./User";
 
 const session: ModelStatic<Model<ISession, ISession>> = db.define("sessions", {
-  id: {
-    allowNull: false,
+  sid: {
     primaryKey: true,
-    type: DataTypes.UUID,
+    type: DataTypes.STRING,
   },
-  expiresAt: DataTypes.DATE,
+  expires: DataTypes.DATE,
+  data: {
+    type: DataTypes.TEXT,
+  },
 });
 
 export class Session extends session {

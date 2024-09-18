@@ -190,11 +190,19 @@ export class UserController extends EntityController<IUser, UserRepo> {
         }
 
         const sessionRepo = new SessionRepo();
-        const session = await sessionRepo.createUserSession(
-          user,
-          req.session.id
-        );
-        res.status(HttpStatusCode.CREATED_201).send(session);
+        await sessionRepo.deleteByUserId(user.id);
+
+        req.session.save(async (err) => {
+          if (err) {
+            return res
+              .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)
+              .send(createError("Error saving session"));
+          }
+
+          const sessionRepo = new SessionRepo();
+          await sessionRepo.updateUserId(req.session.id, user.id);
+          res.status(HttpStatusCode.CREATED_201).send(true);
+        });
       })
     );
   }
@@ -204,7 +212,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
       `${this.routeMeta.path}/logout`,
       ErrorInterceptor(async (req, res) => {
         const sessionRepo = new SessionRepo();
-        const wasDeleted = await sessionRepo.deleteById(req.session.id);
+        const wasDeleted = await sessionRepo.deleteBySid(req.session.id);
         res.clearCookie("connect.sid"); // connect.sid is the default cookie name of express-session
         res.status(HttpStatusCode.OK_200).send(wasDeleted);
       })

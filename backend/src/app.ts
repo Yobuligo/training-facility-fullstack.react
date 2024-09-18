@@ -1,3 +1,4 @@
+import connectSessionSequelize from "connect-session-sequelize";
 import express from "express";
 import session from "express-session";
 import { AppConfig } from "./AppConfig";
@@ -8,8 +9,11 @@ import { UserController } from "./controllers/UserController";
 import { UserInviteController } from "./controllers/UserInviteController";
 import { UserProfileController } from "./controllers/UserProfileController";
 import { checkNotNull } from "./core/utils/checkNotNull";
+import { db } from "./db/db";
 import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
+
+const SequelizeStore = connectSessionSequelize(session.Store);
 
 const initialize = async () => {
   await initializeModels(false);
@@ -26,6 +30,10 @@ server.use(
   session({
     secret: checkNotNull(AppConfig.serverSessionSecret),
     resave: false,
+    store: new SequelizeStore({
+      db: db,
+      table: "sessions",
+    }),
     saveUninitialized: true,
     cookie: {
       httpOnly: true,

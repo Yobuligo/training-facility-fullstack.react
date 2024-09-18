@@ -30,7 +30,7 @@ export const SessionInterceptor = (
 
     // check session
     const sessionRepo = new SessionRepo();
-    const session = await sessionRepo.findById(sessionId);
+    const session = await sessionRepo.findBySid(sessionId);
     if (!session) {
       return res
         .status(HttpStatusCode.UNAUTHORIZED_401)
@@ -38,7 +38,7 @@ export const SessionInterceptor = (
     }
 
     // check session expired
-    if (DateTime.isBefore(session.expiresAt)) {
+    if (DateTime.isBefore(session.expires)) {
       return res
         .status(HttpStatusCode.UNAUTHORIZED_401)
         .send(createError("Session expired", "ExpiredSessionError"));

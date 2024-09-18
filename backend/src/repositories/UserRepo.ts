@@ -97,7 +97,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
       // delete user sessions
       const sessionRepo = new SessionRepo();
-      await sessionRepo.deleteUserSession(userId);
+      await sessionRepo.deleteByUserId(userId);
     });
 
     return updatedRows[0] === 1;
