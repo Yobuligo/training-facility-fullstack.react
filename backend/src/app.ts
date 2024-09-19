@@ -34,7 +34,7 @@ server.use(
       db: db,
       table: "sessions",
     }),
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       httpOnly: true,
       secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
@@ -67,4 +67,5 @@ server.use("/api", new EventRegistrationController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProfileController().router);
 server.use("/api", new UserInviteController().router);
+
 server.listen(5000);

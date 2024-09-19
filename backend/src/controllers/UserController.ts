@@ -189,17 +189,17 @@ export class UserController extends EntityController<IUser, UserRepo> {
             );
         }
 
+        // delete old session of the user
         const sessionRepo = new SessionRepo();
-        await sessionRepo.deleteByUserId(user.id);
+        await sessionRepo.deleteAllExcept(req.session.id, user.id);
 
+        (req.session as any).userId = user.id;
         req.session.save(async (err) => {
           if (err) {
             return res
               .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)
               .send(createError("Error saving session"));
           }
-
-          const sessionRepo = new SessionRepo();
           await sessionRepo.updateUserId(req.session.id, user.id);
           res.status(HttpStatusCode.CREATED_201).send(true);
         });
@@ -210,11 +210,9 @@ export class UserController extends EntityController<IUser, UserRepo> {
   private logout() {
     this.router.post(
       `${this.routeMeta.path}/logout`,
-      ErrorInterceptor(async (req, res) => {
-        const sessionRepo = new SessionRepo();
-        const wasDeleted = await sessionRepo.deleteBySid(req.session.id);
+      ErrorInterceptor(async (_, res) => {
         res.clearCookie("connect.sid"); // connect.sid is the default cookie name of express-session
-        res.status(HttpStatusCode.OK_200).send(wasDeleted);
+        res.status(HttpStatusCode.OK_200).send(true);
       })
     );
   }

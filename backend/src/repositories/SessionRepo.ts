@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Session } from "../model/Session";
 import { ISession } from "../model/types/ISession";
 
@@ -7,8 +8,12 @@ export class SessionRepo {
     return deletedRows === 1;
   }
 
-  async deleteBySid(sid: string): Promise<boolean> {
-    const deletedRows = await Session.destroy({ where: { sid } });
+  async deleteAllExcept(sid: string, userId: string): Promise<boolean> {
+    const deletedRows = await Session.destroy({
+      where: {
+        [Op.and]: [{ sid: { [Op.ne]: sid } }, { userId }],
+      },
+    });
     return deletedRows === 1;
   }
 
