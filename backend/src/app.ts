@@ -24,6 +24,7 @@ initialize();
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
+server.set("trust proxy", 1);
 
 // add user session
 server.use(
@@ -36,6 +37,8 @@ server.use(
     }),
     saveUninitialized: false,
     cookie: {
+      domain: AppConfig.clientDomain,
+      // path: AppConfig.clientPath,
       httpOnly: true,
       secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
       maxAge:

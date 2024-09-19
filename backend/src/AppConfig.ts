@@ -10,8 +10,10 @@ const envFile =
 dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export const AppConfig = {
+  clientDomain: process.env.CLIENT_DOMAIN,
   clientHost: process.env.CLIENT_HOST,
   clientAppUrl: process.env.CLIENT_APP_URL,
+  clientPath: process.env.CLIENT_PATH,
   dbHost: process.env.DB_HOST,
   dbPort: parseInt(process.env.DB_PORT!),
   dbName: process.env.DB_NAME,
