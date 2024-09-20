@@ -16,13 +16,12 @@ const session: ModelStatic<Model<ISession, ISession>> = db.define("sessions", {
 
 export class Session extends session {
   static associate() {
-    Session.belongsTo(User);
+    Session.belongsTo(User, { onDelete: "CASCADE" });
     User.hasOne(Session, {
       foreignKey: {
         name: "userId",
         allowNull: false,
       },
-      onDelete: "CASCADE",
     });
   }
 }
