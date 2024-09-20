@@ -153,6 +153,7 @@
 	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
 	# Bug: Buttons for inviting users and changing password must be active in display mode
 	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
+	# Bug: User session is not deleted with user.
 	
 # User List
 	# Display loading spinner, when loading users
