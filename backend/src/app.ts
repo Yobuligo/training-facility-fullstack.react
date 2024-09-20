@@ -37,9 +37,7 @@ server.use(
     }),
     saveUninitialized: false,
     cookie: {
-      domain: AppConfig.clientDomain,
-      // path: AppConfig.clientPath,
-      httpOnly: true,
+      httpOnly: false,
       secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
       maxAge:
         1000 *
