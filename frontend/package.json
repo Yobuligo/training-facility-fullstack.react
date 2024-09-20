@@ -22,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "deploy": "docker build -t hoffmannpeter82/yeoljeong-frontend:latest . && docker push hoffmannpeter82/yeoljeong-frontend:latest",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
