@@ -37,7 +37,7 @@ server.use(
     }),
     saveUninitialized: false,
     cookie: {
-      httpOnly: false,
+      httpOnly: true,
       secure: false, // use https? Set it e.g. in production to true process.env.NODE_ENV === 'production'
       maxAge:
         1000 *
