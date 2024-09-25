@@ -145,7 +145,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            isOptional={true}
+            error={viewModel.birthdayError}
             label={t(texts.user.birthday)}
             type="date"
             onChange={viewModel.onChangeBirthday}
@@ -168,7 +168,7 @@ export const User: React.FC<IUserProps> = (props) => {
         >
           <LabeledInput
             disabled={viewModel.displayMode}
-            isOptional={true}
+            error={viewModel.streetError}
             label={t(texts.user.street)}
             maxLength={100}
             onChange={viewModel.setStreet}
@@ -177,7 +177,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            isOptional={true}
+            error={viewModel.postalCodeError}
             label={t(texts.user.postalCode)}
             maxLength={10}
             onChange={viewModel.onChangePostalCode}
@@ -186,7 +186,7 @@ export const User: React.FC<IUserProps> = (props) => {
 
           <LabeledInput
             disabled={viewModel.displayMode}
-            isOptional={true}
+            error={viewModel.cityError}
             label={t(texts.user.city)}
             maxLength={50}
             onChange={viewModel.setCity}

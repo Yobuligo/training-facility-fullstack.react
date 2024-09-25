@@ -41,9 +41,10 @@ export const useUserViewModel = (props: IUserProps) => {
       ? false
       : true
   );
-  const [birthday, setBirthday] = useState(
-    userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
-  );
+  const [birthday, setBirthday, birthdayError, setBirthdayError] =
+    useLabeledElement(
+      userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
+    );
   const [email, setEmail, emailError, setEmailError] = useLabeledElement(
     userProfile.email
   );
@@ -57,9 +58,14 @@ export const useUserViewModel = (props: IUserProps) => {
   const [tariff, setTariff] = useState(userProfile.tariff);
   const [isAdmin, setIsAdmin] = useState(UserInfo.containsAdminRole(userRoles));
   const [phone, setPhone] = useState(userProfile.phone);
-  const [street, setStreet] = useState(userProfile.street);
-  const [postalCode, setPostalCode] = useState(userProfile.postalCode);
-  const [city, setCity] = useState(userProfile.city);
+  const [street, setStreet, streetError, setStreetError] = useLabeledElement(
+    userProfile.street
+  );
+  const [postalCode, setPostalCode, postalCodeError, setPostalCodeError] =
+    useLabeledElement(userProfile.postalCode);
+  const [city, setCity, cityError, setCityError] = useLabeledElement(
+    userProfile.city
+  );
   const [bankAccountOwner, setBankAccountOwner] = useState(
     userProfile.userBankAccount?.bankAccountOwner ?? ""
   );
@@ -118,30 +124,34 @@ export const useUserViewModel = (props: IUserProps) => {
     );
     setDisplayMode(true);
   }, [
-    props.user.lockedAt,
-    props.user.isLocked,
-    props.user.username,
-    setEmail,
-    setFirstname,
-    setLastname,
-    setUsername,
+    setBirthday,
     userProfile.birthday,
-    userProfile.city,
     userProfile.email,
     userProfile.firstname,
-    userProfile.gender,
-    userProfile.joinedOn,
     userProfile.lastname,
+    userProfile.gender,
     userProfile.phone,
-    userProfile.postalCode,
     userProfile.street,
+    userProfile.postalCode,
+    userProfile.city,
     userProfile.tariff,
     userProfile.userBankAccount?.bankAccountBIC,
     userProfile.userBankAccount?.bankAccountIBAN,
     userProfile.userBankAccount?.bankAccountInstitution,
     userProfile.userBankAccount?.bankAccountOwner,
     userProfile.userGradings,
+    userProfile.joinedOn,
+    setEmail,
+    setUsername,
+    props.user.username,
+    props.user.isLocked,
+    props.user.lockedAt,
+    setFirstname,
+    setLastname,
     userRoles,
+    setStreet,
+    setPostalCode,
+    setCity,
   ]);
 
   const onCancel = useCallback(() => {
@@ -473,6 +483,26 @@ export const useUserViewModel = (props: IUserProps) => {
       }
     }
 
+    if (isInitial(birthday)) {
+      isValid = false;
+      setBirthdayError(t(texts.user.errorBirthdayRequired));
+    }
+
+    if (isInitial(street)) {
+      isValid = false;
+      setStreetError(t(texts.user.errorStreetRequired));
+    }
+
+    if (isInitial(postalCode)) {
+      isValid = false;
+      setPostalCodeError(t(texts.user.errorPostalCodeRequired));
+    }
+
+    if (isInitial(city)) {
+      isValid = false;
+      setCityError(t(texts.user.errorCityRequired));
+    }
+
     if (!isValid) {
       throw new ValidationError();
     }
@@ -484,7 +514,9 @@ export const useUserViewModel = (props: IUserProps) => {
     bankAccountInstitution,
     bankAccountOwner,
     birthday,
+    birthdayError,
     city,
+    cityError,
     collapseBank,
     confirmDialog,
     displayMode,
@@ -524,6 +556,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onValidate,
     phone,
     postalCode,
+    postalCodeError,
     profileDetailsSettings,
     onChangePassword,
     selectedIsAdminOption,
@@ -544,6 +577,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setStreet,
     setUsername,
     street,
+    streetError,
     tariffOptions,
     username,
     usernameError,
