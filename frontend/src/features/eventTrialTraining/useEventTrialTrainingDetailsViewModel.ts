@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../api/EventInstanceApi";
+import { UserTrialTrainingApi } from "../../api/UserTrialTrainingApi";
+import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isEmailInvalid } from "../../core/utils/isEmailInvalid";
+import { isError } from "../../core/utils/isError";
 import { isNotInitial } from "../../core/utils/isNotInitial";
 import { useInitialize } from "../../hooks/useInitialize";
 import { useLabeledElement } from "../../hooks/useLabeledElement";
+import { useToast } from "../../lib/toast/hooks/useToast";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
@@ -22,6 +26,11 @@ export const useEventTrialTrainingDetailsViewModel = (
   const [email, setEmail, emailError, setEmailError] = useLabeledElement("");
   const [fetchEventInstanceRequest, isFetchEventInstanceRequestProcessing] =
     useRequest();
+  const [
+    insertUserTrialTrainingRequest,
+    isInsertUserTrialTrainingRequestProcessing,
+  ] = useRequest();
+  const toast = useToast();
 
   useInitialize(() =>
     fetchEventInstanceRequest(async () => {
@@ -52,7 +61,26 @@ export const useEventTrialTrainingDetailsViewModel = (
 
   const onSendBooking = () => {
     if (isValid()) {
-      props.onSendBooking?.();
+      insertUserTrialTrainingRequest(
+        async () => {
+          const userTrialTrainingApi = new UserTrialTrainingApi();
+          const userTrialTraining =
+            await userTrialTrainingApi.insertFromAttrsSecured(
+              checkNotNull(eventInstance).id,
+              firstname,
+              lastname,
+              email
+            );
+          props.onSendBooking?.();
+        },
+        (error) => {
+          if (isError(error) && error.type === "UserTrialTrainingExistsError") {
+            toast.info(t(texts.trialTrainingContent.errorTrialTrainingExists));
+            return true;
+          }
+          return false;
+        }
+      );
     }
   };
 
@@ -63,6 +91,7 @@ export const useEventTrialTrainingDetailsViewModel = (
     firstname,
     lastname,
     isFetchEventInstanceRequestProcessing,
+    isInsertUserTrialTrainingRequestProcessing,
     isFilledOut,
     onFormChange,
     onSendBooking,

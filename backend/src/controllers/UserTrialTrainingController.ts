@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { UserTrialTrainingRepo } from "../repositories/UserTrialTrainingRepo";
+import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
@@ -10,12 +11,12 @@ import { SecretInterceptor } from "./core/SecretInterceptor";
 export class UserTrialTrainingController extends Controller {
   constructor() {
     super();
-    this.insert();
+    this.insertSecured();
   }
 
-  private insert() {
+  private insertSecured() {
     this.router.post(
-      `${UserTrialTrainingRouteMeta.path}`,
+      `${UserTrialTrainingRouteMeta.path}${SecretRequestRouteMeta.path}`,
       SecretInterceptor(async (req, res) => {
         const userTrialTraining: IUserTrialTraining = req.secretRequest.data;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();

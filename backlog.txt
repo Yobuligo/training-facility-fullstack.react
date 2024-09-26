@@ -174,8 +174,7 @@
 - Trial Training
 	# Customer can select a day he wants to book a trial training
 	# Customer has to provide firstname, lastname and email address
-	- Creation of EventInstances must only be possible with shared key
-	- Booking is only possible with an unknown email?
+	# Creation of EventInstances must only be possible with shared key
 	- Booking is only possible once for an email but we don't consider the past
 	# It must not be possible to book a past training
 	- Email is send to the customer
@@ -247,6 +246,7 @@
 
 - Performance
 	- Admin tabs are loaded asynchronously
+	- table userTrialTraining needs an index on email
 
 - Gamification
 
