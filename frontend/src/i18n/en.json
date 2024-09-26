@@ -205,6 +205,9 @@
         "principals": "Principal",
         "relatives": "Relative"
     },
+    "trialTrainingContent":{
+        "book": "Book"
+    },
     "user": {
         "unlock": "Unlock",
         "unlockUserQuestion": "Do you really want to unlock the user '{{username}}'?",

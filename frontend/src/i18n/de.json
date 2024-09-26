@@ -205,6 +205,9 @@
         "principals": "Leitung",
         "relatives": "Angehörige"
     },
+    "trialTrainingContent": {
+        "book": "Buchen"
+    },
     "user": {
         "unlock": "Entsperren",
         "unlockUserQuestion": "Soll der Benutzer '{{username}}' wirklich entsperrt werden?",
