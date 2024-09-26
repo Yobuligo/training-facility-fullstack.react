@@ -23,21 +23,24 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
       isOptional={props.isOptional}
       label={props.label}
     >
-      <input
-        className={style(
-          props.classNameInput,
-          styles.labeledInput,
-          props.disabled ? styles.inputDisabled : "",
-          props.error ? styles.error : ""
-        )}
-        disabled={props.disabled}
-        id={id}
-        maxLength={props.maxLength}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        type={props.type ?? "text"}
-        value={props.value}
-      />
+      <div className={styles.inputContainer}>
+        <input
+          className={style(
+            props.classNameInput,
+            styles.labeledInput,
+            props.disabled ? styles.inputDisabled : "",
+            props.error ? styles.error : ""
+          )}
+          disabled={props.disabled}
+          id={id}
+          maxLength={props.maxLength}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          type={props.type ?? "text"}
+          value={props.value}
+        />
+        {props.children}
+      </div>
     </LabeledElement>
   );
 };

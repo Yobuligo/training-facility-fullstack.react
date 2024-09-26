@@ -3,6 +3,14 @@
 .labeledInput {
   font-size: large;
   padding: 0.5rem;
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .inputDisabled {
