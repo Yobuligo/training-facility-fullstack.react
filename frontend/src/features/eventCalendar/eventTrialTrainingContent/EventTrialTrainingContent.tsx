@@ -1,4 +1,5 @@
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventContent } from "../eventContent/EventContent";
@@ -17,13 +18,15 @@ export const EventTrialTrainingContent: React.FC<
       className={styles.eventTrialTrainingContent}
       eventDefinition={props.event.eventDefinition}
     >
-      <SpinnerButton
-        className={styles.bookButton}
-        displaySpinner={false}
-        onClick={onBook}
-      >
-        {t(texts.trialTrainingContent.book)}
-      </SpinnerButton>
+      {props.event.start && DateTime.isAfter(props.event.start) && (
+        <SpinnerButton
+          className={styles.bookButton}
+          displaySpinner={false}
+          onClick={onBook}
+        >
+          {t(texts.trialTrainingContent.book)}
+        </SpinnerButton>
+      )}
     </EventContent>
   );
 };
