@@ -4,9 +4,14 @@ import { HttpStatusCode } from "../../core/api/types/HttpStatusCode";
 import { createError } from "../../core/utils/createError";
 import { ISecretRequest } from "../../shared/model/ISecretRequest";
 import { ErrorInterceptor } from "./ErrorInterceptor";
+import { ISecuredRequest } from "./types/ISecuredRequest";
 
 export const SecretInterceptor = (
-  requestHandler: (req: Request, res: Response, next: NextFunction) => any
+  requestHandler: (
+    req: ISecuredRequest<any>,
+    res: Response,
+    next: NextFunction
+  ) => any
 ) => {
   return ErrorInterceptor(
     async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +28,8 @@ export const SecretInterceptor = (
           .send(createError("Invalid secret error", "InvalidSecretError"));
       }
 
-      await requestHandler(req, res, next);
+      (req as ISecuredRequest<any>).secretRequest = secretRequest;
+      await requestHandler(req as ISecuredRequest<any>, res, next);
     }
   );
 };

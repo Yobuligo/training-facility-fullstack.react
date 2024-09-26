@@ -1,6 +1,7 @@
 import { Button } from "../../components/button/Button";
 import { DetailView } from "../../components/detailView/DetailView";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
+import { PageSpinner } from "../../components/pageSpinner/PageSpinner";
 import { Toolbar } from "../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { texts } from "../../lib/translation/texts";
@@ -18,55 +19,64 @@ export const EventTrialTrainingDetails: React.FC<
 
   return (
     <DetailView onBack={props.onBack}>
-      <h3>{t(texts.trialTrainingContent.bookTrialTraining)}</h3>
+      {viewModel.isFetchEventInstanceRequestProcessing ? (
+        <PageSpinner />
+      ) : (
+        <>
+          {viewModel.eventInstance && (
+            <>
+              <h3>{t(texts.trialTrainingContent.bookTrialTraining)}</h3>
+              <EventInstanceItem
+                eventInstanceItemModel={{
+                  color: props.event.eventDefinition.color,
+                  from: checkNotNull(props.event.start),
+                  to: checkNotNull(props.event.end),
+                  id: props.event.eventDefinition.id,
+                  title: props.event.eventDefinition.title,
+                }}
+              >
+                <p>{t(texts.trialTrainingContent.description)}</p>
+                <form
+                  className={styles.eventTrialTrainingDetails}
+                  onChange={viewModel.onFormChange}
+                >
+                  <LabeledInput
+                    label={t(texts.user.firstname)}
+                    maxLength={50}
+                    onChange={viewModel.setFirstname}
+                    value={viewModel.firstname}
+                  />
 
-      <EventInstanceItem
-        eventInstanceItemModel={{
-          color: props.event.eventDefinition.color,
-          from: checkNotNull(props.event.start),
-          to: checkNotNull(props.event.end),
-          id: props.event.eventDefinition.id,
-          title: props.event.eventDefinition.title,
-        }}
-      >
-        <p>{t(texts.trialTrainingContent.description)}</p>
-        <form
-          className={styles.eventTrialTrainingDetails}
-          onChange={viewModel.onFormChange}
-        >
-          <LabeledInput
-            label={t(texts.user.firstname)}
-            maxLength={50}
-            onChange={viewModel.setFirstname}
-            value={viewModel.firstname}
-          />
+                  <LabeledInput
+                    label={t(texts.user.lastname)}
+                    maxLength={50}
+                    onChange={viewModel.setLastname}
+                    value={viewModel.lastname}
+                  />
 
-          <LabeledInput
-            label={t(texts.user.lastname)}
-            maxLength={50}
-            onChange={viewModel.setLastname}
-            value={viewModel.lastname}
-          />
-
-          <div className={styles.email}>
-            <LabeledInput
-              error={viewModel.emailError}
-              label={t(texts.user.email)}
-              maxLength={255}
-              onChange={viewModel.setEmail}
-              value={viewModel.email}
-            />
-          </div>
-        </form>
-        <Toolbar alignRight={true}>
-          <Button
-            disabled={!viewModel.isFilledOut()}
-            onClick={viewModel.onSendBooking}
-          >
-            {t(texts.trialTrainingContent.sendBooking)}
-          </Button>
-        </Toolbar>
-      </EventInstanceItem>
+                  <div className={styles.email}>
+                    <LabeledInput
+                      error={viewModel.emailError}
+                      label={t(texts.user.email)}
+                      maxLength={255}
+                      onChange={viewModel.setEmail}
+                      value={viewModel.email}
+                    />
+                  </div>
+                </form>
+                <Toolbar alignRight={true}>
+                  <Button
+                    disabled={!viewModel.isFilledOut()}
+                    onClick={viewModel.onSendBooking}
+                  >
+                    {t(texts.trialTrainingContent.sendBooking)}
+                  </Button>
+                </Toolbar>
+              </EventInstanceItem>
+            </>
+          )}
+        </>
+      )}
     </DetailView>
   );
 };

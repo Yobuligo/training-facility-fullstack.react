@@ -8,7 +8,7 @@ import {
 import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
-import { ErrorInterceptor } from "./core/ErrorInterceptor";
+import { SecretInterceptor } from "./core/SecretInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class EventInstanceController extends EntityController<
@@ -73,7 +73,14 @@ export class EventInstanceController extends EntityController<
   private insertSecured() {
     this.router.post(
       `${this.routeMeta.path}${SecretRequestRouteMeta.path}`,
-      ErrorInterceptor(async (req, res) => {})
+      SecretInterceptor(async (req, res) => {
+        const eventInstance: IEventInstance = req.secretRequest.data;
+        const eventInstanceRepo = new EventInstanceRepo();
+        const createdEventInstance = await eventInstanceRepo.insert(
+          eventInstance
+        );
+        res.status(HttpStatusCode.CREATED_201).send(createdEventInstance);
+      })
     );
   }
 }
