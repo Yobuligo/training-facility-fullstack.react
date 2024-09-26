@@ -1,6 +1,6 @@
+import { Button } from "../../components/button/Button";
 import { DetailView } from "../../components/detailView/DetailView";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
-import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { texts } from "../../lib/translation/texts";
@@ -8,15 +8,17 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { EventInstanceItem } from "../eventInstance/eventInstanceItem/EventInstanceItem";
 import styles from "./EventTrialTrainingDetails.module.scss";
 import { IEventTrialTrainingDetailsProps } from "./IEventTrialTrainingDetailsProps";
+import { useEventTrialTrainingDetailsViewModel } from "./useEventTrialTrainingDetailsViewModel";
 
 export const EventTrialTrainingDetails: React.FC<
   IEventTrialTrainingDetailsProps
 > = (props) => {
+  const viewModel = useEventTrialTrainingDetailsViewModel(props);
   const { t } = useTranslation();
 
   return (
     <DetailView onBack={props.onBack}>
-      <h3>Book a trial training</h3>
+      <h3>{t(texts.trialTrainingContent.bookTrialTraining)}</h3>
 
       <EventInstanceItem
         eventInstanceItemModel={{
@@ -27,21 +29,42 @@ export const EventTrialTrainingDetails: React.FC<
           title: props.event.eventDefinition.title,
         }}
       >
-        <p>
-          Melde dich hier für dieses kostenlose Probetraining an. Wir schicken
-          dir eine E-Mail mit weiteren Details zum Training. Datum und Uhrzeit
-        </p>
-        <div className={styles.eventTrialTrainingDetails}>
-          <LabeledInput label="Firstname" />
-          <LabeledInput label="Lastname" />
+        <p>{t(texts.trialTrainingContent.description)}</p>
+        <form
+          className={styles.eventTrialTrainingDetails}
+          onChange={viewModel.onFormChange}
+        >
+          <LabeledInput
+            label={t(texts.user.firstname)}
+            maxLength={50}
+            onChange={viewModel.setFirstname}
+            value={viewModel.firstname}
+          />
+
+          <LabeledInput
+            label={t(texts.user.lastname)}
+            maxLength={50}
+            onChange={viewModel.setLastname}
+            value={viewModel.lastname}
+          />
+
           <div className={styles.email}>
-            <LabeledInput label="Email" />
+            <LabeledInput
+              error={viewModel.emailError}
+              label={t(texts.user.email)}
+              maxLength={255}
+              onChange={viewModel.setEmail}
+              value={viewModel.email}
+            />
           </div>
-        </div>
+        </form>
         <Toolbar alignRight={true}>
-          <SpinnerButton displaySpinner={false}>
+          <Button
+            disabled={!viewModel.isFilledOut()}
+            onClick={viewModel.onSendBooking}
+          >
             {t(texts.trialTrainingContent.sendBooking)}
-          </SpinnerButton>
+          </Button>
         </Toolbar>
       </EventInstanceItem>
     </DetailView>

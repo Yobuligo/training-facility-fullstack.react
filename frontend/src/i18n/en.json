@@ -207,6 +207,8 @@
     },
     "trialTrainingContent": {
         "book": "Book",
+        "bookTrialTraining": "Book a trial training",
+        "description": "Book now this free trial session. You will receive an email with all the important information and further details afterwards.",
         "sendBooking": "Send booking"
     },
     "user": {

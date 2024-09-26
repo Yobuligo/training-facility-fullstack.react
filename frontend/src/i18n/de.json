@@ -207,6 +207,8 @@
     },
     "trialTrainingContent": {
         "book": "Buchen",
+        "bookTrialTraining": "Probetraining buchen",
+        "description": "Melde dich jetzt für dieses kostenlose Probetraining an. Im Anschluss erhältst du eine E-Mail mit allen wichtigen Informationen und weiteren Details.",
         "sendBooking": "Buchung abschicken"
     },
     "user": {
