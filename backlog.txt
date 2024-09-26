@@ -147,6 +147,8 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
+	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
+		# username, firstname, lastname, email, birthday, street, postal code, city
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
@@ -154,6 +156,7 @@
 	# Bug: Buttons for inviting users and changing password must be active in display mode
 	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	# Bug: User session is not deleted with user.
+	- Bug: Link of invite email leads to wrong url
 	
 # User List
 	# Display loading spinner, when loading users
@@ -167,6 +170,16 @@
 	* Display loading spinner when searching - not required as it on clientside
 	# Bug: As admin created user is shown as normal user.
 	- Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
+	
+- Trial Training
+	# Customer can select a day he wants to book a trial training
+	# Customer has to provide firstname, lastname and email address
+	- Booking is only possible with an unknown email?
+	- Booking is only possible once for an email but we don't consider the past
+	# It must not be possible to book a past training
+	- Email is send to the customer
+		- Contains date and time for the training, information like required clothes, the address, a link to unregister
+	- Registered user is displayed in event registration list of the event instance and marked as trial training
 
 # Login
 	# Login must only be possible with valid username and password
@@ -177,6 +190,7 @@
 	
 # Password
 	# User must be able to change password
+	# Click on eye can toggle between displaying password as text or asterisks
 	
 # User Invite Screen
 	# Invite must be checked, display error in case of expired or invalid invite
