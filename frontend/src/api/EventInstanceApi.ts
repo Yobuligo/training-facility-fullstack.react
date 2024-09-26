@@ -1,9 +1,14 @@
+import { AppConfig } from "../AppConfig";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
+import {
+  ISecuredRequest,
+  SecuredRequestRouteMeta,
+} from "../shared/model/ISecuredRequest";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { IEventInstance } from "./../shared/model/IEventInstance";
@@ -70,7 +75,24 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
    * and returns it.
    */
   async insertFromEvent(event: IEvent): Promise<IEventInstance> {
-    const eventInstance: IEventInstance = {
+    const eventInstance = this.createEventInstanceByEvent(event);
+    return await this.insert(eventInstance);
+  }
+
+  async insertFromEventBySharedKey(event: IEvent): Promise<IEventInstance> {
+    const eventInstance = this.createEventInstanceByEvent(event);
+    const securedRequest: ISecuredRequest<IEventInstance> = {
+      data: eventInstance,
+      sharedKey: AppConfig.sharedKey,
+    };
+    return await RESTApi.post(
+      `${this.url}${SecuredRequestRouteMeta.path}`,
+      securedRequest
+    );
+  }
+
+  private createEventInstanceByEvent(event: IEvent): IEventInstance {
+    return {
       id: uuid(),
       color: event.eventDefinition.color,
       description: event.eventDefinition.description,
@@ -83,6 +105,5 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    return await this.insert(eventInstance);
   }
 }
