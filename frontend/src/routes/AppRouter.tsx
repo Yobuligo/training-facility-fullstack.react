@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { BookTrialTrainingPage } from "../pages/BookTrialTrainingPage";
 import { ChangePasswordPage } from "../pages/ChangePasswordPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { ErrorPage } from "../pages/ErrorPage";
@@ -27,6 +28,11 @@ export const AppRouter = createBrowserRouter([
   {
     path: AppRoutes.eventOverview.origin,
     element: <EventOverviewPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: AppRoutes.bookTrialTraining.origin,
+    element: <BookTrialTrainingPage />,
     errorElement: <ErrorPage />,
   },
   {

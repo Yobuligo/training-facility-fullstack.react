@@ -7,5 +7,6 @@ export const AppRoutes = configureRoutes({
   dashboard: route("/"),
   error: route("/error"),
   login: route("/login"),
+  bookTrialTraining: route("/book-trial-training"),
   userInvite: route("/user-invite/:userInviteId"),
 });
