@@ -10,12 +10,12 @@ export const EventTrialTrainingContent: React.FC<
 > = (props) => {
   const { t } = useTranslation();
 
-  const onBook = () => props.onBook?.(props.eventDefinition);
+  const onBook = () => props.onBook?.(props.event);
 
   return (
     <EventContent
       className={styles.eventTrialTrainingContent}
-      eventDefinition={props.eventDefinition}
+      eventDefinition={props.event.eventDefinition}
     >
       <SpinnerButton
         className={styles.bookButton}

@@ -1,6 +1,6 @@
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
+import { IEvent } from "../model/IEvent";
 
 export interface IEventTrialTrainingContentProps {
-  eventDefinition: IEventDefinition;
-  onBook?: (eventDefinition: IEventDefinition) => void;
+  event: IEvent;
+  onBook?: (event: IEvent) => void;
 }
