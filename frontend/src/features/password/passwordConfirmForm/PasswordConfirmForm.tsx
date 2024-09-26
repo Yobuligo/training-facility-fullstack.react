@@ -3,6 +3,7 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
+import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 
 export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   props
@@ -33,6 +34,12 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
         type="password"
         onChange={props.setNewConfirmPassword}
         error={props.newConfirmPasswordError}
+      />
+      <LabeledPasswordInput 
+        label={t(texts.passwordConfirmForm.confirmNewPassword)}
+        type="password"
+        onChange={props.setNewConfirmPassword}
+        error={props.newConfirmPasswordError}      
       />
     </>
   );
