@@ -1,5 +1,7 @@
 import { AppConfig } from "../AppConfig";
+import { DateTime } from "../core/services/date/DateTime";
 import { SendEmailError } from "../shared/errors/SendEmailError";
+import { IEventInstance } from "../shared/model/IEventInstance";
 import { smtp } from "./smtp";
 
 export class EmailService {
@@ -74,6 +76,43 @@ export class EmailService {
     } catch (error) {
       this.handleError(error);
     }
+  }
+
+  async bookTrialTraining(
+    recipientEmail: string,
+    eventInstance: IEventInstance,
+    firstname: string
+  ) {
+    try {
+      await smtp.sendMail({
+        from: AppConfig.smtpSender,
+        to: recipientEmail,
+        subject: "Anmeldung zum Taekwon-Do Probetraining",
+        html: `
+          <p>Hallo ${firstname},</p>
+
+          <p>vielen Dank für dein Interesse an unserem Taekwon-Do Probetraining! Hier sind alle wichtigen Informationen, die du für das Training benötigst:</p>
+
+          <ol>
+            <li><strong>Wann:</strong> Das Training findet am ${DateTime.format(
+              eventInstance.from,
+              "dd.MM.yyyy"
+            )} um ${DateTime.format(
+          eventInstance.from,
+          "hh:mm"
+        )} statt. Falls du es schaffst sei bitte 10 - 15 min vor Trainingsbeginn da, dann kannst du dich noch in Ruhe umziehen und wir haben noch kurz Zeit uns vorzustellen. </li>
+            <li><strong>Wo:</strong> Landstraße 108, 69198 Schriesheim</li>
+            <li><strong>Was solltest du mitbringen:</strong> Wir trainieren barfuß, daher benötigst du nur eine lange Sporthose und ein T-Shirt. Weitere Ausrüstung ist für das Probetraining nicht notwendig.</li>
+          </ol>
+
+          <p>Falls du doch nicht am Training teilnehmen kannst, kannst du dich über diesen Link vom Training abmelden: [Stornierungslink]</p>
+
+          <p>Wir freuen uns, dich beim Training kennenzulernen!</p>
+
+          ${this.createSignature()}
+          `,
+      });
+    } catch (error) {}
   }
 
   private createInviteLink(userInviteId: string): string {
