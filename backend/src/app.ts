@@ -8,6 +8,7 @@ import { EventRegistrationController } from "./controllers/EventRegistrationCont
 import { UserController } from "./controllers/UserController";
 import { UserInviteController } from "./controllers/UserInviteController";
 import { UserProfileController } from "./controllers/UserProfileController";
+import { UserTrialTrainingController } from "./controllers/UserTrialTrainingController";
 import { checkNotNull } from "./core/utils/checkNotNull";
 import { db } from "./db/db";
 import { initializeModels } from "./db/initializeModels";
@@ -68,5 +69,6 @@ server.use("/api", new EventRegistrationController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProfileController().router);
 server.use("/api", new UserInviteController().router);
+server.use("/api", new UserTrialTrainingController().router);
 
 server.listen(5000);
