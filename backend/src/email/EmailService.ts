@@ -128,6 +128,14 @@ export class EmailService {
   }
 
   private createSignature() {
-    return `<p>Liebe Grüße,<br>Beatriz, Frank, Peter & Sonja</p>`;
+    return `
+        <p>Liebe Grüße,<br>Beatriz, Frank, Peter & Sonja</p>
+        <p>
+          <strong>Yeoljeong Taekwon-Do</strong><br>
+          Bascon-Wolf, Burkart, Hoffmann und Steinhagen TaeXit GbR<br>
+          Landstraße 108 | 69198 Schriesheim | Germany<br>
+          E-Mail: info@yeoljeong-taekwondo.de<br>
+          http://www.yeoljeong-taekwondo.de/<br>
+        </p>`;
   }
 }

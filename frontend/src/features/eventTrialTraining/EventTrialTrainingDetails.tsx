@@ -1,7 +1,7 @@
-import { Button } from "../../components/button/Button";
 import { DetailView } from "../../components/detailView/DetailView";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
 import { PageSpinner } from "../../components/pageSpinner/PageSpinner";
+import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../components/toolbar/Toolbar";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { texts } from "../../lib/translation/texts";
@@ -65,12 +65,15 @@ export const EventTrialTrainingDetails: React.FC<
                   </div>
                 </form>
                 <Toolbar alignRight={true}>
-                  <Button
+                  <SpinnerButton
                     disabled={!viewModel.isFilledOut()}
+                    displaySpinner={
+                      viewModel.isInsertUserTrialTrainingRequestProcessing
+                    }
                     onClick={viewModel.onSendBooking}
                   >
                     {t(texts.trialTrainingContent.sendBooking)}
-                  </Button>
+                  </SpinnerButton>
                 </Toolbar>
               </EventInstanceItem>
             </>
