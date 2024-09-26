@@ -206,7 +206,8 @@
         "relatives": "Angehörige"
     },
     "trialTrainingContent": {
-        "book": "Buchen"
+        "book": "Buchen",
+        "sendBooking": "Buchung abschicken"
     },
     "user": {
         "unlock": "Entsperren",

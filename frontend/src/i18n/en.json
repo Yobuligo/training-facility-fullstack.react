@@ -205,8 +205,9 @@
         "principals": "Principal",
         "relatives": "Relative"
     },
-    "trialTrainingContent":{
-        "book": "Book"
+    "trialTrainingContent": {
+        "book": "Book",
+        "sendBooking": "Send booking"
     },
     "user": {
         "unlock": "Unlock",
