@@ -11,6 +11,7 @@ import { UserInvite } from "../model/UserInvite";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
+import { UserTrialTraining } from "../model/UserTrialTraining";
 
 export const initializeModels = async (alter: boolean) => {
   const models: IHaveStaticAssociate[] = [
@@ -22,6 +23,7 @@ export const initializeModels = async (alter: boolean) => {
     UserBankAccount,
     UserLoginFailAttempt,
     UserInvite,
+    UserTrialTraining,
     EventDefinition,
     EventInstance,
     EventRegistration,
