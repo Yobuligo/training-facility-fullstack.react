@@ -6,9 +6,9 @@ import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import {
-  ISecuredRequest,
-  SecuredRequestRouteMeta,
-} from "../shared/model/ISecuredRequest";
+  ISecretRequest,
+  SecretRequestRouteMeta,
+} from "../shared/model/ISecretRequest";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { IEventInstance } from "./../shared/model/IEventInstance";
@@ -79,15 +79,15 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     return await this.insert(eventInstance);
   }
 
-  async insertFromEventBySharedKey(event: IEvent): Promise<IEventInstance> {
+  async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
     const eventInstance = this.createEventInstanceByEvent(event);
-    const securedRequest: ISecuredRequest<IEventInstance> = {
+    const secretRequest: ISecretRequest<IEventInstance> = {
       data: eventInstance,
       sharedKey: AppConfig.sharedKey,
     };
     return await RESTApi.post(
-      `${this.url}${SecuredRequestRouteMeta.path}`,
-      securedRequest
+      `${this.url}${SecretRequestRouteMeta.path}`,
+      secretRequest
     );
   }
 

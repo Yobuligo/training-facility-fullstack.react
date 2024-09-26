@@ -5,8 +5,10 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
+import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
+import { ErrorInterceptor } from "./core/ErrorInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class EventInstanceController extends EntityController<
@@ -15,6 +17,7 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
+    this.insertSecured();
   }
 
   protected findAll(): void {
@@ -65,5 +68,12 @@ export class EventInstanceController extends EntityController<
   protected insert(): void {
     // no authorities required
     super.insert();
+  }
+
+  private insertSecured() {
+    this.router.post(
+      `${this.routeMeta.path}${SecretRequestRouteMeta.path}`,
+      ErrorInterceptor(async (req, res) => {})
+    );
   }
 }
