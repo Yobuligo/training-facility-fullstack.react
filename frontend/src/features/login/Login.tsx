@@ -1,5 +1,6 @@
 import { Card } from "../../components/card/Card";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
+import { LabeledPasswordInput } from "../../components/labeledPasswordInput/LabeledPasswordInput";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
@@ -27,12 +28,11 @@ export const Login: React.FC = () => {
           onEnter={viewModel.onEnter}
           value={viewModel.username}
         />
-        <LabeledInput
+        <LabeledPasswordInput
           disabled={viewModel.disablePassword}
           label={t(texts.login.password)}
           onChange={viewModel.setPassword}
           onEnter={viewModel.onEnter}
-          type="password"
           value={viewModel.password}
         />
         <div className={styles.footer}>
