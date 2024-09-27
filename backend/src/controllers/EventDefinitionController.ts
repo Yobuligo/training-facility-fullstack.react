@@ -6,8 +6,10 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
+import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
+import { SecretInterceptor } from "./core/SecretInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 import { ISessionRequest } from "./core/types/ISessionRequest";
 
@@ -19,6 +21,7 @@ export class EventDefinitionController extends EntityController<
     super(EventDefinitionRouteMeta, new EventDefinitionRepo(), [
       AuthRole.ADMIN,
     ]);
+    this.findByDateTimeSpanSecured();
   }
 
   protected findAll(): void {
@@ -43,6 +46,33 @@ export class EventDefinitionController extends EntityController<
           const eventInstances = await this.repo.findAll(fields);
           res.status(HttpStatusCode.OK_200).send(eventInstances);
         }
+      })
+    );
+  }
+
+  private async findByDateTimeSpanSecured() {
+    this.router.post(
+      `${this.routeMeta.path}${SecretRequestRouteMeta.path}`,
+      SecretInterceptor(async (req, res) => {
+        const from = req.query.from;
+        const to = req.query.to;
+
+        if (
+          !(from && typeof from === "string") ||
+          !(to && typeof to === "string")
+        ) {
+          return res.status(HttpStatusCode.BAD_REQUEST_400).end();
+        }
+
+        const dateTimeSpan: IDateTimeSpan = {
+          from: new Date(from),
+          to: new Date(to),
+        };
+
+        const eventDefinitions = await this.repo.findByDateTimeSpan(
+          dateTimeSpan
+        );
+        res.status(HttpStatusCode.OK_200).send(eventDefinitions);
       })
     );
   }
