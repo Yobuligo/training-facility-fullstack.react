@@ -35,46 +35,54 @@ export const EventTrialTrainingDetails: React.FC<
                   title: props.event.eventDefinition.title,
                 }}
               >
-                <p>{t(texts.trialTrainingContent.description)}</p>
-                <form
-                  className={styles.eventTrialTrainingDetails}
-                  onChange={viewModel.onFormChange}
-                >
-                  <LabeledInput
-                    label={t(texts.user.firstname)}
-                    maxLength={50}
-                    onChange={viewModel.setFirstname}
-                    value={viewModel.firstname}
-                  />
+                {viewModel.booked ? (
+                  <p className={styles.bookingConfirmation}>
+                    {t(texts.trialTrainingContent.bookingConfirmation)}
+                  </p>
+                ) : (
+                  <>
+                    <p>{t(texts.trialTrainingContent.description)}</p>
+                    <form
+                      className={styles.eventTrialTrainingDetails}
+                      onChange={viewModel.onFormChange}
+                    >
+                      <LabeledInput
+                        label={t(texts.user.firstname)}
+                        maxLength={50}
+                        onChange={viewModel.setFirstname}
+                        value={viewModel.firstname}
+                      />
 
-                  <LabeledInput
-                    label={t(texts.user.lastname)}
-                    maxLength={50}
-                    onChange={viewModel.setLastname}
-                    value={viewModel.lastname}
-                  />
+                      <LabeledInput
+                        label={t(texts.user.lastname)}
+                        maxLength={50}
+                        onChange={viewModel.setLastname}
+                        value={viewModel.lastname}
+                      />
 
-                  <div className={styles.email}>
-                    <LabeledInput
-                      error={viewModel.emailError}
-                      label={t(texts.user.email)}
-                      maxLength={255}
-                      onChange={viewModel.setEmail}
-                      value={viewModel.email}
-                    />
-                  </div>
-                </form>
-                <Toolbar alignRight={true}>
-                  <SpinnerButton
-                    disabled={!viewModel.isFilledOut()}
-                    displaySpinner={
-                      viewModel.isInsertUserTrialTrainingRequestProcessing
-                    }
-                    onClick={viewModel.onSendBooking}
-                  >
-                    {t(texts.trialTrainingContent.sendBooking)}
-                  </SpinnerButton>
-                </Toolbar>
+                      <div className={styles.email}>
+                        <LabeledInput
+                          error={viewModel.emailError}
+                          label={t(texts.user.email)}
+                          maxLength={255}
+                          onChange={viewModel.setEmail}
+                          value={viewModel.email}
+                        />
+                      </div>
+                    </form>
+                    <Toolbar alignRight={true}>
+                      <SpinnerButton
+                        disabled={!viewModel.isFilledOut()}
+                        displaySpinner={
+                          viewModel.isInsertUserTrialTrainingRequestProcessing
+                        }
+                        onClick={viewModel.onSendBooking}
+                      >
+                        {t(texts.trialTrainingContent.sendBooking)}
+                      </SpinnerButton>
+                    </Toolbar>
+                  </>
+                )}
               </EventInstanceItem>
             </>
           )}

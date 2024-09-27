@@ -31,6 +31,7 @@ export const useEventTrialTrainingDetailsViewModel = (
     isInsertUserTrialTrainingRequestProcessing,
   ] = useRequest();
   const toast = useToast();
+  const [booked, setBooked] = useState(false);
 
   useInitialize(() =>
     fetchEventInstanceRequest(async () => {
@@ -64,18 +65,17 @@ export const useEventTrialTrainingDetailsViewModel = (
       insertUserTrialTrainingRequest(
         async () => {
           const userTrialTrainingApi = new UserTrialTrainingApi();
-          const userTrialTraining =
-            await userTrialTrainingApi.insertFromAttrsSecured(
-              checkNotNull(eventInstance).id,
-              firstname,
-              lastname,
-              email
-            );
-          props.onSendBooking?.();
+          await userTrialTrainingApi.insertFromAttrsSecured(
+            checkNotNull(eventInstance).id,
+            firstname,
+            lastname,
+            email
+          );
+          setBooked(true);
         },
         (error) => {
           if (isError(error) && error.type === "UserTrialTrainingExistsError") {
-            toast.info(t(texts.trialTrainingContent.errorTrialTrainingExists));
+            toast.error(t(texts.trialTrainingContent.errorTrialTrainingExists));
             return true;
           }
           return false;
@@ -85,6 +85,7 @@ export const useEventTrialTrainingDetailsViewModel = (
   };
 
   return {
+    booked,
     email,
     emailError,
     eventInstance,
