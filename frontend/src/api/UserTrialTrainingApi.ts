@@ -16,8 +16,8 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
 
   async deleteByIdSecured(id: string): Promise<boolean> {
     const secretRequest = this.createSecretRequest(undefined);
-    return await RESTApi.delete(
-      `${this.url}/${id}${SecretRequestRouteMeta.path}`,
+    return await RESTApi.post(
+      `${this.url}/${id}${SecretRequestRouteMeta.path}/delete`,
       secretRequest
     );
   }

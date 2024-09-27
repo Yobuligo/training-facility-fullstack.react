@@ -66,8 +66,10 @@
         "open": "Anmeldung wieder öffnen"
     },
     "eventTrialTrainingCancellation": {
+        "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",
         "cancelTrialTraining": "Probetraining stornieren",
-        "cancelQuestion": "Möchtest du dieses Probetraining wirklich stornieren?"
+        "cancelQuestion": "Möchtest du dieses Probetraining wirklich stornieren?",
+        "notFound": "Zu löschendes Probetraining nicht gefunden."
     },
     "general": {
         "cancel": "Abbrechen",

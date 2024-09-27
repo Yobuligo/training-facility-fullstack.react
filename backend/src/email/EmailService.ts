@@ -105,7 +105,7 @@ export class EmailService {
             <li><strong>Was solltest du mitbringen:</strong> Wir trainieren barfuß, daher benötigst du nur eine lange Sporthose und ein T-Shirt. Weitere Ausrüstung ist für das Probetraining nicht notwendig.</li>
           </ol>
 
-          <p>Falls du doch nicht am Training teilnehmen kannst, kannst du dich über diesen Link vom Training abmelden: <a href="${cancelLink}">Stornierungs-Link</a></p>
+          <p>Falls du doch nicht am Training teilnehmen kannst, melde dich bitte über diesen Link vom Training ab: <a href="${cancelLink}">Stornierungs-Link</a></p>
 
           <p>Wir freuen uns, dich beim Training kennenzulernen!</p>
 

@@ -23,19 +23,29 @@ export const EventTrialTrainingCancellation: React.FC = () => {
                 viewModel.userTrialTrainingDetails.eventInstance
               }
             >
-              <p className={styles.cancelConfirmation}>
-                {t(texts.eventTrialTrainingCancellation.cancelQuestion)}
-              </p>
-              <Toolbar alignRight={true}>
-                <SpinnerButton
-                  displaySpinner={
-                    viewModel.isCancelUserTrialTrainingRequestProcessing
-                  }
-                  onClick={viewModel.onCancelUserTrialTraining}
-                >
-                  {t(texts.eventTrialTrainingCancellation.cancelTrialTraining)}
-                </SpinnerButton>
-              </Toolbar>
+              {viewModel.wasDeleted ? (
+                <p className={styles.cancelConfirmation}>
+                  {t(texts.eventTrialTrainingCancellation.cancelConfirmation)}
+                </p>
+              ) : (
+                <>
+                  <p className={styles.cancelConfirmation}>
+                    {t(texts.eventTrialTrainingCancellation.cancelQuestion)}
+                  </p>
+                  <Toolbar alignRight={true}>
+                    <SpinnerButton
+                      displaySpinner={
+                        viewModel.isCancelUserTrialTrainingRequestProcessing
+                      }
+                      onClick={viewModel.onCancelUserTrialTraining}
+                    >
+                      {t(
+                        texts.eventTrialTrainingCancellation.cancelTrialTraining
+                      )}
+                    </SpinnerButton>
+                  </Toolbar>
+                </>
+              )}
             </EventInstanceItem>
           )}
         </div>

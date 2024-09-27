@@ -66,8 +66,10 @@
         "open": "Reopen registration"
     },
     "eventTrialTrainingCancellation": {
+        "cancelConfirmation": "Your trial training was successfully canceled.",
         "cancelTrialTraining": "Cancel trial training",
-        "cancelQuestion": "Do you really want to cancel this trial training session?"
+        "cancelQuestion": "Do you really want to cancel this trial training session?",
+        "notFound": "Trial training to be deleted not found."
     },
     "general": {
         "cancel": "Cancel",

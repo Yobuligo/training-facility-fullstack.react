@@ -15,8 +15,21 @@ import { SecretInterceptor } from "./core/SecretInterceptor";
 export class UserTrialTrainingController extends Controller {
   constructor() {
     super();
+    this.deleteByIdSecured();
     this.findByIdSecured();
     this.insertSecured();
+  }
+
+  private deleteByIdSecured() {
+    this.router.post(
+      `${UserTrialTrainingRouteMeta.path}/:id${SecretRequestRouteMeta.path}/delete`,
+      SecretInterceptor(async (req, res) => {
+        const id = req.params.id;
+        const userTrialTrainingRepo = new UserTrialTrainingRepo();
+        const wasDeleted = await userTrialTrainingRepo.deleteById(id);
+        res.status(HttpStatusCode.OK_200).send(wasDeleted);
+      })
+    );
   }
 
   private findByIdSecured() {
