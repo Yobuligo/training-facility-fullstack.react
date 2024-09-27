@@ -171,7 +171,7 @@
 	# Bug: As admin created user is shown as normal user.
 	- Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 	
-- Trial Training
+# Trial Training
 	# Customer can select a day he wants to book a trial training
 	# Customer has to provide firstname, lastname and email address
 	# Creation of EventInstances must only be possible with shared key
@@ -185,7 +185,7 @@
 	# Click on unregister displays an internet page to unregister from the training
 	# Registered user is displayed in event registration list of the event instance and marked as trial training
 	# Registered user can be marked as present, missing or open
-	- Bug: EventDefinitions must only be loaded with SecretRequest
+	# Bug: EventDefinitions must only be loaded with SecretRequest
 
 # Login
 	# Login must only be possible with valid username and password
