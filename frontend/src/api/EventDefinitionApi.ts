@@ -52,6 +52,25 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
     return eventDefinitions;
   }
 
+  async findByDateTimeSpanSecured(
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IEventDefinition[]> {
+    const secretRequest = this.createSecretRequest(undefined);
+    const eventDefinitions = await RESTApi.post<IEventDefinition[]>(
+      `${this.url}`,
+      secretRequest,
+      {
+        urlParams: {
+          from: dateTimeSpan.from.toString(),
+          to: dateTimeSpan.to.toString(),
+        },
+      }
+    );
+
+    this.fillDates(eventDefinitions);
+    return eventDefinitions;
+  }
+
   /**
    * Provides a date object for each date property.
    */
