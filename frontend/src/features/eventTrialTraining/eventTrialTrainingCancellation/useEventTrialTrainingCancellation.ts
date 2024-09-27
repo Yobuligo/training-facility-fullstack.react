@@ -38,7 +38,8 @@ export const useEventTrialTrainingCancellation = () => {
     })
   );
 
-  const onCancelUserTrialTraining = () => {};
+  const onCancelUserTrialTraining = () =>
+    cancelUserTrialTrainingRequest(async () => {});
 
   return {
     isCancelUserTrialTrainingRequestProcessing,

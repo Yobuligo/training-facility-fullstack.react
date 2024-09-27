@@ -3,6 +3,7 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { EventTrialTrainingDetails } from "../../eventTrialTraining/eventTrialTraining/EventTrialTrainingDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventTrialTrainingContent } from "../eventTrialTrainingContent/EventTrialTrainingContent";
+import styles from "./EventCalendarTrialTraining.module.scss";
 import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialTrainingViewModel";
 
 /**
@@ -13,7 +14,7 @@ export const EventCalendarTrialTraining: React.FC = () => {
   const viewModel = useEventCalendarTrialTrainingViewModel();
 
   return (
-    <>
+    <div className={styles.eventCalendarTrialTraining}>
       {viewModel.selectedEvent ? (
         <EventTrialTrainingDetails
           event={viewModel.selectedEvent}
@@ -36,6 +37,6 @@ export const EventCalendarTrialTraining: React.FC = () => {
           views={["day", "week"]}
         />
       )}
-    </>
+    </div>
   );
 };
