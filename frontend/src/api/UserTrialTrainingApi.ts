@@ -1,8 +1,4 @@
-import { AppConfig } from "../AppConfig";
-import {
-  ISecretRequest,
-  SecretRequestRouteMeta,
-} from "../shared/model/ISecretRequest";
+import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
@@ -18,13 +14,18 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
     super(UserTrialTrainingRouteMeta);
   }
 
+  async deleteByIdSecured(id: string): Promise<boolean> {
+    const secretRequest = this.createSecretRequest(undefined);
+    return await RESTApi.delete(
+      `${this.url}/${id}${SecretRequestRouteMeta.path}`,
+      secretRequest
+    );
+  }
+
   async findDetailsByIdSecured(
     id: string
   ): Promise<IUserTrialTrainingDetails | undefined> {
-    const secretRequest: ISecretRequest<undefined> = {
-      data: undefined,
-      sharedKey: AppConfig.sharedKey,
-    };
+    const secretRequest = this.createSecretRequest(undefined);
     return await RESTApi.post(
       `${this.url}/${id}${SecretRequestRouteMeta.path}`,
       secretRequest
@@ -37,19 +38,16 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
     lastname: string,
     email: string
   ): Promise<IUserTrialTraining> {
-    const secretRequest: ISecretRequest<IUserTrialTraining> = {
-      data: {
-        id: uuid(),
-        email,
-        eventInstanceId,
-        firstname,
-        lastname,
-        state: EventRegistrationState.OPEN,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      sharedKey: AppConfig.sharedKey,
-    };
+    const secretRequest = this.createSecretRequest<IUserTrialTraining>({
+      id: uuid(),
+      email,
+      eventInstanceId,
+      firstname,
+      lastname,
+      state: EventRegistrationState.OPEN,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
     return await RESTApi.post(
       `${this.url}${SecretRequestRouteMeta.path}`,
       secretRequest

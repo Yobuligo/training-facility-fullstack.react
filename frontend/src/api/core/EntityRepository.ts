@@ -1,8 +1,10 @@
+import { AppConfig } from "../../AppConfig";
 import { IEntity } from "../../core/api/types/IEntity";
 import { IEntityDetails } from "../../core/api/types/IEntityDetails";
 import { IEntityRepository } from "../../core/api/types/IEntityRepository";
 import { IEntitySubset } from "../../core/api/types/IEntitySubset";
 import { NotImplementedError } from "../../core/errors/NotImplementedError";
+import { ISecretRequest } from "../../shared/model/ISecretRequest";
 import { Repository } from "./Repository";
 import { RESTApi } from "./RESTApi";
 
@@ -96,5 +98,12 @@ export abstract class EntityRepository<TEntity extends IEntity>
       return fields;
     }
     return [];
+  }
+
+  protected createSecretRequest<T>(data: T): ISecretRequest<T> {
+    return {
+      data,
+      sharedKey: AppConfig.sharedKey,
+    };
   }
 }

@@ -6,11 +6,17 @@ import { RequestParams } from "./RequestParams";
 import { UrlParamsExtenderRegistry } from "./urlParams/UrlParamsExtenderRegistry";
 
 export class RESTApi {
-  static delete<T>(url: string, requestParams?: RequestParams<T>): Promise<T> {
+  static delete<T>(
+    url: string,
+    data?: any,
+    requestParams?: RequestParams<T>,
+  ): Promise<T> {
     return this.createPromise(
       url,
       async (extendedUrl) => {
+        const body = JSON.stringify(data);
         return await fetch(extendedUrl, {
+          body,
           credentials: "include",
           method: "DELETE",
           mode: "cors",

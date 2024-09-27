@@ -39,7 +39,12 @@ export const useEventTrialTrainingCancellation = () => {
   );
 
   const onCancelUserTrialTraining = () =>
-    cancelUserTrialTrainingRequest(async () => {});
+    cancelUserTrialTrainingRequest(async () => {
+      const useTrialTrainingApi = new UserTrialTrainingApi();
+      const wasDeleted = await useTrialTrainingApi.deleteByIdSecured(
+        checkNotNull(userTrialTrainingDetails).id
+      );
+    });
 
   return {
     isCancelUserTrialTrainingRequestProcessing,
