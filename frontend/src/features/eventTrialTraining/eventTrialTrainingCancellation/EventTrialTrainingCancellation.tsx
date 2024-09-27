@@ -8,7 +8,9 @@ export const EventTrialTrainingCancellation: React.FC = () => {
       {viewModel.isLoadUserTrialTrainingDetailsRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <>Hello World</>
+        <>
+        {}
+        Hello World</>
       )}
     </>
   );

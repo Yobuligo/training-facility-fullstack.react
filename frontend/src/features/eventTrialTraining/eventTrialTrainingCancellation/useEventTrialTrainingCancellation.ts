@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { IUserTrialTrainingDetails } from "../../../shared/model/IUserTrialTrainingDetails";
 
 export const useEventTrialTrainingCancellation = () => {
@@ -11,6 +12,7 @@ export const useEventTrialTrainingCancellation = () => {
   const [userTrialTrainingDetails, setUserTrialTrainingDetails] = useState<
     IUserTrialTrainingDetails | undefined
   >(undefined);
+  const navigate = useNavigate();
   const [
     loadUserTrialTrainingDetailsRequest,
     isLoadUserTrialTrainingDetailsRequestProcessing,
@@ -23,6 +25,11 @@ export const useEventTrialTrainingCancellation = () => {
         await userTrialTrainingApi.findDetailsByIdSecured(
           checkNotNull(params.userTrialTrainingId)
         );
+
+      // Display error page, if userTrialTraining or corresponding event instance wasn't found
+      if (!userTrialTrainingDetails) {
+        return navigate(AppRoutes.error.toPath());
+      }
       setUserTrialTrainingDetails(userTrialTrainingDetails);
     })
   );
