@@ -14,7 +14,7 @@ export const EventCalendarOverview: React.FC = () => {
       <EventCalendarSection
         eventDefinitionLoader={async () => {
           const eventDefinitionApi = new EventDefinitionApi();
-          return await eventDefinitionApi.findByDateTimeSpan(
+          return await eventDefinitionApi.findByDateTimeSpanSecured(
             DateTime.getWeekSpanDates(new Date())
           );
         }}
