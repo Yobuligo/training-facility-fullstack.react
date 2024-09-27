@@ -1,13 +1,24 @@
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { EventInstance } from "../model/EventInstance";
 import { UserTrialTraining } from "../model/UserTrialTraining";
 import { UserTrialTrainingExistsError } from "../shared/errors/UserTrialTrainingExistsError";
 import { IUserTrialTraining } from "../shared/model/IUserTrialTraining";
+import { IUserTrialTrainingDetails } from "../shared/model/IUserTrialTrainingDetails";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class UserTrialTrainingRepo extends SequelizeRepository<IUserTrialTraining> {
   constructor() {
     super(UserTrialTraining);
+  }
+
+  async findDetailsById(
+    id: string
+  ): Promise<IUserTrialTrainingDetails | undefined> {
+    const data = await UserTrialTraining.findByPk(id, {
+      include: [{ model: EventInstance, as: "eventInstance" }],
+    });
+    return data?.toJSON() as IUserTrialTrainingDetails | undefined;
   }
 
   insert<K extends keyof IUserTrialTraining>(
