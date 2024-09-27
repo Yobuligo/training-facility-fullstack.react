@@ -35,6 +35,9 @@
         "unregisterTitle": "Abmelden",
         "unregisterOnClosed": "Abmeldung nicht möglich. Anmeldung ist geschlossen."
     },
+    "eventCalendarTrialTraining":{
+        "errorEventInstanceClosed": "Buchung nicht möglich. Es gibt bereits zu viele Anmeldungen."
+    },    
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },

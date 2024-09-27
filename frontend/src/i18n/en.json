@@ -35,6 +35,9 @@
         "unregisterTitle": "Unregister",
         "unregisterOnClosed": "Unregistering is not possible. Registration is closed."
     },
+    "eventCalendarTrialTraining": {
+        "errorEventInstanceClosed": "Booking not possible. There are already to many registrations."
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Title is required"
     },

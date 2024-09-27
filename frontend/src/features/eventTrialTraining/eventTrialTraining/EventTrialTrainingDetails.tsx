@@ -3,7 +3,6 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
@@ -28,11 +27,11 @@ export const EventTrialTrainingDetails: React.FC<
               <h3>{t(texts.trialTrainingContent.bookTrialTraining)}</h3>
               <EventInstanceItem
                 eventInstanceItemModel={{
-                  color: props.event.eventDefinition.color,
-                  from: checkNotNull(props.event.start),
-                  to: checkNotNull(props.event.end),
-                  id: props.event.eventDefinition.id,
-                  title: props.event.eventDefinition.title,
+                  color: props.eventInstance.color,
+                  from: props.eventInstance.from,
+                  to: props.eventInstance.to,
+                  id: props.eventInstance.id,
+                  title: props.eventInstance.title,
                 }}
               >
                 {viewModel.booked ? (

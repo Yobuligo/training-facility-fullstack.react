@@ -15,9 +15,10 @@ export const EventCalendarTrialTraining: React.FC = () => {
 
   return (
     <div className={styles.eventCalendarTrialTraining}>
-      {viewModel.selectedEvent ? (
+      {viewModel.eventInstance && viewModel.selectedEvent ? (
         <EventTrialTrainingDetails
           event={viewModel.selectedEvent}
+          eventInstance={viewModel.eventInstance}
           onBack={viewModel.onBack}
         />
       ) : (
