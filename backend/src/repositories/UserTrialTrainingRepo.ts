@@ -15,10 +15,19 @@ export class UserTrialTrainingRepo extends SequelizeRepository<IUserTrialTrainin
   async findDetailsById(
     id: string
   ): Promise<IUserTrialTrainingDetails | undefined> {
-    const data = await UserTrialTraining.findByPk(id, {
-      include: [{ model: EventInstance, as: "eventInstance" }],
-    });
-    return data?.toJSON() as IUserTrialTrainingDetails | undefined;
+    const data = await UserTrialTraining.findByPk(id);
+    if (data) {
+      const userTrialTraining = data.toJSON() as IUserTrialTrainingDetails;
+      const eventInstanceData = await EventInstance.findByPk(
+        userTrialTraining.eventInstanceId
+      );
+      if (!eventInstanceData) {
+        return undefined;
+      }
+      userTrialTraining.eventInstance = eventInstanceData.toJSON();
+      return userTrialTraining;
+    }
+    return undefined;
   }
 
   insert<K extends keyof IUserTrialTraining>(

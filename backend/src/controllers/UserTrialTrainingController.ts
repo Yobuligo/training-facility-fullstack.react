@@ -20,7 +20,7 @@ export class UserTrialTrainingController extends Controller {
   }
 
   private findByIdSecured() {
-    this.router.get(
+    this.router.post(
       `${UserTrialTrainingRouteMeta.path}/:id${SecretRequestRouteMeta.path}`,
       SecretInterceptor(async (req, res) => {
         const id = req.params.id;
@@ -64,11 +64,7 @@ export class UserTrialTrainingController extends Controller {
 
         // send email
         const emailService = new EmailService();
-        emailService.bookTrialTraining(
-          userTrialTraining.email,
-          eventInstance,
-          userTrialTraining.firstname
-        );
+        emailService.bookTrialTraining(createdUserTrialTraining, eventInstance);
 
         res.status(HttpStatusCode.CREATED_201).send(createdUserTrialTraining);
       })

@@ -2,6 +2,7 @@ import { AppConfig } from "../AppConfig";
 import { DateTime } from "../core/services/date/DateTime";
 import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IEventInstance } from "../shared/model/IEventInstance";
+import { IUserTrialTraining } from "../shared/model/IUserTrialTraining";
 import { smtp } from "./smtp";
 
 export class EmailService {
@@ -64,9 +65,7 @@ export class EmailService {
       
           <p>Um deine Anmeldung abzuschließen, klicke bitte auf folgenden Link: <a href="${linkInvite}">Anmelde-Link</a></p>
       
-          <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${
-          AppConfig.clientAppUrl
-        }">Portal-Link</a></p>
+          <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${AppConfig.clientAppUrl}">Portal-Link</a></p>
       
           <p>Bei Fragen oder Problemen stehen wir dir natürlich gerne zur Verfügung.</p>
       
@@ -79,17 +78,18 @@ export class EmailService {
   }
 
   async bookTrialTraining(
-    recipientEmail: string,
-    eventInstance: IEventInstance,
-    firstname: string
+    userTrialTraining: IUserTrialTraining,
+    eventInstance: IEventInstance
   ) {
+    const cancelLink = `${AppConfig.clientAppUrl}/cancel-trial-training/${userTrialTraining.id}`;
+
     try {
       await smtp.sendMail({
         from: AppConfig.smtpSender,
-        to: recipientEmail,
+        to: userTrialTraining.email,
         subject: "Anmeldung zum Taekwon-Do Probetraining",
         html: `
-          <p>Hallo ${firstname},</p>
+          <p>Hallo ${userTrialTraining.firstname},</p>
 
           <p>vielen Dank für dein Interesse an unserem Taekwon-Do Probetraining! Hier sind alle wichtigen Informationen, die du für das Training benötigst:</p>
 
@@ -105,7 +105,7 @@ export class EmailService {
             <li><strong>Was solltest du mitbringen:</strong> Wir trainieren barfuß, daher benötigst du nur eine lange Sporthose und ein T-Shirt. Weitere Ausrüstung ist für das Probetraining nicht notwendig.</li>
           </ol>
 
-          <p>Falls du doch nicht am Training teilnehmen kannst, kannst du dich über diesen Link vom Training abmelden: [Stornierungslink]</p>
+          <p>Falls du doch nicht am Training teilnehmen kannst, kannst du dich über diesen Link vom Training abmelden: <a href="${cancelLink}">Stornierungs-Link</a></p>
 
           <p>Wir freuen uns, dich beim Training kennenzulernen!</p>
 
