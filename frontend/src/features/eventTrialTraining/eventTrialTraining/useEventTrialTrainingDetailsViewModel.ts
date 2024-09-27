@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { EventInstanceApi } from "../../api/EventInstanceApi";
-import { UserTrialTrainingApi } from "../../api/UserTrialTrainingApi";
-import { checkNotNull } from "../../core/utils/checkNotNull";
-import { isEmailInvalid } from "../../core/utils/isEmailInvalid";
-import { isError } from "../../core/utils/isError";
-import { isNotInitial } from "../../core/utils/isNotInitial";
-import { useInitialize } from "../../hooks/useInitialize";
-import { useLabeledElement } from "../../hooks/useLabeledElement";
-import { useToast } from "../../lib/toast/hooks/useToast";
-import { texts } from "../../lib/translation/texts";
-import { useTranslation } from "../../lib/translation/useTranslation";
-import { useRequest } from "../../lib/userSession/hooks/useRequest";
-import { IEventInstance } from "../../shared/model/IEventInstance";
+import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
+import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { isEmailInvalid } from "../../../core/utils/isEmailInvalid";
+import { isError } from "../../../core/utils/isError";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
+import { useInitialize } from "../../../hooks/useInitialize";
+import { useLabeledElement } from "../../../hooks/useLabeledElement";
+import { useToast } from "../../../lib/toast/hooks/useToast";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { IEventTrialTrainingDetailsProps } from "./IEventTrialTrainingDetailsProps";
 
 export const useEventTrialTrainingDetailsViewModel = (

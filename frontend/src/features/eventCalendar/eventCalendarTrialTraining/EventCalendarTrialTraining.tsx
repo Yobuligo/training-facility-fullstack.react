@@ -1,6 +1,6 @@
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { DateTime } from "../../../core/services/date/DateTime";
-import { EventTrialTrainingDetails } from "../../eventTrialTraining/EventTrialTrainingDetails";
+import { EventTrialTrainingDetails } from "../../eventTrialTraining/eventTrialTraining/EventTrialTrainingDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventTrialTrainingContent } from "../eventTrialTrainingContent/EventTrialTrainingContent";
 import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialTrainingViewModel";

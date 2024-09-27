@@ -1,4 +1,4 @@
-import { IEvent } from "../eventCalendar/model/IEvent";
+import { IEvent } from "../../eventCalendar/model/IEvent";
 
 export interface IEventTrialTrainingDetailsProps {
   event: IEvent;
