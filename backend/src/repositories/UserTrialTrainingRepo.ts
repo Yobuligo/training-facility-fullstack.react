@@ -30,6 +30,15 @@ export class UserTrialTrainingRepo extends SequelizeRepository<IUserTrialTrainin
     return undefined;
   }
 
+  async findByEventInstanceId(
+    eventInstanceId: string
+  ): Promise<IUserTrialTraining[]> {
+    const data = await UserTrialTraining.findAll({
+      where: { eventInstanceId },
+    });
+    return data.map((model) => model.toJSON());
+  }
+
   insert<K extends keyof IUserTrialTraining>(
     entity: IEntityDetails<IUserTrialTraining>,
     fields: K[]

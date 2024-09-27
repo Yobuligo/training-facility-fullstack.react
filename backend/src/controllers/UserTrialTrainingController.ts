@@ -3,6 +3,7 @@ import { createError } from "../core/utils/createError";
 import { EmailService } from "../email/EmailService";
 import { EventInstanceRepo } from "../repositories/EventInstanceRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
+import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import {
   IUserTrialTraining,
@@ -11,11 +12,13 @@ import {
 import { UserTrialTrainingRepo } from "./../repositories/UserTrialTrainingRepo";
 import { Controller } from "./core/Controller";
 import { SecretInterceptor } from "./core/SecretInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserTrialTrainingController extends Controller {
   constructor() {
     super();
     this.deleteByIdSecured();
+    this.findByEventInstanceId();
     this.findByIdSecured();
     this.insertSecured();
   }
@@ -28,6 +31,19 @@ export class UserTrialTrainingController extends Controller {
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
         const wasDeleted = await userTrialTrainingRepo.deleteById(id);
         res.status(HttpStatusCode.OK_200).send(wasDeleted);
+      })
+    );
+  }
+
+  private findByEventInstanceId() {
+    this.router.get(
+      `${EventInstanceRouteMeta.path}/:id${UserTrialTrainingRouteMeta.path}`,
+      SessionInterceptor(async (req, res) => {
+        const eventInstanceId = req.params.id;
+        const userTrialTrainingRepo = new UserTrialTrainingRepo();
+        const userTrialTrainings =
+          await userTrialTrainingRepo.findByEventInstanceId(eventInstanceId);
+        res.status(HttpStatusCode.OK_200).send(userTrialTrainings);
       })
     );
   }

@@ -46,6 +46,7 @@
     },
     "eventRegistrationItem": {
         "addedByTrainer": "(added by trainer)",
+        "addedByTrialTraining": "(trial training)",
         "deleteQuestion": "Do you really want to delete '{{user}}' from this event?",
         "deleteTitle": "Delete user",
         "missing": "Missing",

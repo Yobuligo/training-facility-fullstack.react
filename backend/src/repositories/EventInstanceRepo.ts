@@ -6,6 +6,7 @@ import { checkNotNull } from "../core/utils/checkNotNull";
 import { db } from "../db/db";
 import { EventInstance } from "../model/EventInstance";
 import { EventRegistration } from "../model/EventRegistration";
+import { UserTrialTraining } from "../model/UserTrialTraining";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
@@ -13,6 +14,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
   constructor() {
     super(EventInstance, [
       { model: EventRegistration, as: "eventRegistrations" },
+      { model: UserTrialTraining, as: "userTrialTrainings" },
     ]);
   }
 
@@ -35,6 +37,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
             userId: userId,
           },
         },
+        { model: UserTrialTraining, as: "userTrialTrainings" },
       ],
     });
 

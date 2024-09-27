@@ -1,6 +1,6 @@
-@use '../../../styles/mixins.scss';
+@use "../../../styles/mixins.scss";
 
-.eventRegistrationItem {
+.eventRegistrationTrialTrainingItem {
   display: flex;
   flex-direction: row;
   column-gap: 2rem;
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.manuallyAddedSection {
+.details {
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
@@ -19,7 +19,7 @@
   }
 }
 
-.addedByTrainerInfo {
+.addedByTrialTrainingInfo {
   font-style: italic;
   align-self: end;
 

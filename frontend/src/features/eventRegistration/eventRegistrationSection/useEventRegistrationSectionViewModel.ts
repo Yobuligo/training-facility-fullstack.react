@@ -164,5 +164,6 @@ export const useEventRegistrationSectionViewModel = (
     onCloseRegistration,
     onDelete,
     onReopenRegistration,
+    userTrialTrainings,
   };
 };

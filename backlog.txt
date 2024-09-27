@@ -177,10 +177,11 @@
 	# Creation of EventInstances must only be possible with shared key
 	# Booking is only possible once for an email but we don't consider the past
 	# It must not be possible to book a past training
-	- Email is send to the customer
-		- Contains date and time for the training, information like required clothes, the address, a link to unregister	
+	- It must not be possible to book a closed training
+	# Email is send to the customer
+		# Contains date and time for the training, information like required clothes, the address, a link to unregister	
 	# A message is displayed that the booking was successful
-	- Click on unregister displays an internet page to unregister from the training
+	# Click on unregister displays an internet page to unregister from the training
 	- Registered user is displayed in event registration list of the event instance and marked as trial training
 
 # Login
