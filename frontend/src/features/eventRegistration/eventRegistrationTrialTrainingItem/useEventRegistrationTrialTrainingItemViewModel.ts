@@ -1,5 +1,5 @@
+import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { IToggleButtonOption } from "../../../components/toggleButtonGroup/IToggleButtonOption";
-import { NotImplementedError } from "../../../core/errors/NotImplementedError";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -15,10 +15,9 @@ export const useEventRegistrationTrialTrainingItemViewModel = (
 
   const updateEventState = async (eventState: EventRegistrationState) => {
     updateRequest(async () => {
-      //   props.eventRegistration.state = eventState;
-      //   const eventRegistrationApi = new EventRegistrationApi();
-      //   await eventRegistrationApi.update(props.eventRegistration);
-      throw new NotImplementedError();
+      props.userTrialTraining.state = eventState;
+      const userTrialTrainingApi = new UserTrialTrainingApi();
+      await userTrialTrainingApi.update(props.userTrialTraining);
     });
   };
 

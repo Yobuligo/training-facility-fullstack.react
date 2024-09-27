@@ -10,13 +10,16 @@ import {
   UserTrialTrainingRouteMeta,
 } from "../shared/model/IUserTrialTraining";
 import { UserTrialTrainingRepo } from "./../repositories/UserTrialTrainingRepo";
-import { Controller } from "./core/Controller";
+import { EntityController } from "./core/EntityController";
 import { SecretInterceptor } from "./core/SecretInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
-export class UserTrialTrainingController extends Controller {
+export class UserTrialTrainingController extends EntityController<
+  IUserTrialTraining,
+  UserTrialTrainingRepo
+> {
   constructor() {
-    super();
+    super(UserTrialTrainingRouteMeta, new UserTrialTrainingRepo());
     this.deleteByIdSecured();
     this.findByEventInstanceId();
     this.findByIdSecured();
