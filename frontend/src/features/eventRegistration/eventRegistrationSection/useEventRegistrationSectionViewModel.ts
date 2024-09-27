@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
+import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { isError } from "../../../core/utils/isError";
@@ -13,6 +14,7 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { UserInfo } from "../../../services/UserInfo";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
+import { IUserTrialTraining } from "../../../shared/model/IUserTrialTraining";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
@@ -27,6 +29,9 @@ export const useEventRegistrationSectionViewModel = (
   );
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
+  >([]);
+  const [userTrialTrainings, setUserTrialTrainings] = useState<
+    IUserTrialTraining[]
   >([]);
   const [
     loadEventRegistrationRequest,
@@ -49,6 +54,13 @@ export const useEventRegistrationSectionViewModel = (
         DateTime.compare(left.createdAt, right.createdAt)
       );
       setEventRegistrations(eventRegistrations);
+
+      const userTrialTrainingApi = new UserTrialTrainingApi();
+      const userTrialTrainings =
+        await userTrialTrainingApi.findByEventInstanceId(
+          props.eventInstance.id
+        );
+      setUserTrialTrainings(userTrialTrainings);
     });
   };
 

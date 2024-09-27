@@ -1,3 +1,4 @@
+import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import {
   IUserTrialTraining,
@@ -19,6 +20,14 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
     return await RESTApi.post(
       `${this.url}/${id}${SecretRequestRouteMeta.path}/delete`,
       secretRequest
+    );
+  }
+
+  async findByEventInstanceId(
+    eventInstanceId: string
+  ): Promise<IUserTrialTraining[]> {
+    return await RESTApi.get(
+      `${this.host}${EventInstanceRouteMeta.path}/${eventInstanceId}${this.routeMeta.path}`
     );
   }
 
