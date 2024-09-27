@@ -31,3 +31,10 @@
       $amount: 0.4);
   backdrop-filter: blur(2px);
 }
+
+@mixin padding{
+  @include large-screen {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}

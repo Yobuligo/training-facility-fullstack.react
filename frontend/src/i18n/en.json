@@ -65,6 +65,10 @@
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
         "open": "Reopen registration"
     },
+    "eventTrialTrainingCancellation": {
+        "cancelTrialTraining": "Cancel trial training",
+        "cancelQuestion": "Do you really want to cancel this trial training session?"
+    },
     "general": {
         "cancel": "Cancel",
         "delete": "Delete",

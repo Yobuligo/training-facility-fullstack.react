@@ -17,6 +17,10 @@ export const useEventTrialTrainingCancellation = () => {
     loadUserTrialTrainingDetailsRequest,
     isLoadUserTrialTrainingDetailsRequestProcessing,
   ] = useRequest();
+  const [
+    cancelUserTrialTrainingRequest,
+    isCancelUserTrialTrainingRequestProcessing,
+  ] = useRequest();
 
   useInitialize(() =>
     loadUserTrialTrainingDetailsRequest(async () => {
@@ -34,8 +38,12 @@ export const useEventTrialTrainingCancellation = () => {
     })
   );
 
+  const onCancelUserTrialTraining = () => {};
+
   return {
+    isCancelUserTrialTrainingRequestProcessing,
     isLoadUserTrialTrainingDetailsRequestProcessing,
+    onCancelUserTrialTraining,
     userTrialTrainingDetails,
   };
 };

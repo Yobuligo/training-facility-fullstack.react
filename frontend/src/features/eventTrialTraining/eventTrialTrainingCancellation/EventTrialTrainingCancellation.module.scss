@@ -1,0 +1,14 @@
+@use "../../../styles/mixins.scss";
+
+.eventTrialTrainingCancellation {
+  padding: 1rem;
+  @include mixins.medium-screen {
+    padding: 2rem;
+  }
+  @include mixins.padding;
+}
+
+.cancelConfirmation {
+  font-size: large;
+  font-weight: 600;
+}

@@ -65,6 +65,10 @@
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
         "open": "Anmeldung wieder öffnen"
     },
+    "eventTrialTrainingCancellation": {
+        "cancelTrialTraining": "Probetraining stornieren",
+        "cancelQuestion": "Möchtest du dieses Probetraining wirklich stornieren?"
+    },
     "general": {
         "cancel": "Abbrechen",
         "delete": "Löschen",
