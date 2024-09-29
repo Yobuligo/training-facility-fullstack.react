@@ -1,4 +1,5 @@
 export interface IToken {
-  expiredAt: Date;
+  id: string;
+  expiresAt: Date;
   signature: string;
 }

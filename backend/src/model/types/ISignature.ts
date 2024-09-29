@@ -1,5 +1,5 @@
 export interface ISignature {
-  expiredAt: Date;
+  expiresAt: Date;
   sharedKey: string;
   uuid: string;
 }
