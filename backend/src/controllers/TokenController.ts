@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { TokenService } from "../services/TokenService";
+import { TokenRouteMeta } from "../shared/model/IToken";
 import { Controller } from "./core/Controller";
 import { ErrorInterceptor } from "./core/ErrorInterceptor";
 
@@ -11,7 +12,7 @@ export class TokenController extends Controller {
 
   private get() {
     this.router.post(
-      `/token`,
+      `${TokenRouteMeta.path}`,
       ErrorInterceptor(async (_, res) => {
         const tokenService = new TokenService();
         const token = tokenService.createAsString();
@@ -19,4 +20,6 @@ export class TokenController extends Controller {
       })
     );
   }
+
+  
 }
