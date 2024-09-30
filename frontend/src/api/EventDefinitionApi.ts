@@ -3,7 +3,6 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
-import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -54,13 +53,13 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
   }
 
   async findByDateTimeSpanSecured(
-    dateTimeSpan: IDateTimeSpan
+    dateTimeSpan: IDateTimeSpan,
+    token: string
   ): Promise<IEventDefinition[]> {
-    const secretRequest = this.createSecretRequest(undefined);
-    const eventDefinitions = await RESTApi.post<IEventDefinition[]>(
-      `${this.url}${SecretRequestRouteMeta.path}`,
-      secretRequest,
+    const eventDefinitions = await RESTApi.get<IEventDefinition[]>(
+      `${this.publicUrl}`,
       {
+        token,
         urlParams: {
           from: dateTimeSpan.from.toString(),
           to: dateTimeSpan.to.toString(),

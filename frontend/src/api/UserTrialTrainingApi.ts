@@ -1,5 +1,5 @@
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
-import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
+
 import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
@@ -15,12 +15,8 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
     super(UserTrialTrainingRouteMeta);
   }
 
-  async deleteByIdSecured(id: string): Promise<boolean> {
-    const secretRequest = this.createSecretRequest(undefined);
-    return await RESTApi.post(
-      `${this.url}/${id}${SecretRequestRouteMeta.path}/delete`,
-      secretRequest
-    );
+  async deleteByIdSecured(id: string, token: string): Promise<boolean> {
+    return await RESTApi.delete(`${this.publicUrl}/${id}`, { token });
   }
 
   async findByEventInstanceId(
@@ -32,22 +28,20 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
   }
 
   async findDetailsByIdSecured(
-    id: string
+    id: string,
+    token: string
   ): Promise<IUserTrialTrainingDetails | undefined> {
-    const secretRequest = this.createSecretRequest(undefined);
-    return await RESTApi.post(
-      `${this.url}/${id}${SecretRequestRouteMeta.path}`,
-      secretRequest
-    );
+    return await RESTApi.get(`${this.publicUrl}/${id}`, { token });
   }
 
   async insertFromAttrsSecured(
     eventInstanceId: string,
     firstname: string,
     lastname: string,
-    email: string
+    email: string,
+    token: string
   ): Promise<IUserTrialTraining> {
-    const secretRequest = this.createSecretRequest<IUserTrialTraining>({
+    const useTrialTraining: IUserTrialTraining = {
       id: uuid(),
       email,
       eventInstanceId,
@@ -56,10 +50,7 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
       state: EventRegistrationState.OPEN,
       createdAt: new Date(),
       updatedAt: new Date(),
-    });
-    return await RESTApi.post(
-      `${this.url}${SecretRequestRouteMeta.path}`,
-      secretRequest
-    );
+    };
+    return await RESTApi.post(`${this.publicUrl}`, useTrialTraining, { token });
   }
 }

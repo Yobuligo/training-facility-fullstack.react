@@ -267,7 +267,7 @@
         "sendInvitation": "Einladung senden",
         "street": "Straße",
         "successResetPassword": "E-Mail zum Zurücksetzen des Passwortes wurde an {{user}} verschickt",
-        "successSendUserInvite": "Einladung wurde an {{user}} verschickt.",
+        "successSendUserInvite": "Einladung wurde an {{user}} verschickt",
         "tariff": "Tarif",
         "technicalInformation": "Technische Informationen"
     },

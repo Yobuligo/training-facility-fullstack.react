@@ -16,6 +16,11 @@ export type RequestParams<T> = {
   fields?: T extends IEntity ? Array<keyof T> : string[];
 
   /**
+   * This property contains a token that is send via authorization
+   */
+  token?: string;
+
+  /**
    * This property contains url params as key value pairs, which will be added to the request.
    *
    * @example
