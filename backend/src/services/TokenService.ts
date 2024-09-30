@@ -40,7 +40,7 @@ export class TokenService {
     const signature: ISignature = {
       expiresAt,
       id,
-      sharedKey: AppConfig.sharedKey,
+      sharedKey: AppConfig.tokenSecret,
     };
     return hash(JSON.stringify(signature));
   }

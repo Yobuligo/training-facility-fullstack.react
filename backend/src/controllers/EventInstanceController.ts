@@ -5,11 +5,11 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
-import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
+import { TokenRouteMeta } from "../shared/model/IToken";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
-import { SecretInterceptor } from "./core/SecretInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
+import { TokenInterceptor } from "./core/TokenInterceptor";
 
 export class EventInstanceController extends EntityController<
   IEventInstance,
@@ -72,9 +72,9 @@ export class EventInstanceController extends EntityController<
 
   private insertSecured() {
     this.router.post(
-      `${this.routeMeta.path}${SecretRequestRouteMeta.path}`,
-      SecretInterceptor(async (req, res) => {
-        const eventInstance: IEventInstance = req.secretRequest.data;
+      `${this.routeMeta.path}${TokenRouteMeta.path}`,
+      TokenInterceptor(async (req, res) => {
+        const eventInstance: IEventInstance = req.body;
         const eventInstanceRepo = new EventInstanceRepo();
         const createdEventInstance = await eventInstanceRepo.insert(
           eventInstance

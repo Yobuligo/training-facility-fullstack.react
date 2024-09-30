@@ -4,15 +4,15 @@ import { EmailService } from "../email/EmailService";
 import { EventInstanceRepo } from "../repositories/EventInstanceRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
-import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
+import { TokenRouteMeta } from "../shared/model/IToken";
 import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
 } from "../shared/model/IUserTrialTraining";
 import { UserTrialTrainingRepo } from "./../repositories/UserTrialTrainingRepo";
 import { EntityController } from "./core/EntityController";
-import { SecretInterceptor } from "./core/SecretInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
+import { TokenInterceptor } from "./core/TokenInterceptor";
 
 export class UserTrialTrainingController extends EntityController<
   IUserTrialTraining,
@@ -28,8 +28,8 @@ export class UserTrialTrainingController extends EntityController<
 
   private deleteByIdSecured() {
     this.router.post(
-      `${UserTrialTrainingRouteMeta.path}/:id${SecretRequestRouteMeta.path}/delete`,
-      SecretInterceptor(async (req, res) => {
+      `${UserTrialTrainingRouteMeta.path}/:id${TokenRouteMeta.path}/delete`,
+      TokenInterceptor(async (req, res) => {
         const id = req.params.id;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
         const wasDeleted = await userTrialTrainingRepo.deleteById(id);
@@ -53,8 +53,8 @@ export class UserTrialTrainingController extends EntityController<
 
   private findByIdSecured() {
     this.router.post(
-      `${UserTrialTrainingRouteMeta.path}/:id${SecretRequestRouteMeta.path}`,
-      SecretInterceptor(async (req, res) => {
+      `${UserTrialTrainingRouteMeta.path}/:id${TokenRouteMeta.path}`,
+      TokenInterceptor(async (req, res) => {
         const id = req.params.id;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
         const userTrialTrainingDetails =
@@ -74,9 +74,9 @@ export class UserTrialTrainingController extends EntityController<
 
   private insertSecured() {
     this.router.post(
-      `${UserTrialTrainingRouteMeta.path}${SecretRequestRouteMeta.path}`,
-      SecretInterceptor(async (req, res) => {
-        const userTrialTraining: IUserTrialTraining = req.secretRequest.data;
+      `${UserTrialTrainingRouteMeta.path}${TokenRouteMeta.path}`,
+      TokenInterceptor(async (req, res) => {
+        const userTrialTraining: IUserTrialTraining = req.body;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
         const createdUserTrialTraining = await userTrialTrainingRepo.insert(
           userTrialTraining
