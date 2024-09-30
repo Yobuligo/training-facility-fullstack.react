@@ -1,3 +1,4 @@
+import { TokenRepository } from "../../../api/core/TokenRepository";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { requestToken } from "../../../api/utils/requestToken";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -25,11 +26,10 @@ export const EventCalendarTrialTraining: React.FC = () => {
       ) : (
         <EventCalendarSection
           eventDefinitionLoader={async () => {
-            const token = await requestToken();
+            TokenRepository.token = await requestToken();
             const eventDefinitionApi = new EventDefinitionApi();
             return await eventDefinitionApi.findByDateTimeSpanSecured(
-              DateTime.getWeekSpanDates(new Date()),
-              token
+              DateTime.getWeekSpanDates(new Date())
             );
           }}
           renderEvent={(event) => (

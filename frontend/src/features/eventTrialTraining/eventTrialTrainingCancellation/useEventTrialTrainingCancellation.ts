@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
-import { requestToken } from "../../../api/utils/requestToken";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
+import { useTokenRequest } from "../../../hooks/useTokenRequest";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IUserTrialTrainingDetails } from "../../../shared/model/IUserTrialTrainingDetails";
 
 export const useEventTrialTrainingCancellation = () => {
@@ -21,22 +20,20 @@ export const useEventTrialTrainingCancellation = () => {
   const [
     loadUserTrialTrainingDetailsRequest,
     isLoadUserTrialTrainingDetailsRequestProcessing,
-  ] = useRequest();
+  ] = useTokenRequest();
   const [
     cancelUserTrialTrainingRequest,
     isCancelUserTrialTrainingRequestProcessing,
-  ] = useRequest();
+  ] = useTokenRequest();
   const [wasDeleted, setWasDeleted] = useState(false);
 
   useInitialize(() =>
     loadUserTrialTrainingDetailsRequest(
       async () => {
-        const token = await requestToken();
         const userTrialTrainingApi = new UserTrialTrainingApi();
         const userTrialTrainingDetails =
           await userTrialTrainingApi.findDetailsByIdSecured(
-            checkNotNull(params.userTrialTrainingId),
-            token
+            checkNotNull(params.userTrialTrainingId)
           );
 
         // Display error page, if userTrialTraining or corresponding event instance wasn't found
@@ -58,11 +55,9 @@ export const useEventTrialTrainingCancellation = () => {
 
   const onCancelUserTrialTraining = () =>
     cancelUserTrialTrainingRequest(async () => {
-      const token = await requestToken();
       const useTrialTrainingApi = new UserTrialTrainingApi();
       await useTrialTrainingApi.deleteByIdSecured(
-        checkNotNull(userTrialTrainingDetails).id,
-        token
+        checkNotNull(userTrialTrainingDetails).id
       );
       setWasDeleted(true);
     });

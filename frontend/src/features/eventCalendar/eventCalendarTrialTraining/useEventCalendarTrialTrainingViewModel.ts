@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
-import { requestToken } from "../../../api/utils/requestToken";
+import { useTokenRequest } from "../../../hooks/useTokenRequest";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
@@ -19,7 +18,7 @@ export const useEventCalendarTrialTrainingViewModel = () => {
     IEventInstance | undefined
   >(undefined);
   const [fetchEventInstanceRequest, isFetchEventInstanceRequestProcessing] =
-    useRequest();
+    useTokenRequest();
 
   const onBack = () => {
     setSelectedEvent(undefined);
@@ -28,11 +27,9 @@ export const useEventCalendarTrialTrainingViewModel = () => {
 
   const onBook = (event: IEvent) =>
     fetchEventInstanceRequest(async () => {
-      const token = await requestToken();
       const eventInstanceApi = new EventInstanceApi();
       const eventInstance = await eventInstanceApi.insertFromEventSecured(
-        event,
-        token
+        event
       );
       if (eventInstance.state === EventInstanceState.CLOSED) {
         toast.warning(

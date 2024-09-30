@@ -3,6 +3,7 @@ import { createError } from "../../core/utils/createError";
 import { isError } from "../../core/utils/isError";
 import { UrlParamsBuilder } from "../../lib/urlParamsExtender/UrlParamsBuilder";
 import { RequestParams } from "./RequestParams";
+import { TokenRepository } from "./TokenRepository";
 import { UrlParamsExtenderRegistry } from "./urlParams/UrlParamsExtenderRegistry";
 
 export class RESTApi {
@@ -143,8 +144,10 @@ export class RESTApi {
     requestParams?: RequestParams<T>
   ): HeadersInit {
     const headers: HeadersInit = {};
-    if (requestParams?.token) {
-      headers["Authorization"] = `Bearer ${requestParams.token}`;
+    if (requestParams?.token || TokenRepository.token) {
+      headers["Authorization"] = `Bearer ${
+        requestParams?.token ? requestParams.token : TokenRepository.token
+      }`;
     }
     return headers;
   }

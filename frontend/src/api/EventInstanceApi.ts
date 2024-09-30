@@ -74,12 +74,9 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     return await this.insert(eventInstance);
   }
 
-  async insertFromEventSecured(
-    event: IEvent,
-    token: string
-  ): Promise<IEventInstance> {
+  async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
     const eventInstance = this.createEventInstanceByEvent(event);
-    return await RESTApi.post(`${this.publicUrl}`, eventInstance, { token });
+    return await RESTApi.post(`${this.publicUrl}`, eventInstance);
   }
 
   private createEventInstanceByEvent(event: IEvent): IEventInstance {

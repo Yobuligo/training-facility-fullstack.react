@@ -53,13 +53,11 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
   }
 
   async findByDateTimeSpanSecured(
-    dateTimeSpan: IDateTimeSpan,
-    token: string
+    dateTimeSpan: IDateTimeSpan
   ): Promise<IEventDefinition[]> {
     const eventDefinitions = await RESTApi.get<IEventDefinition[]>(
       `${this.publicUrl}`,
       {
-        token,
         urlParams: {
           from: dateTimeSpan.from.toString(),
           to: dateTimeSpan.to.toString(),
