@@ -21,11 +21,11 @@ export class TokenService {
 
   createAsString(): string {
     const token: IToken = this.create();
-    return JSON.stringify(token);
+    return this.encode(token);
   }
 
-  verify(value: string): void {
-    const token: IToken = JSON.parse(value);
+  verify(encodedToken: string): void {
+    const token = this.decode(encodedToken);
     const signature = this.createSignature(token.id, token.expiresAt);
     if (token.signature !== signature) {
       throw new InvalidTokenError();
@@ -43,5 +43,17 @@ export class TokenService {
       sharedKey: AppConfig.sharedKey,
     };
     return hash(JSON.stringify(signature));
+  }
+
+  private encode(token: IToken): string {
+    const json = JSON.stringify(token);
+    const encodedToken = Buffer.from(json).toString("base64");
+    return encodedToken;
+  }
+
+  private decode(encodedToken: string): IToken {
+    const json = Buffer.from(encodedToken, "base64").toString("utf-8");
+    const token: IToken = JSON.parse(json);
+    return token;
   }
 }
