@@ -267,7 +267,7 @@
         "sendInvitation": "Send invitation",
         "street": "Street",
         "successResetPassword": "Reset password request was send to {{user}}",
-        "successSendUserInvite": "Invitation was send to {{user}}.",
+        "successSendUserInvite": "Invitation was send to {{user}}",
         "tariff": "Tariff",
         "technicalInformation": "Technical Information"
     },

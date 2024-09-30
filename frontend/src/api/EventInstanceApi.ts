@@ -1,14 +1,10 @@
-import { AppConfig } from "../AppConfig";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
-import {
-  ISecretRequest,
-  SecretRequestRouteMeta,
-} from "../shared/model/ISecretRequest";
+import { SecretRequestRouteMeta } from "../shared/model/ISecretRequest";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { IEventInstance } from "./../shared/model/IEventInstance";
@@ -81,10 +77,7 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
 
   async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
     const eventInstance = this.createEventInstanceByEvent(event);
-    const secretRequest: ISecretRequest<IEventInstance> = {
-      data: eventInstance,
-      sharedKey: AppConfig.sharedKey,
-    };
+    const secretRequest = this.createSecretRequest(eventInstance);
     return await RESTApi.post(
       `${this.url}${SecretRequestRouteMeta.path}`,
       secretRequest
