@@ -1,4 +1,5 @@
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { requestToken } from "../../../api/utils/requestToken";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventContent } from "../eventContent/EventContent";
@@ -13,9 +14,11 @@ export const EventCalendarOverview: React.FC = () => {
     <div className={styles.eventCalendarOverview}>
       <EventCalendarSection
         eventDefinitionLoader={async () => {
+          const token = await requestToken();
           const eventDefinitionApi = new EventDefinitionApi();
           return await eventDefinitionApi.findByDateTimeSpanSecured(
-            DateTime.getWeekSpanDates(new Date())
+            DateTime.getWeekSpanDates(new Date()),
+            token
           );
         }}
         renderEvent={(event) => (

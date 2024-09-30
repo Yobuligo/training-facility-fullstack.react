@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { requestToken } from "../../../api/utils/requestToken";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -7,8 +8,6 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { IEvent } from "../model/IEvent";
-import { TokenApi } from "../../../api/TokenApi";
-import { NotImplementedError } from "../../../core/errors/NotImplementedError";
 
 export const useEventCalendarTrialTrainingViewModel = () => {
   const { t } = useTranslation();
@@ -29,14 +28,11 @@ export const useEventCalendarTrialTrainingViewModel = () => {
 
   const onBook = (event: IEvent) =>
     fetchEventInstanceRequest(async () => {
-      const tokenApi = new TokenApi();
-      const token = await tokenApi.create();
-
-      throw new NotImplementedError()
-
+      const token = await requestToken();
       const eventInstanceApi = new EventInstanceApi();
       const eventInstance = await eventInstanceApi.insertFromEventSecured(
-        event
+        event,
+        token
       );
       if (eventInstance.state === EventInstanceState.CLOSED) {
         toast.warning(

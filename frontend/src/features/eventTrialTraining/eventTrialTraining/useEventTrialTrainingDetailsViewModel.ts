@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
+import { requestToken } from "../../../api/utils/requestToken";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isEmailInvalid } from "../../../core/utils/isEmailInvalid";
 import { isError } from "../../../core/utils/isError";
@@ -35,9 +36,11 @@ export const useEventTrialTrainingDetailsViewModel = (
 
   useInitialize(() =>
     fetchEventInstanceRequest(async () => {
+      const token = await requestToken();
       const eventInstanceApi = new EventInstanceApi();
       const eventInstance = await eventInstanceApi.insertFromEventSecured(
-        props.event
+        props.event,
+        token
       );
       setEventInstance(eventInstance);
     })
@@ -64,12 +67,14 @@ export const useEventTrialTrainingDetailsViewModel = (
     if (isValid()) {
       insertUserTrialTrainingRequest(
         async () => {
+          const token = await requestToken();
           const userTrialTrainingApi = new UserTrialTrainingApi();
           await userTrialTrainingApi.insertFromAttrsSecured(
             checkNotNull(eventInstance).id,
             firstname,
             lastname,
-            email
+            email,
+            token
           );
           setBooked(true);
         },

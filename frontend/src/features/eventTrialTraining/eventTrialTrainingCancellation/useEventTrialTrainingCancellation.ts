@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
+import { requestToken } from "../../../api/utils/requestToken";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -30,10 +31,12 @@ export const useEventTrialTrainingCancellation = () => {
   useInitialize(() =>
     loadUserTrialTrainingDetailsRequest(
       async () => {
+        const token = await requestToken();
         const userTrialTrainingApi = new UserTrialTrainingApi();
         const userTrialTrainingDetails =
           await userTrialTrainingApi.findDetailsByIdSecured(
-            checkNotNull(params.userTrialTrainingId)
+            checkNotNull(params.userTrialTrainingId),
+            token
           );
 
         // Display error page, if userTrialTraining or corresponding event instance wasn't found
@@ -55,9 +58,11 @@ export const useEventTrialTrainingCancellation = () => {
 
   const onCancelUserTrialTraining = () =>
     cancelUserTrialTrainingRequest(async () => {
+      const token = await requestToken();
       const useTrialTrainingApi = new UserTrialTrainingApi();
       await useTrialTrainingApi.deleteByIdSecured(
-        checkNotNull(userTrialTrainingDetails).id
+        checkNotNull(userTrialTrainingDetails).id,
+        token
       );
       setWasDeleted(true);
     });
