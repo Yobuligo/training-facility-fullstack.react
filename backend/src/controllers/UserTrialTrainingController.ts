@@ -4,11 +4,11 @@ import { EmailService } from "../email/EmailService";
 import { EventInstanceRepo } from "../repositories/EventInstanceRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
-import { TokenRouteMeta } from "../shared/model/IToken";
 import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
 } from "../shared/model/IUserTrialTraining";
+import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
 import { UserTrialTrainingRepo } from "./../repositories/UserTrialTrainingRepo";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -27,8 +27,8 @@ export class UserTrialTrainingController extends EntityController<
   }
 
   private deleteByIdSecured() {
-    this.router.post(
-      `${UserTrialTrainingRouteMeta.path}/:id${TokenRouteMeta.path}/delete`,
+    this.router.delete(
+      `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}/:id`,
       TokenInterceptor(async (req, res) => {
         const id = req.params.id;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
@@ -52,8 +52,8 @@ export class UserTrialTrainingController extends EntityController<
   }
 
   private findByIdSecured() {
-    this.router.post(
-      `${UserTrialTrainingRouteMeta.path}/:id${TokenRouteMeta.path}`,
+    this.router.get(
+      `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}/:id`,
       TokenInterceptor(async (req, res) => {
         const id = req.params.id;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
@@ -74,7 +74,7 @@ export class UserTrialTrainingController extends EntityController<
 
   private insertSecured() {
     this.router.post(
-      `${UserTrialTrainingRouteMeta.path}${TokenRouteMeta.path}`,
+      `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}`,
       TokenInterceptor(async (req, res) => {
         const userTrialTraining: IUserTrialTraining = req.body;
         const userTrialTrainingRepo = new UserTrialTrainingRepo();
