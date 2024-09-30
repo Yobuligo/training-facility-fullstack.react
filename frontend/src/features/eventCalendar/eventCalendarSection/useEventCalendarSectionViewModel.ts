@@ -7,6 +7,7 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../../core/types/Recurrence";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useScreenSize } from "../../../hooks/useScreenSize";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
 import { IEvent } from "../model/IEvent";
@@ -153,15 +154,20 @@ export const useEventCalendarSectionViewModel = (
         throw new NotSupportedError();
     }
   });
+  const [loadEventDefinitionRequest] = useRequest();
 
   const loadEventDefinitions = useCallback(
-    async (from: Date, to: Date) => {
-      const dateTimeSpan: IDateTimeSpan = { from, to };
-      const eventDefinitions = await props.eventDefinitionLoader(dateTimeSpan);
-      const events = eventDefinitionsToEvent(eventDefinitions, from, to);
-      setEvents(events);
-    },
-    [props]
+    async (from: Date, to: Date) =>
+      loadEventDefinitionRequest(async () => {
+        const dateTimeSpan: IDateTimeSpan = { from, to };
+        const eventDefinitions = await props.eventDefinitionLoader(
+          dateTimeSpan
+        );
+        const events = eventDefinitionsToEvent(eventDefinitions, from, to);
+        setEvents(events);
+      }),
+
+    [loadEventDefinitionRequest, props]
   );
 
   useEffect(() => {
