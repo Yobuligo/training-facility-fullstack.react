@@ -1,6 +1,6 @@
 - App
-	- Refactor page style and display edges only in WQHD but not Full-HD
-	- Improve repsonsive design for smaller devices (e.g. Tablets)
+	# Refactor page style and display edges only in WQHD but not Full-HD
+	# Improve repsonsive design for smaller devices (e.g. Tablets)
 	# Language can be switched
 		# Selected language must be persisted and loaded when reloading page
 	# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
@@ -159,6 +159,7 @@
 	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	# Bug: User session is not deleted with user.
 	# Bug: Link of invite email leads to wrong url
+	- Bug: Invite user, send password change request and verify user invite sends requests without token
 	- Bug: Link of invite email leads to dashboard instead of login page
 	
 # User List
