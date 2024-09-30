@@ -21,7 +21,7 @@ export class EventDefinitionController extends EntityController<
     super(EventDefinitionRouteMeta, new EventDefinitionRepo(), [
       AuthRole.ADMIN,
     ]);
-    this.findByDateTimeSpanSecured();
+    this.findByDateTimeSpanPublic();
   }
 
   protected findAll(): void {
@@ -50,9 +50,9 @@ export class EventDefinitionController extends EntityController<
     );
   }
 
-  private async findByDateTimeSpanSecured() {
-    this.router.post(
-      `${PublicRouteMeta.path}${this.routeMeta.path}`,
+  private async findByDateTimeSpanPublic() {
+    this.router.get(
+      `${PublicRouteMeta.path}${EventDefinitionRouteMeta.path}`,
       TokenInterceptor(async (req, res) => {
         const from = req.query.from;
         const to = req.query.to;

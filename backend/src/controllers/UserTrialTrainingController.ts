@@ -20,13 +20,13 @@ export class UserTrialTrainingController extends EntityController<
 > {
   constructor() {
     super(UserTrialTrainingRouteMeta, new UserTrialTrainingRepo());
-    this.deleteByIdSecured();
+    this.deleteByIdPublic();
     this.findByEventInstanceId();
-    this.findByIdSecured();
-    this.insertSecured();
+    this.findByIdPublic();
+    this.insertPublic();
   }
 
-  private deleteByIdSecured() {
+  private deleteByIdPublic() {
     this.router.delete(
       `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}/:id`,
       TokenInterceptor(async (req, res) => {
@@ -51,7 +51,7 @@ export class UserTrialTrainingController extends EntityController<
     );
   }
 
-  private findByIdSecured() {
+  private findByIdPublic() {
     this.router.get(
       `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}/:id`,
       TokenInterceptor(async (req, res) => {
@@ -72,7 +72,7 @@ export class UserTrialTrainingController extends EntityController<
     );
   }
 
-  private insertSecured() {
+  private insertPublic() {
     this.router.post(
       `${PublicRouteMeta.path}${UserTrialTrainingRouteMeta.path}`,
       TokenInterceptor(async (req, res) => {

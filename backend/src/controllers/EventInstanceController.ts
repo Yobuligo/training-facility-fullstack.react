@@ -17,7 +17,7 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
-    this.insertSecured();
+    this.insertPublic();
   }
 
   protected findAll(): void {
@@ -70,7 +70,7 @@ export class EventInstanceController extends EntityController<
     super.insert();
   }
 
-  private insertSecured() {
+  private insertPublic() {
     this.router.post(
       `${PublicRouteMeta.path}${this.routeMeta.path}`,
       TokenInterceptor(async (req, res) => {
