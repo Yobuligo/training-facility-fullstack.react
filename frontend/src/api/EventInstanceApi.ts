@@ -1,7 +1,6 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
@@ -70,19 +69,28 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
    * and returns it.
    */
   async insertFromEvent(event: IEvent): Promise<IEventInstance> {
-    const eventInstance: IEventInstance = {
+    const eventInstance = this.createEventInstanceByEvent(event);
+    return await this.insert(eventInstance);
+  }
+
+  async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
+    const eventInstance = this.createEventInstanceByEvent(event);
+    return await RESTApi.post(`${this.publicUrl}`, eventInstance);
+  }
+
+  private createEventInstanceByEvent(event: IEvent): IEventInstance {
+    return {
       id: uuid(),
       color: event.eventDefinition.color,
       description: event.eventDefinition.description,
       title: event.eventDefinition.title,
       eventDefinitionId: event.eventDefinition.id,
       eventRegistrations: [],
-      from: checkNotNull(event.start),
-      to: checkNotNull(event.end),
+      from: event.dateTimeSpan.from,
+      to: event.dateTimeSpan.to,
       state: EventInstanceState.OPEN,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    return await this.insert(eventInstance);
   }
 }

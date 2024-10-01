@@ -6,12 +6,12 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
-import { useFetchEventInstance } from "../hooks/useFetchEventInstance";
-import { IEvent } from "../model/IEvent";
-import { IEventMyTrainingsContentProps } from "./IEventMyTrainingsContentProps";
+import { useFetchEventInstance } from "../../eventCalendar/hooks/useFetchEventInstance";
+import { IEvent } from "../../eventCalendar/model/IEvent";
+import { IEventRegistrationButtonProps } from "./IEventRegistrationButtonProps";
 
-export const useEventMyTrainingsContentViewModel = (
-  props: IEventMyTrainingsContentProps
+export const useEventRegistrationButtonViewModel = <TEvent extends IEvent>(
+  props: IEventRegistrationButtonProps<TEvent>
 ) => {
   const { t } = useTranslation();
   const [registerRequest, isRegisterRequestProcessing] = useRequest();
@@ -19,7 +19,7 @@ export const useEventMyTrainingsContentViewModel = (
   const fetchEventInstance = useFetchEventInstance();
   const confirmDialog = useConfirmDialog();
 
-  const onRegister = async (event: IEvent) => {
+  const onRegister = async (event: TEvent) => {
     const eventInstance = await fetchEventInstance(event);
     if (!eventInstance) {
       return;
@@ -44,7 +44,7 @@ export const useEventMyTrainingsContentViewModel = (
     });
   };
 
-  const onUnregister = async (event: IEvent) => {
+  const onUnregister = async (event: TEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
       event,
       props.userId

@@ -35,6 +35,9 @@
         "unregisterTitle": "Abmelden",
         "unregisterOnClosed": "Abmeldung nicht möglich. Anmeldung ist geschlossen."
     },
+    "eventCalendarTrialTraining": {
+        "errorEventInstanceClosed": "Buchung nicht möglich. Es gibt bereits zu viele Anmeldungen."
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },
@@ -44,8 +47,13 @@
     "eventPlanSection": {
         "addTraining": "Training hinzufügen"
     },
+    "eventRegistrationButton": {
+        "register": "Anmelden",
+        "unregister": "Abmelden"
+    },    
     "eventRegistrationItem": {
         "addedByTrainer": "(von Trainer hinzugefügt)",
+        "addedByTrialTraining": "(Probetraining)",
         "deleteQuestion": "Soll '{{user}}' wirklich von diesem Ereignis entfernt werden?",
         "deleteTitle": "Benutzer löschen",
         "missing": "Fehlend",
@@ -65,8 +73,23 @@
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
         "open": "Anmeldung wieder öffnen"
     },
+    "eventTrialTrainingCancellation": {
+        "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",
+        "cancelTrialTraining": "Probetraining stornieren",
+        "cancelQuestion": "Möchtest du dieses Probetraining wirklich stornieren?",
+        "notFound": "Zu löschendes Probetraining nicht gefunden."
+    },
     "general": {
+        "apply": "Anwenden",
         "cancel": "Abbrechen",
+        "dateTimeSpan": {
+            "today": "Heute",
+            "from": "Von",
+            "month": "Monat",
+            "to": "Bis",
+            "tomorrow": "Morgen",
+            "week": "Woche"
+        },
         "delete": "Löschen",
         "deleteQuestion": "Möchten Sie wirklich löschen?",
         "deleteTitle": "Löschen",
@@ -178,10 +201,6 @@
     "myProfile": {
         "errorLoadingUserSession": "Fehler beim Laden der Benutzersitzung"
     },
-    "myTrainingsContent": {
-        "register": "Anmelden",
-        "unregister": "Abmelden"
-    },
     "passwordChange": {
         "changePassword": "Passwort ändern",
         "currentPassword": "Aktuelles Passwort",
@@ -204,6 +223,14 @@
         "family3": "Familie 3",
         "principals": "Leitung",
         "relatives": "Angehörige"
+    },
+    "trialTrainingContent": {
+        "book": "Buchen",
+        "bookTrialTraining": "Probetraining buchen",
+        "description": "Wir freuen uns, dass du dich für ein Probetraining interessierst. Melde dich hier kostenlos für das Training an.  Im Anschluss erhältst du eine E-Mail mit allen wichtigen Informationen und weiteren Details.",
+        "bookingConfirmation": "Dein Probetraining wurde erfolgreich gebucht. Wir freuen uns dich kennenzulernen.",
+        "errorTrialTrainingExists": "Du kannst nur ein kostenloses Probetraining buchen. Falls du stattdessen einen anderen Termin wählen möchtest, storniere bitte das Probetraining über den Link in der E-Mail, die du erhalten hast.",
+        "sendBooking": "Buchung abschicken"
     },
     "user": {
         "unlock": "Entsperren",
@@ -228,6 +255,10 @@
         "errorUsernameExists": "Benutzername existiert bereits",
         "errorFirstnameRequired": "Vorname ist erforderlich",
         "errorLastnameRequired": "Nachname ist erforderlich",
+        "errorBirthdayRequired": "Geburtstag ist erforderlich",
+        "errorStreetRequired": "Straße ist erforderlich",
+        "errorPostalCodeRequired": "Postleitzahl ist erforderlich",
+        "errorCityRequired": "Stadt ist erforderlich",
         "errorEmailRequired": "E-Mail ist erforderlich",
         "errorEmailInvalid": "E-Mail ist ungültig",
         "errorSendEmail": "Fehler beim Versenden der E-Mail",
@@ -245,7 +276,7 @@
         "sendInvitation": "Einladung senden",
         "street": "Straße",
         "successResetPassword": "E-Mail zum Zurücksetzen des Passwortes wurde an {{user}} verschickt",
-        "successSendUserInvite": "Einladung wurde an {{user}} verschickt.",
+        "successSendUserInvite": "Einladung wurde an {{user}} verschickt",
         "tariff": "Tarif",
         "technicalInformation": "Technische Informationen"
     },

@@ -35,8 +35,14 @@
         "unregisterTitle": "Unregister",
         "unregisterOnClosed": "Unregistering is not possible. Registration is closed."
     },
+    "eventCalendarTrialTraining": {
+        "errorEventInstanceClosed": "Booking not possible. There are already to many registrations."
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Title is required"
+    },
+    "eventDefinitionList": {
+        "noItems": "No events found"
     },
     "eventInstanceList": {
         "noItems": "No events found"
@@ -44,8 +50,13 @@
     "eventPlanSection": {
         "addTraining": "Add training"
     },
+    "eventRegistrationButton": {
+        "register": "Register",
+        "unregister": "Unregister"
+    },    
     "eventRegistrationItem": {
         "addedByTrainer": "(added by trainer)",
+        "addedByTrialTraining": "(trial training)",
         "deleteQuestion": "Do you really want to delete '{{user}}' from this event?",
         "deleteTitle": "Delete user",
         "missing": "Missing",
@@ -65,8 +76,23 @@
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
         "open": "Reopen registration"
     },
+    "eventTrialTrainingCancellation": {
+        "cancelConfirmation": "Your trial training was successfully canceled.",
+        "cancelTrialTraining": "Cancel trial training",
+        "cancelQuestion": "Do you really want to cancel this trial training session?",
+        "notFound": "Trial training to be deleted not found."
+    },
     "general": {
+        "apply": "Apply",
         "cancel": "Cancel",
+        "dateTimeSpan": {
+            "today": "Today",
+            "from": "From",
+            "month": "Month",
+            "to": "To",
+            "tomorrow": "Tomorrow",
+            "week": "Week"
+        },
         "delete": "Delete",
         "deleteQuestion": "Do you really want to delete?",
         "deleteTitle": "Delete",
@@ -178,10 +204,6 @@
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
     },
-    "myTrainingsContent": {
-        "register": "Register",
-        "unregister": "Unregister"
-    },
     "passwordChange": {
         "changePassword": "Change password",
         "currentPassword": "Current password",
@@ -204,6 +226,14 @@
         "family3": "Family 3",
         "principals": "Principal",
         "relatives": "Relative"
+    },
+    "trialTrainingContent": {
+        "book": "Book",
+        "bookingConfirmation": "Your trial training was successfully booked. We are looking forward to meeting you.",
+        "bookTrialTraining": "Book a trial training",
+        "description": "We are excited that you're interested in a trial session. Here you can book this free training. You will receive an email with all the important information and further details afterwards.",
+        "errorTrialTrainingExists": "You can only book one free trial training. If you instead want to switch your trial training, please cancel your previously booked trial session via the email you received.",
+        "sendBooking": "Send booking"
     },
     "user": {
         "unlock": "Unlock",
@@ -228,6 +258,10 @@
         "errorUsernameExists": "Username already exists",
         "errorFirstnameRequired": "Firstname is required",
         "errorLastnameRequired": "Lastname is required",
+        "errorBirthdayRequired": "Birthday is required",
+        "errorStreetRequired": "Street is required",
+        "errorPostalCodeRequired": "Postal code is required",
+        "errorCityRequired": "City is required",
         "errorEmailRequired": "Email is required",
         "errorEmailInvalid": "Email is invalid",
         "errorSendEmail": "Error send invitation email",
@@ -245,7 +279,7 @@
         "sendInvitation": "Send invitation",
         "street": "Street",
         "successResetPassword": "Reset password request was send to {{user}}",
-        "successSendUserInvite": "Invitation was send to {{user}}.",
+        "successSendUserInvite": "Invitation was send to {{user}}",
         "tariff": "Tariff",
         "technicalInformation": "Technical Information"
     },

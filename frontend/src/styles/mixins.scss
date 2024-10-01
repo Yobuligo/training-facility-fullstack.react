@@ -27,7 +27,24 @@
 }
 
 @mixin glassy {
-  background-color: transparentize($color: colors.$color-backdrop,
-      $amount: 0.4);
+  background-color: transparentize(
+    $color: colors.$color-backdrop,
+    $amount: 0.4
+  );
   backdrop-filter: blur(2px);
+}
+
+@mixin component-padding {
+  padding: 1rem;
+
+  @include medium-screen {
+    padding: 2rem;
+  }
+}
+
+@mixin page-padding {
+  @include large-screen {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
 }

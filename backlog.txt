@@ -1,6 +1,6 @@
 - App
-	- Refactor page style and display edges only in WQHD but not Full-HD
-	- Improve repsonsive design for smaller devices (e.g. Tablets)
+	# Refactor page style and display edges only in WQHD but not Full-HD
+	# Improve repsonsive design for smaller devices (e.g. Tablets)
 	# Language can be switched
 		# Selected language must be persisted and loaded when reloading page
 	# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
@@ -8,6 +8,7 @@
 	# Display an ErrorBoundaryPage when calling an unknown url
 	# useRequest must not call block, if the block is currently running
 	# Introduce HttpStatusCodes
+	- Set german as default language
 	
 # ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard
@@ -112,7 +113,8 @@
 		# Bank Account BIC 11
 		# Bank Account IBAN 34
 		# Bank Account Institution 50
-		# Bank Account Owner 100		
+		# Bank Account Owner 100
+	- Add dobok size
 	# Current user must not be lockable
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
@@ -147,6 +149,9 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
+	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
+		# username, firstname, lastname, email, birthday, street, postal code, city
+    - Improve: Display of buttons in user profile must be restructured
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
@@ -154,6 +159,9 @@
 	# Bug: Buttons for inviting users and changing password must be active in display mode
 	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	# Bug: User session is not deleted with user.
+	# Bug: Link of invite email leads to wrong url
+	# Bug: Invite user, send password change request and verify user invite sends requests without token
+	# Bug: Link of invite email leads to dashboard instead of login page
 	
 # User List
 	# Display loading spinner, when loading users
@@ -166,7 +174,24 @@
 	# Users can be searched
 	* Display loading spinner when searching - not required as it on clientside
 	# Bug: As admin created user is shown as normal user.
-	- Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
+	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
+	
+# Trial Training
+	# Customer can select a day he wants to book a trial training
+	# Customer has to provide firstname, lastname and email address
+	# Creation of EventInstances must only be possible with shared key
+	# Booking is only possible once for an email but we don't consider the past
+	# It must not be possible to book a past training
+	# It must not be possible to book a closed training
+	# Email is send to the customer
+		# Contains date and time for the training, information like required clothes, the address, a link to unregister	
+	* Booking must be confirmed
+	# A message is displayed that the booking was successful
+	# Click on unregister displays an internet page to unregister from the training
+	# Registered user is displayed in event registration list of the event instance and marked as trial training
+	# Registered user can be marked as present, missing or open
+	- Display check icon when booking a trial training and cancelling it to visualize it to the user
+	# Bug: EventDefinitions must only be loaded with SecretRequest
 
 # Login
 	# Login must only be possible with valid username and password
@@ -177,6 +202,7 @@
 	
 # Password
 	# User must be able to change password
+	# Click on eye can toggle between displaying password as text or asterisks
 	
 # User Invite Screen
 	# Invite must be checked, display error in case of expired or invalid invite
@@ -205,6 +231,9 @@
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
+- DateTimeSpan
+	- Bug: from value must not be lower than to value
+		
 - Emails
 	- Send mails must create an email at the send mail folder of the mail account
 
@@ -229,9 +258,11 @@
 			# UserApi.login() doesn't return the session anymore, but instead the user
 			# UserApi.logout() doesn't need the session anymore
 			# delete ISession on client side
+	# Public calls must be authorized via token
 
 - Performance
 	- Admin tabs are loaded asynchronously
+	- table userTrialTraining needs an index on email
 
 - Gamification
 

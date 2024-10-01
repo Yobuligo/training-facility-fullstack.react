@@ -17,7 +17,6 @@
     flex-direction: row;
     column-gap: 1rem;
   }
-
 }
 
 .addedByTrainerInfo {
@@ -27,5 +26,4 @@
   @include mixins.medium-screen {
     align-self: center;
   }
-
 }

@@ -37,4 +37,5 @@ export const AppConfig = {
   serverSessionExpirationInHours:
     process.env.SERVER_SESSION_EXPIRATION_IN_HOURS,
   serverSessionSecret: process.env.SERVER_SESSION_SECRET,
+  tokenSecret: checkNotNull(process.env.TOKEN_SECRET),
 };

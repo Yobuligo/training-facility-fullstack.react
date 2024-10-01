@@ -1,49 +1,23 @@
-import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
-import { style } from "../../../core/ui/style";
-import { texts } from "../../../lib/translation/texts";
-import { useTranslation } from "../../../lib/translation/useTranslation";
+import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventContent } from "../eventContent/EventContent";
 import styles from "./EventMyTrainingsContent.module.scss";
 import { IEventMyTrainingsContentProps } from "./IEventMyTrainingsContentProps";
-import { useEventMyTrainingsContentViewModel } from "./useEventMyTrainingsContentViewModel";
 
 export const EventMyTrainingsContent: React.FC<
   IEventMyTrainingsContentProps
 > = (props) => {
-  const { t } = useTranslation();
-  const viewModel = useEventMyTrainingsContentViewModel(props);
-
   return (
     <EventContent
       className={styles.eventMyTrainingsContent}
-      eventDefinition={props.event.eventDefinition}
+      eventDefinition={props.calendarEvent.eventDefinition}
     >
-      <>
-        {viewModel.confirmDialog.content}
-        {props.isRegistered === true ? (
-          <SpinnerButton
-            className={style(styles.registerButton, styles.unregisterButton)}
-            displaySpinner={viewModel.isUnregisterRequestProcessing}
-            onClick={(clickEvent) => {
-              viewModel.onUnregister(props.event);
-              clickEvent.stopPropagation();
-            }}
-          >
-            {t(texts.myTrainingsContent.unregister)}
-          </SpinnerButton>
-        ) : (
-          <SpinnerButton
-            className={styles.registerButton}
-            displaySpinner={viewModel.isRegisterRequestProcessing}
-            onClick={(clickEvent) => {
-              viewModel.onRegister(props.event);
-              clickEvent.stopPropagation();
-            }}
-          >
-            {t(texts.myTrainingsContent.register)}
-          </SpinnerButton>
-        )}
-      </>
+      <EventRegistrationButton
+        event={props.calendarEvent}
+        isRegistered={props.isRegistered}
+        onRegister={props.onRegister}
+        onUnregister={props.onUnregister}
+        userId={props.userId}
+      />
     </EventContent>
   );
 };

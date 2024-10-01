@@ -1,5 +1,5 @@
 import { Card } from "../../../components/card/Card";
-import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
+import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
@@ -21,9 +21,8 @@ export const PasswordChange: React.FC = () => {
         {viewModel.changePasswordError && (
           <Error message={viewModel.changePasswordError} />
         )}
-        <LabeledInput
+        <LabeledPasswordInput
           label={t(texts.passwordChange.currentPassword)}
-          type="password"
           onChange={viewModel.setCurrentPassword}
         />
         <PasswordConfirmForm

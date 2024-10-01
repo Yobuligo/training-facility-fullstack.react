@@ -7,10 +7,10 @@ import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
+import { useTokenRequest } from "../../../hooks/useTokenRequest";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { IUserInviteShort } from "../../../shared/model/IUserInviteShort";
 
@@ -18,9 +18,9 @@ export const useUserInviteViewModel = () => {
   const params = useParams<{ userInviteId: string }>();
   const { t } = useTranslation();
   const [verifyUserInviteRequest, isVerifyUserInviteRequestProcessing] =
-    useRequest();
+    useTokenRequest();
   const [changePasswordRequest, isChangePasswordRequestProcessing] =
-    useRequest();
+    useTokenRequest();
   const [userInvite, setUserInvite] = useState<IUserInviteShort | undefined>(
     undefined
   );

@@ -1,0 +1,11 @@
+@use "../../../styles/mixins.scss";
+
+.eventTrialTrainingCancellation {
+  @include mixins.component-padding;
+  @include mixins.page-padding;
+}
+
+.cancelConfirmation {
+  font-size: large;
+  font-weight: 600;
+}

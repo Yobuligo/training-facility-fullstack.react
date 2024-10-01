@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useAuth } from "../../../hooks/useAuth";
 import { useSignal } from "../../../hooks/useSignal";
@@ -17,6 +18,9 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const auth = useAuth();
   const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
+  const [eventDefinitions, setEventDefinitions] = useState<IEventDefinition[]>(
+    []
+  );
   const [loadEventDefinitionsRequest] = useRequest();
   const fetchEventInstance = useFetchEventInstance();
 
@@ -39,12 +43,21 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         dateTimeSpan,
         user.id
       );
+      const eventDefinitionsSorted = eventDefinitions.sort((left, right) =>
+        DateTime.compare(left.from, right.from)
+      );
+      setEventDefinitions(eventDefinitionsSorted);
     });
     return eventDefinitions;
   };
 
+  const onReload = (dateTimeSpan: IDateTimeSpan) =>
+    loadEventDefinitions(dateTimeSpan);
+
   return {
+    eventDefinitions,
     loadEventDefinitions,
+    onReload,
     onEventInstanceUnselect,
     onEventSelected,
     reloadSignal,

@@ -25,6 +25,7 @@ $medium-screen-width: 46rem;
   display: flex;
   flex-direction: column;
   padding: 1rem 0.5rem;
+  width: 100%;
 
   @include mixins.medium-screen($medium-screen-width) {
     flex-direction: row;
@@ -48,6 +49,8 @@ $medium-screen-width: 46rem;
 .timeContainer {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 .dateTimeContainer {

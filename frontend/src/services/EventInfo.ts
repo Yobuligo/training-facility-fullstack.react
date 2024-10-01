@@ -1,11 +1,11 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
-import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { IEvent } from "./../features/eventCalendar/model/IEvent";
 
 /**
- * This class is responsible for providing access to specific information regarding and instance of type {@link IEvent}
+ * This class is responsible for providing access to specific information regarding an instance of type {@link IEvent}.
  */
 export class EventInfo {
   /**
@@ -15,8 +15,8 @@ export class EventInfo {
   static findEventInstance(event: IEvent): IEventInstance | undefined {
     const eventInstance = event.eventDefinition.eventInstances?.find(
       (eventInstance) =>
-        DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
-        DateTime.equals(eventInstance.to, checkNotNull(event.end))
+        DateTime.equals(eventInstance.from, event.dateTimeSpan.from) &&
+        DateTime.equals(eventInstance.to, event.dateTimeSpan.to)
     );
     return eventInstance;
   }
@@ -48,8 +48,8 @@ export class EventInfo {
           );
           if (
             eventRegistration.userId === userId &&
-            DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
-            DateTime.equals(eventInstance.to, checkNotNull(event.end))
+            DateTime.equals(eventInstance.from, event.dateTimeSpan.from) &&
+            DateTime.equals(eventInstance.to, event.dateTimeSpan.to)
           ) {
             return { instance: eventRegistration, eventInstance };
           }

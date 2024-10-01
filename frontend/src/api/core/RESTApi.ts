@@ -3,6 +3,7 @@ import { createError } from "../../core/utils/createError";
 import { isError } from "../../core/utils/isError";
 import { UrlParamsBuilder } from "../../lib/urlParamsExtender/UrlParamsBuilder";
 import { RequestParams } from "./RequestParams";
+import { TokenRepository } from "./TokenRepository";
 import { UrlParamsExtenderRegistry } from "./urlParams/UrlParamsExtenderRegistry";
 
 export class RESTApi {
@@ -10,10 +11,12 @@ export class RESTApi {
     return this.createPromise(
       url,
       async (extendedUrl) => {
+        const headers = this.createHeaders(requestParams);
         return await fetch(extendedUrl, {
           credentials: "include",
           method: "DELETE",
           mode: "cors",
+          headers,
         });
       },
       requestParams
@@ -24,9 +27,11 @@ export class RESTApi {
     return this.createPromise(
       url,
       async (extendedUrl) => {
+        const headers = this.createHeaders(requestParams);
         return await fetch(extendedUrl, {
           credentials: "include",
           method: "GET",
+          headers,
         });
       },
       requestParams
@@ -38,6 +43,8 @@ export class RESTApi {
     data: any,
     requestParams?: RequestParams<T>
   ): Promise<T> {
+    const headers = this.createHeaders(requestParams);
+    (headers as any)["Content-Type"] = "application/json";
     return this.createPromise(
       url,
       async (extendedUrl) => {
@@ -45,9 +52,7 @@ export class RESTApi {
         return await fetch(extendedUrl, {
           body: body,
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers,
           method: "PUT",
           mode: "cors",
         });
@@ -65,12 +70,12 @@ export class RESTApi {
       url,
       async (extendedUrl) => {
         const body = JSON.stringify(data);
+        const headers = this.createHeaders(requestParams);
+        (headers as any)["Content-Type"] = "application/json";
         return await fetch(extendedUrl, {
           body: body,
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers,
           method: "POST",
           mode: "cors",
         });
@@ -133,5 +138,17 @@ export class RESTApi {
     );
     const extendedUrl = urlParamsBuilder.build();
     return extendedUrl;
+  }
+
+  private static createHeaders<T>(
+    requestParams?: RequestParams<T>
+  ): HeadersInit {
+    const headers: HeadersInit = {};
+    if (requestParams?.token || TokenRepository.token) {
+      headers["Authorization"] = `Bearer ${
+        requestParams?.token ? requestParams.token : TokenRepository.token
+      }`;
+    }
+    return headers;
   }
 }

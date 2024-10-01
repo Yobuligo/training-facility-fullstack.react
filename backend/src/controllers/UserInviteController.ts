@@ -11,8 +11,8 @@ import { IUserInviteRequestPasswordChange } from "../shared/model/IUserInviteReq
 import { AuthRole } from "../shared/types/AuthRole";
 import { UserInviteType } from "../shared/types/UserInviteType";
 import { EntityController } from "./core/EntityController";
-import { ErrorInterceptor } from "./core/ErrorInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
+import { TokenInterceptor } from "./core/TokenInterceptor";
 
 export class UserInviteController extends EntityController<
   IUserInvite,
@@ -84,7 +84,7 @@ export class UserInviteController extends EntityController<
   private changePassword() {
     this.router.post(
       `${this.routeMeta.path}/:id/change-password`,
-      ErrorInterceptor(async (req, res) => {
+      TokenInterceptor(async (req, res) => {
         // first verify userInvite
         const userInviteId = req.params.id;
         const userInviteRepo = new UserInviteRepo();
@@ -108,7 +108,7 @@ export class UserInviteController extends EntityController<
   private verify() {
     this.router.get(
       `${this.routeMeta.path}/:id/verify`,
-      ErrorInterceptor(async (req, res) => {
+      TokenInterceptor(async (req, res) => {
         const userInviteId = req.params.id;
         const userInviteRepo = new UserInviteRepo();
         const userInvite = await userInviteRepo.verify(userInviteId);

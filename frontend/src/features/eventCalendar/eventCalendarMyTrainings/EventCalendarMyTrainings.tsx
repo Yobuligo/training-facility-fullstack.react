@@ -1,23 +1,24 @@
 import { EventInfo } from "../../../services/EventInfo";
+import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventMyTrainingsContent } from "../eventMyTrainingsContent/EventMyTrainingsContent";
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const viewModel = useEventCalendarMyTrainingsViewModel();
 
-  const renderEvent = (event: IEvent) => {
+  const renderEvent = (calendarEvent: ICalendarEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
-      event,
+      calendarEvent,
       viewModel.userId
     );
 
     // Render content and show register or unregister, depending on if the user is already registered or not
     return (
       <EventMyTrainingsContent
-        event={event}
+        calendarEvent={calendarEvent}
         isRegistered={eventRegistration !== undefined}
         userId={viewModel.userId}
         onRegister={() => viewModel.triggerReloadSignal()}
@@ -34,12 +35,20 @@ export const EventCalendarMyTrainings: React.FC = () => {
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
-        <EventCalendarSection
-          eventDefinitionLoader={viewModel.loadEventDefinitions}
-          onEventSelected={viewModel.onEventSelected}
-          reloadSignal={viewModel.reloadSignal}
-          renderEvent={renderEvent}
-        />
+        <>
+          <EventDefinitionSection
+            eventDefinitions={viewModel.eventDefinitions}
+            onReload={viewModel.onReload}
+            userId={viewModel.userId}
+          />
+
+          <EventCalendarSection
+            eventDefinitionLoader={viewModel.loadEventDefinitions}
+            onEventSelected={viewModel.onEventSelected}
+            reloadSignal={viewModel.reloadSignal}
+            renderEvent={renderEvent}
+          />
+        </>
       )}
     </div>
   );

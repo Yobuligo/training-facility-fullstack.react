@@ -1,12 +1,19 @@
 import { Banner } from "../../../components/banner/Banner";
 import { Card } from "../../../components/card/Card";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { style } from "../../../core/ui/style";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
 export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   const renderWeekday = useRenderWeekday();
+
+  const renderChildren = () => (
+    <div className={style(styles.children, props.classNameChildren)}>
+      {props.children}
+    </div>
+  );
 
   return (
     <Card className={styles.card}>
@@ -36,12 +43,15 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
                   props.eventInstanceItemModel.from
                 )} - ${DateTime.toTime(props.eventInstanceItemModel.to)}`}</div>
               </div>
+              {props.renderChildrenInline === true && props.children && (
+                <div className={props.classNameChildren}>{props.children}</div>
+              )}
             </div>
           </div>
         </div>
-        {props.children && (
-          <div className={styles.children}>{props.children}</div>
-        )}
+        {(props.renderChildrenInline === undefined ||
+          props.renderChildrenInline === false) &&
+          props.children && <>{renderChildren()}</>}
       </div>
     </Card>
   );

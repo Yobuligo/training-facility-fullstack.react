@@ -50,6 +50,7 @@ export const EventRegistrationSection: React.FC<
           <EventRegistrationList
             eventRegistrations={viewModel.eventRegistrations}
             onDelete={viewModel.onDelete}
+            userTrialTrainings={viewModel.userTrialTrainings}
           />
           <EventRegistrationSearch
             className={styles.search}

@@ -6,8 +6,10 @@ import {
   IEventInstance,
 } from "../shared/model/IEventInstance";
 import { AuthRole } from "../shared/types/AuthRole";
+import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
+import { TokenInterceptor } from "./core/TokenInterceptor";
 
 export class EventInstanceController extends EntityController<
   IEventInstance,
@@ -15,6 +17,7 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
+    this.insertPublic();
   }
 
   protected findAll(): void {
@@ -65,5 +68,19 @@ export class EventInstanceController extends EntityController<
   protected insert(): void {
     // no authorities required
     super.insert();
+  }
+
+  private insertPublic() {
+    this.router.post(
+      `${PublicRouteMeta.path}${this.routeMeta.path}`,
+      TokenInterceptor(async (req, res) => {
+        const eventInstance: IEventInstance = req.body;
+        const eventInstanceRepo = new EventInstanceRepo();
+        const createdEventInstance = await eventInstanceRepo.insert(
+          eventInstance
+        );
+        res.status(HttpStatusCode.CREATED_201).send(createdEventInstance);
+      })
+    );
   }
 }

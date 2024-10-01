@@ -31,6 +31,11 @@ export const useRequest = (): [
         toast.info(t(texts.general.logoutInvalidSession));
         logout.logout();
         return;
+      } else if (
+        error.type === "InvalidTokenError" ||
+        error.type === "ExpiredTokenError"
+      ) {
+        toast.error(t(texts.general.errorMissingAuthority));
       } else if (error.type === "MissingAuthorityError") {
         toast.error(t(texts.general.errorMissingAuthority));
       } else {

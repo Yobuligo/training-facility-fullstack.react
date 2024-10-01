@@ -6,7 +6,7 @@ import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export const useEventCalendarPlanSectionViewModel = () => {
   const [selectedEventDefinition, setSelectedEventDefinition] = useState<
@@ -38,8 +38,8 @@ export const useEventCalendarPlanSectionViewModel = () => {
       triggerReloadSignal();
     });
 
-  const onEventSelected = (event: IEvent) =>
-    setSelectedEventDefinition(event.eventDefinition);
+  const onEventSelected = (calendarEvent: ICalendarEvent) =>
+    setSelectedEventDefinition(calendarEvent.eventDefinition);
 
   const insertEventDefinition = (eventDefinition: DummyEventDefinition) =>
     insertEventDefinitionRequest(async () => {
