@@ -11,7 +11,11 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
 
   return (
     <div className={styles.eventDefinitionSection}>
-      <DateTimeSpanFilter fromDate={viewModel.from} toDate={viewModel.to} />
+      <DateTimeSpanFilter
+        fromDate={viewModel.from}
+        toDate={viewModel.to}
+        onChange={viewModel.onDateTimeSpanChanged}
+      />
       <EventDefinitionList events={viewModel.events} userId={props.userId} />
     </div>
   );

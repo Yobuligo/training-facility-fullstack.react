@@ -104,6 +104,12 @@ export class EventFactory {
         }
       }
     });
-    return events;
+
+    // sort events
+    const eventsSorted = events.sort((left, right) =>
+      DateTime.compare(left.dateTimeSpan.from, right.dateTimeSpan.from)
+    );
+
+    return eventsSorted;
   }
 }

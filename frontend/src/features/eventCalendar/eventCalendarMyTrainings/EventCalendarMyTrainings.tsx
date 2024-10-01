@@ -37,8 +37,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
       ) : (
         <>
           <EventDefinitionSection
-            eventDefinitions={viewModel.eventDefinitions}
-            
+            eventDefinitionLoader={viewModel.loadEventDefinitions}
             userId={viewModel.userId}
           />
 

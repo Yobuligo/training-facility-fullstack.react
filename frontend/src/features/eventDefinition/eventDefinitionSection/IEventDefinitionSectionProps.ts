@@ -1,6 +1,9 @@
+import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 
 export interface IEventDefinitionSectionProps {
-  eventDefinitions: IEventDefinition[];
+  eventDefinitionLoader: (
+    dateTimeSpan: IDateTimeSpan
+  ) => Promise<IEventDefinition[]>;
   userId: string;
 }

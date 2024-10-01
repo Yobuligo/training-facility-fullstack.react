@@ -13,10 +13,10 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
 
   const eventInstanceItemModel: IEventInstanceItemModel = {
     color: eventDefinition.color,
-    from: eventDefinition.from,
+    from: props.event.dateTimeSpan.from,
     id: eventDefinition.id,
     title: eventDefinition.title,
-    to: eventDefinition.to,
+    to: props.event.dateTimeSpan.to,
   };
 
   const onRegister = () => setIsRegistered(true);

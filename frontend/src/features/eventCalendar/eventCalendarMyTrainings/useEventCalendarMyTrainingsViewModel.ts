@@ -51,9 +51,13 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     return eventDefinitions;
   };
 
+  const onDateTimeSpanChange = (dateTimeSpan: IDateTimeSpan) =>
+    loadEventDefinitions(dateTimeSpan);
+
   return {
     eventDefinitions,
     loadEventDefinitions,
+    onDateTimeSpanChange,
     onEventInstanceUnselect,
     onEventSelected,
     reloadSignal,
