@@ -17,11 +17,14 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
     to: props.event.dateTimeSpan.to,
   };
 
+  const onClick = () => props.onSelect?.(props.event);
+
   return (
     <EventInstanceItem
       classNameChildren={styles.children}
       eventInstanceItemModel={eventInstanceItemModel}
       renderChildrenInline={true}
+      onClick={onClick}
     >
       <EventRegistrationButton
         event={props.event}

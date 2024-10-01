@@ -16,7 +16,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   );
 
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} onClick={props.onClick}>
       <div className={styles.eventInstanceItem}>
         <div className={styles.header}>
           <Banner color={props.eventInstanceItemModel.color} />

@@ -19,6 +19,7 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
       <EventDefinitionList
         events={viewModel.events}
         onRegister={viewModel.onRegister}
+        onSelect={props.onSelect}
         onUnregister={viewModel.onUnregister}
         userId={props.userId}
       />

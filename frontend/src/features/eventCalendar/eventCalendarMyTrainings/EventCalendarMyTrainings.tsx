@@ -39,6 +39,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
           <EventDefinitionSection
             eventDefinitions={viewModel.eventDefinitions}
             onReload={viewModel.onReload}
+            onSelect={viewModel.onEventSelected}
             userId={viewModel.userId}
           />
 
