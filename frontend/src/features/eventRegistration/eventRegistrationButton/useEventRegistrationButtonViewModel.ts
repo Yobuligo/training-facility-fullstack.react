@@ -7,7 +7,6 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { useFetchEventInstance } from "../../eventCalendar/hooks/useFetchEventInstance";
-import { ICalendarEvent } from "../../eventCalendar/model/ICalendarEvent";
 import { IEvent } from "../../eventCalendar/model/IEvent";
 import { IEventRegistrationButtonProps } from "./IEventRegistrationButtonProps";
 
@@ -20,8 +19,8 @@ export const useEventRegistrationButtonViewModel = <TEvent extends IEvent>(
   const fetchEventInstance = useFetchEventInstance();
   const confirmDialog = useConfirmDialog();
 
-  const onRegister = async (calendarEvent: ICalendarEvent) => {
-    const eventInstance = await fetchEventInstance(calendarEvent);
+  const onRegister = async (event: TEvent) => {
+    const eventInstance = await fetchEventInstance(event);
     if (!eventInstance) {
       return;
     }
@@ -45,9 +44,9 @@ export const useEventRegistrationButtonViewModel = <TEvent extends IEvent>(
     });
   };
 
-  const onUnregister = async (calendarEvent: ICalendarEvent) => {
+  const onUnregister = async (event: TEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
-      calendarEvent,
+      event,
       props.userId
     );
 

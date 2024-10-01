@@ -25,7 +25,7 @@ export const EventRegistrationButton = <TEvent extends IEvent>(
           className={style(styles.registerButton, styles.unregisterButton)}
           displaySpinner={viewModel.isUnregisterRequestProcessing}
           onClick={(clickEvent) => {
-            viewModel.onUnregister(props.calendarEvent);
+            viewModel.onUnregister(props.event);
             clickEvent.stopPropagation();
           }}
         >
@@ -36,7 +36,7 @@ export const EventRegistrationButton = <TEvent extends IEvent>(
           className={styles.registerButton}
           displaySpinner={viewModel.isRegisterRequestProcessing}
           onClick={(clickEvent) => {
-            viewModel.onRegister(props.calendarEvent);
+            viewModel.onRegister(props.event);
             clickEvent.stopPropagation();
           }}
         >

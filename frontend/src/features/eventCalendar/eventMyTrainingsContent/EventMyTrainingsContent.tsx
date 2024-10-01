@@ -12,7 +12,7 @@ export const EventMyTrainingsContent: React.FC<
       eventDefinition={props.calendarEvent.eventDefinition}
     >
       <EventRegistrationButton
-        calendarEvent={props.calendarEvent}
+        event={props.calendarEvent}
         isRegistered={props.isRegistered}
         onRegister={props.onRegister}
         onUnregister={props.onUnregister}
