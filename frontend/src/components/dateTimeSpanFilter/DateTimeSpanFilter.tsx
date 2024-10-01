@@ -1,6 +1,5 @@
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
-import { Button } from "../button/Button";
 import { LabeledInput } from "../labeledInput/LabeledInput";
 import { SecondaryButton } from "../secondaryButton/SecondaryButton";
 import { Toolbar } from "../toolbar/Toolbar";
@@ -61,9 +60,6 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
               value={viewModel.toDate}
             />
           </div>
-          <Button className={styles.applyButton} onClick={props.onApply}>
-            {t(texts.general.apply)}
-          </Button>
         </div>
       </div>
     </div>

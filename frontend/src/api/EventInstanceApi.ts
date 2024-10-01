@@ -1,8 +1,7 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { checkNotNull } from "../core/utils/checkNotNull";
-import { ICalendarEvent } from "../features/eventCalendar/model/ICalendarEvent";
+import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
@@ -66,35 +65,29 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   }
 
   /**
-   * Creates a new event instance from the given {@link calendarEvent}, inserts it to the persistance
+   * Creates a new event instance from the given {@link event}, inserts it to the persistance
    * and returns it.
    */
-  async insertFromEvent(
-    calendarEvent: ICalendarEvent
-  ): Promise<IEventInstance> {
-    const eventInstance = this.createEventInstanceByEvent(calendarEvent);
+  async insertFromEvent(event: IEvent): Promise<IEventInstance> {
+    const eventInstance = this.createEventInstanceByEvent(event);
     return await this.insert(eventInstance);
   }
 
-  async insertFromEventSecured(
-    calendarEvent: ICalendarEvent
-  ): Promise<IEventInstance> {
-    const eventInstance = this.createEventInstanceByEvent(calendarEvent);
+  async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
+    const eventInstance = this.createEventInstanceByEvent(event);
     return await RESTApi.post(`${this.publicUrl}`, eventInstance);
   }
 
-  private createEventInstanceByEvent(
-    calendarEvent: ICalendarEvent
-  ): IEventInstance {
+  private createEventInstanceByEvent(event: IEvent): IEventInstance {
     return {
       id: uuid(),
-      color: calendarEvent.eventDefinition.color,
-      description: calendarEvent.eventDefinition.description,
-      title: calendarEvent.eventDefinition.title,
-      eventDefinitionId: calendarEvent.eventDefinition.id,
+      color: event.eventDefinition.color,
+      description: event.eventDefinition.description,
+      title: event.eventDefinition.title,
+      eventDefinitionId: event.eventDefinition.id,
       eventRegistrations: [],
-      from: checkNotNull(calendarEvent.start),
-      to: checkNotNull(calendarEvent.end),
+      from: event.dateTimeSpan.from,
+      to: event.dateTimeSpan.to,
       state: EventInstanceState.OPEN,
       createdAt: new Date(),
       updatedAt: new Date(),
