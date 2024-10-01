@@ -22,7 +22,7 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
             onClick={viewModel.onClickDay}
             className={styles.button}
           >
-            {t(texts.general.dateTimeSpan.day)}
+            {t(texts.general.dateTimeSpan.today)}
           </SecondaryButton>
           <SecondaryButton
             onClick={viewModel.onClickTomorrow}
@@ -45,18 +45,22 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
           </SecondaryButton>
         </Toolbar>
         <div className={styles.inputGroup}>
-          <LabeledInput
-            label={t(texts.general.dateTimeSpan.from)}
-            onChange={viewModel.onChangeFromDate}
-            type="date"
-            value={viewModel.fromDate}
-          />
-          <LabeledInput
-            label={t(texts.general.dateTimeSpan.to)}
-            onChange={viewModel.onChangeToDate}
-            type="date"
-            value={viewModel.toDate}
-          />
+          <div className={styles.fromToInputs}>
+            <LabeledInput
+              className={styles.input}
+              label={t(texts.general.dateTimeSpan.from)}
+              onChange={viewModel.onChangeFromDate}
+              type="date"
+              value={viewModel.fromDate}
+            />
+            <LabeledInput
+              className={styles.input}
+              label={t(texts.general.dateTimeSpan.to)}
+              onChange={viewModel.onChangeToDate}
+              type="date"
+              value={viewModel.toDate}
+            />
+          </div>
           <Button className={styles.applyButton} onClick={props.onApply}>
             {t(texts.general.apply)}
           </Button>

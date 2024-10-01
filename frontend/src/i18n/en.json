@@ -79,7 +79,7 @@
         "apply": "Apply",
         "cancel": "Cancel",
         "dateTimeSpan": {
-            "day": "Day",
+            "today": "Today",
             "from": "From",
             "month": "Month",
             "to": "To",

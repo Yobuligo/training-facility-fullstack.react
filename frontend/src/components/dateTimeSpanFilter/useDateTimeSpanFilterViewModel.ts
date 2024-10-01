@@ -5,8 +5,12 @@ import { IDateTimeSpanFilterProps } from "./IDateTimeSpanFilterProps";
 export const useDateTimeSpanFilterViewModel = (
   props: IDateTimeSpanFilterProps
 ) => {
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState(
+    props.fromDate ? DateTime.toDate(props.fromDate) : ""
+  );
+  const [toDate, setToDate] = useState(
+    props.toDate ? DateTime.toDate(props.toDate) : ""
+  );
   const now = new Date();
 
   const triggerOnChange = (from: Date, to: Date) => props.onChange?.(from, to);

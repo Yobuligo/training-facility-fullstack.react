@@ -231,6 +231,9 @@
 	- Bug: Reset input does not reset value correctly
 		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
+- DateTimeSpan
+	- Bug: from value must not be lower than to value
+		
 - Emails
 	- Send mails must create an email at the send mail folder of the mail account
 

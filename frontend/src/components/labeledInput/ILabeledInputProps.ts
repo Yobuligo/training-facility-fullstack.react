@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export interface ILabeledInputProps {
   children?: ReactNode;
+  className?: string;
   classNameInput?: string;
   disabled?: boolean;
   error?: string;
