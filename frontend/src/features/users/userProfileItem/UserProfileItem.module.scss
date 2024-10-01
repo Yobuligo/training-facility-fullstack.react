@@ -13,11 +13,11 @@
   grid-template-rows: 1fr 1fr 1fr;
   padding: 1rem;
   color: colors.$color-text;
+  width: 100%;
 
   @include mixins.medium-screen(45rem) {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 100%;
   }
 }
 
