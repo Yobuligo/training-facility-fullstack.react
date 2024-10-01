@@ -51,13 +51,19 @@
 	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
 	# Display loading spinner when register on or unregister from a training
 	# Click on event instance displays registered users
+		# must only work for admin users
 	# User must not be registered twice on a training (check in db if user is already registered)
 	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
 	- Display event description on hover
+	- Display trainings on mobile phones as list
+		# trainings must be loaded initially
+		# trainings can be filtered by today, tomorrow, week, month or a separate date
+		- Must behave similar to click, register, unregister in calendar view
 	# Bug: Race condition error when creating event instances by different users at the same moment
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
+	
 	
 - Event Registration
 	# Display spinner when loading registrations
