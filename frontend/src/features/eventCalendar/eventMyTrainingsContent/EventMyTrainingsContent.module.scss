@@ -1,18 +1,4 @@
-@use "../../../styles/colors.module.scss";
-
 .eventMyTrainingsContent {
   justify-content: space-between;
   height: 100%;
-}
-
-.registerButton {
-  align-self: flex-end;
-}
-
-.unregisterButton {
-  background-color: colors.$color-event-my-trainings-button-registered;
-
-  &:hover {
-    background-color: colors.$color-event-my-trainings-button-registered;
-  }
 }

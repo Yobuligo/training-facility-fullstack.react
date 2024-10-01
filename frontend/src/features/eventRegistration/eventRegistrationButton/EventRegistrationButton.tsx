@@ -6,6 +6,10 @@ import styles from "./EventRegistrationButton.module.scss";
 import { IEventRegistrationButtonProps } from "./IEventRegistrationButtonProps";
 import { useEventRegistrationButtonViewModel } from "./useEventRegistrationButtonViewModel";
 
+/**
+ * This component is responsible for displaying a button to register on an event or to unregister from.
+ * The button toggles and changes its color and handles the backend calls.
+ */
 export const EventRegistrationButton: React.FC<
   IEventRegistrationButtonProps
 > = (props) => {
