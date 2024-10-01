@@ -151,6 +151,7 @@
 		# Invite must expire
 	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
 		# username, firstname, lastname, email, birthday, street, postal code, city
+    - Improve: Display of buttons in user profile must be restructured
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
@@ -160,7 +161,7 @@
 	# Bug: User session is not deleted with user.
 	# Bug: Link of invite email leads to wrong url
 	# Bug: Invite user, send password change request and verify user invite sends requests without token
-	- Bug: Link of invite email leads to dashboard instead of login page
+	# Bug: Link of invite email leads to dashboard instead of login page
 	
 # User List
 	# Display loading spinner, when loading users

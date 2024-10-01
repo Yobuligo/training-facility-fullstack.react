@@ -37,6 +37,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
       ) : (
         <>
           <DateTimeSpanFilter />
+
           {/* <EventCalendarSection
             eventDefinitionLoader={viewModel.loadEventDefinitions}
             onEventSelected={viewModel.onEventSelected}

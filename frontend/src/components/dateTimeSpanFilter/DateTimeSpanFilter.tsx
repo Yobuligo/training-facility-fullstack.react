@@ -15,48 +15,52 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
   const viewModel = useDateTimeSpanFilterViewModel(props);
 
   return (
-    <div className={styles.dateTimeSpanFilter}>
-      <Toolbar>
-        <SecondaryButton
-          onClick={viewModel.onClickDay}
-          className={styles.button}
-        >
-          {t(texts.general.dateTimeSpan.day)}
-        </SecondaryButton>
-        <SecondaryButton
-          onClick={viewModel.onClickTomorrow}
-          className={styles.button}
-        >
-          {t(texts.general.dateTimeSpan.tomorrow)}
-        </SecondaryButton>
+    <div className={styles.container}>
+      <div className={styles.dateTimeSpanFilter}>
+        <Toolbar>
+          <SecondaryButton
+            onClick={viewModel.onClickDay}
+            className={styles.button}
+          >
+            {t(texts.general.dateTimeSpan.day)}
+          </SecondaryButton>
+          <SecondaryButton
+            onClick={viewModel.onClickTomorrow}
+            className={styles.button}
+          >
+            {t(texts.general.dateTimeSpan.tomorrow)}
+          </SecondaryButton>
 
-        <SecondaryButton
-          onClick={viewModel.onClickWeek}
-          className={styles.button}
-        >
-          {t(texts.general.dateTimeSpan.week)}
-        </SecondaryButton>
-        <SecondaryButton
-          onClick={viewModel.onClickMonth}
-          className={styles.button}
-        >
-          {t(texts.general.dateTimeSpan.month)}
-        </SecondaryButton>
-      </Toolbar>
-      <div className={styles.inputGroup}>
-        <LabeledInput
-          label={t(texts.general.dateTimeSpan.from)}
-          onChange={viewModel.onChangeFromDate}
-          type="date"
-          value={viewModel.fromDate}
-        />
-        <LabeledInput
-          label={t(texts.general.dateTimeSpan.to)}
-          onChange={viewModel.onChangeToDate}
-          type="date"
-          value={viewModel.toDate}
-        />
-        <Button onClick={props.onApply}>{t(texts.general.apply)}</Button>
+          <SecondaryButton
+            onClick={viewModel.onClickWeek}
+            className={styles.button}
+          >
+            {t(texts.general.dateTimeSpan.week)}
+          </SecondaryButton>
+          <SecondaryButton
+            onClick={viewModel.onClickMonth}
+            className={styles.button}
+          >
+            {t(texts.general.dateTimeSpan.month)}
+          </SecondaryButton>
+        </Toolbar>
+        <div className={styles.inputGroup}>
+          <LabeledInput
+            label={t(texts.general.dateTimeSpan.from)}
+            onChange={viewModel.onChangeFromDate}
+            type="date"
+            value={viewModel.fromDate}
+          />
+          <LabeledInput
+            label={t(texts.general.dateTimeSpan.to)}
+            onChange={viewModel.onChangeToDate}
+            type="date"
+            value={viewModel.toDate}
+          />
+          <Button className={styles.applyButton} onClick={props.onApply}>
+            {t(texts.general.apply)}
+          </Button>
+        </div>
       </div>
     </div>
   );
