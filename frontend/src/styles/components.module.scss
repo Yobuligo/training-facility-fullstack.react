@@ -15,14 +15,6 @@
   fill: $color-icon-disabled;
 }
 
-@mixin border($color, $color-top) {
-  border: 8px solid $color;
-  border-top: 8px solid $color-top;
-  color: $color-grade-kup-text;
-  background-color: transparentize($color, $amount: 0.95);
-  position: relative;
-}
-
 .secondaryButton {
   background-color: transparent;
   outline: $color-secondary-button solid 1px;
@@ -36,43 +28,91 @@
 }
 
 .dan {
-  @include border($color-grade-dan, $color-grade-dan);
+  color: $color-grade-dan;
+}
+
+.danHalf {
+  fill: transparent;
 }
 
 .kup1 {
-  @include border($color-grade-kup1, $color-grade-dan);
+  color: $color-grade-kup1;
+}
+
+.kup1Half {
+  fill: $color-grade-dan;
 }
 
 .kup2 {
-  @include border($color-grade-kup2, $color-grade-kup1);
+  color: $color-grade-kup2;
+}
+
+.kup2Half {
+  fill: transparent;
 }
 
 .kup3 {
-  @include border($color-grade-kup3, $color-grade-kup2);
+  color: $color-grade-kup3;
+}
+
+.kup3Half {
+  fill: $color-grade-kup2;
 }
 
 .kup4 {
-  @include border($color-grade-kup4, $color-grade-kup3);
+  color: $color-grade-kup4;
+}
+
+.kup4Half {
+  fill: transparent;
 }
 
 .kup5 {
-  @include border($color-grade-kup5, $color-grade-kup4);
+  color: $color-grade-kup5;
+}
+
+.kup5Half {
+  fill: $color-grade-kup4;
 }
 
 .kup6 {
-  @include border($color-grade-kup6, $color-grade-kup5);
+  color: $color-grade-kup6;
+}
+
+.kup6Half {
+  fill: transparent;
 }
 
 .kup7 {
-  @include border($color-grade-kup7, $color-grade-kup6);
+  color: $color-grade-kup7;
+}
+
+.kup7Half {
+  fill: $color-grade-kup6;
 }
 
 .kup8 {
-  @include border($color-grade-kup8, $color-grade-kup7);
+  color: $color-grade-kup8;
+}
+
+.kup8Half {
+  fill: transparent;
 }
 
 .kup9 {
-  @include border($color-grade-kup9, $color-grade-kup8);
+  color: $color-grade-kup9;
+}
+
+.kup9Half {
+  fill: $color-grade-kup8;
+}
+
+.kupOutline{
+  stroke: $color-grade-outline;
+}
+
+.kup9Outline{
+  stroke: $color-grade-kup9-outline;
 }
 
 .preLoginLayout {
