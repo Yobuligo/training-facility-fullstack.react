@@ -7,6 +7,7 @@ import { useLogout } from "../../../lib/userSession/hooks/useLogout";
 import { PageSpinner } from "../../pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
+import { PageFooter } from "../pageFooter/PageFooter";
 import { PageHeader } from "../pageHeader/PageHeader";
 import { IProtectedPageProps } from "./IProtectedPageProps";
 import styles from "./ProtectedPage.module.scss";
@@ -51,6 +52,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
         ) : (
           <div>{props.children}</div>
         )}
+        <PageFooter />
       </div>
     </Page>
   );

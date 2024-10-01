@@ -9,6 +9,7 @@
 	# useRequest must not call block, if the block is currently running
 	# Introduce HttpStatusCodes
 	- Set german as default language
+	- Add imprint and privacy policy
 	
 # ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard

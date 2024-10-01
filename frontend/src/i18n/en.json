@@ -101,6 +101,7 @@
         "errorMissingAuthority": "Sorry, you are not authorized for this action.",
         "female": "Female",
         "grade": "Grade",
+        "imprint": "Imprint",
         "isOptional": "(optional)",
         "logoutInvalidSession": "You were logged out due to an invalid or expired session",
         "male": "Male",
@@ -120,6 +121,7 @@
         },
         "no": "No",
         "ok": "Ok",
+        "privacyPolicy": "Privacy Policy",
         "recurrence": {
             "daily": "Daily",
             "monthly": "Monthly",

@@ -1,0 +1,18 @@
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
+
+.pageFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: dimensions.$negative-space;
+  height: 4rem;
+  background-color: colors.$color-page-footer-background;
+  margin-top: 1rem;
+  color: colors.$color-page-footer;
+}
+
+.link {
+  color: colors.$color-page-footer;
+}

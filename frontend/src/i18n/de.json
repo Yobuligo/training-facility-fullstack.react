@@ -98,6 +98,7 @@
         "errorMissingAuthority": "Leider bist du für diese Aktion nicht autorisiert.",
         "female": "Weiblich",
         "grade": "Grad",
+        "imprint": "Impressum",
         "isOptional": "(optional)",
         "logoutInvalidSession": "Du wurdest aufgrund einer ungültigen oder abgelaufenen Sitzung abgemeldet",
         "male": "Männlich",
@@ -117,6 +118,7 @@
         },
         "no": "Nein",
         "ok": "Ok",
+        "privacyPolicy": "Datenschutzerklärung",
         "recurrence": {
             "daily": "Täglich",
             "monthly": "Monatlich",
