@@ -45,6 +45,7 @@ export class EmailService {
     username: string
   ) {
     const linkInvite = this.createInviteLink(userInviteId);
+    const linkLogin = `${AppConfig.clientAppUrl}/login`;
 
     try {
       await smtp.sendMail({
@@ -65,7 +66,7 @@ export class EmailService {
       
           <p>Um deine Anmeldung abzuschließen, klicke bitte auf folgenden Link: <a href="${linkInvite}">Anmelde-Link</a></p>
       
-          <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${AppConfig.clientAppUrl}">Portal-Link</a></p>
+          <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${linkLogin}">Portal-Link</a></p>
       
           <p>Bei Fragen oder Problemen stehen wir dir natürlich gerne zur Verfügung.</p>
       

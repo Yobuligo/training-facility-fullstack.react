@@ -159,7 +159,7 @@
 	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
 	# Bug: User session is not deleted with user.
 	# Bug: Link of invite email leads to wrong url
-	- Bug: Invite user, send password change request and verify user invite sends requests without token
+	# Bug: Invite user, send password change request and verify user invite sends requests without token
 	- Bug: Link of invite email leads to dashboard instead of login page
 	
 # User List
@@ -173,7 +173,7 @@
 	# Users can be searched
 	* Display loading spinner when searching - not required as it on clientside
 	# Bug: As admin created user is shown as normal user.
-	- Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
+	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 	
 # Trial Training
 	# Customer can select a day he wants to book a trial training
@@ -254,6 +254,7 @@
 			# UserApi.login() doesn't return the session anymore, but instead the user
 			# UserApi.logout() doesn't need the session anymore
 			# delete ISession on client side
+	# Public calls must be authorized via token
 
 - Performance
 	- Admin tabs are loaded asynchronously
