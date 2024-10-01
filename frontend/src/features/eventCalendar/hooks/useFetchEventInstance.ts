@@ -2,27 +2,27 @@ import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
-import { ICalendarEvent } from "../model/ICalendarEvent";
+import { IEvent } from "../model/IEvent";
 
 export const useFetchEventInstance = () => {
   const [fetchEventInstanceRequest] = useRequest();
 
   const fetchEventInstance = async (
-    calendarEvent: ICalendarEvent
+    event: IEvent
   ): Promise<IEventInstance | undefined> => {
     let eventInstance: IEventInstance | undefined;
     await fetchEventInstanceRequest(async () => {
-      const cachedEventInstance = EventInfo.findEventInstance(calendarEvent);
+      const cachedEventInstance = EventInfo.findEventInstance(event);
       if (cachedEventInstance) {
         eventInstance = cachedEventInstance;
       } else {
         const eventInstanceApi = new EventInstanceApi();
-        eventInstance = await eventInstanceApi.insertFromEvent(calendarEvent);
-        eventInstance.eventDefinitionId = calendarEvent.eventDefinition.id;
-        if (!calendarEvent.eventDefinition.eventInstances) {
-          calendarEvent.eventDefinition.eventInstances = [];
+        eventInstance = await eventInstanceApi.insertFromEvent(event);
+        eventInstance.eventDefinitionId = event.eventDefinition.id;
+        if (!event.eventDefinition.eventInstances) {
+          event.eventDefinition.eventInstances = [];
         }
-        calendarEvent.eventDefinition.eventInstances.push(eventInstance);
+        event.eventDefinition.eventInstances.push(eventInstance);
       }
     });
 

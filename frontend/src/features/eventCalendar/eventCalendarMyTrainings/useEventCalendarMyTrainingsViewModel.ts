@@ -9,7 +9,7 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { useFetchEventInstance } from "../hooks/useFetchEventInstance";
-import { ICalendarEvent } from "../model/ICalendarEvent";
+import { IEvent } from "../model/IEvent";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
@@ -26,9 +26,9 @@ export const useEventCalendarMyTrainingsViewModel = () => {
 
   const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
 
-  const onEventSelected = async (calendarEvent: ICalendarEvent) => {
+  const onEventSelected = async (event: IEvent) => {
     if (auth.isAdmin()) {
-      const eventInstance = await fetchEventInstance(calendarEvent);
+      const eventInstance = await fetchEventInstance(event);
       setSelectedEventInstance(eventInstance);
     }
   };

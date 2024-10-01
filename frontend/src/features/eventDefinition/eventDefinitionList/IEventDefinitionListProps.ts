@@ -1,5 +1,6 @@
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
+import { IEvent } from "./../../eventCalendar/model/IEvent";
 
 export interface IEventDefinitionListProps {
-  eventDefinitions: IEventDefinition[];
+  events: IEvent[];
+  userId: string;
 }

@@ -38,6 +38,8 @@ export const EventCalendarMyTrainings: React.FC = () => {
         <>
           <EventDefinitionSection
             eventDefinitions={viewModel.eventDefinitions}
+            
+            userId={viewModel.userId}
           />
 
           <EventCalendarSection
