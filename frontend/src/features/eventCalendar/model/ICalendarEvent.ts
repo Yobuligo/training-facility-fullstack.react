@@ -1,7 +1,4 @@
 import { Event } from "react-big-calendar";
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
+import { IEvent } from "./IEvent";
 
-export interface ICalendarEvent extends Event {
-  id: string;
-  eventDefinition: IEventDefinition;  
-}
+export interface ICalendarEvent extends Event, IEvent {}
