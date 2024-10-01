@@ -12,22 +12,37 @@
   column-gap: 2rem;
 }
 
+.beltAndDate {
+  position: relative;
+}
+
+.belt {
+  width: 10rem;
+}
+
 .date {
+  font-family: "MerriweatherSans";
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  padding: 0.5rem;
-  font-family: "MerriweatherSans";
+  row-gap: 2.7rem;
 }
 
 .year {
   font-weight: 700;
   font-size: large;
+}
+
+.monthAndDay{
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.3rem;
 }
 
 .details {
