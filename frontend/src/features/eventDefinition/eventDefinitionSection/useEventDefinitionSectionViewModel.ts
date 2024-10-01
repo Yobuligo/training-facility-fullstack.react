@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { useInitialize } from "../../../hooks/useInitialize";
 import { EventFactory } from "../../../services/EventFactory";
 import { IEvent } from "../../eventCalendar/model/IEvent";
 import { eventCreator } from "../eventDefinitionItem/eventCreator";
@@ -11,6 +12,9 @@ export const useEventDefinitionSectionViewModel = (
   const [from, setFrom] = useState(DateTime.getWeekStartDate(new Date()));
   const [to, setTo] = useState(DateTime.getWeekEndDate(new Date()));
   const [events, setEvents] = useState<IEvent[]>([]);
+
+  // trigger reload initially
+  useInitialize(() => props.onReload?.({ from, to }));
 
   useEffect(() => {
     const events = EventFactory.createFromEventDefinitions(

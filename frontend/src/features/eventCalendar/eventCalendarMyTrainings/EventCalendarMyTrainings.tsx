@@ -1,3 +1,4 @@
+import { useScreenSize } from "../../../hooks/useScreenSize";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
@@ -8,6 +9,7 @@ import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTraini
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const viewModel = useEventCalendarMyTrainingsViewModel();
+  const screenSize = useScreenSize();
 
   const renderEvent = (calendarEvent: ICalendarEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
@@ -36,19 +38,21 @@ export const EventCalendarMyTrainings: React.FC = () => {
         />
       ) : (
         <>
-          <EventDefinitionSection
-            eventDefinitions={viewModel.eventDefinitions}
-            onReload={viewModel.onReload}
-            onSelect={viewModel.onEventSelected}
-            userId={viewModel.userId}
-          />
-
-          <EventCalendarSection
-            eventDefinitionLoader={viewModel.loadEventDefinitions}
-            onEventSelected={viewModel.onEventSelected}
-            reloadSignal={viewModel.reloadSignal}
-            renderEvent={renderEvent}
-          />
+          {screenSize.isSmall() ? (
+            <EventDefinitionSection
+              eventDefinitions={viewModel.eventDefinitions}
+              onReload={viewModel.onReload}
+              onSelect={viewModel.onEventSelected}
+              userId={viewModel.userId}
+            />
+          ) : (
+            <EventCalendarSection
+              eventDefinitionLoader={viewModel.loadEventDefinitions}
+              onEventSelected={viewModel.onEventSelected}
+              reloadSignal={viewModel.reloadSignal}
+              renderEvent={renderEvent}
+            />
+          )}
         </>
       )}
     </div>
