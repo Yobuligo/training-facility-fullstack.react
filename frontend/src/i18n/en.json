@@ -76,7 +76,16 @@
         "notFound": "Trial training to be deleted not found."
     },
     "general": {
+        "apply": "Apply",
         "cancel": "Cancel",
+        "dateTimeSpan": {
+            "day": "Day",
+            "from": "From",
+            "month": "Month",
+            "to": "To",
+            "tomorrow": "Tomorrow",
+            "week": "Week"
+        },
         "delete": "Delete",
         "deleteQuestion": "Do you really want to delete?",
         "deleteTitle": "Delete",

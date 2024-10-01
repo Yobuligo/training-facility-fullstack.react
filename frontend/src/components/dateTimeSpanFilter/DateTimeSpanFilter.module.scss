@@ -1,0 +1,30 @@
+@use "../../styles/dimensions.module.scss";
+@use "../../styles/mixins.scss";
+
+.dateTimeSpanFilter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+
+  @include mixins.medium-screen {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.button {
+  padding: 0.5rem;
+
+  @include mixins.medium-screen {
+    padding: dimensions.$button-padding;
+  }
+}

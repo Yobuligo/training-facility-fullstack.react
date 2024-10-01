@@ -35,9 +35,9 @@
         "unregisterTitle": "Abmelden",
         "unregisterOnClosed": "Abmeldung nicht möglich. Anmeldung ist geschlossen."
     },
-    "eventCalendarTrialTraining":{
+    "eventCalendarTrialTraining": {
         "errorEventInstanceClosed": "Buchung nicht möglich. Es gibt bereits zu viele Anmeldungen."
-    },    
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },
@@ -76,7 +76,16 @@
         "notFound": "Zu löschendes Probetraining nicht gefunden."
     },
     "general": {
+        "apply": "Anwenden",
         "cancel": "Abbrechen",
+        "dateTimeSpan": {
+            "day": "Tag",
+            "from": "Von",
+            "month": "Monat",
+            "to": "Bis",
+            "tomorrow": "Morgen",
+            "week": "Woche"
+        },
         "delete": "Löschen",
         "deleteQuestion": "Möchten Sie wirklich löschen?",
         "deleteTitle": "Löschen",
