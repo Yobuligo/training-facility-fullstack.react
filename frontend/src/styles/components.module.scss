@@ -1,5 +1,12 @@
 @import "../styles/colors.module.scss";
 @import "../styles/mixins.scss";
+@import "../styles/dimensions.module.scss";
+
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
 
 .icon {
   @include hoverIcon;
@@ -107,11 +114,11 @@
   fill: $color-grade-kup8;
 }
 
-.kupOutline{
+.kupOutline {
   stroke: $color-grade-outline;
 }
 
-.kup9Outline{
+.kup9Outline {
   stroke: $color-grade-kup9-outline;
 }
 

@@ -4,6 +4,7 @@ import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useLogout } from "../../../lib/userSession/hooks/useLogout";
+import componentStyles from "../../../styles/components.module.scss";
 import { PageSpinner } from "../../pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
@@ -33,27 +34,22 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
   const displaySpinner = userLoader.isProcessing || !userLoader.user;
 
   return (
-    <Page>
-      <div className={styles.protectedPage}>
-        <PageHeader onAppLogoClick={props.onAppLogoClick}>
-          {!displaySpinner && (
-            <SpinnerButton
-              displaySpinner={isLoggingOut}
-              onClick={onLogout}
-            >{`${t(texts.logout.title)} (${
-              userLoader.user?.userProfile.firstname
-            })`}</SpinnerButton>
-          )}
-        </PageHeader>
-        {displaySpinner ? (
-          <div className={styles.spinner}>
-            <PageSpinner />
-          </div>
-        ) : (
-          <div>{props.children}</div>
+    <Page className={componentStyles.page}>
+      <PageHeader onAppLogoClick={props.onAppLogoClick}>
+        {!displaySpinner && (
+          <SpinnerButton displaySpinner={isLoggingOut} onClick={onLogout}>{`${t(
+            texts.logout.title
+          )} (${userLoader.user?.userProfile.firstname})`}</SpinnerButton>
         )}
-        <PageFooter />
-      </div>
+      </PageHeader>
+      {displaySpinner ? (
+        <div className={styles.spinner}>
+          <PageSpinner />
+        </div>
+      ) : (
+        <div>{props.children}</div>
+      )}
+      <PageFooter />
     </Page>
   );
 };
