@@ -41,6 +41,9 @@
     "eventDefinitionDetails": {
         "errorEnterTitle": "Title is required"
     },
+    "eventDefinitionList": {
+        "noItems": "No events found"
+    },
     "eventInstanceList": {
         "noItems": "No events found"
     },
