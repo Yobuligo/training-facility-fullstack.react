@@ -1,3 +1,4 @@
+import { DateTimeSpanFilter } from "../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
@@ -34,12 +35,15 @@ export const EventCalendarMyTrainings: React.FC = () => {
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
-        <EventCalendarSection
-          eventDefinitionLoader={viewModel.loadEventDefinitions}
-          onEventSelected={viewModel.onEventSelected}
-          reloadSignal={viewModel.reloadSignal}
-          renderEvent={renderEvent}
-        />
+        <>
+          <DateTimeSpanFilter />
+          {/* <EventCalendarSection
+            eventDefinitionLoader={viewModel.loadEventDefinitions}
+            onEventSelected={viewModel.onEventSelected}
+            reloadSignal={viewModel.reloadSignal}
+            renderEvent={renderEvent}
+          /> */}
+        </>
       )}
     </div>
   );

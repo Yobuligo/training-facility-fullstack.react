@@ -2,6 +2,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { Button } from "../button/Button";
 import { LabeledInput } from "../labeledInput/LabeledInput";
+import { SecondaryButton } from "../secondaryButton/SecondaryButton";
 import { Toolbar } from "../toolbar/Toolbar";
 import styles from "./DateTimeSpanFilter.module.scss";
 import { IDateTimeSpanFilterProps } from "./IDateTimeSpanFilterProps";
@@ -16,18 +17,31 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
   return (
     <div className={styles.dateTimeSpanFilter}>
       <Toolbar>
-        <Button onClick={viewModel.onClickYesterday} className={styles.button}>
+        <SecondaryButton
+          onClick={viewModel.onClickDay}
+          className={styles.button}
+        >
           {t(texts.general.dateTimeSpan.day)}
-        </Button>
-        <Button onClick={viewModel.onClickDay} className={styles.button}>
+        </SecondaryButton>
+        <SecondaryButton
+          onClick={viewModel.onClickTomorrow}
+          className={styles.button}
+        >
           {t(texts.general.dateTimeSpan.tomorrow)}
-        </Button>
-        <Button onClick={viewModel.onClickWeek} className={styles.button}>
+        </SecondaryButton>
+
+        <SecondaryButton
+          onClick={viewModel.onClickWeek}
+          className={styles.button}
+        >
           {t(texts.general.dateTimeSpan.week)}
-        </Button>
-        <Button onClick={viewModel.onClickMonth} className={styles.button}>
+        </SecondaryButton>
+        <SecondaryButton
+          onClick={viewModel.onClickMonth}
+          className={styles.button}
+        >
           {t(texts.general.dateTimeSpan.month)}
-        </Button>
+        </SecondaryButton>
       </Toolbar>
       <div className={styles.inputGroup}>
         <LabeledInput
