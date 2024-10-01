@@ -8,10 +8,11 @@ import { EventInfo } from "../../../services/EventInfo";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { useFetchEventInstance } from "../../eventCalendar/hooks/useFetchEventInstance";
 import { ICalendarEvent } from "../../eventCalendar/model/ICalendarEvent";
+import { IEvent } from "../../eventCalendar/model/IEvent";
 import { IEventRegistrationButtonProps } from "./IEventRegistrationButtonProps";
 
-export const useEventRegistrationButtonViewModel = (
-  props: IEventRegistrationButtonProps
+export const useEventRegistrationButtonViewModel = <TEvent extends IEvent>(
+  props: IEventRegistrationButtonProps<TEvent>
 ) => {
   const { t } = useTranslation();
   const [registerRequest, isRegisterRequestProcessing] = useRequest();

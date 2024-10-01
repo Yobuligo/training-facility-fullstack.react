@@ -1,7 +1,7 @@
-import { ICalendarEvent } from "../../eventCalendar/model/ICalendarEvent";
+import { IEvent } from "./../../eventCalendar/model/IEvent";
 
-export interface IEventRegistrationButtonProps {
-  calendarEvent: ICalendarEvent;
+export interface IEventRegistrationButtonProps<TEvent extends IEvent> {
+  calendarEvent: TEvent;
   isRegistered: boolean;
   onRegister?: () => void;
   onUnregister?: () => void;

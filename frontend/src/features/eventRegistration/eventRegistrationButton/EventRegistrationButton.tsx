@@ -2,6 +2,7 @@ import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { style } from "../../../core/ui/style";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { IEvent } from "../../eventCalendar/model/IEvent";
 import styles from "./EventRegistrationButton.module.scss";
 import { IEventRegistrationButtonProps } from "./IEventRegistrationButtonProps";
 import { useEventRegistrationButtonViewModel } from "./useEventRegistrationButtonViewModel";
@@ -10,9 +11,9 @@ import { useEventRegistrationButtonViewModel } from "./useEventRegistrationButto
  * This component is responsible for displaying a button to register on an event or to unregister from.
  * The button toggles and changes its color and handles the backend calls.
  */
-export const EventRegistrationButton: React.FC<
-  IEventRegistrationButtonProps
-> = (props) => {
+export const EventRegistrationButton = <TEvent extends IEvent>(
+  props: IEventRegistrationButtonProps<TEvent>
+) => {
   const viewModel = useEventRegistrationButtonViewModel(props);
   const { t } = useTranslation();
 
