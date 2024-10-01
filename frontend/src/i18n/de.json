@@ -41,6 +41,9 @@
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },
+    "eventDefinitionList": {
+        "noItems": "Keine Ereignisse gefunden"
+    },
     "eventInstanceList": {
         "noItems": "Keine Ereignisse gefunden"
     },
@@ -50,7 +53,7 @@
     "eventRegistrationButton": {
         "register": "Anmelden",
         "unregister": "Abmelden"
-    },    
+    },
     "eventRegistrationItem": {
         "addedByTrainer": "(von Trainer hinzugefügt)",
         "addedByTrialTraining": "(Probetraining)",

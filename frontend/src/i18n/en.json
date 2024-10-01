@@ -53,7 +53,7 @@
     "eventRegistrationButton": {
         "register": "Register",
         "unregister": "Unregister"
-    },    
+    },
     "eventRegistrationItem": {
         "addedByTrainer": "(added by trainer)",
         "addedByTrialTraining": "(trial training)",
