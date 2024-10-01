@@ -1,11 +1,11 @@
+import { EventCalendar } from "../../../components/eventCalendar/EventCalendar";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { Weekday } from "../../../core/types/Weekday";
-import { EventCalendar } from "../../../components/eventCalendar/EventCalendar";
+import colors from "../../../styles/colors.module.scss";
 import { ICalendarEvent } from "../model/ICalendarEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 import { useEventCalendarSectionViewModel } from "./useEventCalendarSectionViewModel";
-import colors from "../../../styles/colors.module.scss";
 
 export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   props
