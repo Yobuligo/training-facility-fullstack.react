@@ -50,6 +50,10 @@
     "eventPlanSection": {
         "addTraining": "Add training"
     },
+    "eventRegistrationButton": {
+        "register": "Register",
+        "unregister": "Unregister"
+    },    
     "eventRegistrationItem": {
         "addedByTrainer": "(added by trainer)",
         "addedByTrialTraining": "(trial training)",
@@ -199,10 +203,6 @@
     },
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
-    },
-    "myTrainingsContent": {
-        "register": "Register",
-        "unregister": "Unregister"
     },
     "passwordChange": {
         "changePassword": "Change password",

@@ -47,6 +47,10 @@
     "eventPlanSection": {
         "addTraining": "Training hinzufügen"
     },
+    "eventRegistrationButton": {
+        "register": "Anmelden",
+        "unregister": "Abmelden"
+    },    
     "eventRegistrationItem": {
         "addedByTrainer": "(von Trainer hinzugefügt)",
         "addedByTrialTraining": "(Probetraining)",
@@ -196,10 +200,6 @@
     },
     "myProfile": {
         "errorLoadingUserSession": "Fehler beim Laden der Benutzersitzung"
-    },
-    "myTrainingsContent": {
-        "register": "Anmelden",
-        "unregister": "Abmelden"
     },
     "passwordChange": {
         "changePassword": "Passwort ändern",
