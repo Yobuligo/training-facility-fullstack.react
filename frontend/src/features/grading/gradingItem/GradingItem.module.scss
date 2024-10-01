@@ -1,4 +1,5 @@
 @use "../../../styles/colors.module.scss";
+@use "../../../styles/mixins.scss";
 
 .gradingItem {
   display: flex;
@@ -17,13 +18,17 @@
 }
 
 .belt {
-  width: 10rem;
+  width: 7rem;
+
+  @include mixins.medium-screen {
+    width: 10rem;
+  }
 }
 
 .date {
-  font-family: "MerriweatherSans";
   position: absolute;
-  top: -0.5rem;
+  font-family: "MerriweatherSans";
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -31,7 +36,13 @@
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  row-gap: 2.7rem;
+  row-gap: 2.5rem;
+  
+  @include mixins.medium-screen {
+    top: -0.1rem;
+    left: 52%;
+    row-gap: 2.7rem;
+  }
 }
 
 .year {
@@ -39,7 +50,7 @@
   font-size: large;
 }
 
-.monthAndDay{
+.monthAndDay {
   display: flex;
   flex-direction: row;
   column-gap: 0.3rem;
@@ -48,7 +59,9 @@
 .details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  row-gap: 1rem;
+  // justify-content: space-evenly;
+  // justify-content: center;
 }
 
 .title {
@@ -61,6 +74,10 @@
 
 .examiners {
   color: colors.$color-grading-item-examiner-text;
+}
+
+.examinersNames{
+  font-weight: 600;
 }
 
 .deleteIcon {

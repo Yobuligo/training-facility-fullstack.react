@@ -40,7 +40,7 @@
 }
 
 .kup1Half {
-  fill: transparent;
+  fill: $color-grade-dan;
 }
 
 .kup2 {
@@ -105,6 +105,14 @@
 
 .kup9Half {
   fill: $color-grade-kup8;
+}
+
+.kupOutline{
+  stroke: $color-grade-outline;
+}
+
+.kup9Outline{
+  stroke: $color-grade-kup9-outline;
 }
 
 .preLoginLayout {
