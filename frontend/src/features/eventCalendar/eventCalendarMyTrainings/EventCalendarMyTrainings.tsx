@@ -1,7 +1,5 @@
-import { DateTimeSpanFilter } from "../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
-import { DateTime } from "../../../core/services/date/DateTime";
 import { EventInfo } from "../../../services/EventInfo";
-import { EventDefinitionList } from "../../eventDefinition/eventDefinitionList/EventDefinitionList";
+import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventMyTrainingsContent } from "../eventMyTrainingsContent/EventMyTrainingsContent";
@@ -38,12 +36,9 @@ export const EventCalendarMyTrainings: React.FC = () => {
         />
       ) : (
         <>
-          <DateTimeSpanFilter
-            fromDate={DateTime.getWeekStartDate(new Date())}
-            toDate={DateTime.getWeekEndDate(new Date())}
+          <EventDefinitionSection
+            eventDefinitions={viewModel.eventDefinitions}
           />
-
-          <EventDefinitionList eventDefinitions={viewModel.eventDefinitions} />
 
           <EventCalendarSection
             eventDefinitionLoader={viewModel.loadEventDefinitions}

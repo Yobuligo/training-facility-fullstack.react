@@ -27,6 +27,7 @@ export const Welcome: React.FC = () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventInstanceItemModels: IEventInstanceItemModel[] =
         await eventInstanceApi.findByUserForWeek(user.id, [
+          "id",
           "color",
           "from",
           "to",
