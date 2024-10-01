@@ -3,5 +3,5 @@ import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 
 export interface IEvent extends Event {
   id: string;
-  eventDefinition: IEventDefinition;
+  eventDefinition: IEventDefinition;  
 }
