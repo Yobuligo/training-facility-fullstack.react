@@ -1,32 +1,36 @@
 import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
-import { IEvent } from "../features/eventCalendar/model/IEvent";
+import { ICalendarEvent } from "../features/eventCalendar/model/ICalendarEvent";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 
 /**
- * This class is responsible for providing access to specific information regarding and instance of type {@link IEvent}
+ * This class is responsible for providing access to specific information regarding and instance of type {@link ICalendarEvent}
  */
 export class EventInfo {
   /**
-   * Finds an event instance, from the attached event definition of the {@link event},
-   * which matches the {@link event} start date.
+   * Finds an event instance, from the attached event definition of the {@link calendarEvent},
+   * which matches the {@link calendarEvent} start date.
    */
-  static findEventInstance(event: IEvent): IEventInstance | undefined {
-    const eventInstance = event.eventDefinition.eventInstances?.find(
+  static findEventInstance(
+    calendarEvent: ICalendarEvent
+  ): IEventInstance | undefined {
+    const eventInstance = calendarEvent.eventDefinition.eventInstances?.find(
       (eventInstance) =>
-        DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
-        DateTime.equals(eventInstance.to, checkNotNull(event.end))
+        DateTime.equals(
+          eventInstance.from,
+          checkNotNull(calendarEvent.start)
+        ) && DateTime.equals(eventInstance.to, checkNotNull(calendarEvent.end))
     );
     return eventInstance;
   }
 
   /**
-   * Finds the first event registration, from the attached event definition of the {@link event},
+   * Finds the first event registration, from the attached event definition of the {@link calendarEvent},
    * which matches the event start date and belongs to a specific user
    */
   static findFirstEventRegistrationByUserId(
-    event: IEvent,
+    calendarEvent: ICalendarEvent,
     userId: string
   ):
     | {
@@ -34,7 +38,7 @@ export class EventInfo {
         eventInstance: IEventInstance;
       }
     | undefined {
-    const eventInstances = event.eventDefinition.eventInstances;
+    const eventInstances = calendarEvent.eventDefinition.eventInstances;
     if (!eventInstances) {
       return undefined;
     }
@@ -48,8 +52,11 @@ export class EventInfo {
           );
           if (
             eventRegistration.userId === userId &&
-            DateTime.equals(eventInstance.from, checkNotNull(event.start)) &&
-            DateTime.equals(eventInstance.to, checkNotNull(event.end))
+            DateTime.equals(
+              eventInstance.from,
+              checkNotNull(calendarEvent.start)
+            ) &&
+            DateTime.equals(eventInstance.to, checkNotNull(calendarEvent.end))
           ) {
             return { instance: eventRegistration, eventInstance };
           }

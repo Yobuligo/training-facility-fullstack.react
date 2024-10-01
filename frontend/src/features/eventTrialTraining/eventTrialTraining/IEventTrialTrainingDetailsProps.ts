@@ -1,8 +1,8 @@
 import { IEventInstance } from "../../../shared/model/IEventInstance";
-import { IEvent } from "../../eventCalendar/model/IEvent";
+import { ICalendarEvent } from "../../eventCalendar/model/ICalendarEvent";
 
 export interface IEventTrialTrainingDetailsProps {
-  event: IEvent;
+  calendarEvent: ICalendarEvent;
   eventInstance: IEventInstance;
   onBack?: () => void;
 }

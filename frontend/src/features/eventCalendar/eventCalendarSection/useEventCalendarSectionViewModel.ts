@@ -10,24 +10,24 @@ import { useScreenSize } from "../../../hooks/useScreenSize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { matchesDateTimeSpan } from "../../../utils/matchesDateTimeSpan";
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 
 const eventDefinitionsToEvent = (
   eventDefinitions: IEventDefinition[],
   from: Date,
   to: Date
-): IEvent[] => {
+): ICalendarEvent[] => {
   // an EventDefinition can occur several times
   // assume an EventDefinition occurs each monday and the range is a month
   // then we have to create events for each monday
 
-  const events: IEvent[] = [];
+  const calendarEvents: ICalendarEvent[] = [];
 
   eventDefinitions.forEach((eventDefinition) => {
     switch (eventDefinition.recurrence) {
       case Recurrence.ONCE: {
-        events.push({
+        calendarEvents.push({
           id: eventDefinition.id,
           eventDefinition,
           start: eventDefinition.from,
@@ -44,7 +44,7 @@ const eventDefinitionsToEvent = (
             return;
           }
 
-          events.push({
+          calendarEvents.push({
             id: eventDefinition.id,
             eventDefinition,
             start: DateTime.create(
@@ -71,7 +71,7 @@ const eventDefinitionsToEvent = (
             return;
           }
           if (current.getDay() === weekday) {
-            events.push({
+            calendarEvents.push({
               id: eventDefinition.id,
               eventDefinition,
               start: DateTime.create(
@@ -94,7 +94,7 @@ const eventDefinitionsToEvent = (
           if (
             DateTime.toDay(current) === DateTime.toDay(eventDefinition.from)
           ) {
-            events.push({
+            calendarEvents.push({
               id: eventDefinition.id,
               eventDefinition,
               start: DateTime.create(
@@ -113,7 +113,7 @@ const eventDefinitionsToEvent = (
       }
     }
   });
-  return events;
+  return calendarEvents;
 };
 
 export const useEventCalendarSectionViewModel = (
@@ -121,7 +121,7 @@ export const useEventCalendarSectionViewModel = (
 ) => {
   const screenSize = useScreenSize();
   const [view, setView] = useState<View>(screenSize.isSmall() ? "day" : "week");
-  const [events, setEvents] = useState<IEvent[]>([]);
+  const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
   const [toTime, setToTime] = useState<Date | undefined>(undefined);
   const [fromDate, setFromDate] = useState<Date>(() => {
@@ -164,7 +164,7 @@ export const useEventCalendarSectionViewModel = (
           dateTimeSpan
         );
         const events = eventDefinitionsToEvent(eventDefinitions, from, to);
-        setEvents(events);
+        setCalendarEvents(events);
       }),
 
     [loadEventDefinitionRequest, props]
@@ -181,19 +181,19 @@ export const useEventCalendarSectionViewModel = (
    */
   useEffect(() => {
     const fromTime = DateTime.earliestTime(
-      ...events.map((event) => checkNotNull(event.start))
+      ...calendarEvents.map((event) => checkNotNull(event.start))
     );
     setFromTime(fromTime);
 
     let toTime = DateTime.latestTime(
-      ...events.map((event) => checkNotNull(event.end))
+      ...calendarEvents.map((event) => checkNotNull(event.end))
     );
     // display one more hour for to time to get a better overview
     if (toTime && DateTime.toHours(toTime) < 23) {
       toTime = DateTime.addMinutes(toTime, 15);
     }
     setToTime(toTime);
-  }, [events]);
+  }, [calendarEvents]);
 
   const onEventRangeChanged = (
     eventRange: Date[] | { start: Date; end: Date } | undefined
@@ -217,7 +217,7 @@ export const useEventCalendarSectionViewModel = (
   const onViewChanged = (view: View) => setView(view);
 
   return {
-    events,
+    events: calendarEvents,
     fromTime,
     onEventRangeChanged,
     onViewChanged,

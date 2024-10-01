@@ -37,7 +37,7 @@ export const useEventTrialTrainingDetailsViewModel = (
     fetchEventInstanceRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventInstance = await eventInstanceApi.insertFromEventSecured(
-        props.event
+        props.calendarEvent
       );
       setEventInstance(eventInstance);
     })

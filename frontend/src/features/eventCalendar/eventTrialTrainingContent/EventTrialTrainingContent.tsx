@@ -11,14 +11,14 @@ export const EventTrialTrainingContent: React.FC<
 > = (props) => {
   const { t } = useTranslation();
 
-  const onBook = () => props.onBook?.(props.event);
+  const onBook = () => props.onBook?.(props.calendarEvent);
 
   return (
     <EventContent
       className={styles.eventTrialTrainingContent}
-      eventDefinition={props.event.eventDefinition}
+      eventDefinition={props.calendarEvent.eventDefinition}
     >
-      {props.event.start && DateTime.isAfter(props.event.start) && (
+      {props.calendarEvent.start && DateTime.isAfter(props.calendarEvent.start) && (
         <SpinnerButton
           className={styles.bookButton}
           displaySpinner={false}

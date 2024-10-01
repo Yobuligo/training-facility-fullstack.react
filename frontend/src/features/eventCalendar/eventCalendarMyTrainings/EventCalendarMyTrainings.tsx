@@ -3,22 +3,22 @@ import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSec
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { EventMyTrainingsContent } from "../eventMyTrainingsContent/EventMyTrainingsContent";
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const viewModel = useEventCalendarMyTrainingsViewModel();
 
-  const renderEvent = (event: IEvent) => {
+  const renderEvent = (calendarEvent: ICalendarEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
-      event,
+      calendarEvent,
       viewModel.userId
     );
 
     // Render content and show register or unregister, depending on if the user is already registered or not
     return (
       <EventMyTrainingsContent
-        event={event}
+        calendarEvent={calendarEvent}
         isRegistered={eventRegistration !== undefined}
         userId={viewModel.userId}
         onRegister={() => viewModel.triggerReloadSignal()}

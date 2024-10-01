@@ -1,6 +1,6 @@
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export interface IEventTrialTrainingContentProps {
-  event: IEvent;
-  onBook?: (event: IEvent) => void;
+  calendarEvent: ICalendarEvent;
+  onBook?: (calendarEvent: ICalendarEvent) => void;
 }

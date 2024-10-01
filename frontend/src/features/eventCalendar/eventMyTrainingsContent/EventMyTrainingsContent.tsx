@@ -9,10 +9,10 @@ export const EventMyTrainingsContent: React.FC<
   return (
     <EventContent
       className={styles.eventMyTrainingsContent}
-      eventDefinition={props.event.eventDefinition}
+      eventDefinition={props.calendarEvent.eventDefinition}
     >
       <EventRegistrationButton
-        event={props.event}
+        calendarEvent={props.calendarEvent}
         isRegistered={props.isRegistered}
         onRegister={props.onRegister}
         onUnregister={props.onUnregister}

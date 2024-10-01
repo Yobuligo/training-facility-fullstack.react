@@ -24,7 +24,7 @@ export const EventRegistrationButton: React.FC<
           className={style(styles.registerButton, styles.unregisterButton)}
           displaySpinner={viewModel.isUnregisterRequestProcessing}
           onClick={(clickEvent) => {
-            viewModel.onUnregister(props.event);
+            viewModel.onUnregister(props.calendarEvent);
             clickEvent.stopPropagation();
           }}
         >
@@ -35,7 +35,7 @@ export const EventRegistrationButton: React.FC<
           className={styles.registerButton}
           displaySpinner={viewModel.isRegisterRequestProcessing}
           onClick={(clickEvent) => {
-            viewModel.onRegister(props.event);
+            viewModel.onRegister(props.calendarEvent);
             clickEvent.stopPropagation();
           }}
         >

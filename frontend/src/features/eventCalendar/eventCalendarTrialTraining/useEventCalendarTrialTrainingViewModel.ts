@@ -6,14 +6,14 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export const useEventCalendarTrialTrainingViewModel = () => {
   const { t } = useTranslation();
   const toast = useToast();
-  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
-    undefined
-  );
+  const [selectedCalendarEvent, setSelectedCalendarEvent] = useState<
+    ICalendarEvent | undefined
+  >(undefined);
   const [eventInstance, setEventInstance] = useState<
     IEventInstance | undefined
   >(undefined);
@@ -21,22 +21,22 @@ export const useEventCalendarTrialTrainingViewModel = () => {
     useTokenRequest();
 
   const onBack = () => {
-    setSelectedEvent(undefined);
+    setSelectedCalendarEvent(undefined);
     setEventInstance(undefined);
   };
 
-  const onBook = (event: IEvent) =>
+  const onBook = (calendarEvent: ICalendarEvent) =>
     fetchEventInstanceRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventInstance = await eventInstanceApi.insertFromEventSecured(
-        event
+        calendarEvent
       );
       if (eventInstance.state === EventInstanceState.CLOSED) {
         toast.warning(
           t(texts.eventCalendarTrialTraining.errorEventInstanceClosed)
         );
       } else {
-        setSelectedEvent(event);
+        setSelectedCalendarEvent(calendarEvent);
         setEventInstance(eventInstance);
       }
     });
@@ -45,7 +45,7 @@ export const useEventCalendarTrialTrainingViewModel = () => {
     isFetchEventInstanceRequestProcessing,
     onBack,
     onBook,
-    selectedEvent,
+    selectedEvent: selectedCalendarEvent,
     eventInstance,
   };
 };

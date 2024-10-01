@@ -1,7 +1,7 @@
-import { IEvent } from "../model/IEvent";
+import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export interface IEventMyTrainingsContentProps {
-  event: IEvent;
+  calendarEvent: ICalendarEvent;
   isRegistered: boolean;
   onRegister?: () => void;
   onUnregister?: () => void;

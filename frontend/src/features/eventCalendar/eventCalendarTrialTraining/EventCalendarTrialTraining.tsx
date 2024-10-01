@@ -19,7 +19,7 @@ export const EventCalendarTrialTraining: React.FC = () => {
     <div className={styles.eventCalendarTrialTraining}>
       {viewModel.eventInstance && viewModel.selectedEvent ? (
         <EventTrialTrainingDetails
-          event={viewModel.selectedEvent}
+          calendarEvent={viewModel.selectedEvent}
           eventInstance={viewModel.eventInstance}
           onBack={viewModel.onBack}
         />
@@ -34,7 +34,7 @@ export const EventCalendarTrialTraining: React.FC = () => {
           }}
           renderEvent={(event) => (
             <EventTrialTrainingContent
-              event={event}
+              calendarEvent={event}
               onBook={viewModel.onBook}
             />
           )}
