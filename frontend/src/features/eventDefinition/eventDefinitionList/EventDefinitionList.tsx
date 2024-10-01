@@ -21,6 +21,8 @@ export const EventDefinitionList: React.FC<IEventDefinitionListProps> = (
         key={event.id}
         event={event}
         isRegistered={eventRegistration !== undefined}
+        onRegister={props.onRegister}
+        onUnregister={props.onUnregister}
         userId={props.userId}
       />
     );

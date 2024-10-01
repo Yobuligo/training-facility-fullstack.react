@@ -16,7 +16,12 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
         toDate={viewModel.to}
         onChange={viewModel.onDateTimeSpanChanged}
       />
-      <EventDefinitionList events={viewModel.events} userId={props.userId} />
+      <EventDefinitionList
+        events={viewModel.events}
+        onRegister={viewModel.onRegister}
+        onUnregister={viewModel.onUnregister}
+        userId={props.userId}
+      />
     </div>
   );
 };

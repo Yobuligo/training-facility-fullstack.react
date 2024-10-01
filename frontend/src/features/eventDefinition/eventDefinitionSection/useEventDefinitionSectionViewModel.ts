@@ -1,7 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DateTime } from "../../../core/services/date/DateTime";
-import { useInitialize } from "../../../hooks/useInitialize";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventFactory } from "../../../services/EventFactory";
 import { IEvent } from "../../eventCalendar/model/IEvent";
 import { eventCreator } from "../eventDefinitionItem/eventCreator";
@@ -13,43 +11,35 @@ export const useEventDefinitionSectionViewModel = (
   const [from, setFrom] = useState(DateTime.getWeekStartDate(new Date()));
   const [to, setTo] = useState(DateTime.getWeekEndDate(new Date()));
   const [events, setEvents] = useState<IEvent[]>([]);
-  const [loadEventDefinitionsRequest, isLoadEventDefinitionRequestProcessing] =
-    useRequest();
-
-  const loadEventDefinitions = useCallback(
-    async (from: Date, to: Date) =>
-      loadEventDefinitionsRequest(async () => {
-        const eventDefinitions = await props.eventDefinitionLoader({
-          from,
-          to,
-        });
-        const events = EventFactory.createFromEventDefinitions(
-          eventCreator,
-          eventDefinitions,
-          from,
-          to
-        );
-        setEvents(events);
-      }),
-    [loadEventDefinitionsRequest, props]
-  );
-
-  useInitialize(() => loadEventDefinitions(from, to));
 
   useEffect(() => {
-    loadEventDefinitions(from, to);
-  }, [from, to]);
+    const events = EventFactory.createFromEventDefinitions(
+      eventCreator,
+      props.eventDefinitions,
+      from,
+      to
+    );
+    setEvents(events);
+  }, [from, props.eventDefinitions, to]);
+
+  const onReload = (from: Date, to: Date) => props.onReload?.({ from, to });
 
   const onDateTimeSpanChanged = (from: Date, to: Date) => {
     setFrom(from);
     setTo(to);
+    onReload(from, to);
   };
+
+  const onRegister = () => onReload(from, to);
+
+  const onUnregister = () => onReload(from, to);
 
   return {
     events,
     from,
-    isLoadEventDefinitionRequestProcessing,
     onDateTimeSpanChanged,
+    onRegister,
+    onUnregister,
     to,
   };
 };
