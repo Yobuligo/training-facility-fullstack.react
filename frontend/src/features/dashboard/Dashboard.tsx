@@ -1,83 +1,42 @@
-import { useEffect, useState } from "react";
-import { ITabItem } from "../../components/tabStrip/ITabItem";
+import { BurgerMenu } from "../../components/burgerMenu/BurgerMenu";
 import { TabStrip } from "../../components/tabStrip/TabStrip";
 import { TabStripContent } from "../../components/tabStripContent/TabStripContent";
-import { useAuth } from "../../hooks/useAuth";
-import { texts } from "../../lib/translation/texts";
-import { useTranslation } from "../../lib/translation/useTranslation";
-import { EventCalendarMyTrainings } from "../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
-import { EventCalendarPlanSection } from "../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
-import { MyGradingList } from "../grading/myGradingList/MyGradingList";
-import { MyProfile } from "../myProfile/MyProfile";
-import { UserProfileSection } from "../users/userProfileSection/UserProfileSection";
-import { Welcome } from "../welcome/Welcome";
+import { style } from "../../core/ui/style";
+
 import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
+import { useDashboardViewModel } from "./useDashboardViewModel";
 
 export const Dashboard: React.FC<IDashboardProps> = (props) => {
-  const [selected, setSelected] = useState(-1);
-  const { t } = useTranslation();
-  const auth = useAuth();
-
-  useEffect(() => {
-    if (props.displayWelcomeSignal) {
-      setSelected(-1);
-    }
-  }, [props.displayWelcomeSignal]);
-
-  const getTabItems = (): ITabItem[] => {
-    const tabItems: ITabItem[] = [];
-
-    if (auth.isAdmin()) {
-      tabItems.push({
-        title: t(texts.dashboard.users),
-        content: <UserProfileSection />,
-      });
-      tabItems.push({
-        title: t(texts.dashboard.planner),
-        content: <EventCalendarPlanSection />,
-      });
-    }
-
-    tabItems.push({
-      title: t(texts.dashboard.trainings),
-      content: <EventCalendarMyTrainings />,
-    });
-
-    tabItems.push({
-      title: t(texts.dashboard.gradings),
-      content: <MyGradingList />,
-    });
-
-    tabItems.push({
-      title: t(texts.dashboard.profile),
-      content: <MyProfile />,
-    });
-    return tabItems;
-  };
-
-  const onSelect = (_tabItem: ITabItem, index: number): void =>
-    setSelected(index);
+  const viewModel = useDashboardViewModel(props);
 
   return (
     <div>
-      <TabStrip
-        className={styles.dashboard}
-        onSelect={onSelect}
-        selected={selected}
-        tabItems={getTabItems()}
-      />
+      {viewModel.needsBurgerMenu && (
+        <div className={style(styles.navigation, styles.burgerMenuAndTabStrip)}>
+          <BurgerMenu
+            className={styles.burgerMenu}
+            captions={viewModel.captions}
+            onEntrySelect={(index) => viewModel.onSelect(index)}
+          />
+          <TabStrip
+            tabItems={viewModel.burgerMenuTabItems}
+            selected={0}
+            className={styles.tabStripWithBurgerMenu}
+          />
+        </div>
+      )}
+      {!viewModel.needsBurgerMenu && (
+        <TabStrip
+          className={styles.navigation}
+          onSelect={(_, index) => viewModel.onSelect(index)}
+          selected={viewModel.selected}
+          tabItems={viewModel.tabItems}
+        />
+      )}
       <TabStripContent
         children={
-          selected === -1 ? (
-            <div className={styles.dashboardContent}>
-              <Welcome />
-            </div>
-          ) : (
-            <div className={styles.dashboardContent}>
-              {getTabItems()[selected].content}
-            </div>
-          )
+          <div className={styles.dashboardContent}>{viewModel.content}</div>
         }
       />
     </div>

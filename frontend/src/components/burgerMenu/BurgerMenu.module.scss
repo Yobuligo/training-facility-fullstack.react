@@ -1,0 +1,49 @@
+@use '../../styles/colors.module.scss';
+@use '../../styles/mixins.scss';
+
+.burgerMenu {
+    overflow: hidden;
+}
+
+.buttonIcon {
+    width: 2rem;
+    height: auto;
+    fill: colors.$color-burger-menu-icon-fill;
+    display: block;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+}
+
+.menuEntries {
+    position: fixed;
+    top: 0;
+    left: -60vw;
+    z-index: 20;
+    width: 60vw;
+    height: 80%;
+    transition: left 0.3s ease-in-out;
+    background-color: transparentize(colors.$color-burger-menu-background, 0.3);
+    backdrop-filter: blur(4px);
+    padding-top: 1rem;
+}
+
+.menuEntry {
+    color: colors.$color-burger-menu-item-caption;
+    font-size: large;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.openMenu {
+    left: 0;
+    transition: left 0.3s ease-in-out;
+}

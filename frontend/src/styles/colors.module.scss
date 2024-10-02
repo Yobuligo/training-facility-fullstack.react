@@ -22,12 +22,15 @@ $color-disabled: rgba(211, 211, 211, 0.63);
 $color-text: $color-secondary-dark;
 $color-text-light: white;
 
-
 // components
 $color-backdrop: white;
 
 $color-border: rgba(128, 128, 128, 0.178); //for dialogs and cards
 $color-box-shadow: 8px 8px 8px $color-disabled; //for dialogs and cards
+
+$color-burger-menu-background: $color-primary-light;
+$color-burger-menu-icon-fill: white;
+$color-burger-menu-item-caption: $color-text-light;
 
 $color-button-background: $color-secondary;
 $color-button-text-disabled: $color-disabled;
@@ -101,6 +104,8 @@ $color-grade-kup-text: $color-secondary;
 $color-grading-item-examiner-text: $color-secondary-light;
 
 $color-language-select: $color-text-light;
+
+$color-navigation-background: $color-primary;
 
 $color-user-deactivated-background: $color-disabled;
 $color-user-deactivated-text: $color-primary-light;
