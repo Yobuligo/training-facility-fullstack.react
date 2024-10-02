@@ -57,7 +57,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
     <>
       {screenSize.isSmall() ? (
         <EventDefinitionSection
-          eventDefinitions={viewModel.eventDefinitions}
+          events={viewModel.calendarEvents}
           isEventDefinitionsLoading={
             viewModel.isLoadEventDefinitionRequestProcessing
           }

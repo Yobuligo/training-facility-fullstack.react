@@ -21,7 +21,7 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
         <PageSpinner />
       ) : (
         <EventDefinitionList
-          events={viewModel.events}
+          events={props.events}
           onSelect={props.onSelect}
           renderEvent={props.renderEvent}
         />
