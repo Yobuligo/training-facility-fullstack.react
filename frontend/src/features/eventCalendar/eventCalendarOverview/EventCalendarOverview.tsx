@@ -3,7 +3,6 @@ import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { requestToken } from "../../../api/utils/requestToken";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
-import { EventContent } from "../eventContent/EventContent";
 import styles from "./EventCalendarOverview.module.scss";
 
 /**
@@ -21,9 +20,6 @@ export const EventCalendarOverview: React.FC = () => {
             DateTime.getWeekSpanDates(new Date())
           );
         }}
-        renderEvent={(event) => (
-          <EventContent eventDefinition={event.eventDefinition} />
-        )}
         views={["day", "week"]}
       />
     </div>

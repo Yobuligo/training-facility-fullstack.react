@@ -4,9 +4,9 @@ import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
-import { useScreenSize } from "../../../hooks/useScreenSize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventFactory } from "../../../services/EventFactory";
+import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { ICalendarEvent } from "./../model/ICalendarEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 import { calendarEventCreator } from "./calendarEventCreator";
@@ -14,9 +14,11 @@ import { calendarEventCreator } from "./calendarEventCreator";
 export const useEventCalendarSectionViewModel = (
   props: IEventCalendarSectionProps
 ) => {
-  const screenSize = useScreenSize();
-  const [view, setView] = useState<View>(screenSize.isSmall() ? "day" : "week");
+  const [view, setView] = useState<View>("week");
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
+  const [eventDefinitions, setEventDefinitions] = useState<IEventDefinition[]>(
+    []
+  );
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
   const [toTime, setToTime] = useState<Date | undefined>(undefined);
   const [fromDate, setFromDate] = useState<Date>(() => {
@@ -49,7 +51,8 @@ export const useEventCalendarSectionViewModel = (
         throw new NotSupportedError();
     }
   });
-  const [loadEventDefinitionRequest] = useRequest();
+  const [loadEventDefinitionRequest, isLoadEventDefinitionRequestProcessing] =
+    useRequest();
 
   const loadEventDefinitions = useCallback(
     async (from: Date, to: Date) =>
@@ -65,6 +68,7 @@ export const useEventCalendarSectionViewModel = (
           to
         );
         setCalendarEvents(events);
+        setEventDefinitions(eventDefinitions);
       }),
 
     [loadEventDefinitionRequest, props]
@@ -114,12 +118,18 @@ export const useEventCalendarSectionViewModel = (
     throw new NotSupportedError();
   };
 
+  const onReload = (dateTimeSpan: IDateTimeSpan) =>
+    loadEventDefinitions(dateTimeSpan.from, dateTimeSpan.to);
+
   const onViewChanged = (view: View) => setView(view);
 
   return {
-    events: calendarEvents,
+    calendarEvents,
+    eventDefinitions,
     fromTime,
+    isLoadEventDefinitionRequestProcessing,
     onEventRangeChanged,
+    onReload,
     onViewChanged,
     toTime,
     view,

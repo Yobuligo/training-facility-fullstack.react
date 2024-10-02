@@ -4,6 +4,7 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { ISignal } from "../../../core/services/signal/ISignal";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { ICalendarEvent } from "../model/ICalendarEvent";
+import { IEvent } from "../model/IEvent";
 
 export interface IEventCalendarSectionProps {
   /**
@@ -13,7 +14,7 @@ export interface IEventCalendarSectionProps {
     dateTimeSpan: IDateTimeSpan
   ) => Promise<IEventDefinition[]>;
 
-  onEventSelected?: (calendarEvent: ICalendarEvent) => void;
+  onEventSelected?: (event: IEvent) => void;
 
   /**
    * Signal to trigger a reload
@@ -21,9 +22,9 @@ export interface IEventCalendarSectionProps {
   reloadSignal?: ISignal;
 
   /**
-   * Renders the {@link calendarEvent} by returning the content that should be displayed
+   * Renders the {@link event} by returning the content that should be displayed
    */
-  renderEvent: (calendarEvent: ICalendarEvent) => ReactNode;
+  renderEvent?: (event: IEvent) => ReactNode;
 
   /**
    * Renders the {@link calendarEvent} style if required, uses the default otherwise

@@ -3,7 +3,6 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventDefinitionDetails } from "../../eventDefinition/eventDefinitionDetails/EventDefinitionDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
-import { EventContent } from "../eventContent/EventContent";
 import styles from "./EventCalendarPlanSection.module.scss";
 import { useEventCalendarPlanSectionViewModel } from "./useEventCalendarPlanSectionViewModel";
 
@@ -29,9 +28,6 @@ export const EventCalendarPlanSection: React.FC = () => {
             eventDefinitionLoader={viewModel.onLoadEventDefinitions}
             onEventSelected={viewModel.onEventSelected}
             reloadSignal={viewModel.reloadSignal}
-            renderEvent={(event) => (
-              <EventContent eventDefinition={event.eventDefinition} />
-            )}
           />
         </div>
       )}

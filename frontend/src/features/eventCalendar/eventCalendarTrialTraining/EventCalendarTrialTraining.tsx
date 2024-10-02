@@ -1,10 +1,14 @@
 import { TokenRepository } from "../../../api/core/TokenRepository";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { requestToken } from "../../../api/utils/requestToken";
+import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventTrialTrainingDetails } from "../../eventTrialTraining/eventTrialTraining/EventTrialTrainingDetails";
+import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
-import { EventTrialTrainingContent } from "../eventTrialTrainingContent/EventTrialTrainingContent";
+import { IEvent } from "../model/IEvent";
 import styles from "./EventCalendarTrialTraining.module.scss";
 import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialTrainingViewModel";
 
@@ -13,7 +17,21 @@ import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialT
  * This calendar has no functionality like registration or planning the trainings but a user can book a trial training.
  */
 export const EventCalendarTrialTraining: React.FC = () => {
+  const { t } = useTranslation();
   const viewModel = useEventCalendarTrialTrainingViewModel();
+
+  const renderEvent = (event: IEvent) => (
+    <EventButtonContent>
+      {event.dateTimeSpan.from && DateTime.isAfter(event.dateTimeSpan.from) && (
+        <SpinnerButton
+          displaySpinner={false}
+          onClick={() => viewModel.onBook(event)}
+        >
+          {t(texts.trialTrainingContent.book)}
+        </SpinnerButton>
+      )}
+    </EventButtonContent>
+  );
 
   return (
     <div className={styles.eventCalendarTrialTraining}>
@@ -32,12 +50,7 @@ export const EventCalendarTrialTraining: React.FC = () => {
               DateTime.getWeekSpanDates(new Date())
             );
           }}
-          renderEvent={(event) => (
-            <EventTrialTrainingContent
-              calendarEvent={event}
-              onBook={viewModel.onBook}
-            />
-          )}
+          renderEvent={renderEvent}
           views={["day", "week"]}
         />
       )}
