@@ -21,7 +21,8 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [eventDefinitions, setEventDefinitions] = useState<IEventDefinition[]>(
     []
   );
-  const [loadEventDefinitionsRequest] = useRequest();
+  const [loadEventDefinitionsRequest, isLoadEventDefinitionRequestProcessing] =
+    useRequest();
   const fetchEventInstance = useFetchEventInstance();
 
   const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
@@ -56,6 +57,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
 
   return {
     eventDefinitions,
+    isLoadEventDefinitionRequestProcessing,
     loadEventDefinitions,
     onReload,
     onEventInstanceUnselect,

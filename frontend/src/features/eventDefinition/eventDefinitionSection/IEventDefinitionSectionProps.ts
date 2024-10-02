@@ -4,6 +4,7 @@ import { IEvent } from "../../eventCalendar/model/IEvent";
 
 export interface IEventDefinitionSectionProps {
   eventDefinitions: IEventDefinition[];
+  isEventDefinitionsLoading: boolean;
   onReload?: (dateTimeSpan: IDateTimeSpan) => void;
   onSelect?: (event: IEvent) => void;
   userId: string;

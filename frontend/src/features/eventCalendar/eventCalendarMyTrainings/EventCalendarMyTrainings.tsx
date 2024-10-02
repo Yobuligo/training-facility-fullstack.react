@@ -41,6 +41,9 @@ export const EventCalendarMyTrainings: React.FC = () => {
           {screenSize.isSmall() ? (
             <EventDefinitionSection
               eventDefinitions={viewModel.eventDefinitions}
+              isEventDefinitionsLoading={
+                viewModel.isLoadEventDefinitionRequestProcessing
+              }
               onReload={viewModel.onReload}
               onSelect={viewModel.onEventSelected}
               userId={viewModel.userId}
