@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateTime } from "../../core/services/date/DateTime";
 import { IDateTimeSpanFilterProps } from "./IDateTimeSpanFilterProps";
 
@@ -12,11 +12,29 @@ export const useDateTimeSpanFilterViewModel = (
     props.toDate ? DateTime.toDate(props.toDate) : ""
   );
   const now = new Date();
+  const [displayTodaySpinner, setDisplayTodaySpinner] = useState(false);
+  const [displayTomorrowSpinner, setDisplayTomorrowSpinner] = useState(false);
+  const [displayWeekSpinner, setDisplayWeekSpinner] = useState(false);
+  const [displayMonthSpinner, setDisplayMonthSpinner] = useState(false);
 
   const triggerOnChange = (from: Date, to: Date) => props.onChange?.(from, to);
 
-  const onClickDay = () => {
+  const resetSpinner = () => {
+    setDisplayTodaySpinner(false);
+    setDisplayTomorrowSpinner(false);
+    setDisplayWeekSpinner(false);
+    setDisplayMonthSpinner(false);
+  };
+
+  useEffect(() => {
+    if (props.isLoading === false) {
+      resetSpinner();
+    }
+  }, [props.isLoading]);
+
+  const onClickToday = () => {
     // set inputs from and to to the current date
+    setDisplayTodaySpinner(true);
     setFromDate(DateTime.toDate(now));
     setToDate(DateTime.toDate(now));
     triggerOnChange(now, now);
@@ -24,6 +42,7 @@ export const useDateTimeSpanFilterViewModel = (
 
   const onClickWeek = () => {
     // set inputs from and to to the current week span dates
+    setDisplayWeekSpinner(true);
     const weekStartDate = DateTime.getWeekStartDate(now);
     const weekEndDate = DateTime.getWeekEndDate(now);
     setFromDate(DateTime.toDate(weekStartDate));
@@ -33,6 +52,7 @@ export const useDateTimeSpanFilterViewModel = (
 
   const onClickMonth = () => {
     // set inputs from and to to the current month span dates
+    setDisplayMonthSpinner(true);
     const monthStartDate = DateTime.getMonthStartDate(now);
     const monthEndDate = DateTime.getMonthEndDate(now);
     setFromDate(DateTime.toDate(monthStartDate));
@@ -42,6 +62,7 @@ export const useDateTimeSpanFilterViewModel = (
 
   const onClickTomorrow = () => {
     // set inputs from and to to tomorrow's dates
+    setDisplayTomorrowSpinner(true);
     const tomorrowsDate = DateTime.addDays(now, 1);
     const tomorrow = DateTime.toDate(tomorrowsDate);
     setFromDate(tomorrow);
@@ -60,9 +81,13 @@ export const useDateTimeSpanFilterViewModel = (
   };
 
   return {
+    displayTodaySpinner,
+    displayTomorrowSpinner,
+    displayWeekSpinner,
+    displayMonthSpinner,
     fromDate,
-    onClickDay,
     onClickMonth,
+    onClickToday,
     onClickTomorrow,
     onClickWeek,
     onChangeFromDate,
