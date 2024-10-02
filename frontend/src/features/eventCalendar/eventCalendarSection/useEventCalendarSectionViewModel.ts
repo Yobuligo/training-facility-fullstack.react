@@ -6,7 +6,6 @@ import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventFactory } from "../../../services/EventFactory";
-import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { ICalendarEvent } from "./../model/ICalendarEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
 import { calendarEventCreator } from "./calendarEventCreator";
@@ -16,9 +15,6 @@ export const useEventCalendarSectionViewModel = (
 ) => {
   const [view, setView] = useState<View>("week");
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
-  const [eventDefinitions, setEventDefinitions] = useState<IEventDefinition[]>(
-    []
-  );
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
   const [toTime, setToTime] = useState<Date | undefined>(undefined);
   const [fromDate, setFromDate] = useState<Date>(() => {
@@ -68,7 +64,6 @@ export const useEventCalendarSectionViewModel = (
           to
         );
         setCalendarEvents(events);
-        setEventDefinitions(eventDefinitions);
       }),
 
     [loadEventDefinitionRequest, props]
@@ -118,14 +113,15 @@ export const useEventCalendarSectionViewModel = (
     throw new NotSupportedError();
   };
 
-  const onReload = (dateTimeSpan: IDateTimeSpan) =>
-    loadEventDefinitions(dateTimeSpan.from, dateTimeSpan.to);
+  const onReload = (dateTimeSpan: IDateTimeSpan) => {
+    setFromDate(dateTimeSpan.from);
+    setToDate(dateTimeSpan.to);
+  };
 
   const onViewChanged = (view: View) => setView(view);
 
   return {
     calendarEvents,
-    eventDefinitions,
     fromTime,
     isLoadEventDefinitionRequestProcessing,
     onEventRangeChanged,
