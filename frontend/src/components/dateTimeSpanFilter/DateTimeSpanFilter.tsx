@@ -18,27 +18,31 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
       <div className={styles.dateTimeSpanFilter}>
         <Toolbar>
           <SecondaryButton
-            onClick={viewModel.onClickDay}
             className={styles.button}
+            displaySpinner={viewModel.displayTodaySpinner}
+            onClick={viewModel.onClickToday}
           >
             {t(texts.general.dateTimeSpan.today)}
           </SecondaryButton>
           <SecondaryButton
-            onClick={viewModel.onClickTomorrow}
             className={styles.button}
+            displaySpinner={viewModel.displayTomorrowSpinner}
+            onClick={viewModel.onClickTomorrow}
           >
             {t(texts.general.dateTimeSpan.tomorrow)}
           </SecondaryButton>
 
           <SecondaryButton
-            onClick={viewModel.onClickWeek}
             className={styles.button}
+            displaySpinner={viewModel.displayWeekSpinner}
+            onClick={viewModel.onClickWeek}
           >
             {t(texts.general.dateTimeSpan.week)}
           </SecondaryButton>
           <SecondaryButton
-            onClick={viewModel.onClickMonth}
             className={styles.button}
+            displaySpinner={viewModel.displayMonthSpinner}
+            onClick={viewModel.onClickMonth}
           >
             {t(texts.general.dateTimeSpan.month)}
           </SecondaryButton>

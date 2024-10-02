@@ -46,6 +46,7 @@
 
 .button {
   padding: 0.5rem;
+  height: 2.5rem;
 
   @include mixins.medium-screen {
     padding: dimensions.$button-padding;

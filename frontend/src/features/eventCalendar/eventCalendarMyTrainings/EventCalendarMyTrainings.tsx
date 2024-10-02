@@ -1,31 +1,36 @@
-import { useScreenSize } from "../../../hooks/useScreenSize";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { EventInfo } from "../../../services/EventInfo";
-import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
+import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
+import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
-import { EventMyTrainingsContent } from "../eventMyTrainingsContent/EventMyTrainingsContent";
-import { ICalendarEvent } from "../model/ICalendarEvent";
+import { IEvent } from "../model/IEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const viewModel = useEventCalendarMyTrainingsViewModel();
-  const screenSize = useScreenSize();
 
-  const renderEvent = (calendarEvent: ICalendarEvent) => {
+  const renderEvent = (event: IEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
-      calendarEvent,
+      event,
       viewModel.userId
     );
 
-    // Render content and show register or unregister, depending on if the user is already registered or not
     return (
-      <EventMyTrainingsContent
-        calendarEvent={calendarEvent}
-        isRegistered={eventRegistration !== undefined}
-        userId={viewModel.userId}
-        onRegister={() => viewModel.triggerReloadSignal()}
-        onUnregister={() => viewModel.triggerReloadSignal()}
-      />
+      <>
+        {event.dateTimeSpan.from &&
+          DateTime.isAfter(event.dateTimeSpan.from) && (
+            <EventButtonContent>
+              <EventRegistrationButton
+                event={event}
+                isRegistered={eventRegistration !== undefined}
+                onRegister={() => viewModel.triggerReloadSignal()}
+                onUnregister={() => viewModel.triggerReloadSignal()}
+                userId={viewModel.userId}
+              />
+            </EventButtonContent>
+          )}
+      </>
     );
   };
 
@@ -37,26 +42,12 @@ export const EventCalendarMyTrainings: React.FC = () => {
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
-        <>
-          {screenSize.isSmall() ? (
-            <EventDefinitionSection
-              eventDefinitions={viewModel.eventDefinitions}
-              isEventDefinitionsLoading={
-                viewModel.isLoadEventDefinitionRequestProcessing
-              }
-              onReload={viewModel.onReload}
-              onSelect={viewModel.onEventSelected}
-              userId={viewModel.userId}
-            />
-          ) : (
-            <EventCalendarSection
-              eventDefinitionLoader={viewModel.loadEventDefinitions}
-              onEventSelected={viewModel.onEventSelected}
-              reloadSignal={viewModel.reloadSignal}
-              renderEvent={renderEvent}
-            />
-          )}
-        </>
+        <EventCalendarSection
+          eventDefinitionLoader={viewModel.loadEventDefinitions}
+          onEventSelected={viewModel.onEventSelected}
+          reloadSignal={viewModel.reloadSignal}
+          renderEvent={renderEvent}
+        />
       )}
     </div>
   );

@@ -1,5 +1,4 @@
 import { DateTimeSpanFilter } from "../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
-import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { EventDefinitionList } from "../eventDefinitionList/EventDefinitionList";
 import styles from "./EventDefinitionSection.module.scss";
 import { IEventDefinitionSectionProps } from "./IEventDefinitionSectionProps";
@@ -14,20 +13,15 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
     <div className={styles.eventDefinitionSection}>
       <DateTimeSpanFilter
         fromDate={viewModel.from}
-        toDate={viewModel.to}
+        isLoading={props.isEventDefinitionsLoading}
         onChange={viewModel.onDateTimeSpanChanged}
+        toDate={viewModel.to}
       />
-      {props.isEventDefinitionsLoading ? (
-        <PageSpinner />
-      ) : (
-        <EventDefinitionList
-          events={viewModel.events}
-          onRegister={viewModel.onRegister}
-          onSelect={props.onSelect}
-          onUnregister={viewModel.onUnregister}
-          userId={props.userId}
-        />
-      )}
+      <EventDefinitionList
+        events={props.events}
+        onSelect={props.onSelect}
+        renderEvent={props.renderEvent}
+      />
     </div>
   );
 };
