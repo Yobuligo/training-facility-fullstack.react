@@ -9,7 +9,7 @@
 	# useRequest must not call block, if the block is currently running
 	# Introduce HttpStatusCodes
 	- Set german as default language
-	- Add imprint and privacy policy
+	# Add imprint and privacy policy
 	
 # ErrorPage
 	# Clicking the Yeoljeong logo navigates to the dashboard
@@ -46,6 +46,7 @@
 	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
 	- Display event planner as list
+	- Mark trainings as private or public (public trainings can be seen in the training-times calendar and can be booked for trial trainings)
 	
 - My Trainings
 	# User can register on and unregister from trainings
