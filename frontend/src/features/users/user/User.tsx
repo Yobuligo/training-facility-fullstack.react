@@ -43,22 +43,14 @@ export const User: React.FC<IUserProps> = (props) => {
 
       {/* current user must not be lockable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
-        <Button
-          disabled={viewModel.displayMode}
-          onClick={viewModel.onToggleIsLocked}
-        >
-          {viewModel.isLocked
-            ? t(texts.user.unlock)
-            : t(texts.user.lock)}
+        <Button onClick={viewModel.onToggleIsLocked}>
+          {viewModel.isLocked ? t(texts.user.unlock) : t(texts.user.lock)}
         </Button>
       )}
 
       {/* current user must not be deletable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
-        <Button
-          disabled={viewModel.displayMode}
-          onClick={viewModel.onDeleteUser}
-        >
+        <Button onClick={viewModel.onDeleteUser}>
           {t(texts.user.deleteUser)}
         </Button>
       )}
