@@ -266,6 +266,7 @@
         "errorCityRequired": "City is required",
         "errorEmailRequired": "Email is required",
         "errorEmailInvalid": "Email is invalid",
+        "errorInvalidInput": "Please fill in all required fields and correct any invalid entries.",
         "errorSendEmail": "Error send invitation email",
         "firstname": "Firstname",
         "gender": "Gender",

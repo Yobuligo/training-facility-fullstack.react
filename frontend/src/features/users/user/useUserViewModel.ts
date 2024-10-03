@@ -504,6 +504,7 @@ export const useUserViewModel = (props: IUserProps) => {
     }
 
     if (!isValid) {
+      toast.error(t(texts.user.errorInvalidInput));
       throw new ValidationError();
     }
   };

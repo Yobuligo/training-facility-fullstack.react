@@ -266,6 +266,7 @@
         "errorCityRequired": "Stadt ist erforderlich",
         "errorEmailRequired": "E-Mail ist erforderlich",
         "errorEmailInvalid": "E-Mail ist ungültig",
+        "errorInvalidInput": "Bitte fülle alle Pflichtfelder aus und korrigiere fehlerhafte Eingaben.",
         "errorSendEmail": "Fehler beim Versenden der E-Mail",
         "firstname": "Vorname",
         "gender": "Geschlecht",

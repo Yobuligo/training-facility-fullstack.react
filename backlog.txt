@@ -159,6 +159,7 @@
 		# Invite must expire
 	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
 		# username, firstname, lastname, email, birthday, street, postal code, city
+		- message is displayed at input fields, but also as a toast
     - Improve: Display of buttons in user profile must be restructured
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
