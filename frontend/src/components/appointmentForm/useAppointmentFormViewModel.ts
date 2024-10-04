@@ -19,11 +19,15 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     undefined
   );
 
-  const [isMemberOnlyOptions, selectedIsMembersOnly, onIsMembersOnlyChange] =
-    useSelectOption(false, [
-      { key: true, text: t(texts.general.yes) },
-      { key: false, text: t(texts.general.no) },
-    ]);
+  // const [
+  //   isMemberOnly,
+  //   isMemberOnlyOptions,
+  //   selectedIsMembersOnly,
+  //   onIsMembersOnlyChange,
+  // ] = useSelectOption(props.isMemberOnly, [
+  //   { key: true, text: t(texts.general.yes) },
+  //   { key: false, text: t(texts.general.no) },
+  // ]);
 
   const recurrenceOptions: ISelectOption<Recurrence>[] = useMemo(
     () => [
@@ -116,8 +120,8 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   return {
     getFromWeekendDay,
     getToWeekendDay,
-    isMemberOnlyOptions,
-    onIsMembersOnlyChange,
+    // isMemberOnlyOptions,
+    // onIsMembersOnlyChange,
     onChangeRecurrence,
     onChangeFromDate,
     onChangeFromTime,
@@ -126,6 +130,6 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     onSubmit,
     recurrenceOptions,
     selectedRecurrence,
-    selectedIsMembersOnly,
+    // selectedIsMembersOnly,
   };
 };

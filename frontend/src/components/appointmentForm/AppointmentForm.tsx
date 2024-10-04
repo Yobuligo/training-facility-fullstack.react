@@ -74,13 +74,13 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         onSelect={viewModel.onChangeRecurrence}
       />
 
-      <LabeledSelect
+      {/* <LabeledSelect
         disabled={props.disabled}
         label={t(texts.appointmentForm.membersOnly)}
         options={viewModel.isMemberOnlyOptions}
         onSelect={viewModel.onIsMembersOnlyChange}
         selected={viewModel.selectedIsMembersOnly}
-      />
+      /> */}
     </form>
   );
 };
