@@ -1,9 +1,10 @@
 {
-    "AppointmentForm": {
+    "appointmentForm": {
         "description": "Description",
         "endDate": "End date",
         "endTime": "End time",
         "recurrence": "Recurrence",
+        "membersOnly": "Members only",
         "startDate": "Start date",
         "startTime": "Start time",
         "title": "Title"

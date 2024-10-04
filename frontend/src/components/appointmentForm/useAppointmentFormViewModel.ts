@@ -2,11 +2,15 @@ import { useMemo, useState } from "react";
 import { DateTime } from "../../core/services/date/DateTime";
 import { Recurrence } from "../../core/types/Recurrence";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
+import { useSelectOption } from "../../hooks/useSelectOption";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 
 export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   const debounceInterval = 500;
+  const { t } = useTranslation();
   const render = useRenderRecurrence();
   const [fromTimeout, setFromTimeout] = useState<NodeJS.Timeout | undefined>(
     undefined
@@ -14,6 +18,12 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   const [toTimeout, setToTimeout] = useState<NodeJS.Timeout | undefined>(
     undefined
   );
+
+  const [isMemberOnlyOptions, selectedIsMembersOnly, onIsMembersOnlyChange] =
+    useSelectOption(false, [
+      { key: true, text: t(texts.general.yes) },
+      { key: false, text: t(texts.general.no) },
+    ]);
 
   const recurrenceOptions: ISelectOption<Recurrence>[] = useMemo(
     () => [
@@ -106,6 +116,8 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   return {
     getFromWeekendDay,
     getToWeekendDay,
+    isMemberOnlyOptions,
+    onIsMembersOnlyChange,
     onChangeRecurrence,
     onChangeFromDate,
     onChangeFromTime,
@@ -114,5 +126,6 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     onSubmit,
     recurrenceOptions,
     selectedRecurrence,
+    selectedIsMembersOnly,
   };
 };

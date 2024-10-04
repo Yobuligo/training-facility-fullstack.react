@@ -4,6 +4,7 @@
         "endDate": "Enddatum",
         "endTime": "Endzeit",
         "recurrence": "Wiederholung",
+        "membersOnly": "Nur für Mitglieder",
         "startDate": "Startdatum",
         "startTime": "Startzeit",
         "title": "Titel"
