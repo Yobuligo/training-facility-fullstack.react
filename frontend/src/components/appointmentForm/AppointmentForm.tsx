@@ -12,28 +12,26 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
 
   return (
     <form className={styles.appointmentForm} onSubmit={viewModel.onSubmit}>
-      <div>
-        <LabeledInput
-          disabled={props.disabled}
-          error={props.titleError}
-          isOptional={props.titleIsOptional}
-          label={t(texts.AppointmentForm.title)}
-          maxLength={100}
-          onChange={props.setTitle}
-          value={props.title}
-        />
-      </div>
-      <div>
-        <LabeledInput
-          disabled={props.disabled}
-          error={props.descriptionError}
-          isOptional={props.descriptionIsOptional}
-          label={t(texts.AppointmentForm.description)}
-          maxLength={100}
-          onChange={props.setDescription}
-          value={props.description}
-        />
-      </div>
+      <LabeledInput
+        disabled={props.disabled}
+        error={props.titleError}
+        isOptional={props.titleIsOptional}
+        label={t(texts.AppointmentForm.title)}
+        maxLength={100}
+        onChange={props.setTitle}
+        value={props.title}
+      />
+
+      <LabeledInput
+        disabled={props.disabled}
+        error={props.descriptionError}
+        isOptional={props.descriptionIsOptional}
+        label={t(texts.AppointmentForm.description)}
+        maxLength={100}
+        onChange={props.setDescription}
+        value={props.description}
+      />
+
       <div className={styles.dateTime}>
         <LabeledInput
           disabled={props.disabled}
@@ -50,6 +48,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
           value={props.fromTime}
         />
       </div>
+
       <div className={styles.dateTime}>
         <LabeledInput
           disabled={props.disabled}
@@ -66,15 +65,14 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
           value={props.toTime}
         />
       </div>
-      <div>
-        <LabeledSelect
-          disabled={props.disabled}
-          label={t(texts.AppointmentForm.recurrence)}
-          options={viewModel.recurrenceOptions}
-          selected={viewModel.selectedRecurrence}
-          onSelect={viewModel.onChangeRecurrence}
-        />
-      </div>
+
+      <LabeledSelect
+        disabled={props.disabled}
+        label={t(texts.AppointmentForm.recurrence)}
+        options={viewModel.recurrenceOptions}
+        selected={viewModel.selectedRecurrence}
+        onSelect={viewModel.onChangeRecurrence}
+      />
     </form>
   );
 };
