@@ -33,14 +33,8 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
     [t]
   );
 
-  const selectedGradeOption = gradeOptions.find(
-    (gradeOption) => gradeOption.key === grade
-  );
-
   const onChangeAchievedAt = (newValue: string) =>
     setAchievedAt(new Date(newValue));
-
-  const onGradeChange = (option: ISelectOption<Grade>) => setGrade(option.key);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
@@ -59,12 +53,12 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   return {
     achievedAt,
     examiners,
+    grade,
     gradeOptions,
     onChangeAchievedAt,
     onConfirm,
-    onGradeChange,
     onSubmit,
-    selectedGradeOption,
     setExaminers,
+    setGrade,
   };
 };

@@ -173,12 +173,6 @@ export const useUserViewModel = (props: IUserProps) => {
     [t]
   );
 
-  const selectedGenderOption =
-    gender === Gender.FEMALE ? genderOptions[0] : genderOptions[1];
-
-  const onGenderChange = (option: ISelectOption<Gender>) =>
-    setGender(option.key);
-
   const tariffOptions: ISelectOption<Tariff>[] = useMemo(
     () => [
       { key: Tariff.TEENAGERS_ADULTS, text: t(texts.tariff.teenagersAdults) },
@@ -196,13 +190,6 @@ export const useUserViewModel = (props: IUserProps) => {
     [t]
   );
 
-  const selectedTariffOption = tariffOptions.find(
-    (tariffOption) => tariffOption.key === tariff
-  );
-
-  const onTariffChange = (option: ISelectOption<Tariff>) =>
-    setTariff(option.key);
-
   const isAdminOptions: ISelectOption<boolean>[] = useMemo(
     () => [
       { key: true, text: t(texts.general.yes) },
@@ -210,12 +197,6 @@ export const useUserViewModel = (props: IUserProps) => {
     ],
     [t]
   );
-
-  const selectedIsAdminOption =
-    isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
-
-  const onIsAdminChange = (option: ISelectOption<boolean>) =>
-    setIsAdmin(option.key);
 
   const isPersistedUser =
     !(props.user instanceof DummyUser) || props.user.isPersisted === true;
@@ -525,8 +506,10 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
+    gender,
     genderOptions,
     gradings,
+    isAdmin,
     isAdminOptions,
     isLocked,
     isPersistedUser,
@@ -542,12 +525,9 @@ export const useUserViewModel = (props: IUserProps) => {
     onChangePostalCode,
     onDeleteGrading,
     onDeleteUser,
-    onIsAdminChange,
-    onGenderChange,
     onPasswordReset,
     onSave,
     onSendUserInvite,
-    onTariffChange,
     onToggleCollapseAddress,
     onToggleCollapseBank,
     onToggleCollapseGradings,
@@ -560,9 +540,6 @@ export const useUserViewModel = (props: IUserProps) => {
     postalCodeError,
     profileDetailsSettings,
     onChangePassword,
-    selectedIsAdminOption,
-    selectedGenderOption,
-    selectedTariffOption,
     setBankAccountBIC,
     setBankAccountIBAN,
     setBankAccountInstitution,
@@ -574,11 +551,14 @@ export const useUserViewModel = (props: IUserProps) => {
     setFirstname,
     setLastname,
     setGender,
+    setIsAdmin,
     setPhone,
     setStreet,
+    setTariff,
     setUsername,
     street,
     streetError,
+    tariff,
     tariffOptions,
     username,
     usernameError,

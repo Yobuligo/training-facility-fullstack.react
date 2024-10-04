@@ -70,8 +70,8 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         disabled={props.disabled}
         label={t(texts.appointmentForm.recurrence)}
         options={viewModel.recurrenceOptions}
-        selected={viewModel.selectedRecurrence}
-        onSelect={viewModel.onChangeRecurrence}
+        value={props.recurrence}
+        onSelect={(recurrence) => props.setRecurrence(recurrence)}
       />
 
       {/* <LabeledSelect

@@ -1,12 +1,12 @@
 import { ISelectOption } from "../select/ISelectOption";
 
-export interface ILabeledSelectProps<T extends ISelectOption<any>> {
+export interface ILabeledSelectProps<T> {
   className?: string;
   disabled?: boolean;
   error?: string;
+  value: T;
   isOptional?: boolean;
   label: string;
-  onSelect?: (option: T) => void;
-  options: T[];
-  selected?: T;
+  onSelect?: (selectedValue: T) => void;
+  options: ISelectOption<T>[];
 }

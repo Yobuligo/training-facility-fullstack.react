@@ -113,8 +113,8 @@ export const User: React.FC<IUserProps> = (props) => {
             disabled={viewModel.displayMode}
             label={t(texts.user.gender)}
             options={viewModel.genderOptions}
-            onSelect={viewModel.onGenderChange}
-            selected={viewModel.selectedGenderOption}
+            onSelect={viewModel.setGender}
+            value={viewModel.gender}
           />
 
           <LabeledInput
@@ -148,8 +148,8 @@ export const User: React.FC<IUserProps> = (props) => {
             disabled={props.isAdminMode === true ? viewModel.displayMode : true}
             label={t(texts.user.tariff)}
             options={viewModel.tariffOptions}
-            onSelect={viewModel.onTariffChange}
-            selected={viewModel.selectedTariffOption}
+            onSelect={viewModel.setTariff}
+            value={viewModel.tariff}
           />
         </UserProfileGroup>
 
@@ -279,8 +279,8 @@ export const User: React.FC<IUserProps> = (props) => {
               disabled={viewModel.displayMode}
               label={t(texts.user.isAdmin)}
               options={viewModel.isAdminOptions}
-              onSelect={viewModel.onIsAdminChange}
-              selected={viewModel.selectedIsAdminOption}
+              onSelect={viewModel.setIsAdmin}
+              value={viewModel.isAdmin}
             />
           )}
           <Toolbar className={screenSize.isSmall() ? styles.toolbar : ""}>
