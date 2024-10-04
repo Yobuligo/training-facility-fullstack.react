@@ -10,6 +10,7 @@ export class DummyEventDefinition extends Dummy implements IEventDefinition {
   eventInstances: IEventInstance[] = [];
   color: string = colors.colorEventDefinition1;
   description: string = "";
+  isMemberOnly: boolean = false;
   recurrence: Recurrence = Recurrence.ONCE;
   title: string = "";
   id: string = uuid();
