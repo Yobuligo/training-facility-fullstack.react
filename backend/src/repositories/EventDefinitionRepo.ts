@@ -1,6 +1,5 @@
 import sequelize from "sequelize";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
-import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
 import { EventDefinition } from "../model/EventDefinition";
@@ -49,36 +48,6 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     let eventDefinitions = await this.selectEventDefinitions(dateTimeSpan);
     eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
     return eventDefinitions;
-  }
-
-  /**
-   * Checks if {@link eventDefinition} matches a date time span {@link from} {@link to}
-   */
-  private matchesDateTimeSpan(
-    from: Date,
-    to: Date,
-    eventDefinition: IEventDefinition
-  ): boolean {
-    // if the range is from e.g. 1 - 5 and eventDefinitionFrom starts at 7, it doesn't match
-    const dateTimeSpanTo = DateTime.toDate(to);
-    const eventDefinitionFrom = DateTime.toDate(eventDefinition.from);
-    if (eventDefinitionFrom > dateTimeSpanTo) {
-      return false;
-    }
-
-    // if from and to date of eventDefinition is equal, it means that the definition counts endless, this matches so return true
-    const eventDefinitionTo = DateTime.toDate(eventDefinition.to);
-    if (eventDefinitionFrom === eventDefinitionTo) {
-      return true;
-    }
-
-    // if the range is from e.g. 5 - 10 and eventDefinitionTo ends at 4, it doesn't match
-    const dateTimeSpanFrom = DateTime.toDate(from);
-    if (eventDefinitionTo < dateTimeSpanFrom) {
-      return false;
-    }
-
-    return true;
   }
 
   private async selectEventDefinitions(
@@ -238,6 +207,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           creatorUserId: row.creatorUserId,
           description: row.description,
           from: row.from,
+          isMemberOnly: row.isMemberOnly,
           recurrence: row.recurrence,
           title: row.title,
           to: row.to,

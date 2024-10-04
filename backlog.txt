@@ -66,7 +66,6 @@
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
 	
-	
 - Event Registration
 	# Display spinner when loading registrations
 	# Registered user must be displayed
@@ -203,6 +202,7 @@
 	# Registered user is displayed in event registration list of the event instance and marked as trial training
 	# Registered user can be marked as present, missing or open
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
+	- Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
 
 # Login
@@ -232,6 +232,7 @@
 	
 # Event Calendar Overview
 	# Provide separate route to calendar overview in display mode
+	- Member only trainings must not be displayed
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem
