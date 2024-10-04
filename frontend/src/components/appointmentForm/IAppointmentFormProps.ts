@@ -1,4 +1,5 @@
 import { Recurrence } from "../../core/types/Recurrence";
+import { Boolean } from "../../shared/types/Boolean";
 
 export interface IAppointmentFormProps {
   disabled?: boolean;
@@ -11,13 +12,13 @@ export interface IAppointmentFormProps {
   /**
    * Defines if the appointment is only visible for members but not e.g. for people who wants to book a trial training.
    */
-  isMemberOnly: boolean;
+  isMemberOnly: Boolean;
 
   recurrence: Recurrence;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setFromDate: React.Dispatch<React.SetStateAction<string>>;
   setFromTime: React.Dispatch<React.SetStateAction<string>>;
-  setIsMemberOnly: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsMemberOnly: React.Dispatch<React.SetStateAction<Boolean>>;
   setRecurrence: React.Dispatch<React.SetStateAction<Recurrence>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setToDate: React.Dispatch<React.SetStateAction<string>>;

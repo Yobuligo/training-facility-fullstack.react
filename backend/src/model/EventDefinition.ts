@@ -15,6 +15,7 @@ const eventDefinition: ModelStatic<
   creatorUserId: DataTypes.UUID,
   description: DataTypes.STRING(100),
   from: DataTypes.DATE,
+  isMemberOnly: DataTypes.BOOLEAN,
   recurrence: DataTypes.INTEGER,
   title: DataTypes.STRING(100),
   to: DataTypes.DATE,
