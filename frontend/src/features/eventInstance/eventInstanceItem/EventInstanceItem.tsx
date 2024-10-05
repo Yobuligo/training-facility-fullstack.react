@@ -5,6 +5,9 @@ import { style } from "../../../core/ui/style";
 import { useRenderDate } from "../../../hooks/useRenderDate";
 import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
+import { useScreenSize } from "../../../hooks/useScreenSize";
+import { MemberOnlyIcon } from "../../../icons/MemberOnlyIcon";
+import { Boolean } from "../../../shared/types/Boolean";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
@@ -12,6 +15,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   const renderWeekday = useRenderWeekday();
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
+  const screenSize = useScreenSize();
 
   const renderChildren = () => (
     <div className={style(styles.children, props.classNameChildren)}>
@@ -25,8 +29,15 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
         <div className={styles.header}>
           <Banner color={props.eventInstanceItemModel.color} />
           <div className={styles.content}>
-            <div className={styles.title}>
-              {props.eventInstanceItemModel.title}
+            <div className={styles.titleContainer}>
+              <div className={styles.title}>
+                {props.eventInstanceItemModel.title}
+              </div>
+              {props.isMemberOnly === Boolean.true && screenSize.isSmall() ? (
+                <MemberOnlyIcon />
+              ) : (
+                <></>
+              )}
             </div>
             <div className={styles.timeContainer}>
               <div className={styles.weekday}>

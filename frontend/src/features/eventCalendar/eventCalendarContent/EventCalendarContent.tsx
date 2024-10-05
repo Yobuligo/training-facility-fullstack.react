@@ -1,6 +1,6 @@
 import { Banner } from "../../../components/banner/Banner";
 import { style } from "../../../core/ui/style";
-import { PrivateIcon } from "../../../icons/PrivateIcon";
+import { MemberOnlyIcon } from "../../../icons/MemberOnlyIcon";
 import styles from "./EventCalendarContent.module.scss";
 import { IEventCalendarContentProps } from "./IEventCalendarContentProps";
 
@@ -17,11 +17,7 @@ export const EventCalendarContent: React.FC<IEventCalendarContentProps> = (
         <div className={styles.header}>
           <div className={styles.titleContainer}>
             <h4 className={styles.title}>{props.eventDefinition.title}</h4>
-            {props.eventDefinition.isMemberOnly ? (
-              <PrivateIcon className={styles.icon} />
-            ) : (
-              <></>
-            )}
+            {props.eventDefinition.isMemberOnly ? <MemberOnlyIcon /> : <></>}
           </div>
           <span className={styles.description}>
             {props.eventDefinition.description}

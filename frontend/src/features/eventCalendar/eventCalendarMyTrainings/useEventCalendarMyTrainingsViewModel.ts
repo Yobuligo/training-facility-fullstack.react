@@ -15,6 +15,9 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
     IEventInstance | undefined
   >(undefined);
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
+    undefined
+  );
   const auth = useAuth();
   const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
@@ -25,12 +28,16 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     useRequest();
   const fetchEventInstance = useFetchEventInstance();
 
-  const onEventInstanceUnselect = () => setSelectedEventInstance(undefined);
+  const onEventInstanceUnselect = () => {
+    setSelectedEventInstance(undefined);
+    setSelectedEvent(undefined);
+  };
 
   const onEventSelected = async (event: IEvent) => {
     if (auth.isAdmin()) {
       const eventInstance = await fetchEventInstance(event);
       setSelectedEventInstance(eventInstance);
+      setSelectedEvent(event);
     }
   };
 
@@ -63,6 +70,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     onEventInstanceUnselect,
     onEventSelected,
     reloadSignal,
+    selectedEvent,
     selectedEventInstance,
     triggerReloadSignal,
     userId: user.id,

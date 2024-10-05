@@ -23,7 +23,10 @@ export const EventRegistrationSection: React.FC<
       {viewModel.isLoadEventRegistrationRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
+        <EventInstanceItem
+          eventInstanceItemModel={props.eventInstance}
+          isMemberOnly={props.isMemberOnly}
+        >
           <div className={styles.buttons}>
             {props.eventInstance.calledOff === Boolean.false ? (
               <SecondaryButton

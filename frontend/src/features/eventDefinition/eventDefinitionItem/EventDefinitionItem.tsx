@@ -22,6 +22,7 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
     <EventInstanceItem
       classNameChildren={styles.children}
       eventInstanceItemModel={eventInstanceItemModel}
+      isMemberOnly={eventDefinition.isMemberOnly}
       renderChildrenInline={true}
       onClick={onClick}
     >

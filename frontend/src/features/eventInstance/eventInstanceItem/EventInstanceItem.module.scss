@@ -39,6 +39,12 @@ $medium-screen-width: 46rem;
   font-weight: 500;
 }
 
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .weekday {
   width: 4rem;
   font-size: large;

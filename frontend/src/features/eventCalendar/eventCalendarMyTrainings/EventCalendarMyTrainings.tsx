@@ -2,8 +2,8 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
-import { EventContent } from "../eventContent/EventContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
+import { EventContent } from "../eventContent/EventContent";
 import { IEvent } from "../model/IEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
@@ -36,9 +36,10 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      {viewModel.selectedEventInstance ? (
+      {viewModel.selectedEventInstance && viewModel.selectedEvent ? (
         <EventRegistrationDetails
           eventInstance={viewModel.selectedEventInstance}
+          isMemberOnly={viewModel.selectedEvent.eventDefinition.isMemberOnly}
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (
