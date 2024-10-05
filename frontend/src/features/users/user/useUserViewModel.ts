@@ -345,13 +345,21 @@ export const useUserViewModel = (props: IUserProps) => {
     updateUserRoles();
     userProfile.userGradings = gradings;
 
-    confirmDialog.show(
-      "Send invitation",
-      "Would you like to send an invitation to the created user?",
-      { displayCancelButton: false }
-    );
-
-    props.onSave?.(props.user);
+    if (props.user instanceof DummyUser && props.user.isPersisted === false) {
+      confirmDialog.show(
+        t(texts.user.sendInvitation),
+        t(texts.user.sendInvitationQuestion),
+        {
+          displayCancelButton: false,
+          cancelButtonCaption: t(texts.general.no),
+          okayButtonCaption: t(texts.general.yes),
+          onCancel: () => props.onSave?.(props.user, true),
+          onOkay: () => props.onSave?.(props.user, false),
+        }
+      );
+    } else {
+      props.onSave?.(props.user, false);
+    }
   };
 
   const handleSendMailError = (error: any): boolean => {

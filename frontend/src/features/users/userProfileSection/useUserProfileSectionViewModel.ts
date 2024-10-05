@@ -7,6 +7,7 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUser } from "../../../model/DummyUser";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
+import { useSendUserInvite } from "../hooks/useSendUserInvite";
 
 export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
@@ -20,6 +21,7 @@ export const useUserProfileSectionViewModel = () => {
   const [deleteUserRequest] = useRequest();
   const [unlockUserRequest] = useRequest();
   const [lockUserRequest] = useRequest();
+  const [sendUserInvite] = useSendUserInvite();
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
@@ -102,10 +104,15 @@ export const useUserProfileSectionViewModel = () => {
       await userApi.delete(user);
     });
 
-  const insertUser = async (user: IUser) =>
+  const insertUser = async (user: IUser, sendInvite: boolean) =>
     insertUserRequest(async () => {
       const userApi = new UserApi();
       const createdUser = await userApi.insert(user);
+
+      if (sendInvite) {
+        await sendUserInvite(user);
+      }
+
       updateUserShort(createdUser, user.id);
 
       // if created user is selected, replace by new created instance, which has an valid uuid
@@ -119,10 +126,10 @@ export const useUserProfileSectionViewModel = () => {
       updateUserShort(user);
     });
 
-  const onChange = (user: IUser) => {
+  const onSave = (user: IUser, sendInvite: boolean) => {
     if (user instanceof DummyUser && user.isPersisted === false) {
       user.setIsPersisted();
-      insertUser(user);
+      insertUser(user, sendInvite);
     } else {
       updateUser(user);
     }
@@ -207,7 +214,7 @@ export const useUserProfileSectionViewModel = () => {
     onAppend,
     onBack,
     onCancel,
-    onChange,
+    onSave,
     onLock,
     onDelete,
     onSelect,

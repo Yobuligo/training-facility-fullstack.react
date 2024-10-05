@@ -281,6 +281,7 @@
         "postalCode": "Postal Code",
         "changePassword": "Change password",
         "sendInvitation": "Send invitation",
+        "sendInvitationQuestion": "Would you like to send an invitation to the created user?",
         "street": "Street",
         "successResetPassword": "Reset password request was send to {{user}}",
         "successSendUserInvite": "Invitation was send to {{user}}",
