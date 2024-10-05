@@ -1,5 +1,9 @@
 @use '../../../styles/mixins.scss';
 
+.introduction {
+    font-weight: 600;
+}
+
 .gradingList {
     @include mixins.medium-screen {
         margin-top: 1rem;

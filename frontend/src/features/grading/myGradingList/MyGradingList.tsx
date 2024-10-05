@@ -31,7 +31,7 @@ export const MyGradingList: React.FC = () => {
         <PageSpinner />
       ) : (
         <>
-          <p>{t(texts.myGradingList.introduction)}</p>
+          <p className={styles.introduction}>{t(texts.myGradingList.introduction)}</p>
           <GradingList
             displayMode={true}
             isAdminMode={false}
