@@ -26,7 +26,7 @@ export const User: React.FC<IUserProps> = (props) => {
     <>
       {viewModel.isPersistedUser && (
         <SpinnerButton
-          displaySpinner={viewModel.isSendUserInviteRequestProcessing}
+          displaySpinner={viewModel.isSendingUserInvite}
           onClick={viewModel.onSendUserInvite}
         >
           {t(texts.user.sendInvitation)}
@@ -34,7 +34,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
       {viewModel.isPersistedUser && (
         <SpinnerButton
-          displaySpinner={viewModel.isPasswordResetRequestProcessing}
+          displaySpinner={viewModel.isSendingPasswordResetRequest}
           onClick={viewModel.onPasswordReset}
         >
           {t(texts.user.resetPassword)}

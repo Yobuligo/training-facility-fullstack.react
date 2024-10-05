@@ -110,7 +110,7 @@ export const useUserProfileSectionViewModel = () => {
       const createdUser = await userApi.insert(user);
 
       if (sendInvite) {
-        await sendUserInvite(user);
+        await sendUserInvite(createdUser);
       }
 
       updateUserShort(createdUser, user.id);

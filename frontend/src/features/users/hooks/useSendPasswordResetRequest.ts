@@ -11,22 +11,21 @@ import { UserInviteType } from "../../../shared/types/UserInviteType";
 import { uuid } from "../../../utils/uuid";
 import { useHandleSendEmailError } from "./useHandleSendEmailError";
 
-export const useSendUserInvite = (): [
+export const useSendPasswordResetRequest = (): [
   send: (user: IUser) => Promise<void>,
   isSending: boolean
 ] => {
   const { t } = useTranslation();
   const handleSendEmailError = useHandleSendEmailError();
-  const [sendUserInviteRequest, isSendUserInviteRequestProcessing] =
-    useRequest();
+  const [passwordResetRequest, isPasswordResetRequestProcessing] = useRequest();
   const toast = useToast();
 
   const send = async (user: IUser) =>
-    await sendUserInviteRequest(async () => {
+    await passwordResetRequest(async () => {
       const userInvite: IUserInvite = {
         id: uuid(),
         expiresAt: DateTime.addDays(new Date(), 5),
-        type: UserInviteType.REGISTER,
+        type: UserInviteType.CHANGE_PASSWORD,
         userId: user.id,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -34,11 +33,11 @@ export const useSendUserInvite = (): [
       const userInviteApi = new UserInviteApi();
       await userInviteApi.insert(userInvite);
       toast.success(
-        t(texts.user.successSendUserInvite, {
+        t(texts.user.successResetPassword, {
           user: UserInfo.toFullName(user),
         })
       );
     }, handleSendEmailError);
 
-  return [send, isSendUserInviteRequestProcessing];
+  return [send, isPasswordResetRequestProcessing];
 };

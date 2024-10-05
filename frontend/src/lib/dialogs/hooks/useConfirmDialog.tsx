@@ -37,6 +37,8 @@ export const useConfirmDialog = () => {
       {display && (
         <ConfirmDialog
           displayCancelButton={confirmDialogOptions?.displayCancelButton}
+          cancelButtonCaption={confirmDialogOptions?.cancelButtonCaption}
+          okayButtonCaption={confirmDialogOptions?.okayButtonCaption}
           onCancel={onCancel}
           onOkay={onOkay}
           title={title}
