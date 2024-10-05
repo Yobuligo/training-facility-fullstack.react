@@ -120,6 +120,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         SELECT 
           def.*,
           inst.id AS inst_id,
+          inst.calledOff as called_off,
           inst.color AS inst_color,
           inst.\`description\` AS inst_description,
           inst.\`from\` AS inst_from,
@@ -221,6 +222,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,
+          calledOff: rowAny.called_off,
           color: rowAny.inst_color,
           createdAt: rowAny.inst_createdAt,
           updatedAt: rowAny.inst_updatedAt,
