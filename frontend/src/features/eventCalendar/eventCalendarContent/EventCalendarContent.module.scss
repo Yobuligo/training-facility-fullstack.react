@@ -28,9 +28,19 @@
   margin-top: 0.5rem;
 }
 
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .title {
   font-size: large;
   margin: 0;
+}
+
+.icon {
+  color: colors.$color-secondary-dark;
 }
 
 .description {
