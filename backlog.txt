@@ -279,6 +279,8 @@
 
 - Gamification
 
+- Survey for external trainings etc.
+
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest
 # Check all backend endpoints and add authorization checks

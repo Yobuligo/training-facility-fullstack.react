@@ -8,6 +8,7 @@ import {
 } from "../shared/model/IEventDefinition";
 import { AuthRole } from "../shared/types/AuthRole";
 import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
+import { Boolean } from "./../shared/types/Boolean";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 import { TokenInterceptor } from "./core/TokenInterceptor";
@@ -56,6 +57,7 @@ export class EventDefinitionController extends EntityController<
       TokenInterceptor(async (req, res) => {
         const from = req.query.from;
         const to = req.query.to;
+        const isMemberOnly = parseInt(req.query.isMemberOnly as any);
 
         if (
           !(from && typeof from === "string") ||
@@ -69,9 +71,13 @@ export class EventDefinitionController extends EntityController<
           to: new Date(to),
         };
 
-        const eventDefinitions = await this.repo.findByDateTimeSpan(
-          dateTimeSpan
-        );
+        let eventDefinitions = await this.repo.findByDateTimeSpan(dateTimeSpan);
+
+        if (isMemberOnly === Boolean.true) {
+          eventDefinitions = eventDefinitions.filter(
+            (eventDefinition) => eventDefinition.isMemberOnly === Boolean.false
+          );
+        }
         res.status(HttpStatusCode.OK_200).send(eventDefinitions);
       })
     );
