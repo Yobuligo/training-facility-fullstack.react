@@ -1,21 +1,9 @@
-import { Banner } from "../../../components/banner/Banner";
-import { style } from "../../../core/ui/style";
 import styles from "./EventContent.module.scss";
 import { IEventContentProps } from "./IEventContentProps";
 
+/**
+ * This component is responsible for rendering the content of an event like buttons or text, which is aligned at the bottom, right.
+ */
 export const EventContent: React.FC<IEventContentProps> = (props) => {
-  return (
-    <div className={styles.eventContent}>
-      <Banner className={styles.banner} color={props.eventDefinition.color} />
-      <div className={style(styles.content, props.className)}>
-        <div className={styles.header}>
-          <h4 className={styles.title}>{props.eventDefinition.title}</h4>
-          <span className={styles.description}>
-            {props.eventDefinition.description}
-          </span>
-        </div>
-        {props.children}
-      </div>
-    </div>
-  );
+  return <div className={styles.eventContent}>{props.children}</div>;
 };

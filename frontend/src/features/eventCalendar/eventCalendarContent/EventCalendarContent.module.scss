@@ -1,0 +1,38 @@
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
+
+.eventCalendarContent {
+  display: flex;
+  flex-direction: row;
+  column-gap: dimensions.$negative-space;
+  height: 100%;
+  width: 100%;
+  color: colors.$color-text;
+}
+
+.banner {
+  margin-top: 0.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.title {
+  font-size: large;
+  margin: 0;
+}
+
+.description {
+  font-style: italic;
+}

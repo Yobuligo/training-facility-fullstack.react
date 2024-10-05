@@ -2,7 +2,7 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
-import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
+import { EventContent } from "../eventContent/EventContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { IEvent } from "../model/IEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
@@ -20,7 +20,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
       <>
         {event.dateTimeSpan.from &&
           DateTime.isAfter(event.dateTimeSpan.from) && (
-            <EventButtonContent>
+            <EventContent>
               <EventRegistrationButton
                 event={event}
                 isRegistered={eventRegistration !== undefined}
@@ -28,7 +28,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
                 onUnregister={() => viewModel.triggerReloadSignal()}
                 userId={viewModel.userId}
               />
-            </EventButtonContent>
+            </EventContent>
           )}
       </>
     );
