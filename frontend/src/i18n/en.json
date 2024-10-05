@@ -74,13 +74,14 @@
     },
     "eventRegistrationSection": {
         "callOff": "Call off",
-        "callOffQuestion": "Do you really want to call off the training on {{date}} at {{timeSpan}}? The appointment will be permanently deleted.",
+        "callOffQuestion": "Do you really want to call off the training on {{date}} at {{timeSpan}}?",
         "checkInUsers": "Check-in registered users",
         "close": "Close registration",
         "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",
         "closeRegistrationTitle": "Close registration",
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
-        "open": "Reopen registration"
+        "open": "Reopen registration",
+        "reschedule": "Reschedule"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Your trial training was successfully canceled.",

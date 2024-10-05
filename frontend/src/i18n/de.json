@@ -74,13 +74,14 @@
     },
     "eventRegistrationSection": {
         "callOff": "Absagen",
-        "callOffQuestion": "Möchtest du das Training am {{date}} um {{timeSpan}} wirklich absagen? Der Termin wird endgültig gelöscht.",
+        "callOffQuestion": "Möchtest du das Training am {{date}} um {{timeSpan}} wirklich absagen?",
         "checkInUsers": "Angemeldete Benutzer einchecken",
         "close": "Anmeldung schließen",
         "closeRegistrationQuestion": "Soll die Anmeldung wirklich geschlossen werden? Kein weiterer Benutzer kann sich mehr für dieses Training an- oder abmelden.",
         "closeRegistrationTitle": "Anmeldung schließen",
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
-        "open": "Anmeldung wieder öffnen"
+        "open": "Anmeldung wieder öffnen",
+        "reschedule": "Wiederherstellen"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",

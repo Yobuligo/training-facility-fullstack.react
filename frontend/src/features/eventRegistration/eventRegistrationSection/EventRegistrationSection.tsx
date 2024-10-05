@@ -2,6 +2,7 @@ import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { Boolean } from "../../../shared/types/Boolean";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
@@ -24,12 +25,22 @@ export const EventRegistrationSection: React.FC<
       ) : (
         <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
           <div className={styles.buttons}>
-            <SecondaryButton
-              displaySpinner={viewModel.isCallOffRequestProcessing}
-              onClick={viewModel.onCallOff}
-            >
-              {t(texts.eventRegistrationSection.callOff)}
-            </SecondaryButton>
+            {props.eventInstance.calledOff === Boolean.false ? (
+              <SecondaryButton
+                displaySpinner={viewModel.isCallOffRequestProcessing}
+                onClick={viewModel.onCallOff}
+              >
+                {t(texts.eventRegistrationSection.callOff)}
+              </SecondaryButton>
+            ) : (
+              <SecondaryButton
+                displaySpinner={viewModel.isRescheduleRequestProcessing}
+                onClick={viewModel.onReschedule}
+              >
+                {t(texts.eventRegistrationSection.reschedule)}
+              </SecondaryButton>
+            )}
+
             {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
               <SecondaryButton
                 onClick={viewModel.onCloseRegistration}
