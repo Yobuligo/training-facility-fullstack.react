@@ -1,5 +1,5 @@
 {
-    "AppointmentForm": {
+    "appointmentForm": {
         "description": "Beschreibung",
         "endDate": "Enddatum",
         "endTime": "Endzeit",
@@ -70,6 +70,8 @@
         "addUsers": "Benutzer hinzufügen"
     },
     "eventRegistrationSection": {
+        "callOff": "Absagen",
+        "callOffQuestion": "Möchtest du das Training am {{date}} um {{time}} wirklich absagen? Der Termin wird endgültig gelöscht.",
         "checkInUsers": "Angemeldete Benutzer einchecken",
         "close": "Anmeldung schließen",
         "closeRegistrationQuestion": "Soll die Anmeldung wirklich geschlossen werden? Kein weiterer Benutzer kann sich mehr für dieses Training an- oder abmelden.",

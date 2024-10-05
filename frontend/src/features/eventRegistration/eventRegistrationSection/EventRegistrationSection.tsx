@@ -23,7 +23,13 @@ export const EventRegistrationSection: React.FC<
         <PageSpinner />
       ) : (
         <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
-          <div className={styles.closeButton}>
+          <div className={styles.buttons}>
+            <SecondaryButton
+              displaySpinner={viewModel.isCallOffRequestProcessing}
+              onClick={viewModel.onCallOff}
+            >
+              {t(texts.eventRegistrationSection.callOff)}
+            </SecondaryButton>
             {viewModel.eventInstanceState === EventInstanceState.OPEN ? (
               <SecondaryButton
                 onClick={viewModel.onCloseRegistration}

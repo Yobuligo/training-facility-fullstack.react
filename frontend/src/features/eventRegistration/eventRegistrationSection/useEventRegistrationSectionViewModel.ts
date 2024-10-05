@@ -10,14 +10,15 @@ import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { UserInfo } from "../../../services/UserInfo";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserTrialTraining } from "../../../shared/model/IUserTrialTraining";
+import { Boolean } from "../../../shared/types/Boolean";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
+import { useRequest } from "./../../../lib/userSession/hooks/useRequest";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 
 export const useEventRegistrationSectionViewModel = (
@@ -41,6 +42,7 @@ export const useEventRegistrationSectionViewModel = (
   const [deleteEventRegistrationRequest] = useRequest();
   const [updateEventInstanceRequest, isUpdateEventInstanceRequestProcessing] =
     useRequest();
+  const [callOffRequest, isCallOffRequestProcessing] = useRequest();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
 
@@ -117,6 +119,20 @@ export const useEventRegistrationSectionViewModel = (
     );
   };
 
+  const onCallOff = () => {
+    confirmDialog.show(
+      t(texts.eventRegistrationSection.callOff),
+      t(texts.eventRegistrationSection.callOffQuestion),
+      {
+        onOkay: () =>
+          callOffRequest(async () => {
+            props.eventInstance.calledOff = Boolean.true;
+            await updateEventInstance();
+          }),
+      }
+    );
+  };
+
   const onDelete = (eventRegistration: IEventRegistration) => {
     setEventRegistrations((previous) => {
       List.delete(previous, (item) => item.id === eventRegistration.id);
@@ -158,9 +174,11 @@ export const useEventRegistrationSectionViewModel = (
     confirmDialog,
     eventInstanceState,
     eventRegistrations,
+    isCallOffRequestProcessing,
     isLoadEventRegistrationRequestProcessing,
     isUpdateEventInstanceRequestProcessing,
     onAddUser,
+    onCallOff,
     onCloseRegistration,
     onDelete,
     onReopenRegistration,

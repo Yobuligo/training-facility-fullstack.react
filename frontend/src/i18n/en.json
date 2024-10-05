@@ -70,6 +70,8 @@
         "addUsers": "Add user"
     },
     "eventRegistrationSection": {
+        "callOff": "Call off",
+        "callOffQuestion": "Do you really want to call off the training on {{date}} at {{time}}? The appointment will be permanently deleted.",
         "checkInUsers": "Check-in registered users",
         "close": "Close registration",
         "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",

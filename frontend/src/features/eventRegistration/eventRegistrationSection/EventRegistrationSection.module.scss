@@ -1,3 +1,5 @@
+@use '../../../styles/dimensions.module.scss';
+
 .title {
   font-size: medium;
   font-weight: 500;
@@ -8,8 +10,9 @@
   margin-top: 2.5rem;
 }
 
-.closeButton {
+.buttons {
   display: flex;
   flex-direction: row;
   justify-content: right;
+  column-gap: dimensions.$negative-space;
 }

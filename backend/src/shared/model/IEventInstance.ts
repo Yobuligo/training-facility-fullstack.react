@@ -9,6 +9,7 @@ import { IUserTrialTraining } from "./IUserTrialTraining";
  * This interface represents a specific event instance based on an event definition
  */
 export interface IEventInstance extends IEntity, IDateTimeSpan {
+  calledOff: Boolean;
   color: string;
   description: string;
   title: string;
