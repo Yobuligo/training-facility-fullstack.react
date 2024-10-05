@@ -122,8 +122,10 @@ export const useEventRegistrationSectionViewModel = (
   const onCallOff = () => {
     confirmDialog.show(
       t(texts.eventRegistrationSection.callOff),
-      t(texts.eventRegistrationSection.callOffQuestion),
+      t(texts.eventRegistrationSection.callOffQuestion, {}),
       {
+        cancelButtonCaption: t(texts.general.no),
+        okayButtonCaption: t(texts.general.yes),
         onOkay: () =>
           callOffRequest(async () => {
             props.eventInstance.calledOff = Boolean.true;
