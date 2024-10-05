@@ -128,7 +128,7 @@ export const useEventRegistrationSectionViewModel = (
     confirmDialog.show(
       t(texts.eventRegistrationSection.callOff),
       t(texts.eventRegistrationSection.callOffQuestion, {
-        date: renderDate(props.eventInstance.from),
+        date: renderDate(props.eventInstance.from, true),
         timeSpan: renderTimeSpan({
           from: props.eventInstance.from,
           to: props.eventInstance.to,

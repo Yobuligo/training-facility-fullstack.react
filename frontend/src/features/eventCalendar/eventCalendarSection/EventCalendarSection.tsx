@@ -3,6 +3,7 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { Weekday } from "../../../core/types/Weekday";
 import { useScreenSize } from "../../../hooks/useScreenSize";
+import { EventInfo } from "../../../services/EventInfo";
 import colors from "../../../styles/colors.module.scss";
 import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventContent } from "../eventContent/EventContent";
@@ -47,9 +48,18 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
     }
   };
 
+  const isEventCalledOff = (event: IEvent) => {
+    const eventInstance = EventInfo.findEventInstance(event);
+    return eventInstance && eventInstance.calledOff;
+  };
+
   const renderEvent = (event: IEvent) => (
     <EventContent eventDefinition={event.eventDefinition}>
-      {props.renderEvent && props.renderEvent(event)}
+      {isEventCalledOff(event) ? (
+        <>Called off</>
+      ) : (
+        <>{props.renderEvent && props.renderEvent(event)}</>
+      )}
     </EventContent>
   );
 
