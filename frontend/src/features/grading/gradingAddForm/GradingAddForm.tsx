@@ -26,8 +26,8 @@ export const GradingAddForm: React.FC<IGradingAddFormProps> = (props) => {
           disabled={props.displayMode}
           label={t(texts.general.grade)}
           options={viewModel.gradeOptions}
-          onSelect={viewModel.onGradeChange}
-          selected={viewModel.selectedGradeOption}
+          value={viewModel.grade}
+          onSelect={(grade) => viewModel.setGrade(grade)}
         />
 
         <LabeledInput

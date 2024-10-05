@@ -1,9 +1,10 @@
 {
-    "AppointmentForm": {
+    "appointmentForm": {
         "description": "Beschreibung",
         "endDate": "Enddatum",
         "endTime": "Endzeit",
         "recurrence": "Wiederholung",
+        "membersOnly": "Nur für Mitglieder",
         "startDate": "Startdatum",
         "startTime": "Startzeit",
         "title": "Titel"
@@ -72,6 +73,8 @@
         "addUsers": "Benutzer hinzufügen"
     },
     "eventRegistrationSection": {
+        "callOff": "Absagen",
+        "callOffQuestion": "Möchtest du das Training am {{date}} um {{timeSpan}} wirklich absagen? Der Termin wird endgültig gelöscht.",
         "checkInUsers": "Angemeldete Benutzer einchecken",
         "close": "Anmeldung schließen",
         "closeRegistrationQuestion": "Soll die Anmeldung wirklich geschlossen werden? Kein weiterer Benutzer kann sich mehr für dieses Training an- oder abmelden.",
@@ -269,6 +272,7 @@
         "errorCityRequired": "Stadt ist erforderlich",
         "errorEmailRequired": "E-Mail ist erforderlich",
         "errorEmailInvalid": "E-Mail ist ungültig",
+        "errorInvalidInput": "Bitte fülle alle Pflichtfelder aus und korrigiere fehlerhafte Eingaben.",
         "errorSendEmail": "Fehler beim Versenden der E-Mail",
         "firstname": "Vorname",
         "gender": "Geschlecht",
@@ -282,6 +286,7 @@
         "postalCode": "Postleitzahl",
         "changePassword": "Passwort ändern",
         "sendInvitation": "Einladung senden",
+        "sendInvitationQuestion": "Soll eine Einladung an den erstellten Benutzer verschickt werden?",
         "street": "Straße",
         "successResetPassword": "E-Mail zum Zurücksetzen des Passwortes wurde an {{user}} verschickt",
         "successSendUserInvite": "Einladung wurde an {{user}} verschickt",

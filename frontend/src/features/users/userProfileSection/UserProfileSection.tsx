@@ -21,7 +21,7 @@ export const UserProfileSection: React.FC = () => {
           onUnlock={viewModel.onUnlock}
           onBack={viewModel.onBack}
           onCancel={viewModel.onCancel}
-          onChange={viewModel.onChange}
+          onSave={viewModel.onSave}
           onLock={viewModel.onLock}
           onDelete={viewModel.onDelete}
         />

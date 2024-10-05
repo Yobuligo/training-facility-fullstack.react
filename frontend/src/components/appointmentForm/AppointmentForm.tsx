@@ -12,69 +12,75 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
 
   return (
     <form className={styles.appointmentForm} onSubmit={viewModel.onSubmit}>
-      <div>
-        <LabeledInput
-          disabled={props.disabled}
-          error={props.titleError}
-          isOptional={props.titleIsOptional}
-          label={t(texts.AppointmentForm.title)}
-          maxLength={100}
-          onChange={props.setTitle}
-          value={props.title}
-        />
-      </div>
-      <div>
-        <LabeledInput
-          disabled={props.disabled}
-          error={props.descriptionError}
-          isOptional={props.descriptionIsOptional}
-          label={t(texts.AppointmentForm.description)}
-          maxLength={100}
-          onChange={props.setDescription}
-          value={props.description}
-        />
-      </div>
+      <LabeledInput
+        disabled={props.disabled}
+        error={props.titleError}
+        isOptional={props.titleIsOptional}
+        label={t(texts.appointmentForm.title)}
+        maxLength={100}
+        onChange={props.setTitle}
+        value={props.title}
+      />
+
+      <LabeledInput
+        disabled={props.disabled}
+        error={props.descriptionError}
+        isOptional={props.descriptionIsOptional}
+        label={t(texts.appointmentForm.description)}
+        maxLength={100}
+        onChange={props.setDescription}
+        value={props.description}
+      />
+
       <div className={styles.dateTime}>
         <LabeledInput
           disabled={props.disabled}
-          label={t(texts.AppointmentForm.startDate)}
+          label={t(texts.appointmentForm.startDate)}
           onChange={viewModel.onChangeFromDate}
           type="date"
           value={props.fromDate}
         />
         <LabeledInput
           disabled={props.disabled}
-          label={t(texts.AppointmentForm.startTime)}
+          label={t(texts.appointmentForm.startTime)}
           onChange={viewModel.onChangeFromTime}
           type="time"
           value={props.fromTime}
         />
       </div>
+
       <div className={styles.dateTime}>
         <LabeledInput
           disabled={props.disabled}
-          label={t(texts.AppointmentForm.endDate)}
+          label={t(texts.appointmentForm.endDate)}
           onChange={viewModel.onChangeToDate}
           type="date"
           value={props.toDate}
         />
         <LabeledInput
           disabled={props.disabled}
-          label={t(texts.AppointmentForm.endTime)}
+          label={t(texts.appointmentForm.endTime)}
           onChange={viewModel.onChangeToTime}
           type="time"
           value={props.toTime}
         />
       </div>
-      <div>
-        <LabeledSelect
-          disabled={props.disabled}
-          label={t(texts.AppointmentForm.recurrence)}
-          options={viewModel.recurrenceOptions}
-          selected={viewModel.selectedRecurrence}
-          onSelect={viewModel.onChangeRecurrence}
-        />
-      </div>
+
+      <LabeledSelect
+        disabled={props.disabled}
+        label={t(texts.appointmentForm.recurrence)}
+        options={viewModel.recurrenceOptions}
+        value={props.recurrence}
+        onSelect={(recurrence) => props.setRecurrence(recurrence)}
+      />
+
+      <LabeledSelect
+        disabled={props.disabled}
+        label={t(texts.appointmentForm.membersOnly)}
+        options={viewModel.isMemberOnlyOptions}
+        onSelect={props.setIsMemberOnly}
+        value={props.isMemberOnly}
+      />
     </form>
   );
 };

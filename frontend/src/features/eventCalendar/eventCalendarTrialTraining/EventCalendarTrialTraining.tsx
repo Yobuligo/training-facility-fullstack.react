@@ -5,6 +5,7 @@ import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { Boolean } from "../../../shared/types/Boolean";
 import { EventTrialTrainingDetails } from "../../eventTrialTraining/eventTrialTraining/EventTrialTrainingDetails";
 import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
@@ -43,11 +44,12 @@ export const EventCalendarTrialTraining: React.FC = () => {
         />
       ) : (
         <EventCalendarSection
-          eventDefinitionLoader={async () => {
+          eventDefinitionLoader={async (dateTimeSpan) => {
             TokenRepository.token = await requestToken();
             const eventDefinitionApi = new EventDefinitionApi();
             return await eventDefinitionApi.findByDateTimeSpanSecured(
-              DateTime.getWeekSpanDates(new Date())
+              dateTimeSpan,
+              Boolean.true
             );
           }}
           renderEvent={renderEvent}

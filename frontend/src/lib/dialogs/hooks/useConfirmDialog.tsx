@@ -18,7 +18,10 @@ export const useConfirmDialog = () => {
     setDisplay(false);
   };
 
-  const onCancel = () => reset();
+  const onCancel = () => {
+    confirmDialogOptions?.onCancel?.();
+    reset();
+  };
 
   const onOkay = () => {
     confirmDialogOptions?.onOkay?.();
@@ -34,6 +37,8 @@ export const useConfirmDialog = () => {
       {display && (
         <ConfirmDialog
           displayCancelButton={confirmDialogOptions?.displayCancelButton}
+          cancelButtonCaption={confirmDialogOptions?.cancelButtonCaption}
+          okayButtonCaption={confirmDialogOptions?.okayButtonCaption}
           onCancel={onCancel}
           onOkay={onOkay}
           title={title}

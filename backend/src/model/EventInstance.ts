@@ -9,6 +9,7 @@ const eventInstance: ModelStatic<
   Model<IEventInstance, IEntityDetails<IEventInstance>>
 > = db.define("event-instances", {
   id: createIdType(),
+  calledOff: DataTypes.BOOLEAN,
   color: {
     type: DataTypes.STRING(10),
   },

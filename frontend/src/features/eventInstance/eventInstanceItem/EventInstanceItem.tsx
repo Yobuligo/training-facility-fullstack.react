@@ -2,12 +2,16 @@ import { Banner } from "../../../components/banner/Banner";
 import { Card } from "../../../components/card/Card";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { style } from "../../../core/ui/style";
+import { useRenderDate } from "../../../hooks/useRenderDate";
+import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
 export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   const renderWeekday = useRenderWeekday();
+  const renderDate = useRenderDate();
+  const renderTimeSpan = useRenderTimeSpan();
 
   const renderChildren = () => (
     <div className={style(styles.children, props.classNameChildren)}>
@@ -33,15 +37,13 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               </div>
 
               <div className={styles.dateTimeContainer}>
+                <div>{renderDate(props.eventInstanceItemModel.from)}</div>
                 <div>
-                  {DateTime.format(
-                    props.eventInstanceItemModel.from,
-                    "dd.MM.yyyy"
-                  )}
+                  {renderTimeSpan({
+                    from: props.eventInstanceItemModel.from,
+                    to: props.eventInstanceItemModel.to,
+                  })}
                 </div>
-                <div>{`${DateTime.toTime(
-                  props.eventInstanceItemModel.from
-                )} - ${DateTime.toTime(props.eventInstanceItemModel.to)}`}</div>
               </div>
               {props.renderChildrenInline === true && props.children && (
                 <div className={props.classNameChildren}>{props.children}</div>

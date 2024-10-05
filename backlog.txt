@@ -46,7 +46,7 @@
 	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
 	# Display event planner as list
-	- Mark trainings as private or public (public trainings can be seen in the training-times calendar and can be booked for trial trainings)
+	# Mark trainings as private or public (public trainings can be booked for trial trainings)
 	
 - My Trainings
 	# User can register on and unregister from trainings
@@ -65,7 +65,6 @@
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
-	
 	
 - Event Registration
 	# Display spinner when loading registrations
@@ -127,6 +126,7 @@
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
 	# Delete user with user profile, bank account, gradings, roles, etc.
+		# Delete user is active in display mode
 	# Refactor Collapsables can be toggled on click at title
 	# Errors from backend must be translatable or mapped to client errors
 		# e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
@@ -149,6 +149,7 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
+		# Invite is active in display mode
 	# Send reset password mail to user -> equal to send invite with different mail text
 		# Display loading spinner when sending mail
 		# User must be forwarded to invite route
@@ -157,8 +158,10 @@
 			# previous inivites of a user must be deleted
 			# User invitation must be deleted with user
 		# Invite must expire
+		# Invite is active in display mode
 	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
 		# username, firstname, lastname, email, birthday, street, postal code, city
+		# message is displayed at input fields, but also as a toast
     - Improve: Display of buttons in user profile must be restructured
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
@@ -184,7 +187,7 @@
 	# Bug: As admin created user is shown as normal user.
 	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 	
-# Trial Training
+- Trial Training
 	# Customer can select a day he wants to book a trial training
 	# Customer has to provide firstname, lastname and email address
 	# Creation of EventInstances must only be possible with shared key
@@ -199,7 +202,9 @@
 	# Registered user is displayed in event registration list of the event instance and marked as trial training
 	# Registered user can be marked as present, missing or open
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
+	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
+	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 
 # Login
 	# Login must only be possible with valid username and password
@@ -227,12 +232,13 @@
 	# Remove month view
 	
 # Event Calendar Overview
-	# Provide separate route to calendar overview in display mode
+	# Provide separate route to calendar overview in display mode	
+	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem
 	
-- Display Courses / seminars
+- Display Courses / seminars in "grading list"
 	- Courses can be displayed in user profile
 
 - LabeledSelect
@@ -273,6 +279,8 @@
 	- table userTrialTraining needs an index on email
 
 - Gamification
+
+- Survey for external trainings etc.
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest

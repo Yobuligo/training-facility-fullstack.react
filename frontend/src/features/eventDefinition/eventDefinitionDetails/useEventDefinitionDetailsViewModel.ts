@@ -30,6 +30,9 @@ export const useEventDefinitionDetailsViewModel = (
   const [toTime, setToTime] = useState(
     DateTime.toTime(props.eventDefinition.to)
   );
+  const [isMemberOnly, setIsMemberOnly] = useState(
+    props.eventDefinition.isMemberOnly
+  );
   const [recurrence, setRecurrence] = useState(
     props.eventDefinition.recurrence
   );
@@ -63,6 +66,7 @@ export const useEventDefinitionDetailsViewModel = (
   const onSave = () => {
     props.eventDefinition.description = description;
     props.eventDefinition.from = DateTime.create(fromDate, fromTime);
+    props.eventDefinition.isMemberOnly = isMemberOnly;
     props.eventDefinition.recurrence = recurrence;
     props.eventDefinition.title = title;
     props.eventDefinition.to = DateTime.create(toDate, toTime);
@@ -89,6 +93,7 @@ export const useEventDefinitionDetailsViewModel = (
     displayMode,
     fromDate,
     fromTime,
+    isMemberOnly,
     onCancel,
     onChangeTitle,
     onDelete,
@@ -101,6 +106,7 @@ export const useEventDefinitionDetailsViewModel = (
     setDisplayMode,
     setFromDate,
     setFromTime,
+    setIsMemberOnly,
     setRecurrence,
     setToDate,
     setToTime,

@@ -2,17 +2,29 @@ import { useMemo, useState } from "react";
 import { DateTime } from "../../core/services/date/DateTime";
 import { Recurrence } from "../../core/types/Recurrence";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
+import { Boolean } from "../../shared/types/Boolean";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 
 export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   const debounceInterval = 500;
+  const { t } = useTranslation();
   const render = useRenderRecurrence();
   const [fromTimeout, setFromTimeout] = useState<NodeJS.Timeout | undefined>(
     undefined
   );
   const [toTimeout, setToTimeout] = useState<NodeJS.Timeout | undefined>(
     undefined
+  );
+
+  const isMemberOnlyOptions: ISelectOption<Boolean>[] = useMemo(
+    () => [
+      { key: Boolean.false, text: t(texts.general.no) },
+      { key: Boolean.true, text: t(texts.general.yes) },
+    ],
+    [t]
   );
 
   const recurrenceOptions: ISelectOption<Recurrence>[] = useMemo(
@@ -24,13 +36,6 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     ],
     [render]
   );
-
-  const selectedRecurrence = recurrenceOptions.find(
-    (selectOption) => selectOption.key === props.recurrence
-  );
-
-  const onChangeRecurrence = (selectedRecurrence: ISelectOption<Recurrence>) =>
-    props.setRecurrence(selectedRecurrence.key);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
@@ -106,13 +111,12 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   return {
     getFromWeekendDay,
     getToWeekendDay,
-    onChangeRecurrence,
+    isMemberOnlyOptions,
     onChangeFromDate,
     onChangeFromTime,
     onChangeToDate,
     onChangeToTime,
     onSubmit,
     recurrenceOptions,
-    selectedRecurrence,
   };
 };

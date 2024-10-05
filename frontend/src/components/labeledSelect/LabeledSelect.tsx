@@ -6,10 +6,17 @@ import { Select } from "../select/Select";
 import { ILabeledSelectProps } from "./ILabeledSelectProps";
 import styles from "./LabeledSelect.module.scss";
 
-export function LabeledSelect<T extends ISelectOption<any>>(
-  props: ILabeledSelectProps<T>
-) {
+export function LabeledSelect<T>(props: ILabeledSelectProps<T>) {
   const id = useId();
+
+  const onSelectValue = (selectedValue: ISelectOption<T>) => {
+    props.onSelect?.(selectedValue.key);
+  };
+
+  const selectedValue = props.options.find(
+    (option) => option.key === props.value
+  );
+
   return (
     <LabeledElement
       className={props.className}
@@ -25,8 +32,8 @@ export function LabeledSelect<T extends ISelectOption<any>>(
           props.error ? styles.error : ""
         )}
         disabled={props.disabled}
-        onSelect={props.onSelect}
-        selected={props.selected}
+        onSelect={onSelectValue}
+        selected={selectedValue}
         options={props.options}
       />
     </LabeledElement>

@@ -1,9 +1,10 @@
 {
-    "AppointmentForm": {
+    "appointmentForm": {
         "description": "Description",
         "endDate": "End date",
         "endTime": "End time",
         "recurrence": "Recurrence",
+        "membersOnly": "Members only",
         "startDate": "Start date",
         "startTime": "Start time",
         "title": "Title"
@@ -72,6 +73,8 @@
         "addUsers": "Add user"
     },
     "eventRegistrationSection": {
+        "callOff": "Call off",
+        "callOffQuestion": "Do you really want to call off the training on {{date}} at {{timeSpan}}? The appointment will be permanently deleted.",
         "checkInUsers": "Check-in registered users",
         "close": "Close registration",
         "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",
@@ -269,6 +272,7 @@
         "errorCityRequired": "City is required",
         "errorEmailRequired": "Email is required",
         "errorEmailInvalid": "Email is invalid",
+        "errorInvalidInput": "Please fill in all required fields and correct any invalid entries.",
         "errorSendEmail": "Error send invitation email",
         "firstname": "Firstname",
         "gender": "Gender",
@@ -282,6 +286,7 @@
         "postalCode": "Postal Code",
         "changePassword": "Change password",
         "sendInvitation": "Send invitation",
+        "sendInvitationQuestion": "Would you like to send an invitation to the created user?",
         "street": "Street",
         "successResetPassword": "Reset password request was send to {{user}}",
         "successSendUserInvite": "Invitation was send to {{user}}",

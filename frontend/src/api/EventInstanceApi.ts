@@ -3,6 +3,7 @@ import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
+import { Boolean } from "../shared/types/Boolean";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
 import { IEventInstance } from "./../shared/model/IEventInstance";
@@ -81,6 +82,7 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   private createEventInstanceByEvent(event: IEvent): IEventInstance {
     return {
       id: uuid(),
+      calledOff: Boolean.false,
       color: event.eventDefinition.color,
       description: event.eventDefinition.description,
       title: event.eventDefinition.title,

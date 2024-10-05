@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserInviteApi } from "../../../api/UserInviteApi";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isEmailInvalid } from "../../../core/utils/isEmailInvalid";
-import { isError } from "../../../core/utils/isError";
 import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
@@ -21,13 +19,13 @@ import { DummyUser } from "../../../model/DummyUser";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
-import { IUserInvite } from "../../../shared/model/IUserInvite";
 import { AuthRole } from "../../../shared/types/AuthRole";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
 import { Tariff } from "../../../shared/types/Tariff";
-import { UserInviteType } from "../../../shared/types/UserInviteType";
 import { uuid } from "../../../utils/uuid";
+import { useSendPasswordResetRequest } from "../hooks/useSendPasswordResetRequest";
+import { useSendUserInvite } from "../hooks/useSendUserInvite";
 import { IUserProps } from "./IUserProps";
 
 export const useUserViewModel = (props: IUserProps) => {
@@ -88,9 +86,9 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
   const [existsByUsernameRequest] = useRequest();
-  const [sendUserInviteRequest, isSendUserInviteRequestProcessing] =
-    useRequest();
-  const [passwordResetRequest, isPasswordResetRequestProcessing] = useRequest();
+  const [sendUserInvite, isSendingUserInvite] = useSendUserInvite();
+  const [sendPasswordResetRequest, isSendingPasswordResetRequest] =
+    useSendPasswordResetRequest();
   const navigate = useNavigate();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
@@ -173,12 +171,6 @@ export const useUserViewModel = (props: IUserProps) => {
     [t]
   );
 
-  const selectedGenderOption =
-    gender === Gender.FEMALE ? genderOptions[0] : genderOptions[1];
-
-  const onGenderChange = (option: ISelectOption<Gender>) =>
-    setGender(option.key);
-
   const tariffOptions: ISelectOption<Tariff>[] = useMemo(
     () => [
       { key: Tariff.TEENAGERS_ADULTS, text: t(texts.tariff.teenagersAdults) },
@@ -196,13 +188,6 @@ export const useUserViewModel = (props: IUserProps) => {
     [t]
   );
 
-  const selectedTariffOption = tariffOptions.find(
-    (tariffOption) => tariffOption.key === tariff
-  );
-
-  const onTariffChange = (option: ISelectOption<Tariff>) =>
-    setTariff(option.key);
-
   const isAdminOptions: ISelectOption<boolean>[] = useMemo(
     () => [
       { key: true, text: t(texts.general.yes) },
@@ -210,12 +195,6 @@ export const useUserViewModel = (props: IUserProps) => {
     ],
     [t]
   );
-
-  const selectedIsAdminOption =
-    isAdmin === true ? isAdminOptions[0] : isAdminOptions[1];
-
-  const onIsAdminChange = (option: ISelectOption<boolean>) =>
-    setIsAdmin(option.key);
 
   const isPersistedUser =
     !(props.user instanceof DummyUser) || props.user.isPersisted === true;
@@ -284,6 +263,10 @@ export const useUserViewModel = (props: IUserProps) => {
   };
 
   const onChangePassword = () => navigate(AppRoutes.changePassword.toPath());
+
+  const onSendUserInvite = () => sendUserInvite(props.user);
+
+  const onPasswordReset = () => sendPasswordResetRequest(props.user);
 
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||
@@ -363,55 +346,22 @@ export const useUserViewModel = (props: IUserProps) => {
     updateUserBankAccount();
     updateUserRoles();
     userProfile.userGradings = gradings;
-    props.onChange?.(props.user);
-  };
 
-  const handleSendMailError = (error: any): boolean => {
-    if (isError(error) && error.type === "SendEmailError") {
-      toast.error(t(texts.user.errorSendEmail));
-      return true;
+    if (props.user instanceof DummyUser && props.user.isPersisted === false) {
+      confirmDialog.show(
+        t(texts.user.sendInvitation),
+        t(texts.user.sendInvitationQuestion),
+        {
+          cancelButtonCaption: t(texts.general.no),
+          okayButtonCaption: t(texts.general.yes),
+          onCancel: () => props.onSave?.(props.user, false),
+          onOkay: () => props.onSave?.(props.user, true),
+        }
+      );
     } else {
-      return false;
+      props.onSave?.(props.user, false);
     }
   };
-
-  const onPasswordReset = () =>
-    passwordResetRequest(async () => {
-      const userInvite: IUserInvite = {
-        id: uuid(),
-        expiresAt: DateTime.addDays(new Date(), 5),
-        type: UserInviteType.CHANGE_PASSWORD,
-        userId: props.user.id,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      const userInviteApi = new UserInviteApi();
-      await userInviteApi.insert(userInvite);
-      toast.success(
-        t(texts.user.successResetPassword, {
-          user: UserInfo.toFullName(props.user),
-        })
-      );
-    }, handleSendMailError);
-
-  const onSendUserInvite = () =>
-    sendUserInviteRequest(async () => {
-      const userInvite: IUserInvite = {
-        id: uuid(),
-        expiresAt: DateTime.addDays(new Date(), 5),
-        type: UserInviteType.REGISTER,
-        userId: props.user.id,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      const userInviteApi = new UserInviteApi();
-      await userInviteApi.insert(userInvite);
-      toast.success(
-        t(texts.user.successSendUserInvite, {
-          user: UserInfo.toFullName(props.user),
-        })
-      );
-    }, handleSendMailError);
 
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
@@ -504,6 +454,7 @@ export const useUserViewModel = (props: IUserProps) => {
     }
 
     if (!isValid) {
+      toast.error(t(texts.user.errorInvalidInput));
       throw new ValidationError();
     }
   };
@@ -524,13 +475,15 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
+    gender,
     genderOptions,
     gradings,
+    isAdmin,
     isAdminOptions,
     isLocked,
     isPersistedUser,
-    isSendUserInviteRequestProcessing,
-    isPasswordResetRequestProcessing,
+    isSendingUserInvite,
+    isSendingPasswordResetRequest,
     joinedOn,
     lastname,
     lastnameError,
@@ -541,12 +494,9 @@ export const useUserViewModel = (props: IUserProps) => {
     onChangePostalCode,
     onDeleteGrading,
     onDeleteUser,
-    onIsAdminChange,
-    onGenderChange,
     onPasswordReset,
     onSave,
     onSendUserInvite,
-    onTariffChange,
     onToggleCollapseAddress,
     onToggleCollapseBank,
     onToggleCollapseGradings,
@@ -559,9 +509,6 @@ export const useUserViewModel = (props: IUserProps) => {
     postalCodeError,
     profileDetailsSettings,
     onChangePassword,
-    selectedIsAdminOption,
-    selectedGenderOption,
-    selectedTariffOption,
     setBankAccountBIC,
     setBankAccountIBAN,
     setBankAccountInstitution,
@@ -573,11 +520,14 @@ export const useUserViewModel = (props: IUserProps) => {
     setFirstname,
     setLastname,
     setGender,
+    setIsAdmin,
     setPhone,
     setStreet,
+    setTariff,
     setUsername,
     street,
     streetError,
+    tariff,
     tariffOptions,
     username,
     usernameError,

@@ -26,7 +26,7 @@ export const User: React.FC<IUserProps> = (props) => {
     <>
       {viewModel.isPersistedUser && (
         <SpinnerButton
-          displaySpinner={viewModel.isSendUserInviteRequestProcessing}
+          displaySpinner={viewModel.isSendingUserInvite}
           onClick={viewModel.onSendUserInvite}
         >
           {t(texts.user.sendInvitation)}
@@ -34,7 +34,7 @@ export const User: React.FC<IUserProps> = (props) => {
       )}
       {viewModel.isPersistedUser && (
         <SpinnerButton
-          displaySpinner={viewModel.isPasswordResetRequestProcessing}
+          displaySpinner={viewModel.isSendingPasswordResetRequest}
           onClick={viewModel.onPasswordReset}
         >
           {t(texts.user.resetPassword)}
@@ -43,20 +43,14 @@ export const User: React.FC<IUserProps> = (props) => {
 
       {/* current user must not be lockable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
-        <Button
-          disabled={viewModel.displayMode}
-          onClick={viewModel.onToggleIsLocked}
-        >
+        <Button onClick={viewModel.onToggleIsLocked}>
           {viewModel.isLocked ? t(texts.user.unlock) : t(texts.user.lock)}
         </Button>
       )}
 
       {/* current user must not be deletable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
-        <Button
-          disabled={viewModel.displayMode}
-          onClick={viewModel.onDeleteUser}
-        >
+        <Button onClick={viewModel.onDeleteUser}>
           {t(texts.user.deleteUser)}
         </Button>
       )}
@@ -119,8 +113,8 @@ export const User: React.FC<IUserProps> = (props) => {
             disabled={viewModel.displayMode}
             label={t(texts.user.gender)}
             options={viewModel.genderOptions}
-            onSelect={viewModel.onGenderChange}
-            selected={viewModel.selectedGenderOption}
+            onSelect={viewModel.setGender}
+            value={viewModel.gender}
           />
 
           <LabeledInput
@@ -154,8 +148,8 @@ export const User: React.FC<IUserProps> = (props) => {
             disabled={props.isAdminMode === true ? viewModel.displayMode : true}
             label={t(texts.user.tariff)}
             options={viewModel.tariffOptions}
-            onSelect={viewModel.onTariffChange}
-            selected={viewModel.selectedTariffOption}
+            onSelect={viewModel.setTariff}
+            value={viewModel.tariff}
           />
         </UserProfileGroup>
 
@@ -285,8 +279,8 @@ export const User: React.FC<IUserProps> = (props) => {
               disabled={viewModel.displayMode}
               label={t(texts.user.isAdmin)}
               options={viewModel.isAdminOptions}
-              onSelect={viewModel.onIsAdminChange}
-              selected={viewModel.selectedIsAdminOption}
+              onSelect={viewModel.setIsAdmin}
+              value={viewModel.isAdmin}
             />
           )}
           <Toolbar className={screenSize.isSmall() ? styles.toolbar : ""}>

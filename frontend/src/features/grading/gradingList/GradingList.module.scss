@@ -7,8 +7,12 @@
   row-gap: 2rem;
   color: colors.$color-text;
 
-  @include mixins.medium-screen(43rem) {
+  @include mixins.medium-screen(70rem) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  @include mixins.large-screen {
+    column-gap: 5rem;
   }
 }
