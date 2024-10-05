@@ -45,6 +45,7 @@ export const useEventRegistrationSectionViewModel = (
   const [updateEventInstanceRequest, isUpdateEventInstanceRequestProcessing] =
     useRequest();
   const [callOffRequest, isCallOffRequestProcessing] = useRequest();
+  const [rescheduleRequest, isRescheduleRequestProcessing] = useRequest();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
   const renderDate = useRenderDate();
@@ -143,6 +144,12 @@ export const useEventRegistrationSectionViewModel = (
     );
   };
 
+  const onReschedule = () =>
+    rescheduleRequest(async () => {
+      props.eventInstance.calledOff = Boolean.false;
+      await updateEventInstance();
+    });
+
   const onDelete = (eventRegistration: IEventRegistration) => {
     setEventRegistrations((previous) => {
       List.delete(previous, (item) => item.id === eventRegistration.id);
@@ -186,12 +193,14 @@ export const useEventRegistrationSectionViewModel = (
     eventRegistrations,
     isCallOffRequestProcessing,
     isLoadEventRegistrationRequestProcessing,
+    isRescheduleRequestProcessing,
     isUpdateEventInstanceRequestProcessing,
     onAddUser,
     onCallOff,
     onCloseRegistration,
     onDelete,
     onReopenRegistration,
+    onReschedule,
     userTrialTrainings,
   };
 };
