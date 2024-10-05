@@ -81,7 +81,7 @@
         "closeRegistrationTitle": "Anmeldung schließen",
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
         "open": "Anmeldung wieder öffnen",
-        "reschedule": "Wiederherstellen"
+        "reschedule": "Wieder einplanen"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",

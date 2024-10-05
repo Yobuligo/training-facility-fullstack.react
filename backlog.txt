@@ -66,6 +66,16 @@
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
 	
+- Event Calendar
+	- Display if event is called off. Must be displayed at:
+		- Weekly overview of user (Dashboard)
+		- Training times calendar
+		- Trial training calendar
+		- My trainings calendar
+	- Display if event is for member only. Must be displayed at:
+		- My trainings calendar
+		- Planer
+	
 - Event Registration
 	# Display spinner when loading registrations
 	# Registered user must be displayed
