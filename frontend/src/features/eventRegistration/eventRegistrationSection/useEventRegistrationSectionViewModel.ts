@@ -134,8 +134,6 @@ export const useEventRegistrationSectionViewModel = (
         }),
       }),
       {
-        cancelButtonCaption: t(texts.general.no),
-        okayButtonCaption: t(texts.general.yes),
         onOkay: () =>
           callOffRequest(async () => {
             props.eventInstance.calledOff = Boolean.true;
