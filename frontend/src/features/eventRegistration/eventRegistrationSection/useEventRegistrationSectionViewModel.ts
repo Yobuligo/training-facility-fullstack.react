@@ -6,6 +6,8 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
+import { useRenderDate } from "../../../hooks/useRenderDate";
+import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
@@ -45,6 +47,8 @@ export const useEventRegistrationSectionViewModel = (
   const [callOffRequest, isCallOffRequestProcessing] = useRequest();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
+  const renderDate = useRenderDate();
+  const renderTimeSpan = useRenderTimeSpan();
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -122,7 +126,13 @@ export const useEventRegistrationSectionViewModel = (
   const onCallOff = () => {
     confirmDialog.show(
       t(texts.eventRegistrationSection.callOff),
-      t(texts.eventRegistrationSection.callOffQuestion, {}),
+      t(texts.eventRegistrationSection.callOffQuestion, {
+        date: renderDate(props.eventInstance.from),
+        timeSpan: renderTimeSpan({
+          from: props.eventInstance.from,
+          to: props.eventInstance.to,
+        }),
+      }),
       {
         cancelButtonCaption: t(texts.general.no),
         okayButtonCaption: t(texts.general.yes),
