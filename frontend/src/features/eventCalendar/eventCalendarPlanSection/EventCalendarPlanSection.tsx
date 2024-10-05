@@ -12,6 +12,7 @@ export const EventCalendarPlanSection: React.FC = () => {
 
   return (
     <div>
+      <p className={styles.description}>{t(texts.eventPlanSection.description)}</p>
       {viewModel.selectedEventDefinition ? (
         <EventDefinitionDetails
           eventDefinition={viewModel.selectedEventDefinition}

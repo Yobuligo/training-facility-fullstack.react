@@ -30,6 +30,8 @@
         "users": "Benutzer"
     },
     "eventCalendarMyTrainings": {
+        "additionalDescriptionForAdmin": ", manage Teilnehmer, schließe die Anmeldung oder sage ein Training ab",
+        "description": "Melde dich für ein Training an oder ab",
         "registerTitle": "Anmelden",
         "registerOnClosed": "Anmelden nicht möglich. Anmeldung ist geschlossen.",
         "unregisterTitle": "Abmelden",
@@ -48,6 +50,7 @@
         "noItems": "Keine Ereignisse gefunden"
     },
     "eventPlanSection": {
+        "description": "Plane neue Trainings ein oder ändere bestehende",
         "addTraining": "Training hinzufügen"
     },
     "eventRegistrationButton": {

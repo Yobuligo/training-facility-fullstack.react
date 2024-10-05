@@ -52,6 +52,8 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     return eventDefinitions;
   };
 
+  const showAdditionalAdminDescription = auth.isAdmin();
+
   const onReload = (dateTimeSpan: IDateTimeSpan) =>
     loadEventDefinitions(dateTimeSpan);
 
@@ -64,6 +66,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     onEventSelected,
     reloadSignal,
     selectedEventInstance,
+    showAdditionalAdminDescription,
     triggerReloadSignal,
     userId: user.id,
   };

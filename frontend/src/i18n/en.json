@@ -30,6 +30,8 @@
         "users": "Users"
     },
     "eventCalendarMyTrainings": {
+        "additionalDescriptionForAdmin": ", handle participating members, close registration or call off a training",
+        "description": "Register or unregister for a training",
         "registerTitle": "Register",
         "registerOnClosed": "Registering is not possible. Registration is closed.",
         "unregisterTitle": "Unregister",
@@ -48,6 +50,7 @@
         "noItems": "No events found"
     },
     "eventPlanSection": {
+        "description": "Plan in new trainings or adjust existing ones",
         "addTraining": "Add training"
     },
     "eventRegistrationButton": {

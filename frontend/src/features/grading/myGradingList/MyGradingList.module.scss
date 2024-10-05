@@ -1,7 +1,8 @@
 @use '../../../styles/mixins.scss';
+@use '../../../styles/components.module.scss';
 
 .introduction {
-    font-weight: 600;
+    @extend .pageDescription;
 }
 
 .gradingList {

@@ -8,6 +8,10 @@
   min-height: 100vh;
 }
 
+.pageDescription{
+  font-weight: 600;
+}
+
 .icon {
   @include hoverIcon;
   fill: $color-icon;

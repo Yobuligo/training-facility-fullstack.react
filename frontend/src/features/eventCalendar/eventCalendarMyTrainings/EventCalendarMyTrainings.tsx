@@ -1,4 +1,6 @@
 import { DateTime } from "../../../core/services/date/DateTime";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
@@ -6,8 +8,10 @@ import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { IEvent } from "../model/IEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
+import styles from "./EventCalendarMyTrainings.module.scss";
 
 export const EventCalendarMyTrainings: React.FC = () => {
+  const { t } = useTranslation();
   const viewModel = useEventCalendarMyTrainingsViewModel();
 
   const renderEvent = (event: IEvent) => {
@@ -36,6 +40,13 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
+      <p className={styles.description}>{`${t(
+        texts.eventCalendarMyTrainings.description
+      )}${
+        viewModel.showAdditionalAdminDescription
+          ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
+          : ""
+      }`}</p>
       {viewModel.selectedEventInstance ? (
         <EventRegistrationDetails
           eventInstance={viewModel.selectedEventInstance}
