@@ -44,11 +44,11 @@ export const EventCalendarTrialTraining: React.FC = () => {
         />
       ) : (
         <EventCalendarSection
-          eventDefinitionLoader={async () => {
+          eventDefinitionLoader={async (dateTimeSpan) => {
             TokenRepository.token = await requestToken();
             const eventDefinitionApi = new EventDefinitionApi();
             return await eventDefinitionApi.findByDateTimeSpanSecured(
-              DateTime.getWeekSpanDates(new Date()),
+              dateTimeSpan,
               Boolean.true
             );
           }}

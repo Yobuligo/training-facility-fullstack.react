@@ -46,7 +46,7 @@
 	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
 	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
 	# Display event planner as list
-	- Mark trainings as private or public (public trainings can be seen in the training-times calendar and can be booked for trial trainings)
+	# Mark trainings as private or public (public trainings can be booked for trial trainings)
 	
 - My Trainings
 	# User can register on and unregister from trainings
@@ -202,8 +202,9 @@
 	# Registered user is displayed in event registration list of the event instance and marked as trial training
 	# Registered user can be marked as present, missing or open
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
-	- Member only trainings must not be displayed
+	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
+	- Bug: selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 
 # Login
 	# Login must only be possible with valid username and password
@@ -231,13 +232,13 @@
 	# Remove month view
 	
 # Event Calendar Overview
-	# Provide separate route to calendar overview in display mode
-	- Member only trainings must not be displayed
+	# Provide separate route to calendar overview in display mode	
+	- Bug: selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem
 	
-- Display Courses / seminars
+- Display Courses / seminars in "grading list"
 	- Courses can be displayed in user profile
 
 - LabeledSelect
