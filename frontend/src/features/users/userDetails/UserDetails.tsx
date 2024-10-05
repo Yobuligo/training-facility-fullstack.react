@@ -21,7 +21,7 @@ export const UserDetails: React.FC<IUserDetails> = (props) => {
         isAdminMode={props.isAdminMode}
         onUnlock={props.onUnlock}
         onCancel={props.onCancel}
-        onChange={props.onChange}
+        onSave={props.onSave}
         onLock={props.onLock}
         onDelete={props.onDelete}
         user={props.user}

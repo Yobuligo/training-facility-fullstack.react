@@ -344,7 +344,14 @@ export const useUserViewModel = (props: IUserProps) => {
     updateUserBankAccount();
     updateUserRoles();
     userProfile.userGradings = gradings;
-    props.onChange?.(props.user);
+
+    confirmDialog.show(
+      "Send invitation",
+      "Would you like to send an invitation to the created user?",
+      { displayCancelButton: false }
+    );
+
+    props.onSave?.(props.user);
   };
 
   const handleSendMailError = (error: any): boolean => {

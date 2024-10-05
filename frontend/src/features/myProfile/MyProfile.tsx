@@ -15,7 +15,7 @@ export const MyProfile: React.FC = () => {
         viewModel.user && (
           <User
             isAdminMode={false}
-            onChange={viewModel.onChange}
+            onSave={viewModel.onSave}
             user={viewModel.user!}
           />
         )

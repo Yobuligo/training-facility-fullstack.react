@@ -204,7 +204,7 @@
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
-	- Bug: selecting a filter (like today, tomorrow, week, month) doesn't update the training list
+	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 
 # Login
 	# Login must only be possible with valid username and password
@@ -233,7 +233,7 @@
 	
 # Event Calendar Overview
 	# Provide separate route to calendar overview in display mode	
-	- Bug: selecting a filter (like today, tomorrow, week, month) doesn't update the training list
+	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem

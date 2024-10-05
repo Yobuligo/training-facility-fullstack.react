@@ -32,7 +32,7 @@ export const useMyProfileViewModel = () => {
     loadUser();
   });
 
-  const onChange = (user: IUser) =>
+  const onSave = (user: IUser) =>
     changeUserProfileRequest(async () => {
       const userApi = new UserApi();
       await userApi.update(user);
@@ -41,7 +41,7 @@ export const useMyProfileViewModel = () => {
   return {
     error,
     isLoadUserProfileRequestProcessing,
-    onChange,
+    onSave,
     user,
   };
 };

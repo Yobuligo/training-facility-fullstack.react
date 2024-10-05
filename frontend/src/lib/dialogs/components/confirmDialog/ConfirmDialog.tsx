@@ -25,10 +25,16 @@ export const ConfirmDialog: React.FC<IConfirmDialogProps> = (props) => {
       <Toolbar>
         {props.displayCancelButton !== false && (
           <SecondaryButton onClick={onCancel}>
-            {t(texts.general.cancel)}
+            {props.cancelButtonCaption
+              ? props.cancelButtonCaption
+              : t(texts.general.cancel)}
           </SecondaryButton>
         )}
-        <Button onClick={onOkay}>{t(texts.general.ok)}</Button>
+        <Button onClick={onOkay}>
+          {props.okayButtonCaption
+            ? props.okayButtonCaption
+            : t(texts.general.ok)}
+        </Button>
       </Toolbar>
     </div>
   );
