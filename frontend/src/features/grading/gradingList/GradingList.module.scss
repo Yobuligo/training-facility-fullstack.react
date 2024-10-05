@@ -1,8 +1,14 @@
 @use "../../../styles/colors.module.scss";
+@use "../../../styles/mixins.scss";
 
 .gradingList {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   color: colors.$color-text;
+
+  @include mixins.medium-screen(43rem) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }

@@ -1,0 +1,7 @@
+@use '../../../styles/mixins.scss';
+
+.gradingList {
+    @include mixins.medium-screen {
+        margin-top: 1rem;
+    }
+}

@@ -9,6 +9,7 @@ import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { GradingList } from "../gradingList/GradingList";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { texts } from "../../../lib/translation/texts";
+import styles from './MyGradingList.module.scss';
 
 export const MyGradingList: React.FC = () => {
   const [gradings, setGradings] = useState<IUserGrading[]>([]);
@@ -35,6 +36,7 @@ export const MyGradingList: React.FC = () => {
             displayMode={true}
             isAdminMode={false}
             gradings={gradings}
+            className={styles.gradingList}
           />
         </>
       )}
