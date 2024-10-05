@@ -2,7 +2,6 @@ import { BurgerMenu } from "../../components/burgerMenu/BurgerMenu";
 import { TabStrip } from "../../components/tabStrip/TabStrip";
 import { TabStripContent } from "../../components/tabStripContent/TabStripContent";
 import { style } from "../../core/ui/style";
-
 import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
 import { useDashboardViewModel } from "./useDashboardViewModel";
@@ -16,7 +15,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
         <div className={style(styles.navigation, styles.burgerMenuAndTabStrip)}>
           <BurgerMenu
             className={styles.burgerMenu}
-            captions={viewModel.captions}
+            items={viewModel.items}
             onEntrySelect={(index) => viewModel.onSelect(index)}
           />
           <TabStrip

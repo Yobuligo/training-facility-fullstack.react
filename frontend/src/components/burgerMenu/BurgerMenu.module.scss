@@ -34,6 +34,13 @@
     padding-top: 1rem;
 }
 
+.line {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    align-items: center;
+}
+
 .menuEntry {
     color: colors.$color-burger-menu-item-caption;
     font-size: large;

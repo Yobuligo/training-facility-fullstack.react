@@ -18,6 +18,12 @@
   left: 0.2rem;
 }
 
+.icon {
+  width: 2rem;
+  height: auto;
+  color: colors.$color-burger-menu-item-caption;
+}
+
 .dashboardContent {
   display: flex;
   flex-direction: column;

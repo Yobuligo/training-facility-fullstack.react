@@ -47,9 +47,7 @@ export const User: React.FC<IUserProps> = (props) => {
           disabled={viewModel.displayMode}
           onClick={viewModel.onToggleIsLocked}
         >
-          {viewModel.isLocked
-            ? t(texts.user.unlock)
-            : t(texts.user.lock)}
+          {viewModel.isLocked ? t(texts.user.unlock) : t(texts.user.lock)}
         </Button>
       )}
 

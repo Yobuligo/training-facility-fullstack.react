@@ -12,7 +12,7 @@ export const BurgerMenu: React.FC<IBurgerMenuProps> = (props) => {
       style={{ top: props.topPosition }}
       className={style(styles.menuEntries, isOpen ? styles.openMenu : "")}
     >
-      {props.captions.map((caption, index) => (
+      {props.items.map((item, index) => (
         <div
           className={styles.menuEntry}
           key={index}
@@ -21,7 +21,10 @@ export const BurgerMenu: React.FC<IBurgerMenuProps> = (props) => {
             toggleIsOpen();
           }}
         >
-          {caption}
+          <div className={styles.line}>
+            {item.icon}
+            <div>{item.title}</div>
+          </div>
         </div>
       ))}
     </div>

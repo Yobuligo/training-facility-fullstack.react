@@ -1,0 +1,9 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_686_252)">
+        <path d="M182.612 73.707C148.049 73.7052 108.556 73.706 108.556 73.706M52.079 49.7224C16.8251 57.3262 24.6294 76.4504 60.9516 73.7056L108.556 73.706M108.556 73.706L108.556 108.955" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+        <path d="M213.612 177.707C179.049 177.705 139.556 177.706 139.556 177.706M83.079 153.722C47.8251 161.326 55.6294 180.45 91.9516 177.706L139.556 177.706M139.556 177.706L139.556 212.955" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+        <circle cx="107" cy="40" r="14" stroke="currentColor" stroke-width="10"/>
+        <circle cx="139" cy="148" r="14" stroke="currentColor" stroke-width="10"/>
+    </g>
+</svg>

@@ -1,6 +1,8 @@
+import { IItem } from "../../core/types/IItem";
+
 export interface IBurgerMenuProps {
   className?: string;
-  captions: string[];
+  items: IItem[];
   onEntrySelect?: (index: number) => void;
   topPosition?: number;
 }
