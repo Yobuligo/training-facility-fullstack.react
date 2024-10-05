@@ -9,6 +9,7 @@ import { Boolean } from "../../../shared/types/Boolean";
 import colors from "../../../styles/colors.module.scss";
 import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventCalendarContent } from "../eventCalendarContent/EventCalendarContent";
+import { EventCalledOff } from "../eventCalledOff/EventCalledOff";
 import { ICalendarEvent } from "../model/ICalendarEvent";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
@@ -57,7 +58,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
 
   const renderEvent = (event: IEvent): ReactNode =>
     isEventCalledOff(event) ? (
-      <>Called off</>
+      <EventCalledOff />
     ) : (
       <>{props.renderEvent && props.renderEvent(event)}</>
     );

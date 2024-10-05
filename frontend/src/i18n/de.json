@@ -39,6 +39,9 @@
     "eventCalendarTrialTraining": {
         "errorEventInstanceClosed": "Buchung nicht möglich. Es gibt bereits zu viele Anmeldungen."
     },
+    "eventCalledOff": {
+        "calledOff": "Abgesagt"
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },

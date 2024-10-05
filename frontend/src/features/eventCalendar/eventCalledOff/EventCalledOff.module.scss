@@ -1,0 +1,7 @@
+@use "../../../styles/colors.module.scss";
+
+.eventCalledOff {
+  font-size: large;
+  font-weight: 600;
+  color: colors.$color-event-called-off;
+}
