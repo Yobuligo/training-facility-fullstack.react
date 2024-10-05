@@ -72,9 +72,9 @@
 		- Training times calendar
 		- Trial training calendar
 		- My trainings calendar
-	- Display if event is for member only. Must be displayed at:
-		- My trainings calendar
-		- Planer
+	# Display if event is for member only. Must be displayed at:
+		# My trainings calendar
+		# Planer
 	
 - Event Registration
 	# Display spinner when loading registrations

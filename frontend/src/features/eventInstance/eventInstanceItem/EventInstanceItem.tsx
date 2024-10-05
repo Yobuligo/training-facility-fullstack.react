@@ -61,6 +61,13 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               )}
             </div>
           </div>
+          {props.isMemberOnly === Boolean.true && !screenSize.isSmall() ? (
+            <div className={styles.icon}>
+              <MemberOnlyIcon />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         {(props.renderChildrenInline === undefined ||
           props.renderChildrenInline === false) &&
