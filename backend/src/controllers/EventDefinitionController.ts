@@ -70,7 +70,9 @@ export class EventDefinitionController extends EntityController<
           to: new Date(to),
         };
 
-        let eventDefinitions = await this.repo.findByDateTimeSpan(dateTimeSpan);
+        let eventDefinitions = await this.repo.findByDateTimeSpanAndInstances(
+          dateTimeSpan
+        );
 
         if (isMemberOnly) {
           eventDefinitions = eventDefinitions.filter(
