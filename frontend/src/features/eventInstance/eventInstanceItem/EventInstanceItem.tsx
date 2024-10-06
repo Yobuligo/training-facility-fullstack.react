@@ -7,7 +7,6 @@ import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import { useScreenSize } from "../../../hooks/useScreenSize";
 import { MemberOnlyIcon } from "../../../icons/MemberOnlyIcon";
-import { Boolean } from "../../../shared/types/Boolean";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
@@ -39,7 +38,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               <div className={styles.title}>
                 {props.eventInstanceItemModel.title}
               </div>
-              {props.eventInstanceItemModel.isMemberOnly === Boolean.true &&
+              {props.eventInstanceItemModel.isMemberOnly === true &&
               screenSize.isSmall() ? (
                 <MemberOnlyIcon />
               ) : (
@@ -68,7 +67,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               )}
             </div>
           </div>
-          {props.eventInstanceItemModel.isMemberOnly === Boolean.true &&
+          {props.eventInstanceItemModel.isMemberOnly === true &&
           !screenSize.isSmall() ? (
             <div className={styles.icon}>
               <MemberOnlyIcon />

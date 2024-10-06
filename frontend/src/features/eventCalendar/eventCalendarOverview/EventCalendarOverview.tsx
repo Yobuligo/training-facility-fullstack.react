@@ -1,7 +1,6 @@
 import { TokenRepository } from "../../../api/core/TokenRepository";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { requestToken } from "../../../api/utils/requestToken";
-import { Boolean } from "../../../shared/types/Boolean";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import styles from "./EventCalendarOverview.module.scss";
 
@@ -18,7 +17,7 @@ export const EventCalendarOverview: React.FC = () => {
           const eventDefinitionApi = new EventDefinitionApi();
           return await eventDefinitionApi.findByDateTimeSpanSecured(
             dateTimeSpan,
-            Boolean.false
+            false
           );
         }}
         views={["day", "week"]}

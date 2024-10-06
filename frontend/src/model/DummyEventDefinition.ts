@@ -2,7 +2,6 @@ import { DateTime } from "../core/services/date/DateTime";
 import { Recurrence } from "../core/types/Recurrence";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { IEventInstance } from "../shared/model/IEventInstance";
-import { Boolean } from "../shared/types/Boolean";
 import colors from "../styles/colors.module.scss";
 import { uuid } from "../utils/uuid";
 import { Dummy } from "./Dummy";
@@ -11,7 +10,7 @@ export class DummyEventDefinition extends Dummy implements IEventDefinition {
   eventInstances: IEventInstance[] = [];
   color: string = colors.colorEventDefinition1;
   description: string = "";
-  isMemberOnly: Boolean = Boolean.false;
+  isMemberOnly: boolean = false;
   recurrence: Recurrence = Recurrence.ONCE;
   title: string = "";
   id: string = uuid();

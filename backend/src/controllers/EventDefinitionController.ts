@@ -8,7 +8,6 @@ import {
 } from "../shared/model/IEventDefinition";
 import { AuthRole } from "../shared/types/AuthRole";
 import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
-import { Boolean } from "./../shared/types/Boolean";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 import { TokenInterceptor } from "./core/TokenInterceptor";
@@ -73,9 +72,9 @@ export class EventDefinitionController extends EntityController<
 
         let eventDefinitions = await this.repo.findByDateTimeSpan(dateTimeSpan);
 
-        if (isMemberOnly === Boolean.true) {
+        if (isMemberOnly) {
           eventDefinitions = eventDefinitions.filter(
-            (eventDefinition) => eventDefinition.isMemberOnly === Boolean.false
+            (eventDefinition) => eventDefinition.isMemberOnly === false
           );
         }
         res.status(HttpStatusCode.OK_200).send(eventDefinitions);

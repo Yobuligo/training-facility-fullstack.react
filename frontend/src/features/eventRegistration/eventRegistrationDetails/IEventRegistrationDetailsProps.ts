@@ -1,8 +1,7 @@
 import { IEventInstance } from "../../../shared/model/IEventInstance";
-import { Boolean } from "../../../shared/types/Boolean";
 
 export interface IEventRegistrationDetailsProps {
   eventInstance: IEventInstance;
-  isMemberOnly: Boolean;
+  isMemberOnly: boolean;
   onBack?: () => void;
 }

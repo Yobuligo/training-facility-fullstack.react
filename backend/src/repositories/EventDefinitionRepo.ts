@@ -92,7 +92,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         ));
     `;
 
-    const eventDefinitions = await db.query<IEventDefinition>(query, {
+    let eventDefinitions = await db.query<IEventDefinition>(query, {
       replacements: {
         from: dateTimeSpan.from,
         to: dateTimeSpan.to,
@@ -100,6 +100,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       type: sequelize.QueryTypes.SELECT,
     });
 
+    this.correctBoolean(eventDefinitions);
     return eventDefinitions;
   }
 
@@ -263,5 +264,12 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
     // convert to array
     return Object.values(eventDefinitionsDb);
+  }
+
+  private correctBoolean(eventDefinitions: IEventDefinition[]): void {
+    eventDefinitions.forEach((eventDefinition) => {
+      eventDefinition.isMemberOnly =
+        (eventDefinition.isMemberOnly as any) === 1 ? true : false;
+    });
   }
 }
