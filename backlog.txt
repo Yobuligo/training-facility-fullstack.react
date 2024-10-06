@@ -89,6 +89,7 @@
 	# Display loading spinner when closing or reopening an EventInstance	
 	# It must not be possible to register on past events
 	# It must not be possible to register if event instance was closed
+	- It must not be possible to register if event instance was called off
 	# It must not be possible to unregister if event instance was closed
 	# User can be added to EventInstance manually by search and add
 	# Manually added users are added sorted
