@@ -5,7 +5,6 @@ import { List } from "../../../core/services/list/List";
 import { Weekday } from "../../../core/types/Weekday";
 import { useScreenSize } from "../../../hooks/useScreenSize";
 import { EventInfo } from "../../../services/EventInfo";
-import { Boolean } from "../../../shared/types/Boolean";
 import colors from "../../../styles/colors.module.scss";
 import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
 import { EventCalendarContent } from "../eventCalendarContent/EventCalendarContent";
@@ -28,10 +27,9 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
         padding: "0.5rem",
       };
     } else {
-      const backgroundColor =
-        EventInfo.calledOff(calendarEvent) === Boolean.true
-          ? colors.colorEventCalledOffBackground
-          : colors.colorEventBackground;
+      const backgroundColor = EventInfo.calledOff(calendarEvent)
+        ? colors.colorEventCalledOffBackground
+        : colors.colorEventBackground;
       return {
         backgroundColor: backgroundColor,
         color: colors.colorEventText,
@@ -56,7 +54,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
   };
 
   const renderEvent = (event: IEvent): ReactNode =>
-    EventInfo.calledOff(event) === Boolean.true ? (
+    EventInfo.calledOff(event) ? (
       <EventCalledOff />
     ) : (
       <>{props.renderEvent && props.renderEvent(event)}</>

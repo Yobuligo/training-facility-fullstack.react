@@ -16,7 +16,6 @@ import { UserInfo } from "../../../services/UserInfo";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserTrialTraining } from "../../../shared/model/IUserTrialTraining";
-import { Boolean } from "../../../shared/types/Boolean";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { uuid } from "../../../utils/uuid";
@@ -137,7 +136,7 @@ export const useEventRegistrationSectionViewModel = (
       {
         onOkay: () =>
           callOffRequest(async () => {
-            props.eventInstance.calledOff = Boolean.true;
+            props.eventInstance.calledOff = true;
             await updateEventInstance();
           }),
       }
@@ -146,7 +145,7 @@ export const useEventRegistrationSectionViewModel = (
 
   const onReschedule = () =>
     rescheduleRequest(async () => {
-      props.eventInstance.calledOff = Boolean.false;
+      props.eventInstance.calledOff = false;
       await updateEventInstance();
     });
 

@@ -222,7 +222,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,
-          calledOff: rowAny.called_off,
+          calledOff: rowAny.called_off === 0 ? false : true,
           color: rowAny.inst_color,
           createdAt: rowAny.inst_createdAt,
           updatedAt: rowAny.inst_updatedAt,
