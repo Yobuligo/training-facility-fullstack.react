@@ -31,7 +31,7 @@
         "users": "Benutzer"
     },
     "eventCalendarMyTrainings": {
-        "additionalDescriptionForAdmin": ", manage Teilnehmer, schließe die Anmeldung oder sage ein Training ab",
+        "additionalDescriptionForAdmin": ", verwalte Teilnehmer, schließe die Anmeldung oder sage ein Training ab",
         "description": "Melde dich für ein Training an oder ab",
         "registerTitle": "Anmelden",
         "registerOnClosed": "Anmelden nicht möglich. Anmeldung ist geschlossen.",
@@ -208,7 +208,7 @@
         "title": "Abmelden"
     },
     "myGradingList": {
-        "introduction": "Hier findest du eine Übersicht deiner bestandenen Taekwon-do-Prüfungen und den erreichten Graduierungen."
+        "introduction": "Hier findest du eine Übersicht deiner bestandenen Taekwon-do-Prüfungen und den erreichten Graduierungen"
     },
     "myProfile": {
         "errorLoadingUserSession": "Fehler beim Laden der Benutzersitzung"
