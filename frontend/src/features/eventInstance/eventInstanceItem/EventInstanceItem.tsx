@@ -23,6 +23,10 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
     </div>
   );
 
+  // const styling = {
+  //   "--backgroundColor":
+  // } as CSSProperties
+
   return (
     <Card className={styles.card} onClick={props.onClick}>
       <div className={styles.eventInstanceItem}>
@@ -33,7 +37,8 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               <div className={styles.title}>
                 {props.eventInstanceItemModel.title}
               </div>
-              {props.isMemberOnly === Boolean.true && screenSize.isSmall() ? (
+              {props.eventInstanceItemModel.isMemberOnly === Boolean.true &&
+              screenSize.isSmall() ? (
                 <MemberOnlyIcon />
               ) : (
                 <></>
@@ -61,7 +66,8 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
               )}
             </div>
           </div>
-          {props.isMemberOnly === Boolean.true && !screenSize.isSmall() ? (
+          {props.eventInstanceItemModel.isMemberOnly === Boolean.true &&
+          !screenSize.isSmall() ? (
             <div className={styles.icon}>
               <MemberOnlyIcon />
             </div>

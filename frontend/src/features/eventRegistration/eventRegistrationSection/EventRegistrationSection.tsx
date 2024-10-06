@@ -24,8 +24,10 @@ export const EventRegistrationSection: React.FC<
         <PageSpinner />
       ) : (
         <EventInstanceItem
-          eventInstanceItemModel={props.eventInstance}
-          isMemberOnly={props.isMemberOnly}
+          eventInstanceItemModel={{
+            ...props.eventInstance,
+            isMemberOnly: props.isMemberOnly,
+          }}
         >
           <div className={styles.buttons}>
             {props.eventInstance.calledOff === Boolean.false ? (

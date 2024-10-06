@@ -12,6 +12,7 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
     color: eventDefinition.color,
     from: props.event.dateTimeSpan.from,
     id: eventDefinition.id,
+    isMemberOnly: eventDefinition.isMemberOnly,
     title: eventDefinition.title,
     to: props.event.dateTimeSpan.to,
   };
@@ -22,7 +23,6 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
     <EventInstanceItem
       classNameChildren={styles.children}
       eventInstanceItemModel={eventInstanceItemModel}
-      isMemberOnly={eventDefinition.isMemberOnly}
       renderChildrenInline={true}
       onClick={onClick}
     >
