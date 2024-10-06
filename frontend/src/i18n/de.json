@@ -41,6 +41,9 @@
     "eventCalendarTrialTraining": {
         "errorEventInstanceClosed": "Buchung nicht möglich. Es gibt bereits zu viele Anmeldungen."
     },
+    "eventCalledOff": {
+        "calledOff": "Abgesagt"
+    },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Titel ist erforderlich"
     },
@@ -81,7 +84,7 @@
         "closeRegistrationTitle": "Anmeldung schließen",
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
         "open": "Anmeldung wieder öffnen",
-        "reschedule": "Wiederherstellen"
+        "reschedule": "Wieder einplanen"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",

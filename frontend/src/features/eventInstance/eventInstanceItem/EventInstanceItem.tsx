@@ -5,6 +5,9 @@ import { style } from "../../../core/ui/style";
 import { useRenderDate } from "../../../hooks/useRenderDate";
 import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
+import { useScreenSize } from "../../../hooks/useScreenSize";
+import { MemberOnlyIcon } from "../../../icons/MemberOnlyIcon";
+import { EventCalledOff } from "../../eventCalendar/eventCalledOff/EventCalledOff";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
@@ -12,6 +15,7 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   const renderWeekday = useRenderWeekday();
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
+  const screenSize = useScreenSize();
 
   const renderChildren = () => (
     <div className={style(styles.children, props.classNameChildren)}>
@@ -20,13 +24,27 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
   );
 
   return (
-    <Card className={styles.card} onClick={props.onClick}>
+    <Card
+      className={style(
+        styles.card,
+        props.eventInstanceItemModel.calledOff ? styles.cardCalledOff : ""
+      )}
+      onClick={props.onClick}
+    >
       <div className={styles.eventInstanceItem}>
         <div className={styles.header}>
           <Banner color={props.eventInstanceItemModel.color} />
           <div className={styles.content}>
-            <div className={styles.title}>
-              {props.eventInstanceItemModel.title}
+            <div className={styles.titleContainer}>
+              <div className={styles.title}>
+                {props.eventInstanceItemModel.title}
+              </div>
+              {props.eventInstanceItemModel.isMemberOnly === true &&
+              screenSize.isSmall() ? (
+                <MemberOnlyIcon />
+              ) : (
+                <></>
+              )}
             </div>
             <div className={styles.timeContainer}>
               <div className={styles.weekday}>
@@ -45,11 +63,29 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
                   })}
                 </div>
               </div>
-              {props.renderChildrenInline === true && props.children && (
-                <div className={props.classNameChildren}>{props.children}</div>
+              {props.eventInstanceItemModel.calledOff ? (
+                <div className={styles.calledOffText}>
+                  <EventCalledOff />
+                </div>
+              ) : (
+                <>
+                  {props.renderChildrenInline === true && props.children && (
+                    <div className={props.classNameChildren}>
+                      {props.children}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
+          {props.eventInstanceItemModel.isMemberOnly === true &&
+          !screenSize.isSmall() ? (
+            <div className={styles.icon}>
+              <MemberOnlyIcon />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         {(props.renderChildrenInline === undefined ||
           props.renderChildrenInline === false) &&

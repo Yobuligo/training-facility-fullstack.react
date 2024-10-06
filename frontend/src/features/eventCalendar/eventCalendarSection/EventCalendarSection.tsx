@@ -1,11 +1,14 @@
+import { ReactNode } from "react";
 import { EventCalendar } from "../../../components/eventCalendar/EventCalendar";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { Weekday } from "../../../core/types/Weekday";
 import { useScreenSize } from "../../../hooks/useScreenSize";
+import { EventInfo } from "../../../services/EventInfo";
 import colors from "../../../styles/colors.module.scss";
 import { EventDefinitionSection } from "../../eventDefinition/eventDefinitionSection/EventDefinitionSection";
-import { EventContent } from "../eventContent/EventContent";
+import { EventCalendarContent } from "../eventCalendarContent/EventCalendarContent";
+import { EventCalledOff } from "../eventCalledOff/EventCalledOff";
 import { ICalendarEvent } from "../model/ICalendarEvent";
 import { IEvent } from "../model/IEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
@@ -24,8 +27,11 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
         padding: "0.5rem",
       };
     } else {
+      const backgroundColor = EventInfo.calledOff(calendarEvent)
+        ? colors.colorEventCalledOffBackground
+        : colors.colorEventBackground;
       return {
-        backgroundColor: colors.colorEventBackground,
+        backgroundColor: backgroundColor,
         color: colors.colorEventText,
         padding: "0.5rem",
       };
@@ -47,10 +53,17 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
     }
   };
 
-  const renderEvent = (event: IEvent) => (
-    <EventContent eventDefinition={event.eventDefinition}>
-      {props.renderEvent && props.renderEvent(event)}
-    </EventContent>
+  const renderEvent = (event: IEvent): ReactNode =>
+    EventInfo.calledOff(event) ? (
+      <EventCalledOff />
+    ) : (
+      <>{props.renderEvent && props.renderEvent(event)}</>
+    );
+
+  const renderCalendarEvent = (event: IEvent) => (
+    <EventCalendarContent eventDefinition={event.eventDefinition}>
+      {renderEvent(event)}
+    </EventCalendarContent>
   );
 
   return (
@@ -63,7 +76,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
           }
           onReload={viewModel.onReload}
           onSelect={props.onEventSelected}
-          renderEvent={props.renderEvent}
+          renderEvent={renderEvent}
         />
       ) : (
         <EventCalendar
@@ -73,7 +86,7 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
           onRangeChanged={viewModel.onEventRangeChanged}
           onViewChanged={viewModel.onViewChanged}
           renderDay={renderDay}
-          renderEvent={renderEvent}
+          renderEvent={renderCalendarEvent}
           styleEvent={styleEvent}
           toTime={viewModel.toTime}
           view={viewModel.view}

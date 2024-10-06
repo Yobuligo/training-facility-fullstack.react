@@ -4,8 +4,8 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
-import { EventButtonContent } from "../eventButtonContent/EventButtonContent";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
+import { EventContent } from "../eventContent/EventContent";
 import { IEvent } from "../model/IEvent";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 import styles from "./EventCalendarMyTrainings.module.scss";
@@ -24,7 +24,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
       <>
         {event.dateTimeSpan.from &&
           DateTime.isAfter(event.dateTimeSpan.from) && (
-            <EventButtonContent>
+            <EventContent>
               <EventRegistrationButton
                 event={event}
                 isRegistered={eventRegistration !== undefined}
@@ -32,7 +32,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
                 onUnregister={() => viewModel.triggerReloadSignal()}
                 userId={viewModel.userId}
               />
-            </EventButtonContent>
+            </EventContent>
           )}
       </>
     );
@@ -47,9 +47,10 @@ export const EventCalendarMyTrainings: React.FC = () => {
           ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
           : ""
       }`}</p>
-      {viewModel.selectedEventInstance ? (
+      {viewModel.selectedEventInstance && viewModel.selectedEvent ? (
         <EventRegistrationDetails
           eventInstance={viewModel.selectedEventInstance}
+          isMemberOnly={viewModel.selectedEvent.eventDefinition.isMemberOnly}
           onBack={viewModel.onEventInstanceUnselect}
         />
       ) : (

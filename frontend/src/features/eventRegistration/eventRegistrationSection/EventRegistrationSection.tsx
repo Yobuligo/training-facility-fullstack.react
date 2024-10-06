@@ -2,7 +2,6 @@ import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { Boolean } from "../../../shared/types/Boolean";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
@@ -23,9 +22,14 @@ export const EventRegistrationSection: React.FC<
       {viewModel.isLoadEventRegistrationRequestProcessing ? (
         <PageSpinner />
       ) : (
-        <EventInstanceItem eventInstanceItemModel={props.eventInstance}>
+        <EventInstanceItem
+          eventInstanceItemModel={{
+            ...props.eventInstance,
+            isMemberOnly: props.isMemberOnly,
+          }}
+        >
           <div className={styles.buttons}>
-            {props.eventInstance.calledOff === Boolean.false ? (
+            {props.eventInstance.calledOff === false ? (
               <SecondaryButton
                 displaySpinner={viewModel.isCallOffRequestProcessing}
                 onClick={viewModel.onCallOff}

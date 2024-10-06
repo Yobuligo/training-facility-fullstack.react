@@ -4,7 +4,6 @@ import { Recurrence } from "../../core/types/Recurrence";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
-import { Boolean } from "../../shared/types/Boolean";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 
@@ -19,10 +18,10 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
     undefined
   );
 
-  const isMemberOnlyOptions: ISelectOption<Boolean>[] = useMemo(
+  const isMemberOnlyOptions: ISelectOption<boolean>[] = useMemo(
     () => [
-      { key: Boolean.false, text: t(texts.general.no) },
-      { key: Boolean.true, text: t(texts.general.yes) },
+      { key: false, text: t(texts.general.no) },
+      { key: true, text: t(texts.general.yes) },
     ],
     [t]
   );

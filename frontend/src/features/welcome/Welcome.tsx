@@ -29,6 +29,7 @@ export const Welcome: React.FC = () => {
         await eventInstanceApi.findByUserForWeek(user.id, [
           "id",
           "color",
+          "calledOff",
           "from",
           "to",
           "title",

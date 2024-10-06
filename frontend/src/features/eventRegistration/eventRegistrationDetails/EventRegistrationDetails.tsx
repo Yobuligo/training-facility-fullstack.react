@@ -7,7 +7,10 @@ export const EventRegistrationDetails: React.FC<
 > = (props) => {
   return (
     <DetailView onBack={props.onBack}>
-      <EventRegistrationSection eventInstance={props.eventInstance} />
+      <EventRegistrationSection
+        eventInstance={props.eventInstance}
+        isMemberOnly={props.isMemberOnly}
+      />
     </DetailView>
   );
 };

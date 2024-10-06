@@ -9,6 +9,14 @@ import { IEvent } from "./../features/eventCalendar/model/IEvent";
  */
 export class EventInfo {
   /**
+   * Returns if the given event was called off, return false if no information was found
+   */
+  static calledOff(event: IEvent): boolean {
+    const eventInstance = this.findEventInstance(event);
+    return eventInstance !== undefined && eventInstance.calledOff === true;
+  }
+
+  /**
    * Finds an event instance, from the attached event definition of the {@link event},
    * which matches the {@link event} start date.
    */

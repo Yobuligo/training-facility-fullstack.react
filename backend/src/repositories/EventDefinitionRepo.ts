@@ -28,9 +28,28 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     userId: string,
     fields?: unknown
   ): Promise<unknown> {
+    let eventDefinitions =
+      await this.selectEventDefinitionsInstancesAndRegistrations(
+        dateTimeSpan,
+        userId
+      );
+    eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
+    return eventDefinitions;
+  }
+
+  findByDateTimeSpanAndInstances<K extends keyof IEventDefinition>(
+    dateTimeSpan: IDateTimeSpan,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventDefinition, K>[]>;
+  findByDateTimeSpanAndInstances(
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IEventDefinition[]>;
+  async findByDateTimeSpanAndInstances(
+    dateTimeSpan: IDateTimeSpan,
+    fields?: unknown
+  ): Promise<unknown> {
     let eventDefinitions = await this.selectEventDefinitionsAndInstances(
-      dateTimeSpan,
-      userId
+      dateTimeSpan
     );
     eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
     return eventDefinitions;
@@ -92,7 +111,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         ));
     `;
 
-    const eventDefinitions = await db.query<IEventDefinition>(query, {
+    let eventDefinitions = await db.query<IEventDefinition>(query, {
       replacements: {
         from: dateTimeSpan.from,
         to: dateTimeSpan.to,
@@ -100,10 +119,89 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       type: sequelize.QueryTypes.SELECT,
     });
 
+    this.correctBooleans(eventDefinitions);
     return eventDefinitions;
   }
 
   private async selectEventDefinitionsAndInstances(
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IEventDefinition[]> {
+    const query = `
+        # get dates of range
+        WITH RECURSIVE date_range AS (
+            SELECT DATE(:from) AS datum
+            UNION ALL
+            SELECT DATE_ADD(datum, INTERVAL 1 DAY)
+            FROM date_range
+            WHERE datum < DATE(:to)
+        )
+
+        SELECT 
+          def.*,
+          inst.id AS inst_id,
+          inst.calledOff as called_off,
+          inst.color AS inst_color,
+          inst.\`description\` AS inst_description,
+          inst.\`from\` AS inst_from,
+          inst.state AS inst_state,
+          inst.title AS inst_title,
+          inst.\`to\` AS inst_to,
+          inst.createdAt AS inst_createdAt,
+          inst.updatedAt AS inst_updatedAt,
+          inst.eventDefinitionId AS inst_eventDefinitionId
+        FROM \`event-definitions\` AS def
+        LEFT JOIN \`event-instances\` AS inst
+        ON def.id = inst.eventDefinitionId
+        AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
+        WHERE 
+        # once
+        ((def.recurrence = 0 && (
+          DATE(def.\`from\`) >= DATE(:from) && DATE(def.\`to\`) <= DATE(:to)
+        )) OR 
+
+        # daily
+        (def.recurrence = 1 && (
+          # matches given date time span
+          DATE(def.\`from\`) <= DATE(:to) && ( 
+            (DATE(def.\`to\`) = DATE(def.\`from\`)) OR (DATE(def.\`to\`) > DATE(:from))
+          )
+        )) OR 
+
+        # weekly
+        (def.recurrence = 2 AND (
+          # matches given date time span
+          (DATE(def.\`from\`) <= DATE(:to) AND ( 
+            (DATE(def.\`to\`) = DATE(def.\`from\`)) OR (DATE(def.\`to\`) > DATE(:from))
+          )) AND
+          
+          # matches the weekdays of the date time span
+          DAYOFWEEK(def.\`from\`) IN (SELECT DAYOFWEEK(datum) FROM date_range)
+        )) OR
+
+        # monthly
+        (def.recurrence = 3 && (
+          # matches given date time span
+          (DATE(def.\`from\`) <= DATE(:to) && ( 
+            (DATE(def.\`to\`) = DATE(def.\`from\`)) OR (DATE(def.\`to\`) > DATE(:from))
+          )) AND
+          
+          # matches the weekdays of the date time span
+          DAY(def.\`from\`) IN (SELECT DAY(datum) FROM date_range)
+        )))
+    `;
+
+    const data = await db.query<IEventDefinition>(query, {
+      replacements: {
+        from: dateTimeSpan.from,
+        to: dateTimeSpan.to,
+      },
+      type: sequelize.QueryTypes.SELECT,
+    });
+
+    return this.convertToEventDefinition(data);
+  }
+
+  private async selectEventDefinitionsInstancesAndRegistrations(
     dateTimeSpan: IDateTimeSpan,
     userId?: string
   ): Promise<IEventDefinition[]> {
@@ -208,7 +306,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           creatorUserId: row.creatorUserId,
           description: row.description,
           from: row.from,
-          isMemberOnly: row.isMemberOnly,
+          isMemberOnly: (row.isMemberOnly as any) === 1 ? true : false,
           recurrence: row.recurrence,
           title: row.title,
           to: row.to,
@@ -222,7 +320,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,
-          calledOff: rowAny.called_off,
+          calledOff: rowAny.called_off === 0 ? false : true,
           color: rowAny.inst_color,
           createdAt: rowAny.inst_createdAt,
           updatedAt: rowAny.inst_updatedAt,
@@ -263,5 +361,12 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
     // convert to array
     return Object.values(eventDefinitionsDb);
+  }
+
+  private correctBooleans(eventDefinitions: IEventDefinition[]): void {
+    eventDefinitions.forEach((eventDefinition) => {
+      eventDefinition.isMemberOnly =
+        (eventDefinition.isMemberOnly as any) === 1 ? true : false;
+    });
   }
 }

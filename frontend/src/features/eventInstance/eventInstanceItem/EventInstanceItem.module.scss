@@ -6,6 +6,18 @@ $medium-screen-width: 46rem;
 
 .card {
   padding: 0;
+  background-color: colors.$color-event-background;
+}
+
+.cardCalledOff {
+  background-color: colors.$color-event-called-off-background;
+}
+
+.calledOffText {
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1;
+  height: 100%;
 }
 
 .eventInstanceItem {
@@ -39,6 +51,12 @@ $medium-screen-width: 46rem;
   font-weight: 500;
 }
 
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .weekday {
   width: 4rem;
   font-size: large;
@@ -68,4 +86,9 @@ $medium-screen-width: 46rem;
 
 .children {
   padding: 1rem;
+}
+
+.icon {
+  padding-top: 1rem;
+  padding-right: dimensions.$negative-space;
 }

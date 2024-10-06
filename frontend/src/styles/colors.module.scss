@@ -8,13 +8,25 @@ $color-secondary-lighter: #c1c2b8;
 $color-accent: #e1a847;
 
 $color-error: #d95f59;
-$color-error-light: lighten($color: $color-error, $amount: 20);
+$color-error-light: lighten(
+  $color: $color-error,
+  $amount: 20,
+);
 $color-success: rgba(63, 150, 13, 0.493);
-$color-success-light: lighten($color: $color-success, $amount: 40);
+$color-success-light: lighten(
+  $color: $color-success,
+  $amount: 40,
+);
 $color-warning: #e6e619;
-$color-warning-light: lighten($color: $color-warning, $amount: 40);
+$color-warning-light: lighten(
+  $color: $color-warning,
+  $amount: 40,
+);
 $color-info: #2626d9;
-$color-info-light: lighten($color: $color-info, $amount: 40);
+$color-info-light: lighten(
+  $color: $color-info,
+  $amount: 40,
+);
 
 $color-hover: lighten($color-secondary, 0.5);
 $color-disabled: rgba(211, 211, 211, 0.63);
@@ -73,10 +85,15 @@ $color-tab-unselected: $color-text-light;
 $color-toast-background: white;
 
 $color-toggle-button-background-selected: $color-secondary;
-$color-toggle-button-background-unselected: lighten($color: $color-secondary, $amount: 30);
+$color-toggle-button-background-unselected: lighten(
+  $color: $color-secondary,
+  $amount: 30,
+);
 
 // features
 $color-app-logo: white;
+
+$color-event-background: white;
 
 $color-event-definition-color-selection-border: black;
 $color-event-definition-button-background-0: $color-primary-light;
@@ -86,6 +103,9 @@ $color-event-definition-button-background-3: $color-secondary-light;
 $color-event-definition-button-background-4: $color-secondary;
 
 $color-event-my-trainings-button-registered: $color-accent;
+
+$color-event-called-off-text: $color-secondary;
+$color-event-called-off-background: $color-disabled;
 
 $color-grade-dan: hsl(0, 0%, 13%);
 $color-grade-kup1: #d92626;
@@ -113,7 +133,8 @@ $color-user-deactivated-text: $color-primary-light;
 :export {
   colorBannerAdmin: $color-secondary;
   colorBannerNeutral: white;
-  colorEventBackground: white;
+  colorEventBackground: $color-event-background;
+  colorEventCalledOffBackground: $color-event-called-off-background;
   colorEventText: $color-text;
   colorEventDefinition0: $color-primary-light;
   colorEventDefinition1: $color-primary;
@@ -125,4 +146,5 @@ $color-user-deactivated-text: $color-primary-light;
   colorSliderOffState: $color-disabled;
   colorSliderOnState: $color-primary;
   colorPageSpinnerText: $color-secondary;
+  colorMemberOnlyIcon: $color-secondary-dark;
 }

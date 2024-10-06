@@ -3,7 +3,6 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
-import { Boolean } from "../shared/types/Boolean";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -55,7 +54,7 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
 
   async findByDateTimeSpanSecured(
     dateTimeSpan: IDateTimeSpan,
-    isMemberOnly: Boolean
+    isMemberOnly: boolean
   ): Promise<IEventDefinition[]> {
     const eventDefinitions = await RESTApi.get<IEventDefinition[]>(
       `${this.publicUrl}`,

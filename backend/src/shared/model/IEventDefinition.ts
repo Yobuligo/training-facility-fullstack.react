@@ -2,7 +2,6 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { Recurrence } from "../../core/types/Recurrence";
-import { Boolean } from "../types/Boolean";
 import { IEventInstance } from "./IEventInstance";
 
 /**
@@ -13,7 +12,7 @@ export interface IEventDefinition extends IEntity, IDateTimeSpan {
   creatorUserId: string;
   description: string;
   eventInstances?: IEventInstance[];
-  isMemberOnly: Boolean;
+  isMemberOnly: boolean;
   recurrence: Recurrence;
   title: string;
 }
