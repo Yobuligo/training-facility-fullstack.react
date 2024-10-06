@@ -7,6 +7,7 @@ import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
 import { useRenderWeekday } from "../../../hooks/useRenderWeekday";
 import { useScreenSize } from "../../../hooks/useScreenSize";
 import { MemberOnlyIcon } from "../../../icons/MemberOnlyIcon";
+import { EventCalledOff } from "../../eventCalendar/eventCalledOff/EventCalledOff";
 import styles from "./EventInstanceItem.module.scss";
 import { IEventInstanceItemProps } from "./IEventInstanceItemProps";
 
@@ -62,8 +63,18 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
                   })}
                 </div>
               </div>
-              {props.renderChildrenInline === true && props.children && (
-                <div className={props.classNameChildren}>{props.children}</div>
+              {props.eventInstanceItemModel.calledOff ? (
+                <div className={styles.calledOffText}>
+                  <EventCalledOff />
+                </div>
+              ) : (
+                <>
+                  {props.renderChildrenInline === true && props.children && (
+                    <div className={props.classNameChildren}>
+                      {props.children}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>

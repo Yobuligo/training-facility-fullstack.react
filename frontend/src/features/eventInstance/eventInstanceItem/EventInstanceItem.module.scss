@@ -13,6 +13,13 @@ $medium-screen-width: 46rem;
   background-color: colors.$color-event-called-off-background;
 }
 
+.calledOffText {
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex: 1;
+  height: 100%;
+}
+
 .eventInstanceItem {
   display: flex;
   flex-direction: column;
