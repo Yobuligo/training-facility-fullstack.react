@@ -1,30 +1,27 @@
-import { useState } from "react";
-import { DateTime } from "../../../core/services/date/DateTime";
+import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
 import { IEventDefinitionSectionProps } from "./IEventDefinitionSectionProps";
 
 export const useEventDefinitionSectionViewModel = (
   props: IEventDefinitionSectionProps
 ) => {
-  const [from, setFrom] = useState(DateTime.getWeekStartDate(new Date()));
-  const [to, setTo] = useState(DateTime.getWeekEndDate(new Date()));
-
+  const [dateTimeSpanFilter, setDateTimeSpanFilter] = useDateTimeSpanFilter();
   const onReload = (from: Date, to: Date) => props.onReload?.({ from, to });
 
   const onDateTimeSpanChanged = (from: Date, to: Date) => {
-    setFrom(from);
-    setTo(to);
+    setDateTimeSpanFilter({ from, to });
     onReload(from, to);
   };
 
-  const onRegister = () => onReload(from, to);
+  const onRegister = () =>
+    onReload(dateTimeSpanFilter.from, dateTimeSpanFilter.to);
 
-  const onUnregister = () => onReload(from, to);
+  const onUnregister = () =>
+    onReload(dateTimeSpanFilter.from, dateTimeSpanFilter.to);
 
   return {
-    from,
+    dateTimeSpanFilter,
     onDateTimeSpanChanged,
     onRegister,
     onUnregister,
-    to,
   };
 };

@@ -12,10 +12,10 @@ export const EventDefinitionSection: React.FC<IEventDefinitionSectionProps> = (
   return (
     <div className={styles.eventDefinitionSection}>
       <DateTimeSpanFilter
-        fromDate={viewModel.from}
+        fromDate={viewModel.dateTimeSpanFilter.from}
         isLoading={props.isEventDefinitionsLoading}
         onChange={viewModel.onDateTimeSpanChanged}
-        toDate={viewModel.to}
+        toDate={viewModel.dateTimeSpanFilter.to}
       />
       <EventDefinitionList
         events={props.events}

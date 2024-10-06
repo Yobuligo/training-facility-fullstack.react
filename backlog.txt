@@ -48,7 +48,7 @@
 	# Display event planner as list
 	# Mark trainings as private or public (public trainings can be booked for trial trainings)
 	
-- My Trainings
+# My Trainings
 	# User can register on and unregister from trainings
 	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
 	# Display loading spinner when register on or unregister from a training
@@ -61,18 +61,18 @@
 		# trainings must be loaded initially
 		# trainings can be filtered by today, tomorrow, week, month or a separate date
 		# Must behave similar to click, register, unregister in calendar view
-		- Filter is persisted, so that the user doesn't have to select it each time when navigating throught the app
+		# Filter is persisted, so that the user doesn't have to select it each time when navigating throught the app
 	# Bug: Race condition error when creating event instances by different users at the same moment
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
 	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
 	
-- Event Calendar
-	- Display if event is called off. Must be displayed at:
-		- Weekly overview of user (Dashboard)
-		- Training times calendar
-		- Trial training calendar
-		- My trainings calendar
+# Event Calendar
+	# Display if event is called off. Must be displayed at:
+		# Weekly overview of user (Dashboard)
+		# Training times calendar
+		# Trial training calendar
+		# My trainings calendar
 	# Display if event is for member only. Must be displayed at:
 		# My trainings calendar
 		# Planer
@@ -96,11 +96,11 @@
 	# Registered users are displayed in the order they registered
 	# Display loading spinner when searching for users
 	- Display loading spinner when adding user
-	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
 	- Display loading spinner when deleting user
-	- Event Instance must be deletable
-		- I want to delete an instance of an event definition (e.g. if the school is closed for some days)
-		- Event definitions of deleted event instances must not be displayed
+	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
+	# Event Instance must be called offable
+		# I want to call off an instance of an event definition (e.g. if the school is closed for some days)
+		# Called off event instances are highlighted
 	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
 # Welcome
@@ -133,7 +133,6 @@
 		# Bank Account IBAN 34
 		# Bank Account Institution 50
 		# Bank Account Owner 100
-	- Add dobok size
 	# Current user must not be lockable
 	# Current user must not be deletable	
 	# UserBankAccount must be loaded with User
@@ -199,7 +198,7 @@
 	# Bug: As admin created user is shown as normal user.
 	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 	
-- Trial Training
+# Trial Training
 	# Customer can select a day he wants to book a trial training
 	# Customer has to provide firstname, lastname and email address
 	# Creation of EventInstances must only be possible with shared key
@@ -212,8 +211,7 @@
 	# A message is displayed that the booking was successful
 	# Click on unregister displays an internet page to unregister from the training
 	# Registered user is displayed in event registration list of the event instance and marked as trial training
-	# Registered user can be marked as present, missing or open
-	- Display check icon when booking a trial training and cancelling it to visualize it to the user
+	# Registered user can be marked as present, missing or open	
 	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
 	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
@@ -249,9 +247,6 @@
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem
-	
-- Display Courses / seminars in "grading list"
-	- Courses can be displayed in user profile
 
 - LabeledSelect
 	- Bug: Reset input does not reset value correctly
@@ -286,13 +281,16 @@
 			# delete ISession on client side
 	# Public calls must be authorized via token
 
-- Performance
-	- Admin tabs are loaded asynchronously
-	- table userTrialTraining needs an index on email
-
-- Gamification
-
-- Survey for external trainings etc.
+- Version 2.0
+	- Display Courses / seminars in "grading list"
+		- Courses can be displayed in user profile	
+	- Display check icon when booking a trial training and cancelling it to visualize it to the user
+	- Add dobok size to user profile
+	- Performance
+		- Admin tabs are loaded asynchronously
+		- table userTrialTraining needs an index on email
+	- Survey for external trainings etc.
+	- Gamification
 
 - Check all ui endpoints and delete which are not required anymore
 - Check all ui REST calls if they use useRequest

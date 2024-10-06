@@ -4,6 +4,7 @@ import { NotSupportedError } from "../../../core/errors/NotSupportedError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
+import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventFactory } from "../../../services/EventFactory";
 import { ICalendarEvent } from "./../model/ICalendarEvent";
@@ -15,38 +16,11 @@ export const useEventCalendarSectionViewModel = (
 ) => {
   const [view, setView] = useState<View>("week");
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
+  const [dateTimeSpanFilter] = useDateTimeSpanFilter();
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
   const [toTime, setToTime] = useState<Date | undefined>(undefined);
-  const [fromDate, setFromDate] = useState<Date>(() => {
-    switch (view) {
-      case "day": {
-        return DateTime.getDayStartDate(new Date());
-      }
-      case "week": {
-        return DateTime.getWeekStartDate(new Date());
-      }
-      case "month": {
-        return DateTime.getMonthStartDate(new Date());
-      }
-      default:
-        throw new NotSupportedError();
-    }
-  });
-  const [toDate, setToDate] = useState<Date>(() => {
-    switch (view) {
-      case "day": {
-        return DateTime.getDayEndDate(new Date());
-      }
-      case "week": {
-        return DateTime.getWeekEndDate(new Date());
-      }
-      case "month": {
-        return DateTime.getMonthEndDate(new Date());
-      }
-      default:
-        throw new NotSupportedError();
-    }
-  });
+  const [fromDate, setFromDate] = useState<Date>(dateTimeSpanFilter.from);
+  const [toDate, setToDate] = useState<Date>(dateTimeSpanFilter.to);
   const [loadEventDefinitionRequest, isLoadEventDefinitionRequestProcessing] =
     useRequest();
 
