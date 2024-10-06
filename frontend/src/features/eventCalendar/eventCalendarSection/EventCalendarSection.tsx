@@ -28,8 +28,13 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
         padding: "0.5rem",
       };
     } else {
+      const eventInstance = EventInfo.findEventInstance(calendarEvent);
+      const backgroundColor =
+        eventInstance && eventInstance.calledOff === Boolean.true
+          ? colors.colorEventCalledOffBackground
+          : colors.colorEventBackground;
       return {
-        backgroundColor: colors.colorEventBackground,
+        backgroundColor: backgroundColor,
         color: colors.colorEventText,
         padding: "0.5rem",
       };

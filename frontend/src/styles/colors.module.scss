@@ -102,7 +102,8 @@ $color-event-definition-button-background-4: $color-secondary;
 
 $color-event-my-trainings-button-registered: $color-accent;
 
-$color-event-called-off: $color-error;
+$color-event-called-off-text: $color-secondary-light;
+$color-event-called-off-background: $color-disabled;
 
 $color-grade-dan: hsl(0, 0%, 13%);
 $color-grade-kup1: #d92626;
@@ -131,6 +132,7 @@ $color-user-deactivated-text: $color-primary-light;
   colorBannerAdmin: $color-secondary;
   colorBannerNeutral: white;
   colorEventBackground: white;
+  colorEventCalledOffBackground: $color-event-called-off-background;
   colorEventText: $color-text;
   colorEventDefinition0: $color-primary-light;
   colorEventDefinition1: $color-primary;
