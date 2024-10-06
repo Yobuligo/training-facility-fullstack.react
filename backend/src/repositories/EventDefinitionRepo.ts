@@ -100,7 +100,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       type: sequelize.QueryTypes.SELECT,
     });
 
-    this.correctBoolean(eventDefinitions);
+    this.correctBooleans(eventDefinitions);
     return eventDefinitions;
   }
 
@@ -209,7 +209,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           creatorUserId: row.creatorUserId,
           description: row.description,
           from: row.from,
-          isMemberOnly: row.isMemberOnly,
+          isMemberOnly: (row.isMemberOnly as any) === 1 ? true : false,
           recurrence: row.recurrence,
           title: row.title,
           to: row.to,
@@ -266,7 +266,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     return Object.values(eventDefinitionsDb);
   }
 
-  private correctBoolean(eventDefinitions: IEventDefinition[]): void {
+  private correctBooleans(eventDefinitions: IEventDefinition[]): void {
     eventDefinitions.forEach((eventDefinition) => {
       eventDefinition.isMemberOnly =
         (eventDefinition.isMemberOnly as any) === 1 ? true : false;
