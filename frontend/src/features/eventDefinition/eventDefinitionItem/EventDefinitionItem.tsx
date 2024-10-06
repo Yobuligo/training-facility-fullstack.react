@@ -1,3 +1,4 @@
+import { EventInfo } from "../../../services/EventInfo";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { IEventInstanceItemModel } from "../../eventInstance/eventInstanceItem/IEventInstanceItemModel";
 import styles from "./EventDefinitionItem.module.scss";
@@ -13,6 +14,7 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
     from: props.event.dateTimeSpan.from,
     id: eventDefinition.id,
     isMemberOnly: eventDefinition.isMemberOnly,
+    calledOff: EventInfo.calledOff(props.event),
     title: eventDefinition.title,
     to: props.event.dateTimeSpan.to,
   };

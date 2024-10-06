@@ -29,6 +29,7 @@ export const EventTrialTrainingDetails: React.FC<
                 eventInstanceItemModel={{
                   color: props.eventInstance.color,
                   from: props.eventInstance.from,
+                  calledOff: props.eventInstance.calledOff,
                   to: props.eventInstance.to,
                   id: props.eventInstance.id,
                   title: props.eventInstance.title,

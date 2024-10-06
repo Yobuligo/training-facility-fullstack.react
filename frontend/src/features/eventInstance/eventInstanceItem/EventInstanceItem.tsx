@@ -23,12 +23,16 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
     </div>
   );
 
-  // const styling = {
-  //   "--backgroundColor":
-  // } as CSSProperties
-
   return (
-    <Card className={styles.card} onClick={props.onClick}>
+    <Card
+      className={style(
+        styles.card,
+        props.eventInstanceItemModel.calledOff === Boolean.true
+          ? styles.cardCalledOff
+          : ""
+      )}
+      onClick={props.onClick}
+    >
       <div className={styles.eventInstanceItem}>
         <div className={styles.header}>
           <Banner color={props.eventInstanceItemModel.color} />

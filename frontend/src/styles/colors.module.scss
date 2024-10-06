@@ -93,6 +93,8 @@ $color-toggle-button-background-unselected: lighten(
 // features
 $color-app-logo: white;
 
+$color-event-background: white;
+
 $color-event-definition-color-selection-border: black;
 $color-event-definition-button-background-0: $color-primary-light;
 $color-event-definition-button-background-1: $color-primary;
@@ -131,7 +133,7 @@ $color-user-deactivated-text: $color-primary-light;
 :export {
   colorBannerAdmin: $color-secondary;
   colorBannerNeutral: white;
-  colorEventBackground: white;
+  colorEventBackground: $color-event-background;
   colorEventCalledOffBackground: $color-event-called-off-background;
   colorEventText: $color-text;
   colorEventDefinition0: $color-primary-light;

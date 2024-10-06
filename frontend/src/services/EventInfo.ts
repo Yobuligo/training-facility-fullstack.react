@@ -2,12 +2,28 @@ import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { Boolean } from "../shared/types/Boolean";
 import { IEvent } from "./../features/eventCalendar/model/IEvent";
 
 /**
  * This class is responsible for providing access to specific information regarding an instance of type {@link IEvent}.
  */
 export class EventInfo {
+  /**
+   * Returns if the given event was called off, return false if no information was found
+   */
+  static calledOff(event: IEvent): Boolean {
+    const eventInstance = this.findEventInstance(event);
+    if (
+      eventInstance !== undefined &&
+      eventInstance.calledOff === Boolean.true
+    ) {
+      return Boolean.true;
+    } else {
+      return Boolean.false;
+    }
+  }
+
   /**
    * Finds an event instance, from the attached event definition of the {@link event},
    * which matches the {@link event} start date.

@@ -5,6 +5,7 @@ export interface IEventInstanceItemModel extends IHaveId {
   color: string;
   from: Date;
   isMemberOnly?: Boolean;
+  calledOff?: Boolean;
   title: string;
   to: Date;
 }

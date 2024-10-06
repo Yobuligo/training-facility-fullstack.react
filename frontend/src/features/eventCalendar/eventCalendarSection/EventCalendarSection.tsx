@@ -28,9 +28,8 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
         padding: "0.5rem",
       };
     } else {
-      const eventInstance = EventInfo.findEventInstance(calendarEvent);
       const backgroundColor =
-        eventInstance && eventInstance.calledOff === Boolean.true
+        EventInfo.calledOff(calendarEvent) === Boolean.true
           ? colors.colorEventCalledOffBackground
           : colors.colorEventBackground;
       return {
@@ -56,13 +55,8 @@ export const EventCalendarSection: React.FC<IEventCalendarSectionProps> = (
     }
   };
 
-  const isEventCalledOff = (event: IEvent) => {
-    const eventInstance = EventInfo.findEventInstance(event);
-    return eventInstance && eventInstance.calledOff === Boolean.true;
-  };
-
   const renderEvent = (event: IEvent): ReactNode =>
-    isEventCalledOff(event) ? (
+    EventInfo.calledOff(event) === Boolean.true ? (
       <EventCalledOff />
     ) : (
       <>{props.renderEvent && props.renderEvent(event)}</>

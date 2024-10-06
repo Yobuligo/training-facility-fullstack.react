@@ -6,6 +6,11 @@ $medium-screen-width: 46rem;
 
 .card {
   padding: 0;
+  background-color: colors.$color-event-background;
+}
+
+.cardCalledOff {
+  background-color: colors.$color-event-called-off-background;
 }
 
 .eventInstanceItem {

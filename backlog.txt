@@ -61,6 +61,7 @@
 		# trainings must be loaded initially
 		# trainings can be filtered by today, tomorrow, week, month or a separate date
 		# Must behave similar to click, register, unregister in calendar view
+		- Filter is persisted, so that the user doesn't have to select it each time when navigating throught the app
 	# Bug: Race condition error when creating event instances by different users at the same moment
 	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
 	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
