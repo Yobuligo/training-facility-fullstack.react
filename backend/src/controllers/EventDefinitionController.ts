@@ -56,7 +56,7 @@ export class EventDefinitionController extends EntityController<
       TokenInterceptor(async (req, res) => {
         const from = req.query.from;
         const to = req.query.to;
-        const isMemberOnly = parseInt(req.query.isMemberOnly as any);
+        const isMemberOnly = req.query.isMemberOnly === "true" ? true : false;
 
         if (
           !(from && typeof from === "string") ||
