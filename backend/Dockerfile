@@ -1,5 +1,7 @@
 #raspberry:
-FROM --platform=arm64 arm64v8/node:alpine3.19
+#FROM --platform=arm64 arm64v8/node:alpine3.19
+#Ubuntu
+FROM node:20-alpine3.19
 #FROM node:20
 WORKDIR /app
 COPY package*.json ./
