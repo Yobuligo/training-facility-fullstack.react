@@ -11,6 +11,7 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
 
   const eventInstanceItemModel: IEventInstanceItemModel = {
     color: eventDefinition.color,
+    description: eventDefinition.description,
     from: props.event.dateTimeSpan.from,
     id: eventDefinition.id,
     isMemberOnly: eventDefinition.isMemberOnly,

@@ -35,16 +35,21 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
         <div className={styles.header}>
           <Banner color={props.eventInstanceItemModel.color} />
           <div className={styles.content}>
-            <div className={styles.titleContainer}>
-              <div className={styles.title}>
-                {props.eventInstanceItemModel.title}
+            <div>
+              <div className={styles.titleContainer}>
+                <div className={styles.title}>
+                  {props.eventInstanceItemModel.title}
+                </div>
+                {props.eventInstanceItemModel.isMemberOnly === true &&
+                screenSize.isSmall() ? (
+                  <MemberOnlyIcon />
+                ) : (
+                  <></>
+                )}
               </div>
-              {props.eventInstanceItemModel.isMemberOnly === true &&
-              screenSize.isSmall() ? (
-                <MemberOnlyIcon />
-              ) : (
-                <></>
-              )}
+              <div className={styles.description}>
+                {props.eventInstanceItemModel.description}
+              </div>
             </div>
             <div className={styles.timeContainer}>
               <div className={styles.weekday}>
