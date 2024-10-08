@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isError } from "../../../core/utils/isError";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -18,7 +19,7 @@ import { IEvent } from "../../eventCalendar/model/IEvent";
 import { eventCreator } from "../../eventDefinition/eventDefinitionItem/eventCreator";
 import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
 import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
-import styles from './EventInstanceRegistration.module.scss'
+import styles from "./EventInstanceRegistration.module.scss";
 
 export const EventInstanceRegistration: React.FC = () => {
   const params = useParams<{ eventInstanceId: string }>();
@@ -87,15 +88,18 @@ export const EventInstanceRegistration: React.FC = () => {
                 isMemberOnly: event.eventDefinition?.isMemberOnly,
               }}
             >
-              <EventContent>
-                <EventRegistrationButton
-                  event={event}
-                  isRegistered={isRegistered}
-                  onRegister={onRegister}
-                  onUnregister={onUnregister}
-                  userId={user.id}
-                />
-              </EventContent>
+              {event.dateTimeSpan.from &&
+                DateTime.isAfter(event.dateTimeSpan.from) && (
+                  <EventContent>
+                    <EventRegistrationButton
+                      event={event}
+                      isRegistered={isRegistered}
+                      onRegister={onRegister}
+                      onUnregister={onUnregister}
+                      userId={user.id}
+                    />
+                  </EventContent>
+                )}
             </EventInstanceItem>
           )}
         </>
