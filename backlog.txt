@@ -282,7 +282,8 @@
 	- Gradings can be changed
 	- Change default password from simple initial to a strong password
 	- Improve: Display of buttons in user profile must be restructured
-	- Bug: Error when entering letters in postalcode field
+	- Increase margin in EventRegistrationItem between buttons and child-items
+	# Bug: Error when entering letters in postalcode field
 	# Bug: Reset LabeledSelect in user profile does not reset value correctly
 		# e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 
