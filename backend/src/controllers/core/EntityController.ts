@@ -63,7 +63,9 @@ export abstract class EntityController<
         if (entity) {
           res.status(HttpStatusCode.OK_200).send(entity);
         } else {
-          res.status(HttpStatusCode.NOT_FOUND_404).end();
+          res
+            .status(HttpStatusCode.NOT_FOUND_404)
+            .send(createError("Not found", "NotFoundError"));
         }
       }, authRoles)
     );

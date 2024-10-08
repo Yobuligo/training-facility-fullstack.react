@@ -53,6 +53,9 @@
     "eventInstanceList": {
         "noItems": "No events found"
     },
+    "eventInstanceRegistration": {
+        "errorLoadingEventInstance": "The event cannot be found. Please check the link."
+    },
     "eventPlanSection": {
         "description": "Plan in new trainings or adjust existing ones",
         "addTraining": "Add training"

@@ -69,6 +69,17 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     return eventDefinitions;
   }
 
+  async findByEventInstanceAndUser(
+    eventInstanceId: string,
+    requestedUserId: string
+  ): Promise<IEventDefinition | undefined> {
+    const eventDefinition = await this.selectByEventInstanceAndUser(
+      eventInstanceId,
+      requestedUserId
+    );
+    return eventDefinition;
+  }
+
   private async selectEventDefinitions(
     dateTimeSpan: IDateTimeSpan
   ): Promise<IEventDefinition[]> {
@@ -288,6 +299,47 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     });
 
     return this.convertToEventDefinition(data);
+  }
+
+  private async selectByEventInstanceAndUser(
+    eventInstanceId: string,
+    userId: string
+  ): Promise<IEventDefinition | undefined> {
+    const query = `
+        SELECT
+          def.*,
+          inst.id AS inst_id,
+          inst.calledOff as called_off,
+          inst.color AS inst_color,
+          inst.\`description\` AS inst_description,
+          inst.\`from\` AS inst_from,
+          inst.state AS inst_state,
+          inst.title AS inst_title,
+          inst.\`to\` AS inst_to,
+          inst.createdAt AS inst_createdAt,
+          inst.updatedAt AS inst_updatedAt,
+          inst.eventDefinitionId AS inst_eventDefinitionId,
+          reg.id AS reg_id,
+          reg.manuallyAdded AS reg_manuallyAdded,
+          reg.state AS reg_state,
+          reg.userId AS reg_userId,
+          reg.createdAt AS reg_createdAt,
+          reg.updatedAt AS reg_updatedAt,
+          reg.eventInstanceId AS reg_eventInstanceId
+        FROM \`event-definitions\` AS def
+        INNER JOIN \`event-instances\` AS inst
+        ON inst.eventDefinitionId = def.id
+        LEFT JOIN \`event-registrations\` AS reg
+        ON reg.eventInstanceId = inst.id
+        AND reg.userId = "${userId}"
+        WHERE inst.id="${eventInstanceId}"
+    `;
+
+    const data = await db.query<IEventDefinition>(query, {
+      type: sequelize.QueryTypes.SELECT,
+    });
+
+    return this.convertToEventDefinition(data)[0];
   }
 
   private convertToEventDefinition(

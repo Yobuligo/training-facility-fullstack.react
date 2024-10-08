@@ -5,6 +5,9 @@ export const AppRoutes = configureRoutes({
   bookTrialTraining: route("/book-trial-training"),
   cancelTrialTraining: route("/cancel-trial-training/:userTrialTrainingId"),
   changePassword: route("/changePassword"),
+  eventInstanceRegistration: route(
+    "/event-instance-registration/:eventInstanceId"
+  ),
   eventOverview: route("/training-times"),
   dashboard: route("/"),
   error: route("/error"),

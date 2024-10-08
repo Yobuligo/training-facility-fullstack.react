@@ -1,0 +1,6 @@
+@use "../../../styles/mixins.scss";
+
+.eventInstanceRegistration {
+    @include mixins.component-padding;
+    @include mixins.page-padding;
+}
