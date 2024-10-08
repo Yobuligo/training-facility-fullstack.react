@@ -1,4 +1,4 @@
-- App
+# App
 	# Refactor page style and display edges only in WQHD but not Full-HD
 	# Improve repsonsive design for smaller devices (e.g. Tablets)
 	# Language can be switched
@@ -7,8 +7,7 @@
 	# Unknown server errors are handled in an ErrorBoundaryPage
 	# Display an ErrorBoundaryPage when calling an unknown url
 	# useRequest must not call block, if the block is currently running
-	# Introduce HttpStatusCodes
-	- Set german as default language
+	# Introduce HttpStatusCodes	
 	# Add imprint and privacy policy
 	
 # ErrorPage
@@ -100,8 +99,7 @@
 	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
 	# Event Instance must be called offable
 		# I want to call off an instance of an event definition (e.g. if the school is closed for some days)
-		# Called off event instances are highlighted
-	- The user can create a deep link to a specific training instance
+		# Called off event instances are highlighted	
 	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
 # Welcome
@@ -146,14 +144,12 @@
 	# User Gradings
 		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
-		# Display confirm dialog before deleting a grading
-		- Gradings can be changed
+		# Display confirm dialog before deleting a grading		
 		# Bug: Error when entering achievedAt date manually
 	# Change password
 		# The user must be able to change his password
 		# The salt must be changed with the password
 		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
-		- Change default password from simple initial to a strong password
 	# Send invite mail to user
 		# Display loading spinner when sending mail
 		# User must be forwarded to invite route
@@ -174,8 +170,7 @@
 		# Invite is active in display mode
 	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
 		# username, firstname, lastname, email, birthday, street, postal code, city
-		# message is displayed at input fields, but also as a toast
-    - Improve: Display of buttons in user profile must be restructured
+		# message is displayed at input fields, but also as a toast    
 	# Bug: created user cannot be selected from user list
 	# Bug: Customer id is not displayed when user was created in backend
 	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
@@ -185,8 +180,7 @@
 	# Bug: User session is not deleted with user.
 	# Bug: Link of invite email leads to wrong url
 	# Bug: Invite user, send password change request and verify user invite sends requests without token
-	# Bug: Link of invite email leads to dashboard instead of login page
-	- Bug: Error when entering letters in postalcode field
+	# Bug: Link of invite email leads to dashboard instead of login page	
 	
 # User List
 	# Display loading spinner, when loading users
@@ -197,7 +191,7 @@
 	# Mark admin users
 	# Locked user must be displayed as locked otherwise it must be displayed as enabled
 	# Users can be searched
-	* Display loading spinner when searching - not required as it on clientside
+	* Display loading spinner when searching - not required as it on clientside	
 	# Bug: As admin created user is shown as normal user.
 	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
 	
@@ -217,10 +211,7 @@
 	# Registered user can be marked as present, missing or open	
 	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
-	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
-	
-- Deep Link Event Instance
-	- An event instance can be displayed via deep link, which can e.g. send to customers
+	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list	
 
 # Login
 	# Login must only be possible with valid username and password
@@ -253,10 +244,6 @@
 	
 # Gradings
 	# Gradings are displayed in a separate tabitem
-
-- LabeledSelect
-	- Bug: Reset input does not reset value correctly
-		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 		
 - DateTimeSpan
 	- Bug: from value must not be lower than to value
@@ -264,7 +251,7 @@
 - Emails
 	- Send mails must create an email at the send mail folder of the mail account
 
-- Security
+# Security
 	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
 	# Hash passwords before transferring them from client to server
 	# Lock user after to many login fails
@@ -286,6 +273,18 @@
 			# UserApi.logout() doesn't need the session anymore
 			# delete ISession on client side
 	# Public calls must be authorized via token
+
+- Version 1.0.1
+	- Deep Link Event Instances
+		- The user can create a deep link to a specific training instance
+		- An event instance can be displayed via deep link, which can e.g. send to customers
+	- Set german as default language
+	- Gradings can be changed
+	- Change default password from simple initial to a strong password
+	- Improve: Display of buttons in user profile must be restructured
+	- Bug: Error when entering letters in postalcode field
+	- Bug: Reset LabeledSelect in user profile does not reset value correctly
+		- e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin	
 
 - Version 2.0
 	- Display Courses / seminars in "grading list"
