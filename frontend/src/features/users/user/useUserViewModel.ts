@@ -204,7 +204,14 @@ export const useUserViewModel = (props: IUserProps) => {
   const onChangeJoinedOn = (newValue: string) => setJoinedOn(newValue);
 
   const onChangePostalCode = (newValue: string) => {
-    setPostalCode(parseInt(newValue).toString());
+    if (isInitial(newValue)) {
+      setPostalCode("");
+    } else {
+      const newValueInt = parseInt(newValue);
+      if (newValueInt) {
+        setPostalCode(newValueInt.toString());
+      }
+    }
   };
 
   const onAddGrading = (achievedAt: Date, grade: Grade, examiners: string) => {
