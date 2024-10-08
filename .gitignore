@@ -3,8 +3,10 @@ backend/node_modules
 backend/.env
 backend/.env.production
 backend/.env.development
+backend/.env.testing
 frontend/node_modules
 frontend/build
 frontend/.env
 frontend/.env.production
 frontend/.env.development
+frontend/.env.testing

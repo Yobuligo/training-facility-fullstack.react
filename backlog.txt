@@ -101,6 +101,7 @@
 	# Event Instance must be called offable
 		# I want to call off an instance of an event definition (e.g. if the school is closed for some days)
 		# Called off event instances are highlighted
+	- The user can create a deep link to a specific training instance
 	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
 	
 # Welcome
@@ -146,6 +147,7 @@
 		# Gradings can be added, saved and reloaded
 		# Gradings can be deleted
 		# Display confirm dialog before deleting a grading
+		- Gradings can be changed
 		# Bug: Error when entering achievedAt date manually
 	# Change password
 		# The user must be able to change his password
@@ -184,6 +186,7 @@
 	# Bug: Link of invite email leads to wrong url
 	# Bug: Invite user, send password change request and verify user invite sends requests without token
 	# Bug: Link of invite email leads to dashboard instead of login page
+	- Bug: Error when entering letters in postalcode field
 	
 # User List
 	# Display loading spinner, when loading users
@@ -215,6 +218,9 @@
 	# Member only trainings must not be displayed
 	# Bug: EventDefinitions must only be loaded with SecretRequest
 	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
+	
+- Deep Link Event Instance
+	- An event instance can be displayed via deep link, which can e.g. send to customers
 
 # Login
 	# Login must only be possible with valid username and password
@@ -284,6 +290,7 @@
 - Version 2.0
 	- Display Courses / seminars in "grading list"
 		- Courses can be displayed in user profile	
+	- Set cursor to username input of login screen
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Add dobok size to user profile
 	- Performance
