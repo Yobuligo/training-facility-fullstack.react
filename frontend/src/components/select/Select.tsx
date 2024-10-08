@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ISelectOption } from "./ISelectOption";
 import { ISelectProps } from "./ISelectProps";
 import { findByText } from "./utils/findByText";
 
 export function Select<T extends ISelectOption<any>>(props: ISelectProps<T>) {
   const [selected, setSelected] = useState(props.selected);
+
+  useEffect(() => {
+    setSelected(props.selected);
+  }, [props.selected]);
 
   const items = props.options.map((option) => (
     <option key={option.key}>{option.text}</option>
