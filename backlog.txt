@@ -274,18 +274,21 @@
 			# delete ISession on client side
 	# Public calls must be authorized via token
 
-- Version 1.0.1
-	- Deep Link Event Instances
-		- The user can create a deep link to a specific training instance
-		- An event instance can be displayed via deep link, which can e.g. send to customers
-	- Set german as default language
-	- Gradings can be changed
-	- Change default password from simple initial to a strong password
-	- Improve: Display of buttons in user profile must be restructured
-	- Increase margin in EventRegistrationSection between buttons and child-items
+# Version 1.1.0
+	# Deep Link Event Instances
+		# The user can create a deep link to a specific training instance
+		# An event instance can be displayed via deep link, which can e.g. send to customers
+	# Improve: Display of buttons in user profile must be restructured
+	# Increase margin in EventRegistrationSection between buttons and child-items
 	# Bug: Error when entering letters in postalcode field
 	# Bug: Reset LabeledSelect in user profile does not reset value correctly
 		# e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
+
+- Version 1.2.0
+	- Set german as default language
+	- Gradings can be changed
+	- Change default password from simple initial to a strong password
+	- Increase expiration time of session
 
 - Version 2.0
 	- Display Courses / seminars in "grading list"
