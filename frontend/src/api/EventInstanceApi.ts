@@ -2,6 +2,10 @@ import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { IEvent } from "../features/eventCalendar/model/IEvent";
+import {
+  EventDefinitionRouteMeta,
+  IEventDefinition,
+} from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { uuid } from "../utils/uuid";
@@ -40,6 +44,23 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
         userId: userId,
       },
     });
+  }
+
+  /**
+   * Finds an event definition with event instance and event registration by the given {@link eventInstanceId} and for the user of the given {@link userId}.
+   */
+  async findByEventInstanceAndUser(
+    eventInstanceId: string,
+    userId: string
+  ): Promise<IEventDefinition | undefined> {
+    return RESTApi.get(
+      `${this.url}/${eventInstanceId}${EventDefinitionRouteMeta.path}`,
+      {
+        urlParams: {
+          userId,
+        },
+      }
+    );
   }
 
   findByUserForWeek<K extends keyof IEventInstance>(

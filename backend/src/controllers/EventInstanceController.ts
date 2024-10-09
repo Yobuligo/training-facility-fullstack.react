@@ -1,6 +1,9 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
+import { createError } from "../core/utils/createError";
+import { EventDefinitionRepo } from "../repositories/EventDefinitionRepo";
 import { EventInstanceRepo } from "../repositories/EventInstanceRepo";
+import { EventDefinitionRouteMeta } from "../shared/model/IEventDefinition";
 import {
   EventInstanceRouteMeta,
   IEventInstance,
@@ -17,6 +20,7 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
+    this.findDefinitionByInstanceId();
     this.insertPublic();
   }
 
@@ -68,6 +72,42 @@ export class EventInstanceController extends EntityController<
   protected insert(): void {
     // no authorities required
     super.insert();
+  }
+
+  private findDefinitionByInstanceId() {
+    this.router.get(
+      `${this.routeMeta.path}/:id${EventDefinitionRouteMeta.path}`,
+      SessionInterceptor(async (req, res) => {
+        const requestedUserId = req.query.userId;
+        if (!requestedUserId || !(typeof requestedUserId === "string")) {
+          return res
+            .status(HttpStatusCode.BAD_REQUEST_400)
+            .send(
+              createError(
+                "Error while getting event definition by event instance id and user id. The user id is invalid."
+              )
+            );
+        }
+        if (!this.checkIsAdminOrYourself(req, res, requestedUserId)) {
+          return;
+        }
+
+        const eventInstanceId = req.params.id;
+        const eventDefinitionRepo = new EventDefinitionRepo();
+        const eventDefinition =
+          await eventDefinitionRepo.findByEventInstanceAndUser(
+            eventInstanceId,
+            requestedUserId
+          );
+        if (eventDefinition) {
+          res.status(HttpStatusCode.OK_200).send(eventDefinition);
+        } else {
+          res
+            .status(HttpStatusCode.NOT_FOUND_404)
+            .send(createError("Not found", "NotFoundError"));
+        }
+      })
+    );
   }
 
   private insertPublic() {

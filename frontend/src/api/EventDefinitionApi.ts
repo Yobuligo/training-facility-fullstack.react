@@ -71,18 +71,6 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
     return eventDefinitions;
   }
 
-  async findByEventInstanceAndUser(
-    eventInstanceId: string,
-    userId: string
-  ): Promise<IEventDefinition | undefined> {
-    return RESTApi.get(`${this.url}`, {
-      urlParams: {
-        userId,
-        eventInstanceId,
-      },
-    });
-  }
-
   /**
    * Provides a date object for each date property.
    */

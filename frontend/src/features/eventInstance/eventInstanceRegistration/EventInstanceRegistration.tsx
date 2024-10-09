@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
@@ -37,7 +37,7 @@ export const EventInstanceRegistration: React.FC = () => {
     request(
       async () => {
         const eventDefinition =
-          await new EventDefinitionApi().findByEventInstanceAndUser(
+          await new EventInstanceApi().findByEventInstanceAndUser(
             checkNotNull(params.eventInstanceId),
             user.id
           );

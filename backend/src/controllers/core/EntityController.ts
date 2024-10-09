@@ -113,10 +113,4 @@ export abstract class EntityController<
     const fields = query.fields ? String(query.fields).split(",") : [];
     return fields as unknown as (keyof TEntity)[];
   }
-
-  protected sendMissingAuthorityError(res: Response): Response {
-    return res
-      .status(HttpStatusCode.FORBIDDEN_403)
-      .send(createError("Missing authority", "MissingAuthorityError"));
-  }
 }

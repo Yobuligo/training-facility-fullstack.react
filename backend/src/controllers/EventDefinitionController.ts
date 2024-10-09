@@ -1,7 +1,6 @@
 import { Response } from "express";
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
-import { createError } from "../core/utils/createError";
 import { EventDefinitionRepo } from "../repositories/EventDefinitionRepo";
 import {
   EventDefinitionRouteMeta,
@@ -33,7 +32,6 @@ export class EventDefinitionController extends EntityController<
         const from = req.query.from;
         const to = req.query.to;
         const requestedUserId = req.query.userId;
-        const eventInstanceId = req.query.eventInstanceId;
 
         if (from && typeof from === "string" && to && typeof to === "string") {
           await this.findByDateTimeSpan(
@@ -43,18 +41,6 @@ export class EventDefinitionController extends EntityController<
             to,
             requestedUserId,
             fields
-          );
-        } else if (
-          eventInstanceId &&
-          typeof eventInstanceId === "string" &&
-          requestedUserId &&
-          typeof requestedUserId === "string"
-        ) {
-          await this.findByEventInstanceIdAndUser(
-            req,
-            res,
-            eventInstanceId,
-            requestedUserId
           );
         } else {
           const eventInstances = await this.repo.findAll(fields);
@@ -149,31 +135,5 @@ export class EventDefinitionController extends EntityController<
       fields
     );
     res.status(HttpStatusCode.OK_200).send(eventDefinitions);
-  }
-
-  private async findByEventInstanceIdAndUser(
-    req: ISessionRequest,
-    res: Response,
-    eventInstanceId: string,
-    requestedUserId: string
-  ) {
-    const isAdminOrYourSelf = await req.sessionInfo.isAdminOrYourself(
-      requestedUserId
-    );
-    if (!isAdminOrYourSelf) {
-      return this.sendMissingAuthorityError(res);
-    }
-
-    const eventDefinition = await this.repo.findByEventInstanceAndUser(
-      eventInstanceId,
-      requestedUserId
-    );
-    if (eventDefinition) {
-      res.status(HttpStatusCode.OK_200).send(eventDefinition);
-    } else {
-      res
-        .status(HttpStatusCode.NOT_FOUND_404)
-        .send(createError("Not found", "NotFoundError"));
-    }
   }
 }
