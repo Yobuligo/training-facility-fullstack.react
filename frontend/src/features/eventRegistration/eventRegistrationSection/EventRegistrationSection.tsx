@@ -1,5 +1,6 @@
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
+import { LinkIcon } from "../../../icons/LinkIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
@@ -29,6 +30,9 @@ export const EventRegistrationSection: React.FC<
           }}
         >
           <div className={styles.buttons}>
+            <SecondaryButton onClick={viewModel.onCopyLink}>
+              <LinkIcon />
+            </SecondaryButton>
             {props.eventInstance.calledOff === false ? (
               <SecondaryButton
                 displaySpinner={viewModel.isCallOffRequestProcessing}

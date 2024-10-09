@@ -46,8 +46,8 @@ export const EventInstanceRegistration: React.FC = () => {
           const event = EventFactory.createFromEventDefinitions(
             eventCreator,
             [eventDefinition],
-            eventInstance.from,
-            eventInstance.to
+            DateTime.toDateInstance(eventInstance.from),
+            DateTime.toDateInstance(eventInstance.to)
           )[0];
           const isRegistered =
             EventInfo.findFirstEventRegistrationByUserId(event, user.id) !==

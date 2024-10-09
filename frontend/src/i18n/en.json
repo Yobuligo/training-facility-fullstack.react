@@ -86,6 +86,7 @@
         "closeRegistrationQuestion": "Do you really want to close the registration? No other user can register or unregister for this training anymore.",
         "closeRegistrationTitle": "Close registration",
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
+        "infoCopyLink": "Link was copied to clipboard",
         "open": "Reopen registration",
         "reschedule": "Reschedule"
     },

@@ -86,6 +86,7 @@
         "closeRegistrationQuestion": "Soll die Anmeldung wirklich geschlossen werden? Kein weiterer Benutzer kann sich mehr für dieses Training an- oder abmelden.",
         "closeRegistrationTitle": "Anmeldung schließen",
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
+        "infoCopyLink": "Der Link wurde in die Zwischenablage kopiert",
         "open": "Anmeldung wieder öffnen",
         "reschedule": "Wieder einplanen"
     },

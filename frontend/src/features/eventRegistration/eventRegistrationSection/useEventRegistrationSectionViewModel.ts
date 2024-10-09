@@ -12,6 +12,7 @@ import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserInfo } from "../../../services/UserInfo";
 import { IEventRegistration } from "../../../shared/model/IEventRegistration";
 import { IUser } from "../../../shared/model/IUser";
@@ -180,6 +181,16 @@ export const useEventRegistrationSectionViewModel = (
       }
     );
 
+  const onCopyLink = () => {
+    toast.info(t(texts.eventRegistrationSection.infoCopyLink));
+    const link = `${window.location.protocol}//${
+      window.location.host
+    }${AppRoutes.eventInstanceRegistration.toPath({
+      eventInstanceId: props.eventInstance.id,
+    })}`;
+    navigator.clipboard.writeText(link);
+  };
+
   const onReopenRegistration = () => {
     props.eventInstance.state = EventInstanceState.OPEN;
     setEventInstanceState(EventInstanceState.OPEN);
@@ -197,6 +208,7 @@ export const useEventRegistrationSectionViewModel = (
     onAddUser,
     onCallOff,
     onCloseRegistration,
+    onCopyLink,
     onDelete,
     onReopenRegistration,
     onReschedule,
