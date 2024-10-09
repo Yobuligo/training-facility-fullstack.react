@@ -5,7 +5,6 @@ import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
-import { useScreenSize } from "../../../hooks/useScreenSize";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -20,7 +19,6 @@ export const User: React.FC<IUserProps> = (props) => {
   const viewModel = useUserViewModel(props);
   const [user] = useUser();
   const { t } = useTranslation();
-  const screenSize = useScreenSize(45);
 
   const adminModeButtons = (
     <>
@@ -283,7 +281,7 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.isAdmin}
             />
           )}
-          <Toolbar className={screenSize.isSmall() ? styles.toolbar : ""}>
+          <Toolbar className={styles.toolbar}>
             {props.isAdminMode && adminModeButtons}
             {!props.isAdminMode && (
               <Button onClick={viewModel.onChangePassword}>

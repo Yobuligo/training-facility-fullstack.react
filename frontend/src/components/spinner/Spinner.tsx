@@ -33,6 +33,7 @@ export const Spinner: React.FC<ISpinnerProps> = (props) => {
     "--spinnerColor": `${props.color ?? "#fff"}`,
     "--spinnerSize": `${getSpinnerSize()}`,
     "--spinnerBorderSize": `${getSpinnerBorderSize()}`,
+    "flexShrink": 0,
   } as CSSProperties;
 
   return <div aria-label="spinner" className={styles.spinner} style={style} />;

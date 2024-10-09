@@ -1,5 +1,6 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
+@use "../../../styles/mixins.scss";
 
 .user {
   display: flex;
@@ -21,11 +22,14 @@
   color: colors.$color-text;
 }
 
-
 .toolbar {
   display: flex;
   flex-direction: column;
   row-gap: dimensions.$negative-space;
   grid-column-start: 1;
   grid-column-end: 3;
+
+  @include mixins.medium-screen {
+    flex-direction: row;
+  }
 }
