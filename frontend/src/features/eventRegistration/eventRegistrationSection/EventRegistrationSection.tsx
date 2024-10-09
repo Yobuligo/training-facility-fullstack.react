@@ -31,7 +31,7 @@ export const EventRegistrationSection: React.FC<
         >
           <div className={styles.buttons}>
             <SecondaryButton onClick={viewModel.onCopyLink}>
-              <LinkIcon />
+              <LinkIcon className={styles.copyLink} />
             </SecondaryButton>
             {props.eventInstance.calledOff === false ? (
               <SecondaryButton
