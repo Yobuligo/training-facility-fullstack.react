@@ -26,7 +26,7 @@ export const Welcome: React.FC = () => {
     loadEventInstancesRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
       const eventInstanceItemModels: IEventInstanceItemModel[] =
-        await eventInstanceApi.findByUserForWeek(user.id, [
+        await eventInstanceApi.findUpcomingByUserForWeek(user.id, [
           "id",
           "description",
           "color",

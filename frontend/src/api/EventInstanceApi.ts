@@ -63,12 +63,12 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     );
   }
 
-  findByUserForWeek<K extends keyof IEventInstance>(
+  findUpcomingByUserForWeek<K extends keyof IEventInstance>(
     userId: string,
     fields: K[]
   ): Promise<IEntitySubset<IEventInstance, K>[]>;
-  findByUserForWeek(userId: string): Promise<IEventInstance[]>;
-  async findByUserForWeek<K extends keyof IEventInstance>(
+  findUpcomingByUserForWeek(userId: string): Promise<IEventInstance[]>;
+  async findUpcomingByUserForWeek<K extends keyof IEventInstance>(
     userId: string,
     fields?: K[]
   ): Promise<unknown> {

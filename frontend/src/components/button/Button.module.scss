@@ -15,6 +15,7 @@
   font-size: medium;
   font-weight: 400;
   padding: dimensions.$negative-space;
+  height: 2.5rem;
 
   @include mixins.medium-screen {
     padding: dimensions.$negative-space 1rem;

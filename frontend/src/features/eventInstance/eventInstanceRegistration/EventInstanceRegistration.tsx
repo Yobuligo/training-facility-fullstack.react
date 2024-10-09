@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
-import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { isError } from "../../../core/utils/isError";
@@ -23,7 +22,7 @@ import styles from "./EventInstanceRegistration.module.scss";
 
 export const EventInstanceRegistration: React.FC = () => {
   const params = useParams<{ eventInstanceId: string }>();
-  const [request, isRequesting] = useRequest();
+  const [request] = useRequest();
   const [eventInstance, setEventInstance] = useState<
     IEventInstance | undefined
   >(undefined);
@@ -77,32 +76,26 @@ export const EventInstanceRegistration: React.FC = () => {
 
   return (
     <div className={styles.eventInstanceRegistration}>
-      {isRequesting ? (
-        <PageSpinner />
-      ) : (
-        <>
-          {event && eventInstance && (
-            <EventInstanceItem
-              eventInstanceItemModel={{
-                ...eventInstance,
-                isMemberOnly: event.eventDefinition?.isMemberOnly,
-              }}
-            >
-              {event.dateTimeSpan.from &&
-                DateTime.isAfter(event.dateTimeSpan.from) && (
-                  <EventContent>
-                    <EventRegistrationButton
-                      event={event}
-                      isRegistered={isRegistered}
-                      onRegister={onRegister}
-                      onUnregister={onUnregister}
-                      userId={user.id}
-                    />
-                  </EventContent>
-                )}
-            </EventInstanceItem>
-          )}
-        </>
+      {event && eventInstance && (
+        <EventInstanceItem
+          eventInstanceItemModel={{
+            ...eventInstance,
+            isMemberOnly: event.eventDefinition?.isMemberOnly,
+          }}
+        >
+          {event.dateTimeSpan.from &&
+            DateTime.isAfter(event.dateTimeSpan.from) && (
+              <EventContent>
+                <EventRegistrationButton
+                  event={event}
+                  isRegistered={isRegistered}
+                  onRegister={onRegister}
+                  onUnregister={onUnregister}
+                  userId={user.id}
+                />
+              </EventContent>
+            )}
+        </EventInstanceItem>
       )}
     </div>
   );
