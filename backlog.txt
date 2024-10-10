@@ -279,13 +279,11 @@ Version 1.0.0-20241007.1
 	# Bug: Reset LabeledSelect in user profile does not reset value correctly
 		# e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 
-- Version 1.2.0-<>.3
+# Version 1.2.0-20241010.3
 	# Set german as default language
-	- Gradings can be changed
-	- Change default password from simple initial to a strong password
-	- Tighten password for database
-	- Tighten password policy
-	- Increase expiration time of session
+	# Tighten password for database
+	# Change default password from simple initial to a strong password for created user
+	# Tighten password for root user
 	# Display version and build details
 	# Display language select above logout button at mobile devices
 	# Set cursor to input in different screens
@@ -295,11 +293,16 @@ Version 1.0.0-20241007.1
 		# Field new password in user invite for change password
 		# Field username for created user
 		# Field title for new event definition
-	- Migrate data
+	# Migrate data
 	# Bug: Add training to planner, switch to trainings, select the training, copy the link and open in a new tab -> Error
-	- Bug: Register / unregister button is displayed for event instance of deep link, even so the event was called off
+	# Bug: Register / unregister button is displayed for event instance of deep link, even so the event was called off
+	
+- Version 1.3.0-<>.4
+	- Tighten password policy
 
 - Backlog
+	- Gradings can be changed
+	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"
 		- Courses can be displayed in user profile	
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
