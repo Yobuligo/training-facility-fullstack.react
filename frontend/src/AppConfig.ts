@@ -1,6 +1,11 @@
 import { error } from "./core/utils/error";
 
 export const AppConfig = {
+  build: {
+    version: "1.1.0",
+    date: "20241009",
+    number: 2,
+  },
   HOST:
     process.env.REACT_APP_BACKEND_HOST ??
     error(`Error while getting host information from environment variables`),

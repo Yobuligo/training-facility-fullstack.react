@@ -1,280 +1,275 @@
-# App
-	# Refactor page style and display edges only in WQHD but not Full-HD
-	# Improve repsonsive design for smaller devices (e.g. Tablets)
-	# Language can be switched
-		# Selected language must be persisted and loaded when reloading page
-	# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
-	# Unknown server errors are handled in an ErrorBoundaryPage
-	# Display an ErrorBoundaryPage when calling an unknown url
-	# useRequest must not call block, if the block is currently running
-	# Introduce HttpStatusCodes	
-	# Add imprint and privacy policy
-	
-# ErrorPage
-	# Clicking the Yeoljeong logo navigates to the dashboard
-
-# Event Planner
-	# Title must be mandatory. Saving must not be possible without title.
-	# Description is optional
-	# inputs are restricted to length of related db fields		
-		# Title is restricted to 100 characters
-		# Description is restricted to 100 characters
-	# EventDefinition can be updated
-	# EventDefinition can be deleted
-	# Create, delete, update operations must be only allowed with ADMIN role
-	# Calendar
-		# Appointments of recurrence once 
-			# must be displayed once at the specific date
-		# Appointments of recurrence daily 
-			# must be displayed daily
-			# must not be displayed before the start date
-			# must not be displayed after the end date
-			# must be displayed endless if start and end date are equal
-		# Appointments of recurrence weekly
-			# must be displayed weekly
-			# must not be displayed before the start date
-			# must not be displayed after the end date
-			# must be displayed endless if start and end date are equal
-			# must only be displayed at the specific weekday
-		# Appointments of recurrence monthly
-			# must be displayed monthly
-			# must not be displayed before the start date
-			# must not be displayed after the end date
-			# must be displayed endless if start and end date are equal
-			# must only be displayed at the specific day of month
-	# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
-	# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
-	# Display event planner as list
-	# Mark trainings as private or public (public trainings can be booked for trial trainings)
-	
-# My Trainings
-	# User can register on and unregister from trainings
-	# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
-	# Display loading spinner when register on or unregister from a training
-	# Click on event instance displays registered users
-		# must only work for admin users
-	# User must not be registered twice on a training (check in db if user is already registered)
-	# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
-	* Display event description on hover
-	# Display trainings on mobile phones as list
-		# trainings must be loaded initially
-		# trainings can be filtered by today, tomorrow, week, month or a separate date
-		# Must behave similar to click, register, unregister in calendar view
-		# Filter is persisted, so that the user doesn't have to select it each time when navigating throught the app
-	# Bug: Race condition error when creating event instances by different users at the same moment
-	# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
-	# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
-	# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
-	
-# Event Calendar
-	# Display if event is called off. Must be displayed at:
-		# Weekly overview of user (Dashboard)
-		# Training times calendar
-		# Trial training calendar
-		# My trainings calendar
-	# Display if event is for member only. Must be displayed at:
-		# My trainings calendar
-		# Planer
-	
-- Event Registration
-	# Display spinner when loading registrations
-	# Registered user must be displayed
-	# EventRegistrationState for registered user can be set (either present, missing or back to open)
-	* Display loading spinner when changing EventRegistrationState (present, missing, open)
-	# Registration can be closed
-	# Display confirm dialog before closing event registration
-	# Registration can be reopened
-	# Closing and opening must be considered in multiple sessions (2 sessions, 1. session closes, 2. session tries to registers -> registrations must fail)
-	# Display loading spinner when closing or reopening an EventInstance	
-	# It must not be possible to register on past events
-	# It must not be possible to register if event instance was closed
-	- It must not be possible to register if event instance was called off
-	# It must not be possible to unregister if event instance was closed
-	# User can be added to EventInstance manually by search and add
-	# Manually added users are added sorted
-	# Registered users are displayed in the order they registered
-	# Display loading spinner when searching for users
-	- Display loading spinner when adding user
-	- Display loading spinner when deleting user
-	# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
-	# Event Instance must be called offable
-		# I want to call off an instance of an event definition (e.g. if the school is closed for some days)
-		# Called off event instances are highlighted	
-	# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
-	
-# Welcome
-	# Display spinner when loading registrations I am registered on
-	# Display upcoming events of the current week
-	# Upcoming events are sorted chronologically
-	# Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
-
-- User Profile
-	# Display loading spinner when loading user profile
-	# Dummy objects are removed
-	# User can be locked or unlocked (session must be deleted)
-	# user must not be creatable without username, firstname, lastname and email
-	# username must be unique
-	# User can be marked as admin and vice versa
-	# User role Admin is assigned to user, when marked as admin while creating
-	# Only a valid email address can be persisted
-	# Customer Id must be created and displayed
-	# Joined on must be changeable in admin mode otherwise displayed
-	# Joined on can be changed by entering values instead of using value help
-	# inputs are restricted to length of related db fields
-		# Firstname 50
-		# Lastname 50
-		# Email 255
-		# City 50
-		# Postal Code 10
-		# Street 100
-		# Phone 20
-		# Bank Account BIC 11
-		# Bank Account IBAN 34
-		# Bank Account Institution 50
-		# Bank Account Owner 100
-	# Current user must not be lockable
-	# Current user must not be deletable	
-	# UserBankAccount must be loaded with User
-	# Delete user with user profile, bank account, gradings, roles, etc.
-		# Delete user is active in display mode
-	# Refactor Collapsables can be toggled on click at title
-	# Errors from backend must be translatable or mapped to client errors
-		# e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
-	# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
-	# User Gradings
-		# Gradings can be added, saved and reloaded
-		# Gradings can be deleted
-		# Display confirm dialog before deleting a grading		
-		# Bug: Error when entering achievedAt date manually
-	# Change password
-		# The user must be able to change his password
-		# The salt must be changed with the password
-		# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
-	# Send invite mail to user
-		# Display loading spinner when sending mail
-		# User must be forwarded to invite route
-			# throw error if email could not be send because of an invalid email
-			# throw error if email could not be send because of technical issues
-			# previous inivites of a user must be deleted
-			# User invitation must be deleted with user
-		# Invite must expire
-		# Invite is active in display mode
-	# Send reset password mail to user -> equal to send invite with different mail text
-		# Display loading spinner when sending mail
-		# User must be forwarded to invite route
-			# throw error if email could not be send because of an invalid email
-			# throw error if email could not be send because of technical issues
-			# previous inivites of a user must be deleted
-			# User invitation must be deleted with user
-		# Invite must expire
-		# Invite is active in display mode
-	# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
-		# username, firstname, lastname, email, birthday, street, postal code, city
-		# message is displayed at input fields, but also as a toast    
-	# Bug: created user cannot be selected from user list
-	# Bug: Customer id is not displayed when user was created in backend
-	# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
-	# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
-	# Bug: Buttons for inviting users and changing password must be active in display mode
-	# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
-	# Bug: User session is not deleted with user.
-	# Bug: Link of invite email leads to wrong url
-	# Bug: Invite user, send password change request and verify user invite sends requests without token
-	# Bug: Link of invite email leads to dashboard instead of login page	
-	
-# User List
-	# Display loading spinner, when loading users
-	# user must be sorted by name
-		# Currently it is not sorted, if a user was added
-		# Perhaps it should be sorted directly within the backend
-	# Mark locked users
-	# Mark admin users
-	# Locked user must be displayed as locked otherwise it must be displayed as enabled
-	# Users can be searched
-	* Display loading spinner when searching - not required as it on clientside	
-	# Bug: As admin created user is shown as normal user.
-	# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
-	
-# Trial Training
-	# Customer can select a day he wants to book a trial training
-	# Customer has to provide firstname, lastname and email address
-	# Creation of EventInstances must only be possible with shared key
-	# Booking is only possible once for an email but we don't consider the past
-	# It must not be possible to book a past training
-	# It must not be possible to book a closed training
-	# Email is send to the customer
-		# Contains date and time for the training, information like required clothes, the address, a link to unregister	
-	* Booking must be confirmed
-	# A message is displayed that the booking was successful
-	# Click on unregister displays an internet page to unregister from the training
-	# Registered user is displayed in event registration list of the event instance and marked as trial training
-	# Registered user can be marked as present, missing or open	
-	# Member only trainings must not be displayed
-	# Bug: EventDefinitions must only be loaded with SecretRequest
-	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list	
-
-# Login
-	# Login must only be possible with valid username and password
-	# Session expires after a certain time
-	# Locked user must not be logged in
-	# Display error if user credentials invalid
-	# Display less technical error when login fails for an unknown reason
-	
-# Password
-	# User must be able to change password
-	# Click on eye can toggle between displaying password as text or asterisks
-	
-# User Invite Screen
-	# Invite must be checked, display error in case of expired or invalid invite
-	# User must set a password
-	# User will be navigated to login page after changing the password
-	# User invite must be deleted when password was changed to not use it twice
-	
-# Reset Password
-	# User must be forwarded to reset password route
-	# Reset password must expire
-	
-# Event Calendar
-	# Start display of calender hours of first event and end hours of end of last event
-	# Remove month view
-	
-# Event Calendar Overview
-	# Provide separate route to calendar overview in display mode	
-	# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
-	
-# Gradings
-	# Gradings are displayed in a separate tabitem
+Version 1.0.0-20241007.1
+	# App
+		# Refactor page style and display edges only in WQHD but not Full-HD
+		# Improve repsonsive design for smaller devices (e.g. Tablets)
+		# Language can be switched
+			# Selected language must be persisted and loaded when reloading page
+		# Errors are displayed as toasts, which can be closed by close button, but don't disappear automatically
+		# Unknown server errors are handled in an ErrorBoundaryPage
+		# Display an ErrorBoundaryPage when calling an unknown url
+		# useRequest must not call block, if the block is currently running
+		# Introduce HttpStatusCodes	
+		# Add imprint and privacy policy
 		
-- DateTimeSpan
-	- Bug: from value must not be lower than to value
+	# ErrorPage
+		# Clicking the Yeoljeong logo navigates to the dashboard
+
+	# Event Planner
+		# Title must be mandatory. Saving must not be possible without title.
+		# Description is optional
+		# inputs are restricted to length of related db fields		
+			# Title is restricted to 100 characters
+			# Description is restricted to 100 characters
+		# EventDefinition can be updated
+		# EventDefinition can be deleted
+		# Create, delete, update operations must be only allowed with ADMIN role
+		# Calendar
+			# Appointments of recurrence once 
+				# must be displayed once at the specific date
+			# Appointments of recurrence daily 
+				# must be displayed daily
+				# must not be displayed before the start date
+				# must not be displayed after the end date
+				# must be displayed endless if start and end date are equal
+			# Appointments of recurrence weekly
+				# must be displayed weekly
+				# must not be displayed before the start date
+				# must not be displayed after the end date
+				# must be displayed endless if start and end date are equal
+				# must only be displayed at the specific weekday
+			# Appointments of recurrence monthly
+				# must be displayed monthly
+				# must not be displayed before the start date
+				# must not be displayed after the end date
+				# must be displayed endless if start and end date are equal
+				# must only be displayed at the specific day of month
+		# Loading EventInstances from EventDefinitions must consider the date time span - currently all instances are loaded from a definition
+		# Bug: Calendar doesn't show earlier event e.g. from 16 - 18
+		# Display event planner as list
+		# Mark trainings as private or public (public trainings can be booked for trial trainings)
 		
-- Emails
-	- Send mails must create an email at the send mail folder of the mail account
+	# My Trainings
+		# User can register on and unregister from trainings
+		# User can unregister from trainings where he was added manually (the user was added from a trainer, anyway the user must be able to unregister from the training)
+		# Display loading spinner when register on or unregister from a training
+		# Click on event instance displays registered users
+			# must only work for admin users
+		# User must not be registered twice on a training (check in db if user is already registered)
+		# Event instances must be loaded correctly for each event definition (EventDefinitionApi.findByDataTimeSpanAndUser)	
+		* Display event description on hover
+		# Display trainings on mobile phones as list
+			# trainings must be loaded initially
+			# trainings can be filtered by today, tomorrow, week, month or a separate date
+			# Must behave similar to click, register, unregister in calendar view
+			# Filter is persisted, so that the user doesn't have to select it each time when navigating throught the app
+		# Bug: Race condition error when creating event instances by different users at the same moment
+		# Bug: click very fast register / unregister - at some time I will get an error - useRequest must not be allowed to call request, if it is already running
+		# Bug: when opening my trainings in mobile view, only one training is displayed instead of all and the state (register / unregister) seems to be inconsistent - dateTimeSpan (from / to) was not correctly set for a day
+		# Bug: when pressing register for one event instance the spinner button for all register buttons is displayed - Introduce separate component to provide one register button for each event.
+		
+	# Event Calendar
+		# Display if event is called off. Must be displayed at:
+			# Weekly overview of user (Dashboard)
+			# Training times calendar
+			# Trial training calendar
+			# My trainings calendar
+		# Display if event is for member only. Must be displayed at:
+			# My trainings calendar
+			# Planer
+		
+	- Event Registration
+		# Display spinner when loading registrations
+		# Registered user must be displayed
+		# EventRegistrationState for registered user can be set (either present, missing or back to open)
+		* Display loading spinner when changing EventRegistrationState (present, missing, open)
+		# Registration can be closed
+		# Display confirm dialog before closing event registration
+		# Registration can be reopened
+		# Closing and opening must be considered in multiple sessions (2 sessions, 1. session closes, 2. session tries to registers -> registrations must fail)
+		# Display loading spinner when closing or reopening an EventInstance	
+		# It must not be possible to register on past events
+		# It must not be possible to register if event instance was closed
+		- It must not be possible to register if event instance was called off
+		# It must not be possible to unregister if event instance was closed
+		# User can be added to EventInstance manually by search and add
+		# Manually added users are added sorted
+		# Registered users are displayed in the order they registered
+		# Display loading spinner when searching for users
+		- Display loading spinner when adding user
+		- Display loading spinner when deleting user
+		# Manually added user can be deleted from EventInstance (needs to confirm the deletion)
+		# Event Instance must be called offable
+			# I want to call off an instance of an event definition (e.g. if the school is closed for some days)
+			# Called off event instances are highlighted	
+		# Bug: Error when trying to add a user, which was deleted in parallel. (2 Session: 1. session searchs for user, that should be added manually (user is displayed), 2. session deletes user, 1. session clicks add => technical error)
+		
+	# Welcome
+		# Display spinner when loading registrations I am registered on
+		# Display upcoming events of the current week
+		# Upcoming events are sorted chronologically
+		# Upcoming events must be displayed for manually added users (user was added manually, anyway the event must be displayed at the welcome page)
 
-# Security
-	# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
-	# Hash passwords before transferring them from client to server
-	# Lock user after to many login fails
-		# User can login for 5 times
-		# User is blocked after a certain number of login fails (e.g. 5)
-		# User gets a different message (Login currently not possible. Please try later.)
-		# User can retry after e.g. 15 min for the next 5 times
-		# UserLoginFailAttemps will be deleted with the next valid login
-		# User is locked after a certain number of login fails (e.g. 10), lock flag is set, lockedAt is set and session is deleted
-		# User can be unlocked from user profile (user login fail attempts must be deleted)		
-		# User Login Fail Attempts must be deleted with user
-	# Move session persistence from local storage to cookies (http only)
-		# Session must be added with the login
-		# Session is transmitted with each request from the client (RESTApi)
-		# Session / Cookie is destroyed when logging out
-		# Session Token must not be transmitted anymore
-		# Session information are not persisted at clientside anymore
-			# UserApi.login() doesn't return the session anymore, but instead the user
-			# UserApi.logout() doesn't need the session anymore
-			# delete ISession on client side
-	# Public calls must be authorized via token
+	- User Profile
+		# Display loading spinner when loading user profile
+		# Dummy objects are removed
+		# User can be locked or unlocked (session must be deleted)
+		# user must not be creatable without username, firstname, lastname and email
+		# username must be unique
+		# User can be marked as admin and vice versa
+		# User role Admin is assigned to user, when marked as admin while creating
+		# Only a valid email address can be persisted
+		# Customer Id must be created and displayed
+		# Joined on must be changeable in admin mode otherwise displayed
+		# Joined on can be changed by entering values instead of using value help
+		# inputs are restricted to length of related db fields
+			# Firstname 50
+			# Lastname 50
+			# Email 255
+			# City 50
+			# Postal Code 10
+			# Street 100
+			# Phone 20
+			# Bank Account BIC 11
+			# Bank Account IBAN 34
+			# Bank Account Institution 50
+			# Bank Account Owner 100
+		# Current user must not be lockable
+		# Current user must not be deletable	
+		# UserBankAccount must be loaded with User
+		# Delete user with user profile, bank account, gradings, roles, etc.
+			# Delete user is active in display mode
+		# Refactor Collapsables can be toggled on click at title
+		# Errors from backend must be translatable or mapped to client errors
+			# e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
+		# Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
+		# User Gradings
+			# Gradings can be added, saved and reloaded
+			# Gradings can be deleted
+			# Display confirm dialog before deleting a grading		
+			# Bug: Error when entering achievedAt date manually
+		# Change password
+			# The user must be able to change his password
+			# The salt must be changed with the password
+			# Changing the password is only allowed for admins or if the password to be changed belongs to the current user
+		# Send invite mail to user
+			# Display loading spinner when sending mail
+			# User must be forwarded to invite route
+				# throw error if email could not be send because of an invalid email
+				# throw error if email could not be send because of technical issues
+				# previous inivites of a user must be deleted
+				# User invitation must be deleted with user
+			# Invite must expire
+			# Invite is active in display mode
+		# Send reset password mail to user -> equal to send invite with different mail text
+			# Display loading spinner when sending mail
+			# User must be forwarded to invite route
+				# throw error if email could not be send because of an invalid email
+				# throw error if email could not be send because of technical issues
+				# previous inivites of a user must be deleted
+				# User invitation must be deleted with user
+			# Invite must expire
+			# Invite is active in display mode
+		# Display error if mandatory fields are not provided and do not save data. Mandatory fields are:
+			# username, firstname, lastname, email, birthday, street, postal code, city
+			# message is displayed at input fields, but also as a toast    
+		# Bug: created user cannot be selected from user list
+		# Bug: Customer id is not displayed when user was created in backend
+		# Bug: Details of created user is not displayed in User-List (create User -> save -> back to user list -> details are missing)
+		# Bug: Missing authority error when updating own user profile of non admin user. (user must be able to change his own profile)
+		# Bug: Buttons for inviting users and changing password must be active in display mode
+		# Bug: Sending user invite to user, which is not created yet, fails (create new user -> don't save -> send invite)
+		# Bug: User session is not deleted with user.
+		# Bug: Link of invite email leads to wrong url
+		# Bug: Invite user, send password change request and verify user invite sends requests without token
+		# Bug: Link of invite email leads to dashboard instead of login page	
+		
+	# User List
+		# Display loading spinner, when loading users
+		# user must be sorted by name
+			# Currently it is not sorted, if a user was added
+			# Perhaps it should be sorted directly within the backend
+		# Mark locked users
+		# Mark admin users
+		# Locked user must be displayed as locked otherwise it must be displayed as enabled
+		# Users can be searched
+		* Display loading spinner when searching - not required as it on clientside	
+		# Bug: As admin created user is shown as normal user.
+		# Bug: Locked user are displayed incorrectly in mobile view (disabled view ends at the middle of the card)
+		
+	# Trial Training
+		# Customer can select a day he wants to book a trial training
+		# Customer has to provide firstname, lastname and email address
+		# Creation of EventInstances must only be possible with shared key
+		# Booking is only possible once for an email but we don't consider the past
+		# It must not be possible to book a past training
+		# It must not be possible to book a closed training
+		# Email is send to the customer
+			# Contains date and time for the training, information like required clothes, the address, a link to unregister	
+		* Booking must be confirmed
+		# A message is displayed that the booking was successful
+		# Click on unregister displays an internet page to unregister from the training
+		# Registered user is displayed in event registration list of the event instance and marked as trial training
+		# Registered user can be marked as present, missing or open	
+		# Member only trainings must not be displayed
+		# Bug: EventDefinitions must only be loaded with SecretRequest
+		# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list	
 
-# Version 1.1.0
+	# Login
+		# Login must only be possible with valid username and password
+		# Session expires after a certain time
+		# Locked user must not be logged in
+		# Display error if user credentials invalid
+		# Display less technical error when login fails for an unknown reason
+		
+	# Password
+		# User must be able to change password
+		# Click on eye can toggle between displaying password as text or asterisks
+		
+	# User Invite Screen
+		# Invite must be checked, display error in case of expired or invalid invite
+		# User must set a password
+		# User will be navigated to login page after changing the password
+		# User invite must be deleted when password was changed to not use it twice
+		
+	# Reset Password
+		# User must be forwarded to reset password route
+		# Reset password must expire
+		
+	# Event Calendar
+		# Start display of calender hours of first event and end hours of end of last event
+		# Remove month view
+		
+	# Event Calendar Overview
+		# Provide separate route to calendar overview in display mode	
+		# Bug: Selecting a filter (like today, tomorrow, week, month) doesn't update the training list
+		
+	# Gradings
+		# Gradings are displayed in a separate tabitem
+
+	# Security
+		# Add authority checks to backend functions (e.g. a normale user must not be able to create or delete users)
+		# Hash passwords before transferring them from client to server
+		# Lock user after to many login fails
+			# User can login for 5 times
+			# User is blocked after a certain number of login fails (e.g. 5)
+			# User gets a different message (Login currently not possible. Please try later.)
+			# User can retry after e.g. 15 min for the next 5 times
+			# UserLoginFailAttemps will be deleted with the next valid login
+			# User is locked after a certain number of login fails (e.g. 10), lock flag is set, lockedAt is set and session is deleted
+			# User can be unlocked from user profile (user login fail attempts must be deleted)		
+			# User Login Fail Attempts must be deleted with user
+		# Move session persistence from local storage to cookies (http only)
+			# Session must be added with the login
+			# Session is transmitted with each request from the client (RESTApi)
+			# Session / Cookie is destroyed when logging out
+			# Session Token must not be transmitted anymore
+			# Session information are not persisted at clientside anymore
+				# UserApi.login() doesn't return the session anymore, but instead the user
+				# UserApi.logout() doesn't need the session anymore
+				# delete ISession on client side
+		# Public calls must be authorized via token
+		
+# Version 1.1.0-20241009.2
 	# Deep Link Event Instances
 		# The user can create a deep link to a specific training instance
 		# An event instance can be displayed via deep link, which can e.g. send to customers
@@ -298,24 +293,31 @@
 		# Field new password in user invite for change password
 		# Field username for created user
 		# Field title for new event definition
+	- Migrate data
+	- Bug: Add training to planner, switch to trainings, select the training, copy the link and open in a new tab -> Error
 
-- Version 2.0
+- Backlog
 	- Display Courses / seminars in "grading list"
 		- Courses can be displayed in user profile	
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Add dobok size to user profile
+	- Set and display trainer to event instance
 	- Performance
 		- Admin tabs are loaded asynchronously
 		- table userTrialTraining needs an index on email	
 	- Gamification
-
-- Check all ui endpoints and delete which are not required anymore
-- Check all ui REST calls if they use useRequest
-# Check all backend endpoints and add authorization checks
-- We have to check the behavior for each REST request when it fails
-- We have to check the transmitted data for each REST request if it can be reduced to only required information
-- Edge Cases
-	- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
+	- DateTimeSpan
+		- Bug: from value must not be lower than to value			
+	- Emails
+		- Send mails must create an email at the send mail folder of the mail account
+	- Check all ui endpoints and delete which are not required anymore
+	- Check all ui REST calls if they use useRequest
+	# Check all backend endpoints and add authorization checks
+	- We have to check the behavior for each REST request when it fails
+	- We have to check the transmitted data for each REST request if it can be reduced to only required information
+	- Edge Cases
+		- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
+	
 
 Best Practices Sequelize:
 - DTO types do contain properties for ids of referenced objects and for the reference itself
