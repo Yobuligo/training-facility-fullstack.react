@@ -1,14 +1,12 @@
-import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
-import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
+import { EventRegistrationButtonContent } from "../../eventRegistration/eventRegistrationButtonContent/EventRegistrationButtonContent";
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
-import { EventContent } from "../eventContent/EventContent";
 import { IEvent } from "../model/IEvent";
-import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 import styles from "./EventCalendarMyTrainings.module.scss";
+import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const { t } = useTranslation();
@@ -21,20 +19,13 @@ export const EventCalendarMyTrainings: React.FC = () => {
     );
 
     return (
-      <>
-        {event.dateTimeSpan.from &&
-          DateTime.isAfter(event.dateTimeSpan.from) && (
-            <EventContent>
-              <EventRegistrationButton
-                event={event}
-                isRegistered={eventRegistration !== undefined}
-                onRegister={() => viewModel.triggerReloadSignal()}
-                onUnregister={() => viewModel.triggerReloadSignal()}
-                userId={viewModel.userId}
-              />
-            </EventContent>
-          )}
-      </>
+      <EventRegistrationButtonContent
+        event={event}
+        isRegistered={eventRegistration !== undefined}
+        onRegister={() => viewModel.triggerReloadSignal()}
+        onUnregister={() => viewModel.triggerReloadSignal()}
+        userId={viewModel.userId}
+      />
     );
   };
 

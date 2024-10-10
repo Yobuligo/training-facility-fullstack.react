@@ -296,7 +296,7 @@ Version 1.0.0-20241007.1
 		# Field username for created user
 		# Field title for new event definition
 	- Migrate data
-	- Bug: Add training to planner, switch to trainings, select the training, copy the link and open in a new tab -> Error
+	# Bug: Add training to planner, switch to trainings, select the training, copy the link and open in a new tab -> Error
 	- Bug: Register / unregister button is displayed for event instance of deep link, even so the event was called off
 
 - Backlog

@@ -13,10 +13,9 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventFactory } from "../../../services/EventFactory";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
-import { EventContent } from "../../eventCalendar/eventContent/EventContent";
 import { IEvent } from "../../eventCalendar/model/IEvent";
 import { eventCreator } from "../../eventDefinition/eventDefinitionItem/eventCreator";
-import { EventRegistrationButton } from "../../eventRegistration/eventRegistrationButton/EventRegistrationButton";
+import { EventRegistrationButtonContent } from "../../eventRegistration/eventRegistrationButtonContent/EventRegistrationButtonContent";
 import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
 import styles from "./EventInstanceRegistration.module.scss";
 
@@ -73,10 +72,6 @@ export const EventInstanceRegistration: React.FC = () => {
 
   useInitialize(() => onReload());
 
-  const onRegister = () => onReload();
-
-  const onUnregister = () => onReload();
-
   return (
     <div className={styles.eventInstanceRegistration}>
       {event && eventInstance && (
@@ -86,18 +81,13 @@ export const EventInstanceRegistration: React.FC = () => {
             isMemberOnly: event.eventDefinition?.isMemberOnly,
           }}
         >
-          {event.dateTimeSpan.from &&
-            DateTime.isAfter(event.dateTimeSpan.from) && (
-              <EventContent>
-                <EventRegistrationButton
-                  event={event}
-                  isRegistered={isRegistered}
-                  onRegister={onRegister}
-                  onUnregister={onUnregister}
-                  userId={user.id}
-                />
-              </EventContent>
-            )}
+          <EventRegistrationButtonContent
+            event={event}
+            isRegistered={isRegistered}
+            onRegister={onReload}
+            onUnregister={onReload}
+            userId={user.id}
+          />
         </EventInstanceItem>
       )}
     </div>
