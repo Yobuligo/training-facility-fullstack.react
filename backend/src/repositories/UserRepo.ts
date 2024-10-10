@@ -236,7 +236,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       // create User
       const userSecure = await this.createUser({
         username: entity.username,
-        password: hash("initial"),
+        password: hash(uuid()),
       });
 
       createdUser = {
