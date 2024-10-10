@@ -81,6 +81,7 @@ export const User: React.FC<IUserProps> = (props) => {
           title={t(texts.user.personalInformation)}
         >
           <LabeledInput
+            autoFocus
             disabled={viewModel.displayMode || !props.isAdminMode}
             error={viewModel.usernameError}
             label={t(texts.general.username)}

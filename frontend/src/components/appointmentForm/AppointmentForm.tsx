@@ -13,6 +13,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
   return (
     <form className={styles.appointmentForm} onSubmit={viewModel.onSubmit}>
       <LabeledInput
+        autoFocus
         disabled={props.disabled}
         error={props.titleError}
         isOptional={props.titleIsOptional}

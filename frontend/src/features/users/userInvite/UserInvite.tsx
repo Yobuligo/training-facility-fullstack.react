@@ -32,6 +32,7 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
               />
             )}
             <PasswordConfirmForm
+              autoFocus
               newConfirmPassword={viewModel.newConfirmPassword}
               newConfirmPasswordError={viewModel.newConfirmPasswordError}
               newPassword={viewModel.newPassword}

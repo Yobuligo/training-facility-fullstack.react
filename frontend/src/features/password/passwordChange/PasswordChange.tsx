@@ -22,6 +22,7 @@ export const PasswordChange: React.FC = () => {
           <Error message={viewModel.changePasswordError} />
         )}
         <LabeledPasswordInput
+          autoFocus
           label={t(texts.passwordChange.currentPassword)}
           onChange={viewModel.setCurrentPassword}
         />

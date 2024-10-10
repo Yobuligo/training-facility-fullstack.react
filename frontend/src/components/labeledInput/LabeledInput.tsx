@@ -26,6 +26,7 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
     >
       <div className={styles.inputContainer}>
         <input
+          autoFocus={props.autoFocus}
           className={style(
             props.classNameInput,
             styles.labeledInput,

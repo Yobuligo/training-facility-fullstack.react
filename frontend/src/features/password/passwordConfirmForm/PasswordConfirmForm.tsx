@@ -24,6 +24,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   return (
     <>
       <LabeledPasswordInput
+        autoFocus={props.autoFocus}
         label={t(texts.passwordConfirmForm.newPassword)}
         onChange={props.setNewPassword}
       />

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ILabeledInputProps {
+  autoFocus?: boolean;
   children?: ReactNode;
   className?: string;
   classNameInput?: string;

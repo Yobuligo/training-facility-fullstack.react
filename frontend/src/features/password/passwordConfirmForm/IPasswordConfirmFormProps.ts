@@ -1,4 +1,5 @@
 export interface IPasswordConfirmFormProps {
+  autoFocus?: boolean;
   newConfirmPassword: string;
   newConfirmPasswordError: string;
   newPassword: string;

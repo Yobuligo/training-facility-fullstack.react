@@ -23,6 +23,7 @@ export const Login: React.FC = () => {
           </Card>
         )}
         <LabeledInput
+          autoFocus
           label={t(texts.general.username)}
           onChange={viewModel.setUsername}
           onEnter={viewModel.onEnter}

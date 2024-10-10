@@ -288,18 +288,25 @@
 	- Set german as default language
 	- Gradings can be changed
 	- Change default password from simple initial to a strong password
+	- Tighten password for database
+	- Tighten password policy
 	- Increase expiration time of session
+	# Set cursor to input in different screens
+		# Field username in login screen
+		# Field current password in password change screen
+		# Field new password in user invite for registration
+		# Field new password in user invite for change password
+		# Field username for created user
+		# Field title for new event definition
 
 - Version 2.0
 	- Display Courses / seminars in "grading list"
 		- Courses can be displayed in user profile	
-	- Set cursor to username input of login screen
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Add dobok size to user profile
 	- Performance
 		- Admin tabs are loaded asynchronously
-		- table userTrialTraining needs an index on email
-	- Survey for external trainings etc.
+		- table userTrialTraining needs an index on email	
 	- Gamification
 
 - Check all ui endpoints and delete which are not required anymore
