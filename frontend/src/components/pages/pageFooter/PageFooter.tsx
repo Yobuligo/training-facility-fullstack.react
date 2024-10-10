@@ -8,23 +8,27 @@ export const PageFooter: React.FC = () => {
 
   return (
     <footer className={styles.pageFooter}>
-      <a
-        className={styles.link}
-        href={AppConfig.imprint}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {t(texts.general.imprint)}
-      </a>
-      |
-      <a
-        className={styles.link}
-        href={AppConfig.privacyPolicy}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {t(texts.general.privacyPolicy)}
-      </a>
+      <div></div>
+      <div className={styles.imprintAndPrivacyPolicy}>
+        <a
+          className={styles.link}
+          href={AppConfig.imprint}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {t(texts.general.imprint)}
+        </a>
+        |
+        <a
+          className={styles.link}
+          href={AppConfig.privacyPolicy}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {t(texts.general.privacyPolicy)}
+        </a>
+      </div>
+      <div className={styles.version}>{AppConfig.version}</div>
     </footer>
   );
 };
