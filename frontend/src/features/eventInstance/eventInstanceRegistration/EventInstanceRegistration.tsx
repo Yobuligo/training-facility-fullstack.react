@@ -16,7 +16,7 @@ import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { IEvent } from "../../eventCalendar/model/IEvent";
 import { eventCreator } from "../../eventDefinition/eventDefinitionItem/eventCreator";
 import { EventRegistrationButtonContent } from "../../eventRegistration/eventRegistrationButtonContent/EventRegistrationButtonContent";
-import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
+import { EventInstanceItemAligned } from "../eventInstanceItemAligned/EventInstanceItemAligned";
 import styles from "./EventInstanceRegistration.module.scss";
 
 export const EventInstanceRegistration: React.FC = () => {
@@ -75,11 +75,12 @@ export const EventInstanceRegistration: React.FC = () => {
   return (
     <div className={styles.eventInstanceRegistration}>
       {event && eventInstance && (
-        <EventInstanceItem
+        <EventInstanceItemAligned
           eventInstanceItemModel={{
             ...eventInstance,
             isMemberOnly: event.eventDefinition?.isMemberOnly,
           }}
+          renderChildrenInline={true}
         >
           <EventRegistrationButtonContent
             event={event}
@@ -88,7 +89,7 @@ export const EventInstanceRegistration: React.FC = () => {
             onUnregister={onReload}
             userId={user.id}
           />
-        </EventInstanceItem>
+        </EventInstanceItemAligned>
       )}
     </div>
   );

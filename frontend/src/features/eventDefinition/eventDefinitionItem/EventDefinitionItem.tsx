@@ -1,7 +1,6 @@
 import { EventInfo } from "../../../services/EventInfo";
-import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { IEventInstanceItemModel } from "../../eventInstance/eventInstanceItem/IEventInstanceItemModel";
-import styles from "./EventDefinitionItem.module.scss";
+import { EventInstanceItemAligned } from "../../eventInstance/eventInstanceItemAligned/EventInstanceItemAligned";
 import { IEventDefinitionItemProps } from "./IEventDefinitionItemProps";
 
 export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
@@ -23,13 +22,12 @@ export const EventDefinitionItem: React.FC<IEventDefinitionItemProps> = (
   const onClick = () => props.onSelect?.(props.event);
 
   return (
-    <EventInstanceItem
-      classNameChildren={styles.children}
+    <EventInstanceItemAligned
       eventInstanceItemModel={eventInstanceItemModel}
       renderChildrenInline={true}
       onClick={onClick}
     >
       {props.renderEvent && props.renderEvent(props.event)}
-    </EventInstanceItem>
+    </EventInstanceItemAligned>
   );
 };

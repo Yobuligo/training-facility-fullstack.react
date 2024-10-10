@@ -3,6 +3,10 @@ import { EventContent } from "../../eventCalendar/eventContent/EventContent";
 import { EventRegistrationButton } from "../eventRegistrationButton/EventRegistrationButton";
 import { IEventRegistrationButtonContentProps } from "./IEventRegistrationButtonContentProps";
 
+/**
+ * This component is responsible to display an event registration button as event content.
+ * It checks if the event has already passed and shouldn't be displayed.
+ */
 export const EventRegistrationButtonContent: React.FC<
   IEventRegistrationButtonContentProps
 > = (props) => {
