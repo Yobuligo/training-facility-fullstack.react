@@ -280,13 +280,13 @@ Version 1.0.0-20241007.1
 		# e.g. choose is Admin in UserProfiles and cancel changes -> user is still displayed as admin
 
 - Version 1.2.0
-	- Set german as default language
+	# Set german as default language
 	- Gradings can be changed
 	- Change default password from simple initial to a strong password
 	- Tighten password for database
 	- Tighten password policy
 	- Increase expiration time of session
-	- Display language select above logout button at mobile devices
+	# Display language select above logout button at mobile devices
 	# Set cursor to input in different screens
 		# Field username in login screen
 		# Field current password in password change screen

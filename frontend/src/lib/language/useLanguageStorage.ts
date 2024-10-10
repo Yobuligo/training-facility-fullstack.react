@@ -5,7 +5,7 @@ import { Language } from "./types/Language";
 export const useLanguageStorage = (): Value<Language> => {
   const [language, setLanguage] = useLocalStorage(
     "training-facility.language",
-    Language.EN
+    Language.DE
   );
   return [language, setLanguage];
 };
