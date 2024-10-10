@@ -42,6 +42,9 @@ export const EventInstanceRegistration: React.FC = () => {
           );
         const eventInstance = eventDefinition?.eventInstances?.[0];
         if (eventDefinition && eventInstance) {
+          // correct date to real date
+          eventDefinition.from = DateTime.toDateInstance(eventDefinition.from);
+          eventDefinition.to = DateTime.toDateInstance(eventDefinition.to);
           const event = EventFactory.createFromEventDefinitions(
             eventCreator,
             [eventDefinition],
