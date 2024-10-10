@@ -286,6 +286,7 @@ Version 1.0.0-20241007.1
 	- Tighten password for database
 	- Tighten password policy
 	- Increase expiration time of session
+	- Display language select above logout button at mobile devices
 	# Set cursor to input in different screens
 		# Field username in login screen
 		# Field current password in password change screen

@@ -1,5 +1,6 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
+@use "../../../styles/mixins.scss";
 
 .pageHeader {
   display: flex;
@@ -12,11 +13,18 @@
 
 .right {
   display: flex;
-  flex-direction: row;
-  column-gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  align-items: end;
   margin-right: dimensions.$negative-space;
+
+  @include mixins.medium-screen {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .appLogo {
