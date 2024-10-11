@@ -10,6 +10,7 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   const [achievedAt, setAchievedAt] = useState<Date>(new Date());
   const [grade, setGrade] = useState<Grade>(Grade.KUP9);
   const [examiners, setExaminers] = useState("");
+  const [place, setPlace] = useState("");
 
   const gradeOptions: ISelectOption<Grade>[] = useMemo(
     () => [
@@ -58,7 +59,9 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
     onChangeAchievedAt,
     onConfirm,
     onSubmit,
+    place,
     setExaminers,
     setGrade,
+    setPlace,
   };
 };

@@ -135,6 +135,7 @@
         },
         "no": "No",
         "ok": "Ok",
+        "place": "Place",
         "privacyPolicy": "Privacy Policy",
         "recurrence": {
             "daily": "Daily",
@@ -184,13 +185,13 @@
         "kup3": "3. Kup",
         "kup2": "2. Kup",
         "kup1": "1. Kup",
-        "dan1": "1. Dan",
-        "dan2": "2. Dan",
-        "dan3": "3. Dan",
-        "dan4": "4. Dan",
-        "dan5": "5. Dan",
-        "dan6": "6. Dan",
-        "dan7": "7. Dan"
+        "dan1": "I. Dan",
+        "dan2": "II. Dan",
+        "dan3": "III. Dan",
+        "dan4": "IV. Dan",
+        "dan5": "V. Dan",
+        "dan6": "VI. Dan",
+        "dan7": "VII. Dan"
     },
     "gradingList": {
         "noGradingsAvailable": "You have no gradings yet."

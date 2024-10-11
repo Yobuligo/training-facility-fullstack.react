@@ -32,6 +32,13 @@ export const GradingAddForm: React.FC<IGradingAddFormProps> = (props) => {
 
         <LabeledInput
           disabled={props.displayMode}
+          label={t(texts.general.place)}
+          onChange={viewModel.setPlace}
+          value={viewModel.place}
+        />
+
+        <LabeledInput
+          disabled={props.displayMode}
           label={t(texts.gradingItem.examiners)}
           onChange={viewModel.setExaminers}
           value={viewModel.examiners}
