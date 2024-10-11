@@ -7,6 +7,7 @@ export interface IUserGrading extends IEntity {
   achievedAt: Date;
   examiners: string;
   grade: Grade;
+  place: string;
 }
 
 export const UserGradingMeta: IRouteMeta = { path: "/user-gradings" };

@@ -47,7 +47,7 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   };
 
   const onConfirm = () => {
-    props.onAddGrading?.(achievedAt, grade, examiners);
+    props.onAddGrading?.(achievedAt, grade, place, examiners);
     reset();
   };
 

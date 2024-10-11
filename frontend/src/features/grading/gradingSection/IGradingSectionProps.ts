@@ -1,6 +1,6 @@
+import { IHaveUserId } from "../../../core/api/types/IHaveUserId";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { Grade } from "../../../shared/types/Grade";
-import { IHaveUserId } from "../../../core/api/types/IHaveUserId";
 import { IHaveDisplayMode } from "../../../types/IHaveDisplayMode";
 import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 
@@ -9,6 +9,11 @@ export interface IGradingSectionProps
     IHaveIsAdminMode,
     IHaveUserId {
   gradings: IUserGrading[];
-  onAddGrading?: (achievedAt: Date, grade: Grade, examiners: string) => void;
+  onAddGrading?: (
+    achievedAt: Date,
+    grade: Grade,
+    place: string,
+    examiners: string
+  ) => void;
   onDelete?: (grading: IUserGrading) => void;
 }

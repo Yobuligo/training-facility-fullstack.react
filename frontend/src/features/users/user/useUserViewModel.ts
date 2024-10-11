@@ -214,7 +214,12 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
-  const onAddGrading = (achievedAt: Date, grade: Grade, examiners: string) => {
+  const onAddGrading = (
+    achievedAt: Date,
+    grade: Grade,
+    place: string,
+    examiners: string
+  ) => {
     setGradings((previous) => {
       const grading: IUserGrading = {
         id: uuid(),
@@ -222,6 +227,7 @@ export const useUserViewModel = (props: IUserProps) => {
         achievedAt: achievedAt.toISOString() as unknown as Date,
         examiners,
         grade,
+        place,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
