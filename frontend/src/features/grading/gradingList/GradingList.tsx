@@ -1,4 +1,5 @@
 import { DateTime } from "../../../core/services/date/DateTime";
+import { List } from "../../../core/services/list/List";
 import { style } from "../../../core/ui/style";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -15,7 +16,9 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
 
   return (
     <div className={style(styles.gradingList, props.className)}>
-      {items.length > 0 ? items : t(texts.gradingList.noGradingsAvailable)}
+      {List.isNotEmpty(items)
+        ? items
+        : t(texts.gradingList.noGradingsAvailable)}
     </div>
   );
 };
