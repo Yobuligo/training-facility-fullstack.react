@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Collapse } from "../../../components/collapse/Collapse";
 import { useRenderGrade } from "../../../hooks/useRenderGrade";
-import { GradingAddForm } from "../gradingAddForm/GradingAddForm";
+import { GradingInputs } from "../gradingInputs/GradingInputs";
 import { IGradingItemEditProps } from "./IGradingItemEditProps";
 
 export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
@@ -15,7 +15,15 @@ export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
         setCollapsed={setCollapse}
         title={renderGrade(props.grading.grade)}
       />
-      {!collapse && <GradingAddForm displayMode={false} />}
+      {!collapse && (
+        <GradingInputs
+          achievedAt={props.grading.achievedAt}
+          displayMode={false}
+          examiners={props.grading.examiners}
+          grade={props.grading.grade}
+          place={props.grading.place}
+        />
+      )}
     </>
   );
 };

@@ -1,0 +1,18 @@
+@use "../../../styles/dimensions.module.scss";
+@use "../../../styles/mixins.scss";
+
+.gradingInputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: dimensions.$negative-space;
+
+  @include mixins.medium-screen(45rem) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mixins.large-screen {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  column-gap: 3rem;
+}

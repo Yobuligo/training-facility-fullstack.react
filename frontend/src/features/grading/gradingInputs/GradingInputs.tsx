@@ -1,5 +1,6 @@
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import styles from "./GradingInputs.module.scss";
@@ -17,6 +18,7 @@ export const GradingInputs: React.FC<IGradingInputsProps> = (props) => {
         label={t(texts.gradingItem.achievedAt)}
         type="date"
         onChange={viewModel.onChangeAchievedAt}
+        value={DateTime.toDate(viewModel.achievedAt)}
       />
 
       <LabeledSelect
