@@ -20,9 +20,9 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
       </div>
       <div className={styles.details}>
         <div>{t(texts.general.place)}</div>
-        <div className={styles.examinersNames}>{props.grading.place}</div>
+        <div className={styles.detailValue}>{props.grading.place}</div>
         <div>{t(texts.gradingItem.examiners)}</div>
-        <div className={styles.examinersNames}>{props.grading.examiners}</div>
+        <div className={styles.detailValue}>{props.grading.examiners}</div>
       </div>
     </div>
   );

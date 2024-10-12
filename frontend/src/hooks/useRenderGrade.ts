@@ -2,6 +2,9 @@ import { texts } from "../lib/translation/texts";
 import { useTranslation } from "../lib/translation/useTranslation";
 import { Grade } from "../shared/types/Grade";
 
+/**
+ * This hook is responsible for rendering a given {@link Grade} to a text.
+ */
 export const useRenderGrade = () => {
   const { t } = useTranslation();
 
