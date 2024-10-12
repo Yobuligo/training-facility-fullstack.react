@@ -302,6 +302,7 @@ Version 1.0.0-20241007.1
 	- Gradings can be changed
 	# Display Dan Degrees as roman numerals
 	# Set place for grading
+	# Bug: Add dot to date of a grading in german
 
 - Backlog
 	- Increase expiration time of session
@@ -315,6 +316,7 @@ Version 1.0.0-20241007.1
 		- Admin tabs are loaded asynchronously
 		- table userTrialTraining needs an index on email	
 	- Gamification
+		- Display number of trainings of a person
 	- DateTimeSpan
 		- Bug: from value must not be lower than to value			
 	- Emails
