@@ -1,0 +1,44 @@
+@use "../../styles/mixins.scss";
+
+.beltAndDate {
+  position: relative;
+}
+
+.belt {
+  width: 7rem;
+
+  @include mixins.medium-screen {
+    width: 10rem;
+  }
+}
+
+.date {
+  position: absolute;
+  font-family: "MerriweatherSans";
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2.5rem;
+
+  @include mixins.medium-screen {
+    top: -0.1rem;
+    left: 52%;
+    row-gap: 2.7rem;
+  }
+}
+
+.year {
+  font-weight: 700;
+  font-size: large;
+}
+
+.monthAndDay {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.3rem;
+}

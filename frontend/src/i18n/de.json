@@ -175,7 +175,15 @@
     },
     "gradingItem": {
         "achievedAt": "Erreicht am",
-        "examiners": "Prüfer",
+        "examiners": "Prüfer"
+    },
+    "gradingList": {
+        "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
+    },
+    "gradingSection": {
+        "title": "Prüfung hinzufügen"
+    },
+    "grads": {
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",
@@ -192,12 +200,6 @@
         "dan5": "V. Dan",
         "dan6": "VI. Dan",
         "dan7": "VII. Dan"
-    },
-    "gradingList": {
-        "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
-    },
-    "gradingSection": {
-        "title": "Prüfung hinzufügen"
     },
     "language": {
         "de": "Deutsch",

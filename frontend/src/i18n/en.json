@@ -175,7 +175,15 @@
     },
     "gradingItem": {
         "achievedAt": "Achieved At",
-        "examiners": "Examiners",
+        "examiners": "Examiners"
+    },
+    "gradingList": {
+        "noGradingsAvailable": "You have no gradings yet."
+    },
+    "gradingSection": {
+        "title": "Add new Grading"
+    },
+    "grads":{
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",
@@ -192,12 +200,6 @@
         "dan5": "V. Dan",
         "dan6": "VI. Dan",
         "dan7": "VII. Dan"
-    },
-    "gradingList": {
-        "noGradingsAvailable": "You have no gradings yet."
-    },
-    "gradingSection": {
-        "title": "Add new Grading"
     },
     "language": {
         "de": "Deutsch",
