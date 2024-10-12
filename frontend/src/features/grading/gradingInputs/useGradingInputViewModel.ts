@@ -3,14 +3,14 @@ import { ISelectOption } from "../../../components/select/ISelectOption";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Grade } from "../../../shared/types/Grade";
-import { IGradingAddFormProps } from "./IGradingAddFormProps";
+import { IGradingInputsProps } from "./IGradingInputsProps";
 
-export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
+export const useGradingInputViewModel = (props: IGradingInputsProps) => {
   const { t } = useTranslation();
-  const [achievedAt, setAchievedAt] = useState<Date>(new Date());
-  const [grade, setGrade] = useState<Grade>(Grade.KUP9);
-  const [examiners, setExaminers] = useState("");
-  const [place, setPlace] = useState("");
+  const [achievedAt, setAchievedAt] = useState<Date>(props.achievedAt);
+  const [grade, setGrade] = useState<Grade>(props.grade);
+  const [examiners, setExaminers] = useState(props.examiners);
+  const [place, setPlace] = useState(props.place);
 
   const gradeOptions: ISelectOption<Grade>[] = useMemo(
     () => [
@@ -37,29 +37,12 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   const onChangeAchievedAt = (newValue: string) =>
     setAchievedAt(new Date(newValue));
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) =>
-    event.preventDefault();
-
-  const reset = () => {
-    setAchievedAt(new Date());
-    setGrade(Grade.KUP9);
-    setExaminers("");
-    setPlace("");
-  };
-
-  const onConfirm = () => {
-    props.onAddGrading?.(achievedAt, grade, place, examiners);
-    reset();
-  };
-
   return {
     achievedAt,
     examiners,
     grade,
     gradeOptions,
     onChangeAchievedAt,
-    onConfirm,
-    onSubmit,
     place,
     setExaminers,
     setGrade,
