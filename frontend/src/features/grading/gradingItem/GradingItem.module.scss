@@ -1,16 +1,28 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/mixins.scss";
 
-.gradingItem {
+
+.newHeader{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @include mixins.medium-screen{
+    margin-right: 20rem;
+  }
+}
+
+
+.gradingItem {
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
   display: flex;
   flex-direction: row;
   column-gap: 2rem;
+  align-items: end;
 }
 
 .beltAndDate {
@@ -57,11 +69,10 @@
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  // justify-content: space-evenly;
-  // justify-content: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  color: colors.$color-grading-item-examiner-text;
+  column-gap: 1rem;
 }
 
 .title {
@@ -70,6 +81,7 @@
   font-size: large;
   font-family: "MerriweatherSans";
   letter-spacing: 0.1rem;
+  margin-bottom: 0.5rem;
 }
 
 .examiners {

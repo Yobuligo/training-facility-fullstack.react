@@ -1,17 +1,19 @@
+import { DateTime } from "../../../core/services/date/DateTime";
+import { style } from "../../../core/ui/style";
 import { useRenderMonth } from "../../../hooks/useRenderMonth";
+import { Language } from "../../../lib/language/types/Language";
+import { useLanguage } from "../../../lib/language/useLanguage";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { DeleteIcon } from "../../../icons/DeleteIcon";
-import { DateTime } from "../../../core/services/date/DateTime";
 import { Grade } from "../../../shared/types/Grade";
 import componentStyles from "../../../styles/components.module.scss";
-import { style } from "../../../core/ui/style";
 import styles from "./GradingItem.module.scss";
 import { IGradingItemProps } from "./IGradingItemProps";
 
 export const GradingItem: React.FC<IGradingItemProps> = (props) => {
   const { t } = useTranslation();
   const renderMonth = useRenderMonth();
+  const [language] = useLanguage();
 
   const gradeToText = (grade: Grade) => {
     switch (grade) {
@@ -159,7 +161,7 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
 
   return (
     <div className={styles.gradingItem}>
-      <div className={styles.card}>
+      <div className={styles.newHeader}>
         <div className={styles.beltAndDate}>
           {belt}
           <div className={style(styles.date)}>
@@ -167,28 +169,29 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
               {DateTime.toYear(props.grading.achievedAt)}
             </div>
             <div className={styles.monthAndDay}>
-              <div>{DateTime.toDay(props.grading.achievedAt)}</div>
+              <div>
+                {DateTime.toDay(props.grading.achievedAt)}
+                {language === Language.DE && `.`}
+              </div>
               <div>
                 {renderMonth(DateTime.toMonth(props.grading.achievedAt))}
               </div>
             </div>
           </div>
         </div>
-        <div className={styles.details}>
-          <div className={styles.title}>{gradeToText(props.grading.grade)}</div>
-          <div className={styles.examiners}>
-            <div>{t(texts.gradingItem.examiners)}</div>
-            <div className={styles.examinersNames}>
-              {props.grading.examiners}
-            </div>
-          </div>
-        </div>
+        <div className={styles.title}>{gradeToText(props.grading.grade)}</div>
       </div>
-      {props.isAdminMode && (
+      <div className={styles.details}>
+        <div>{t(texts.general.place)}</div>
+        <div className={styles.examinersNames}>{props.grading.place}</div>
+        <div>{t(texts.gradingItem.examiners)}</div>
+        <div className={styles.examinersNames}>{props.grading.examiners}</div>
+      </div>
+      {/* {props.isAdminMode && (
         <div className={styles.deleteIcon}>
           <DeleteIcon disabled={props.displayMode} onClick={props.onDelete} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
