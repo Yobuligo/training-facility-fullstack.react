@@ -307,7 +307,7 @@ Version 1.0.0-20241007.1
 - Backlog
 	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"
-		- Courses can be displayed in user profile	
+		- Courses can be displayed in user profile
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Add dobok size to user profile
 	- Set and display trainer to event instance

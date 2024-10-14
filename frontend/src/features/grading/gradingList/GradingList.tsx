@@ -28,7 +28,13 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
     );
 
   return (
-    <div className={style(styles.gradingList, props.className)}>
+    <div
+      className={style(
+        styles.gradingList,
+        props.isAdminMode ? styles.gradingListAdmin : "",
+        props.className
+      )}
+    >
       {List.isNotEmpty(items)
         ? items
         : t(texts.gradingList.noGradingsAvailable)}

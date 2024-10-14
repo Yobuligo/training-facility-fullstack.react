@@ -14,7 +14,7 @@ export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
   const renderGrade = useRenderGrade();
 
   return (
-    <>
+    <div>
       <Collapse
         collapsed={viewModel.collapse}
         setCollapsed={viewModel.setCollapse}
@@ -44,6 +44,6 @@ export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
