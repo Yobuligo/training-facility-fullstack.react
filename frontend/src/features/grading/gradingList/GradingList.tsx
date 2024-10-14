@@ -15,7 +15,11 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
     .sort((left, right) => DateTime.compare(right.achievedAt, left.achievedAt))
     .map((grading) =>
       props.isAdminMode ? (
-        <GradingItemEdit key={grading.id} grading={grading} />
+        <GradingItemEdit
+          key={grading.id}
+          displayMode={props.displayMode}
+          grading={grading}
+        />
       ) : (
         <GradingItem key={grading.id} grading={grading} />
       )
