@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 import { ValidationError } from "../../../core/errors/ValidationError";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -9,8 +10,8 @@ import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
 export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   props
 ) => {
-  const validatePassword = useValidatePassword();
   const { t } = useTranslation();
+  const validatePassword = useValidatePassword();
 
   useEffect(() => {
     if (props.newConfirmPassword[0] !== "") {
@@ -25,14 +26,16 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   }, [props.newConfirmPassword, props.newPassword, t, validatePassword]);
 
   useEffect(() => {
-    try {
-      validatePassword(props.newPassword[0]);
-      props.newPassword[3]("");
-    } catch (error) {
-      if (error instanceof ValidationError) {
-        props.newPassword[3](error.message);
-      } else {
-        props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
+    if (isNotInitial(props.newPassword[0])) {
+      try {
+        validatePassword(props.newPassword[0]);
+        props.newPassword[3]("");
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          props.newPassword[3](error.message);
+        } else {
+          props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
+        }
       }
     }
   }, [props.newPassword, t, validatePassword]);
