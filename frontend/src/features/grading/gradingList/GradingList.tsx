@@ -30,8 +30,7 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
   return (
     <div
       className={style(
-        styles.gradingList,
-        props.isAdminMode ? styles.gradingListAdmin : "",
+        props.isAdminMode ? styles.gradingListAdmin : styles.gradingList,
         props.className
       )}
     >

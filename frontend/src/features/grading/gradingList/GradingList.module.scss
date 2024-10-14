@@ -6,6 +6,8 @@
   flex-direction: column;
   row-gap: 3rem;
   color: colors.$color-text;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   @include mixins.medium-screen(70rem) {
     display: grid;
@@ -18,5 +20,13 @@
 }
 
 .gradingListAdmin {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+  color: colors.$color-text;  
   row-gap: 2rem;
+
+  @include mixins.large-screen {
+    column-gap: 5rem;
+  }  
 }
