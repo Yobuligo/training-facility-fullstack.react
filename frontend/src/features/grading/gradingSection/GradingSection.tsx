@@ -12,7 +12,9 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
     <div className={styles.gradingSection}>
       {props.isAdminMode && (
         <div className={styles.card}>
-          <h4 className={styles.addGradingTitle}>{t(texts.gradingSection.title)}</h4>
+          <h4 className={styles.addGradingTitle}>
+            {t(texts.gradingSection.title)}
+          </h4>
           <GradingAddForm
             displayMode={props.displayMode}
             onAddGrading={props.onAddGrading}

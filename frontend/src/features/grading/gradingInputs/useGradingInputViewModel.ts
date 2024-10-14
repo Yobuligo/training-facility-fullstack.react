@@ -34,8 +34,26 @@ export const useGradingInputViewModel = (props: IGradingInputsProps) => {
     [t]
   );
 
-  const onChangeAchievedAt = (newValue: string) =>
-    setAchievedAt(new Date(newValue));
+  const onChangeAchievedAt = (newValue: string) => {
+    const achievedAt = new Date(newValue);
+    setAchievedAt(achievedAt);
+    props.onAchievedAtChange?.(achievedAt);
+  };
+
+  const onExaminersChange = (examiners: string) => {
+    setExaminers(examiners);
+    props.onExaminersChange?.(examiners);
+  };
+
+  const onGradeChange = (grade: Grade) => {
+    setGrade(grade);
+    props.onGradeChange?.(grade);
+  };
+
+  const onPlaceChange = (place: string) => {
+    setPlace(place);
+    props.onPlaceChange?.(place);
+  };
 
   return {
     achievedAt,
@@ -43,9 +61,9 @@ export const useGradingInputViewModel = (props: IGradingInputsProps) => {
     grade,
     gradeOptions,
     onChangeAchievedAt,
+    onExaminersChange,
+    onGradeChange,
+    onPlaceChange,
     place,
-    setExaminers,
-    setGrade,
-    setPlace,
   };
 };

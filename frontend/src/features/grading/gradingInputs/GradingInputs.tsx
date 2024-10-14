@@ -26,20 +26,20 @@ export const GradingInputs: React.FC<IGradingInputsProps> = (props) => {
         label={t(texts.general.grade)}
         options={viewModel.gradeOptions}
         value={viewModel.grade}
-        onSelect={(grade) => viewModel.setGrade(grade)}
+        onSelect={(grade) => viewModel.onGradeChange(grade)}
       />
 
       <LabeledInput
         disabled={props.displayMode}
         label={t(texts.general.place)}
-        onChange={viewModel.setPlace}
+        onChange={viewModel.onPlaceChange}
         value={viewModel.place}
       />
 
       <LabeledInput
         disabled={props.displayMode}
         label={t(texts.gradingItem.examiners)}
-        onChange={viewModel.setExaminers}
+        onChange={viewModel.onExaminersChange}
         value={viewModel.examiners}
       />
     </div>

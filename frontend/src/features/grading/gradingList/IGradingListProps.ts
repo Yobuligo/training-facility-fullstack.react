@@ -5,5 +5,6 @@ import { IHaveIsAdminMode } from "../../../types/IHaveIsAdminMode";
 export interface IGradingListProps extends IHaveIsAdminMode, IHaveDisplayMode {
   className?: string;
   gradings: IUserGrading[];
+  onChange?: (grading: IUserGrading) => void;
   onDelete?: (grading: IUserGrading) => void;
 }
