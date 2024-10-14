@@ -238,11 +238,11 @@
         "passwordsNotIdentical": "Your new passwords are not identical"
     },
     "passwordValidation": {
-        "errorLength": "Password must be at least 8 characters long",
-        "errorNeedsSpecialCharacter": "Needs special character !@#$%^&*(),.?\":{}|<>",
-        "errorNeedsNumber": "Password must contain at least one number",
-        "errorNeedsUppercaseLetter": "Password must contain at least one uppercase letter",
-        "errorNeedsLowercaseLetter": "Password must contain at least one lowercase letter"
+        "errorLength": "at least 8 characters",
+        "errorNeedsSpecialCharacter": "special character !@#$%^&*(),.?\":{}|<>",
+        "errorNeedsNumber": "at least one number",
+        "errorNeedsUppercaseLetter": "at least one uppercase letter",
+        "errorNeedsLowercaseLetter": "at least one lowercase letter"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",

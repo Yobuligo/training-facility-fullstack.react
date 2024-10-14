@@ -24,6 +24,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
       try {
         validatePassword(newPassword);
         props.newPassword[3]("");
+        onValidateNewConfirmPassword(props.newConfirmPassword[0], newPassword);
       } catch (error) {
         if (error instanceof ValidationError) {
           props.newPassword[3](error.message);
@@ -45,9 +46,12 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
     setNewPasswordTimeout(timeout);
   };
 
-  const onValidateNewConfirmPassword = (newConfirmPassword: string) => {
+  const onValidateNewConfirmPassword = (
+    newConfirmPassword: string,
+    newPassword: string
+  ) => {
     if (isNotInitial(newConfirmPassword)) {
-      if (props.newPassword[0] !== newConfirmPassword) {
+      if (newPassword !== newConfirmPassword) {
         props.newConfirmPassword[3](
           t(texts.passwordConfirmForm.passwordsNotIdentical)
         );
@@ -63,7 +67,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
     clearTimeout(newConfirmPasswordTimeout);
     const timeout = setTimeout(() => {
       props.newConfirmPassword[1](newConfirmPassword);
-      onValidateNewConfirmPassword(newConfirmPassword);
+      onValidateNewConfirmPassword(newConfirmPassword, props.newPassword[0]);
     }, 300);
     setNewConfirmPasswordTimeout(timeout);
   };
