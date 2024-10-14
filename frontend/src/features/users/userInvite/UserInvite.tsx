@@ -38,7 +38,7 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
             />
             <Toolbar className={styles.toolbar}>
               <SpinnerButton
-                disabled={viewModel.isConfirmButtonDisabled}
+                disabled={viewModel.isConfirmButtonDisabled()}
                 displaySpinner={viewModel.isChangePasswordRequestProcessing}
                 onClick={viewModel.onChangePasswordConfirm}
               >

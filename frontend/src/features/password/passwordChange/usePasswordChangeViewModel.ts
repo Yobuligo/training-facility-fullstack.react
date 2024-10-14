@@ -27,6 +27,7 @@ export const usePasswordChangeViewModel = () => {
   const toast = useToast();
 
   const confirmButtonDisabled =
+    isNotInitial(newPassword[2]) ||
     isNotInitial(newConfirmPassword[2]) ||
     isInitial(currentPassword) ||
     isInitial(newPassword[0]) ||

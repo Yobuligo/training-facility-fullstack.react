@@ -25,7 +25,6 @@ export const useUserInviteViewModel = () => {
     undefined
   );
   const [error, setError] = useState("");
-  // const [newPassword, setNewPassword] = useState("");
   const newPassword = useLabeledElement("");
   const newConfirmPassword = useLabeledElement("");
   const navigate = useNavigate();
@@ -62,10 +61,13 @@ export const useUserInviteViewModel = () => {
     )
   );
 
-  const isConfirmButtonDisabled =
-    isNotInitial(newConfirmPassword[2]) ||
-    isInitial(newPassword[0]) ||
-    isInitial(newConfirmPassword[0]);
+  const isConfirmButtonDisabled = () => {
+    return (
+      isNotInitial(newConfirmPassword[2]) ||
+      isInitial(newPassword[0]) ||
+      isInitial(newConfirmPassword[0])
+    );
+  };
 
   const onChangePasswordConfirm = () =>
     changePasswordRequest(

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
@@ -12,23 +12,17 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
 ) => {
   const { t } = useTranslation();
   const validatePassword = useValidatePassword();
+  const [newPasswordTimeout, setNewPasswordTimeout] = useState<
+    NodeJS.Timeout | undefined
+  >(undefined);
+  const [newConfirmPasswordTimeout, setNewConfirmPasswordTimeout] = useState<
+    NodeJS.Timeout | undefined
+  >(undefined);
 
-  useEffect(() => {
-    if (props.newConfirmPassword[0] !== "") {
-      if (props.newPassword[0] !== props.newConfirmPassword[0]) {
-        props.newConfirmPassword[3](
-          t(texts.passwordConfirmForm.passwordsNotIdentical)
-        );
-      } else {
-        props.newConfirmPassword[3]("");
-      }
-    }
-  }, [props.newConfirmPassword, props.newPassword, t, validatePassword]);
-
-  useEffect(() => {
-    if (isNotInitial(props.newPassword[0])) {
+  const onValidateNewPassword = (newPassword: string) => {
+    if (isNotInitial(newPassword)) {
       try {
-        validatePassword(props.newPassword[0]);
+        validatePassword(newPassword);
         props.newPassword[3]("");
       } catch (error) {
         if (error instanceof ValidationError) {
@@ -37,8 +31,42 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
           props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
         }
       }
+    } else {
+      props.newPassword[3]("");
     }
-  }, [props.newPassword, t, validatePassword]);
+  };
+
+  const onNewPasswordChangeDebounce = (newPassword: string) => {
+    clearTimeout(newPasswordTimeout);
+    const timeout = setTimeout(() => {
+      props.newPassword[1](newPassword);
+      onValidateNewPassword(newPassword);
+    }, 300);
+    setNewPasswordTimeout(timeout);
+  };
+
+  const onValidateNewConfirmPassword = (newConfirmPassword: string) => {
+    if (isNotInitial(newConfirmPassword)) {
+      if (props.newPassword[0] !== newConfirmPassword) {
+        props.newConfirmPassword[3](
+          t(texts.passwordConfirmForm.passwordsNotIdentical)
+        );
+      } else {
+        props.newConfirmPassword[3]("");
+      }
+    } else {
+      props.newConfirmPassword[3]("");
+    }
+  };
+
+  const onNewConfirmPasswordChangeDebounce = (newConfirmPassword: string) => {
+    clearTimeout(newConfirmPasswordTimeout);
+    const timeout = setTimeout(() => {
+      props.newConfirmPassword[1](newConfirmPassword);
+      onValidateNewConfirmPassword(newConfirmPassword);
+    }, 300);
+    setNewConfirmPasswordTimeout(timeout);
+  };
 
   return (
     <>
@@ -46,12 +74,12 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
         autoFocus={props.autoFocus}
         error={props.newPassword[2]}
         label={t(texts.passwordConfirmForm.newPassword)}
-        onChange={props.newPassword[1]}
+        onChange={onNewPasswordChangeDebounce}
       />
       <LabeledPasswordInput
         error={props.newConfirmPassword[2]}
         label={t(texts.passwordConfirmForm.confirmNewPassword)}
-        onChange={props.newConfirmPassword[1]}
+        onChange={onNewConfirmPasswordChangeDebounce}
       />
     </>
   );
