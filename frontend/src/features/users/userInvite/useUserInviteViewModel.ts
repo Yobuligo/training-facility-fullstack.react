@@ -63,6 +63,7 @@ export const useUserInviteViewModel = () => {
 
   const isConfirmButtonDisabled = () => {
     return (
+      isNotInitial(newPassword[2]) ||
       isNotInitial(newConfirmPassword[2]) ||
       isInitial(newPassword[0]) ||
       isInitial(newConfirmPassword[0])
