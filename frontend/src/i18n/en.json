@@ -183,7 +183,7 @@
     "gradingSection": {
         "title": "Add new Grading"
     },
-    "grads":{
+    "grads": {
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",
@@ -235,6 +235,13 @@
         "confirmNewPassword": "Confirm new password",
         "newPassword": "New password",
         "passwordsNotIdentical": "Your new passwords are not identical"
+    },
+    "passwordValidation": {
+        "errorLength": "Password must be at least 8 characters long",
+        "errorNeedsSpecialCharacter": "Password must contain at least one special character",
+        "errorNeedsNumber": "Password must contain at least one number",
+        "errorNeedsUppercaseLetter": "Password must contain at least one uppercase letter",
+        "errorNeedsLowercaseLetter": "Password must contain at least one lowercase letter"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
