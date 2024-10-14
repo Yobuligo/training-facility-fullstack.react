@@ -241,8 +241,8 @@
         "errorLength": "mindestens 8 Zeichen lang",
         "errorNeedsSpecialCharacter": "Sonderzeichen !@#$%^&*(),.?\":{}|<>",
         "errorNeedsNumber": "mindestens eine Zahl",
-        "errorNeedsUppercaseLetter": "mindestens ein Großbuchstaben",
-        "errorNeedsLowercaseLetter": "mindestens ein Kleinbuchstaben"
+        "errorNeedsUppercaseLetter": "mindestens ein Großbuchstabe",
+        "errorNeedsLowercaseLetter": "mindestens ein Kleinbuchstabe"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",
