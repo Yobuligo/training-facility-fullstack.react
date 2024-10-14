@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
+import { ValidationError } from "../../../core/errors/ValidationError";
+import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
@@ -7,31 +9,46 @@ import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
 export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   props
 ) => {
+  const validatePassword = useValidatePassword();
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (props.newConfirmPassword !== "") {
-      if (props.newPassword !== props.newConfirmPassword) {
-        props.setNewConfirmPasswordError(
+    if (props.newConfirmPassword[0] !== "") {
+      if (props.newPassword[0] !== props.newConfirmPassword[0]) {
+        props.newConfirmPassword[3](
           t(texts.passwordConfirmForm.passwordsNotIdentical)
         );
       } else {
-        props.setNewConfirmPasswordError("");
+        props.newConfirmPassword[3]("");
       }
     }
-  }, [props, t]);
+  }, [props.newConfirmPassword, props.newPassword, t, validatePassword]);
+
+  useEffect(() => {
+    try {
+      validatePassword(props.newPassword[0]);
+      props.newPassword[3]("");
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        props.newPassword[3](error.message);
+      } else {
+        props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
+      }
+    }
+  }, [props.newPassword, t, validatePassword]);
 
   return (
     <>
       <LabeledPasswordInput
         autoFocus={props.autoFocus}
+        error={props.newPassword[2]}
         label={t(texts.passwordConfirmForm.newPassword)}
-        onChange={props.setNewPassword}
+        onChange={props.newPassword[1]}
       />
       <LabeledPasswordInput
+        error={props.newConfirmPassword[2]}
         label={t(texts.passwordConfirmForm.confirmNewPassword)}
-        onChange={props.setNewConfirmPassword}
-        error={props.newConfirmPasswordError}
+        onChange={props.newConfirmPassword[1]}
       />
     </>
   );

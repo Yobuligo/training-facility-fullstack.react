@@ -14,13 +14,8 @@ import { AppRoutes } from "../../../routes/AppRoutes";
 
 export const usePasswordChangeViewModel = () => {
   const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [
-    newConfirmPassword,
-    setNewConfirmPassword,
-    newConfirmPasswordError,
-    setNewConfirmPasswordError,
-  ] = useLabeledElement("");
+  const newPassword = useLabeledElement("");
+  const newConfirmPassword = useLabeledElement("");
   const [changePasswordError, setChangePasswordError] = useState<
     string | undefined
   >(undefined);
@@ -32,10 +27,10 @@ export const usePasswordChangeViewModel = () => {
   const toast = useToast();
 
   const confirmButtonDisabled =
-    isNotInitial(newConfirmPasswordError) ||
+    isNotInitial(newConfirmPassword[2]) ||
     isInitial(currentPassword) ||
-    isInitial(newPassword) ||
-    isInitial(newConfirmPassword);
+    isInitial(newPassword[0]) ||
+    isInitial(newConfirmPassword[0]);
 
   const onCancel = () => navigate(AppRoutes.dashboard.toPath());
 
@@ -47,7 +42,7 @@ export const usePasswordChangeViewModel = () => {
           user.id,
           user.username,
           currentPassword,
-          newPassword
+          newPassword[0]
         );
         toast.success(t(texts.passwordChange.successPasswordChanged));
         navigate(AppRoutes.dashboard.toPath());
@@ -81,13 +76,9 @@ export const usePasswordChangeViewModel = () => {
     confirmButtonDisabled,
     displaySpinner: isChangePasswordRequestProcessing,
     newConfirmPassword,
-    newConfirmPasswordError,
     newPassword,
     onCancel,
     onChangePasswordConfirm,
     setCurrentPassword,
-    setNewConfirmPasswordError,
-    setNewPassword,
-    setNewConfirmPassword,
   };
 };

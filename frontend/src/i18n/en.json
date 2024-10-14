@@ -233,12 +233,13 @@
     },
     "passwordConfirmForm": {
         "confirmNewPassword": "Confirm new password",
+        "errorUnknownError": "Unknown error while validating password",
         "newPassword": "New password",
         "passwordsNotIdentical": "Your new passwords are not identical"
     },
     "passwordValidation": {
         "errorLength": "Password must be at least 8 characters long",
-        "errorNeedsSpecialCharacter": "Password must contain at least one special character",
+        "errorNeedsSpecialCharacter": "Needs special character !@#$%^&*(),.?\":{}|<>",
         "errorNeedsNumber": "Password must contain at least one number",
         "errorNeedsUppercaseLetter": "Password must contain at least one uppercase letter",
         "errorNeedsLowercaseLetter": "Password must contain at least one lowercase letter"

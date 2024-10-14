@@ -1,13 +1,7 @@
 import { useState } from "react";
+import { UseLabeledElement } from "./types/UseLabeledElement";
 
-export const useLabeledElement = <T>(
-  initialValue: T
-): [
-  value: T,
-  updateValue: React.Dispatch<React.SetStateAction<T>>,
-  error: string,
-  setError: React.Dispatch<React.SetStateAction<string>>
-] => {
+export const useLabeledElement = <T>(initialValue: T): UseLabeledElement<T> => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState("");
 

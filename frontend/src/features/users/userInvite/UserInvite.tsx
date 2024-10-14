@@ -34,11 +34,7 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
             <PasswordConfirmForm
               autoFocus
               newConfirmPassword={viewModel.newConfirmPassword}
-              newConfirmPasswordError={viewModel.newConfirmPasswordError}
               newPassword={viewModel.newPassword}
-              setNewConfirmPassword={viewModel.setNewConfirmPassword}
-              setNewConfirmPasswordError={viewModel.setNewConfirmPasswordError}
-              setNewPassword={viewModel.setNewPassword}
             />
             <Toolbar className={styles.toolbar}>
               <SpinnerButton

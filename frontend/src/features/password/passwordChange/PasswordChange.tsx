@@ -28,11 +28,7 @@ export const PasswordChange: React.FC = () => {
         />
         <PasswordConfirmForm
           newConfirmPassword={viewModel.newConfirmPassword}
-          newConfirmPasswordError={viewModel.newConfirmPasswordError}
           newPassword={viewModel.newPassword}
-          setNewConfirmPassword={viewModel.setNewConfirmPassword}
-          setNewConfirmPasswordError={viewModel.setNewConfirmPasswordError}
-          setNewPassword={viewModel.setNewPassword}
         />
         <Toolbar className={styles.toolbar}>
           <SecondaryButton onClick={viewModel.onCancel}>

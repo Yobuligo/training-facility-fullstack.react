@@ -25,13 +25,9 @@ export const useUserInviteViewModel = () => {
     undefined
   );
   const [error, setError] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [
-    newConfirmPassword,
-    setNewConfirmPassword,
-    newConfirmPasswordError,
-    setNewConfirmPasswordError,
-  ] = useLabeledElement("");
+  // const [newPassword, setNewPassword] = useState("");
+  const newPassword = useLabeledElement("");
+  const newConfirmPassword = useLabeledElement("");
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -67,9 +63,9 @@ export const useUserInviteViewModel = () => {
   );
 
   const isConfirmButtonDisabled =
-    isNotInitial(newConfirmPasswordError) ||
-    isInitial(newPassword) ||
-    isInitial(newConfirmPassword);
+    isNotInitial(newConfirmPassword[2]) ||
+    isInitial(newPassword[0]) ||
+    isInitial(newConfirmPassword[0]);
 
   const onChangePasswordConfirm = () =>
     changePasswordRequest(
@@ -80,7 +76,7 @@ export const useUserInviteViewModel = () => {
         await userInviteApi.changePassword(
           checkNotNull(userInvite?.id),
           checkNotNull(userInvite?.userId),
-          newPassword
+          newPassword[0]
         );
         toast.success(t(texts.passwordChange.successPasswordChanged));
         navigate(AppRoutes.login.toPath());
@@ -94,12 +90,8 @@ export const useUserInviteViewModel = () => {
     isConfirmButtonDisabled,
     isVerifyUserInviteRequestProcessing,
     newConfirmPassword,
-    newConfirmPasswordError,
     newPassword,
     onChangePasswordConfirm,
-    setNewConfirmPassword,
-    setNewConfirmPasswordError,
-    setNewPassword,
     userInvite,
   };
 };
