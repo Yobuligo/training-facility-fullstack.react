@@ -239,6 +239,7 @@ export const User: React.FC<IUserProps> = (props) => {
               gradings={viewModel.gradings}
               isAdminMode={props.isAdminMode}
               onAddGrading={viewModel.onAddGrading}
+              onChange={viewModel.onChangeGrading}
               onDelete={viewModel.onDeleteGrading}
               userId={props.user.id}
             />

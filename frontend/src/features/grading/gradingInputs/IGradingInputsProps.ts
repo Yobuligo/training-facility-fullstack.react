@@ -8,6 +8,6 @@ export interface IGradingInputsProps extends IHaveDisplayMode {
   onAchievedAtChange?: (achievedAt: Date) => void;
   onExaminersChange?: (examiners: string) => void;
   onGradeChange?: (grade: Grade) => void;
-  onPlaceChange?: (grade: string) => void;
+  onPlaceChange?: (place: string) => void;
   place: string;
 }

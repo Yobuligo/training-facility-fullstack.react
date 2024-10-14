@@ -19,7 +19,7 @@ export const GradingList: React.FC<IGradingListProps> = (props) => {
           key={grading.id}
           displayMode={props.displayMode}
           grading={grading}
-
+          onChange={props.onChange}
           onDelete={props.onDelete}
         />
       ) : (

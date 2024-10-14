@@ -15,5 +15,6 @@ export interface IGradingSectionProps
     place: string,
     examiners: string
   ) => void;
+  onChange?: (grading: IUserGrading) => void;
   onDelete?: (grading: IUserGrading) => void;
 }

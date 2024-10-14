@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -11,6 +11,24 @@ export const useGradingInputViewModel = (props: IGradingInputsProps) => {
   const [grade, setGrade] = useState<Grade>(props.grade);
   const [examiners, setExaminers] = useState(props.examiners);
   const [place, setPlace] = useState(props.place);
+
+  useEffect(() => {
+    if (achievedAt !== props.achievedAt) {
+      setAchievedAt(props.achievedAt);
+    }
+
+    if (grade !== props.grade) {
+      setGrade(props.grade);
+    }
+
+    if (examiners !== props.examiners) {
+      setExaminers(props.examiners);
+    }
+
+    if (place !== props.place) {
+      setPlace(props.place);
+    }
+  }, [achievedAt, examiners, grade, place, props]);
 
   const gradeOptions: ISelectOption<Grade>[] = useMemo(
     () => [

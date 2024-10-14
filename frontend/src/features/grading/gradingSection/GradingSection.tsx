@@ -26,6 +26,7 @@ export const GradingSection: React.FC<IGradingSectionProps> = (props) => {
         displayMode={props.displayMode}
         gradings={props.gradings}
         isAdminMode={props.isAdminMode}
+        onChange={props.onChange}
         onDelete={props.onDelete}
       />
     </div>

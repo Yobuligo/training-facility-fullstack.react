@@ -26,7 +26,7 @@ export const GradingInputs: React.FC<IGradingInputsProps> = (props) => {
         label={t(texts.general.grade)}
         options={viewModel.gradeOptions}
         value={viewModel.grade}
-        onSelect={(grade) => viewModel.onGradeChange(grade)}
+        onSelect={viewModel.onGradeChange}
       />
 
       <LabeledInput

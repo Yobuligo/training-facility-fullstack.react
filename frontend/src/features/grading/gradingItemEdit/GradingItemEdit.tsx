@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Collapse } from "../../../components/collapse/Collapse";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { useRenderGrade } from "../../../hooks/useRenderGrade";
@@ -7,22 +6,21 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { GradingInputs } from "../gradingInputs/GradingInputs";
 import styles from "./GradingItemEdit.module.scss";
 import { IGradingItemEditProps } from "./IGradingItemEditProps";
+import { useGradingItemEditViewModel } from "./useGradingItemEditViewModel";
 
 export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
+  const viewModel = useGradingItemEditViewModel(props);
   const { t } = useTranslation();
-  const [collapse, setCollapse] = useState(true);
   const renderGrade = useRenderGrade();
-
-  const onDelete = () => props.onDelete?.(props.grading);
 
   return (
     <>
       <Collapse
-        collapsed={collapse}
-        setCollapsed={setCollapse}
+        collapsed={viewModel.collapse}
+        setCollapsed={viewModel.setCollapse}
         title={renderGrade(props.grading.grade)}
       />
-      {!collapse && (
+      {!viewModel.collapse && (
         <div className={styles.gradingItemEdit}>
           <GradingInputs
             achievedAt={props.grading.achievedAt}
@@ -30,12 +28,16 @@ export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
             examiners={props.grading.examiners}
             grade={props.grading.grade}
             place={props.grading.place}
+            onAchievedAtChange={viewModel.onAchievedAtChange}
+            onExaminersChange={viewModel.onExaminersChange}
+            onGradeChange={viewModel.onGradeChange}
+            onPlaceChange={viewModel.onPlaceChange}
           />
           <div className={styles.deleteButton}>
             <SpinnerButton
               disabled={props.displayMode}
               displaySpinner={false}
-              onClick={onDelete}
+              onClick={viewModel.onDelete}
             >
               {t(texts.general.delete)}
             </SpinnerButton>

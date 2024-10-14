@@ -80,7 +80,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [lockedAt, setLockedAt] = useState(props.user.lockedAt);
   const [collapseBank, setCollapseBank] = useState(false);
   const [gradings, setGradings] = useState<IUserGrading[]>(
-    userProfile.userGradings ?? []
+    userProfile.userGradings
+      ? userProfile.userGradings.map((userGrading) => ({ ...userGrading }))
+      : []
   );
   const [joinedOn, setJoinedOn] = useState(
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
@@ -116,7 +118,11 @@ export const useUserViewModel = (props: IUserProps) => {
       userProfile.userBankAccount?.bankAccountInstitution ?? ""
     );
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
-    setGradings(userProfile.userGradings ?? []);
+    setGradings(
+      userProfile.userGradings
+        ? userProfile.userGradings.map((userGrading) => ({ ...userGrading }))
+        : []
+    );
     setJoinedOn(
       userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
     );
@@ -232,6 +238,16 @@ export const useUserViewModel = (props: IUserProps) => {
         updatedAt: new Date(),
       };
       return [...previous, grading];
+    });
+  };
+
+  const onChangeGrading = (grading: IUserGrading) => {
+    setGradings((previous) => {
+      const index = previous.findIndex((item) => item.id === grading.id);
+      if (index !== -1) {
+        previous.splice(index, 1, grading);
+      }
+      return [...previous];
     });
   };
 
@@ -503,6 +519,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onAddGrading,
     onCancel,
     onChangeBirthday,
+    onChangeGrading,
     onChangeJoinedOn,
     onChangePostalCode,
     onDeleteGrading,
