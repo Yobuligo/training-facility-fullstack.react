@@ -297,7 +297,7 @@ Version 1.0.0-20241007.1
 	# Bug: Add training to planner, switch to trainings, select the training, copy the link and open in a new tab -> Error
 	# Bug: Register / unregister button is displayed for event instance of deep link, even so the event was called off
 	
-- Version 1.3.0-<>.4
+# Version 1.3.0-20241014.4
 	# Tighten password policy (8 characters, special, lowercase and uppercase letters and numbers)
 	# Gradings can be changed
 	# Display Dan Degrees as roman numerals
