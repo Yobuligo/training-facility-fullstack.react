@@ -32,6 +32,7 @@ export const UserProfileSection: React.FC = () => {
               {t(texts.userProfileSection.addUser)}
             </Button>
             <Search
+              className={styles.search}
               onSearch={(query) => viewModel.setQuery(query)}
               query={viewModel.query}
               searchImplicit={true}
