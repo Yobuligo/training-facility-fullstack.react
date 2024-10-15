@@ -34,6 +34,7 @@ export const UserProfileSection: React.FC = () => {
             <Search
               onSearch={(query) => viewModel.setQuery(query)}
               query={viewModel.query}
+              searchImplicit={true}
             />
           </div>
           {viewModel.isLoadUsersShortRequestProcessing ||

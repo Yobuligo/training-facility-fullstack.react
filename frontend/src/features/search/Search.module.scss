@@ -8,13 +8,28 @@
 
 .input {
   font-size: large;
-  width: 10rem;
+  width: 100%;
+  align-self: stretch;
 
   @include medium-screen {
     width: auto;
   }
 }
 
+.inputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
 .icon {
   fill: $color-search-button-text;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 0.5rem;
+  fill: $color-secondary-light;
 }

@@ -13,6 +13,7 @@ export const UserSearchSection: React.FC<IUserSearchSectionProps> = (props) => {
         displaySpinner={viewModel.isSearchRequestProcessing}
         inputClassName={styles.inputSearch}
         onSearch={viewModel.onSearch}
+        searchImplicit={true}
       />
       <UserSearchList onSelect={props.onSelect} users={viewModel.user} />
     </div>
