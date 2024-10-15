@@ -304,13 +304,13 @@ Version 1.0.0-20241007.1
 	# Set place for grading
 	# Bug: Add dot to date of a grading in german
 	
-- Version 1.4.0-<>.5
-	- Display date of last invite of a user
+- Version 1.4.0-<>.5	
 	- Entered text to an input can be cleared via click on a specific icon
 	# Run search while typing
 
 - Backlog
 	- Set and display trainer to event instance
+	- Display date of last invite of a user
 	- backup data
 	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"

@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { DateTime } from "../../core/services/date/DateTime";
 import { Recurrence } from "../../core/types/Recurrence";
+import { useDebounce } from "../../hooks/useDebounce";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
@@ -11,12 +12,8 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   const debounceInterval = 500;
   const { t } = useTranslation();
   const render = useRenderRecurrence();
-  const [fromTimeout, setFromTimeout] = useState<NodeJS.Timeout | undefined>(
-    undefined
-  );
-  const [toTimeout, setToTimeout] = useState<NodeJS.Timeout | undefined>(
-    undefined
-  );
+  const debounceFrom = useDebounce();
+  const debounceTo = useDebounce();
 
   const isMemberOnlyOptions: ISelectOption<boolean>[] = useMemo(
     () => [
@@ -43,30 +40,26 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
    * Checks if to is earlier than from, in that case correct to by adding one hour
    */
   const correctTo = (from: Date, to: Date) => {
-    clearTimeout(toTimeout);
-    const newToTimeout = setTimeout(() => {
+    debounceTo(() => {
       if (DateTime.compare(from, to) >= 0) {
         const newTo = DateTime.addHours(from, 1);
         props.setToDate(DateTime.toDate(newTo));
         props.setToTime(DateTime.toTime(newTo));
       }
     }, debounceInterval);
-    setToTimeout(newToTimeout);
   };
 
   /**
    * Checks if to is earlier than from, in that case correct to by adding one hour
    */
   const correctFrom = (from: Date, to: Date) => {
-    clearTimeout(fromTimeout);
-    const newFromTimeout = setTimeout(() => {
+    debounceFrom(() => {
       if (DateTime.compare(from, to) === 1) {
         const newFrom = DateTime.subtractHours(to, 1);
         props.setFromDate(DateTime.toDate(newFrom));
         props.setFromTime(DateTime.toTime(newFrom));
       }
     }, debounceInterval);
-    setFromTimeout(newFromTimeout);
   };
 
   const onChangeFromDate = (fromDate: string) => {
