@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
+import { useDebounce } from "../../../hooks/useDebounce";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -12,12 +12,8 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
 ) => {
   const { t } = useTranslation();
   const validatePassword = useValidatePassword();
-  const [newPasswordTimeout, setNewPasswordTimeout] = useState<
-    NodeJS.Timeout | undefined
-  >(undefined);
-  const [newConfirmPasswordTimeout, setNewConfirmPasswordTimeout] = useState<
-    NodeJS.Timeout | undefined
-  >(undefined);
+  const debounceNewPassword = useDebounce();
+  const debounceNewConfirmPassword = useDebounce();
 
   const onValidateNewPassword = (newPassword: string) => {
     if (isNotInitial(newPassword)) {
@@ -37,14 +33,11 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
     }
   };
 
-  const onNewPasswordChangeDebounce = (newPassword: string) => {
-    clearTimeout(newPasswordTimeout);
-    const timeout = setTimeout(() => {
+  const onNewPasswordChangeDebounce = (newPassword: string) =>
+    debounceNewPassword(() => {
       props.newPassword[1](newPassword);
       onValidateNewPassword(newPassword);
     }, 300);
-    setNewPasswordTimeout(timeout);
-  };
 
   const onValidateNewConfirmPassword = (
     newConfirmPassword: string,
@@ -63,14 +56,11 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
     }
   };
 
-  const onNewConfirmPasswordChangeDebounce = (newConfirmPassword: string) => {
-    clearTimeout(newConfirmPasswordTimeout);
-    const timeout = setTimeout(() => {
+  const onNewConfirmPasswordChangeDebounce = (newConfirmPassword: string) =>
+    debounceNewConfirmPassword(() => {
       props.newConfirmPassword[1](newConfirmPassword);
       onValidateNewConfirmPassword(newConfirmPassword, props.newPassword[0]);
     }, 300);
-    setNewConfirmPasswordTimeout(timeout);
-  };
 
   return (
     <>

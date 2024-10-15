@@ -39,7 +39,7 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   /**
    * Checks if to is earlier than from, in that case correct to by adding one hour
    */
-  const correctTo = (from: Date, to: Date) => {
+  const correctTo = (from: Date, to: Date) =>
     debounceTo(() => {
       if (DateTime.compare(from, to) >= 0) {
         const newTo = DateTime.addHours(from, 1);
@@ -47,12 +47,11 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
         props.setToTime(DateTime.toTime(newTo));
       }
     }, debounceInterval);
-  };
 
   /**
    * Checks if to is earlier than from, in that case correct to by adding one hour
    */
-  const correctFrom = (from: Date, to: Date) => {
+  const correctFrom = (from: Date, to: Date) =>
     debounceFrom(() => {
       if (DateTime.compare(from, to) === 1) {
         const newFrom = DateTime.subtractHours(to, 1);
@@ -60,7 +59,6 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
         props.setFromTime(DateTime.toTime(newFrom));
       }
     }, debounceInterval);
-  };
 
   const onChangeFromDate = (fromDate: string) => {
     props.setFromDate(fromDate);
