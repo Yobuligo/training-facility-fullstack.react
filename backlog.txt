@@ -304,9 +304,12 @@ Version 1.0.0-20241007.1
 	# Set place for grading
 	# Bug: Add dot to date of a grading in german
 	
-- Version 1.4.0-<>.5	
-	- Entered text to an input can be cleared via click on a specific icon
+# Version 1.4.0-20241015.5
+	# Entered text in search inputs can be cleared via click on a specific icon 
 	# Run search while typing
+		# Debounce time for reloading data
+
+- Version 1.5.0-<>.6
 
 - Backlog
 	- Set and display trainer to event instance
