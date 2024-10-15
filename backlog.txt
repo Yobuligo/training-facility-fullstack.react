@@ -303,22 +303,31 @@ Version 1.0.0-20241007.1
 	# Display Dan Degrees as roman numerals
 	# Set place for grading
 	# Bug: Add dot to date of a grading in german
+	
+- Version 1.4.0-<>.5
+	- Display date of last invite of a user
+	- Entered text to an input can be cleared via click on a specific icon
+	# Run search while typing
 
 - Backlog
+	- Set and display trainer to event instance
+	- backup data
 	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"
 		- Courses can be displayed in user profile
 	- Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Add dobok size to user profile
-	- Set and display trainer to event instance
 	- Inform users who are registered for a training that will be called off
 	- Performance
 		- Admin tabs are loaded asynchronously
 		- table userTrialTraining needs an index on email	
-	- Gamification
-		- Display number of trainings of a person
+	- Statistics / Reporting / Gamification
+		- Display number registrations per day / week / month / year
+			- for classes
+			- for each person
+		- Display development of persons (new persons) per day / week / month / year
 	- DateTimeSpan
-		- Bug: from value must not be lower than to value			
+		- Bug: from value must not be lower than to value
 	- Emails
 		- Send mails must create an email at the send mail folder of the mail account
 	- Check all ui endpoints and delete which are not required anymore
