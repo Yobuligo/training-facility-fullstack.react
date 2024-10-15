@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { style } from "../../core/ui/style";
+import { useDebounce } from "../../hooks/useDebounce";
 import { SearchIcon } from "../../icons/SearchIcon";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
@@ -10,6 +11,7 @@ import styles from "./Search.module.scss";
 export const Search: React.FC<ISearchProps> = (props) => {
   const [query, setQuery] = useState(props.query ?? "");
   const { t } = useTranslation();
+  const debounce = useDebounce();
 
   const onSearch = () => props.onSearch?.(query);
 
@@ -19,8 +21,10 @@ export const Search: React.FC<ISearchProps> = (props) => {
     }
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
+    debounce(() => props.onSearch?.(event.target.value), 300);
+  };
 
   return (
     <div className={styles.search}>
