@@ -305,12 +305,14 @@ Version 1.0.0-20241007.1
 	# Bug: Add dot to date of a grading in german
 	
 # Version 1.4.0-20241015.5
-	# Entered text in search inputs can be cleared via click on a specific icon 
+	# Entered text in search inputs can be cleared via click on a specific icon
 	# Run search while typing
 		# Debounce time for reloading data
 
 - Version 1.5.0-<>.6
-
+	- Persist quit at in a separate field
+	# Bug: Search result list for adding users to a training is not sorted
+	
 - Backlog
 	- Set and display trainer to event instance
 	- Display date of last invite of a user
@@ -329,6 +331,8 @@ Version 1.0.0-20241007.1
 			- for classes
 			- for each person
 		- Display development of persons (new persons) per day / week / month / year
+		- Display income per month
+	- Exercise compendium
 	- DateTimeSpan
 		- Bug: from value must not be lower than to value
 	- Emails
