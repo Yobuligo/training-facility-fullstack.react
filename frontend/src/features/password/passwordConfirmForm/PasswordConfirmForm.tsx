@@ -1,7 +1,6 @@
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useDebounce } from "../../../hooks/useDebounce";
-import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { PasswordRequirementList } from "../passwordPolicy/PasswordRequirementList";
@@ -12,25 +11,12 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   props
 ) => {
   const { t } = useTranslation();
-  const validatePassword = useValidatePassword();
   const debounceNewPassword = useDebounce();
   const debounceNewConfirmPassword = useDebounce();
 
   const onValidateNewPassword = (newPassword: string) => {
     if (isNotInitial(newPassword)) {
-      try {
-        validatePassword(newPassword);
-        props.newPassword[3]("");
-        onValidateNewConfirmPassword(props.newConfirmPassword[0], newPassword);
-      } catch (error) {
-        // if (error instanceof ValidationError) {
-        //   props.newPassword[3](error.message);
-        // } else {
-        //   props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
-        // }
-      }
-    } else {
-      props.newPassword[3]("");
+      onValidateNewConfirmPassword(props.newConfirmPassword[0], newPassword);
     }
   };
 
