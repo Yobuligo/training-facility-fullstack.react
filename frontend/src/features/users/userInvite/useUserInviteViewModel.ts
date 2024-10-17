@@ -13,6 +13,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { IUserInviteShort } from "../../../shared/model/IUserInviteShort";
+import { usePasswordRequirements } from "../../password/hooks/usePasswordRequirements";
 
 export const useUserInviteViewModel = () => {
   const params = useParams<{ userInviteId: string }>();
@@ -29,6 +30,8 @@ export const useUserInviteViewModel = () => {
   const newConfirmPassword = useLabeledElement("");
   const navigate = useNavigate();
   const toast = useToast();
+  const [passwordRequirements, arePasswordRequirementsValid] =
+    usePasswordRequirements();
 
   const handleError = (error: any): boolean => {
     if (isError(error)) {
@@ -63,9 +66,8 @@ export const useUserInviteViewModel = () => {
 
   const isConfirmButtonDisabled = () => {
     return (
-      isNotInitial(newPassword[2]) ||
+      arePasswordRequirementsValid(newPassword[0]) === false ||
       isNotInitial(newConfirmPassword[2]) ||
-      isInitial(newPassword[0]) ||
       isInitial(newConfirmPassword[0])
     );
   };
@@ -95,6 +97,7 @@ export const useUserInviteViewModel = () => {
     newConfirmPassword,
     newPassword,
     onChangePasswordConfirm,
+    passwordRequirements,
     userInvite,
   };
 };

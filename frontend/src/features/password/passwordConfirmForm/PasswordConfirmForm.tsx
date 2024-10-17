@@ -1,5 +1,4 @@
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
-import { NotImplementedError } from "../../../core/errors/NotImplementedError";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
@@ -23,7 +22,6 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
         validatePassword(newPassword);
         props.newPassword[3]("");
         onValidateNewConfirmPassword(props.newConfirmPassword[0], newPassword);
-        throw new NotImplementedError()
       } catch (error) {
         // if (error instanceof ValidationError) {
         //   props.newPassword[3](error.message);

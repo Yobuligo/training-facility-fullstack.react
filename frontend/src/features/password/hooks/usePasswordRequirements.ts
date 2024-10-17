@@ -10,7 +10,10 @@ import { IPasswordRequirement } from "../types/IPasswordRequirement";
 /**
  * This hook is responsible for returning all password requirements which have to be checked when setting a password.
  */
-export const usePasswordRequirements = (): IPasswordRequirement[] => {
+export const usePasswordRequirements = (): [
+  passwordRequirements: IPasswordRequirement[],
+  areValid: (password: string) => boolean
+] => {
   const { t } = useTranslation();
 
   const passwordRequirements: IPasswordRequirement[] = useMemo(
@@ -35,5 +38,17 @@ export const usePasswordRequirements = (): IPasswordRequirement[] => {
     [t]
   );
 
-  return passwordRequirements;
+  /**
+   * Returns if all passwordRequirements are valid, otherwise false.
+   */
+  const areValid = (password: string): boolean => {
+    for (const passwordRequirement of passwordRequirements) {
+      if (!passwordRequirement.check.isValid(password)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  return [passwordRequirements, areValid];
 };

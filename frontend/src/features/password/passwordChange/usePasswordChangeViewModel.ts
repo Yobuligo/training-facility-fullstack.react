@@ -11,6 +11,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { AppRoutes } from "../../../routes/AppRoutes";
+import { usePasswordRequirements } from "../hooks/usePasswordRequirements";
 
 export const usePasswordChangeViewModel = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -25,12 +26,13 @@ export const usePasswordChangeViewModel = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const toast = useToast();
+  const [passwordRequirements, arePasswordRequirementsValid] =
+    usePasswordRequirements();
 
   const confirmButtonDisabled =
-    isNotInitial(newPassword[2]) ||
+    arePasswordRequirementsValid(newPassword[0]) === false ||
     isNotInitial(newConfirmPassword[2]) ||
     isInitial(currentPassword) ||
-    isInitial(newPassword[0]) ||
     isInitial(newConfirmPassword[0]);
 
   const onCancel = () => navigate(AppRoutes.dashboard.toPath());
@@ -80,6 +82,7 @@ export const usePasswordChangeViewModel = () => {
     newPassword,
     onCancel,
     onChangePasswordConfirm,
+    passwordRequirements,
     setCurrentPassword,
   };
 };
