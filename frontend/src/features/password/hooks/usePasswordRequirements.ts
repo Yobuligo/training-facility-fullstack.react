@@ -7,6 +7,9 @@ import { PasswordHasSpecialCharacter } from "../../../services/password/Password
 import { PasswordHasUppercaseLetter } from "../../../services/password/PasswordHasUppercaseLetter";
 import { IPasswordRequirement } from "../types/IPasswordRequirement";
 
+/**
+ * This hook is responsible for returning all password requirements which have to be checked when setting a password.
+ */
 export const usePasswordRequirements = (): IPasswordRequirement[] => {
   const { t } = useTranslation();
 

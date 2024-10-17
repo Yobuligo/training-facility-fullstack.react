@@ -5,7 +5,7 @@ import { useDebounce } from "../../../hooks/useDebounce";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { PasswordPolicy } from "../passwordPolicy/PasswordPolicy";
+import { PasswordRequirementList } from "../passwordPolicy/PasswordRequirementList";
 import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
 import styles from "./PasswordConfirmForm.module.scss";
 
@@ -67,7 +67,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
 
   return (
     <>
-      <PasswordPolicy
+      <PasswordRequirementList
         className={styles.passwordPolicy}
         password={props.newPassword[0]}
         passwordRequirements={props.passwordRequirements}
