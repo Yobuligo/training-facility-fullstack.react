@@ -240,7 +240,7 @@
     "passwordValidation": {
         "passwordMustContain": "Passwort muss mindestens enthalten:",
         "errorLength": "{{length}} Zeichen",
-        "errorNeedsSpecialCharacter": "Sonderzeichen",
+        "errorNeedsSpecialCharacter": "Sonderzeichen !@#$%^&*(),.?\":{}|<>",
         "errorNeedsNumber": "Zahl",
         "errorNeedsUppercaseLetter": "Großbuchstabe",
         "errorNeedsLowercaseLetter": "Kleinbuchstabe"

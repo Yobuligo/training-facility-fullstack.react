@@ -5,6 +5,7 @@ import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useLogout } from "../../../lib/userSession/hooks/useLogout";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import componentStyles from "../../../styles/components.module.scss";
 import { PageSpinner } from "../../pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
@@ -13,7 +14,6 @@ import { PageFooter } from "../pageFooter/PageFooter";
 import { PageHeader } from "../pageHeader/PageHeader";
 import { IProtectedPageProps } from "./IProtectedPageProps";
 import styles from "./ProtectedPage.module.scss";
-import { AppRoutes } from "../../../routes/AppRoutes";
 
 export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
   const { logout, isLoggingOut } = useLogout();

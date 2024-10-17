@@ -8,7 +8,7 @@
   min-height: 100vh;
 }
 
-.pageDescription{
+.pageDescription {
   font-weight: 600;
 }
 
@@ -127,12 +127,12 @@
 }
 
 .preLoginLayout {
-  margin-top: 10rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20rem;
+  @include component-padding;
 
   @include medium-screen {
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
     width: 25rem;
   }
 
