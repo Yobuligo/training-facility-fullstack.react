@@ -3,7 +3,7 @@ import { Card } from "../../../components/card/Card";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import { CheckIcon } from "../../../icons/CheckIcon";
+import { GiftsIcon } from "../../../icons/GiftsIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { hasBirthday } from "../../../utils/hasBirthday";
@@ -46,7 +46,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
       <>
         {hasBirthday(props.eventRegistration.user?.userProfile?.birthday) && (
           <div className={styles.giftContainer}>
-            <CheckIcon />
+            <GiftsIcon className={styles.gift} />
           </div>
         )}
       </>

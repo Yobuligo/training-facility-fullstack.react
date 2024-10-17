@@ -39,4 +39,13 @@
   flex-direction: row;
   justify-content: right;
   margin-top: dimensions.$negative-space;
+
+  @include mixins.medium-screen {
+    justify-content: left;
+  }
+}
+
+.gift {
+  width: 2rem;
+  height: auto;
 }
