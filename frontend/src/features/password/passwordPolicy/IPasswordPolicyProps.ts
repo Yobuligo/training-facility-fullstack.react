@@ -1,1 +1,3 @@
-export interface IPasswordPolicyProps{  }
+export interface IPasswordPolicyProps {
+  password: string;
+}

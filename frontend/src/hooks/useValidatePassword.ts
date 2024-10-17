@@ -9,7 +9,9 @@ export const useValidatePassword = () => {
   const validate = useMemo(() => {
     return (password: string) => {
       if (password.length < 8) {
-        throw new ValidationError(t(texts.passwordValidation.errorLength));
+        throw new ValidationError(
+          t(texts.passwordValidation.errorLength, { length: "8" })
+        );
       }
 
       const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;

@@ -5,6 +5,7 @@ import { useDebounce } from "../../../hooks/useDebounce";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { PasswordPolicy } from "../passwordPolicy/PasswordPolicy";
 import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
 
 export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
@@ -64,6 +65,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
 
   return (
     <>
+      <PasswordPolicy password={props.newPassword[0]} />
       <LabeledPasswordInput
         autoFocus={props.autoFocus}
         error={props.newPassword[2]}

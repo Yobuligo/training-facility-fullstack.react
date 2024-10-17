@@ -238,7 +238,8 @@
         "passwordsNotIdentical": "Your new passwords are not identical"
     },
     "passwordValidation": {
-        "errorLength": "at least 8 characters",
+        "passwordMustContain": "Password must contain:",
+        "errorLength": "at least {{length}} characters",
         "errorNeedsSpecialCharacter": "special character !@#$%^&*(),.?\":{}|<>",
         "errorNeedsNumber": "at least one number",
         "errorNeedsUppercaseLetter": "at least one uppercase letter",

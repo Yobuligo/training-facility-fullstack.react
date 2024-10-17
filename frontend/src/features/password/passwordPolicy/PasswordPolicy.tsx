@@ -1,27 +1,45 @@
-import { useState } from 'react';
-import { IPasswordPolicyProps } from './IPasswordPolicyProps';
-import styles from './PasswordPolicy.module.scss';
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
+import { PasswordHasLowercaseLetter } from "../../../services/password/PasswordHasLowercaseLetter";
+import { PasswordHasMinLength } from "../../../services/password/PasswordHasMinLength";
+import { PasswordHasNumber } from "../../../services/password/PasswordHasNumber";
+import { PasswordHasSpecialCharacter } from "../../../services/password/PasswordHasSpecialCharacter";
+import { PasswordHasUppercaseLetter } from "../../../services/password/PasswordHasUppercaseLetter";
+import { PasswordRequirement } from "../passwordRequirement/PasswordRequirement";
+import { IPasswordPolicyProps } from "./IPasswordPolicyProps";
+import styles from "./PasswordPolicy.module.scss";
 
-interface IPasswordRequirement{
-    text: string
-    isFulfilled: boolean
-}
+export const PasswordPolicy: React.FC<IPasswordPolicyProps> = (props) => {
+  const { t } = useTranslation();
 
-const usePasswordPolicyBuilder = ()=>{
-    const [minNumberCharacters, setNumberCharacters] = useState<number | undefined>(undefined)
-
-    const setMinNumberCharacters = (minNumberCharacters: number)=>{}
-
-    const setNeedsUppercaseLetter = () => {}
-
-    const setNeedsLowercaseLetter = () => {}
-
-    const setNeedsSpecialLetter = () => {}
-
-    const build = ()=>{}
-
-}
-
-export const PasswordPolicy: React.FC<IPasswordPolicyProps>=(props)=>{
-return <div className={styles.passwordPolicy}></div>}
-
+  return (
+    <div className={styles.passwordPolicy}>
+      {t(texts.passwordValidation.passwordMustContain)}
+      <PasswordRequirement
+        password={props.password}
+        passwordRequirementCheck={new PasswordHasMinLength(8)}
+        title={t(texts.passwordValidation.errorLength, { length: "8" })}
+      />
+      <PasswordRequirement
+        password={props.password}
+        passwordRequirementCheck={new PasswordHasUppercaseLetter()}
+        title={t(texts.passwordValidation.errorNeedsUppercaseLetter)}
+      />
+      <PasswordRequirement
+        password={props.password}
+        passwordRequirementCheck={new PasswordHasLowercaseLetter()}
+        title={t(texts.passwordValidation.errorNeedsLowercaseLetter)}
+      />
+      <PasswordRequirement
+        password={props.password}
+        passwordRequirementCheck={new PasswordHasNumber()}
+        title={t(texts.passwordValidation.errorNeedsNumber)}
+      />
+      <PasswordRequirement
+        password={props.password}
+        passwordRequirementCheck={new PasswordHasSpecialCharacter()}
+        title={t(texts.passwordValidation.errorNeedsSpecialCharacter)}
+      />
+    </div>
+  );
+};
