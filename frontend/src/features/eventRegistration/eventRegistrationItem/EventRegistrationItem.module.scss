@@ -1,6 +1,12 @@
-@use '../../../styles/mixins.scss';
+@use "../../../styles/mixins.scss";
+@use "../../../styles/dimensions.module.scss";
 
 .eventRegistrationItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventRegistrationItemContent {
   display: flex;
   flex-direction: row;
   column-gap: 2rem;
@@ -26,4 +32,11 @@
   @include mixins.medium-screen {
     align-self: center;
   }
+}
+
+.giftContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-top: dimensions.$negative-space;
 }
