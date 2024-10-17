@@ -48,3 +48,8 @@
     padding-right: 15%;
   }
 }
+
+@mixin label {
+  font-weight: 500;
+  color: colors.$color-labeled-element-label;
+}

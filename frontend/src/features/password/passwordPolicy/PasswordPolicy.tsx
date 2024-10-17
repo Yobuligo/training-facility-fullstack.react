@@ -1,3 +1,4 @@
+import { style } from "../../../core/ui/style";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { PasswordHasLowercaseLetter } from "../../../services/password/PasswordHasLowercaseLetter";
@@ -13,8 +14,10 @@ export const PasswordPolicy: React.FC<IPasswordPolicyProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.passwordPolicy}>
-      {t(texts.passwordValidation.passwordMustContain)}
+    <div className={style(styles.passwordPolicy, props.className)}>
+      <div className={styles.title}>
+        {t(texts.passwordValidation.passwordMustContain)}
+      </div>
       <PasswordRequirement
         password={props.password}
         passwordRequirementCheck={new PasswordHasMinLength(8)}

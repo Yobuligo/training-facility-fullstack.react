@@ -238,12 +238,12 @@
         "passwordsNotIdentical": "Neue Passwörter sind nicht identisch"
     },
     "passwordValidation": {
-        "passwordMustContain": "Passwort muss enthalten:",
-        "errorLength": "mindestens {{length}} Zeichen lang",
-        "errorNeedsSpecialCharacter": "Sonderzeichen !@#$%^&*(),.?\":{}|<>",
-        "errorNeedsNumber": "mindestens eine Zahl",
-        "errorNeedsUppercaseLetter": "mindestens ein Großbuchstabe",
-        "errorNeedsLowercaseLetter": "mindestens ein Kleinbuchstabe"
+        "passwordMustContain": "Passwort muss mindestens enthalten:",
+        "errorLength": "{{length}} Zeichen",
+        "errorNeedsSpecialCharacter": "Sonderzeichen",
+        "errorNeedsNumber": "Zahl",
+        "errorNeedsUppercaseLetter": "Großbuchstabe",
+        "errorNeedsLowercaseLetter": "Kleinbuchstabe"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",

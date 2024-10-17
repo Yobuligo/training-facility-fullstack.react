@@ -238,12 +238,12 @@
         "passwordsNotIdentical": "Your new passwords are not identical"
     },
     "passwordValidation": {
-        "passwordMustContain": "Password must contain:",
-        "errorLength": "at least {{length}} characters",
-        "errorNeedsSpecialCharacter": "special character !@#$%^&*(),.?\":{}|<>",
-        "errorNeedsNumber": "at least one number",
-        "errorNeedsUppercaseLetter": "at least one uppercase letter",
-        "errorNeedsLowercaseLetter": "at least one lowercase letter"
+        "passwordMustContain": "Password must contain at least:",
+        "errorLength": "{{length}} characters",
+        "errorNeedsSpecialCharacter": "special character",
+        "errorNeedsNumber": "number",
+        "errorNeedsUppercaseLetter": "uppercase letter",
+        "errorNeedsLowercaseLetter": "lowercase letter"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
