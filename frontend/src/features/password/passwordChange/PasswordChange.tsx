@@ -6,6 +6,7 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Error } from "../../error/Error";
+import { usePasswordRequirements } from "../hooks/usePasswordRequirements";
 import { PasswordConfirmForm } from "../passwordConfirmForm/PasswordConfirmForm";
 import styles from "./PasswordChange.module.scss";
 import { usePasswordChangeViewModel } from "./usePasswordChangeViewModel";
@@ -13,6 +14,7 @@ import { usePasswordChangeViewModel } from "./usePasswordChangeViewModel";
 export const PasswordChange: React.FC = () => {
   const viewModel = usePasswordChangeViewModel();
   const { t } = useTranslation();
+  const passwordRequirements = usePasswordRequirements();
 
   return (
     <div className={styles.passwordChange}>
@@ -29,6 +31,7 @@ export const PasswordChange: React.FC = () => {
         <PasswordConfirmForm
           newConfirmPassword={viewModel.newConfirmPassword}
           newPassword={viewModel.newPassword}
+          passwordRequirements={passwordRequirements}
         />
         <Toolbar className={styles.toolbar}>
           <SecondaryButton onClick={viewModel.onCancel}>

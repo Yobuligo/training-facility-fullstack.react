@@ -1,5 +1,5 @@
 import { LabeledPasswordInput } from "../../../components/labeledPasswordInput/LabeledPasswordInput";
-import { ValidationError } from "../../../core/errors/ValidationError";
+import { NotImplementedError } from "../../../core/errors/NotImplementedError";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { useValidatePassword } from "../../../hooks/useValidatePassword";
@@ -23,12 +23,13 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
         validatePassword(newPassword);
         props.newPassword[3]("");
         onValidateNewConfirmPassword(props.newConfirmPassword[0], newPassword);
+        throw new NotImplementedError()
       } catch (error) {
-        if (error instanceof ValidationError) {
-          props.newPassword[3](error.message);
-        } else {
-          props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
-        }
+        // if (error instanceof ValidationError) {
+        //   props.newPassword[3](error.message);
+        // } else {
+        //   props.newPassword[3](t(texts.passwordConfirmForm.errorUnknownError));
+        // }
       }
     } else {
       props.newPassword[3]("");
@@ -69,6 +70,7 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
       <PasswordPolicy
         className={styles.passwordPolicy}
         password={props.newPassword[0]}
+        passwordRequirements={props.passwordRequirements}
       />
       <LabeledPasswordInput
         autoFocus={props.autoFocus}
