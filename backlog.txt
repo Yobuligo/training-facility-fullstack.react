@@ -310,12 +310,17 @@ Version 1.0.0-20241007.1
 		# Debounce time for reloading data
 
 - Version 1.5.0-<>.6
-	- Persist quit at in a separate field
+	- Display date of last invite of a user
+	- Persist resignedAt in a separate field
+	- Display password policy directly
 	# Bug: Search result list for adding users to a training is not sorted
 	
 - Backlog
+	- Highlight users which have birthday that day
+		- Display in list for adding users to a training
+		- Display in user list
+		- Show toast once a day and inform about birthdays
 	- Set and display trainer to event instance
-	- Display date of last invite of a user
 	- backup data
 	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"
@@ -326,12 +331,16 @@ Version 1.0.0-20241007.1
 	- Performance
 		- Admin tabs are loaded asynchronously
 		- table userTrialTraining needs an index on email	
-	- Statistics / Reporting / Gamification
-		- Display number registrations per day / week / month / year
-			- for classes
-			- for each person
-		- Display development of persons (new persons) per day / week / month / year
+	- Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Display income per month
+		- Customer development
+			- Display number of all customers
+			- Display number of new customers
+			- Display number of quit customers
+		- Training sessions (Display number registrations)
+			- for a specific class (children, beginners)
+			- overall
+			- for a specific person
 	- Exercise compendium
 	- DateTimeSpan
 		- Bug: from value must not be lower than to value
