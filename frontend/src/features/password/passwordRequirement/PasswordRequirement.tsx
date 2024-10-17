@@ -12,7 +12,9 @@ export const PasswordRequirement: React.FC<IPasswordRequirementProps> = (
       <div className={styles.iconContainer}>
         {isValid && <CheckIcon className={styles.icon} />}
       </div>
-      <div className={isValid ? styles.fulfilled : ""}>{props.title}</div>
+      <div className={isValid ? styles.fulfilled : styles.title}>
+        {props.title}
+      </div>
     </div>
   );
 };

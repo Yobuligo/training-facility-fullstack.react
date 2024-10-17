@@ -7,6 +7,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { PasswordPolicy } from "../passwordPolicy/PasswordPolicy";
 import { IPasswordConfirmFormProps } from "./IPasswordConfirmFormProps";
+import styles from "./PasswordConfirmForm.module.scss";
 
 export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
   props
@@ -65,7 +66,10 @@ export const PasswordConfirmForm: React.FC<IPasswordConfirmFormProps> = (
 
   return (
     <>
-      <PasswordPolicy password={props.newPassword[0]} />
+      <PasswordPolicy
+        className={styles.passwordPolicy}
+        password={props.newPassword[0]}
+      />
       <LabeledPasswordInput
         autoFocus={props.autoFocus}
         error={props.newPassword[2]}
