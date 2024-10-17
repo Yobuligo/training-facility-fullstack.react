@@ -309,12 +309,14 @@ Version 1.0.0-20241007.1
 	# Run search while typing
 		# Debounce time for reloading data
 
-- Version 1.5.0-<>.6
-	- Display date of last invite of a user
-	- Persist resignedAt in a separate field
-	- Highlight users in list for addings users which have birthday that day
+# Version 1.5.0-20241017.6
+	# Highlight users in registration list which have birthday that day
 	# Display password requirements when changing password
 	# Bug: Search result list for adding users to a training is not sorted
+	
+- Version 1.6.0-<>.7
+	- Display date of last invite of a user
+	- Persist resignedAt in a separate field
 	
 - Backlog
 	- Display version details
