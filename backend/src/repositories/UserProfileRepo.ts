@@ -61,7 +61,20 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     return wasUpdated;
   }
 
-  // async updateLastInvitedAt(userProfileId: string, lastInvitedAt: Date): Promise<boolean>{
+  async updateLastInvitedAtByUserId(
+    userId: string,
+    lastInvitedAt: Date
+  ): Promise<boolean> {
+    const userProfile = await this.findByUserId(userId, ["id"]);
+    if (!userProfile) {
+      return false;
+    }
 
-  // }
+    await this.model.update(
+      { lastInvitedAt: lastInvitedAt },
+      { where: { id: userProfile.id } }
+    );
+
+    return true;
+  }
 }

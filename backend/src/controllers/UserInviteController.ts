@@ -35,9 +35,12 @@ export class UserInviteController extends EntityController<
           const fields = this.getFieldsFromQuery(req.query);
           const createdUserInvite = await this.repo.insert(userInvite, fields);
 
-          // update user profile lastInvitedAt
+          // update user profile lastInvitedAt by userId
           const userProfileRepo = new UserProfileRepo();
-          // userProfileRepo.findByUserId()
+          await userProfileRepo.updateLastInvitedAtByUserId(
+            createdUserInvite.userId,
+            new Date()
+          );
 
           // find user email
           const userRepo = new UserRepo();
