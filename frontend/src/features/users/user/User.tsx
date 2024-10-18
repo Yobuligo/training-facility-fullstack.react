@@ -285,11 +285,11 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.resignedAt}
             />
           )}
-          {props.isAdminMode && props.user.userProfile?.lastInvitedAt && (
+          {props.isAdminMode && viewModel.lastInvitedAt && (
             <LabeledText
               className={styles.lastInvitedAt}
               label={t(texts.user.lastInvitationSent)}
-              text={toStringDate(props.user.userProfile.lastInvitedAt)}
+              text={toStringDate(viewModel.lastInvitedAt)}
             />
           )}
           <Toolbar className={styles.toolbar}>

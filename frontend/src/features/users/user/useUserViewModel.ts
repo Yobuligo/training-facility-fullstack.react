@@ -90,6 +90,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const [resignedAt, setResignedAt] = useState(
     userProfile.resignedAt ? DateTime.toDate(userProfile.resignedAt) : ""
   );
+  const [lastInvitedAt, setLastInvitedAt] = useState(userProfile.lastInvitedAt);
   const [existsByUsernameRequest] = useRequest();
   const [sendUserInvite, isSendingUserInvite] = useSendUserInvite();
   const [sendPasswordResetRequest, isSendingPasswordResetRequest] =
@@ -302,7 +303,10 @@ export const useUserViewModel = (props: IUserProps) => {
 
   const onChangePassword = () => navigate(AppRoutes.changePassword.toPath());
 
-  const onSendUserInvite = () => sendUserInvite(props.user);
+  const onSendUserInvite = async () => {
+    await sendUserInvite(props.user);
+    setLastInvitedAt(new Date());
+  };
 
   const onPasswordReset = () => sendPasswordResetRequest(props.user);
 
@@ -524,6 +528,7 @@ export const useUserViewModel = (props: IUserProps) => {
     isSendingUserInvite,
     isSendingPasswordResetRequest,
     joinedOn,
+    lastInvitedAt,
     lastname,
     lastnameError,
     onAddGrading,
