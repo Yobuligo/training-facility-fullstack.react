@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { isInitial } from "../../../../core/utils/isInitial";
 import { UserApi } from "../../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../../lib/userSession/hooks/useRequest";
 import { IUser } from "../../../../shared/model/IUser";
@@ -10,7 +11,7 @@ export const useUserSearchSectionViewModel = () => {
   const onSearch = (query: string) => {
     searchRequest(async () => {
       const userApi = new UserApi();
-      const users = await userApi.findByQuery(query);
+      const users = await userApi.findByQuery(isInitial(query) ? "*" : query);
       users.sort((left, right) => {
         const userProfileLeft = left.userProfile;
         const userProfileRight = right.userProfile;

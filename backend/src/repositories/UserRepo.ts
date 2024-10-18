@@ -114,29 +114,40 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     excludeResigned: boolean,
     fields?: unknown
   ): Promise<unknown> {
-    const searchTerms = query.split(" ");
+    let where: WhereOptions<any> = {};
 
-    let where: WhereOptions<any> = {
-      [Op.or]: searchTerms.map((term) => ({
-        [Op.or]: [
-          {
-            firstname: {
-              [Op.like]: `%${term}%`,
-            },
-          },
-          {
-            lastname: {
-              [Op.like]: `%${term}%`,
-            },
-          },
-        ],
-      })),
-    };
+    // select all data? Exclude resigned users?
+    if (query === "*") {
+      if (excludeResigned) {
+        where = {
+          resignedAt: { [Op.eq]: null },
+        };
+      }
+    } else {
+      const searchTerms = query.split(" ");
 
-    if (excludeResigned) {
       where = {
-        [Op.and]: [{ resignedAt: { [Op.eq]: null } }, where],
+        [Op.or]: searchTerms.map((term) => ({
+          [Op.or]: [
+            {
+              firstname: {
+                [Op.like]: `%${term}%`,
+              },
+            },
+            {
+              lastname: {
+                [Op.like]: `%${term}%`,
+              },
+            },
+          ],
+        })),
       };
+
+      if (excludeResigned) {
+        where = {
+          [Op.and]: [{ resignedAt: { [Op.eq]: null } }, where],
+        };
+      }
     }
 
     const data = await this.model.findAll({

@@ -319,7 +319,7 @@ Version 1.0.0-20241007.1
 	- Resigned
 		# User can be marked at resigned by setting a corresponding resignedAt date
 		- Resigned users are displayed in a separate group of the user list
-		- Resigned users are not displayed in the search result of the user registration list
+		# Resigned users are not displayed in the search result of the user registration list
 	
 - Backlog
 	- Display version details
