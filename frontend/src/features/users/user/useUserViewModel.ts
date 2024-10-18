@@ -87,6 +87,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [joinedOn, setJoinedOn] = useState(
     userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
   );
+  const [resignedAt, setResignedAt] = useState(
+    userProfile.resignedAt ? DateTime.toDate(userProfile.resignedAt) : ""
+  );
   const [existsByUsernameRequest] = useRequest();
   const [sendUserInvite, isSendingUserInvite] = useSendUserInvite();
   const [sendPasswordResetRequest, isSendingPasswordResetRequest] =
@@ -126,6 +129,9 @@ export const useUserViewModel = (props: IUserProps) => {
     setJoinedOn(
       userProfile.joinedOn ? DateTime.toDate(userProfile.joinedOn) : ""
     );
+    setResignedAt(
+      userProfile.resignedAt ? DateTime.toDate(userProfile.resignedAt) : ""
+    );
     setDisplayMode(true);
   }, [
     setBirthday,
@@ -145,6 +151,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount?.bankAccountOwner,
     userProfile.userGradings,
     userProfile.joinedOn,
+    userProfile.resignedAt,
     setEmail,
     setUsername,
     props.user.username,
@@ -208,6 +215,8 @@ export const useUserViewModel = (props: IUserProps) => {
   const onChangeBirthday = (newValue: string) => setBirthday(newValue);
 
   const onChangeJoinedOn = (newValue: string) => setJoinedOn(newValue);
+
+  const onChangeResignAt = (newValue: string) => setResignedAt(newValue);
 
   const onChangePostalCode = (newValue: string) => {
     if (isInitial(newValue)) {
@@ -369,6 +378,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.city = city;
     userProfile.tariff = tariff;
     userProfile.joinedOn = DateTime.create(joinedOn, "12:00");
+    userProfile.resignedAt = DateTime.create(resignedAt, "12:00");
     props.user.isLocked = isLocked;
     props.user.lockedAt = lockedAt;
 
@@ -521,7 +531,9 @@ export const useUserViewModel = (props: IUserProps) => {
     onChangeBirthday,
     onChangeGrading,
     onChangeJoinedOn,
+    onChangePassword,
     onChangePostalCode,
+    onChangeResignAt,
     onDeleteGrading,
     onDeleteUser,
     onPasswordReset,
@@ -538,7 +550,7 @@ export const useUserViewModel = (props: IUserProps) => {
     postalCode,
     postalCodeError,
     profileDetailsSettings,
-    onChangePassword,
+    resignedAt,
     setBankAccountBIC,
     setBankAccountIBAN,
     setBankAccountInstitution,

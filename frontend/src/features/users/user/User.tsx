@@ -283,6 +283,15 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.isAdmin}
             />
           )}
+          {props.isAdminMode && (
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              label={t(texts.user.resignedAt)}
+              type="date"
+              onChange={viewModel.onChangeResignAt}
+              value={viewModel.resignedAt}
+            />
+          )}
           <Toolbar className={styles.toolbar}>
             {props.isAdminMode && adminModeButtons}
             {!props.isAdminMode && (

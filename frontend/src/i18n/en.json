@@ -305,6 +305,7 @@
         "phone": "Phone",
         "postalCode": "Postal Code",
         "changePassword": "Change password",
+        "resignedAt": "Resigned at",
         "sendInvitation": "Send invitation",
         "sendInvitationQuestion": "Would you like to send an invitation to the created user?",
         "street": "Street",
