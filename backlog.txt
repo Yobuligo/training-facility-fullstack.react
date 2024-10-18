@@ -314,12 +314,15 @@ Version 1.0.0-20241007.1
 	# Display password requirements when changing password
 	# Bug: Search result list for adding users to a training is not sorted
 	
-# Version 1.6.0-<>.7
+# Version 1.6.0-20241018.7
 	# Display date of last invite of a user		
 	# Resigned
 		# User can be marked at resigned by setting a corresponding resignedAt date
 		# Resigned users are displayed in a separate group of the user list
 		# Resigned users are not displayed in the search result of the user registration list
+		
+- Version 1.7.0-<>.8
+	# Clicking on the logo on the login page should navigate to dashboard screen
 	
 - Backlog
 	- Display version details
