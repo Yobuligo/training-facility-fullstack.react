@@ -51,14 +51,14 @@ export const UserProfileSection: React.FC = () => {
               />
               <Collapse
                 className={styles.collapse}
-                collapsed={viewModel.displayResigned}
-                setCollapsed={viewModel.setDisplayResigned}
+                collapsed={viewModel.collapseResigned}
+                setCollapsed={viewModel.setCollapseResigned}
                 title={t(texts.userProfileSection.resignedUsers)}
               />
-              {viewModel.displayResigned && (
+              {!viewModel.collapseResigned && (
                 <UserProfileList
                   onSelect={viewModel.onSelect}
-                  usersShort={viewModel.filterUsers()}
+                  usersShort={viewModel.filterResignedUsers()}
                 />
               )}
             </>

@@ -177,7 +177,14 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         {
           model: UserProfile,
           as: "userProfile",
-          attributes: ["id", "firstname", "lastname", "email", "phone"],
+          attributes: [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "phone",
+            "resignedAt",
+          ],
         },
         {
           model: UserRole,
@@ -201,7 +208,14 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         {
           model: UserProfile,
           as: "userProfile",
-          attributes: ["id", "firstname", "lastname", "email", "phone"],
+          attributes: [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "phone",
+            "resignedAt",
+          ],
         },
         {
           model: UserRole,
@@ -426,6 +440,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         })) ?? [],
       phone: user.userProfile?.phone,
       username: user.username,
+      resignedAt: user.userProfile?.resignedAt,
     };
   }
 

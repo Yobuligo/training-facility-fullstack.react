@@ -8,12 +8,16 @@ import { DummyUser } from "../../../model/DummyUser";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
+import { sortUsersShort } from "../utils/sortUsersShort";
 
 export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
+  const [resignedUsersShort, setResignedUsersShort] = useState<IUserShort[]>(
+    []
+  );
   const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
-  const [displayResigned, setDisplayResigned] = useState(false);
+  const [collapseResigned, setCollapseResigned] = useState(false);
   const [loadUsersShortRequest, isLoadUsersShortRequestProcessing] =
     useRequest();
   const [loadUserRequest, isLoadUserRequestProcessing] = useRequest();
@@ -32,29 +36,34 @@ export const useUserProfileSectionViewModel = () => {
     return fuzzySearch.search(query, usersShort);
   };
 
+  const filterResignedUsers = (): IUserShort[] => {
+    if (query.length === 0) {
+      return resignedUsersShort;
+    }
+    const fuzzySearch = new FuzzySearch<IUserShort>();
+    return fuzzySearch.search(query, resignedUsersShort);
+  };
+
   const loadUsersShort = () =>
     loadUsersShortRequest(async () => {
       const userApi = new UserApi();
-      const usersShort: IUserShort[] = await userApi.findAllShort();
-      const sortedUsersShort = usersShort.sort((left, right) => {
-        if (left.firstname < right.firstname) {
-          return -1;
-        }
+      const users: IUserShort[] = await userApi.findAllShort();
 
-        if (left.firstname > right.firstname) {
-          return 1;
-        }
+      const usersShort: IUserShort[] = [];
+      const resignedUsersShort: IUserShort[] = [];
 
-        if (left.lastname < right.lastname) {
-          return -1;
+      users.forEach((userShort) => {
+        if (userShort.resignedAt === null) {
+          usersShort.push(userShort);
+        } else {
+          resignedUsersShort.push(userShort);
         }
-
-        if (left.lastname > right.lastname) {
-          return 1;
-        }
-        return 0;
       });
+
+      const sortedUsersShort = sortUsersShort(usersShort);
       setUsersShort(sortedUsersShort);
+      const sortedResignedUsersShort = sortUsersShort(resignedUsersShort);
+      setResignedUsersShort(sortedResignedUsersShort);
     });
 
   useInitialize(() => loadUsersShort());
@@ -207,7 +216,8 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   return {
-    displayResigned,
+    collapseResigned,
+    filterResignedUsers,
     filterUsers,
     isLoadUserRequestProcessing,
     isLoadUsersShortRequestProcessing,
@@ -221,7 +231,7 @@ export const useUserProfileSectionViewModel = () => {
     onDelete,
     onSelect,
     query,
-    setDisplayResigned,
+    setCollapseResigned,
     selectedUser,
     setQuery,
   };
