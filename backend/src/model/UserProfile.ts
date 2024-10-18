@@ -28,6 +28,8 @@ const userProfile: ModelStatic<
   phone: DataTypes.STRING(20),
   tariff: DataTypes.INTEGER,
   joinedOn: DataTypes.DATE,
+  lastInvitedAt: DataTypes.DATE,
+  resignedAt: DataTypes.DATE,
 });
 
 export class UserProfile extends userProfile {
