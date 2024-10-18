@@ -19,6 +19,8 @@ export interface IUserProfile extends IEntity, IHaveUserId {
   phone?: string;
   tariff: Tariff;
   joinedOn: Date;
+  resignedAt?: Date;
+  lastInvitedAt?: Date;  
   userBankAccount?: IUserBankAccount;
   userGradings?: IUserGrading[];
 }

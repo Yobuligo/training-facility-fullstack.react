@@ -320,7 +320,9 @@ Version 1.0.0-20241007.1
 	
 - Backlog
 	- Display version details
+	- Rename "Gradings" tab to "Digital pass"?
 	- Set and display trainer to event instance
+	- Documentation for deployment etc.
 	- backup data
 	- Increase expiration time of session
 	- Display Courses / seminars in "grading list"
