@@ -13,6 +13,7 @@ export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUser | undefined>();
   const [query, setQuery] = useState("");
+  const [displayResigned, setDisplayResigned] = useState(false);
   const [loadUsersShortRequest, isLoadUsersShortRequestProcessing] =
     useRequest();
   const [loadUserRequest, isLoadUserRequestProcessing] = useRequest();
@@ -206,6 +207,7 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   return {
+    displayResigned,
     filterUsers,
     isLoadUserRequestProcessing,
     isLoadUsersShortRequestProcessing,
@@ -219,6 +221,7 @@ export const useUserProfileSectionViewModel = () => {
     onDelete,
     onSelect,
     query,
+    setDisplayResigned,
     selectedUser,
     setQuery,
   };

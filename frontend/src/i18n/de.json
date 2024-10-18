@@ -322,7 +322,8 @@
         "locked": "Gesperrt"
     },
     "userProfileSection": {
-        "addUser": "Benutzer hinzufügen"
+        "addUser": "Benutzer hinzufügen",
+        "resignedUsers": "Gekündigte Benutzer"
     },
     "userSearchItem": {
         "addUser": "Benutzer hinzufügen"

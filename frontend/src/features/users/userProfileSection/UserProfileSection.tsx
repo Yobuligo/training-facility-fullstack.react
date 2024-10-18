@@ -1,4 +1,5 @@
 import { Button } from "../../../components/button/Button";
+import { Collapse } from "../../../components/collapse/Collapse";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -43,10 +44,24 @@ export const UserProfileSection: React.FC = () => {
           viewModel.isInsertUserRequestProcessing ? (
             <PageSpinner />
           ) : (
-            <UserProfileList
-              onSelect={viewModel.onSelect}
-              usersShort={viewModel.filterUsers()}
-            />
+            <>
+              <UserProfileList
+                onSelect={viewModel.onSelect}
+                usersShort={viewModel.filterUsers()}
+              />
+              <Collapse
+                className={styles.collapse}
+                collapsed={viewModel.displayResigned}
+                setCollapsed={viewModel.setDisplayResigned}
+                title={t(texts.userProfileSection.resignedUsers)}
+              />
+              {viewModel.displayResigned && (
+                <UserProfileList
+                  onSelect={viewModel.onSelect}
+                  usersShort={viewModel.filterUsers()}
+                />
+              )}
+            </>
           )}
         </>
       )}

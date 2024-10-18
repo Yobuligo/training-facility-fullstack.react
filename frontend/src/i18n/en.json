@@ -322,7 +322,8 @@
         "locked": "Locked"
     },
     "userProfileSection": {
-        "addUser": "Add user"
+        "addUser": "Add user",
+        "resignedUsers": "Resigned users"
     },
     "userSearchItem": {
         "addUser": "Add user"

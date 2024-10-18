@@ -14,7 +14,10 @@ export const Collapse: React.FC<ICollapseProps> = (props) => {
     });
 
   return (
-    <div className={styles.collapse} onClick={onToggleCollapsed}>
+    <div
+      className={style(styles.collapse, props.className)}
+      onClick={onToggleCollapsed}
+    >
       {props.title && (
         <h3 className={style(styles.title, props.titleClassName)}>
           {props.title}
