@@ -5,11 +5,11 @@ import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { LabeledText } from "../../../components/labeledText/LabeledText";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
-import { DateTime } from "../../../core/services/date/DateTime";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
+import { toStringDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
 import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
@@ -261,17 +261,11 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.joinedOn}
             />
           ) : (
-            <div className={styles.joinedOnReadonly}>
-              <div>{t(texts.user.joinedOn)}</div>
-              <div>
-                {props.user.userProfile
-                  ? DateTime.format(
-                      props.user.userProfile?.joinedOn,
-                      "dd.MM.yyyy"
-                    )
-                  : ""}
-              </div>
-            </div>
+            <LabeledText
+              className={styles.joinedOnReadonly}
+              label={t(texts.user.joinedOn)}
+              text={toStringDate(props.user.userProfile?.joinedOn)}
+            />
           )}
           {props.isAdminMode && (
             <LabeledSelect
@@ -291,17 +285,12 @@ export const User: React.FC<IUserProps> = (props) => {
               value={viewModel.resignedAt}
             />
           )}
-          {props.isAdminMode && (
-            <div className={styles.lastInvitedAt}>
-              <LabeledText
-                label={t(texts.user.lastInvitationSent)}
-                text="15.10.2024"
-              />
-              <label className={styles.lastInvitedAtLabel}>
-                {t(texts.user.lastInvitationSent)}
-              </label>
-              <div className={styles.lastInvitedAtValue}>15.10.2024</div>
-            </div>
+          {props.isAdminMode && props.user.userProfile?.lastInvitedAt && (
+            <LabeledText
+              className={styles.lastInvitedAt}
+              label={t(texts.user.lastInvitationSent)}
+              text={toStringDate(props.user.userProfile.lastInvitedAt)}
+            />
           )}
           <Toolbar className={styles.toolbar}>
             {props.isAdminMode && adminModeButtons}
