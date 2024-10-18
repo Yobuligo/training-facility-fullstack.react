@@ -1,0 +1,10 @@
+@use "../../styles/mixins.scss";
+@use "../../styles/colors.module.scss";
+
+.label {
+  @include mixins.label;
+}
+
+.text {
+  color: colors.$color-text;
+}

@@ -2,6 +2,7 @@ import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { LabeledText } from "../../../components/labeledText/LabeledText";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -38,14 +39,12 @@ export const User: React.FC<IUserProps> = (props) => {
           {t(texts.user.resetPassword)}
         </SpinnerButton>
       )}
-
       {/* current user must not be lockable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button onClick={viewModel.onToggleIsLocked}>
           {viewModel.isLocked ? t(texts.user.unlock) : t(texts.user.lock)}
         </Button>
       )}
-
       {/* current user must not be deletable */}
       {user.id !== props.user.id && viewModel.isPersistedUser && (
         <Button onClick={viewModel.onDeleteUser}>
@@ -291,6 +290,18 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.onChangeResignAt}
               value={viewModel.resignedAt}
             />
+          )}
+          {props.isAdminMode && (
+            <div className={styles.lastInvitedAt}>
+              <LabeledText
+                label={t(texts.user.lastInvitationSent)}
+                text="15.10.2024"
+              />
+              <label className={styles.lastInvitedAtLabel}>
+                {t(texts.user.lastInvitationSent)}
+              </label>
+              <div className={styles.lastInvitedAtValue}>15.10.2024</div>
+            </div>
           )}
           <Toolbar className={styles.toolbar}>
             {props.isAdminMode && adminModeButtons}

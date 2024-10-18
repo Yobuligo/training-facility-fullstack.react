@@ -3,6 +3,7 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { createError } from "../core/utils/createError";
 import { EmailService } from "../email/EmailService";
 import { UserInviteRepo } from "../repositories/UserInviteRepo";
+import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { UserRepo } from "../repositories/UserRepo";
 import { NotFoundError } from "../shared/errors/NotFoundError";
 import { SendEmailError } from "../shared/errors/SendEmailError";
@@ -33,6 +34,10 @@ export class UserInviteController extends EntityController<
           const userInvite: IEntityDetails<IUserInvite> = req.body;
           const fields = this.getFieldsFromQuery(req.query);
           const createdUserInvite = await this.repo.insert(userInvite, fields);
+
+          // update user profile lastInvitedAt
+          const userProfileRepo = new UserProfileRepo();
+          // userProfileRepo.findByUserId()
 
           // find user email
           const userRepo = new UserRepo();

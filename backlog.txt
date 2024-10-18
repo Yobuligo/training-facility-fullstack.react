@@ -316,7 +316,11 @@ Version 1.0.0-20241007.1
 	
 - Version 1.6.0-<>.7
 	- Display date of last invite of a user
-	# User can be marked at resigned by setting a corresponding resignedAt date
+		- Button contains date of last invite and caption is changed to "Resend invitation"
+	- Resigned
+		# User can be marked at resigned by setting a corresponding resignedAt date
+		- Resigned users are displayed in a separate group of the user list
+		- Resigned users are not displayed in the search result of the user registration list
 	
 - Backlog
 	- Display version details

@@ -33,3 +33,16 @@
     flex-direction: row;
   }
 }
+
+.lastInvitedAt {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.lastInvitedAtLabel {
+  @include mixins.label;
+}
+
+.lastInvitedAtValue {
+  color: colors.$color-text;
+}

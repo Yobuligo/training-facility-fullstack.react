@@ -60,4 +60,8 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     });
     return wasUpdated;
   }
+
+  // async updateLastInvitedAt(userProfileId: string, lastInvitedAt: Date): Promise<boolean>{
+
+  // }
 }

@@ -306,6 +306,7 @@
         "postalCode": "Postleitzahl",
         "changePassword": "Passwort ändern",
         "resignedAt": "Gekündigt am",
+        "lastInvitationSent": "Letzte Einladung verschickt",
         "sendInvitation": "Einladung senden",
         "sendInvitationQuestion": "Soll eine Einladung an den erstellten Benutzer verschickt werden?",
         "street": "Straße",
