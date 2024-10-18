@@ -51,8 +51,18 @@ export class UserController extends EntityController<IUser, UserRepo> {
         async (req, res) => {
           const fields = this.getFieldsFromQuery(req.query);
           const query = req.query.query;
+          const excludeResigned = req.query.excludeResigned
+            ? req.query.excludeResigned === "true"
+              ? true
+              : false
+            : false;
+
           if (query && typeof query === "string") {
-            const users = await this.repo.findAllByQuery(query, fields);
+            const users = await this.repo.findAllByQuery(
+              query,
+              excludeResigned,
+              fields
+            );
             return res.status(HttpStatusCode.OK_200).send(users);
           }
 

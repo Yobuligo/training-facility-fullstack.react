@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { Op, WhereOptions } from "sequelize";
 import { AppConfig } from "../AppConfig";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
@@ -105,13 +105,18 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
   findAllByQuery<K extends keyof IUser>(
     query: string,
+    excludeResigned: boolean,
     fields: K[]
   ): Promise<IEntitySubset<IUser, K>[]>;
-  findAllByQuery(query: string): Promise<IUser[]>;
-  async findAllByQuery(query: string, fields?: unknown): Promise<unknown> {
+  findAllByQuery(query: string, excludeResigned: boolean): Promise<IUser[]>;
+  async findAllByQuery(
+    query: string,
+    excludeResigned: boolean,
+    fields?: unknown
+  ): Promise<unknown> {
     const searchTerms = query.split(" ");
 
-    const where = {
+    let where: WhereOptions<any> = {
       [Op.or]: searchTerms.map((term) => ({
         [Op.or]: [
           {
@@ -127,6 +132,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         ],
       })),
     };
+
+    if (excludeResigned) {
+      where = {
+        [Op.and]: [{ resignedAt: { [Op.eq]: null } }, where],
+      };
+    }
 
     const data = await this.model.findAll({
       include: [{ model: UserProfile, as: "userProfile", where }],
