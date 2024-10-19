@@ -134,6 +134,7 @@
             "dec": "Dez"
         },
         "no": "Nein",
+        "noEntriesFound": "Keine Einträge gefunden",
         "ok": "Ok",
         "place": "Ort",
         "privacyPolicy": "Datenschutzerklärung",
@@ -327,9 +328,6 @@
     },
     "userSearchItem": {
         "addUser": "Benutzer hinzufügen"
-    },
-    "userSearchList": {
-        "noEntries": "Keine Einträge gefunden"
     },
     "welcome": {
         "explanation": "Im Yeoljeong-Mitgliederbereich kannst Du Deine Trainings planen und Dein Benutzerprofil pflegen.",

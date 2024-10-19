@@ -134,6 +134,7 @@
             "dec": "Dec"
         },
         "no": "No",
+        "noEntriesFound": "No entries found",
         "ok": "Ok",
         "place": "Place",
         "privacyPolicy": "Privacy Policy",
@@ -327,9 +328,6 @@
     },
     "userSearchItem": {
         "addUser": "Add user"
-    },
-    "userSearchList": {
-        "noEntries": "No entries found"
     },
     "welcome": {
         "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",

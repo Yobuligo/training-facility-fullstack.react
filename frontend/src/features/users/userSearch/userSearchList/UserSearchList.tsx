@@ -9,17 +9,13 @@ export const UserSearchList: React.FC<IUserSearchListProps> = (props) => {
   const { t } = useTranslation();
 
   const items = props.users.map((user) => (
-    <UserSearchItem
-      key={user.id}
-      onSelect={props.onSelect}
-      user={user}
-    />
+    <UserSearchItem key={user.id} onSelect={props.onSelect} user={user} />
   ));
 
   return (
     <div className={styles.userSearchList}>
       {List.isEmpty(items) ? (
-        <>{t(texts.userSearchList.noEntries)} </>
+        <>{t(texts.general.noEntriesFound)} </>
       ) : (
         <>{items}</>
       )}

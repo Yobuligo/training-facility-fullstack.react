@@ -181,7 +181,7 @@ Version 1.0.0-20241007.1
 		# Bug: User session is not deleted with user.
 		# Bug: Link of invite email leads to wrong url
 		# Bug: Invite user, send password change request and verify user invite sends requests without token
-		# Bug: Link of invite email leads to dashboard instead of login page	
+		# Bug: Link of invite email leads to dashboard instead of login page
 		
 	# User List
 		# Display loading spinner, when loading users
@@ -323,11 +323,13 @@ Version 1.0.0-20241007.1
 		
 - Version 1.7.0-<>.8
 	# Clicking on the logo on the login page should navigate to dashboard screen
+	- A person can be marked as trainer (as a separate role)
 	
 - Backlog
+	- Set and display trainer to event definition and event instance
+		- A trainer can be selected from a select option
+		- The trainer can be redefined for a specific event instance
 	- Display version details
-	- Rename "Gradings" tab to "Digital pass"?
-	- Set and display trainer to event instance
 	- Documentation for deployment etc.
 	- backup data
 	- Increase expiration time of session

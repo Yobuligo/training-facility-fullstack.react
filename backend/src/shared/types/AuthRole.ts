@@ -3,5 +3,6 @@
  */
 export enum AuthRole {
   ADMIN = "ADMIN",
+  TRAINER = "TRAINER",
   USER = "USER",
 }
