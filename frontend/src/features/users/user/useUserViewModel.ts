@@ -9,6 +9,7 @@ import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
+import { useYesOrNoSelectOption } from "../../../hooks/useYesOrNoSelectOption";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
@@ -101,6 +102,8 @@ export const useUserViewModel = (props: IUserProps) => {
   const navigate = useNavigate();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
+  const isAdminOptions = useYesOrNoSelectOption();
+  const isTrainerOptions = useYesOrNoSelectOption();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -202,22 +205,6 @@ export const useUserViewModel = (props: IUserProps) => {
       { key: Tariff.FAMILY_3, text: t(texts.tariff.family3) },
       { key: Tariff.PRINCIPALS, text: t(texts.tariff.principals) },
       { key: Tariff.RELATIVES, text: t(texts.tariff.relatives) },
-    ],
-    [t]
-  );
-
-  const isAdminOptions: ISelectOption<boolean>[] = useMemo(
-    () => [
-      { key: true, text: t(texts.general.yes) },
-      { key: false, text: t(texts.general.no) },
-    ],
-    [t]
-  );
-
-  const isTrainerOptions: ISelectOption<boolean>[] = useMemo(
-    () => [
-      { key: true, text: t(texts.general.yes) },
-      { key: false, text: t(texts.general.no) },
     ],
     [t]
   );
