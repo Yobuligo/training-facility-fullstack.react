@@ -323,6 +323,7 @@ Version 1.0.0-20241007.1
 		
 - Version 1.7.0-<>.8
 	# Clicking on the logo on the login page should navigate to dashboard screen
+	# Display message in user list if no users were found
 	- A person can be marked as trainer (as a separate role)
 	
 - Backlog

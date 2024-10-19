@@ -55,6 +55,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [gender, setGender] = useState(userProfile.gender);
   const [tariff, setTariff] = useState(userProfile.tariff);
   const [isAdmin, setIsAdmin] = useState(UserInfo.containsAdminRole(userRoles));
+  const [isTrainer, setIsTrainer] = useState(
+    UserInfo.containsTrainerRole(userRoles)
+  );
   const [phone, setPhone] = useState(userProfile.phone);
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
     userProfile.street
@@ -109,6 +112,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setLastname(userProfile.lastname);
     setGender(userProfile.gender);
     setIsAdmin(UserInfo.containsAdminRole(userRoles));
+    setIsTrainer(UserInfo.containsTrainerRole(userRoles));
     setPhone(userProfile.phone);
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
@@ -203,6 +207,14 @@ export const useUserViewModel = (props: IUserProps) => {
   );
 
   const isAdminOptions: ISelectOption<boolean>[] = useMemo(
+    () => [
+      { key: true, text: t(texts.general.yes) },
+      { key: false, text: t(texts.general.no) },
+    ],
+    [t]
+  );
+
+  const isTrainerOptions: ISelectOption<boolean>[] = useMemo(
     () => [
       { key: true, text: t(texts.general.yes) },
       { key: false, text: t(texts.general.no) },
@@ -344,13 +356,11 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
   };
 
-  const updateUserRoles = () => {
-    // find admin role index
-    const index = userRoles.findIndex(
-      (userRole) => userRole.role === AuthRole.ADMIN
-    );
+  const updateUserRole = (role: AuthRole, hasRole: boolean) => {
+    // find role index
+    const index = userRoles.findIndex((userRole) => userRole.role === role);
 
-    if (isAdmin === false) {
+    if (hasRole === false) {
       // delete if exist
       if (index !== -1) {
         userRoles.splice(index, 1);
@@ -360,13 +370,18 @@ export const useUserViewModel = (props: IUserProps) => {
       if (index === -1) {
         userRoles.push({
           id: uuid(),
-          role: AuthRole.ADMIN,
+          role: role,
           userId: props.user.id,
           createdAt: new Date(),
           updatedAt: new Date(),
         });
       }
     }
+  };
+
+  const updateUserRoles = () => {
+    updateUserRole(AuthRole.ADMIN, isAdmin);
+    updateUserRole(AuthRole.TRAINER, isTrainer);
   };
 
   const onSave = () => {
@@ -527,6 +542,8 @@ export const useUserViewModel = (props: IUserProps) => {
     isPersistedUser,
     isSendingUserInvite,
     isSendingPasswordResetRequest,
+    isTrainer,
+    isTrainerOptions,
     joinedOn,
     lastInvitedAt,
     lastname,
@@ -568,6 +585,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setLastname,
     setGender,
     setIsAdmin,
+    setIsTrainer,
     setPhone,
     setStreet,
     setTariff,

@@ -5,9 +5,15 @@ import { AuthRole } from "../shared/types/AuthRole";
 
 export class UserInfo {
   static containsAdminRole(userRoles: IUserRole[]): boolean {
-    const index = userRoles.findIndex(
-      (userRole) => userRole.role === AuthRole.ADMIN
-    );
+    return this.containsRole(userRoles, AuthRole.ADMIN);
+  }
+
+  static containsTrainerRole(userRoles: IUserRole[]): boolean {
+    return this.containsRole(userRoles, AuthRole.TRAINER);
+  }
+
+  static containsRole(userRoles: IUserRole[], role: AuthRole): boolean {
+    const index = userRoles.findIndex((userRole) => userRole.role === role);
     return index !== -1;
   }
 

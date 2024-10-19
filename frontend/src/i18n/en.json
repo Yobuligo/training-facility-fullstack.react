@@ -300,6 +300,7 @@
         "resetPassword": "Reset Password",
         "gradings": "Gradings",
         "isAdmin": "Is Admin",
+        "isTrainer": "Is Trainer",
         "joinedOn": "Joined On",
         "lastname": "Lastname",
         "personalInformation": "Personal Information",

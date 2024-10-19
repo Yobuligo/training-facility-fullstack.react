@@ -268,6 +268,15 @@ export const User: React.FC<IUserProps> = (props) => {
             />
           )}
           {props.isAdminMode && (
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              label={t(texts.user.resignedAt)}
+              type="date"
+              onChange={viewModel.onChangeResignAt}
+              value={viewModel.resignedAt}
+            />
+          )}
+          {props.isAdminMode && (
             <LabeledSelect
               disabled={viewModel.displayMode}
               label={t(texts.user.isAdmin)}
@@ -277,14 +286,14 @@ export const User: React.FC<IUserProps> = (props) => {
             />
           )}
           {props.isAdminMode && (
-            <LabeledInput
+            <LabeledSelect
               disabled={viewModel.displayMode}
-              label={t(texts.user.resignedAt)}
-              type="date"
-              onChange={viewModel.onChangeResignAt}
-              value={viewModel.resignedAt}
+              label={t(texts.user.isTrainer)}
+              options={viewModel.isTrainerOptions}
+              onSelect={viewModel.setIsTrainer}
+              value={viewModel.isTrainer}
             />
-          )}
+          )}          
           {props.isAdminMode && viewModel.lastInvitedAt && (
             <LabeledText
               className={styles.lastInvitedAt}
