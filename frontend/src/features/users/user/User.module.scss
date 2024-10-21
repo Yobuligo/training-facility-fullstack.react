@@ -22,6 +22,14 @@
   color: colors.$color-text;
 }
 
+.toolbarContainer {
+  @include mixins.medium-screen {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
 .toolbar {
   display: flex;
   flex-direction: column;
@@ -37,6 +45,7 @@
 .lastInvitedAt {
   grid-column-start: 1;
   grid-column-end: 3;
+  margin-bottom: dimensions.$negative-space;
 }
 
 .lastInvitedAtLabel {

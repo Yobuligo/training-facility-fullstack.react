@@ -293,22 +293,24 @@ export const User: React.FC<IUserProps> = (props) => {
               onSelect={viewModel.setIsTrainer}
               value={viewModel.isTrainer}
             />
-          )}          
-          {props.isAdminMode && viewModel.lastInvitedAt && (
-            <LabeledText
-              className={styles.lastInvitedAt}
-              label={t(texts.user.lastInvitationSent)}
-              text={toStringDate(viewModel.lastInvitedAt)}
-            />
           )}
-          <Toolbar className={styles.toolbar}>
-            {props.isAdminMode && adminModeButtons}
-            {!props.isAdminMode && (
-              <Button onClick={viewModel.onChangePassword}>
-                {t(texts.user.changePassword)}
-              </Button>
+          <div className={styles.toolbarContainer}>
+            {props.isAdminMode && viewModel.lastInvitedAt && (
+              <LabeledText
+                className={styles.lastInvitedAt}
+                label={t(texts.user.lastInvitationSent)}
+                text={toStringDate(viewModel.lastInvitedAt)}
+              />
             )}
-          </Toolbar>
+            <Toolbar className={styles.toolbar}>
+              {props.isAdminMode && adminModeButtons}
+              {!props.isAdminMode && (
+                <Button onClick={viewModel.onChangePassword}>
+                  {t(texts.user.changePassword)}
+                </Button>
+              )}
+            </Toolbar>
+          </div>
         </UserProfileGroup>
       </ChangeableForm>
     </div>
