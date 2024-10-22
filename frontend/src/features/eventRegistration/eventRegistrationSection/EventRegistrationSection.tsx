@@ -1,3 +1,4 @@
+import { MultiSelectGroup } from "../../../components/multiSelectGroup/MultiSelectGroup";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { LinkIcon } from "../../../icons/LinkIcon";
@@ -69,6 +70,17 @@ export const EventRegistrationSection: React.FC<
               </SecondaryButton>
             )}
           </div>
+
+          <h3 className={styles.title}>Trainer</h3>
+          <MultiSelectGroup
+            options={[
+              { key: 1, text: "Beatriz Bascon-Wolf" },
+              { key: 2, text: "Frank Burkart" },
+              { key: 3, text: "Peter Hoffmann" },
+              { key: 4, text: "Sonja Steinhagen" },
+            ]}
+          />
+
           <h3 className={styles.title}>
             {t(texts.eventRegistrationSection.checkInUsers)}
           </h3>

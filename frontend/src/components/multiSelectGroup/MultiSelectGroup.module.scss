@@ -1,0 +1,19 @@
+@use "../../styles/dimensions.module.scss";
+@use "../../styles/colors.module.scss";
+
+.multiSelectGroupItem {
+  display: flex;
+  flex-direction: row;
+  column-gap: dimensions.$negative-space;
+  width: 100%;
+}
+
+.select {
+  font-size: large;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.icon {
+  fill: colors.$color-search-button-text;
+}

@@ -325,7 +325,7 @@ Version 1.0.0-20241007.1
 	# Clicking on the logo on the login page should navigate to dashboard screen
 	# Display message in user list if no users were found
 	# A person can be marked as trainer (as a separate role)
-	- Adjust styling of technical information in user profile admin view (currently there is a bug that the app becomes to wide)
+	- Adjust styling of technical information in user profile admin view
 	
 - Backlog
 	- Set and display trainer to event definition and event instance
