@@ -1,4 +1,4 @@
-import { MultiSelectGroup } from "../../../components/multiSelectList/MultiSelectList";
+import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { LinkIcon } from "../../../icons/LinkIcon";
@@ -71,8 +71,11 @@ export const EventRegistrationSection: React.FC<
             )}
           </div>
 
-          <h3 className={styles.title}>Trainer</h3>
-          <MultiSelectGroup
+          <h3 className={styles.title}>
+            {t(texts.eventRegistrationSection.trainers)}
+          </h3>
+          <MultiSelectList
+            className={styles.trainerMultiSelectList}
             options={[
               { key: 1, text: "Beatriz Bascon-Wolf" },
               { key: 2, text: "Frank Burkart" },

@@ -88,7 +88,8 @@
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
         "infoCopyLink": "Link was copied to clipboard",
         "open": "Reopen registration",
-        "reschedule": "Reschedule"
+        "reschedule": "Reschedule",
+        "trainers": "Trainers"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Your trial training was successfully canceled.",

@@ -1,4 +1,5 @@
 import { List } from "../../core/services/list/List";
+import { style } from "../../core/ui/style";
 import { AddIcon } from "../../icons/AddIcon";
 import { MultiSelectItem } from "../multiSelectItem/MultiSelectItem";
 import { SpinnerButton } from "../spinnerButton/SpinnerButton";
@@ -6,7 +7,7 @@ import { IMultiSelectListProps } from "./IMultiSelectListProps";
 import styles from "./MultiSelectList.module.scss";
 import { useMultiSelectListViewModel } from "./useMultiSelectListViewModel";
 
-export function MultiSelectGroup<T>(props: IMultiSelectListProps<T>) {
+export function MultiSelectList<T>(props: IMultiSelectListProps<T>) {
   const viewModel = useMultiSelectListViewModel(props);
 
   const items = viewModel.multiSelectItems.map((multiSelectItem, index) => (
@@ -21,7 +22,7 @@ export function MultiSelectGroup<T>(props: IMultiSelectListProps<T>) {
   ));
 
   return (
-    <div className={styles.multiSelectList}>
+    <div className={style(styles.multiSelectList, props.className)}>
       {List.isEmpty(items) ? (
         <div className={styles.addButton}>
           <SpinnerButton displaySpinner={false} onClick={viewModel.onAdd}>
