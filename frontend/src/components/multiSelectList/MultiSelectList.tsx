@@ -1,19 +1,36 @@
+import { List } from "../../core/services/list/List";
+import { AddIcon } from "../../icons/AddIcon";
 import { MultiSelectItem } from "../multiSelectItem/MultiSelectItem";
+import { SpinnerButton } from "../spinnerButton/SpinnerButton";
 import { IMultiSelectListProps } from "./IMultiSelectListProps";
 import styles from "./MultiSelectList.module.scss";
-import { useMultiSelectGroupViewModel } from "./useMultiSelectListViewModel";
+import { useMultiSelectListViewModel } from "./useMultiSelectListViewModel";
 
 export function MultiSelectGroup<T>(props: IMultiSelectListProps<T>) {
-  const viewModel = useMultiSelectGroupViewModel(props);
+  const viewModel = useMultiSelectListViewModel(props);
 
-  const items = viewModel.multiSelectGroupItems.map(
-    (multiSelectGroupItem, index) => (
-      <MultiSelectItem
-        key={index}
-        options={multiSelectGroupItem.selectOptions}
-      />
-    )
+  const items = viewModel.multiSelectItems.map((multiSelectItem, index) => (
+    <MultiSelectItem
+      key={index}
+      multiSelectItem={multiSelectItem}
+      onAdd={viewModel.onAdd}
+      onDelete={viewModel.onDelete}
+      onSelect={viewModel.onSelect}
+      selected={multiSelectItem.selected}
+    />
+  ));
+
+  return (
+    <div className={styles.multiSelectList}>
+      {List.isEmpty(items) ? (
+        <div className={styles.addButton}>
+          <SpinnerButton displaySpinner={false} onClick={viewModel.onAdd}>
+            <AddIcon className={styles.addIcon} />
+          </SpinnerButton>
+        </div>
+      ) : (
+        items
+      )}
+    </div>
   );
-
-  return <div className={styles.multiSelectList}>{items}</div>;
 }

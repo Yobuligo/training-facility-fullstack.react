@@ -1,19 +1,18 @@
 @use "../../styles/dimensions.module.scss";
 @use "../../styles/colors.module.scss";
 
-.multiSelectListItem {
+.multiSelectList {
   display: flex;
-  flex-direction: row;
-  column-gap: dimensions.$negative-space;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
   width: 100%;
 }
 
-.select {
-  font-size: large;
-  padding: 0.5rem;
-  width: 100%;
+.addButton {
+  justify-self: center;
+  align-self: center;
 }
 
-.icon {
+.addIcon {
   fill: colors.$color-search-button-text;
 }
