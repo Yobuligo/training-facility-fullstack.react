@@ -1,5 +1,7 @@
 import { ISelectOption } from "../select/ISelectOption";
 
-export interface IMultiSelectGroupProps<T> {
+export interface IMultiSelectItemProps<T> {
+  onAdd?: () => void;
+  onDelete?: () => void;
   options: ISelectOption<T>[];
 }

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { ISelectOption } from "../select/ISelectOption";
-import { IMultiSelectGroupProps } from "./IMultiSelectGroupProps";
+import { IMultiSelectListProps } from "./IMultiSelectListProps";
 
 interface IMultiSelectGroupItem<T> {
   selectOptions: ISelectOption<T>[];
 }
 
 export const useMultiSelectGroupViewModel = <T>(
-  props: IMultiSelectGroupProps<T>
+  props: IMultiSelectListProps<T>
 ) => {
   const [multiSelectGroupItems, setMultiSelectGroupItems] = useState<
     IMultiSelectGroupItem<T>[]

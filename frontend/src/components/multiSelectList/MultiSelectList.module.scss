@@ -1,7 +1,7 @@
 @use "../../styles/dimensions.module.scss";
 @use "../../styles/colors.module.scss";
 
-.multiSelectGroupItem {
+.multiSelectListItem {
   display: flex;
   flex-direction: row;
   column-gap: dimensions.$negative-space;

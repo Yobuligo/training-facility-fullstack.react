@@ -1,4 +1,4 @@
-import { MultiSelectGroup } from "../../../components/multiSelectGroup/MultiSelectGroup";
+import { MultiSelectGroup } from "../../../components/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { LinkIcon } from "../../../icons/LinkIcon";
