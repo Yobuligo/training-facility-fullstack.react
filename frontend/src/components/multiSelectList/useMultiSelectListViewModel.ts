@@ -25,9 +25,9 @@ export const useMultiSelectListViewModel = <T>(
   };
 
   /**
-   * Returns the first free option, which is not in use, so not selected.
+   * Returns the next free option, which is not in use, so not selected, otherwise undefined.
    */
-  const findFirstFreeOption = (
+  const findNextFreeOption = (
     multiSelectItems: IMultiSelectItem<T>[]
   ): ISelectOption<T> | undefined => {
     const selectedKeys = findSelectedKeys(multiSelectItems);
@@ -45,49 +45,47 @@ export const useMultiSelectListViewModel = <T>(
   const updateOptions = (multiSelectItems: IMultiSelectItem<T>[]) => {
     const selectedKeys = findSelectedKeys(multiSelectItems);
 
-    // Update multiSelectItems.options so that already selected elements can not be selected multiple times.
-    // Consider to add the select option, if the selected element of a multiSelectItem is the selected.
-    // E.g. if we have the keys 1, 2, 3 and in one select option, the key 2 is selected, then we have to add the select option with key 2.
+    // Filter free options (which are not in use, so currently free, which can be selected) or an option in case it is the selected option of the multiSelectItem
     multiSelectItems.forEach((multiSelectItem) => {
-      for (let i = 0; i < multiSelectItem.options.length; i++) {
-        const option = multiSelectItem.options[i];
-
-        // delete if key is already in use
-        if (
-          option.key !== multiSelectItem.selected.key &&
-          selectedKeys.has(option.key)
-        ) {
-          multiSelectItem.options.splice(i, 1);
-          i--;
-        }
-      }
+      multiSelectItem.options = props.options.filter(
+        (option) =>
+          option.key === multiSelectItem.selected.key ||
+          !selectedKeys.has(option.key)
+      );
     });
   };
 
   const onAdd = () => {
-    const toBeSelected = findFirstFreeOption(multiSelectItems);
+    // find the next free option
+    const toBeSelected = findNextFreeOption(multiSelectItems);
     if (!toBeSelected) {
       return;
     }
 
     setMultiSelectItems((previous) => {
+      // add new entry with the next free option
       previous.push({
         id: uuid(),
         options: props.options,
         selected: toBeSelected,
       });
+
+      updateOptions(previous);
       return [...previous];
     });
   };
 
   const onDelete = (multiSelectItem: IMultiSelectItem<T>) =>
     setMultiSelectItems((previous) => {
+      // delete multiSelectItem from the list
       const index = previous.findIndex(
         (item) => item.id === multiSelectItem.id
       );
       if (index !== -1) {
         previous.splice(index, 1);
       }
+
+      updateOptions(previous);
       return [...previous];
     });
 
@@ -96,6 +94,7 @@ export const useMultiSelectListViewModel = <T>(
     option: ISelectOption<T>
   ) => {
     setMultiSelectItems((previous) => {
+      // update the selected option of a multiSelectOption
       const index = previous.findIndex(
         (item) => item.id === multiSelectItem.id
       );
@@ -103,6 +102,8 @@ export const useMultiSelectListViewModel = <T>(
         multiSelectItem.selected = option;
         previous.splice(index, 1, multiSelectItem);
       }
+
+      updateOptions(previous);
       return [...previous];
     });
   };
