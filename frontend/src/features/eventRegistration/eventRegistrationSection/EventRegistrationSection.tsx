@@ -7,7 +7,6 @@ import { LinkIcon } from "../../../icons/LinkIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { UserInfo } from "../../../services/UserInfo";
-import { IUserShort } from "../../../shared/model/IUserShort";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { sortUsersShort } from "../../users/utils/sortUsersShort";
@@ -23,10 +22,10 @@ export const EventRegistrationSection: React.FC<
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
 
-  const trainerSelectOptions: ISelectOption<IUserShort>[] = useMemo(
+  const trainerSelectOptions: ISelectOption<string>[] = useMemo(
     () =>
       sortUsersShort(props.trainers).map((trainer) => ({
-        key: trainer,
+        key: trainer.id,
         text: UserInfo.toFullName(trainer),
       })),
     [props.trainers]
