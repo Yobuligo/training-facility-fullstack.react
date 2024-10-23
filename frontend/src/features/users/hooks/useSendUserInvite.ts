@@ -35,7 +35,7 @@ export const useSendUserInvite = (): [
       await userInviteApi.insert(userInvite);
       toast.success(
         t(texts.user.successSendUserInvite, {
-          user: UserInfo.toFullName(user),
+          user: UserInfo.toFullName(user.userProfile),
         })
       );
     }, handleSendEmailError);

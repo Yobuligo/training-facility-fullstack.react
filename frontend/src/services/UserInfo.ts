@@ -1,7 +1,7 @@
 import { Subset } from "../core/Subset";
-import { IUser } from "../shared/model/IUser";
 import { IUserRole } from "../shared/model/IUserRole";
 import { AuthRole } from "../shared/types/AuthRole";
+import { IHaveName } from "../types/IHaveName";
 
 export class UserInfo {
   static containsAdminRole(userRoles: IUserRole[]): boolean {
@@ -24,7 +24,7 @@ export class UserInfo {
     return index !== -1;
   }
 
-  static toFullName(user: IUser): string {
-    return `${user.userProfile?.firstname} ${user.userProfile?.lastname}`;
+  static toFullName(object?: IHaveName): string {
+    return `${object?.firstname} ${object?.lastname}`;
   }
 }

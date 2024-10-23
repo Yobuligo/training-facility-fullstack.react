@@ -3,6 +3,7 @@ import { RESTApi } from "../../../api/core/RESTApi";
 import { IUserInternal } from "../../../model/IUserInternal";
 import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
+import { AuthRole } from "../../../shared/types/AuthRole";
 import { hashPassword } from "../../../utils/hashPassword";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
@@ -44,6 +45,10 @@ export class UserApi extends EntityRepository<IUser> {
 
   async findAllShort(): Promise<IUserShort[]> {
     return await RESTApi.get(`${this.url}/short/all`);
+  }
+
+  async findAllShortByRole(role: AuthRole): Promise<IUserShort[]> {
+    return await RESTApi.get(`${this.url}/short/all`, { urlParams: { role } });
   }
 
   async findByQuery(query: string): Promise<IUser[]> {

@@ -114,7 +114,7 @@ export const useEventRegistrationSectionViewModel = (
         if (isError(error) && error.type === "UserNotFoundError") {
           toast.error(
             t(texts.eventRegistrationSection.errorUserNotFound, {
-              user: UserInfo.toFullName(user),
+              user: UserInfo.toFullName(user.userProfile),
             })
           );
           return true;

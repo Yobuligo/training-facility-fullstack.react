@@ -34,7 +34,7 @@ export const useSendPasswordResetRequest = (): [
       await userInviteApi.insert(userInvite);
       toast.success(
         t(texts.user.successResetPassword, {
-          user: UserInfo.toFullName(user),
+          user: UserInfo.toFullName(user.userProfile),
         })
       );
     }, handleSendEmailError);

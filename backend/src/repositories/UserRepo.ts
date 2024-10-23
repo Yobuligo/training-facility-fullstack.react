@@ -170,6 +170,37 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
+  async findAllShort(): Promise<IUserShort[]> {
+    const data = await User.findAll({
+      attributes: ["id", "isLocked", "username"],
+      include: [
+        {
+          model: UserProfile,
+          as: "userProfile",
+          attributes: [
+            "id",
+            "firstname",
+            "lastname",
+            "email",
+            "phone",
+            "resignedAt",
+          ],
+        },
+        {
+          model: UserRole,
+          as: "userRoles",
+          attributes: ["id", "role"],
+        },
+      ],
+      transaction: findTransaction(),
+    });
+
+    const userShorts: IUserShort[] = data.map((model) =>
+      this.toUserShort(model)
+    );
+    return userShorts;
+  }
+
   async findByIdShort(userId: string): Promise<IUserShort | undefined> {
     const data = await User.findByPk(userId, {
       attributes: ["id", "isLocked", "username"],
@@ -201,9 +232,13 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return this.toUserShort(data);
   }
 
-  async findAllShort(): Promise<IUserShort[]> {
+  /**
+   * Returns all users in a short format having a specific role, e.g. ADMIN or TRAINER.
+   * Attention: Returns only the role to which is restricted not all rules of a user.
+   */
+  async findAllShortByRole(role: AuthRole): Promise<IUserShort[]> {
     const data = await User.findAll({
-      attributes: ["id", "isLocked"],
+      attributes: ["id", "isLocked", "username"],
       include: [
         {
           model: UserProfile,
@@ -221,9 +256,11 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
           model: UserRole,
           as: "userRoles",
           attributes: ["id", "role"],
+          where: {
+            role: role,
+          },
         },
       ],
-      transaction: findTransaction(),
     });
 
     const userShorts: IUserShort[] = data.map((model) =>

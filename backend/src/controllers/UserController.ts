@@ -137,10 +137,18 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.router.get(
       `${this.routeMeta.path}/short/all`,
       SessionInterceptor(
-        async (_, res) => {
+        async (req, res) => {
+          const role = req.query.role;
           const userRepo = new UserRepo();
-          const usersShort = await userRepo.findAllShort();
-          res.status(HttpStatusCode.OK_200).send(usersShort);
+          if (role && this.isKeyOf(role, AuthRole)) {
+            const usersShort = await userRepo.findAllShortByRole(
+              AuthRole[role]
+            );
+            res.status(HttpStatusCode.OK_200).send(usersShort);
+          } else {
+            const usersShort = await userRepo.findAllShort();
+            res.status(HttpStatusCode.OK_200).send(usersShort);
+          }
         },
         [AuthRole.ADMIN]
       )
@@ -240,5 +248,12 @@ export class UserController extends EntityController<IUser, UserRepo> {
         [AuthRole.ADMIN]
       )
     );
+  }
+
+  /**
+   * Returns if the {@link key} is a key of type of {@link object}.
+   */
+  private isKeyOf<T extends object>(key: any, object: T): key is keyof T {
+    return key in object;
   }
 }

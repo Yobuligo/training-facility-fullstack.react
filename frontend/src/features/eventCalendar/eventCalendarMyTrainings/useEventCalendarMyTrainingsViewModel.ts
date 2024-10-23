@@ -8,8 +8,11 @@ import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
+import { IUserShort } from "../../../shared/model/IUserShort";
+import { AuthRole } from "../../../shared/types/AuthRole";
 import { useFetchEventInstance } from "../hooks/useFetchEventInstance";
 import { IEvent } from "../model/IEvent";
+import { UserApi } from "./../../../lib/userSession/api/UserApi";
 
 export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
@@ -18,6 +21,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
     undefined
   );
+  const [trainers, setTrainers] = useState<IUserShort[]>([]);
   const auth = useAuth();
   const [user] = useUser();
   const [reloadSignal, triggerReloadSignal] = useSignal();
@@ -37,6 +41,10 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     if (auth.isAdmin()) {
       const eventInstance = await fetchEventInstance(event);
       setSelectedEventInstance(eventInstance);
+
+      const userApi = new UserApi();
+      const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+      setTrainers(trainers);
       setSelectedEvent(event);
     }
   };
@@ -75,6 +83,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     selectedEvent,
     selectedEventInstance,
     showAdditionalAdminDescription,
+    trainers,
     triggerReloadSignal,
     userId: user.id,
   };

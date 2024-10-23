@@ -43,6 +43,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
           eventInstance={viewModel.selectedEventInstance}
           isMemberOnly={viewModel.selectedEvent.eventDefinition.isMemberOnly}
           onBack={viewModel.onEventInstanceUnselect}
+          trainers={viewModel.trainers}
         />
       ) : (
         <EventCalendarSection

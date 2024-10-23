@@ -10,6 +10,7 @@ export const EventRegistrationDetails: React.FC<
       <EventRegistrationSection
         eventInstance={props.eventInstance}
         isMemberOnly={props.isMemberOnly}
+        trainers={props.trainers}
       />
     </DetailView>
   );

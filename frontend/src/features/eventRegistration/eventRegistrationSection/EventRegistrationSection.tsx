@@ -1,9 +1,12 @@
 import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
+import { ISelectOption } from "../../../components/select/ISelectOption";
 import { LinkIcon } from "../../../icons/LinkIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { UserInfo } from "../../../services/UserInfo";
+import { IUserShort } from "../../../shared/model/IUserShort";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
@@ -17,6 +20,8 @@ export const EventRegistrationSection: React.FC<
 > = (props) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
+
+  const trainerSelectOptions: ISelectOption<IUserShort>[] = props.trainers.map((trainer) => ({key: trainer, text: UserInfo.toFullName(trainer)}))
 
   return (
     <>
