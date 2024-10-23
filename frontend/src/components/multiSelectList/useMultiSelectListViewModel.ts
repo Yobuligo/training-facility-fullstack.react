@@ -37,7 +37,7 @@ export const useMultiSelectListViewModel = <T>(
 ) => {
   const [multiSelectItems, setMultiSelectItems] = useState<
     IMultiSelectItem<T>[]
-  >([{ id: uuid(), options: props.options, selected: props.options[0] }]);
+  >(createMultiSelectItems(props.options, props.selected ?? []));
 
   /**
    * Returns the keys of the select options, which are in use, which means which are selected.
