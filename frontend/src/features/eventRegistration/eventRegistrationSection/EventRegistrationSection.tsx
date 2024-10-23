@@ -10,6 +10,7 @@ import { UserInfo } from "../../../services/UserInfo";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
+import { sortUsersShort } from "../../users/utils/sortUsersShort";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
 import { EventRegistrationSearch } from "../eventRegistrationSearch/EventRegistrationSearch";
 import styles from "./EventRegistrationSection.module.scss";
@@ -24,7 +25,7 @@ export const EventRegistrationSection: React.FC<
 
   const trainerSelectOptions: ISelectOption<IUserShort>[] = useMemo(
     () =>
-      props.trainers.map((trainer) => ({
+      sortUsersShort(props.trainers).map((trainer) => ({
         key: trainer,
         text: UserInfo.toFullName(trainer),
       })),
