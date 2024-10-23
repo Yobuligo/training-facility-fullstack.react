@@ -1,8 +1,36 @@
 import { useState } from "react";
+import { error } from "../../core/utils/error";
 import { uuid } from "../../utils/uuid";
 import { ISelectOption } from "../select/ISelectOption";
 import { IMultiSelectItem } from "./IMultiSelectItem";
 import { IMultiSelectListProps } from "./IMultiSelectListProps";
+
+/**
+ * Creates a {@link IMultiSelectItem} with the given {@link options} and sets the given {@link key} as selected option.
+ */
+const createMultiSelectItem = <T>(
+  options: ISelectOption<T>[],
+  key: T
+): IMultiSelectItem<T> => {
+  return {
+    id: uuid(),
+    options,
+    selected:
+      options.find((option) => option.key === key) ??
+      error(
+        "Error while creating select options. 'Selected' must be part of 'options'."
+      ),
+  };
+};
+
+/**
+ * Creates a list with {@link IMultiSelectItem}s with the given {@link options} and sets the given {@link keys} as selected options.
+ */
+const createMultiSelectItems = <T>(
+  options: ISelectOption<T>[],
+  keys: T[]
+): IMultiSelectItem<T>[] =>
+  keys.map((key) => createMultiSelectItem(options, key));
 
 export const useMultiSelectListViewModel = <T>(
   props: IMultiSelectListProps<T>

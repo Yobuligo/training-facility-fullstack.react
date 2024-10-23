@@ -332,8 +332,9 @@ Version 1.0.0-20241007.1
 		- A trainer can be selected from a select option
 		- The trainer can be redefined for a specific event instance
 		- Certain trainers can be assigned to a training
-		- What happend if a user is assigned as trainer but later the trainer flag gets deleted?
-		- What happend if a user is assigned as trainer but later deleted? 
+		- What happend if a user is trainer but later the trainer flag gets deleted? Trainer must still assigned as trainer in past trainings.
+		- What happend if a user is trainer but later deleted? Just delete it, if the training has no trainers, we can imagine what happened.
+		- What happend if a user is trainer and resigned? Trainer must not be selectable anymore as trainer even so he has the role.
 	- Display version details
 	- Documentation for deployment etc.
 	- backup data
