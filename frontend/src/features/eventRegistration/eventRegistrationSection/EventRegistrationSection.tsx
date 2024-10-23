@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
@@ -21,7 +22,14 @@ export const EventRegistrationSection: React.FC<
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
 
-  const trainerSelectOptions: ISelectOption<IUserShort>[] = props.trainers.map((trainer) => ({key: trainer, text: UserInfo.toFullName(trainer)}))
+  const trainerSelectOptions: ISelectOption<IUserShort>[] = useMemo(
+    () =>
+      props.trainers.map((trainer) => ({
+        key: trainer,
+        text: UserInfo.toFullName(trainer),
+      })),
+    [props.trainers]
+  );
 
   return (
     <>
@@ -81,12 +89,7 @@ export const EventRegistrationSection: React.FC<
           </h3>
           <MultiSelectList
             className={styles.trainerMultiSelectList}
-            options={[
-              { key: 1, text: "Beatriz Bascon-Wolf" },
-              { key: 2, text: "Frank Burkart" },
-              { key: 3, text: "Peter Hoffmann" },
-              { key: 4, text: "Sonja Steinhagen" },
-            ]}
+            options={trainerSelectOptions}
           />
 
           <h3 className={styles.title}>

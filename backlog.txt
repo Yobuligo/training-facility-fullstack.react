@@ -325,12 +325,14 @@ Version 1.0.0-20241007.1
 	# Clicking on the logo on the login page should navigate to dashboard screen
 	# Display message in user list if no users were found
 	# A person can be marked as trainer (as a separate role)
-	- Adjust styling of technical information in user profile admin view
+	- Adjust styling of technical information in user profile admin view		
 	
 - Backlog
 	- Set and display trainer to event definition and event instance
 		- A trainer can be selected from a select option
 		- The trainer can be redefined for a specific event instance
+		- Certain trainers can be assigned to a training
+		- What happend if a user is assigned as trainer but later the trainer flag gets deleted?
 	- Display version details
 	- Documentation for deployment etc.
 	- backup data
