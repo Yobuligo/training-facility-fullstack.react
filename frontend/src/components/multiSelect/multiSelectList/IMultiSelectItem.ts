@@ -1,4 +1,4 @@
-import { ISelectOption } from "../select/ISelectOption";
+import { ISelectOption } from "../../select/ISelectOption";
 
 export interface IMultiSelectItem<T> {
   id: string;

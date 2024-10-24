@@ -1,4 +1,4 @@
-import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
+import { MultiSelectList } from "../../../components/multiSelect/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";

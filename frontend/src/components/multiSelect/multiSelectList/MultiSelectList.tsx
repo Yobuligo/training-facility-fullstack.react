@@ -1,8 +1,8 @@
-import { List } from "../../core/services/list/List";
-import { style } from "../../core/ui/style";
-import { AddIcon } from "../../icons/AddIcon";
+import { List } from "../../../core/services/list/List";
+import { style } from "../../../core/ui/style";
+import { AddIcon } from "../../../icons/AddIcon";
 import { MultiSelectItem } from "../multiSelectItem/MultiSelectItem";
-import { SpinnerButton } from "../spinnerButton/SpinnerButton";
+import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { IMultiSelectListProps } from "./IMultiSelectListProps";
 import styles from "./MultiSelectList.module.scss";
 import { useMultiSelectListViewModel } from "./useMultiSelectListViewModel";

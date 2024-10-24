@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { error } from "../../core/utils/error";
-import { uuid } from "../../utils/uuid";
-import { ISelectOption } from "../select/ISelectOption";
+import { error } from "../../../core/utils/error";
+import { uuid } from "../../../utils/uuid";
+import { ISelectOption } from "../../select/ISelectOption";
 import { IMultiSelectItem } from "./IMultiSelectItem";
 import { IMultiSelectListProps } from "./IMultiSelectListProps";
 

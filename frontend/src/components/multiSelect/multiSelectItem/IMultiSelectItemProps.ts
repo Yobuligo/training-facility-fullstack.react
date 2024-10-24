@@ -1,5 +1,5 @@
+import { ISelectOption } from "../../select/ISelectOption";
 import { IMultiSelectItem } from "../multiSelectList/IMultiSelectItem";
-import { ISelectOption } from "../select/ISelectOption";
 
 export interface IMultiSelectItemProps<T> {
   multiSelectItem: IMultiSelectItem<T>;

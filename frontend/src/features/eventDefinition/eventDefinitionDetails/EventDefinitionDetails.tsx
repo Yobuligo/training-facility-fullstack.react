@@ -1,7 +1,7 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
-import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
+import { MultiSelectList } from "../../../components/multiSelect/multiSelectList/MultiSelectList";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { style } from "../../../core/ui/style";
 import colors from "../../../styles/colors.module.scss";

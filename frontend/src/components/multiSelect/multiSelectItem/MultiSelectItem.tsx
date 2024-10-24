@@ -1,9 +1,9 @@
-import { AddIcon } from "../../icons/AddIcon";
-import { DeleteIcon } from "../../icons/DeleteIcon";
-import { SecondaryButton } from "../secondaryButton/SecondaryButton";
-import { ISelectOption } from "../select/ISelectOption";
-import { Select } from "../select/Select";
-import { SpinnerButton } from "../spinnerButton/SpinnerButton";
+import { AddIcon } from "../../../icons/AddIcon";
+import { DeleteIcon } from "../../../icons/DeleteIcon";
+import { SecondaryButton } from "../../secondaryButton/SecondaryButton";
+import { ISelectOption } from "../../select/ISelectOption";
+import { Select } from "../../select/Select";
+import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { IMultiSelectItemProps } from "./IMultiSelectItemProps";
 import styles from "./MultiSelectItem.module.scss";
 
