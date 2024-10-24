@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { error } from "../../../core/utils/error";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { uuid } from "../../../utils/uuid";
 import { ISelectOption } from "../../select/ISelectOption";
 import { IMultiSelectItem } from "./IMultiSelectItem";
@@ -30,7 +31,9 @@ const createMultiSelectItems = <T>(
   options: ISelectOption<T>[],
   keys: T[]
 ): IMultiSelectItem<T>[] =>
-  keys.map((key) => createMultiSelectItem(options, key));
+  isNotInitial(options)
+    ? keys.map((key) => createMultiSelectItem(options, key))
+    : [];
 
 export const useMultiSelectListViewModel = <T>(
   props: IMultiSelectListProps<T>

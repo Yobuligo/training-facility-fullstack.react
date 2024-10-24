@@ -335,6 +335,7 @@ Version 1.0.0-20241007.1
 		- What happend if a user is trainer but later the trainer flag gets deleted? Trainer must still assigned as trainer in past trainings.
 		- What happend if a user is trainer but later deleted? Just delete it, if the training has no trainers, we can imagine what happened.
 		- What happend if a user is trainer and resigned? Trainer must not be selectable anymore as trainer even so he has the role.
+		- Assignment must be deleted when deleting definition or instance
 	- Display version details
 	- Documentation for deployment etc.
 	- backup data
