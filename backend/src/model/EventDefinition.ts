@@ -9,14 +9,16 @@ const eventDefinition: ModelStatic<
   Model<IEventDefinition, IEntityDetails<IEventDefinition>>
 > = db.define("event-definitions", {
   id: createIdType(),
+  creatorUserId: DataTypes.UUID,
+  isMemberOnly: DataTypes.BOOLEAN,
+  recurrence: DataTypes.INTEGER,
+
+  // EventDetails
   color: {
     type: DataTypes.STRING(10),
   },
-  creatorUserId: DataTypes.UUID,
   description: DataTypes.STRING(100),
   from: DataTypes.DATE,
-  isMemberOnly: DataTypes.BOOLEAN,
-  recurrence: DataTypes.INTEGER,
   title: DataTypes.STRING(100),
   to: DataTypes.DATE,
 });

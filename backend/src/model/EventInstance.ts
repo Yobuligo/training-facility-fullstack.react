@@ -10,12 +10,14 @@ const eventInstance: ModelStatic<
 > = db.define("event-instances", {
   id: createIdType(),
   calledOff: DataTypes.BOOLEAN,
+  state: DataTypes.INTEGER,
+
+  // EventDetails
   color: {
     type: DataTypes.STRING(10),
   },
   description: DataTypes.STRING(100),
   from: DataTypes.DATE,
-  state: DataTypes.INTEGER,
   title: DataTypes.STRING(100),
   to: DataTypes.DATE,
 });
