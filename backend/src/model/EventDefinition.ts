@@ -9,7 +9,6 @@ const eventDefinition: ModelStatic<
   Model<IEventDefinition, IEntityDetails<IEventDefinition>>
 > = db.define("event-definitions", {
   id: createIdType(),
-  creatorUserId: DataTypes.UUID,
   isMemberOnly: DataTypes.BOOLEAN,
   recurrence: DataTypes.INTEGER,
 
@@ -28,7 +27,7 @@ export class EventDefinition extends eventDefinition {
     EventDefinition.belongsTo(User, { foreignKey: "creatorUserId" });
 
     // Trainer relation
-    EventDefinition.belongsToMany(User, { through: "event-instance-trainers" });
-    User.belongsToMany(EventDefinition, { through: "event-instance-trainers" });
+    EventDefinition.belongsToMany(User, { through: "event-definitions-trainers" });
+    User.belongsToMany(EventDefinition, { through: "event-definitions-trainers" });
   }
 }

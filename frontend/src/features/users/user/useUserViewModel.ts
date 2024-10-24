@@ -9,7 +9,7 @@ import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
-import { useYesOrNoSelectOption } from "../../../hooks/useYesOrNoSelectOption";
+import { useYesOrNoSelectOptions } from "../../../hooks/selectOptions/useYesOrNoSelectOptions";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
@@ -102,8 +102,8 @@ export const useUserViewModel = (props: IUserProps) => {
   const navigate = useNavigate();
   const confirmDialog = useConfirmDialog();
   const toast = useToast();
-  const isAdminOptions = useYesOrNoSelectOption();
-  const isTrainerOptions = useYesOrNoSelectOption();
+  const isAdminOptions = useYesOrNoSelectOptions();
+  const isTrainerOptions = useYesOrNoSelectOptions();
 
   const reset = useCallback(() => {
     setBirthday(

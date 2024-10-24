@@ -1,6 +1,7 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
+import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { style } from "../../../core/ui/style";
 import colors from "../../../styles/colors.module.scss";
@@ -61,6 +62,8 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             toDate={viewModel.toDate}
             toTime={viewModel.toTime}
           />
+
+          <MultiSelectList options={viewModel.trainerSelectOptions} />
 
           <Toolbar className={styles.buttonContainer}>
             {renderButton(colors.colorEventDefinition0, styles.button0)}

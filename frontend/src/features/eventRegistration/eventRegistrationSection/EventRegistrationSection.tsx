@@ -1,15 +1,12 @@
-import { useMemo } from "react";
 import { MultiSelectList } from "../../../components/multiSelectList/MultiSelectList";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
-import { ISelectOption } from "../../../components/select/ISelectOption";
+import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
 import { LinkIcon } from "../../../icons/LinkIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { UserInfo } from "../../../services/UserInfo";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventInstanceItem";
-import { sortUsersShort } from "../../users/utils/sortUsersShort";
 import { EventRegistrationList } from "../eventRegistrationList/EventRegistrationList";
 import { EventRegistrationSearch } from "../eventRegistrationSearch/EventRegistrationSearch";
 import styles from "./EventRegistrationSection.module.scss";
@@ -21,15 +18,7 @@ export const EventRegistrationSection: React.FC<
 > = (props) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
-
-  const trainerSelectOptions: ISelectOption<string>[] = useMemo(
-    () =>
-      sortUsersShort(props.trainers).map((trainer) => ({
-        key: trainer.id,
-        text: UserInfo.toFullName(trainer),
-      })),
-    [props.trainers]
-  );
+  const [trainerSelectOptions] = useTrainerSelectOptions(props.trainers);
 
   return (
     <>

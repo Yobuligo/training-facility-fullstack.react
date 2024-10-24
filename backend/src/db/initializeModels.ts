@@ -12,6 +12,7 @@ import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
 import { UserTrialTraining } from "../model/UserTrialTraining";
+import { db } from "./db";
 
 export const initializeModels = async (alter: boolean) => {
   const models: IHaveStaticAssociate[] = [
@@ -37,4 +38,8 @@ export const initializeModels = async (alter: boolean) => {
     async (model) =>
       await (model as unknown as ModelStatic<any>).sync({ alter })
   );
+
+  if (alter) {
+    db.sync();
+  }
 };

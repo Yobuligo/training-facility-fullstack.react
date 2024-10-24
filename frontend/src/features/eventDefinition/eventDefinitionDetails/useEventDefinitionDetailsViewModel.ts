@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { isInitial } from "../../../core/utils/isInitial";
+import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -39,6 +40,7 @@ export const useEventDefinitionDetailsViewModel = (
   const [selectedColor, setSelectedColor] = useState(
     props.eventDefinition.color
   );
+  const [trainerSelectOptions] = useTrainerSelectOptions();
 
   const reset = () => {
     setTitle(props.eventDefinition.title);
@@ -112,6 +114,7 @@ export const useEventDefinitionDetailsViewModel = (
     setToTime,
     title,
     titleError,
+    trainerSelectOptions,
     toDate,
     toTime,
   };

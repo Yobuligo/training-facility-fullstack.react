@@ -3,7 +3,7 @@ import { DateTime } from "../../core/services/date/DateTime";
 import { Recurrence } from "../../core/types/Recurrence";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
-import { useYesOrNoSelectOption } from "../../hooks/useYesOrNoSelectOption";
+import { useYesOrNoSelectOptions } from "../../hooks/selectOptions/useYesOrNoSelectOptions";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 
@@ -12,7 +12,7 @@ export const useAppointmentFormViewModel = (props: IAppointmentFormProps) => {
   const render = useRenderRecurrence();
   const debounceFrom = useDebounce();
   const debounceTo = useDebounce();
-  const isMemberOnlyOptions = useYesOrNoSelectOption();
+  const isMemberOnlyOptions = useYesOrNoSelectOptions();
 
   const recurrenceOptions: ISelectOption<Recurrence>[] = useMemo(
     () => [
