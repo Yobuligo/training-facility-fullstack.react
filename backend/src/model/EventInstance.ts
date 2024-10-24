@@ -4,6 +4,7 @@ import { db } from "../db/db";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { createIdType } from "./core/createIdType";
 import { EventDefinition } from "./EventDefinition";
+import { User } from "./User";
 
 const eventInstance: ModelStatic<
   Model<IEventInstance, IEntityDetails<IEventInstance>>
@@ -29,5 +30,9 @@ export class EventInstance extends eventInstance {
       as: "eventInstances",
       foreignKey: "eventDefinitionId",
     });
+
+    // Trainer relation
+    EventInstance.belongsToMany(User, { through: "event-definition-trainers" });
+    User.belongsToMany(EventInstance, { through: "event-definition-trainers" });
   }
 }
