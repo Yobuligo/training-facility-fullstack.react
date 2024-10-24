@@ -3,11 +3,14 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
-import { EventDefinition } from "../model/EventDefinition";
+import { EventDefinitionTrainer } from "../model/EventDefinitionTrainer";
 import { EventInstance } from "../model/EventInstance";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
+import { IEventDefinitionTrainer } from "../shared/model/IEventDefinitionTrainer";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { ITrainer } from "../shared/types/ITrainer";
+import { EventDefinition } from "./../model/EventDefinition";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
@@ -91,14 +94,41 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     fields?: K[]
   ): Promise<unknown> {
     if (fields) {
-      return await super.insert(entity, fields);
+      const eventDefinition = await super.insert(entity, fields);
+      this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      return eventDefinition;
     } else {
-      return await super.insert(entity);
+      const eventDefinition = await super.insert(entity);
+      this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      return eventDefinition;
     }
   }
 
   async update(entity: IEventDefinition): Promise<boolean> {
-    return await super.update(entity);
+    let wasUpdated = await super.update(entity);
+    this.synchronizeTrainers(entity.id, entity.trainers);
+    return wasUpdated;
+  }
+
+  private async synchronizeTrainers(
+    eventDefinitionId: string,
+    trainers?: ITrainer[]
+  ) {
+    // Delete all existing trainer relations for this EventDefinition
+    EventDefinitionTrainer.destroy({
+      where: { eventDefinitionId: eventDefinitionId },
+    });
+
+    // Add all currently set trainer relations
+    const eventDefinitionTrainers: sequelize.Optional<
+      IEventDefinitionTrainer,
+      never
+    >[] =
+      trainers?.map((trainer) => ({
+        eventDefinitionId: eventDefinitionId,
+        userId: trainer.id,
+      })) ?? [];
+    EventDefinitionTrainer.bulkCreate(eventDefinitionTrainers, {});
   }
 
   private async selectEventDefinitions(

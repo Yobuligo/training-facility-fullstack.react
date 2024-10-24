@@ -1,12 +1,11 @@
+import { Model, ModelStatic } from "sequelize";
 import { db } from "../db/db";
+import { IEventInstanceTrainer } from "../shared/model/IEventInstanceTrainer";
 import { EventInstance } from "./EventInstance";
 import { User } from "./User";
 
-const eventInstanceTrainer = db.define(
-  "event-instances-trainers",
-  {},
-  { timestamps: false }
-);
+const eventInstanceTrainer: ModelStatic<Model<IEventInstanceTrainer>> =
+  db.define("event-instances-trainers", {} as any);
 
 export class EventInstanceTrainer extends eventInstanceTrainer {
   static associate() {
