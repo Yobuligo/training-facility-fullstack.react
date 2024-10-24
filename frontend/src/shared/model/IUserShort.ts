@@ -1,10 +1,9 @@
 import { IHaveId } from "../../core/api/types/IHaveId";
 import { Subset } from "../../core/Subset";
+import { IHaveName } from "../types/IHaveName";
 import { IUserRole } from "./IUserRole";
 
-export interface IUserShort extends IHaveId {
-  firstname: string;
-  lastname: string;
+export interface IUserShort extends IHaveId, IHaveName {
   email: string;
   phone?: string;
   isLocked: boolean;

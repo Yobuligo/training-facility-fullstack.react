@@ -1,7 +1,7 @@
 import { Subset } from "../core/Subset";
 import { IUserRole } from "../shared/model/IUserRole";
 import { AuthRole } from "../shared/types/AuthRole";
-import { IHaveName } from "../types/IHaveName";
+import { IHaveName } from "../shared/types/IHaveName";
 
 export class UserInfo {
   static containsAdminRole(userRoles: IUserRole[]): boolean {
