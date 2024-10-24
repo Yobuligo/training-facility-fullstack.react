@@ -92,6 +92,18 @@ export const useMultiSelectListViewModel = <T>(
     });
   };
 
+  const raiseOnChange = (multiSelectItems: IMultiSelectItem<T>[]) =>
+    props.onChange?.(
+      multiSelectItems.map((multiSelectItem) => multiSelectItem.selected.key)
+    );
+
+  const handleMultiSelectItemsChange = (
+    multiSelectItems: IMultiSelectItem<T>[]
+  ) => {
+    updateOptions(multiSelectItems);
+    raiseOnChange(multiSelectItems);
+  };
+
   const onAdd = () => {
     // find the next free option
     const toBeSelected = findNextFreeOption(multiSelectItems);
@@ -107,7 +119,7 @@ export const useMultiSelectListViewModel = <T>(
         selected: toBeSelected,
       });
 
-      updateOptions(previous);
+      handleMultiSelectItemsChange(previous);
       return [...previous];
     });
   };
@@ -122,7 +134,7 @@ export const useMultiSelectListViewModel = <T>(
         previous.splice(index, 1);
       }
 
-      updateOptions(previous);
+      handleMultiSelectItemsChange(previous);
       return [...previous];
     });
 
@@ -140,7 +152,7 @@ export const useMultiSelectListViewModel = <T>(
         previous.splice(index, 1, multiSelectItem);
       }
 
-      updateOptions(previous);
+      handleMultiSelectItemsChange(previous);
       return [...previous];
     });
   };

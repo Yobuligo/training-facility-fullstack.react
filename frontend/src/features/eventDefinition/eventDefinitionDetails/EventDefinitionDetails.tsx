@@ -70,6 +70,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             className={styles.multiSelectSection}
             label={t(texts.general.trainers)}
             options={viewModel.trainerSelectOptions}
+            onChange={viewModel.onSelectedTrainerIdsChange}
             selected={viewModel.selectedTrainerIds}
           />
 

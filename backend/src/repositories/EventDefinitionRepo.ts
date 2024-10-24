@@ -1,4 +1,5 @@
 import sequelize from "sequelize";
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
@@ -78,6 +79,26 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       requestedUserId
     );
     return eventDefinition;
+  }
+
+  insert<K extends keyof IEventDefinition>(
+    entity: IEntityDetails<IEventDefinition>,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventDefinition, K>>;
+  insert(entity: IEntityDetails<IEventDefinition>): Promise<IEventDefinition>;
+  async insert<K extends keyof IEventDefinition>(
+    entity: IEntityDetails<IEventDefinition>,
+    fields?: K[]
+  ): Promise<unknown> {
+    if (fields) {
+      return await super.insert(entity, fields);
+    } else {
+      return await super.insert(entity);
+    }
+  }
+
+  async update(entity: IEventDefinition): Promise<boolean> {
+    return await super.update(entity);
   }
 
   private async selectEventDefinitions(

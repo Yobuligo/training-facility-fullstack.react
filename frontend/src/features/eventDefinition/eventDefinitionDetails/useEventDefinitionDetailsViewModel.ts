@@ -6,6 +6,7 @@ import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainer
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { ITrainer } from "../../../shared/types/ITrainer";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (
@@ -42,8 +43,9 @@ export const useEventDefinitionDetailsViewModel = (
   );
   const [trainerSelectOptions] = useTrainerSelectOptions(props.trainers);
 
-  const selectedTrainerIds =
-    props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? [];
+  const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
+    props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? []
+  );
 
   const reset = () => {
     setTitle(props.eventDefinition.title);
@@ -54,6 +56,9 @@ export const useEventDefinitionDetailsViewModel = (
     setToTime(DateTime.toTime(props.eventDefinition.to));
     setRecurrence(props.eventDefinition.recurrence);
     setSelectedColor(props.eventDefinition.color);
+    setSelectedTrainerIds(
+      props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? []
+    );
   };
 
   const onCancel = () => {
@@ -68,6 +73,28 @@ export const useEventDefinitionDetailsViewModel = (
 
   const onDelete = () => props.onDelete?.(props.eventDefinition);
 
+  const createTrainers = (): ITrainer[] => {
+    const trainers: ITrainer[] = [];
+
+    selectedTrainerIds.forEach((trainerId) => {
+      const trainer = props.trainers.find(
+        (trainer) => trainer.id === trainerId
+      );
+      if (!trainer) {
+        throw new Error(
+          "Error while updating trainer list. Trainer with Id not found."
+        );
+      }
+      trainers.push({
+        id: trainer.id,
+        firstname: trainer.firstname,
+        lastname: trainer.lastname,
+      });
+    });
+
+    return trainers;
+  };
+
   const onSave = () => {
     props.eventDefinition.description = description;
     props.eventDefinition.from = DateTime.create(fromDate, fromTime);
@@ -76,10 +103,15 @@ export const useEventDefinitionDetailsViewModel = (
     props.eventDefinition.title = title;
     props.eventDefinition.to = DateTime.create(toDate, toTime);
     props.eventDefinition.color = selectedColor;
+    props.eventDefinition.trainers = createTrainers();
     props.onSave?.(props.eventDefinition);
   };
 
   const onSelectColor = (color: string) => setSelectedColor(color);
+
+  const onSelectedTrainerIdsChange = (trainerIds?: string[]) => {
+    setSelectedTrainerIds(trainerIds ?? []);
+  };
 
   const onValidate = () => {
     let isValid = true;
@@ -104,6 +136,7 @@ export const useEventDefinitionDetailsViewModel = (
     onDelete,
     onSave,
     onSelectColor,
+    onSelectedTrainerIdsChange,
     onValidate,
     recurrence,
     selectedColor,
