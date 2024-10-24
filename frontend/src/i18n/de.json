@@ -88,8 +88,7 @@
         "errorUserNotFound": "Hinzufügen von Benutzer '{{user}}' nicht möglich. Benutzer wurde nicht gefunden.",
         "infoCopyLink": "Der Link wurde in die Zwischenablage kopiert",
         "open": "Anmeldung wieder öffnen",
-        "reschedule": "Wieder einplanen",
-        "trainers": "Trainer"
+        "reschedule": "Wieder einplanen"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Dein Probetraining wurde erfolgreich storniert.",
@@ -153,6 +152,7 @@
             "success": "Erfolg",
             "warning": "Warnung"
         },
+        "trainers": "Trainer",
         "username": "Benutzername",
         "weekdays": {
             "monday": "Montag",

@@ -88,8 +88,7 @@
         "errorUserNotFound": "Adding user '{{user}}' not possible. User was not found.",
         "infoCopyLink": "Link was copied to clipboard",
         "open": "Reopen registration",
-        "reschedule": "Reschedule",
-        "trainers": "Trainers"
+        "reschedule": "Reschedule"
     },
     "eventTrialTrainingCancellation": {
         "cancelConfirmation": "Your trial training was successfully canceled.",
@@ -153,6 +152,7 @@
             "success": " Success",
             "warning": "Warning"
         },
+        "trainers": "Trainers",
         "username": "Username",
         "weekdays": {
             "monday": "Monday",

@@ -1,0 +1,8 @@
+@use "../../../styles/dimensions.module.scss";
+
+.title {
+  font-size: medium;
+  font-weight: 500;
+  margin: 0rem;
+  margin-bottom: dimensions.$negative-space;
+}

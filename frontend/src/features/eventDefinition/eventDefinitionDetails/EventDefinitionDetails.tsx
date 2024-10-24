@@ -1,9 +1,11 @@
 import { AppointmentForm } from "../../../components/appointmentForm/AppointmentForm";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { DetailView } from "../../../components/detailView/DetailView";
-import { MultiSelectList } from "../../../components/multiSelect/multiSelectList/MultiSelectList";
+import { MultiSelectSection } from "../../../components/multiSelect/multiSelectSection/MultiSelectSection";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { style } from "../../../core/ui/style";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import colors from "../../../styles/colors.module.scss";
 import styles from "./EventDefinitionDetails.module.scss";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
@@ -15,6 +17,7 @@ import { useEventDefinitionDetailsViewModel } from "./useEventDefinitionDetailsV
 export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
   props
 ) => {
+  const { t } = useTranslation();
   const viewModel = useEventDefinitionDetailsViewModel(props);
 
   const renderButton = (color: string, className: string) => {
@@ -63,7 +66,10 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             toTime={viewModel.toTime}
           />
 
-          <MultiSelectList options={viewModel.trainerSelectOptions} />
+          <MultiSelectSection
+            label={t(texts.general.trainers)}
+            options={viewModel.trainerSelectOptions}
+          />
 
           <Toolbar className={styles.buttonContainer}>
             {renderButton(colors.colorEventDefinition0, styles.button0)}

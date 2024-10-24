@@ -1,4 +1,4 @@
-import { MultiSelectList } from "../../../components/multiSelect/multiSelectList/MultiSelectList";
+import { MultiSelectSection } from "../../../components/multiSelect/multiSelectSection/MultiSelectSection";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
@@ -73,11 +73,9 @@ export const EventRegistrationSection: React.FC<
             )}
           </div>
 
-          <h3 className={styles.title}>
-            {t(texts.eventRegistrationSection.trainers)}
-          </h3>
-          <MultiSelectList
-            className={styles.trainerMultiSelectList}
+          <MultiSelectSection
+            className={styles.trainerMultiSelectSection}
+            label={t(texts.general.trainers)}
             options={trainerSelectOptions}
           />
 
