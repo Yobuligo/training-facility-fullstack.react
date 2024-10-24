@@ -25,9 +25,5 @@ const eventDefinition: ModelStatic<
 export class EventDefinition extends eventDefinition {
   static associate() {
     EventDefinition.belongsTo(User, { foreignKey: "creatorUserId" });
-
-    // Trainer relation
-    EventDefinition.belongsToMany(User, { through: "event-definitions-trainers" });
-    User.belongsToMany(EventDefinition, { through: "event-definitions-trainers" });
   }
 }

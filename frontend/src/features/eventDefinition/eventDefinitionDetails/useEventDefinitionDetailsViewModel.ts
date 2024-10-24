@@ -109,9 +109,8 @@ export const useEventDefinitionDetailsViewModel = (
 
   const onSelectColor = (color: string) => setSelectedColor(color);
 
-  const onSelectedTrainerIdsChange = (trainerIds?: string[]) => {
+  const onSelectedTrainerIdsChange = (trainerIds?: string[]) =>
     setSelectedTrainerIds(trainerIds ?? []);
-  };
 
   const onValidate = () => {
     let isValid = true;

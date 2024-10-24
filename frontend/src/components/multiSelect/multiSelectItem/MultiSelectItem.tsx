@@ -19,14 +19,23 @@ export function MultiSelectItem<T>(props: IMultiSelectItemProps<T>) {
     <div className={styles.multiSelectItem}>
       <Select
         className={styles.select}
+        disabled={props.disabled}
         options={props.multiSelectItem.options}
         onSelect={onSelect}
         selected={props.selected}
       />
-      <SpinnerButton displaySpinner={false} onClick={onAdd}>
+      <SpinnerButton
+        disabled={props.disabled}
+        displaySpinner={false}
+        onClick={onAdd}
+      >
         <AddIcon className={styles.icon} />
       </SpinnerButton>
-      <SecondaryButton displaySpinner={false} onClick={onDelete}>
+      <SecondaryButton
+        disabled={props.disabled}
+        displaySpinner={false}
+        onClick={onDelete}
+      >
         <DeleteIcon />
       </SecondaryButton>
     </div>

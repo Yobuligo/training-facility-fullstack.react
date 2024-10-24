@@ -2,6 +2,7 @@ import { ISelectOption } from "../../select/ISelectOption";
 import { IMultiSelectItem } from "../multiSelectList/IMultiSelectItem";
 
 export interface IMultiSelectItemProps<T> {
+  disabled?: boolean;
   multiSelectItem: IMultiSelectItem<T>;
   onAdd?: () => void;
   onDelete?: (multiSelectItem: IMultiSelectItem<T>) => void;

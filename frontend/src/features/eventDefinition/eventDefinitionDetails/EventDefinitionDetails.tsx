@@ -68,6 +68,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
 
           <MultiSelectSection
             className={styles.multiSelectSection}
+            disabled={viewModel.displayMode}
             label={t(texts.general.trainers)}
             options={viewModel.trainerSelectOptions}
             onChange={viewModel.onSelectedTrainerIdsChange}

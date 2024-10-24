@@ -8,6 +8,10 @@ import { List } from "../../core/services/list/List";
 import { findEntityPropNames } from "./utils/findEntityPropNames";
 import { findTransaction } from "./utils/findTransaction";
 
+/**
+ * This class is responsible for synchronizing related data of a sequelize model.
+ * This means to add new entries, deleted obsolete and update existing entries.
+ */
 export class SequelizeSynchronizer<TEntity extends IEntity> {
   private entityPropNames: (keyof TEntity)[] | undefined = undefined;
 

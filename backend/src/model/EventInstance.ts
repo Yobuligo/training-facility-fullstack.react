@@ -32,7 +32,13 @@ export class EventInstance extends eventInstance {
     });
 
     // Trainer relation
-    EventInstance.belongsToMany(User, { through: "event-instances-trainers" });
-    User.belongsToMany(EventInstance, { through: "event-instances-trainers" });
+    EventInstance.belongsToMany(User, {
+      through: "event-instances-trainers",
+      timestamps: false,
+    });
+    User.belongsToMany(EventInstance, {
+      through: "event-instances-trainers",
+      timestamps: false,
+    });
   }
 }

@@ -13,6 +13,7 @@ export function MultiSelectList<T>(props: IMultiSelectListProps<T>) {
   const items = viewModel.multiSelectItems.map((multiSelectItem, index) => (
     <MultiSelectItem
       key={index}
+      disabled={props.disabled}
       multiSelectItem={multiSelectItem}
       onAdd={viewModel.onAdd}
       onDelete={viewModel.onDelete}
@@ -25,7 +26,11 @@ export function MultiSelectList<T>(props: IMultiSelectListProps<T>) {
     <div className={style(styles.multiSelectList, props.className)}>
       {List.isEmpty(items) ? (
         <div className={styles.addButton}>
-          <SpinnerButton displaySpinner={false} onClick={viewModel.onAdd}>
+          <SpinnerButton
+            disabled={props.disabled}
+            displaySpinner={false}
+            onClick={viewModel.onAdd}
+          >
             <AddIcon className={styles.addIcon} />
           </SpinnerButton>
         </div>
