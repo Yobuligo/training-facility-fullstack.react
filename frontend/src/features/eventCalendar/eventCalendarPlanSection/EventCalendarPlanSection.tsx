@@ -12,13 +12,16 @@ export const EventCalendarPlanSection: React.FC = () => {
 
   return (
     <div>
-      <p className={styles.description}>{t(texts.eventPlanSection.description)}</p>
+      <p className={styles.description}>
+        {t(texts.eventPlanSection.description)}
+      </p>
       {viewModel.selectedEventDefinition ? (
         <EventDefinitionDetails
           eventDefinition={viewModel.selectedEventDefinition}
           onBack={viewModel.onBack}
           onDelete={viewModel.onDeleteEventDefinition}
           onSave={viewModel.onSaveEventDefinition}
+          trainers={viewModel.trainers}
         />
       ) : (
         <div className={styles.eventCalendar}>

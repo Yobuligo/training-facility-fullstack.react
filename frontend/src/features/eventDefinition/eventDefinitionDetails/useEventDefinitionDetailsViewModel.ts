@@ -40,10 +40,7 @@ export const useEventDefinitionDetailsViewModel = (
   const [selectedColor, setSelectedColor] = useState(
     props.eventDefinition.color
   );
-  const [trainerSelectOptions, ] = useTrainerSelectOptions();
-
-  const assignedTrainerIds: string[] =
-    props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? ["b4ff2878-10d8-474d-a822-abc4d264d117"];
+  const [trainerSelectOptions] = useTrainerSelectOptions(props.trainers);
 
   const reset = () => {
     setTitle(props.eventDefinition.title);
@@ -94,7 +91,6 @@ export const useEventDefinitionDetailsViewModel = (
   };
 
   return {
-    assignedTrainerIds,
     description,
     displayMode,
     fromDate,
