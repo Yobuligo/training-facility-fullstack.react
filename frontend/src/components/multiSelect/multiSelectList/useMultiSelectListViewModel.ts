@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { error } from "../../../core/utils/error";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { uuid } from "../../../utils/uuid";
@@ -41,6 +41,12 @@ export const useMultiSelectListViewModel = <T>(
   const [multiSelectItems, setMultiSelectItems] = useState<
     IMultiSelectItem<T>[]
   >(createMultiSelectItems(props.options, props.selected ?? []));
+
+  useEffect(() => {
+    setMultiSelectItems(
+      createMultiSelectItems(props.options, props.selected ?? [])
+    );
+  }, [props.options, props.selected]);
 
   /**
    * Returns the keys of the select options, which are in use, which means which are selected.

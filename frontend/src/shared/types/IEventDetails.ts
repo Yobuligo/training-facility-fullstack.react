@@ -1,5 +1,5 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
-import { ITrainer } from "../model/ITrainer";
+import { ITrainer } from "./ITrainer";
 
 /**
  * An instance of this interface provides the core properties for event definitions and event instances.
