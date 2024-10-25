@@ -143,7 +143,19 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
             WHERE datum < DATE(:to)
         )
 
-        SELECT * FROM \`event-definitions\` WHERE 
+        SELECT 
+          def.*,
+          def_usr.id AS def_usr_id,
+          def_profile.firstname AS def_profile_firstname,
+          def_profile.lastname AS def_profile_lastname
+        FROM \`event-definitions\` AS def
+        LEFT JOIN \`event-definitions-trainers\` AS trainerRel
+        ON trainerRel.eventDefinitionId = def.id
+        LEFT JOIN \`users\` AS def_usr
+        ON def_usr.id = trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS def_profile
+        ON def_profile.userId = def_usr.id
+        WHERE 
         # once
         (recurrence = 0 AND (
             DATE(\`from\`) >= DATE(:from) AND DATE(\`to\`) <= DATE(:to)
@@ -173,16 +185,14 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         ));
     `;
 
-    let eventDefinitions = await db.query<IEventDefinition>(query, {
+    const data = await db.query<IEventDefinition>(query, {
       replacements: {
         from: dateTimeSpan.from,
         to: dateTimeSpan.to,
       },
       type: sequelize.QueryTypes.SELECT,
     });
-
-    this.correctBooleans(eventDefinitions);
-    return eventDefinitions;
+    return this.convertToEventDefinition(data);
   }
 
   private async selectEventDefinitionsAndInstances(
@@ -414,12 +424,30 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           title: row.title,
           to: row.to,
           eventInstances: [],
+          trainers: [],
         };
         eventDefinitionsDb[row.id] = eventDefinition;
       }
 
-      // create and add event instance if available
       const rowAny: any = row;
+
+      // create and add event definition trainer if available
+      if (
+        rowAny.def_usr_id &&
+        rowAny.def_profile_firstname &&
+        rowAny.def_profile_lastname
+      ) {
+        const trainer: ITrainer = {
+          id: rowAny.def_usr_id,
+          firstname: rowAny.def_profile_firstname,
+          lastname: rowAny.def_profile_lastname,
+        };
+        (eventDefinitionsDb[row.id] as IEventDefinition).trainers?.push(
+          trainer
+        );
+      }
+
+      // create and add event instance if available
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,

@@ -329,13 +329,21 @@ Version 1.0.0-20241007.1
 	
 - Backlog
 	- Set and display trainer to event definition and event instance
-		- A trainer can be selected from a select option
-		- The trainer can be redefined for a specific event instance
-		- Certain trainers can be assigned to a training
-		- What happend if a user is trainer but later the trainer flag gets deleted? Trainer must still assigned as trainer in past trainings.
-		- What happend if a user is trainer but later deleted? Just delete it, if the training has no trainers, we can imagine what happened.
-		- What happend if a user is trainer and resigned? Trainer must not be selectable anymore as trainer even so he has the role.
-		- Assignment must be deleted when deleting definition or instance
+		- General
+			- Trainers can be added
+			- Trainers can be removed
+			- Trainers can be selected from a select option
+			- Several trainers can be added
+			- What happend if a user is trainer but later the trainer flag gets deleted? Trainer must still assigned as trainer in past trainings.
+			- What happend if a user is trainer but later deleted? Just delete it, if the training has no trainers, we can imagine what happened.
+			- What happend if a user is trainer and resigned? Trainer must not be selectable anymore as trainer even so he has the role.
+		- Event Definition
+			- List of trainers must be reset when canceling EventDefinition change mode			
+			- Assignment must be deleted when deleting definition
+		- Event Instance
+			- Initially trainers from the template event definition are copied
+			- The trainer can be redefined for a specific event instance
+			- Assignment must be deleted when deleting instance
 	- Display version details
 	- Documentation for deployment etc.
 	- backup data
