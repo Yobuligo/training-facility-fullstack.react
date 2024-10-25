@@ -1,13 +1,16 @@
-import { Op, Transaction } from "sequelize";
+import sequelize, { Op, Transaction } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { db } from "../db/db";
 import { EventInstance } from "../model/EventInstance";
+import { EventInstanceTrainer } from "../model/EventInstanceTrainer";
 import { EventRegistration } from "../model/EventRegistration";
 import { UserTrialTraining } from "../model/UserTrialTraining";
 import { IEventInstance } from "../shared/model/IEventInstance";
+import { IEventInstanceTrainer } from "../shared/model/IEventInstanceTrainer";
+import { ITrainer } from "../shared/types/ITrainer";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
@@ -73,12 +76,35 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
         if (data) {
           eventInstance = this.toJson(data, fields);
+          await this.synchronizeTrainers(eventInstance.id, entity.trainers);
         } else {
           const data = await this.model.create(entity, { transaction });
           eventInstance = this.toJson(data, fields);
+          await this.synchronizeTrainers(eventInstance.id, entity.trainers);
         }
       }
     );
     return checkNotNull(eventInstance);
+  }
+
+  private async synchronizeTrainers(
+    eventInstanceId: string,
+    trainers?: ITrainer[]
+  ) {
+    // Delete all existing trainer relations for this EventInstance
+    await EventInstanceTrainer.destroy({
+      where: { eventInstanceId: eventInstanceId },
+    });
+
+    // Add all currently set trainer relations
+    const eventInstanceTrainers: sequelize.Optional<
+      IEventInstanceTrainer,
+      never
+    >[] =
+      trainers?.map((trainer) => ({
+        eventInstanceId: eventInstanceId,
+        userId: trainer.id,
+      })) ?? [];
+    await EventInstanceTrainer.bulkCreate(eventInstanceTrainers, {});
   }
 }

@@ -95,18 +95,18 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
   ): Promise<unknown> {
     if (fields) {
       const eventDefinition = await super.insert(entity, fields);
-      this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      await this.synchronizeTrainers(eventDefinition.id, entity.trainers);
       return eventDefinition;
     } else {
       const eventDefinition = await super.insert(entity);
-      this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      await this.synchronizeTrainers(eventDefinition.id, entity.trainers);
       return eventDefinition;
     }
   }
 
   async update(entity: IEventDefinition): Promise<boolean> {
     let wasUpdated = await super.update(entity);
-    this.synchronizeTrainers(entity.id, entity.trainers);
+    await this.synchronizeTrainers(entity.id, entity.trainers);
     return wasUpdated;
   }
 
@@ -115,7 +115,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     trainers?: ITrainer[]
   ) {
     // Delete all existing trainer relations for this EventDefinition
-    EventDefinitionTrainer.destroy({
+    await EventDefinitionTrainer.destroy({
       where: { eventDefinitionId: eventDefinitionId },
     });
 
@@ -128,7 +128,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         eventDefinitionId: eventDefinitionId,
         userId: trainer.id,
       })) ?? [];
-    EventDefinitionTrainer.bulkCreate(eventDefinitionTrainers, {});
+    await EventDefinitionTrainer.bulkCreate(eventDefinitionTrainers, {});
   }
 
   private async selectEventDefinitions(
@@ -492,12 +492,5 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
     // convert to array
     return Object.values(eventDefinitionsDb);
-  }
-
-  private correctBooleans(eventDefinitions: IEventDefinition[]): void {
-    eventDefinitions.forEach((eventDefinition) => {
-      eventDefinition.isMemberOnly =
-        (eventDefinition.isMemberOnly as any) === 1 ? true : false;
-    });
   }
 }
