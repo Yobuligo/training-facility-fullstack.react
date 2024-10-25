@@ -111,6 +111,9 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
       from: event.dateTimeSpan.from,
       to: event.dateTimeSpan.to,
       state: EventInstanceState.OPEN,
+      trainers: event.eventDefinition.trainers?.map((trainer) => ({
+        ...trainer,
+      })),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
