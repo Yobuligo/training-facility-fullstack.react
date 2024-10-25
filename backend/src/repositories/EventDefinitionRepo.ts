@@ -166,7 +166,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         ON def_usr.id = trainerRel.userId
         LEFT JOIN \`user-profiles\` AS def_profile
         ON def_profile.userId = def_usr.id
-        WHERE 
+        WHERE
         # once
         (recurrence = 0 AND (
             DATE(\`from\`) >= DATE(:from) AND DATE(\`to\`) <= DATE(:to)
@@ -221,6 +221,9 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
         SELECT 
           def.*,
+          def_usr.id AS def_usr_id,
+          def_profile.firstname AS def_profile_firstname,
+          def_profile.lastname AS def_profile_lastname,
           inst.id AS inst_id,
           inst.calledOff as called_off,
           inst.color AS inst_color,
@@ -233,6 +236,12 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           inst.updatedAt AS inst_updatedAt,
           inst.eventDefinitionId AS inst_eventDefinitionId
         FROM \`event-definitions\` AS def
+        LEFT JOIN \`event-definitions-trainers\` AS trainerRel
+        ON trainerRel.eventDefinitionId = def.id
+        LEFT JOIN \`users\` AS def_usr
+        ON def_usr.id = trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS def_profile
+        ON def_profile.userId = def_usr.id
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
         AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
@@ -300,6 +309,9 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
         SELECT 
           def.*,
+          def_usr.id AS def_usr_id,
+          def_profile.firstname AS def_profile_firstname,
+          def_profile.lastname AS def_profile_lastname,
           inst.id AS inst_id,
           inst.calledOff as called_off,
           inst.color AS inst_color,
@@ -319,6 +331,12 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           reg.updatedAt AS reg_updatedAt,
           reg.eventInstanceId AS reg_eventInstanceId
         FROM \`event-definitions\` AS def
+        LEFT JOIN \`event-definitions-trainers\` AS trainerRel
+        ON trainerRel.eventDefinitionId = def.id
+        LEFT JOIN \`users\` AS def_usr
+        ON def_usr.id = trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS def_profile
+        ON def_profile.userId = def_usr.id
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
         AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
