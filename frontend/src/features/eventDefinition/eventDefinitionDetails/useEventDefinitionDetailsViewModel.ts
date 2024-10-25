@@ -41,7 +41,7 @@ export const useEventDefinitionDetailsViewModel = (
   const [selectedColor, setSelectedColor] = useState(
     props.eventDefinition.color
   );
-  const [trainerSelectOptions] = useTrainerSelectOptions(props.trainers);
+  const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
 
   const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
     props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? []

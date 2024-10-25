@@ -18,7 +18,7 @@ export const EventRegistrationSection: React.FC<
 > = (props) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
-  const [trainerSelectOptions] = useTrainerSelectOptions(props.trainers);
+  const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
 
   return (
     <>
