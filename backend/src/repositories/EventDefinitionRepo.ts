@@ -4,13 +4,13 @@ import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
 import { EventDefinitionTrainer } from "../model/EventDefinitionTrainer";
-import { EventInstance } from "../model/EventInstance";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { IEventDefinitionTrainer } from "../shared/model/IEventDefinitionTrainer";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { ITrainer } from "../shared/types/ITrainer";
 import { EventDefinition } from "./../model/EventDefinition";
+import { EventInstance } from "./../model/EventInstance";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
 export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
@@ -481,63 +481,81 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
       const rowAny: any = row;
 
-      // create and add event definition trainers if available
+      // create and add event definition trainers, if not yet available
       if (
         rowAny.def_usr_id &&
         rowAny.def_profile_firstname &&
         rowAny.def_profile_lastname
       ) {
-        const trainer: ITrainer = {
-          id: rowAny.def_usr_id,
-          firstname: rowAny.def_profile_firstname,
-          lastname: rowAny.def_profile_lastname,
-        };
-        (eventDefinitionsDb[row.id] as IEventDefinition).trainers?.push(
-          trainer
-        );
+        // add trainer only once
+        const index = (
+          eventDefinitionsDb[row.id] as IEventDefinition
+        ).trainers?.findIndex((trainer) => trainer.id === rowAny.def_usr_id);
+        if (index === -1) {
+          const trainer: ITrainer = {
+            id: rowAny.def_usr_id,
+            firstname: rowAny.def_profile_firstname,
+            lastname: rowAny.def_profile_lastname,
+          };
+          (eventDefinitionsDb[row.id] as IEventDefinition).trainers?.push(
+            trainer
+          );
+        }
       }
 
       // create and add event instances if available
       if (rowAny.inst_id) {
-        const eventInstance: IEventInstance = {
-          id: rowAny.inst_id,
-          calledOff: rowAny.called_off === 0 ? false : true,
-          color: rowAny.inst_color,
-          createdAt: rowAny.inst_createdAt,
-          updatedAt: rowAny.inst_updatedAt,
-          description: rowAny.inst_description,
-          eventDefinitionId: rowAny.inst_eventDefinitionId,
-          from: rowAny.inst_from,
-          state: rowAny.inst_state,
-          title: rowAny.inst_title,
-          to: rowAny.inst_to,
-          eventRegistrations: [],
-          trainers: [],
-        };
-
-        (eventDefinitionsDb[row.id] as IEventDefinition).eventInstances?.push(
-          eventInstance
+        const index = (
+          eventDefinitionsDb[row.id] as IEventDefinition
+        ).eventInstances?.findIndex(
+          (eventInstance) => eventInstance.id === rowAny.inst_id
         );
+        if (index === -1) {
+          const eventInstance: IEventInstance = {
+            id: rowAny.inst_id,
+            calledOff: rowAny.called_off === 0 ? false : true,
+            color: rowAny.inst_color,
+            createdAt: rowAny.inst_createdAt,
+            updatedAt: rowAny.inst_updatedAt,
+            description: rowAny.inst_description,
+            eventDefinitionId: rowAny.inst_eventDefinitionId,
+            from: rowAny.inst_from,
+            state: rowAny.inst_state,
+            title: rowAny.inst_title,
+            to: rowAny.inst_to,
+            eventRegistrations: [],
+            trainers: [],
+          };
+
+          (eventDefinitionsDb[row.id] as IEventDefinition).eventInstances?.push(
+            eventInstance
+          );
+        }
       }
 
       // create and add event registration if available
       if (rowAny.reg_id) {
-        const eventRegistration: IEventRegistration = {
-          id: rowAny.reg_id,
-          createdAt: rowAny.reg_createdAt,
-          updatedAt: rowAny.reg_updatedAt,
-          eventInstanceId: rowAny.reg_eventInstanceId,
-          manuallyAdded: rowAny.reg_manuallyAdded,
-          state: rowAny.reg_state,
-          userId: rowAny.reg_userId,
-        };
-
         const eventInstance = (
           eventDefinitionsDb[row.id] as IEventDefinition
         ).eventInstances?.find(
           (eventInstance) => eventInstance.id === rowAny.inst_id
         );
-        eventInstance?.eventRegistrations?.push(eventRegistration);
+
+        const index = eventInstance?.eventRegistrations?.findIndex(
+          (eventRegistration) => eventRegistration.id === rowAny.reg_id
+        );
+        if (index === -1) {
+          const eventRegistration: IEventRegistration = {
+            id: rowAny.reg_id,
+            createdAt: rowAny.reg_createdAt,
+            updatedAt: rowAny.reg_updatedAt,
+            eventInstanceId: rowAny.reg_eventInstanceId,
+            manuallyAdded: rowAny.reg_manuallyAdded,
+            state: rowAny.reg_state,
+            userId: rowAny.reg_userId,
+          };
+          eventInstance?.eventRegistrations?.push(eventRegistration);
+        }
       }
 
       // create and add event instance trainers if available
@@ -546,18 +564,23 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         rowAny.inst_profile_firstname &&
         rowAny.inst_profile_lastname
       ) {
-        const trainer: ITrainer = {
-          id: rowAny.inst_usr_id,
-          firstname: rowAny.inst_profile_firstname,
-          lastname: rowAny.inst_profile_lastname,
-        };
-
         const eventInstance = (
           eventDefinitionsDb[row.id] as IEventDefinition
         ).eventInstances?.find(
           (eventInstance) => eventInstance.id === rowAny.inst_id
         );
-        eventInstance?.trainers?.push(trainer);
+        const index = eventInstance?.trainers?.findIndex(
+          (trainer) => trainer.id === rowAny.inst_usr_id
+        );
+
+        if (index === -1) {
+          const trainer: ITrainer = {
+            id: rowAny.inst_usr_id,
+            firstname: rowAny.inst_profile_firstname,
+            lastname: rowAny.inst_profile_lastname,
+          };
+          eventInstance?.trainers?.push(trainer);
+        }
       }
     });
 
