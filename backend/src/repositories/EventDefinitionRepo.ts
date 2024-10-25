@@ -95,29 +95,40 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
   ): Promise<unknown> {
     if (fields) {
       const eventDefinition = await super.insert(entity, fields);
-      await this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      await this.synchronizeTrainers(
+        eventDefinition.id,
+        false,
+        entity.trainers
+      );
       return eventDefinition;
     } else {
       const eventDefinition = await super.insert(entity);
-      await this.synchronizeTrainers(eventDefinition.id, entity.trainers);
+      await this.synchronizeTrainers(
+        eventDefinition.id,
+        false,
+        entity.trainers
+      );
       return eventDefinition;
     }
   }
 
   async update(entity: IEventDefinition): Promise<boolean> {
     let wasUpdated = await super.update(entity);
-    await this.synchronizeTrainers(entity.id, entity.trainers);
+    await this.synchronizeTrainers(entity.id, true, entity.trainers);
     return wasUpdated;
   }
 
   private async synchronizeTrainers(
     eventDefinitionId: string,
+    needsDeletion: boolean,
     trainers?: ITrainer[]
   ) {
     // Delete all existing trainer relations for this EventDefinition
-    await EventDefinitionTrainer.destroy({
-      where: { eventDefinitionId: eventDefinitionId },
-    });
+    if (needsDeletion) {
+      await EventDefinitionTrainer.destroy({
+        where: { eventDefinitionId: eventDefinitionId },
+      });
+    }
 
     // Add all currently set trainer relations
     const eventDefinitionTrainers: sequelize.Optional<

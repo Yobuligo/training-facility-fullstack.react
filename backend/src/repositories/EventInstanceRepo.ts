@@ -76,11 +76,19 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
         if (data) {
           eventInstance = this.toJson(data, fields);
-          await this.synchronizeTrainers(eventInstance.id, entity.trainers);
+          await this.synchronizeTrainers(
+            eventInstance.id,
+            true,
+            entity.trainers
+          );
         } else {
           const data = await this.model.create(entity, { transaction });
           eventInstance = this.toJson(data, fields);
-          await this.synchronizeTrainers(eventInstance.id, entity.trainers);
+          await this.synchronizeTrainers(
+            eventInstance.id,
+            false,
+            entity.trainers
+          );
         }
       }
     );
@@ -89,12 +97,15 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
   private async synchronizeTrainers(
     eventInstanceId: string,
+    needsDeletion: boolean,
     trainers?: ITrainer[]
   ) {
     // Delete all existing trainer relations for this EventInstance
-    await EventInstanceTrainer.destroy({
-      where: { eventInstanceId: eventInstanceId },
-    });
+    if (needsDeletion) {
+      await EventInstanceTrainer.destroy({
+        where: { eventInstanceId: eventInstanceId },
+      });
+    }
 
     // Add all currently set trainer relations
     const eventInstanceTrainers: sequelize.Optional<
