@@ -76,6 +76,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
         if (data) {
           eventInstance = this.toJson(data, fields);
+          eventInstance.trainers = entity.trainers
           await this.synchronizeTrainers(
             eventInstance.id,
             transaction,
@@ -84,6 +85,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
         } else {
           const data = await this.model.create(entity, { transaction });
           eventInstance = this.toJson(data, fields);
+          eventInstance.trainers = entity.trainers
           await this.synchronizeTrainers(
             eventInstance.id,
             transaction,
