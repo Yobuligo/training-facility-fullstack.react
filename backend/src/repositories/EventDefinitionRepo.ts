@@ -149,6 +149,8 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           def_profile.firstname AS def_profile_firstname,
           def_profile.lastname AS def_profile_lastname
         FROM \`event-definitions\` AS def
+
+        # join EventDefinition trainers
         LEFT JOIN \`event-definitions-trainers\` AS trainerRel
         ON trainerRel.eventDefinitionId = def.id
         LEFT JOIN \`users\` AS def_usr
@@ -223,17 +225,32 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           inst.\`to\` AS inst_to,
           inst.createdAt AS inst_createdAt,
           inst.updatedAt AS inst_updatedAt,
-          inst.eventDefinitionId AS inst_eventDefinitionId
+          inst.eventDefinitionId AS inst_eventDefinitionId,
+          inst_usr.id AS inst_usr_id,
+          inst_profile.firstname AS inst_profile_firstname,
+          inst_profile.lastname AS inst_profile_lastname
         FROM \`event-definitions\` AS def
+
+        # join EventDefinition trainers
         LEFT JOIN \`event-definitions-trainers\` AS trainerRel
         ON trainerRel.eventDefinitionId = def.id
         LEFT JOIN \`users\` AS def_usr
         ON def_usr.id = trainerRel.userId
         LEFT JOIN \`user-profiles\` AS def_profile
         ON def_profile.userId = def_usr.id
+
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
         AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
+
+        # join EventInstance trainers
+        LEFT JOIN \`event-instances-trainers\` AS inst_trainerRel
+        ON inst_trainerRel.eventInstanceId = inst.id
+        LEFT JOIN \`users\` AS inst_usr
+        ON inst_usr.id = inst_trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS inst_profile
+        ON inst_profile.userId = inst_usr.id
+
         WHERE 
         # once
         ((def.recurrence = 0 && (
@@ -312,6 +329,9 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           inst.createdAt AS inst_createdAt,
           inst.updatedAt AS inst_updatedAt,
           inst.eventDefinitionId AS inst_eventDefinitionId,
+          inst_usr.id AS inst_usr_id,
+          inst_profile.firstname AS inst_profile_firstname,
+          inst_profile.lastname AS inst_profile_lastname,
           reg.id AS reg_id,
           reg.manuallyAdded AS reg_manuallyAdded,
           reg.state AS reg_state,
@@ -320,18 +340,30 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           reg.updatedAt AS reg_updatedAt,
           reg.eventInstanceId AS reg_eventInstanceId
         FROM \`event-definitions\` AS def
+
+        # join EventDefinition trainers
         LEFT JOIN \`event-definitions-trainers\` AS trainerRel
         ON trainerRel.eventDefinitionId = def.id
         LEFT JOIN \`users\` AS def_usr
         ON def_usr.id = trainerRel.userId
         LEFT JOIN \`user-profiles\` AS def_profile
         ON def_profile.userId = def_usr.id
+
         LEFT JOIN \`event-instances\` AS inst
         ON def.id = inst.eventDefinitionId
         AND Date(inst.\`from\`)>= DATE(:from) AND DATE(inst.\`to\`) <= DATE(:to)
         LEFT JOIN \`event-registrations\` AS reg
         ON inst.id = reg.eventInstanceId
         ${userId ? `AND reg.userId = "${userId}"` : ""}
+
+        # join EventInstance trainers
+        LEFT JOIN \`event-instances-trainers\` AS inst_trainerRel
+        ON inst_trainerRel.eventInstanceId = inst.id
+        LEFT JOIN \`users\` AS inst_usr
+        ON inst_usr.id = inst_trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS inst_profile
+        ON inst_profile.userId = inst_usr.id
+
         WHERE 
         # once
         ((recurrence = 0 && (
@@ -449,7 +481,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
 
       const rowAny: any = row;
 
-      // create and add event definition trainer if available
+      // create and add event definition trainers if available
       if (
         rowAny.def_usr_id &&
         rowAny.def_profile_firstname &&
@@ -465,7 +497,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
         );
       }
 
-      // create and add event instance if available
+      // create and add event instances if available
       if (rowAny.inst_id) {
         const eventInstance: IEventInstance = {
           id: rowAny.inst_id,
@@ -480,6 +512,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           title: rowAny.inst_title,
           to: rowAny.inst_to,
           eventRegistrations: [],
+          trainers: [],
         };
 
         (eventDefinitionsDb[row.id] as IEventDefinition).eventInstances?.push(
@@ -505,6 +538,26 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           (eventInstance) => eventInstance.id === rowAny.inst_id
         );
         eventInstance?.eventRegistrations?.push(eventRegistration);
+      }
+
+      // create and add event instance trainers if available
+      if (
+        rowAny.inst_usr_id &&
+        rowAny.inst_profile_firstname &&
+        rowAny.inst_profile_lastname
+      ) {
+        const trainer: ITrainer = {
+          id: rowAny.inst_usr_id,
+          firstname: rowAny.inst_profile_firstname,
+          lastname: rowAny.inst_profile_lastname,
+        };
+
+        const eventInstance = (
+          eventDefinitionsDb[row.id] as IEventDefinition
+        ).eventInstances?.find(
+          (eventInstance) => eventInstance.id === rowAny.inst_id
+        );
+        eventInstance?.trainers?.push(trainer);
       }
     });
 
