@@ -9,6 +9,7 @@ import {
   IEventInstance,
 } from "../shared/model/IEventInstance";
 import { AuthRole } from "../shared/types/AuthRole";
+import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
 import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -22,6 +23,7 @@ export class EventInstanceController extends EntityController<
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
     this.findDefinitionByInstanceId();
     this.insertPublic();
+    this.updateTrainers();
   }
 
   protected findAll(): void {
@@ -120,6 +122,19 @@ export class EventInstanceController extends EntityController<
           eventInstance
         );
         res.status(HttpStatusCode.CREATED_201).send(createdEventInstance);
+      })
+    );
+  }
+
+  private updateTrainers() {
+    this.router.put(
+      `${this.routeMeta.path}/:id${TrainerRouteMeta.path}`,
+      SessionInterceptor(async (req, res) => {
+        const eventInstanceId = req.params.id;
+        const trainers: ITrainer[] = req.body;
+        const eventInstanceRepo = new EventInstanceRepo();
+        await eventInstanceRepo.updateTrainers(eventInstanceId, trainers);
+        res.status(HttpStatusCode.OK_200).send(true);
       })
     );
   }

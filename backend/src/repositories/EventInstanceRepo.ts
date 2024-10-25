@@ -76,7 +76,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
         if (data) {
           eventInstance = this.toJson(data, fields);
-          eventInstance.trainers = entity.trainers
+          eventInstance.trainers = entity.trainers;
           await this.synchronizeTrainers(
             eventInstance.id,
             transaction,
@@ -85,7 +85,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
         } else {
           const data = await this.model.create(entity, { transaction });
           eventInstance = this.toJson(data, fields);
-          eventInstance.trainers = entity.trainers
+          eventInstance.trainers = entity.trainers;
           await this.synchronizeTrainers(
             eventInstance.id,
             transaction,
@@ -97,9 +97,18 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
     return checkNotNull(eventInstance);
   }
 
+  async updateTrainers(
+    eventInstanceId: string,
+    trainers: ITrainer[]
+  ): Promise<void> {
+    await db.transaction(async (transaction) => {
+      await this.synchronizeTrainers(eventInstanceId, transaction, trainers);
+    });
+  }
+
   private async synchronizeTrainers(
     eventInstanceId: string,
-    transaction: Transaction,
+    transaction?: Transaction,
     trainers?: ITrainer[]
   ) {
     // Delete all existing trainer relations for this EventInstance

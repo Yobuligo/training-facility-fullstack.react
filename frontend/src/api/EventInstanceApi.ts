@@ -8,6 +8,7 @@ import {
 } from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
+import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
 import { uuid } from "../utils/uuid";
 import { IEventInstance } from "./../shared/model/IEventInstance";
 import { EntityRepository } from "./core/EntityRepository";
@@ -97,6 +98,19 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   async insertFromEventSecured(event: IEvent): Promise<IEventInstance> {
     const eventInstance = this.createEventInstanceByEvent(event);
     return await RESTApi.post(`${this.publicUrl}`, eventInstance);
+  }
+
+  /**
+   * Updates the trainers of the event instance with id {@link eventInstanceId} by the given {@link trainers}.
+   */
+  async updateTrainers(
+    eventInstanceId: string,
+    trainers: ITrainer[]
+  ): Promise<void> {
+    return await RESTApi.put(
+      `${this.url}/${eventInstanceId}${TrainerRouteMeta.path}`,
+      trainers
+    );
   }
 
   private createEventInstanceByEvent(event: IEvent): IEventInstance {

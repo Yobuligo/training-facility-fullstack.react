@@ -75,6 +75,7 @@ export const EventRegistrationSection: React.FC<
             className={styles.trainerMultiSelectSection}
             label={t(texts.general.trainers)}
             options={viewModel.trainerSelectOptions}
+            onChange={viewModel.onSelectedTrainerIdsChange}
             selected={viewModel.selectedTrainerIds}
           />
 

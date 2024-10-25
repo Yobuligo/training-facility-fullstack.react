@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
@@ -20,6 +20,7 @@ import { IUser } from "../../../shared/model/IUser";
 import { IUserTrialTraining } from "../../../shared/model/IUserTrialTraining";
 import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
+import { ITrainer } from "../../../shared/types/ITrainer";
 import { uuid } from "../../../utils/uuid";
 import { useRequest } from "./../../../lib/userSession/hooks/useRequest";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
@@ -52,10 +53,10 @@ export const useEventRegistrationSectionViewModel = (
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
   const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
-  const selectedTrainerIds = useMemo<string[]>(
-    () => props.eventInstance.trainers?.map((trainer) => trainer.id) ?? [],
-    [props.eventInstance.trainers]
+  const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
+    () => props.eventInstance.trainers?.map((trainer) => trainer.id) ?? []
   );
+  const [updateTrainersRequest] = useRequest();
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -203,6 +204,35 @@ export const useEventRegistrationSectionViewModel = (
     updateEventInstance();
   };
 
+  const onSelectedTrainerIdsChange = async (trainerIds?: string[]) => {
+    setSelectedTrainerIds(trainerIds ?? []);
+
+    // update trainers of event instance
+    const trainers: ITrainer[] =
+      trainerIds?.map((trainerId) => {
+        const trainer = props.trainers.find(
+          (trainer) => trainer.id === trainerId
+        );
+        if (!trainer) {
+          throw new Error(
+            `Error while finding trainer. Trainer by id not found. Data inconsistency.`
+          );
+        }
+        return {
+          id: trainer.id,
+          firstname: trainer.firstname,
+          lastname: trainer.lastname,
+        };
+      }) ?? [];
+    props.eventInstance.trainers = trainers;
+
+    // update backend
+    await updateTrainersRequest(async () => {
+      const eventInstanceApi = new EventInstanceApi();
+      await eventInstanceApi.updateTrainers(props.eventInstance.id, trainers);
+    });
+  };
+
   return {
     confirmDialog,
     eventInstanceState,
@@ -218,6 +248,7 @@ export const useEventRegistrationSectionViewModel = (
     onDelete,
     onReopenRegistration,
     onReschedule,
+    onSelectedTrainerIdsChange,
     selectedTrainerIds,
     trainerSelectOptions,
     userTrialTrainings,
