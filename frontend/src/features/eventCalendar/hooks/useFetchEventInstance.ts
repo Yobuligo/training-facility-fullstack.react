@@ -4,6 +4,10 @@ import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { IEvent } from "../model/IEvent";
 
+/**
+ * This hook is responsible for fetching an event instance for the given {@link event}.
+ * This means to load the event instance either from cache, if available otherwise to create a new event instance and persist it.
+ */
 export const useFetchEventInstance = () => {
   const [fetchEventInstanceRequest] = useRequest();
 

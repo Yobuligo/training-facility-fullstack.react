@@ -1,7 +1,6 @@
 import { MultiSelectSection } from "../../../components/multiSelect/multiSelectSection/MultiSelectSection";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
-import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
 import { LinkIcon } from "../../../icons/LinkIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -18,7 +17,6 @@ export const EventRegistrationSection: React.FC<
 > = (props) => {
   const { t } = useTranslation();
   const viewModel = useEventRegistrationSectionViewModel(props);
-  const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
 
   return (
     <>
@@ -76,7 +74,8 @@ export const EventRegistrationSection: React.FC<
           <MultiSelectSection
             className={styles.trainerMultiSelectSection}
             label={t(texts.general.trainers)}
-            options={trainerSelectOptions}
+            options={viewModel.trainerSelectOptions}
+            selected={viewModel.selectedTrainerIds}
           />
 
           <h3 className={styles.title}>

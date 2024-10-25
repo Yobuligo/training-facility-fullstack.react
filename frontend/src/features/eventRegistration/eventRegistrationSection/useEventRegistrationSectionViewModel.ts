@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { isError } from "../../../core/utils/isError";
+import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRenderDate } from "../../../hooks/useRenderDate";
 import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";
@@ -50,6 +51,11 @@ export const useEventRegistrationSectionViewModel = (
   const toast = useToast();
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
+  const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
+  const selectedTrainerIds = useMemo<string[]>(
+    () => props.eventInstance.trainers?.map((trainer) => trainer.id) ?? [],
+    [props.eventInstance.trainers]
+  );
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
@@ -212,6 +218,8 @@ export const useEventRegistrationSectionViewModel = (
     onDelete,
     onReopenRegistration,
     onReschedule,
+    selectedTrainerIds,
+    trainerSelectOptions,
     userTrialTrainings,
   };
 };

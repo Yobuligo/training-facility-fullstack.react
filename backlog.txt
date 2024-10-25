@@ -339,11 +339,12 @@ Version 1.0.0-20241007.1
 			- What happend if a user is trainer and resigned? Trainer must not be selectable anymore as trainer even so he has the role.
 		- Event Definition
 			- List of trainers must be reset when canceling EventDefinition change mode			
-			- Assignment must be deleted when deleting definition
+			- Assignment must be deleted when deleting definition			
 		- Event Instance
 			- Initially trainers from the template event definition are copied
 			- The trainer can be redefined for a specific event instance
 			- Assignment must be deleted when deleting instance
+			- When changing the trainers of an EventDefinition each new created EventInstance must consider it, even so there are already other EventInstances with the old trainer setup
 	- Display version details
 	- Documentation for deployment etc.
 	- backup data
