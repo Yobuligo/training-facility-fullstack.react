@@ -73,6 +73,7 @@ export const EventRegistrationSection: React.FC<
 
           <MultiSelectSection
             className={styles.trainerMultiSelectSection}
+            disabled={props.eventInstance.calledOff}
             label={t(texts.general.trainers)}
             options={viewModel.trainerSelectOptions}
             onChange={viewModel.onSelectedTrainerIdsChange}

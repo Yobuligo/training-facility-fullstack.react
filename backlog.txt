@@ -326,8 +326,10 @@ Version 1.0.0-20241007.1
 	# Display message in user list if no users were found
 	# A person can be marked as trainer (as a separate role)
 	- Adjust styling of technical information in user profile admin view		
-	
+
 - Backlog
+	- Emails
+		- Send mails must create an email at the send mail folder of the mail account
 	- Set and display trainer to event definition and event instance
 		- General
 			- Trainers can be added
@@ -370,8 +372,6 @@ Version 1.0.0-20241007.1
 	- Exercise compendium
 	- DateTimeSpan
 		- Bug: from value must not be lower than to value
-	- Emails
-		- Send mails must create an email at the send mail folder of the mail account
 	- Check all ui endpoints and delete which are not required anymore
 	- Check all ui REST calls if they use useRequest
 	# Check all backend endpoints and add authorization checks
@@ -379,6 +379,8 @@ Version 1.0.0-20241007.1
 	- We have to check the transmitted data for each REST request if it can be reduced to only required information
 	- Edge Cases
 		- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
+	- Backend must not be started with nodemon but only node
+	- Check if it is required for sequelize to log all SQL-Requests, maybe this is not required
 	
 
 Best Practices Sequelize:
