@@ -5,7 +5,7 @@ import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { List } from "../../../core/services/list/List";
 import { isError } from "../../../core/utils/isError";
-import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
+import { useTrainerSelectOptions } from "../../hooks/useTrainerSelectOptions";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRenderDate } from "../../../hooks/useRenderDate";
 import { useRenderTimeSpan } from "../../../hooks/useRenderTimeSpan";

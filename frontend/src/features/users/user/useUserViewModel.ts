@@ -9,7 +9,7 @@ import { isInitial } from "../../../core/utils/isInitial";
 import { isNotInitial } from "../../../core/utils/isNotInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
-import { useYesOrNoSelectOptions } from "../../../hooks/selectOptions/useYesOrNoSelectOptions";
+import { useYesOrNoSelectOptions } from "../../../hooks/useYesOrNoSelectOptions";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";

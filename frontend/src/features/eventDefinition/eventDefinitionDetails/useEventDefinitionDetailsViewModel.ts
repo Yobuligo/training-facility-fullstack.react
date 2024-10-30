@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { isInitial } from "../../../core/utils/isInitial";
-import { useTrainerSelectOptions } from "../../../hooks/selectOptions/useTrainerSelectOptions";
+import { useTrainerSelectOptions } from "../../hooks/useTrainerSelectOptions";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";

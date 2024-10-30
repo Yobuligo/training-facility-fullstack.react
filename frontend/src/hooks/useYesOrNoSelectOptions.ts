@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { ISelectOption } from "../../components/select/ISelectOption";
-import { texts } from "../../lib/translation/texts";
-import { useTranslation } from "../../lib/translation/useTranslation";
+import { ISelectOption } from "../components/select/ISelectOption";
+import { texts } from "../lib/translation/texts";
+import { useTranslation } from "../lib/translation/useTranslation";
 
 /**
  * This hook is responsible for returning the select options to select Yes or No.

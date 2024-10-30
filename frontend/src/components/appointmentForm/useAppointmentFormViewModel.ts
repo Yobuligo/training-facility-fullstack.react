@@ -3,7 +3,7 @@ import { DateTime } from "../../core/services/date/DateTime";
 import { Recurrence } from "../../core/types/Recurrence";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useRenderRecurrence } from "../../hooks/useRenderRecurrence";
-import { useYesOrNoSelectOptions } from "../../hooks/selectOptions/useYesOrNoSelectOptions";
+import { useYesOrNoSelectOptions } from "../../hooks/useYesOrNoSelectOptions";
 import { ISelectOption } from "../select/ISelectOption";
 import { IAppointmentFormProps } from "./IAppointmentFormProps";
 

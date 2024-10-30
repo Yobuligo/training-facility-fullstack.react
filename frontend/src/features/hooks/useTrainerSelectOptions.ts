@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { sortByName } from "../../features/users/utils/sortByName";
+import { sortByName } from "../users/utils/sortByName";
 import { UserInfo } from "../../services/UserInfo";
 import { IUserShort } from "../../shared/model/IUserShort";
-import { ISelectOption } from "./../../components/select/ISelectOption";
+import { ISelectOption } from "../../components/select/ISelectOption";
 
 /**
  * This custom hook is responsible for providing {@link ISelectOption}s for the given {@link trainers}.
