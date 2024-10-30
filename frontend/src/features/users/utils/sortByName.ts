@@ -1,10 +1,10 @@
-import { IUserShort } from "../../../shared/model/IUserShort";
+import { IHaveName } from "../../../shared/types/IHaveName";
 
 /**
- * This function is responsible for sorting the given {@link usersShort} by firstname and lastname.
+ * This function is responsible for sorting the given {@link objects} by firstname and lastname.
  */
-export const sortUsersShort = (usersShort: IUserShort[]): IUserShort[] => {
-  return usersShort.sort((left, right) => {
+export const sortByName = <T extends IHaveName>(objects: T[]): T[] => {
+  return objects.sort((left, right) => {
     if (left.firstname < right.firstname) {
       return -1;
     }

@@ -335,12 +335,12 @@
 	- Epic: Assign Trainers
 		# Story: A person can be marked as trainer (as a separate role)
 		- Story: Set and display trainer to event definitions
-			- Trainers can be added
-			- Trainers can be removed
-			- Trainers can be selected from a select option (so trainers can be changed)
-				- only still not assigned trainers can be selected and assigned
-			- Multiple trainers can be added
-			- Trainer list can be empty (no trainer must be assigned)
+			# Trainers can be added
+			# Trainers can be removed
+			# Trainers can be selected from a select option (so trainers can be changed)
+				# only still not assigned trainers can be selected and assigned
+			# Multiple trainers can be added
+			# Trainer list can be empty (no trainer must be assigned)
 			- Trainer list is sorted when loaded
 			- List of trainers must be reset when canceling the change mode of an EventDefinition
 			- List of trainers must not be changeable in display mode

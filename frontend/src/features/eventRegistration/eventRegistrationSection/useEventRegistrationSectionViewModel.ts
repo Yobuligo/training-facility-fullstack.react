@@ -58,6 +58,13 @@ export const useEventRegistrationSectionViewModel = (
   );
   const [updateTrainersRequest] = useRequest();
 
+  const useTrainerIds = (trainers?: ITrainer[])=>{
+    const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
+      () => trainers?.map((trainer) => trainer.id) ?? []
+    );
+    return [selectedTrainerIds, setSelectedTrainerIds]
+  }
+
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
       const eventRegistrationApi = new EventRegistrationApi();

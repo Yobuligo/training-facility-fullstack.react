@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { sortUsersShort } from "../../features/users/utils/sortUsersShort";
+import { sortByName } from "../../features/users/utils/sortByName";
 import { UserInfo } from "../../services/UserInfo";
 import { IUserShort } from "../../shared/model/IUserShort";
 import { ISelectOption } from "./../../components/select/ISelectOption";
@@ -12,7 +12,7 @@ export const useTrainerSelectOptions = (
 ): ISelectOption<string>[] => {
   const trainerSelectOptions: ISelectOption<string>[] = useMemo(
     () =>
-      sortUsersShort(trainers).map((trainer) => ({
+      sortByName(trainers).map((trainer) => ({
         key: trainer.id,
         text: UserInfo.toFullName(trainer),
       })),

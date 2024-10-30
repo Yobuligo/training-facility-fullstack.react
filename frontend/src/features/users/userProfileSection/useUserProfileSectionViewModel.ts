@@ -8,7 +8,7 @@ import { DummyUser } from "../../../model/DummyUser";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
-import { sortUsersShort } from "../utils/sortUsersShort";
+import { sortByName } from "../utils/sortByName";
 
 export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
@@ -60,9 +60,9 @@ export const useUserProfileSectionViewModel = () => {
         }
       });
 
-      const sortedUsersShort = sortUsersShort(usersShort);
+      const sortedUsersShort = sortByName(usersShort);
       setUsersShort(sortedUsersShort);
-      const sortedResignedUsersShort = sortUsersShort(resignedUsersShort);
+      const sortedResignedUsersShort = sortByName(resignedUsersShort);
       setResignedUsersShort(sortedResignedUsersShort);
     });
 
