@@ -2,12 +2,11 @@ import { useState } from "react";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { isInitial } from "../../../core/utils/isInitial";
-import { useTrainerSelectOptions } from "../../hooks/useTrainerSelectOptions";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { ITrainer } from "../../../shared/types/ITrainer";
-import { useTrainerIds } from "../../hooks/useTrainerIds";
+import { useTrainer } from "../../hooks/useTrainer";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (
@@ -42,10 +41,8 @@ export const useEventDefinitionDetailsViewModel = (
   const [selectedColor, setSelectedColor] = useState(
     props.eventDefinition.color
   );
-  const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
-  const [selectedTrainerIds, setSelectedTrainerIds] = useTrainerIds(
-    props.eventDefinition.trainers
-  );
+  const [trainerSelectOptions, selectedTrainerIds, setSelectedTrainerIds] =
+    useTrainer(props.trainers, props.eventDefinition.trainers);
 
   const reset = () => {
     setTitle(props.eventDefinition.title);

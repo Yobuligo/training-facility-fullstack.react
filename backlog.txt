@@ -348,9 +348,9 @@
 			- Past users must be loaded as trainers if they are assigned to an event definition
 				- E.g. a user was marked as trainer. Later the flag was removed. In this case the trainer must be displayed as trainer anyway
 			# Deleted users must not be loaded as trainers
-				- E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
-			- Resigned users must not be selectable as trainers, but must be displayed if assigned previously
-				- E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.
+				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
+			# Resigned users must not be selectable as trainers, but must be displayed if assigned previously
+				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.
 		- Story: Set and display trainer to event instances
 			- Trainers can be added
 			- Trainers can be removed
