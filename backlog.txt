@@ -329,17 +329,17 @@
 - Version 1.7.0-<>.8
 	# Story: Clicking on the logo on the login page should navigate to dashboard screen
 	# Story: Display message in user list if no users were found
-	- Story: Adjust styling of technical information in user profile admin view
+	# Story: Adjust styling of technical information in user profile admin view
 
 - Backlog
 	- Epic: Assign Trainers
-		- Goal: Trainer can be 
 		# Story: A person can be marked as trainer (as a separate role)
 		- Story: Set and display trainer to event definitions
 			- Trainers can be added
 			- Trainers can be removed
 			- Trainers can be selected from a select option (so trainers can be changed)
-			- Several trainers can be added
+				- only still not assigned trainers can be selected and assigned
+			- Multiple trainers can be added
 			- Trainer list can be empty (no trainer must be assigned)
 			- List of trainers must be reset when canceling the change mode of an EventDefinition
 			- List of trainers must not be changeable in display mode
@@ -354,7 +354,7 @@
 			- Trainers can be added
 			- Trainers can be removed
 			- Trainers can be selected from a select option (so trainers can be changed)
-			- Several trainers can be added
+			- Multiple trainers can be added
 			- Trainer list can be empty (no trainer must be assigned)
 			- Initially the trainers are copied from the template event definition to the event instance
 			- The trainer can be redefined for a specific event instance
