@@ -7,6 +7,7 @@ import { useLabeledElement } from "../../../hooks/useLabeledElement";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { ITrainer } from "../../../shared/types/ITrainer";
+import { useTrainerIds } from "../../hooks/useTrainerIds";
 import { IEventDefinitionDetailsProps } from "./IEventDefinitionDetailsProps";
 
 export const useEventDefinitionDetailsViewModel = (
@@ -42,9 +43,8 @@ export const useEventDefinitionDetailsViewModel = (
     props.eventDefinition.color
   );
   const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
-
-  const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
-    props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? []
+  const [selectedTrainerIds, setSelectedTrainerIds] = useTrainerIds(
+    props.eventDefinition.trainers
   );
 
   const reset = () => {

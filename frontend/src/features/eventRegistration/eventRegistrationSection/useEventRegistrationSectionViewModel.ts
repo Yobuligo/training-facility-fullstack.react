@@ -22,6 +22,7 @@ import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { ITrainer } from "../../../shared/types/ITrainer";
 import { uuid } from "../../../utils/uuid";
+import { useTrainerIds } from "../../hooks/useTrainerIds";
 import { useRequest } from "./../../../lib/userSession/hooks/useRequest";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 
@@ -53,17 +54,10 @@ export const useEventRegistrationSectionViewModel = (
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
   const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
-  const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
-    () => props.eventInstance.trainers?.map((trainer) => trainer.id) ?? []
+  const [selectedTrainerIds, setSelectedTrainerIds] = useTrainerIds(
+    props.eventInstance.trainers
   );
   const [updateTrainersRequest] = useRequest();
-
-  const useTrainerIds = (trainers?: ITrainer[])=>{
-    const [selectedTrainerIds, setSelectedTrainerIds] = useState<string[]>(
-      () => trainers?.map((trainer) => trainer.id) ?? []
-    );
-    return [selectedTrainerIds, setSelectedTrainerIds]
-  }
 
   const loadRegistrations = async () => {
     loadEventRegistrationRequest(async () => {
