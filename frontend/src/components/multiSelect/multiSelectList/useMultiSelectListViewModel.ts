@@ -35,6 +35,39 @@ const createMultiSelectItems = <T>(
     ? keys.map((key) => createMultiSelectItem(options, key))
     : [];
 
+/**
+ * Returns the keys of the select options, which are in use, which means which are selected.
+ */
+const findSelectedKeys = <T>(
+  multiSelectItems: IMultiSelectItem<T>[]
+): Set<T> => {
+  const selectedKeys = new Set<T>();
+  for (const multiSelectItem of multiSelectItems) {
+    selectedKeys.add(multiSelectItem.selected.key);
+  }
+  return selectedKeys;
+};
+
+/**
+ * Updates the options of each multiSelectItem. If an option is selected, is must not be available for another selection.
+ */
+const updateOptions = <T>(
+  multiSelectItems: IMultiSelectItem<T>[],
+  options: ISelectOption<T>[]
+): IMultiSelectItem<T>[] => {
+  const selectedKeys = findSelectedKeys(multiSelectItems);
+
+  // Filter free options (which are not in use, so currently free, which can be selected) or an option in case it is the selected option of the multiSelectItem
+  multiSelectItems.forEach((multiSelectItem) => {
+    multiSelectItem.options = options.filter(
+      (option) =>
+        option.key === multiSelectItem.selected.key ||
+        !selectedKeys.has(option.key)
+    );
+  });
+  return multiSelectItems;
+};
+
 export const useMultiSelectListViewModel = <T>(
   props: IMultiSelectListProps<T>
 ) => {
@@ -44,22 +77,12 @@ export const useMultiSelectListViewModel = <T>(
 
   useEffect(() => {
     setMultiSelectItems(
-      createMultiSelectItems(props.options, props.selected ?? [])
+      updateOptions(
+        createMultiSelectItems(props.options, props.selected ?? []),
+        props.options
+      )
     );
   }, [props.options, props.selected]);
-
-  /**
-   * Returns the keys of the select options, which are in use, which means which are selected.
-   */
-  const findSelectedKeys = (
-    multiSelectItems: IMultiSelectItem<T>[]
-  ): Set<T> => {
-    const selectedKeys = new Set<T>();
-    for (const multiSelectItem of multiSelectItems) {
-      selectedKeys.add(multiSelectItem.selected.key);
-    }
-    return selectedKeys;
-  };
 
   /**
    * Returns the next free option, which is not in use, so not selected, otherwise undefined.
@@ -76,22 +99,6 @@ export const useMultiSelectListViewModel = <T>(
     return undefined;
   };
 
-  /**
-   * Updates the options of each multiSelectItem. If an option is selected, is must not be available for another selection.
-   */
-  const updateOptions = (multiSelectItems: IMultiSelectItem<T>[]) => {
-    const selectedKeys = findSelectedKeys(multiSelectItems);
-
-    // Filter free options (which are not in use, so currently free, which can be selected) or an option in case it is the selected option of the multiSelectItem
-    multiSelectItems.forEach((multiSelectItem) => {
-      multiSelectItem.options = props.options.filter(
-        (option) =>
-          option.key === multiSelectItem.selected.key ||
-          !selectedKeys.has(option.key)
-      );
-    });
-  };
-
   const raiseOnChange = (multiSelectItems: IMultiSelectItem<T>[]) =>
     props.onChange?.(
       multiSelectItems.map((multiSelectItem) => multiSelectItem.selected.key)
@@ -100,7 +107,7 @@ export const useMultiSelectListViewModel = <T>(
   const handleMultiSelectItemsChange = (
     multiSelectItems: IMultiSelectItem<T>[]
   ) => {
-    updateOptions(multiSelectItems);
+    updateOptions(multiSelectItems, props.options);
     raiseOnChange(multiSelectItems);
   };
 

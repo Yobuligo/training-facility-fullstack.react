@@ -341,6 +341,7 @@
 				- only still not assigned trainers can be selected and assigned
 			- Multiple trainers can be added
 			- Trainer list can be empty (no trainer must be assigned)
+			- Trainer list is sorted when loaded
 			- List of trainers must be reset when canceling the change mode of an EventDefinition
 			- List of trainers must not be changeable in display mode
 			- Trainer assignment must be deleted when deleting event definition
@@ -356,6 +357,7 @@
 			- Trainers can be selected from a select option (so trainers can be changed)
 			- Multiple trainers can be added
 			- Trainer list can be empty (no trainer must be assigned)
+			- Trainer list is sorted when loaded			
 			- Initially the trainers are copied from the template event definition to the event instance
 			- The trainer can be redefined for a specific event instance
 			- List of trainers must not be changeable for called off event instances
