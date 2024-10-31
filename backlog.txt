@@ -351,6 +351,7 @@
 				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
 			# Resigned users must not be selectable as trainers, but must be displayed if assigned previously
 				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.
+			- Bug: When creating an Event Definition it is not possible to assign trainers
 		- Story: Set and display trainer to event instances
 			- Trainers can be added
 			- Trainers can be removed
