@@ -24,6 +24,13 @@ export class UserInfo {
     return index !== -1;
   }
 
+  static containsTrainerRoleFromShort(
+    userRoles: Subset<IUserRole, "id" | "role">[]
+  ): boolean {
+    const index = userRoles.findIndex((row) => row.role === AuthRole.TRAINER);
+    return index !== -1;
+  }
+
   static toFullName(object?: IHaveName): string {
     return `${object?.firstname} ${object?.lastname}`;
   }

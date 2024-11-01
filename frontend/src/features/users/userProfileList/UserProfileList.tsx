@@ -13,6 +13,7 @@ export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
     <UserProfileItem
       key={userShort.id}
       isAdmin={UserInfo.containsAdminRoleFromShort(userShort.userRoles)}
+      isTrainer={UserInfo.containsTrainerRoleFromShort(userShort.userRoles)}
       onSelect={() => props.onSelect?.(userShort)}
       userShort={userShort}
     />

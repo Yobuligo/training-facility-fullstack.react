@@ -4,4 +4,5 @@ export interface IUserProfileItem {
   onSelect?: () => void;
   userShort: IUserShort;
   isAdmin: boolean;
+  isTrainer: boolean;
 }

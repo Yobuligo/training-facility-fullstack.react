@@ -10,14 +10,15 @@
 .userProfileItem {
   cursor: pointer;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto auto;
   padding: 1rem;
   color: colors.$color-text;
   width: 100%;
 
   @include mixins.medium-screen(45rem) {
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    align-items: center;
   }
 }
 
@@ -26,11 +27,39 @@
   color: colors.$color-user-deactivated-text;
 }
 
-.group {
+.nameContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .name {
   font-size: large;
+}
+
+.trainerIcon {
+  width: 2rem;
+  height: auto;
+}
+
+.trainerIconSmallScreen {
+  @extend .trainerIcon;
+
+  @include mixins.medium-screen(45rem) {
+    display: none;
+  }
+}
+
+.trainerIconMediumScreen {
+  @extend .trainerIcon;
+  display: none;
+
+  @include mixins.medium-screen(45rem) {
+    display: block;
+  }
+}
+
+.trainerHidden {
+  visibility: hidden;
 }
