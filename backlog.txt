@@ -331,17 +331,16 @@
 	# Story: Display message in user list if no users were found
 	# Story: Adjust styling of technical information in user profile admin view
 	# Story: Hide memberOnly appointments in training overview calendar
-
-- Backlog
-	- Epic: Assign Trainers
+	# Epic: Assign Trainers
 		# Story: A person can be marked as trainer (as a separate role)
 		# Story: Set and display trainer to event definitions
 			# Trainers can be added
 			# Trainers can be added for new (not yet persisted) event definitions
+			# Multiple trainers can be added
+			# Each trainer can be selected only once. It is not possible to add more trainers than available.			
 			# Trainers can be removed
 			# Trainers can be selected from a select option (so trainers can be changed)
 				# only still not assigned trainers can be selected and assigned
-			# Multiple trainers can be added
 			# Trainer list can be empty (no trainer must be assigned)
 			# Trainer list is sorted when loaded
 			# List of trainers must be reset when canceling the change mode of an EventDefinition
@@ -352,28 +351,35 @@
 			# Deleted users must not be loaded as trainers
 				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
 			# Resigned users must not be selectable as trainers, but must be displayed if assigned previously
-				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.
+				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore. Anyway it is loaded if the user was assigned as trainer once.
 			# Bug: Training cannot be assigned when creating an event definition.
-		- Story: Set and display trainer to event instances
-			- Trainers can be added
-			- Trainers can be removed
-			- Trainers can be selected from a select option (so trainers can be changed)
-			- Multiple trainers can be added
-			- Trainer list can be empty (no trainer must be assigned)
-			- Trainer list is sorted when loaded			
-			- Initially the trainers are copied from the template event definition to the event instance
-			- The trainer can be redefined for a specific event instance
-			- List of trainers must not be changeable for called off event instances
-			- Trainer assignment must be deleted when deleting event instance
-			- Trainer changes of an event definition must be considered for future event instances based on the event definition, even so there are existing event instances
-			- Past users must be loaded as trainers if they are assigned to an event definition
-				- E.g. a user was marked as trainer. Later the flag was removed. In this case the trainer must be displayed as trainer anyway
-			- Deleted users must not be loaded as trainers
-				- E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
-			- Resigned users must not be selectable as trainers
-				- E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.			
-	- Story: Send mails must create an email at the send mail folder of the mail account
+		# Story: Set and display trainer to event instances
+			# Trainers can be added
+			# Trainers can be added for new (not yet persisted) event instances
+			# Multiple trainers can be added
+			# Each trainer can be selected only once. It is not possible to add more trainers than available.						
+			# Trainers can be removed
+			# Trainers can be selected from a select option (so trainers can be changed)
+			# Trainer list can be empty (no trainer must be assigned)
+			# Trainer list is sorted when loaded
+			# Initially the trainers are copied from the template event definition to the event instance
+			# The trainer can be redefined for a specific event instance
+			# List of trainers must not be changeable for called off event instances
+			# Trainer assignment must be deleted when deleting event instance
+			# Trainer changes of an event definition must be considered for future event instances based on the event definition, even so there are existing event instances
+			# Past users must be loaded as trainers if they are assigned to an event definition
+				# E.g. a user was marked as trainer. Later the flag was removed. In this case the trainer must be displayed as trainer anyway
+			# Deleted users must not be loaded as trainers
+				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
+			# Resigned users must not be selectable as trainers
+				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore. Anyway it is loaded if the user was assigned as trainer once.
+
+- Backlog
+	- Story: Send mails must create an email at the send mail folder of the mail account	
 	- Story: Display age of user in UserList
+	- Epic: Tooltip
+		- Story: Display tooltip for Members only flag in event definition
+			- The following message is displayed: If active, training is not displayed in the training overview calendar (homepage) and not displayed in the trial training calendar. 
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.		
 	- Epic: Version details
