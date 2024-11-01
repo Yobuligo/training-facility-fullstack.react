@@ -330,6 +330,7 @@
 	# Story: Clicking on the logo on the login page should navigate to dashboard screen
 	# Story: Display message in user list if no users were found
 	# Story: Adjust styling of technical information in user profile admin view
+	# Story: Hide memberOnly appointments in training overview calendar
 
 - Backlog
 	- Epic: Assign Trainers
@@ -351,7 +352,7 @@
 				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
 			# Resigned users must not be selectable as trainers, but must be displayed if assigned previously
 				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.
-			- Bug: When creating an Event Definition it is not possible to assign trainers
+			- Bug: Training can be assigned when creating an event definition.
 		- Story: Set and display trainer to event instances
 			- Trainers can be added
 			- Trainers can be removed
@@ -372,7 +373,8 @@
 				- E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore.			
 	- Story: Send mails must create an email at the send mail folder of the mail account
 	- Story: Display age of user in UserList
-	- Story: Hide memberOnly appointments in training overview calendar
+	- Epic: Password reset function
+		- Story: A user can request to reset a password by himself.		
 	- Epic: Version details
 	- Epic: Documentation
 		- Story: Write documentation for deployment
