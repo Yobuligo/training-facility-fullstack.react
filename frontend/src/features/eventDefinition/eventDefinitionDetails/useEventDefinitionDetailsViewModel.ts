@@ -3,6 +3,7 @@ import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { isInitial } from "../../../core/utils/isInitial";
 import { useLabeledElement } from "../../../hooks/useLabeledElement";
+import { useToast } from "../../../lib/toast/hooks/useToast";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { ITrainer } from "../../../shared/types/ITrainer";
@@ -13,6 +14,7 @@ export const useEventDefinitionDetailsViewModel = (
   props: IEventDefinitionDetailsProps
 ) => {
   const { t } = useTranslation();
+  const toast = useToast();
   const [displayMode, setDisplayMode] = useState(false);
   const [description, setDescription] = useState(
     props.eventDefinition.description
@@ -57,6 +59,12 @@ export const useEventDefinitionDetailsViewModel = (
       props.eventDefinition.trainers?.map((trainer) => trainer.id) ?? []
     );
   };
+
+  /**
+   * This function is called when a trainer should be added but there are no trainers available.
+   */
+  const onAddNoEntry = () =>
+    toast.info(t(texts.eventDefinitionDetails.infoAddNoEntry));
 
   const onCancel = () => {
     setTitleError("");
@@ -127,6 +135,7 @@ export const useEventDefinitionDetailsViewModel = (
     fromDate,
     fromTime,
     isMemberOnly,
+    onAddNoEntry,
     onCancel,
     onChangeTitle,
     onDelete,

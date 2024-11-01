@@ -45,7 +45,8 @@
         "calledOff": "Abgesagt"
     },
     "eventDefinitionDetails": {
-        "errorEnterTitle": "Titel ist erforderlich"
+        "errorEnterTitle": "Titel ist erforderlich",
+        "infoAddNoEntry": "Es ist kein Trainer verfügbar. Bitte markieren Sie einen Benutzer als Trainer."
     },
     "eventDefinitionList": {
         "noItems": "Keine Ereignisse gefunden"

@@ -9,6 +9,7 @@ export function MultiSelectSection<T>(props: IMultiSelectSectionProps<T>) {
       {props.label && <h3 className={styles.title}>{props.label}</h3>}
       <MultiSelectList
         disabled={props.disabled}
+        onAddNoEntry={props.onAddNoEntry}
         onChange={props.onChange}
         options={props.options}
         selected={props.selected}

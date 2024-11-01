@@ -71,6 +71,7 @@ export const EventDefinitionDetails: React.FC<IEventDefinitionDetailsProps> = (
             disabled={viewModel.displayMode}
             label={t(texts.general.trainers)}
             options={viewModel.trainerSelectOptions}
+            onAddNoEntry={viewModel.onAddNoEntry}
             onChange={viewModel.onSelectedTrainerIdsChange}
             selected={viewModel.selectedTrainerIds}
           />

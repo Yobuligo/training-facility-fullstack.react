@@ -115,6 +115,7 @@ export const useMultiSelectListViewModel = <T>(
     // find the next free option
     const toBeSelected = findNextFreeOption(multiSelectItems);
     if (!toBeSelected) {
+      props.onAddNoEntry?.();
       return;
     }
 
