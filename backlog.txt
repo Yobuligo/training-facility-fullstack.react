@@ -375,7 +375,7 @@
 				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore. Anyway it is loaded if the user was assigned as trainer once.
 
 - Backlog
-	- Story: Send mails must create an email at the send mail folder of the mail account	
+	- Story: Send mails must create an email at the send mail folder of the mail account
 	- Story: Display age of user in UserList
 	- Epic: Tooltip
 		- Story: Display tooltip for Members only flag in event definition
