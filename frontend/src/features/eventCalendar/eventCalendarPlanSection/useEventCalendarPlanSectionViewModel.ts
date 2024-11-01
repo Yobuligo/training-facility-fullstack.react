@@ -3,10 +3,12 @@ import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
+import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IUserShort } from "../../../shared/model/IUserShort";
+import { AuthRole } from "../../../shared/types/AuthRole";
 import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export const useEventCalendarPlanSectionViewModel = () => {
@@ -21,10 +23,18 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [deleteEventDefinitionRequest] = useRequest();
   const [trainers, setTrainers] = useState<IUserShort[]>([]);
 
-  const onAdd = () =>
+  const onAdd = async () => {
+    // load trainers
+    const userApi = new UserApi();
+    const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+    setTrainers(trainers);
     setSelectedEventDefinition(new DummyEventDefinition(user.id));
+  };
 
-  const onBack = () => setSelectedEventDefinition(undefined);
+  const onBack = () => {
+    setTrainers([]);
+    setSelectedEventDefinition(undefined);
+  };
 
   const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) =>
     deleteEventDefinitionRequest(async () => {

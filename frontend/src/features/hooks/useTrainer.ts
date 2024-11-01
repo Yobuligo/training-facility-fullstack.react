@@ -27,12 +27,14 @@ export const useTrainer = (
     // Restrict selectableTrainers to those who have not yet resigned,
     // beside if a resigned trainer is selected / so assigned. Then display the trainer anyway for traceability.
     const filteredTrainers = selectableTrainers.filter(
-      (selectableTrainers) =>
-        selectableTrainers.resignedAt === null ||
-        selectedTrainers?.findIndex(
-          (selectedTrainer) => selectedTrainer.id === selectableTrainers.id
-        ) !== -1
+      (selectableTrainer) =>
+        selectableTrainer.resignedAt === null ||
+        (selectedTrainers &&
+          selectedTrainers.findIndex(
+            (selectedTrainer) => selectedTrainer.id === selectableTrainer.id
+          ) !== -1)
     );
+    
     return sortByName(filteredTrainers).map((trainer) => ({
       key: trainer.id,
       text: UserInfo.toFullName(trainer),

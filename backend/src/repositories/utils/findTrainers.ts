@@ -30,11 +30,7 @@ export const findTrainers = async (
 
   // Load retired trainers and append them to the result list
   if (isNotInitial(retiredUserIds)) {
-    const userRepo = new UserRepo();
-    const retiredUsers = await userRepo.findAllShortByRole(
-      AuthRole.TRAINER,
-      retiredUserIds
-    );
+    const retiredUsers = await userRepo.findAllShort(retiredUserIds);
     trainers.push(...retiredUsers);
   }
 
