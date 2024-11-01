@@ -2,16 +2,20 @@ import sequelize from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
+import { isNotInitial } from "../core/utils/isNotInitial";
 import { db } from "../db/db";
 import { EventDefinitionTrainer } from "../model/EventDefinitionTrainer";
 import { IEventDefinition } from "../shared/model/IEventDefinition";
 import { IEventDefinitionTrainer } from "../shared/model/IEventDefinitionTrainer";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { IUserShort } from "../shared/model/IUserShort";
+import { AuthRole } from "../shared/types/AuthRole";
 import { ITrainer } from "../shared/types/ITrainer";
 import { EventDefinition } from "./../model/EventDefinition";
 import { EventInstance } from "./../model/EventInstance";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { UserRepo } from "./UserRepo";
 
 export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
   constructor() {
@@ -82,6 +86,45 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       requestedUserId
     );
     return eventDefinition;
+  }
+
+  /**
+   * Returns the possible trainers for this event definition.
+   * This means all user having the role TRAINER, but also a user, which might be assigned but hasn't the trainer role anymore.
+   */
+  async findTrainers(eventDefinitionId: string): Promise<IUserShort[]> {
+    // find trainers with role TRAINER
+    const userRepo = new UserRepo();
+    const trainers = await userRepo.findAllShortByRole(AuthRole.TRAINER);
+
+    // find trainers assigned to the event definition
+    const data = await EventDefinitionTrainer.findAll({
+      where: { eventDefinitionId },
+    });
+    const assignedTrainers = data.map((model) => model.toJSON());
+
+    // check if each assigned trainer has still the role TRAINER,
+    // otherwise collect the corresponding user ids
+    const toBeLoadedUserIds: string[] = [];
+    for (const assignedTrainer of assignedTrainers) {
+      const index = trainers.findIndex(
+        (trainer) => trainer.id === assignedTrainer.userId
+      );
+      if (index === -1) {
+        toBeLoadedUserIds.push(assignedTrainer.userId);
+      }
+    }
+
+    // Load required users
+    if (isNotInitial(toBeLoadedUserIds)) {
+      const toBeLoadedUsers = await userRepo.findAllShortByRole(
+        AuthRole.TRAINER,
+        toBeLoadedUserIds
+      );
+      trainers.push(...toBeLoadedUsers);
+    }
+
+    return trainers;
   }
 
   insert<K extends keyof IEventDefinition>(

@@ -22,6 +22,7 @@ export class EventDefinitionController extends EntityController<
       AuthRole.ADMIN,
     ]);
     this.findByDateTimeSpanPublic();
+    this.findTrainers();
   }
 
   protected findAll(): void {
@@ -80,6 +81,20 @@ export class EventDefinitionController extends EntityController<
           );
         }
         res.status(HttpStatusCode.OK_200).send(eventDefinitions);
+      })
+    );
+  }
+
+  /**
+   * Returns the possible trainers for this event definition.
+   */
+  private findTrainers() {
+    this.router.get(
+      `${this.routeMeta.path}/:id/trainers`,
+      SessionInterceptor(async (req, res) => {
+        const eventDefinitionId = req.params.id;
+        const trainers = await this.repo.findTrainers(eventDefinitionId);
+        res.status(HttpStatusCode.OK_200).send(trainers);
       })
     );
   }

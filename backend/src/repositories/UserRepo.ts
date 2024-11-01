@@ -32,6 +32,15 @@ import { UserProfileRepo } from "./UserProfileRepo";
 import { UserRoleRepo } from "./UserRoleRepo";
 
 export class UserRepo extends SequelizeRepository<IUserSecure> {
+  private userProfileShortAttributes: (keyof IUserShort)[] = [
+    "id",
+    "firstname",
+    "lastname",
+    "email",
+    "phone",
+    "resignedAt",
+  ];
+
   constructor() {
     super(User, [
       { model: UserRole, as: "userRoles" },
@@ -177,14 +186,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         {
           model: UserProfile,
           as: "userProfile",
-          attributes: [
-            "id",
-            "firstname",
-            "lastname",
-            "email",
-            "phone",
-            "resignedAt",
-          ],
+          attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
@@ -208,14 +210,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         {
           model: UserProfile,
           as: "userProfile",
-          attributes: [
-            "id",
-            "firstname",
-            "lastname",
-            "email",
-            "phone",
-            "resignedAt",
-          ],
+          attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
@@ -236,21 +231,24 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
    * Returns all users in a short format having a specific role, e.g. ADMIN or TRAINER.
    * Attention: Returns only the role to which is restricted not all rules of a user.
    */
-  async findAllShortByRole(role: AuthRole): Promise<IUserShort[]> {
+  async findAllShortByRole(
+    role: AuthRole,
+    userIds?: string[]
+  ): Promise<IUserShort[]> {
+    // Restrict the result to a list of users?
+    let where: WhereOptions<IUserSecure> | undefined = undefined;
+    if (userIds) {
+      where = { id: { [Op.in]: userIds } };
+    }
+
     const data = await User.findAll({
       attributes: ["id", "isLocked", "username"],
+      where,
       include: [
         {
           model: UserProfile,
           as: "userProfile",
-          attributes: [
-            "id",
-            "firstname",
-            "lastname",
-            "email",
-            "phone",
-            "resignedAt",
-          ],
+          attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
