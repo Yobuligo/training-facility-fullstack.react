@@ -22,6 +22,7 @@ export class EventInstanceController extends EntityController<
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
     this.findDefinitionByInstanceId();
+    this.findTrainers();
     this.insertPublic();
     this.updateTrainers();
   }
@@ -108,6 +109,20 @@ export class EventInstanceController extends EntityController<
             .status(HttpStatusCode.NOT_FOUND_404)
             .send(createError("Not found", "NotFoundError"));
         }
+      })
+    );
+  }
+
+  /**
+   * Returns the possible trainers for an event instance.
+   */
+  private findTrainers() {
+    this.router.get(
+      `${this.routeMeta.path}/:id/trainers`,
+      SessionInterceptor(async (req, res) => {
+        const eventInstanceId = req.params.id;
+        const trainers = await this.repo.findTrainers(eventInstanceId);
+        res.status(HttpStatusCode.OK_200).send(trainers);
       })
     );
   }

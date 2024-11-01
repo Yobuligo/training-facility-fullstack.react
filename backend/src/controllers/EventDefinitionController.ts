@@ -86,7 +86,7 @@ export class EventDefinitionController extends EntityController<
   }
 
   /**
-   * Returns the possible trainers for this event definition.
+   * Returns the possible trainers for an event definition.
    */
   private findTrainers() {
     this.router.get(

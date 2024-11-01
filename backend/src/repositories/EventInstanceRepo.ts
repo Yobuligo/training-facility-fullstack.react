@@ -10,8 +10,10 @@ import { EventRegistration } from "../model/EventRegistration";
 import { UserTrialTraining } from "../model/UserTrialTraining";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventInstanceTrainer } from "../shared/model/IEventInstanceTrainer";
+import { IUserShort } from "../shared/model/IUserShort";
 import { ITrainer } from "../shared/types/ITrainer";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
+import { findTrainers } from "./utils/findTrainers";
 
 export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
   constructor() {
@@ -47,6 +49,21 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
     let eventInstances = data.map((model) => model.toJSON());
     eventInstances = this.restrictEntitiesFields(eventInstances, fields);
     return eventInstances;
+  }
+
+  /**
+   * Returns the possible trainers for an event instance by the given {@link eventInstanceId}.
+   * This means all user having the role TRAINER, but also users, which might be assigned but haven't have the trainer role anymore.
+   */
+  async findTrainers(eventInstanceId: string): Promise<IUserShort[]> {
+    // find trainers assigned to the event instance
+    const data = await EventInstanceTrainer.findAll({
+      where: { eventInstanceId },
+    });
+    const assignedTrainers = data.map((model) => model.toJSON());
+
+    const trainers = await findTrainers(assignedTrainers);
+    return trainers;
   }
 
   insert<K extends keyof IEventInstance>(
