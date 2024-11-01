@@ -17,7 +17,7 @@ export const EventCalendarOverview: React.FC = () => {
           const eventDefinitionApi = new EventDefinitionApi();
           return await eventDefinitionApi.findByDateTimeSpanSecured(
             dateTimeSpan,
-            false
+            true
           );
         }}
         views={["day", "week"]}
