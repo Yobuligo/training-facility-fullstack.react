@@ -3,12 +3,10 @@ import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
-import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IUserShort } from "../../../shared/model/IUserShort";
-import { AuthRole } from "../../../shared/types/AuthRole";
 import { ICalendarEvent } from "../model/ICalendarEvent";
 
 export const useEventCalendarPlanSectionViewModel = () => {
@@ -44,8 +42,10 @@ export const useEventCalendarPlanSectionViewModel = () => {
 
   const onEventSelected = async (calendarEvent: ICalendarEvent) => {
     // load trainers
-    const userApi = new UserApi();
-    const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+    const eventDefinitionApi = new EventDefinitionApi();
+    const trainers = await eventDefinitionApi.findTrainers(
+      calendarEvent.eventDefinition.id
+    );
     setTrainers(trainers);
     setSelectedEventDefinition(calendarEvent.eventDefinition);
   };

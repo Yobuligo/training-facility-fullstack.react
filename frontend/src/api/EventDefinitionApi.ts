@@ -3,6 +3,7 @@ import {
   EventDefinitionRouteMeta,
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
+import { IUserShort } from "../shared/model/IUserShort";
 import { EntityRepository } from "./core/EntityRepository";
 import { RESTApi } from "./core/RESTApi";
 
@@ -69,6 +70,13 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
 
     this.fillDates(eventDefinitions);
     return eventDefinitions;
+  }
+
+  /**
+   * Returns the trainers for the given {@link eventDefinitionId}.
+   */
+  async findTrainers(eventDefinitionId: string): Promise<IUserShort[]> {
+    return await RESTApi.get(`${this.url}/${eventDefinitionId}/trainers`);
   }
 
   /**

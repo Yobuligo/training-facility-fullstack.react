@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
+import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useAuth } from "../../../hooks/useAuth";
@@ -42,9 +43,15 @@ export const useEventCalendarMyTrainingsViewModel = () => {
       const eventInstance = await fetchEventInstance(event);
       setSelectedEventInstance(eventInstance);
 
-      const userApi = new UserApi();
-      const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
-      setTrainers(trainers);
+      if (eventInstance) {
+        const eventInstanceApi = new EventInstanceApi();
+        const trainers = await eventInstanceApi.findTrainers(eventInstance.id);
+        setTrainers(trainers);
+      } else {
+        const userApi = new UserApi();
+        const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+        setTrainers(trainers);
+      }
       setSelectedEvent(event);
     }
   };

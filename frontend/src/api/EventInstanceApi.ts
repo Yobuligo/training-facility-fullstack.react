@@ -7,6 +7,7 @@ import {
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
+import { IUserShort } from "../shared/model/IUserShort";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
 import { uuid } from "../utils/uuid";
@@ -62,6 +63,13 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
         },
       }
     );
+  }
+
+  /**
+   * Returns the trainers for the given {@link eventInstanceId}.
+   */
+  async findTrainers(eventInstanceId: string): Promise<IUserShort[]> {
+    return await RESTApi.get(`${this.url}/${eventInstanceId}/trainers`);
   }
 
   findUpcomingByUserForWeek<K extends keyof IEventInstance>(
