@@ -21,11 +21,9 @@ import { EventInstanceState } from "../../../shared/types/EventInstanceState";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { ITrainer } from "../../../shared/types/ITrainer";
 import { uuid } from "../../../utils/uuid";
-import { useTrainerIds } from "../../hooks/useTrainerIds";
-import { useTrainerSelectOptions } from "../../hooks/useTrainerSelectOptions";
+import { useTrainer } from "../../hooks/useTrainer";
 import { useRequest } from "./../../../lib/userSession/hooks/useRequest";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
-import { useTrainer } from "../../hooks/useTrainer";
 
 export const useEventRegistrationSectionViewModel = (
   props: IEventRegistrationSectionProps
@@ -54,7 +52,8 @@ export const useEventRegistrationSectionViewModel = (
   const toast = useToast();
   const renderDate = useRenderDate();
   const renderTimeSpan = useRenderTimeSpan();
-  const [trainerSelectOptions, selectedTrainerIds, setSelectedTrainerIds] = useTrainer(props.trainers, props.eventInstance.trainers)
+  const [trainerSelectOptions, selectedTrainerIds, setSelectedTrainerIds] =
+    useTrainer(props.trainers, props.eventInstance.trainers);
   // const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
   // const [selectedTrainerIds, setSelectedTrainerIds] = useTrainerIds(
   //   props.eventInstance.trainers
