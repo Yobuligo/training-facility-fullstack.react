@@ -376,7 +376,10 @@
 		# Story: Display message when clicking button add trainer and no user is marked as trainer
 		# Story: Highlight users with auth role trainer in user list
 
-- Version 1.8.0-<>.9
+- Version 1.7.1-20141101.9
+	- Bug: Incorrect translation to German for "is trainer" in user profile
+
+- Version 1.8.0-<>.10
 
 - Backlog
 	- Story: Send mails must create an email at the send mail folder of the mail account
