@@ -326,7 +326,7 @@
 		# Story: Resigned users are displayed in a separate group of the user list
 		# Story: Resigned users are not displayed in the search result of the user registration list
 		
-- Version 1.7.0-<>.8
+# Version 1.7.0-20141101.8
 	# Story: Clicking on the logo on the login page should navigate to dashboard screen
 	# Story: Display message in user list if no users were found
 	# Story: Adjust styling of technical information in user profile admin view
@@ -374,7 +374,9 @@
 			# Resigned users must not be selectable as trainers
 				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore. Anyway it is loaded if the user was assigned as trainer once.
 		# Story: Display message when clicking button add trainer and no user is marked as trainer
-		- Story: Highlight user with auth role trainer in user list
+		# Story: Highlight users with auth role trainer in user list
+
+- Version 1.8.0-<>.9
 
 - Backlog
 	- Story: Send mails must create an email at the send mail folder of the mail account

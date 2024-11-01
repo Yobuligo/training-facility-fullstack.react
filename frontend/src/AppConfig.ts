@@ -2,9 +2,9 @@ import { error } from "./core/utils/error";
 
 export const AppConfig = {
   build: {
-    version: "1.6.0",
-    date: "20241018",
-    number: 7,
+    version: "1.7.0",
+    date: "20241101",
+    number: 8,
   },
   HOST:
     process.env.REACT_APP_BACKEND_HOST ??
