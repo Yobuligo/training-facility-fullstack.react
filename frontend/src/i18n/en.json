@@ -46,7 +46,7 @@
     },
     "eventDefinitionDetails": {
         "errorEnterTitle": "Title is required",
-        "infoAddNoEntry": "No trainer available. Please mark a user as a trainer."
+        "infoAddNoEntry": "No trainer available. Please mark a user as trainer."
     },
     "eventDefinitionList": {
         "noItems": "No events found"

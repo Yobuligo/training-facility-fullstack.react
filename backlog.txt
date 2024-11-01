@@ -373,6 +373,8 @@
 				# E.g. a user was trainer, resigned and the user was deleted. In this case the training has no trainer assigned anymore.
 			# Resigned users must not be selectable as trainers
 				# E.g. a user resigned but the user will not be deleted. In this case the user must not be selectable as trainer anymore. Anyway it is loaded if the user was assigned as trainer once.
+		# Story: Display message when clicking button add trainer and no user is marked as trainer
+		- Story: Highlight user with auth role trainer in user list
 
 - Backlog
 	- Story: Send mails must create an email at the send mail folder of the mail account
