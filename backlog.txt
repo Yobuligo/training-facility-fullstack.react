@@ -380,9 +380,9 @@
 	# Bug: Incorrect translation to German for "is trainer" in user profile
 
 - Version 1.8.0-<>.10
+	# Bug: Typo in word taekwon-do instead of Taekwon-Do
 
 - Backlog
-	- Bug: Typo in word taekwon-do instead of Taekwon-Do
 	- Story: Send mails must create an email at the send mail folder of the mail account
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
