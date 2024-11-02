@@ -221,7 +221,7 @@
         "title": "Abmelden"
     },
     "myGradingList": {
-        "introduction": "Hier findest du eine Übersicht deiner bestandenen Taekwon-do-Prüfungen und den erreichten Graduierungen"
+        "introduction": "Hier findest du eine Übersicht deiner bestandenen Taekwon-Do-Prüfungen und den erreichten Graduierungen"
     },
     "myProfile": {
         "errorLoadingUserSession": "Fehler beim Laden der Benutzersitzung"

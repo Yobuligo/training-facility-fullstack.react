@@ -221,7 +221,7 @@
         "title": "Logout"
     },
     "myGradingList": {
-        "introduction": "An overview of your successfully completed Taekwon-do exams and the ranks you have achieved"
+        "introduction": "An overview of your successfully completed Taekwon-Do exams and the ranks you have achieved"
     },
     "myProfile": {
         "errorLoadingUserSession": "Error while loading user session"
