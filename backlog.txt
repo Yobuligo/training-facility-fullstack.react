@@ -382,6 +382,7 @@
 - Version 1.8.0-<>.10
 
 - Backlog
+	- Bug: Typo in word taekwon-do instead of Taekwon-Do
 	- Story: Send mails must create an email at the send mail folder of the mail account
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
