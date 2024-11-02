@@ -383,10 +383,18 @@
 
 - Backlog
 	- Story: Send mails must create an email at the send mail folder of the mail account
-	- Story: Display age of user in UserList
+	- Epic: Improved app transparency
+		- Story: Display number of displayed trainings in event definition list depending on the selected filter
+		- Story: Display number of displayed trainings in event instance list depending on the selected filter
+		- Story: Display number registered user for an event instance
+		- Story: Display age of user in user list
+		- Story: Display last training of user in user list
+	- Story: Increase size of back button in DetailView component
 	- Epic: Tooltip
 		- Story: Display tooltip for Members only flag in event definition
 			- The following message is displayed: If active, training is not displayed in the training overview calendar (homepage) and not displayed in the trial training calendar. 
+		- Story: Display explanation text in event definition as tooltip of an info icon
+		- Story: Display explanation text in event instance as tooltip of an info icon
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.		
 	- Epic: Version details
@@ -402,16 +410,17 @@
 	- Epic: Performance
 		- Story: Admin tabs are loaded asynchronously
 		- Story: table userTrialTraining needs an index on email	
-	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
+	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)		
 		- Story: Display income per month
 		- Story: Display customer development
-			- Display number of all customers
+			- Display number of all active customers
 			- Display number of new customers
 			- Display number of quit customers
 		- Story: Display number registrations for training sessions
 			- for a specific class (children, beginners)
 			- overall
 			- for a specific person
+		- Story: Display number training sessions of a user for himself
 	- Epic: Exercise compendium
 	- Bug: From value of a DateTimeSpan must not be lower than to value 
 	- Story: Check all ui endpoints and delete which are not required anymore
@@ -419,8 +428,6 @@
 	# Story: Check all backend endpoints and add authorization checks
 	- Story: We have to check the behavior for each REST request when it fails
 	- Story: We have to check the transmitted data for each REST request if it can be reduced to only required information
-	- Edge Cases
-		- Create an EventDefinition, register on an event and finally remove the EventDefinition. Does the EventInstance with the registration should be deleted? (Currently it would be even displayed at the Welcome page)
 	- Story: Backend must not be started with nodemon but only node
 	- Story: Check if it is required for sequelize to log all SQL-Requests, maybe this is not required	
 
