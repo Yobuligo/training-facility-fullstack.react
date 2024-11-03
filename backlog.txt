@@ -384,7 +384,7 @@
 
 - Backlog
 	- Story: Send mails must create an email at the send mail folder of the mail account
-	- Story: Tabs of the TabStrip can be accessed via route
+	- Story: Tabs of the TabStrip can must be accessible via route
 		- It must be possible to use the browser navigation to navigate between tabs
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
