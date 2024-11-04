@@ -1,5 +1,5 @@
-@use '../../../styles/components.module.scss';
-
-.description {
-    @extend .pageDescription;
+.infoArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }

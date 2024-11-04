@@ -1,3 +1,6 @@
+import { Tooltip } from "../../../components/tooltip/Tooltip";
+import { HorizontalAlignment } from "../../../core/ui/HorizontalAlignment";
+import { InfoIcon } from "../../../icons/InfoIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
@@ -31,13 +34,18 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      <p className={styles.description}>{`${t(
-        texts.eventCalendarMyTrainings.description
-      )}${
-        viewModel.showAdditionalAdminDescription
-          ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
-          : ""
-      }`}</p>
+      <div className={styles.infoArea}>
+        <Tooltip
+          align={HorizontalAlignment.LEFT}
+          text={`${t(texts.eventCalendarMyTrainings.description)}${
+            viewModel.showAdditionalAdminDescription
+              ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
+              : ""
+          }`}
+        >
+          <InfoIcon />
+        </Tooltip>
+      </div>
       {viewModel.selectedEventInstance && viewModel.selectedEvent ? (
         <EventRegistrationDetails
           eventInstance={viewModel.selectedEventInstance}

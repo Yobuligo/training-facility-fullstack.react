@@ -1,9 +1,3 @@
-@use "../../../styles/components.module.scss";
-
-.description {
-  @extend .pageDescription;
-}
-
 .button {
   align-self: flex-start;
 }

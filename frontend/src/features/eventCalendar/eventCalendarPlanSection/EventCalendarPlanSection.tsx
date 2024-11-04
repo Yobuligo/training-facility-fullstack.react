@@ -15,9 +15,6 @@ export const EventCalendarPlanSection: React.FC = () => {
 
   return (
     <div>
-      {/* <p className={styles.description}>
-              {t(texts.eventPlanSection.description)}
-            </p> */}
       <div className={styles.infoArea}>
         <Tooltip
           align={HorizontalAlignment.LEFT}
