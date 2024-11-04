@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { HorizontalAlignment } from "../../core/ui/HorizontalAlignment";
+import { style } from "../../core/ui/style";
 import { Card } from "../card/Card";
 import { IPopoverProps } from "./IPopoverProps";
 import styles from "./Popover.module.scss";
@@ -16,7 +18,18 @@ export const Popover: React.FC<IPopoverProps> = (props) => {
       onMouseLeave={hideTooltip}
     >
       {props.children}
-      {visible && <Card className={styles.content}>{props.content}</Card>}
+      {visible && (
+        <Card
+          className={style(
+            styles.content,
+            props.align === HorizontalAlignment.LEFT
+              ? styles.alignLeft
+              : styles.alignRight
+          )}
+        >
+          {props.content}
+        </Card>
+      )}
     </div>
   );
 };

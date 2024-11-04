@@ -1,4 +1,7 @@
 import { Button } from "../../../components/button/Button";
+import { Popover } from "../../../components/popover/Popover";
+import { HorizontalAlignment } from "../../../core/ui/HorizontalAlignment";
+import { InfoIcon } from "../../../icons/InfoIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventDefinitionDetails } from "../../eventDefinition/eventDefinitionDetails/EventDefinitionDetails";
@@ -12,9 +15,21 @@ export const EventCalendarPlanSection: React.FC = () => {
 
   return (
     <div>
-      <p className={styles.description}>
+      {/* <p className={styles.description}>
         {t(texts.eventPlanSection.description)}
-      </p>
+      </p>  */}
+      <div className={styles.infoArea}>
+        <Popover
+          align={HorizontalAlignment.LEFT}
+          content={
+            <p className={styles.description}>
+              {t(texts.eventPlanSection.description)}
+            </p>
+          }
+        >
+          <InfoIcon />
+        </Popover>
+      </div>
       {viewModel.selectedEventDefinition ? (
         <EventDefinitionDetails
           eventDefinition={viewModel.selectedEventDefinition}

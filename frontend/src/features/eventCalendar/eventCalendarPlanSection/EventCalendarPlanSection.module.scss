@@ -1,4 +1,4 @@
-@use '../../../styles/components.module.scss';
+@use "../../../styles/components.module.scss";
 
 .description {
   @extend .pageDescription;
@@ -12,4 +12,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+}
+
+.infoArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }
