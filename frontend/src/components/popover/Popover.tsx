@@ -12,7 +12,7 @@ export const Popover: React.FC<IPopoverProps> = (props) => {
   const hideTooltip = () => setVisible(false);
 
   return (
-    <div
+    <span
       className={styles.tooltipContainer}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
@@ -30,6 +30,6 @@ export const Popover: React.FC<IPopoverProps> = (props) => {
           {props.content}
         </Card>
       )}
-    </div>
+    </span>
   );
 };

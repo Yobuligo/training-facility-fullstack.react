@@ -15,14 +15,14 @@
   justify-content: space-between;
 }
 
-.labelText {
+.label {
+  @include mixins.label;
+}
+
+.infoContainer {
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
-}
-
-.label {
-  @include mixins.label;
 }
 
 .optional {
@@ -32,4 +32,9 @@
 .error {
   color: colors.$color-error;
   height: 1.25rem;
+}
+
+.infoIcon {
+  width: 1.25rem;
+  height: auto;
 }
