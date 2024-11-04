@@ -1,7 +1,5 @@
 import { Button } from "../../../components/button/Button";
-import { Tooltip } from "../../../components/tooltip/Tooltip";
-import { HorizontalAlignment } from "../../../core/ui/HorizontalAlignment";
-import { InfoIcon } from "../../../icons/InfoIcon";
+import { InfoArea } from "../../../components/infoArea/InfoArea";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventDefinitionDetails } from "../../eventDefinition/eventDefinitionDetails/EventDefinitionDetails";
@@ -15,14 +13,7 @@ export const EventCalendarPlanSection: React.FC = () => {
 
   return (
     <div>
-      <div className={styles.infoArea}>
-        <Tooltip
-          align={HorizontalAlignment.LEFT}
-          text={t(texts.eventPlanSection.description)}
-        >
-          <InfoIcon />
-        </Tooltip>
-      </div>
+      <InfoArea text={t(texts.eventPlanSection.description)} />
       {viewModel.selectedEventDefinition ? (
         <EventDefinitionDetails
           eventDefinition={viewModel.selectedEventDefinition}

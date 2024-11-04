@@ -1,6 +1,4 @@
-import { Tooltip } from "../../../components/tooltip/Tooltip";
-import { HorizontalAlignment } from "../../../core/ui/HorizontalAlignment";
-import { InfoIcon } from "../../../icons/InfoIcon";
+import { InfoArea } from "../../../components/infoArea/InfoArea";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
@@ -8,7 +6,6 @@ import { EventRegistrationButtonContent } from "../../eventRegistration/eventReg
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { IEvent } from "../model/IEvent";
-import styles from "./EventCalendarMyTrainings.module.scss";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
@@ -34,18 +31,13 @@ export const EventCalendarMyTrainings: React.FC = () => {
 
   return (
     <div>
-      <div className={styles.infoArea}>
-        <Tooltip
-          align={HorizontalAlignment.LEFT}
-          text={`${t(texts.eventCalendarMyTrainings.description)}${
-            viewModel.showAdditionalAdminDescription
-              ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
-              : ""
-          }`}
-        >
-          <InfoIcon />
-        </Tooltip>
-      </div>
+      <InfoArea
+        text={`${t(texts.eventCalendarMyTrainings.description)}${
+          viewModel.showAdditionalAdminDescription
+            ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
+            : ""
+        }`}
+      />
       {viewModel.selectedEventInstance && viewModel.selectedEvent ? (
         <EventRegistrationDetails
           eventInstance={viewModel.selectedEventInstance}

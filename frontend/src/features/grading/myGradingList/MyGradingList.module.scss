@@ -1,12 +1,7 @@
-@use '../../../styles/mixins.scss';
-@use '../../../styles/components.module.scss';
-
-.introduction {
-    @extend .pageDescription;
-}
+@use "../../../styles/mixins.scss";
 
 .gradingList {
-    @include mixins.medium-screen {
-        margin-top: 1rem;
-    }
+  @include mixins.medium-screen {
+    margin-top: 1rem;
+  }
 }

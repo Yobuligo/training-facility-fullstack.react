@@ -398,6 +398,7 @@
 			- The following message is displayed: If active, training is not displayed in the training overview calendar (homepage) and not displayed in the trial training calendar. 
 		- Story: Display explanation text in event definition as tooltip of an info icon
 		- Story: Display explanation text in event instance as tooltip of an info icon
+		- Story: Display explanation text in gradings as tooltip of an info icon
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.		
 	- Epic: Version details
