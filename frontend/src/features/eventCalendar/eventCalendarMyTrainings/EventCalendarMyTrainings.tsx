@@ -1,4 +1,5 @@
 import { InfoArea } from "../../../components/infoArea/InfoArea";
+import { useScreenSize } from "../../../hooks/useScreenSize";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
@@ -6,11 +7,13 @@ import { EventRegistrationButtonContent } from "../../eventRegistration/eventReg
 import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { IEvent } from "../model/IEvent";
+import styles from "./EventCalendarMyTrainings.module.scss";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
 export const EventCalendarMyTrainings: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventCalendarMyTrainingsViewModel();
+  const screenSize = useScreenSize();
 
   const renderEvent = (event: IEvent) => {
     const eventRegistration = EventInfo.findFirstEventRegistrationByUserId(
@@ -32,6 +35,7 @@ export const EventCalendarMyTrainings: React.FC = () => {
   return (
     <div>
       <InfoArea
+        className={!screenSize.isSmall() ? styles.infoArea : ""}
         text={`${t(texts.eventCalendarMyTrainings.description)}${
           viewModel.showAdditionalAdminDescription
             ? t(texts.eventCalendarMyTrainings.additionalDescriptionForAdmin)
