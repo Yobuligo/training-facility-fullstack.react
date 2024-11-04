@@ -392,7 +392,6 @@
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
 		- Story: Display number registered user for an event instance
 		- Story: Display age of user in user list
-		- Story: Display last training of user in user list
 	- Story: Increase size of back button in DetailView component
 	- Epic: Tooltip
 		- Story: Display tooltip for Members only flag in event definition
@@ -425,6 +424,9 @@
 			- overall
 			- for a specific person
 		- Story: Display number training sessions of a user for himself
+	- Epic: Statistic for user
+		- Story: Display last training of user in user profile
+		- Story: Display number training session of a user per week, month, year, max
 	- Epic: Exercise compendium
 	- Bug: From value of a DateTimeSpan must not be lower than to value 
 	- Story: Check all ui endpoints and delete which are not required anymore
