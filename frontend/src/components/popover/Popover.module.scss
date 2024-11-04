@@ -1,0 +1,13 @@
+@use "../../styles/colors.module.scss";
+
+.tooltipContainer {
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  background-color: white;
+  border: 1px solid colors.$color-secondary-dark;
+  box-shadow: none;
+  z-index: 150;
+}

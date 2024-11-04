@@ -320,8 +320,8 @@
 	# Bug: Search result list for adding users to a training is not sorted
 	
 # Version 1.6.0-20241018.7
-	# Story: Display date of last invite of a user		
-	# Epic: Resigned
+	# Story: Display date of last invite of a user
+	# Epic: Resign
 		# Story: User can be marked at resigned by setting a corresponding resignedAt date
 		# Story: Resigned users are displayed in a separate group of the user list
 		# Story: Resigned users are not displayed in the search result of the user registration list
@@ -383,9 +383,10 @@
 	# Bug: Typo in word taekwon-do instead of Taekwon-Do
 
 - Backlog
-	- Story: Send mails must create an email at the send mail folder of the mail account
-	- Story: Tabs of the TabStrip can must be accessible via route
+	- Story: Sent mails must create an email at the send mail folder of the mail account
+	- Story: Tabs of the TabStrip must be accessible via route
 		- It must be possible to use the browser navigation to navigate between tabs
+	- Story: Display trainings in dashboard where a user is assigned as trainer
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
