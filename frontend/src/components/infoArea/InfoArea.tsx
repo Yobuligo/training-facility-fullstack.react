@@ -1,5 +1,6 @@
 import { HorizontalAlignment } from "../../core/ui/HorizontalAlignment";
 import { InfoIcon } from "../../icons/InfoIcon";
+import componentStyles from "../../styles/components.module.scss";
 import { Tooltip } from "../tooltip/Tooltip";
 import { IInfoAreaProps } from "./IInfoAreaProps";
 import styles from "./InfoArea.module.scss";
@@ -11,7 +12,7 @@ export const InfoArea: React.FC<IInfoAreaProps> = (props) => {
   return (
     <div className={styles.infoArea}>
       <Tooltip align={HorizontalAlignment.LEFT} text={props.text}>
-        <InfoIcon />
+        <InfoIcon className={componentStyles.infoIcon} />
       </Tooltip>
     </div>
   );

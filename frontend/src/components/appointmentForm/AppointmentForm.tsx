@@ -79,6 +79,7 @@ export const AppointmentForm: React.FC<IAppointmentFormProps> = (props) => {
         disabled={props.disabled}
         label={t(texts.appointmentForm.membersOnly)}
         options={viewModel.isMemberOnlyOptions}
+        infoText={t(texts.appointmentForm.membersOnlyInfoText)}
         onSelect={props.setIsMemberOnly}
         value={props.isMemberOnly}
       />

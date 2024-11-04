@@ -2,6 +2,12 @@
 @use "../../styles/mixins.scss";
 @import "../../styles/dimensions.module.scss";
 
+.labeledElement {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+}
+
 .labelContainer {
   display: flex;
   flex-direction: row;
@@ -9,10 +15,10 @@
   justify-content: space-between;
 }
 
-.labeledElement {
+.labelText {
   display: flex;
-  flex-direction: column;
-  row-gap: 0.25rem;
+  flex-direction: row;
+  column-gap: $negative-space;
 }
 
 .label {

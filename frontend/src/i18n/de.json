@@ -5,6 +5,7 @@
         "endTime": "Endzeit",
         "recurrence": "Wiederholung",
         "membersOnly": "Nur für Mitglieder",
+        "membersOnlyInfoText": "Training ist ausschließlich für Mitglieder und wird nicht im Trainingszeiten- und Probetraining-Kalender der Homepage angezeigt.",
         "startDate": "Startdatum",
         "startTime": "Startzeit",
         "title": "Titel"

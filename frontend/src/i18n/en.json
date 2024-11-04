@@ -5,6 +5,7 @@
         "endTime": "End time",
         "recurrence": "Recurrence",
         "membersOnly": "Members only",
+        "membersOnlyInfoText": "Training is only for members and won't be displayed in homepage training times and trial training calendar",
         "startDate": "Start date",
         "startTime": "Start time",
         "title": "Title"

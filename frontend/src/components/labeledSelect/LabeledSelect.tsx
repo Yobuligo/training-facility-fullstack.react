@@ -22,6 +22,7 @@ export function LabeledSelect<T>(props: ILabeledSelectProps<T>) {
       className={props.className}
       elementId={id}
       error={props.error}
+      infoText={props.infoText}
       isOptional={props.isOptional}
       label={props.label}
     >

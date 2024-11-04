@@ -5,6 +5,7 @@ export interface ILabeledSelectProps<T> {
   disabled?: boolean;
   error?: string;
   value: T;
+  infoText?: string;
   isOptional?: boolean;
   label: string;
   onSelect?: (selectedValue: T) => void;
