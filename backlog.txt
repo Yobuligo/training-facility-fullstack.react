@@ -381,6 +381,12 @@
 
 - Version 1.8.0-<>.10
 	# Bug: Typo in word taekwon-do instead of Taekwon-Do
+	# Epic: Tooltip
+		# Story: Display tooltip for Members only flag in event definition
+			# The following message is displayed: If active, training is not displayed in the training overview calendar (homepage) and not displayed in the trial training calendar.
+		# Story: Display explanation text in event definition as tooltip of an info icon
+		# Story: Display explanation text in event instance as tooltip of an info icon
+		# Story: Display explanation text in gradings as tooltip of an info icon
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
@@ -393,12 +399,6 @@
 		- Story: Display number registered user for an event instance
 		- Story: Display age of user in user list
 	- Story: Increase size of back button in DetailView component
-	- Epic: Tooltip
-		- Story: Display tooltip for Members only flag in event definition
-			- The following message is displayed: If active, training is not displayed in the training overview calendar (homepage) and not displayed in the trial training calendar. 
-		- Story: Display explanation text in event definition as tooltip of an info icon
-		- Story: Display explanation text in event instance as tooltip of an info icon
-		- Story: Display explanation text in gradings as tooltip of an info icon
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.		
 	- Epic: Version details
