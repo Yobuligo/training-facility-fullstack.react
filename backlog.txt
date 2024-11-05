@@ -390,8 +390,19 @@
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
-	- Story: Tabs of the TabStrip must be accessible via route
-		- It must be possible to use the browser navigation to navigate between tabs
+	- Epic: TabStrip Routes
+		- Explanation: Tabs of the TabStrip must be accessible via route
+		- Story: Dashboard can be accessed via route
+		- Story: Planer can be accessed via route
+			- Link must not be opened with missing authorities
+		- Story: Event definition can be accessed via route
+			- Link must not be opened with missing authorities
+		- Story: Trainings can be accessed via route
+			- Link must not be opened with missing authorities
+		- Story: Event instances can be accessed via route
+			- Link must not be opened with missing authorities
+		- Story: Gradings can be accessed via route
+		- Story: Profile can be accessed via route
 	- Story: Display trainings in dashboard where a user is assigned as trainer
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
@@ -400,13 +411,13 @@
 		- Story: Display age of user in user list
 	- Story: Increase size of back button in DetailView component
 	- Epic: Password reset function
-		- Story: A user can request to reset a password by himself.		
+		- Story: A user can request to reset a password by himself.
 	- Epic: Version details
 	- Epic: Documentation
 		- Story: Write documentation for deployment
 	- Epic: Data backup
 	- Story: Increase expiration time of session
-	- Epic: Courses and seminar history 
+	- Epic: Courses and seminar history
 		- Story: Courses can be displayed in user profile
 	- Story: Display check icon when booking a trial training and cancelling it to visualize it to the user
 	- Story: Add dobok size to user profile
