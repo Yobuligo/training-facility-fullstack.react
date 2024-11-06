@@ -82,7 +82,8 @@ export function EventCalendar<TEvent extends Event>(
       onView={props.onViewChanged}
       startAccessor="start"
       step={15}
-      style={{ height: "75vh" }}
+      // style={{ height: "75vh" }}
+      style={{ height: "100%" }}
       timeslots={1}
       views={props.views ? props.views : ["day", "week"]}
     />
