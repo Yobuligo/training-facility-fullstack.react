@@ -389,6 +389,7 @@
 		# Story: Display explanation text in gradings as tooltip of an info icon
 
 - Backlog
+	- Story: Embed training overview calendar in homepage
 	- Story: Sent mails must create an email at the send mail folder of the mail account
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route

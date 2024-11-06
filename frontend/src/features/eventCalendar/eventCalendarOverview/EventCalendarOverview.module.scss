@@ -1,6 +1,0 @@
-@use "../../../styles/mixins.scss";
-
-.eventCalendarOverview {
-  @include mixins.component-padding;
-  @include mixins.page-padding;
-}
