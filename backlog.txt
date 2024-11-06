@@ -379,7 +379,7 @@
 # Version 1.7.1-20141101.9
 	# Bug: Incorrect translation to German for "is trainer" in user profile
 
-- Version 1.8.0-<>.10
+# Version 1.8.0-20241106.10
 	# Bug: Typo in word taekwon-do instead of Taekwon-Do
 	# Epic: Tooltip
 		# Story: Display tooltip for Members only flag in event definition
@@ -387,6 +387,9 @@
 		# Story: Display explanation text in event definition as tooltip of an info icon
 		# Story: Display explanation text in event instance as tooltip of an info icon
 		# Story: Display explanation text in gradings as tooltip of an info icon
+	# Story: Adjust styling of event overview calendar to fit the homepage style
+
+- Version 1.9.0-<>.11
 
 - Backlog
 	- Story: Embed training overview calendar in homepage
