@@ -6,5 +6,9 @@ export interface IEventInstanceItemProps {
   classNameChildren?: string;
   eventInstanceItemModel: IEventInstanceItemModel;
   onClick?: () => void;
+
+  /**
+   * If true the given {@link children} are rendered in the row of the banner, otherwise the given {@link children} are rendered below.
+   */
   renderChildrenInline?: boolean;
 }

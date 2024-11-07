@@ -1,5 +1,6 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles/colors.module.scss";
+@use "../../../styles/components.module.scss";
 
 .card {
   display: flex;
@@ -36,11 +37,6 @@
 
 .name {
   font-size: large;
-}
-
-.trainerIcon {
-  width: 2rem;
-  height: auto;
 }
 
 .trainerIconSmallScreen {

@@ -1,4 +1,5 @@
 import { isInitial } from "../../../core/utils/isInitial";
+import { TrainerIcon } from "../../../icons/TrainerIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
@@ -12,7 +13,10 @@ export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
     <EventInstanceItem
       key={eventInstance.id}
       eventInstanceItemModel={eventInstance}
-    />
+      renderChildrenInline={true}
+    >
+      <TrainerIcon />
+    </EventInstanceItem>
   ));
 
   return (
