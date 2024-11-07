@@ -1,17 +1,24 @@
-@use '../../styles/colors.module.scss';
+@use "../../styles/colors.module.scss";
 
 .welcome {
-    color: colors.$color-text;
+  color: colors.$color-text;
 }
 
 .greeting {
-    font-family: "MerriweatherSans";
+  font-family: "MerriweatherSans";
 }
 
 .trainingsLinkInfo {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .upcomingTrainings {
-    margin-top: 2rem;
+  margin-top: 2rem;
+}
+
+.eventContent {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }

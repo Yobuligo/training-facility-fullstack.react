@@ -390,9 +390,10 @@
 	# Story: Adjust styling of event overview calendar to fit the homepage style
 
 - Version 1.9.0-<>.11
+	# Story: Embed training overview calendar in homepage
+	- Story: Display trainings in dashboard where a user is assigned as trainer
 
 - Backlog
-	- Story: Embed training overview calendar in homepage
 	- Story: Sent mails must create an email at the send mail folder of the mail account
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
@@ -407,7 +408,6 @@
 			- Link must not be opened with missing authorities
 		- Story: Gradings can be accessed via route
 		- Story: Profile can be accessed via route
-	- Story: Display trainings in dashboard where a user is assigned as trainer
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
@@ -429,7 +429,7 @@
 	- Epic: Performance
 		- Story: Admin tabs are loaded asynchronously
 		- Story: table userTrialTraining needs an index on email	
-	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)		
+	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Story: Display income per month
 		- Story: Display customer development
 			- Display number of all active customers

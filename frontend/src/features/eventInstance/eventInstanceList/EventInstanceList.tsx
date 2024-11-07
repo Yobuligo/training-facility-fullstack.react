@@ -1,7 +1,7 @@
 import { isInitial } from "../../../core/utils/isInitial";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { EventInstanceItem } from "../eventInstanceItem/EventInstanceItem";
+import { EventInstanceItemAligned } from "../eventInstanceItemAligned/EventInstanceItemAligned";
 import styles from "./EventInstanceList.module.scss";
 import { IEventInstanceListProps } from "./IEventInstanceListProps";
 
@@ -9,13 +9,13 @@ export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
   const { t } = useTranslation();
 
   const items = props.eventInstanceItemModels.map((eventInstance) => (
-    <EventInstanceItem
+    <EventInstanceItemAligned
       key={eventInstance.id}
       eventInstanceItemModel={eventInstance}
       renderChildrenInline={true}
     >
       {props.renderChild && props.renderChild(eventInstance)}
-    </EventInstanceItem>
+    </EventInstanceItemAligned>
   ));
 
   return (

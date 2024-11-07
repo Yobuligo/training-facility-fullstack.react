@@ -6,9 +6,11 @@ import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useInitialize } from "../../hooks/useInitialize";
 import { useUser } from "../../hooks/useUser";
+import { TrainerIcon } from "../../icons/TrainerIcon";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
+import componentStyles from "../../styles/components.module.scss";
 import { IEventInstanceItemModel } from "../eventInstance/eventInstanceItem/IEventInstanceItemModel";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 import styles from "./Welcome.module.scss";
@@ -70,6 +72,9 @@ export const Welcome: React.FC = () => {
               <p>{t(texts.welcome.weekTrainings)}</p>
               <EventInstanceList
                 eventInstanceItemModels={eventInstanceItemModels}
+                renderChild={() => (
+                  <TrainerIcon className={componentStyles.trainerIcon} />
+                )}
               />
             </>
           )}
