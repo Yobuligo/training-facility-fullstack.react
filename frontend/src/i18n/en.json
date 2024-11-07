@@ -335,6 +335,7 @@
     },
     "welcome": {
         "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",
+        "infoParticipateAsTrainer": "Participation as trainer",
         "noTrainings": "Currently you are not registered for any training this week. Go to {{trainings}} to register.",
         "weekTrainings": "You registered for the following upcoming trainings this week:",
         "welcome": "Hi {{name}}, Welcome to the members area"

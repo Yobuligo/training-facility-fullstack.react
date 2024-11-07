@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { EventInstanceApi } from "../../api/EventInstanceApi";
 import { PageSpinner } from "../../components/pageSpinner/PageSpinner";
+import { Tooltip } from "../../components/tooltip/Tooltip";
 import { DateTime } from "../../core/services/date/DateTime";
+import { HorizontalAlignment } from "../../core/ui/HorizontalAlignment";
 import { checkNotNull } from "../../core/utils/checkNotNull";
 import { isInitial } from "../../core/utils/isInitial";
 import { useInitialize } from "../../hooks/useInitialize";
@@ -73,7 +75,12 @@ export const Welcome: React.FC = () => {
               <EventInstanceList
                 eventInstanceItemModels={eventInstanceItemModels}
                 renderChild={() => (
-                  <TrainerIcon className={componentStyles.trainerIcon} />
+                  <Tooltip
+                    text={t(texts.welcome.infoParticipateAsTrainer)}
+                    align={HorizontalAlignment.LEFT}
+                  >
+                    <TrainerIcon className={componentStyles.trainerIcon} />
+                  </Tooltip>
                 )}
               />
             </>
