@@ -90,6 +90,11 @@ $color-text-password-requirement: $color-secondary-light;
 
 $color-toast-background: white;
 
+$color-tooltip-background: lighten(
+  $color: $color-secondary-lighter,
+  $amount: 20,
+);
+
 $color-toggle-button-background-selected: $color-secondary;
 $color-toggle-button-background-unselected: lighten(
   $color: $color-secondary,
