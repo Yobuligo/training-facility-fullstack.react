@@ -17,5 +17,4 @@ export const AppConfig = {
     error(
       `Error while getting privacy policy information from environment variables`
     ),
-  version: "1.1.0",
 };
