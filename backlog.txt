@@ -391,6 +391,7 @@
 
 - Version 1.9.0-<>.11
 	# Story: Embed training overview calendar in homepage
+	# Story: Tooltip looks more highlighted
 	- Story: Display trainings in dashboard where a user is assigned as trainer
 
 - Backlog
