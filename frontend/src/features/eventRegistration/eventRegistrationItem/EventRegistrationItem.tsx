@@ -11,6 +11,11 @@ import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
 
+/**
+ * This component is responsible for displaying an event registration entry, 
+ * so a registration of a user for a specific event instance.
+ * It displays button to mark a registered user as present or missing.
+ */
 export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
   props
 ) => {

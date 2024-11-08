@@ -12,6 +12,10 @@ import styles from "./EventRegistrationSection.module.scss";
 import { IEventRegistrationSectionProps } from "./IEventRegistrationSectionProps";
 import { useEventRegistrationSectionViewModel } from "./useEventRegistrationSectionViewModel";
 
+/**
+ * This component is responsible for providing functions to close a registration of an event instance,
+ * to call it off, to display and add users and assign or unassign trainers.
+ */
 export const EventRegistrationSection: React.FC<
   IEventRegistrationSectionProps
 > = (props) => {
