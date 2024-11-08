@@ -395,6 +395,11 @@
 	# Story: Display trainings in dashboard with the current user assigned as trainer or registered on
 
 - Version 1.10.0-<>.12
+	- Epic: Improved app transparency
+		- Story: Display number of displayed trainings in event definition list depending on the selected filter
+		- Story: Display number of displayed trainings in event instance list depending on the selected filter
+		# Story: Display number registered user for an event instance
+		- Story: Display age of user in user list
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
@@ -411,11 +416,6 @@
 			- Link must not be opened with missing authorities
 		- Story: Gradings can be accessed via route
 		- Story: Profile can be accessed via route
-	- Epic: Improved app transparency
-		- Story: Display number of displayed trainings in event definition list depending on the selected filter
-		- Story: Display number of displayed trainings in event instance list depending on the selected filter
-		- Story: Display number registered user for an event instance
-		- Story: Display age of user in user list
 	- Story: Increase size of back button in DetailView component
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.
