@@ -95,6 +95,8 @@ $color-tooltip-background: lighten(
   $amount: 20,
 );
 
+$color-number-display-background: $color-tooltip-background;
+
 $color-toggle-button-background-selected: $color-secondary;
 $color-toggle-button-background-unselected: lighten(
   $color: $color-secondary,
