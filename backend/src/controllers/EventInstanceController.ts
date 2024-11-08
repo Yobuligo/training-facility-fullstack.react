@@ -21,63 +21,53 @@ export class EventInstanceController extends EntityController<
 > {
   constructor() {
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
+    this.findAllWithRole();
     this.findDefinitionByInstanceId();
     this.findTrainers();
     this.insertPublic();
     this.updateTrainers();
   }
 
-  protected findAll(): void {
-    this.router.get(
-      this.routeMeta.path,
-      SessionInterceptor(async (req, res) => {
-        const fields = this.getFieldsFromQuery(req.query);
-        const from = req.query.from;
-        const to = req.query.to;
-        const userId = req.query.userId;
-        const includeIsCurrentUserTrainer =
-          req.query.includeIsCurrentUserTrainer === "true" ? true : false;
-
-        if (
-          from &&
-          typeof from === "string" &&
-          to &&
-          typeof to === "string" &&
-          userId &&
-          typeof userId === "string"
-        ) {
-          if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
-            return this.sendMissingAuthorityError(res);
-          }
-
-          const dateTimeSpan: IDateTimeSpan = {
-            from: new Date(from),
-            to: new Date(to),
-          };
-
-          const eventInstances = await this.repo.findByDateTimeSpanAndUser(
-            dateTimeSpan,
-            userId,
-            includeIsCurrentUserTrainer,
-            fields
-          );
-
-          res.status(HttpStatusCode.OK_200).send(eventInstances);
-        } else {
-          if (!(await req.sessionInfo.isAdmin())) {
-            return this.sendMissingAuthorityError(res);
-          }
-
-          const eventInstances = await this.repo.findAll(fields);
-          res.status(HttpStatusCode.OK_200).send(eventInstances);
-        }
-      })
-    );
-  }
-
   protected insert(): void {
     // no authorities required
     super.insert();
+  }
+
+  /**
+   * Finds all event instance where the user is registered on or the user is assigned to.
+   */
+  private findAllWithRole() {
+    this.router.get(
+      `${this.routeMeta.path}/all/with-role`,
+      SessionInterceptor(async (req, res) => {
+        const from = req.query.from;
+        const to = req.query.to;
+        const userId = req.query.userId;
+
+        if (
+          typeof userId !== "string" ||
+          typeof from !== "string" ||
+          typeof to !== "string"
+        ) {
+          return res.status(HttpStatusCode.BAD_REQUEST_400).end();
+        }
+
+        if (!(await req.sessionInfo.isAdminOrYourself(userId))) {
+          return this.sendMissingAuthorityError(res);
+        }
+
+        const dateTimeSpan: IDateTimeSpan = {
+          from: new Date(from),
+          to: new Date(to),
+        };
+
+        const eventInstanceAndRoles = await this.repo.findByDateTimeSpanAndUser(
+          dateTimeSpan,
+          userId
+        );
+        res.status(HttpStatusCode.OK_200).send(eventInstanceAndRoles);
+      })
+    );
   }
 
   private findDefinitionByInstanceId() {

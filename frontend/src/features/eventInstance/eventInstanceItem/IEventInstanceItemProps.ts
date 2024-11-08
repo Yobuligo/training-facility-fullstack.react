@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IEventInstanceItemModel } from "./IEventInstanceItemModel";
+import { IEventInstanceItemModel } from "../../../shared/model/IEventInstanceItemModel";
 
 export interface IEventInstanceItemProps {
   children?: ReactNode;

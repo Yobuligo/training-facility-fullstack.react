@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IEventInstanceItemModelAndRole } from "./../eventInstanceItem/IEventInstanceItemModelAndRole";
+import { IEventInstanceItemModelAndRole } from "../../../shared/model/IEventInstanceItemModelAndRole";
 
 export interface IEventInstanceListProps {
   eventInstanceItemModelAndRoles: IEventInstanceItemModelAndRole[];

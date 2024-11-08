@@ -1,5 +1,5 @@
 import { EventInfo } from "../../../services/EventInfo";
-import { IEventInstanceItemModel } from "../../eventInstance/eventInstanceItem/IEventInstanceItemModel";
+import { IEventInstanceItemModel } from "../../../shared/model/IEventInstanceItemModel";
 import { EventInstanceItemAligned } from "../../eventInstance/eventInstanceItemAligned/EventInstanceItemAligned";
 import { IEventDefinitionItemProps } from "./IEventDefinitionItemProps";
 

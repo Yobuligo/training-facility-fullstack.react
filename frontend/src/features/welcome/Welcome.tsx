@@ -12,8 +12,8 @@ import { TrainerIcon } from "../../icons/TrainerIcon";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
+import { IEventInstanceItemModelAndRole } from "../../shared/model/IEventInstanceItemModelAndRole";
 import componentStyles from "../../styles/components.module.scss";
-import { IEventInstanceItemModelAndRole } from "../eventInstance/eventInstanceItem/IEventInstanceItemModelAndRole";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 import styles from "./Welcome.module.scss";
 
@@ -28,17 +28,8 @@ export const Welcome: React.FC = () => {
   useInitialize(() =>
     loadEventInstancesRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
-      const eventInstanceItemModelAndRoles: IEventInstanceItemModelAndRole[] =
-        await eventInstanceApi.findUpcomingByUserForWeek(user.id, [
-          "id",
-          "description",
-          "color",
-          "calledOff",
-          "from",
-          "to",
-          "title",
-          "isCurrentUserTrainer",
-        ]);
+      const eventInstanceItemModelAndRoles =
+        await eventInstanceApi.findUpcomingByUserForWeek(user.id);
       eventInstanceItemModelAndRoles.sort((left, right) =>
         DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
       );

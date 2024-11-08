@@ -1,4 +1,4 @@
-import sequelize, { Op, Transaction } from "sequelize";
+import sequelize, { Transaction } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
@@ -9,6 +9,7 @@ import { EventInstanceTrainer } from "../model/EventInstanceTrainer";
 import { EventRegistration } from "../model/EventRegistration";
 import { UserTrialTraining } from "../model/UserTrialTraining";
 import { IEventInstance } from "../shared/model/IEventInstance";
+import { IEventInstanceItemModelAndRole } from "../shared/model/IEventInstanceItemModelAndRole";
 import { IEventInstanceTrainer } from "../shared/model/IEventInstanceTrainer";
 import { IUserShort } from "../shared/model/IUserShort";
 import { ITrainer } from "../shared/types/ITrainer";
@@ -25,31 +26,11 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
 
   async findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
-    userId: string,
-    includeIsCurrentUserTrainer: boolean,
-    fields: (keyof IEventInstance)[]
-  ): Promise<IEventInstance[]> {
-    const data = await this.model.findAll({
-      where: {
-        from: { [Op.gte]: dateTimeSpan.from },
-        to: { [Op.lte]: dateTimeSpan.to },
-      },
-      attributes: this.getAttributes(fields),
-      include: [
-        {
-          model: EventRegistration,
-          as: "eventRegistrations",
-          where: {
-            userId: userId,
-          },
-        },
-        { model: UserTrialTraining, as: "userTrialTrainings" },
-      ],
-    });
-
-    let eventInstances = data.map((model) => model.toJSON());
-    eventInstances = this.restrictEntitiesFields(eventInstances, fields);
-    return eventInstances;
+    userId: string
+  ): Promise<IEventInstanceItemModelAndRole[]> {
+    const eventInstanceAndRoles =
+      await this.selectEventInstancesBySDateTimeSpan(dateTimeSpan, userId);
+    return eventInstanceAndRoles;
   }
 
   /**
@@ -122,6 +103,74 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
     await db.transaction(async (transaction) => {
       await this.synchronizeTrainers(eventInstanceId, transaction, trainers);
     });
+  }
+
+  private async selectEventInstancesBySDateTimeSpan(
+    dateTimeSpan: IDateTimeSpan,
+    userId: string
+  ): Promise<IEventInstanceItemModelAndRole[]> {
+    const query = `
+      SELECT
+        inst.id AS inst_id,
+        inst.calledOff as inst_called_off,
+        inst.color AS inst_color,
+        inst.\`description\` AS inst_description,
+        inst.\`from\` AS inst_from,
+        inst.state AS inst_state,
+        inst.title AS inst_title,
+        inst.\`to\` AS inst_to,
+        inst.createdAt AS inst_createdAt,
+        inst.updatedAt AS inst_updatedAt,
+        inst.eventDefinitionId AS inst_eventDefinitionId,
+        reg.id AS reg_id
+      FROM \`event-instances\` AS inst
+      LEFT JOIN \`event-registrations\` AS reg
+      ON reg.eventInstanceId = inst.id
+      WHERE (
+          inst.id IN (
+            SELECT eventInstanceId 
+            FROM \`event-instances-trainers\`
+            WHERE userId = :userId
+          ) OR reg.userId = :userId
+        ) 
+        AND inst.\`from\` >= DATE(:from)
+        AND inst.to <= DATE(:to)
+    `;
+
+    const data = await db.query(query, {
+      replacements: {
+        from: dateTimeSpan.from,
+        to: dateTimeSpan.to,
+        userId: userId,
+      },
+      type: sequelize.QueryTypes.SELECT,
+    });
+    return this.convertToEventInstance(data);
+  }
+
+  private convertToEventInstance(
+    data: any[]
+  ): IEventInstanceItemModelAndRole[] {
+    const eventInstanceAndRoles: any = {};
+
+    data.forEach((row) => {
+      const rowAny: any = row;
+      if (!eventInstanceAndRoles[row.inst_id]) {
+        const eventInstanceAndRole: IEventInstanceItemModelAndRole = {
+          id: row.inst_id,
+          calledOff: row.inst_called_off,
+          color: row.inst_color,
+          description: row.inst_description,
+          from: row.inst_from,
+          isCurrentUserTrainer: rowAny.reg_id !== null ? false : true,
+          title: row.inst_title,
+          to: row.inst_to,
+          isMemberOnly: false,
+        };
+        eventInstanceAndRoles[row.inst_id] = eventInstanceAndRole;
+      }
+    });
+    return Object.values(eventInstanceAndRoles);
   }
 
   private async synchronizeTrainers(

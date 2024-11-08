@@ -1,4 +1,4 @@
-import { IHaveId } from "../../../core/api/types/IHaveId";
+import { IHaveId } from "../../core/api/types/IHaveId";
 
 export interface IEventInstanceItemModel extends IHaveId {
   color: string;

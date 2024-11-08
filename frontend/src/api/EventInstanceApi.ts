@@ -7,7 +7,7 @@ import {
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
-import { IEventInstanceAndRole } from "../shared/model/IEventInstanceAndRole";
+import { IEventInstanceItemModelAndRole } from "../shared/model/IEventInstanceItemModelAndRole";
 import { IUserShort } from "../shared/model/IUserShort";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
@@ -77,27 +77,24 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     return await RESTApi.get(`${this.url}/${eventInstanceId}/trainers`);
   }
 
-  findUpcomingByUserForWeek<K extends keyof IEventInstanceAndRole>(
-    userId: string,
-    fields: K[]
-  ): Promise<IEntitySubset<IEventInstanceAndRole, K>[]>;
-  findUpcomingByUserForWeek(userId: string): Promise<IEventInstanceAndRole[]>;
-  async findUpcomingByUserForWeek<K extends keyof IEventInstanceAndRole>(
-    userId: string,
-    fields?: K[]
-  ): Promise<unknown> {
+  async findUpcomingByUserForWeek(
+    userId: string
+  ): Promise<IEventInstanceItemModelAndRole[]> {
     const today = new Date();
     const dateTimeSpan: IDateTimeSpan = {
       from: DateTime.getDayStartDate(today),
       to: DateTime.getWeekEndDate(today),
     };
-    const eventInstances = await this.findByDateTimeSpanAndUser(
-      dateTimeSpan,
-      userId,
-      true,
-      fields as any
-    );
-    return eventInstances;
+    const eventInstanceItemModelAndRoles = await RESTApi.get<
+      IEventInstanceItemModelAndRole[]
+    >(`${this.url}/all/with-role`, {
+      urlParams: {
+        userId,
+        from: dateTimeSpan.from.toString(),
+        to: dateTimeSpan.to.toString(),
+      },
+    });
+    return eventInstanceItemModelAndRoles;
   }
 
   /**
