@@ -35,6 +35,7 @@ export const useEventRegistrationSectionViewModel = (
   const [eventRegistrations, setEventRegistrations] = useState<
     IEventRegistration[]
   >([]);
+  const numberEventRegistrations = eventRegistrations.length;
   const [userTrialTrainings, setUserTrialTrainings] = useState<
     IUserTrialTraining[]
   >([]);
@@ -243,6 +244,7 @@ export const useEventRegistrationSectionViewModel = (
     isLoadEventRegistrationRequestProcessing,
     isRescheduleRequestProcessing,
     isUpdateEventInstanceRequestProcessing,
+    numberEventRegistrations,
     onAddUser,
     onCallOff,
     onCloseRegistration,

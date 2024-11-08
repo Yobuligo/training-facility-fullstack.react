@@ -1,4 +1,5 @@
 import { MultiSelectSection } from "../../../components/multiSelect/multiSelectSection/MultiSelectSection";
+import { NumberDisplay } from "../../../components/numberDisplay/NumberDisplay";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { LinkIcon } from "../../../icons/LinkIcon";
@@ -86,6 +87,7 @@ export const EventRegistrationSection: React.FC<
 
           <h3 className={styles.title}>
             {t(texts.eventRegistrationSection.checkInUsers)}
+            <NumberDisplay value={viewModel.numberEventRegistrations} />
           </h3>
           <EventRegistrationList
             eventRegistrations={viewModel.eventRegistrations}

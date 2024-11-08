@@ -1,0 +1,7 @@
+@use "../../styles/colors.module.scss";
+
+.numberDisplay {
+  border-radius: 20px;
+  background-color: colors.$color-tooltip-background;
+  padding: 0.5rem;
+}
