@@ -126,6 +126,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
       FROM \`event-instances\` AS inst
       LEFT JOIN \`event-registrations\` AS reg
       ON reg.eventInstanceId = inst.id
+      AND reg.userId = :userId
       WHERE (
           inst.id IN (
             SELECT eventInstanceId 
