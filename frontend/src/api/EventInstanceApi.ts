@@ -7,6 +7,7 @@ import {
   IEventDefinition,
 } from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
+import { IEventInstanceAndRole } from "../shared/model/IEventInstanceAndRole";
 import { IUserShort } from "../shared/model/IUserShort";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
@@ -72,12 +73,12 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     return await RESTApi.get(`${this.url}/${eventInstanceId}/trainers`);
   }
 
-  findUpcomingByUserForWeek<K extends keyof IEventInstance>(
+  findUpcomingByUserForWeek<K extends keyof IEventInstanceAndRole>(
     userId: string,
     fields: K[]
-  ): Promise<IEntitySubset<IEventInstance, K>[]>;
-  findUpcomingByUserForWeek(userId: string): Promise<IEventInstance[]>;
-  async findUpcomingByUserForWeek<K extends keyof IEventInstance>(
+  ): Promise<IEntitySubset<IEventInstanceAndRole, K>[]>;
+  findUpcomingByUserForWeek(userId: string): Promise<IEventInstanceAndRole[]>;
+  async findUpcomingByUserForWeek<K extends keyof IEventInstanceAndRole>(
     userId: string,
     fields?: K[]
   ): Promise<unknown> {

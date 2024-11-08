@@ -17,3 +17,5 @@ export interface IEventInstance extends IEntity, IEventDetails {
 }
 
 export const EventInstanceRouteMeta: IRouteMeta = { path: "/event-instances" };
+
+

@@ -13,23 +13,22 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import componentStyles from "../../styles/components.module.scss";
-import { IEventInstanceItemModel } from "../eventInstance/eventInstanceItem/IEventInstanceItemModel";
+import { IEventInstanceItemModelAndRole } from "../eventInstance/eventInstanceItem/IEventInstanceItemModelAndRole";
 import { EventInstanceList } from "../eventInstance/eventInstanceList/EventInstanceList";
 import styles from "./Welcome.module.scss";
 
 export const Welcome: React.FC = () => {
   const [user] = useUser();
   const { t } = useTranslation();
-  const [eventInstanceItemModels, setEventInstanceItemModels] = useState<
-    IEventInstanceItemModel[]
-  >([]);
+  const [eventInstanceItemModelAndRoles, setEventInstanceItemModelAndRoles] =
+    useState<IEventInstanceItemModelAndRole[]>([]);
   const [loadEventInstancesRequest, isLoadEventInstancesRequestProcessing] =
     useRequest();
 
   useInitialize(() =>
     loadEventInstancesRequest(async () => {
       const eventInstanceApi = new EventInstanceApi();
-      const eventInstanceItemModels: IEventInstanceItemModel[] =
+      const eventInstanceItemModelAndRoles: IEventInstanceItemModelAndRole[] =
         await eventInstanceApi.findUpcomingByUserForWeek(user.id, [
           "id",
           "description",
@@ -38,11 +37,12 @@ export const Welcome: React.FC = () => {
           "from",
           "to",
           "title",
+          "isCurrentUserTrainer",
         ]);
-      eventInstanceItemModels.sort((left, right) =>
+      eventInstanceItemModelAndRoles.sort((left, right) =>
         DateTime.compare(checkNotNull(left).from, checkNotNull(right).from)
       );
-      setEventInstanceItemModels(eventInstanceItemModels);
+      setEventInstanceItemModelAndRoles(eventInstanceItemModelAndRoles);
     })
   );
 
@@ -59,7 +59,7 @@ export const Welcome: React.FC = () => {
         <PageSpinner />
       ) : (
         <div className={styles.upcomingTrainings}>
-          {isInitial(eventInstanceItemModels) ? (
+          {isInitial(eventInstanceItemModelAndRoles) ? (
             <div>
               {t(texts.welcome.noTrainings, {
                 trainings: (
@@ -73,7 +73,7 @@ export const Welcome: React.FC = () => {
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
               <EventInstanceList
-                eventInstanceItemModels={eventInstanceItemModels}
+                eventInstanceItemModels={eventInstanceItemModelAndRoles}
                 renderChild={() => (
                   <Tooltip
                     text={t(texts.welcome.infoParticipateAsTrainer)}
