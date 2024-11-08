@@ -389,10 +389,12 @@
 		# Story: Display explanation text in gradings as tooltip of an info icon
 	# Story: Adjust styling of event overview calendar to fit the homepage style
 
-- Version 1.9.0-<>.11
+# Version 1.9.0-20241108.11
 	# Story: Embed training overview calendar in homepage
 	# Story: Tooltip looks more highlighted
-	- Story: Display trainings in dashboard where a user is assigned as trainer
+	# Story: Display trainings in dashboard with the current user assigned as trainer or registered on
+
+- Version 1.10.0-<>.12
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
