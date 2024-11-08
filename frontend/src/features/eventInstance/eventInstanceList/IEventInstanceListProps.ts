@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
-import { IEventInstanceItemModel } from "../eventInstanceItem/IEventInstanceItemModel";
+import { IEventInstanceItemModelAndRole } from "./../eventInstanceItem/IEventInstanceItemModelAndRole";
 
 export interface IEventInstanceListProps {
-  eventInstanceItemModels: IEventInstanceItemModel[];
-  renderChild?: (eventInstanceItemModel: IEventInstanceItemModel) => ReactNode;
+  eventInstanceItemModelAndRoles: IEventInstanceItemModelAndRole[];
+  renderChild?: (
+    eventInstanceItemModelAndRole: IEventInstanceItemModelAndRole
+  ) => ReactNode;
 }

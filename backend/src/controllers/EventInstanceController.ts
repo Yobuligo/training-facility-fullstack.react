@@ -35,6 +35,8 @@ export class EventInstanceController extends EntityController<
         const from = req.query.from;
         const to = req.query.to;
         const userId = req.query.userId;
+        const includeIsCurrentUserTrainer =
+          req.query.includeIsCurrentUserTrainer === "true" ? true : false;
 
         if (
           from &&
@@ -56,6 +58,7 @@ export class EventInstanceController extends EntityController<
           const eventInstances = await this.repo.findByDateTimeSpanAndUser(
             dateTimeSpan,
             userId,
+            includeIsCurrentUserTrainer,
             fields
           );
 

@@ -73,15 +73,17 @@ export const Welcome: React.FC = () => {
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
               <EventInstanceList
-                eventInstanceItemModels={eventInstanceItemModelAndRoles}
-                renderChild={() => (
-                  <Tooltip
-                    text={t(texts.welcome.infoParticipateAsTrainer)}
-                    align={HorizontalAlignment.LEFT}
-                  >
-                    <TrainerIcon className={componentStyles.trainerIcon} />
-                  </Tooltip>
-                )}
+                eventInstanceItemModelAndRoles={eventInstanceItemModelAndRoles}
+                renderChild={(eventInstanceItemModelAndRole) =>
+                  eventInstanceItemModelAndRole.isCurrentUserTrainer && (
+                    <Tooltip
+                      text={t(texts.welcome.infoParticipateAsTrainer)}
+                      align={HorizontalAlignment.LEFT}
+                    >
+                      <TrainerIcon className={componentStyles.trainerIcon} />
+                    </Tooltip>
+                  )
+                }
               />
             </>
           )}

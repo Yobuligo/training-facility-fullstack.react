@@ -26,6 +26,7 @@ export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
   async findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
     userId: string,
+    includeIsCurrentUserTrainer: boolean,
     fields: (keyof IEventInstance)[]
   ): Promise<IEventInstance[]> {
     const data = await this.model.findAll({
