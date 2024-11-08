@@ -24,15 +24,18 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
   findByDateTimeSpanAndUser<K extends keyof IEventInstance>(
     dateTimeSpan: IDateTimeSpan,
     userId: string,
+    includeIsCurrentUserTrainer: boolean,
     fields: K[]
   ): Promise<IEntitySubset<IEventInstance, K>>;
   findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
-    userId: string
+    userId: string,
+    includeIsCurrentUserTrainer: boolean
   ): Promise<IEventInstance[]>;
   async findByDateTimeSpanAndUser(
     dateTimeSpan: IDateTimeSpan,
     userId: string,
+    includeIsCurrentUserTrainer: boolean,
     fields?: unknown
   ): Promise<unknown> {
     let requestedFields: string[] = [];
@@ -45,6 +48,7 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
         from: dateTimeSpan.from.toString(),
         to: dateTimeSpan.to.toString(),
         userId: userId,
+        includeIsCurrentUserTrainer: includeIsCurrentUserTrainer.toString(),
       },
     });
   }
@@ -90,6 +94,7 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     const eventInstances = await this.findByDateTimeSpanAndUser(
       dateTimeSpan,
       userId,
+      true,
       fields as any
     );
     return eventInstances;
