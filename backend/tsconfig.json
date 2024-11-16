@@ -6,12 +6,11 @@
     "moduleResolution": "Node",
     "allowJs": true,
     "outDir": "./dist",
-    "rootDir": "src",
     "strict": true,
     "sourceMap": true,
     "declaration": true,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests/**/*.ts"]
 }
