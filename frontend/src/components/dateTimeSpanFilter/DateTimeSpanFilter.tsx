@@ -24,6 +24,7 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
           >
             {t(texts.general.dateTimeSpan.today)}
           </SecondaryButton>
+
           <SecondaryButton
             className={styles.button}
             displaySpinner={viewModel.displayTomorrowSpinner}
