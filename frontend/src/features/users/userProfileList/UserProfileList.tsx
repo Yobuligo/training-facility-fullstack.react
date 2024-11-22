@@ -22,10 +22,10 @@ export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
 
   return (
     <div className={styles.userProfileList}>
-      <div className={styles.numberEntries}>
+      <h4 className={styles.numberEntries}>
         {t(texts.userProfileList.numberEntries)}
         <NumberDisplay value={items.length} />
-      </div>
+      </h4>
       {isInitial(items) ? <>{t(texts.general.noEntriesFound)}</> : <>{items}</>}
     </div>
   );

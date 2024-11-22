@@ -401,7 +401,7 @@
 		# Story: Display number registered users for an event instance
 		- Story: Display age of users in user list
 		- Story: Display number of users in user list
-	- Story: Hide bank details in user profile
+	# Story: Hide bank details in user profile
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
