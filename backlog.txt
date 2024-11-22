@@ -400,7 +400,7 @@
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
 		# Story: Display number registered users for an event instance
 		- Story: Display age of users in user list
-		- Story: Display number of users in user list
+		# Story: Display number of users in user list
 	# Story: Hide bank details in user profile
 
 - Backlog

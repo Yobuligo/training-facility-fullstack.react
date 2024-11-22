@@ -135,6 +135,7 @@
             "nov": "Nov",
             "dec": "Dec"
         },
+        "na": "n/a.",
         "no": "No",
         "noEntriesFound": "No entries found",
         "ok": "Ok",
@@ -155,6 +156,7 @@
             "warning": "Warning"
         },
         "trainers": "Trainers",
+        "unitAge": "yrs",
         "username": "Username",
         "weekdays": {
             "monday": "Monday",

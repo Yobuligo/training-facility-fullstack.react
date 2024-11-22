@@ -32,6 +32,7 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
                 ? `(${t(texts.userProfileItem.locked)})`
                 : ""
             }`}
+            <div className={styles.age}>{`28 ${t(texts.general.unitAge)}`}</div>
           </div>
           <TrainerIcon
             className={style(

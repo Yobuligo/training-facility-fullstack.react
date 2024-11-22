@@ -31,12 +31,20 @@
 .nameContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 }
 
 .name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   font-size: large;
+}
+
+.age {
+  font-size: medium;
+  margin-right: 1rem;
 }
 
 .trainerIconSmallScreen {

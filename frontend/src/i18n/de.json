@@ -135,6 +135,7 @@
             "nov": "Nov",
             "dec": "Dez"
         },
+        "na": "n.a.",
         "no": "Nein",
         "noEntriesFound": "Keine Einträge gefunden",
         "ok": "Ok",
@@ -155,6 +156,7 @@
             "warning": "Warnung"
         },
         "trainers": "Trainer",
+        "unitAge": "J.",
         "username": "Benutzername",
         "weekdays": {
             "monday": "Montag",
@@ -328,7 +330,7 @@
     },
     "userProfileList": {
         "numberEntries": "Anzahl"
-    },    
+    },
     "userProfileSection": {
         "addUser": "Benutzer hinzufügen",
         "resignedUsers": "Gekündigte Benutzer"
