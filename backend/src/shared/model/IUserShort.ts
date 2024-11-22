@@ -4,6 +4,7 @@ import { IHaveName } from "../types/IHaveName";
 import { IUserRole } from "./IUserRole";
 
 export interface IUserShort extends IHaveId, IHaveName {
+  birthday?: Date;
   email: string;
   phone?: string;
   isLocked: boolean;

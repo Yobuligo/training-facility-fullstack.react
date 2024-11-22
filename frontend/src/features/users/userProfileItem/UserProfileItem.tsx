@@ -12,6 +12,16 @@ import styles from "./UserProfileItem.module.scss";
 export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
   const { t } = useTranslation();
 
+  // const toAgeString = (birthday?: Date): string => {
+  //   return `${
+  //     birthday
+  //       ? `${DateTime.toYearsSince(new Date(), birthday)}  ${t(
+  //           texts.general.unitAge
+  //         )}`
+  //       : t(texts.general.na)
+  //   }`;
+  // };
+
   return (
     <Card className={styles.card} onClick={props.onSelect}>
       <Banner
@@ -32,7 +42,6 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
                 ? `(${t(texts.userProfileItem.locked)})`
                 : ""
             }`}
-            <div className={styles.age}>{`28 ${t(texts.general.unitAge)}`}</div>
           </div>
           <TrainerIcon
             className={style(

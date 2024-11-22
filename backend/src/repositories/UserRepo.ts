@@ -34,6 +34,7 @@ import { UserRoleRepo } from "./UserRoleRepo";
 export class UserRepo extends SequelizeRepository<IUserSecure> {
   private userProfileShortAttributes: (keyof IUserShort)[] = [
     "id",
+    "birthday",
     "firstname",
     "lastname",
     "email",
@@ -460,6 +461,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     const user = model.toJSON();
     return {
       id: user.id,
+      birthday: user.userProfile?.birthday,
       email: user.userProfile?.email ?? "",
       firstname: user.userProfile?.firstname ?? "",
       isLocked: user.isLocked,
