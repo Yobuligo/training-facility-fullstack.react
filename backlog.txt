@@ -394,18 +394,21 @@
 	# Story: Tooltip looks more highlighted
 	# Story: Display trainings in dashboard with the current user assigned as trainer or registered on
 
-- Version 1.10.0-<>.12
-	- Epic: Improved app transparency
-		- Story: Display number of displayed trainings in event definition list depending on the selected filter
-		- Story: Display number of displayed trainings in event instance list depending on the selected filter
+# Version 1.10.0-20241122.12
+	# Epic: Improved app transparency
 		# Story: Display number registered users for an event instance
-		- Story: Display age of users in user list
 		# Story: Display number of users in user list
 	# Story: Hide bank details in user profile
+
+- Version 1.11.0-<>.13
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
 	- Story: Write first test
+	- Epic: Improved app transparency
+		- Story: Display number of displayed trainings in event definition list depending on the selected filter
+		- Story: Display number of displayed trainings in event instance list depending on the selected filter
+		- Story: Display age of users in user list
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
 		- Story: Dashboard can be accessed via route
