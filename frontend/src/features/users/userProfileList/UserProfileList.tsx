@@ -1,3 +1,4 @@
+import { NumberDisplay } from "../../../components/numberDisplay/NumberDisplay";
 import { isInitial } from "../../../core/utils/isInitial";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -21,6 +22,10 @@ export const UserProfileList: React.FC<IUserProfileListProps> = (props) => {
 
   return (
     <div className={styles.userProfileList}>
+      <div className={styles.numberEntries}>
+        {t(texts.userProfileList.numberEntries)}
+        <NumberDisplay value={items.length} />
+      </div>
       {isInitial(items) ? <>{t(texts.general.noEntriesFound)}</> : <>{items}</>}
     </div>
   );
