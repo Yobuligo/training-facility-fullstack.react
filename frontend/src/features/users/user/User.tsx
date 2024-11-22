@@ -184,47 +184,49 @@ export const User: React.FC<IUserProps> = (props) => {
           />
         </UserProfileGroup>
 
-        <UserProfileGroup
-          collapsed={viewModel.profileDetailsSettings.collapseBank}
-          onToggleCollapse={viewModel.onToggleCollapseBank}
-          title={t(texts.user.bank)}
-        >
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            isOptional={true}
-            label={t(texts.user.bankAccountOwner)}
-            maxLength={100}
-            onChange={viewModel.setBankAccountOwner}
-            value={viewModel.bankAccountOwner}
-          />
+        {props.isAdminMode && (
+          <UserProfileGroup
+            collapsed={viewModel.profileDetailsSettings.collapseBank}
+            onToggleCollapse={viewModel.onToggleCollapseBank}
+            title={t(texts.user.bank)}
+          >
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.bankAccountOwner)}
+              maxLength={100}
+              onChange={viewModel.setBankAccountOwner}
+              value={viewModel.bankAccountOwner}
+            />
 
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            isOptional={true}
-            label={t(texts.user.bankAccountIBAN)}
-            maxLength={34}
-            onChange={viewModel.setBankAccountIBAN}
-            value={viewModel.bankAccountIBAN}
-          />
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.bankAccountIBAN)}
+              maxLength={34}
+              onChange={viewModel.setBankAccountIBAN}
+              value={viewModel.bankAccountIBAN}
+            />
 
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            isOptional={true}
-            label={t(texts.user.bankAccountBIC)}
-            maxLength={11}
-            onChange={viewModel.setBankAccountBIC}
-            value={viewModel.bankAccountBIC}
-          />
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.bankAccountBIC)}
+              maxLength={11}
+              onChange={viewModel.setBankAccountBIC}
+              value={viewModel.bankAccountBIC}
+            />
 
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            isOptional={true}
-            label={t(texts.user.bankAccountInstitution)}
-            maxLength={50}
-            onChange={viewModel.setBankAccountInstitution}
-            value={viewModel.bankAccountInstitution}
-          />
-        </UserProfileGroup>
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.bankAccountInstitution)}
+              maxLength={50}
+              onChange={viewModel.setBankAccountInstitution}
+              value={viewModel.bankAccountInstitution}
+            />
+          </UserProfileGroup>
+        )}
 
         {props.isAdminMode && (
           <UserProfileGroup
