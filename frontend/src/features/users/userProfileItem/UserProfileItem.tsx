@@ -1,5 +1,6 @@
 import { Banner } from "../../../components/banner/Banner";
 import { Card } from "../../../components/card/Card";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { style } from "../../../core/ui/style";
 import { TrainerIcon } from "../../../icons/TrainerIcon";
 import { texts } from "../../../lib/translation/texts";
@@ -12,15 +13,15 @@ import styles from "./UserProfileItem.module.scss";
 export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
   const { t } = useTranslation();
 
-  // const toAgeString = (birthday?: Date): string => {
-  //   return `${
-  //     birthday
-  //       ? `${DateTime.toYearsSince(new Date(), birthday)}  ${t(
-  //           texts.general.unitAge
-  //         )}`
-  //       : t(texts.general.na)
-  //   }`;
-  // };
+  const toAgeString = (birthday?: Date): string => {
+    return `${
+      birthday
+        ? `${DateTime.toYearsSince(new Date(), birthday)}  ${t(
+            texts.general.unitAge
+          )}`
+        : t(texts.general.na)
+    }`;
+  };
 
   return (
     <Card className={styles.card} onClick={props.onSelect}>
@@ -42,6 +43,9 @@ export const UserProfileItem: React.FC<IUserProfileItem> = (props) => {
                 ? `(${t(texts.userProfileItem.locked)})`
                 : ""
             }`}
+            <div className={styles.age}>
+              {toAgeString(props.userShort.birthday)}
+            </div>
           </div>
           <TrainerIcon
             className={style(

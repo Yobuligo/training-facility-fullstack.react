@@ -407,8 +407,10 @@
 			- The following options can be changed: email, text message, WhatsApp, homepage photos, social media photos, print photos
 		- Story: Guardian details can be set and changed in the user details
 			- The following options can be set and changed: firstname, lastname, phone
-	- Epic: Improved app transparency
-		- Story: Display age of users in user list
+	# Epic: Improved app transparency
+		# Story: Display age of users in user list
+			# Display age of current user
+			# If the birthday is not set display n/a
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
@@ -416,7 +418,6 @@
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
-		- Story: Display age of users in user list
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
 		- Story: Dashboard can be accessed via route
