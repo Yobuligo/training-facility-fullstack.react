@@ -185,6 +185,21 @@ export const User: React.FC<IUserProps> = (props) => {
         </UserProfileGroup>
 
         {props.isAdminMode && (
+          <UserProfileGroup collapsed={false} title={t(texts.user.guardian)}>
+            Test
+          </UserProfileGroup>
+        )}
+
+        {props.isAdminMode && (
+          <UserProfileGroup
+            collapsed={false}
+            title={t(texts.user.contactOptions)}
+          >
+            Test
+          </UserProfileGroup>
+        )}
+
+        {props.isAdminMode && (
           <UserProfileGroup
             collapsed={viewModel.profileDetailsSettings.collapseBank}
             onToggleCollapse={viewModel.onToggleCollapseBank}
