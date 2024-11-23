@@ -151,6 +151,12 @@ export const User: React.FC<IUserProps> = (props) => {
           />
         </UserProfileGroup>
 
+        {props.isAdminMode && (
+          <UserProfileGroup collapsed={false} title={t(texts.user.guardian)}>
+            Test
+          </UserProfileGroup>
+        )}
+
         <UserProfileGroup
           collapsed={viewModel.profileDetailsSettings.collapseAddress}
           onToggleCollapse={viewModel.onToggleCollapseAddress}
@@ -183,21 +189,6 @@ export const User: React.FC<IUserProps> = (props) => {
             value={viewModel.city}
           />
         </UserProfileGroup>
-
-        {props.isAdminMode && (
-          <UserProfileGroup collapsed={false} title={t(texts.user.guardian)}>
-            Test
-          </UserProfileGroup>
-        )}
-
-        {props.isAdminMode && (
-          <UserProfileGroup
-            collapsed={false}
-            title={t(texts.user.contactOptions)}
-          >
-            Test
-          </UserProfileGroup>
-        )}
 
         {props.isAdminMode && (
           <UserProfileGroup
@@ -240,6 +231,15 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setBankAccountInstitution}
               value={viewModel.bankAccountInstitution}
             />
+          </UserProfileGroup>
+        )}
+
+        {props.isAdminMode && (
+          <UserProfileGroup
+            collapsed={false}
+            title={t(texts.user.contactOptions)}
+          >
+            Test
           </UserProfileGroup>
         )}
 
