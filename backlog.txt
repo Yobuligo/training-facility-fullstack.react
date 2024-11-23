@@ -401,6 +401,14 @@
 	# Story: Hide bank details in user profile
 
 - Version 1.11.0-<>.13
+	- Epic: Additional user properties
+		- Story: Contact options can be set and changed in the user details
+			- It is possible to select yes or no for each option
+			- The following options can be changed: email, text message, WhatsApp, homepage photos, social media photos, print photos
+		- Story: Guardian details can be set and changed in the user details
+			- The following options can be set and changed: firstname, lastname, phone
+	- Epic: Improved app transparency
+		- Story: Display age of users in user list
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
