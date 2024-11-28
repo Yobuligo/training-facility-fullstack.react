@@ -133,13 +133,6 @@ export const useUserViewModel = (props: IUserProps) => {
     userContactOptions?.whatsApp ?? false
   );
 
-  const contactOptionEmailOptions = useYesOrNoSelectOptions();
-  const contactOptionHomepagePhotosOptions = useYesOrNoSelectOptions();
-  const contactOptionPrintPhotosOptions = useYesOrNoSelectOptions();
-  const contactOptionSocialMediaPhotosOptions = useYesOrNoSelectOptions();
-  const contactOptionTextMessageOptions = useYesOrNoSelectOptions();
-  const contactOptionWhatsAppOptions = useYesOrNoSelectOptions();
-
   const reset = useCallback(() => {
     setBirthday(
       userProfile.birthday ? DateTime.toDate(userProfile.birthday) : ""
@@ -568,12 +561,6 @@ export const useUserViewModel = (props: IUserProps) => {
     contactOptionSocialMediaPhotos,
     contactOptionTextMessage,
     contactOptionWhatsApp,
-    contactOptionEmailOptions,
-    contactOptionTextMessageOptions,
-    contactOptionHomepagePhotosOptions,
-    contactOptionPrintPhotosOptions,
-    contactOptionSocialMediaPhotosOptions,
-    contactOptionWhatsAppOptions,
     displayMode,
     email,
     emailError,

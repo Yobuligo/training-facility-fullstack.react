@@ -2,6 +2,7 @@ import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
+import { LabeledSwitch } from "../../../components/labeledSwitch/LabeledSwitch";
 import { LabeledText } from "../../../components/labeledText/LabeledText";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
@@ -273,52 +274,46 @@ export const User: React.FC<IUserProps> = (props) => {
             onToggleCollapse={viewModel.onToggleCollapseContactOptions}
             title={t(texts.user.contactOptions)}
           >
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionEmail}
               disabled={viewModel.displayMode}
               label={t(texts.user.email)}
-              options={viewModel.contactOptionEmailOptions}
-              onSelect={viewModel.setContactOptionEmail}
-              value={viewModel.contactOptionEmail}
+              onChange={viewModel.setContactOptionEmail}
             />
 
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionTextMessage}
               disabled={viewModel.displayMode}
               label={t(texts.user.textMessage)}
-              options={viewModel.contactOptionTextMessageOptions}
-              onSelect={viewModel.setContactOptionTextMessage}
-              value={viewModel.contactOptionTextMessage}
+              onChange={viewModel.setContactOptionTextMessage}
             />
 
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionWhatsApp}
               disabled={viewModel.displayMode}
               label={t(texts.user.whatsApp)}
-              options={viewModel.contactOptionWhatsAppOptions}
-              onSelect={viewModel.setContactOptionWhatsApp}
-              value={viewModel.contactOptionWhatsApp}
+              onChange={viewModel.setContactOptionWhatsApp}
             />
 
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionHomepagePhotos}
               disabled={viewModel.displayMode}
               label={t(texts.user.homepagePhotos)}
-              options={viewModel.contactOptionHomepagePhotosOptions}
-              onSelect={viewModel.setContactOptionHomepagePhotos}
-              value={viewModel.contactOptionHomepagePhotos}
+              onChange={viewModel.setContactOptionHomepagePhotos}
             />
 
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionSocialMediaPhotos}
               disabled={viewModel.displayMode}
               label={t(texts.user.socialMediaPhotos)}
-              options={viewModel.contactOptionSocialMediaPhotosOptions}
-              onSelect={viewModel.setContactOptionSocialMediaPhotos}
-              value={viewModel.contactOptionSocialMediaPhotos}
+              onChange={viewModel.setContactOptionSocialMediaPhotos}
             />
 
-            <LabeledSelect
+            <LabeledSwitch
+              checked={viewModel.contactOptionPrintPhotos}
               disabled={viewModel.displayMode}
               label={t(texts.user.printPhotos)}
-              options={viewModel.contactOptionPrintPhotosOptions}
-              onSelect={viewModel.setContactOptionPrintPhotos}
-              value={viewModel.contactOptionPrintPhotos}
+              onChange={viewModel.setContactOptionPrintPhotos}
             />
           </UserProfileGroup>
         )}
