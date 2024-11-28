@@ -1,5 +1,5 @@
 import { CSSProperties, useEffect, useState } from "react";
-import colors from "../../styles/core/colors.module.scss";
+import colors from "../../styles/colors.module.scss";
 import { ISwitchProps } from "./ISwitchProps";
 import styles from "./Switch.module.scss";
 

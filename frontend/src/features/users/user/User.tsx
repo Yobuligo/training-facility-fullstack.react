@@ -4,6 +4,7 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { LabeledText } from "../../../components/labeledText/LabeledText";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
+import { Switch } from "../../../components/switch/Switch";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
@@ -268,7 +269,13 @@ export const User: React.FC<IUserProps> = (props) => {
             onToggleCollapse={viewModel.onToggleCollapseContactOptions}
             title={t(texts.user.contactOptions)}
           >
-            Test
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.isAdmin)}
+              options={viewModel.isAdminOptions}
+              onSelect={viewModel.setIsAdmin}
+              value={viewModel.isAdmin}
+            />
           </UserProfileGroup>
         )}
 
