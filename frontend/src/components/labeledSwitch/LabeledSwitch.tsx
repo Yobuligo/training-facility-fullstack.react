@@ -15,7 +15,12 @@ export const LabeledSwitch: React.FC<ILabeledSwitchProps> = (props) => {
       isOptional={props.isOptional}
       label={props.label}
     >
-      <Switch checked={props.checked} onChange={props.onChange} width="4rem" />
+      <Switch
+        checked={props.checked}
+        disabled={props.disabled}
+        onChange={props.onChange}
+        width="4rem"
+      />
     </LabeledElement>
   );
 };

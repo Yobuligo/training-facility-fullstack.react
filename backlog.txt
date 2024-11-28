@@ -413,6 +413,7 @@
 		# Story: Display age of users in user list
 			# Display age of current user
 			# If the birthday is not set display n/a
+	- Story: Switch must be disableable
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account

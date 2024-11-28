@@ -32,6 +32,7 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
     <label style={style} className={`${props.className} ${styles.switch}`}>
       <input
         className={styles.checkbox}
+        disabled={props.disabled}
         type="checkbox"
         onChange={(event) => {
           setIsChecked(event.target.checked);
