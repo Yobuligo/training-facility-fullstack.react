@@ -6,6 +6,8 @@ export interface IProfileDetailsSettings {
   collapsePersonalInformation?: boolean;
   collapseAddress?: boolean;
   collapseBank?: boolean;
+  collapseContactOptions?: boolean;
   collapseGradings?: boolean;
+  collapseGuardian?: boolean;
   collapseTechnicalInformation?: boolean;
 }

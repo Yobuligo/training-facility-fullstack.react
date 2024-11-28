@@ -152,7 +152,11 @@ export const User: React.FC<IUserProps> = (props) => {
         </UserProfileGroup>
 
         {props.isAdminMode && (
-          <UserProfileGroup collapsed={false} title={t(texts.user.guardian)}>
+          <UserProfileGroup
+            collapsed={viewModel.profileDetailsSettings.collapseGuardian}
+            onToggleCollapse={viewModel.onToggleCollapseGuardian}
+            title={t(texts.user.guardian)}
+          >
             <LabeledInput
               disabled={viewModel.displayMode}
               isOptional={true}
@@ -260,7 +264,8 @@ export const User: React.FC<IUserProps> = (props) => {
 
         {props.isAdminMode && (
           <UserProfileGroup
-            collapsed={false}
+            collapsed={viewModel.profileDetailsSettings.collapseContactOptions}
+            onToggleCollapse={viewModel.onToggleCollapseContactOptions}
             title={t(texts.user.contactOptions)}
           >
             Test

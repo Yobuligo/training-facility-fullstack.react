@@ -405,8 +405,10 @@
 		- Story: Contact options can be set and changed in the user details
 			- It is possible to select yes or no for each option
 			- The following options can be changed: email, text message, WhatsApp, homepage photos, social media photos, print photos
+			- The collapsible state is persisted
 		- Story: Guardian details can be set and changed in the user details
 			- The following options can be set and changed: firstname, lastname, phone
+			- The collapsible state is persisted
 	# Epic: Improved app transparency
 		# Story: Display age of users in user list
 			# Display age of current user

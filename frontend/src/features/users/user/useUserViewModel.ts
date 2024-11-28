@@ -430,9 +430,21 @@ export const useUserViewModel = (props: IUserProps) => {
       return { ...previous };
     });
 
+  const onToggleCollapseContactOptions = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseContactOptions = collapsed;
+      return { ...previous };
+    });
+
   const onToggleCollapseGradings = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
       previous.collapseGradings = collapsed;
+      return { ...previous };
+    });
+
+  const onToggleCollapseGuardian = (collapsed: boolean) =>
+    setProfileDetailsSettings((previous) => {
+      previous.collapseGuardian = collapsed;
       return { ...previous };
     });
 
@@ -562,7 +574,9 @@ export const useUserViewModel = (props: IUserProps) => {
     onSendUserInvite,
     onToggleCollapseAddress,
     onToggleCollapseBank,
+    onToggleCollapseContactOptions,
     onToggleCollapseGradings,
+    onToggleCollapseGuardian,
     onToggleCollapsePersonalInformation,
     onToggleCollapseTechnicalInformation,
     onToggleIsLocked,
