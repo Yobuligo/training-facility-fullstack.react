@@ -33,6 +33,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
   const userProfile = checkNotNull(props.user.userProfile);
   const userRoles = checkNotNull(props.user.userRoles);
+  const userContactOptions = userProfile.userContactOptions;
   const [profileDetailsSettings, setProfileDetailsSettings] =
     useProfileDetailsSettings();
   const [displayMode, setDisplayMode] = useState(
@@ -62,13 +63,13 @@ export const useUserViewModel = (props: IUserProps) => {
   const [phone, setPhone] = useState(userProfile.phone);
 
   // Guardian
-  const [firstnameGuardian, setFirstnameGuardian] = useState(
-    userProfile.firstnameGuardian
+  const [firstnameGuardian, setGuardianFirstname] = useState(
+    userProfile.guardianFirstname
   );
-  const [lastnameGuardian, setLastnameGuardian] = useState(
-    userProfile.lastnameGuardian
+  const [lastnameGuardian, setGuardianLastname] = useState(
+    userProfile.guardianLastname
   );
-  const [phoneGuardian, setPhoneGuardian] = useState(userProfile.phoneGuardian);
+  const [phoneGuardian, setGuardianPhone] = useState(userProfile.guardianPhone);
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
     userProfile.street
@@ -114,6 +115,30 @@ export const useUserViewModel = (props: IUserProps) => {
   const toast = useToast();
   const isAdminOptions = useYesOrNoSelectOptions();
   const isTrainerOptions = useYesOrNoSelectOptions();
+
+  const [contactOptionEmail, setContactOptionEmail] = useState(
+    userContactOptions?.email ?? false
+  );
+  const [contactOptionHomepagePhotos, setContactOptionHomepagePhotos] =
+    useState(userContactOptions?.homepagePhotos ?? false);
+  const [contactOptionPrintPhotos, setContactOptionPrintPhotos] = useState(
+    userContactOptions?.printPhotos ?? false
+  );
+  const [contactOptionSocialMediaPhotos, setContactOptionSocialMediaPhotos] =
+    useState(userContactOptions?.socialMediaPhotos ?? false);
+  const [contactOptionTextMessage, setContactOptionTextMessage] = useState(
+    userContactOptions?.textMessage ?? false
+  );
+  const [contactOptionWhatsApp, setContactOptionWhatsApp] = useState(
+    userContactOptions?.whatsApp ?? false
+  );
+
+  const contactOptionEmailOptions = useYesOrNoSelectOptions();
+  const contactOptionHomepagePhotosOptions = useYesOrNoSelectOptions();
+  const contactOptionPrintPhotosOptions = useYesOrNoSelectOptions();
+  const contactOptionSocialMediaPhotosOptions = useYesOrNoSelectOptions();
+  const contactOptionTextMessageOptions = useYesOrNoSelectOptions();
+  const contactOptionWhatsAppOptions = useYesOrNoSelectOptions();
 
   const reset = useCallback(() => {
     setBirthday(
@@ -537,12 +562,24 @@ export const useUserViewModel = (props: IUserProps) => {
     cityError,
     collapseBank,
     confirmDialog,
+    contactOptionEmail,
+    contactOptionHomepagePhotos,
+    contactOptionPrintPhotos,
+    contactOptionSocialMediaPhotos,
+    contactOptionTextMessage,
+    contactOptionWhatsApp,
+    contactOptionEmailOptions,
+    contactOptionTextMessageOptions,
+    contactOptionHomepagePhotosOptions,
+    contactOptionPrintPhotosOptions,
+    contactOptionSocialMediaPhotosOptions,
+    contactOptionWhatsAppOptions,
     displayMode,
     email,
     emailError,
     firstname,
     firstnameError,
-    firstnameGuardian,
+    guardianFirstname: firstnameGuardian,
     gender,
     genderOptions,
     gradings,
@@ -558,7 +595,7 @@ export const useUserViewModel = (props: IUserProps) => {
     lastInvitedAt,
     lastname,
     lastnameError,
-    lastnameGuardian,
+    guardianLastname: lastnameGuardian,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -582,7 +619,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleIsLocked,
     onValidate,
     phone,
-    phoneGuardian,
+    guardianPhone: phoneGuardian,
     postalCode,
     postalCodeError,
     profileDetailsSettings,
@@ -593,17 +630,23 @@ export const useUserViewModel = (props: IUserProps) => {
     setBankAccountOwner,
     setCity,
     setCollapseBank,
+    setContactOptionEmail,
+    setContactOptionHomepagePhotos,
+    setContactOptionPrintPhotos,
+    setContactOptionSocialMediaPhotos,
+    setContactOptionTextMessage,
+    setContactOptionWhatsApp,
     setDisplayMode,
     setEmail,
     setFirstname,
-    setFirstnameGuardian,
+    setGuardianFirstname,
+    setGuardianLastname,
+    setGuardianPhone,
     setLastname,
-    setLastnameGuardian,
     setGender,
     setIsAdmin,
     setIsTrainer,
     setPhone,
-    setPhoneGuardian,
     setStreet,
     setTariff,
     setUsername,

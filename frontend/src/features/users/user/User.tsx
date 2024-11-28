@@ -4,7 +4,6 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { LabeledText } from "../../../components/labeledText/LabeledText";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
-import { Switch } from "../../../components/switch/Switch";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useUser } from "../../../hooks/useUser";
 import { texts } from "../../../lib/translation/texts";
@@ -73,6 +72,7 @@ export const User: React.FC<IUserProps> = (props) => {
             : ""
         }`}</h3>
 
+        {/* Personal Information */}
         <UserProfileGroup
           collapsed={
             viewModel.profileDetailsSettings.collapsePersonalInformation
@@ -152,6 +152,7 @@ export const User: React.FC<IUserProps> = (props) => {
           />
         </UserProfileGroup>
 
+        {/* Guardian */}
         {props.isAdminMode && (
           <UserProfileGroup
             collapsed={viewModel.profileDetailsSettings.collapseGuardian}
@@ -161,31 +162,32 @@ export const User: React.FC<IUserProps> = (props) => {
             <LabeledInput
               disabled={viewModel.displayMode}
               isOptional={true}
-              label={t(texts.user.firstnameGuardian)}
+              label={t(texts.user.guardianFirstname)}
               maxLength={50}
-              onChange={viewModel.setFirstnameGuardian}
-              value={viewModel.firstnameGuardian}
+              onChange={viewModel.setGuardianFirstname}
+              value={viewModel.guardianFirstname}
             />
 
             <LabeledInput
               disabled={viewModel.displayMode}
               isOptional={true}
-              label={t(texts.user.lastnameGuardian)}
+              label={t(texts.user.guardianLastname)}
               maxLength={50}
-              onChange={viewModel.setLastnameGuardian}
-              value={viewModel.lastnameGuardian}
+              onChange={viewModel.setGuardianLastname}
+              value={viewModel.guardianLastname}
             />
             <LabeledInput
               disabled={viewModel.displayMode}
               isOptional={true}
-              label={t(texts.user.phoneGuardian)}
+              label={t(texts.user.guardianPhone)}
               maxLength={20}
-              onChange={viewModel.setPhoneGuardian}
-              value={viewModel.phoneGuardian}
+              onChange={viewModel.setGuardianPhone}
+              value={viewModel.guardianPhone}
             />
           </UserProfileGroup>
         )}
 
+        {/* Address */}
         <UserProfileGroup
           collapsed={viewModel.profileDetailsSettings.collapseAddress}
           onToggleCollapse={viewModel.onToggleCollapseAddress}
@@ -219,6 +221,7 @@ export const User: React.FC<IUserProps> = (props) => {
           />
         </UserProfileGroup>
 
+        {/* Bank */}
         {props.isAdminMode && (
           <UserProfileGroup
             collapsed={viewModel.profileDetailsSettings.collapseBank}
@@ -263,6 +266,7 @@ export const User: React.FC<IUserProps> = (props) => {
           </UserProfileGroup>
         )}
 
+        {/* Contact Options */}
         {props.isAdminMode && (
           <UserProfileGroup
             collapsed={viewModel.profileDetailsSettings.collapseContactOptions}
@@ -271,14 +275,55 @@ export const User: React.FC<IUserProps> = (props) => {
           >
             <LabeledSelect
               disabled={viewModel.displayMode}
-              label={t(texts.user.isAdmin)}
-              options={viewModel.isAdminOptions}
-              onSelect={viewModel.setIsAdmin}
-              value={viewModel.isAdmin}
+              label={t(texts.user.email)}
+              options={viewModel.contactOptionEmailOptions}
+              onSelect={viewModel.setContactOptionEmail}
+              value={viewModel.contactOptionEmail}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.textMessage)}
+              options={viewModel.contactOptionTextMessageOptions}
+              onSelect={viewModel.setContactOptionTextMessage}
+              value={viewModel.contactOptionTextMessage}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.whatsApp)}
+              options={viewModel.contactOptionWhatsAppOptions}
+              onSelect={viewModel.setContactOptionWhatsApp}
+              value={viewModel.contactOptionWhatsApp}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.homepagePhotos)}
+              options={viewModel.contactOptionHomepagePhotosOptions}
+              onSelect={viewModel.setContactOptionHomepagePhotos}
+              value={viewModel.contactOptionHomepagePhotos}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.socialMediaPhotos)}
+              options={viewModel.contactOptionSocialMediaPhotosOptions}
+              onSelect={viewModel.setContactOptionSocialMediaPhotos}
+              value={viewModel.contactOptionSocialMediaPhotos}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.printPhotos)}
+              options={viewModel.contactOptionPrintPhotosOptions}
+              onSelect={viewModel.setContactOptionPrintPhotos}
+              value={viewModel.contactOptionPrintPhotos}
             />
           </UserProfileGroup>
         )}
 
+        {/* Gradings */}
         {props.isAdminMode && (
           <UserProfileGroup
             className={styles.gradingGroup}
@@ -298,6 +343,7 @@ export const User: React.FC<IUserProps> = (props) => {
           </UserProfileGroup>
         )}
 
+        {/* Technical Information */}
         <UserProfileGroup
           collapsed={
             viewModel.profileDetailsSettings.collapseTechnicalInformation
