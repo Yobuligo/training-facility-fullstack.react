@@ -6,6 +6,7 @@ import { IHaveGuardian } from "../types/IHaveGuardian";
 import { IHaveName } from "../types/IHaveName";
 import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
+import { IUserContactOptions } from "./IUserContactOptions";
 import { IUserGrading } from "./IUserGrading";
 
 export interface IUserProfile
@@ -26,6 +27,7 @@ export interface IUserProfile
   lastInvitedAt?: Date;
   resignedAt?: Date;
   userBankAccount?: IUserBankAccount;
+  userContactOptions?: IUserContactOptions;
   userGradings?: IUserGrading[];
 }
 

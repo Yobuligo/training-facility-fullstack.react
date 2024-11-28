@@ -60,6 +60,16 @@ export const useUserViewModel = (props: IUserProps) => {
     UserInfo.containsTrainerRole(userRoles)
   );
   const [phone, setPhone] = useState(userProfile.phone);
+
+  // Guardian
+  const [firstnameGuardian, setFirstnameGuardian] = useState(
+    userProfile.firstnameGuardian
+  );
+  const [lastnameGuardian, setLastnameGuardian] = useState(
+    userProfile.lastnameGuardian
+  );
+  const [phoneGuardian, setPhoneGuardian] = useState(userProfile.phoneGuardian);
+
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
     userProfile.street
   );
@@ -520,6 +530,7 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
+    firstnameGuardian,
     gender,
     genderOptions,
     gradings,
@@ -535,6 +546,7 @@ export const useUserViewModel = (props: IUserProps) => {
     lastInvitedAt,
     lastname,
     lastnameError,
+    lastnameGuardian,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -556,6 +568,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleIsLocked,
     onValidate,
     phone,
+    phoneGuardian,
     postalCode,
     postalCodeError,
     profileDetailsSettings,
@@ -569,11 +582,14 @@ export const useUserViewModel = (props: IUserProps) => {
     setDisplayMode,
     setEmail,
     setFirstname,
+    setFirstnameGuardian,
     setLastname,
+    setLastnameGuardian,
     setGender,
     setIsAdmin,
     setIsTrainer,
     setPhone,
+    setPhoneGuardian,
     setStreet,
     setTariff,
     setUsername,

@@ -153,7 +153,31 @@ export const User: React.FC<IUserProps> = (props) => {
 
         {props.isAdminMode && (
           <UserProfileGroup collapsed={false} title={t(texts.user.guardian)}>
-            Test
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.firstnameGuardian)}
+              maxLength={50}
+              onChange={viewModel.setFirstnameGuardian}
+              value={viewModel.firstnameGuardian}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.lastnameGuardian)}
+              maxLength={50}
+              onChange={viewModel.setLastnameGuardian}
+              value={viewModel.lastnameGuardian}
+            />
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.phoneGuardian)}
+              maxLength={20}
+              onChange={viewModel.setPhoneGuardian}
+              value={viewModel.phoneGuardian}
+            />
           </UserProfileGroup>
         )}
 
