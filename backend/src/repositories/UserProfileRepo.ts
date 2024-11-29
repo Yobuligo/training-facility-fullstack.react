@@ -1,5 +1,6 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { UserBankAccount } from "../model/UserBankAccount";
+import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
 import { UserProfile } from "../model/UserProfile";
 import { IUserProfile } from "../shared/model/IUserProfile";
@@ -12,6 +13,7 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
     super(UserProfile, [
       { model: UserBankAccount, as: "userBankAccount" },
+      { model: UserContactOptions, as: "userContactOptions" },
       { model: UserGrading, as: "userGradings" },
     ]);
   }
@@ -43,6 +45,12 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
 
       if (entity.userBankAccount) {
         await UserBankAccount.upsert(entity.userBankAccount, { transaction });
+      }
+
+      if (entity.userContactOptions) {
+        await UserContactOptions.upsert(entity.userContactOptions, {
+          transaction,
+        });
       }
 
       if (entity.userGradings) {

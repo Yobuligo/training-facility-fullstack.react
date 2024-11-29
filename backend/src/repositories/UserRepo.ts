@@ -8,6 +8,7 @@ import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
+import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
@@ -50,6 +51,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         as: "userProfile",
         include: [
           { model: UserBankAccount, as: "userBankAccount" },
+          { model: UserContactOptions, as: "userContactOptions" },
           {
             model: UserGrading,
             as: "userGradings",

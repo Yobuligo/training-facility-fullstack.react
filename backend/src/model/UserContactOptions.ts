@@ -3,8 +3,9 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { db } from "../db/db";
 import { IUserContactOptions } from "../shared/model/IUserContactOptions";
 import { createIdType } from "./core/createIdType";
+import { UserProfile } from "./UserProfile";
 
-const userContactOption: ModelStatic<
+const userContactOptions: ModelStatic<
   Model<IUserContactOptions, IEntityDetails<IUserContactOptions>>
 > = db.define("user-contact-options", {
   id: createIdType(),
@@ -16,3 +17,15 @@ const userContactOption: ModelStatic<
   whatsApp: DataTypes.BOOLEAN,
 });
 
+export class UserContactOptions extends userContactOptions {
+  static associate() {
+    UserContactOptions.belongsTo(UserProfile, { onDelete: "CASCADE" });
+    UserProfile.hasOne(UserContactOptions, {
+      as: "userContactOptions",
+      foreignKey: {
+        allowNull: false,
+        name: "userProfileId",
+      },
+    });
+  }
+}

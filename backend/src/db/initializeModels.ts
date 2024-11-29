@@ -8,6 +8,7 @@ import { EventRegistration } from "../model/EventRegistration";
 import { Session } from "../model/Session";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
+import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
 import { UserInvite } from "../model/UserInvite";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
@@ -23,6 +24,7 @@ export const initializeModels = async (alter: boolean) => {
     UserRole,
     UserGrading,
     UserBankAccount,
+    UserContactOptions,
     UserLoginFailAttempt,
     UserInvite,
     UserTrialTraining,
