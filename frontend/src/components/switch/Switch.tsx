@@ -1,11 +1,12 @@
 import { CSSProperties, useEffect, useState } from "react";
+import { style } from "../../core/ui/style";
 import colors from "../../styles/colors.module.scss";
 import { ISwitchProps } from "./ISwitchProps";
 import styles from "./Switch.module.scss";
 
 export const Switch: React.FC<ISwitchProps> = (props) => {
   const [isChecked, setIsChecked] = useState(props.checked ?? false);
-  let style: CSSProperties = {};
+  let styling: CSSProperties = {};
 
   useEffect(() => {
     if (props.checked !== undefined && props.checked !== null) {
@@ -14,22 +15,34 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
   }, [props.checked]);
 
   const addCSSProperty = (cssProperties: object) => {
-    style = { ...style, ...cssProperties } as CSSProperties;
+    styling = { ...styling, ...cssProperties } as CSSProperties;
   };
 
   props.width && addCSSProperty({ "--switchWidth": props.width });
   props.sliderColor
     ? addCSSProperty({ "--sliderColor": props.sliderColor })
-    : addCSSProperty({ "--sliderColor": colors.colorSlider });
+    : addCSSProperty({
+        "--sliderColor": props.disabled
+          ? colors.colorSliderDisabled
+          : colors.colorSlider,
+      });
   props.colorOffState
     ? addCSSProperty({ "--colorOffState": props.colorOffState })
-    : addCSSProperty({ "--colorOffState": colors.colorSliderOffState });
+    : addCSSProperty({
+        "--colorOffState": props.disabled
+          ? colors.colorSliderOffStateDisabled
+          : colors.colorSliderOffState,
+      });
   props.colorOnState
     ? addCSSProperty({ "--colorOnState": props.colorOnState })
-    : addCSSProperty({ "--colorOnState": colors.colorSliderOnState });
+    : addCSSProperty({
+        "--colorOnState": props.disabled
+          ? colors.colorSliderOnStateDisabled
+          : colors.colorSliderOnState,
+      });
 
   return (
-    <label style={style} className={`${props.className} ${styles.switch}`}>
+    <label style={styling} className={style(props.className, styles.switch)}>
       <input
         className={styles.checkbox}
         disabled={props.disabled}
@@ -40,7 +53,13 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
         }}
         checked={isChecked}
       />
-      <span className={`${styles.slider} ${styles.round}`}></span>
+      <span
+        className={style(
+          styles.slider,
+          styles.round,
+          props.disabled ? styles.sliderDisabled : ""
+        )}
+      ></span>
     </label>
   );
 };

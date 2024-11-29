@@ -79,8 +79,11 @@ $color-search-button-text: $color-text-light;
 $color-secondary-button: $color-primary;
 
 $color-switch-state-off: $color-disabled;
-$color-switch-state-on: $color-secondary-light;
+$color-switch-state-off-disabled: lighten($color-disabled, 8);
+$color-switch-state-on: lighten($color-secondary,10);
+$color-switch-state-on-disabled: lighten($color-secondary-light, 20);
 $color-switch-slider: $color-secondary-dark;
+$color-switch-slider-disabled: lighten($color-secondary-dark, 50);
 
 $color-tabstrip-background: $color-primary;
 $color-tab-selected: $color-secondary-light;
@@ -155,9 +158,12 @@ $color-user-deactivated-text: $color-primary-light;
   colorEventDefinition3: $color-secondary-light;
   colorEventDefinition4: $color-secondary;
   colorSecondaryButtonSpinner: $color-primary;
-  colorSlider: $color-secondary-dark;
-  colorSliderOffState: $color-disabled;
-  colorSliderOnState: $color-secondary-light;
+  colorSlider: $color-switch-slider;
+  colorSliderDisabled: $color-switch-slider-disabled;
+  colorSliderOffState: $color-switch-state-off;
+  colorSliderOffStateDisabled: $color-switch-state-off-disabled;
+  colorSliderOnState: $color-switch-state-on;
+  colorSliderOnStateDisabled: $color-switch-state-on-disabled;
   colorPageSpinnerText: $color-secondary;
   colorMemberOnlyIcon: $color-secondary-dark;
 }

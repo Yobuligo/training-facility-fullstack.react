@@ -32,11 +32,13 @@ label {
   left: 0;
   right: 0;
   bottom: 0;
+  // background for disabled state
   background-color: var(--colorOffState);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
+// dot element
 .slider:before {
   position: absolute;
   content: "";
@@ -50,6 +52,7 @@ label {
 }
 
 .checkbox:checked + .slider {
+  // background for enabled state
   background-color: var(--colorOnState);
 }
 
