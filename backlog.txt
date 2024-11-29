@@ -400,20 +400,22 @@
 		# Story: Display number of users in user list
 	# Story: Hide bank details in user profile
 
-- Version 1.11.0-<>.13
-	- Epic: Additional user properties
-		- Story: Contact options can be set and changed in the user details
-			- It is possible to select yes or no for each option
-			- The following options can be changed: email, text message, WhatsApp, homepage photos, social media photos, print photos
+# Version 1.11.0-20241129.13
+	# Epic: Additional user properties
+		# Story: Contact options can be set and changed in the user details
+			# It is possible to select yes or no for each option
+			# The following options can be changed: email, text message, WhatsApp, homepage photos, social media photos, print photos
 			# The collapsible state is persisted
-		- Story: Guardian details can be set and changed in the user details
-			- The following options can be set and changed: firstname, lastname, phone
+		# Story: Guardian details can be set and changed in the user details
+			# The following options can be set and changed: firstname, lastname, phone
 			# The collapsible state is persisted
 	# Epic: Improved app transparency
 		# Story: Display age of users in user list
 			# Display age of current user
 			# If the birthday is not set display n/a
 	# Story: Switch can be disabled
+
+- Version 1.12.0-<>.14
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
