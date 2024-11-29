@@ -80,7 +80,7 @@ $color-secondary-button: $color-primary;
 
 $color-switch-state-off: $color-disabled;
 $color-switch-state-off-disabled: lighten($color-disabled, 8);
-$color-switch-state-on: lighten($color-secondary,10);
+$color-switch-state-on: lighten($color-secondary, 10);
 $color-switch-state-on-disabled: lighten($color-secondary-light, 16);
 $color-switch-slider: $color-secondary-dark;
 $color-switch-slider-disabled: lighten($color-secondary-dark, 45);
