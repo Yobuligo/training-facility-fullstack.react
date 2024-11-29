@@ -63,13 +63,13 @@ export const useUserViewModel = (props: IUserProps) => {
   const [phone, setPhone] = useState(userProfile.phone);
 
   // Guardian
-  const [firstnameGuardian, setGuardianFirstname] = useState(
+  const [guardianFirstname, setGuardianFirstname] = useState(
     userProfile.guardianFirstname ?? ""
   );
-  const [lastnameGuardian, setGuardianLastname] = useState(
+  const [guardianLastname, setGuardianLastname] = useState(
     userProfile.guardianLastname ?? ""
   );
-  const [phoneGuardian, setGuardianPhone] = useState(
+  const [guardianPhone, setGuardianPhone] = useState(
     userProfile.guardianPhone ?? ""
   );
 
@@ -472,6 +472,10 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.isLocked = isLocked;
     props.user.lockedAt = lockedAt;
 
+    userProfile.guardianFirstname = guardianFirstname;
+    userProfile.guardianLastname = guardianLastname;
+    userProfile.guardianPhone = guardianPhone;
+
     updateUserBankAccount();
     updateUserContactOptions();
     updateUserRoles();
@@ -623,7 +627,7 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
-    guardianFirstname: firstnameGuardian,
+    guardianFirstname,
     gender,
     genderOptions,
     gradings,
@@ -639,7 +643,7 @@ export const useUserViewModel = (props: IUserProps) => {
     lastInvitedAt,
     lastname,
     lastnameError,
-    guardianLastname: lastnameGuardian,
+    guardianLastname,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -663,7 +667,7 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleIsLocked,
     onValidate,
     phone,
-    guardianPhone: phoneGuardian,
+    guardianPhone,
     postalCode,
     postalCodeError,
     profileDetailsSettings,
