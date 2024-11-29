@@ -64,12 +64,14 @@ export const useUserViewModel = (props: IUserProps) => {
 
   // Guardian
   const [firstnameGuardian, setGuardianFirstname] = useState(
-    userProfile.guardianFirstname
+    userProfile.guardianFirstname ?? ""
   );
   const [lastnameGuardian, setGuardianLastname] = useState(
-    userProfile.guardianLastname
+    userProfile.guardianLastname ?? ""
   );
-  const [phoneGuardian, setGuardianPhone] = useState(userProfile.guardianPhone);
+  const [phoneGuardian, setGuardianPhone] = useState(
+    userProfile.guardianPhone ?? ""
+  );
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
     userProfile.street
@@ -142,21 +144,36 @@ export const useUserViewModel = (props: IUserProps) => {
     setFirstname(userProfile.firstname);
     setLastname(userProfile.lastname);
     setGender(userProfile.gender);
-    setIsAdmin(UserInfo.containsAdminRole(userRoles));
-    setIsTrainer(UserInfo.containsTrainerRole(userRoles));
     setPhone(userProfile.phone);
+    setTariff(userProfile.tariff);
+
+    setGuardianFirstname(userProfile.guardianFirstname ?? "");
+    setGuardianLastname(userProfile.guardianLastname ?? "");
+    setGuardianPhone(userProfile.guardianPhone ?? "");
+
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
     setCity(userProfile.city);
+
     setIsLocked(props.user.isLocked);
     setLockedAt(props.user.lockedAt);
-    setTariff(userProfile.tariff);
+
     setBankAccountBIC(userProfile.userBankAccount?.bankAccountBIC ?? "");
     setBankAccountIBAN(userProfile.userBankAccount?.bankAccountIBAN ?? "");
     setBankAccountInstitution(
       userProfile.userBankAccount?.bankAccountInstitution ?? ""
     );
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
+
+    setContactOptionEmail(userContactOptions?.email ?? false);
+    setContactOptionHomepagePhotos(userContactOptions?.homepagePhotos ?? false);
+    setContactOptionPrintPhotos(userContactOptions?.printPhotos ?? false);
+    setContactOptionSocialMediaPhotos(
+      userContactOptions?.socialMediaPhotos ?? false
+    );
+    setContactOptionTextMessage(userContactOptions?.textMessage ?? false);
+    setContactOptionWhatsApp(userContactOptions?.whatsApp ?? false);
+
     setGradings(
       userProfile.userGradings
         ? userProfile.userGradings.map((userGrading) => ({ ...userGrading }))
@@ -168,6 +185,8 @@ export const useUserViewModel = (props: IUserProps) => {
     setResignedAt(
       userProfile.resignedAt ? DateTime.toDate(userProfile.resignedAt) : ""
     );
+    setIsAdmin(UserInfo.containsAdminRole(userRoles));
+    setIsTrainer(UserInfo.containsTrainerRole(userRoles));
     setDisplayMode(true);
   }, [
     setBirthday,
@@ -177,10 +196,13 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.lastname,
     userProfile.gender,
     userProfile.phone,
+    userProfile.tariff,
+    userProfile.guardianFirstname,
+    userProfile.guardianLastname,
+    userProfile.guardianPhone,
     userProfile.street,
     userProfile.postalCode,
     userProfile.city,
-    userProfile.tariff,
     userProfile.userBankAccount?.bankAccountBIC,
     userProfile.userBankAccount?.bankAccountIBAN,
     userProfile.userBankAccount?.bankAccountInstitution,
@@ -195,10 +217,16 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.lockedAt,
     setFirstname,
     setLastname,
-    userRoles,
     setStreet,
     setPostalCode,
     setCity,
+    userContactOptions?.email,
+    userContactOptions?.homepagePhotos,
+    userContactOptions?.printPhotos,
+    userContactOptions?.socialMediaPhotos,
+    userContactOptions?.textMessage,
+    userContactOptions?.whatsApp,
+    userRoles,
   ]);
 
   const onCancel = useCallback(() => {
