@@ -399,6 +399,34 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
   };
 
+  const updateUserContactOptions = () => {
+    // if userContactOptions was not created yet, create it
+    if (!userProfile.userContactOptions) {
+      userProfile.userContactOptions = {
+        id: uuid(),
+        email: contactOptionEmail,
+        homepagePhotos: contactOptionHomepagePhotos,
+        printPhotos: contactOptionPrintPhotos,
+        socialMediaPhotos: contactOptionSocialMediaPhotos,
+        textMessage: contactOptionTextMessage,
+        whatsApp: contactOptionWhatsApp,
+        userProfileId: userProfile.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      return;
+    }
+
+    // update userContactOptions
+    userProfile.userContactOptions.email = contactOptionEmail;
+    userProfile.userContactOptions.homepagePhotos = contactOptionHomepagePhotos;
+    userProfile.userContactOptions.printPhotos = contactOptionPrintPhotos;
+    userProfile.userContactOptions.socialMediaPhotos =
+      contactOptionSocialMediaPhotos;
+    userProfile.userContactOptions.textMessage = contactOptionTextMessage;
+    userProfile.userContactOptions.whatsApp = contactOptionWhatsApp;
+  };
+
   const updateUserRole = (role: AuthRole, hasRole: boolean) => {
     // find role index
     const index = userRoles.findIndex((userRole) => userRole.role === role);
@@ -445,6 +473,7 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.lockedAt = lockedAt;
 
     updateUserBankAccount();
+    updateUserContactOptions();
     updateUserRoles();
     userProfile.userGradings = gradings;
 
