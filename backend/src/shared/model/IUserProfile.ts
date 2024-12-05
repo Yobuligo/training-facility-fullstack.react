@@ -8,6 +8,7 @@ import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserContactOptions } from "./IUserContactOptions";
 import { IUserGrading } from "./IUserGrading";
+import { IUserGuardian } from "./IUserGuardian";
 
 export interface IUserProfile
   extends IEntity,
@@ -29,6 +30,7 @@ export interface IUserProfile
   userBankAccount?: IUserBankAccount;
   userContactOptions?: IUserContactOptions;
   userGradings?: IUserGrading[];
+  userGuardians?: IUserGuardian[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

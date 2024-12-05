@@ -1,13 +1,16 @@
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { IEntityWithUserProfileId } from "../model/types/IEntityWithUserProfileId";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
+import { UserGuardian } from "../model/UserGuardian";
 import { UserProfile } from "../model/UserProfile";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 import { findTransaction } from "./sequelize/utils/findTransaction";
 import { transaction } from "./sequelize/utils/transaction";
 import { UserGradingRepo } from "./UserGradingRepo";
+import { UserGuardianRepo } from "./UserGuardianRepo";
 
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
@@ -15,6 +18,7 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       { model: UserBankAccount, as: "userBankAccount" },
       { model: UserContactOptions, as: "userContactOptions" },
       { model: UserGrading, as: "userGradings" },
+      { model: UserGuardian, as: "userGuardians" },
     ]);
   }
 
@@ -53,17 +57,9 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
         });
       }
 
-      if (entity.userGradings) {
-        // update user profile id
-        entity.userGradings.forEach(
-          (userGrading) => (userGrading.userProfileId = entity.id)
-        );
+      await this.updateUserGradings(entity);
+      await this.updateUserGuardians(entity);
 
-        const userGradingRepo = new UserGradingRepo();
-        await userGradingRepo.synchronize(entity.userGradings, {
-          userProfileId: entity.id,
-        });
-      }
       wasUpdated = updatedRows === 1;
     });
     return wasUpdated;
@@ -84,5 +80,32 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     );
 
     return true;
+  }
+
+  private async updateUserGradings(entity: IUserProfile) {
+    if (entity.userGradings) {
+      this.updateUserProfileId(entity.userGradings, entity.id);
+      const userGradingRepo = new UserGradingRepo();
+      await userGradingRepo.synchronize(entity.userGradings, {
+        userProfileId: entity.id,
+      });
+    }
+  }
+
+  private async updateUserGuardians(entity: IUserProfile) {
+    if (entity.userGuardians) {
+      this.updateUserProfileId(entity.userGuardians, entity.id);
+      const userGuardianRepo = new UserGuardianRepo();
+      await userGuardianRepo.synchronize(entity.userGuardians, {
+        userProfileId: entity.id,
+      });
+    }
+  }
+
+  private updateUserProfileId(
+    entities: IEntityWithUserProfileId[],
+    userProfileId: string
+  ) {
+    entities.forEach((entity) => (entity.userProfileId = userProfileId));
   }
 }

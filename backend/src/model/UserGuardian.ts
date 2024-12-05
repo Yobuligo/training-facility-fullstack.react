@@ -19,7 +19,7 @@ export class UserGuardian extends userGuardian {
   static associate() {
     UserGuardian.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasMany(UserGuardian, {
-      as: "userGuardian",
+      as: "userGuardians",
       foreignKey: {
         allowNull: false,
         name: "userProfileId",

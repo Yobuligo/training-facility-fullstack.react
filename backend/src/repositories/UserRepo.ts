@@ -10,6 +10,7 @@ import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
+import { UserGuardian } from "../model/UserGuardian";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
 import { UserRole } from "../model/UserRole";
@@ -52,10 +53,8 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         include: [
           { model: UserBankAccount, as: "userBankAccount" },
           { model: UserContactOptions, as: "userContactOptions" },
-          {
-            model: UserGrading,
-            as: "userGradings",
-          },
+          { model: UserGrading, as: "userGradings" },
+          { model: UserGuardian, as: "userGuardians" },
         ],
       },
     ]);
