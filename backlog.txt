@@ -416,6 +416,8 @@
 	# Story: Switch can be disabled
 
 - Version 1.12.0-<>.14
+	- Story: Add guardian email in user profile
+	- Story: Second guardian can be added
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
@@ -423,6 +425,7 @@
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
+		- Story: Set "today" as default filter
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
 		- Story: Dashboard can be accessed via route

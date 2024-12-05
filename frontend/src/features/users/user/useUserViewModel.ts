@@ -72,6 +72,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [guardianPhone, setGuardianPhone] = useState(
     userProfile.guardianPhone ?? ""
   );
+  const [guardianEmail, setGuardianEmail] = useState(
+    userProfile.guardianEmail ?? ""
+  );
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
     userProfile.street
@@ -150,6 +153,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setGuardianFirstname(userProfile.guardianFirstname ?? "");
     setGuardianLastname(userProfile.guardianLastname ?? "");
     setGuardianPhone(userProfile.guardianPhone ?? "");
+    setGuardianEmail(userProfile.guardianEmail ?? "");
 
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
@@ -200,6 +204,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.guardianFirstname,
     userProfile.guardianLastname,
     userProfile.guardianPhone,
+    userProfile.guardianEmail,
     userProfile.street,
     userProfile.postalCode,
     userProfile.city,
@@ -475,6 +480,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.guardianFirstname = guardianFirstname;
     userProfile.guardianLastname = guardianLastname;
     userProfile.guardianPhone = guardianPhone;
+    userProfile.guardianEmail = guardianEmail;
 
     updateUserBankAccount();
     updateUserContactOptions();
@@ -627,7 +633,10 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
+    guardianEmail,
     guardianFirstname,
+    guardianLastname,
+    guardianPhone,
     gender,
     genderOptions,
     gradings,
@@ -643,7 +652,6 @@ export const useUserViewModel = (props: IUserProps) => {
     lastInvitedAt,
     lastname,
     lastnameError,
-    guardianLastname,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -667,7 +675,6 @@ export const useUserViewModel = (props: IUserProps) => {
     onToggleIsLocked,
     onValidate,
     phone,
-    guardianPhone,
     postalCode,
     postalCodeError,
     profileDetailsSettings,
@@ -687,6 +694,7 @@ export const useUserViewModel = (props: IUserProps) => {
     setDisplayMode,
     setEmail,
     setFirstname,
+    setGuardianEmail,
     setGuardianFirstname,
     setGuardianLastname,
     setGuardianPhone,

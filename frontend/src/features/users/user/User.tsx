@@ -177,6 +177,16 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setGuardianLastname}
               value={viewModel.guardianLastname}
             />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.guardianEmail)}
+              maxLength={255}
+              onChange={viewModel.setGuardianEmail}
+              value={viewModel.guardianEmail}
+            />
+
             <LabeledInput
               disabled={viewModel.displayMode}
               isOptional={true}

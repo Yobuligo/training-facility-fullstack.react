@@ -5,4 +5,5 @@ export interface IHaveGuardian {
   guardianFirstname?: string;
   guardianLastname?: string;
   guardianPhone?: string;
+  guardianEmail?: string;
 }

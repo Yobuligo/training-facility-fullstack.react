@@ -306,6 +306,7 @@
         "resetPassword": "Passwort zurücksetzen",
         "gradings": "Prüfungen",
         "guardian": "Vormund",
+        "guardianEmail": "Email Vormund",
         "guardianFirstname": "Vorname Vormund",
         "guardianLastname": "Nachname Vormund",
         "guardianPhone": "Telefon Vormund",

@@ -306,6 +306,7 @@
         "resetPassword": "Reset Password",
         "gradings": "Gradings",
         "guardian": "Guardian",
+        "guardianEmail": "Email guardian",
         "guardianFirstname": "Firstname guardian",
         "guardianLastname": "Lastname guardian",
         "guardianPhone": "Phone guardian",
