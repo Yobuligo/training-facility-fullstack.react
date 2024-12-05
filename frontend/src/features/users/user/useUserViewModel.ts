@@ -63,17 +63,17 @@ export const useUserViewModel = (props: IUserProps) => {
   const [phone, setPhone] = useState(userProfile.phone);
 
   // Guardian
-  const [guardianFirstname, setGuardianFirstname] = useState(
-    userProfile.guardianFirstname ?? ""
+  const [guardian1Firstname, setGuardian1Firstname] = useState(
+    userProfile.guardian1Firstname ?? ""
   );
-  const [guardianLastname, setGuardianLastname] = useState(
-    userProfile.guardianLastname ?? ""
+  const [guardian1Lastname, setGuardian1Lastname] = useState(
+    userProfile.guardian1Lastname ?? ""
   );
-  const [guardianPhone, setGuardianPhone] = useState(
-    userProfile.guardianPhone ?? ""
+  const [guardian1Phone, setGuardian1Phone] = useState(
+    userProfile.guardian1Phone ?? ""
   );
-  const [guardianEmail, setGuardianEmail] = useState(
-    userProfile.guardianEmail ?? ""
+  const [guardian1Email, setGuardian1Email] = useState(
+    userProfile.guardian1Email ?? ""
   );
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
@@ -150,10 +150,10 @@ export const useUserViewModel = (props: IUserProps) => {
     setPhone(userProfile.phone);
     setTariff(userProfile.tariff);
 
-    setGuardianFirstname(userProfile.guardianFirstname ?? "");
-    setGuardianLastname(userProfile.guardianLastname ?? "");
-    setGuardianPhone(userProfile.guardianPhone ?? "");
-    setGuardianEmail(userProfile.guardianEmail ?? "");
+    setGuardian1Firstname(userProfile.guardian1Firstname ?? "");
+    setGuardian1Lastname(userProfile.guardian1Lastname ?? "");
+    setGuardian1Phone(userProfile.guardian1Phone ?? "");
+    setGuardian1Email(userProfile.guardian1Email ?? "");
 
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
@@ -201,10 +201,10 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.gender,
     userProfile.phone,
     userProfile.tariff,
-    userProfile.guardianFirstname,
-    userProfile.guardianLastname,
-    userProfile.guardianPhone,
-    userProfile.guardianEmail,
+    userProfile.guardian1Firstname,
+    userProfile.guardian1Lastname,
+    userProfile.guardian1Phone,
+    userProfile.guardian1Email,
     userProfile.street,
     userProfile.postalCode,
     userProfile.city,
@@ -477,10 +477,10 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.isLocked = isLocked;
     props.user.lockedAt = lockedAt;
 
-    userProfile.guardianFirstname = guardianFirstname;
-    userProfile.guardianLastname = guardianLastname;
-    userProfile.guardianPhone = guardianPhone;
-    userProfile.guardianEmail = guardianEmail;
+    userProfile.guardian1Firstname = guardian1Firstname;
+    userProfile.guardian1Lastname = guardian1Lastname;
+    userProfile.guardian1Phone = guardian1Phone;
+    userProfile.guardian1Email = guardian1Email;
 
     updateUserBankAccount();
     updateUserContactOptions();
@@ -633,10 +633,10 @@ export const useUserViewModel = (props: IUserProps) => {
     emailError,
     firstname,
     firstnameError,
-    guardianEmail,
-    guardianFirstname,
-    guardianLastname,
-    guardianPhone,
+    guardian1Email,
+    guardian1Firstname,
+    guardian1Lastname,
+    guardian1Phone,
     gender,
     genderOptions,
     gradings,
@@ -694,10 +694,10 @@ export const useUserViewModel = (props: IUserProps) => {
     setDisplayMode,
     setEmail,
     setFirstname,
-    setGuardianEmail,
-    setGuardianFirstname,
-    setGuardianLastname,
-    setGuardianPhone,
+    setGuardian1Email,
+    setGuardian1Firstname,
+    setGuardian1Lastname,
+    setGuardian1Phone,
     setLastname,
     setGender,
     setIsAdmin,
