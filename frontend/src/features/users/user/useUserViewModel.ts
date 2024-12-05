@@ -63,6 +63,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const [phone, setPhone] = useState(userProfile.phone);
 
   // Guardian
+  const [guardian1Email, setGuardian1Email] = useState(
+    userProfile.guardian1Email ?? ""
+  );
   const [guardian1Firstname, setGuardian1Firstname] = useState(
     userProfile.guardian1Firstname ?? ""
   );
@@ -72,8 +75,18 @@ export const useUserViewModel = (props: IUserProps) => {
   const [guardian1Phone, setGuardian1Phone] = useState(
     userProfile.guardian1Phone ?? ""
   );
-  const [guardian1Email, setGuardian1Email] = useState(
-    userProfile.guardian1Email ?? ""
+
+  const [guardian2Email, setGuardian2Email] = useState(
+    userProfile.guardian2Email ?? ""
+  );
+  const [guardian2Firstname, setGuardian2Firstname] = useState(
+    userProfile.guardian2Firstname ?? ""
+  );
+  const [guardian2Lastname, setGuardian2Lastname] = useState(
+    userProfile.guardian2Lastname ?? ""
+  );
+  const [guardian2Phone, setGuardian2Phone] = useState(
+    userProfile.guardian2Phone ?? ""
   );
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
@@ -154,6 +167,10 @@ export const useUserViewModel = (props: IUserProps) => {
     setGuardian1Lastname(userProfile.guardian1Lastname ?? "");
     setGuardian1Phone(userProfile.guardian1Phone ?? "");
     setGuardian1Email(userProfile.guardian1Email ?? "");
+    setGuardian2Firstname(userProfile.guardian2Firstname ?? "");
+    setGuardian2Lastname(userProfile.guardian2Lastname ?? "");
+    setGuardian2Phone(userProfile.guardian2Phone ?? "");
+    setGuardian2Email(userProfile.guardian2Email ?? "");
 
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
@@ -205,6 +222,10 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.guardian1Lastname,
     userProfile.guardian1Phone,
     userProfile.guardian1Email,
+    userProfile.guardian2Firstname,
+    userProfile.guardian2Lastname,
+    userProfile.guardian2Phone,
+    userProfile.guardian2Email,
     userProfile.street,
     userProfile.postalCode,
     userProfile.city,
@@ -481,6 +502,10 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.guardian1Lastname = guardian1Lastname;
     userProfile.guardian1Phone = guardian1Phone;
     userProfile.guardian1Email = guardian1Email;
+    userProfile.guardian2Firstname = guardian2Firstname;
+    userProfile.guardian2Lastname = guardian2Lastname;
+    userProfile.guardian2Phone = guardian2Phone;
+    userProfile.guardian2Email = guardian2Email;
 
     updateUserBankAccount();
     updateUserContactOptions();
@@ -637,6 +662,10 @@ export const useUserViewModel = (props: IUserProps) => {
     guardian1Firstname,
     guardian1Lastname,
     guardian1Phone,
+    guardian2Email,
+    guardian2Firstname,
+    guardian2Lastname,
+    guardian2Phone,
     gender,
     genderOptions,
     gradings,
@@ -698,6 +727,10 @@ export const useUserViewModel = (props: IUserProps) => {
     setGuardian1Firstname,
     setGuardian1Lastname,
     setGuardian1Phone,
+    setGuardian2Email,
+    setGuardian2Firstname,
+    setGuardian2Lastname,
+    setGuardian2Phone,
     setLastname,
     setGender,
     setIsAdmin,

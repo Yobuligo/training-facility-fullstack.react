@@ -195,6 +195,42 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setGuardian1Phone}
               value={viewModel.guardian1Phone}
             />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.guardian2Firstname)}
+              maxLength={50}
+              onChange={viewModel.setGuardian2Firstname}
+              value={viewModel.guardian2Firstname}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.guardian2Lastname)}
+              maxLength={50}
+              onChange={viewModel.setGuardian2Lastname}
+              value={viewModel.guardian2Lastname}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.guardian2Email)}
+              maxLength={255}
+              onChange={viewModel.setGuardian2Email}
+              value={viewModel.guardian2Email}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.guardian2Phone)}
+              maxLength={20}
+              onChange={viewModel.setGuardian2Phone}
+              value={viewModel.guardian2Phone}
+            />
           </UserProfileGroup>
         )}
 
