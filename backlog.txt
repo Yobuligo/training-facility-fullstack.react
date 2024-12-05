@@ -418,6 +418,8 @@
 - Version 1.12.0-<>.14
 	- Story: Add guardian email in user profile
 	- Story: Second guardian can be added
+		- Introduce new entity IUserGuardian
+		- Remove interface IHaveGuardian
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account
