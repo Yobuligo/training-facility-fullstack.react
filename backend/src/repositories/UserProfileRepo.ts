@@ -1,3 +1,4 @@
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IEntityWithUserProfileId } from "../model/types/IEntityWithUserProfileId";
 import { UserBankAccount } from "../model/UserBankAccount";
@@ -37,6 +38,29 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       transaction: findTransaction(),
     });
     return data?.toJSON();
+  }
+
+  insert<K extends keyof IUserProfile>(
+    entity: IEntityDetails<IUserProfile>,
+    fields: K[]
+  ): Promise<IEntitySubset<IUserProfile, K>>;
+  insert(entity: IEntityDetails<IUserProfile>): Promise<IUserProfile>;
+  async insert(
+    entity: IEntityDetails<IUserProfile>,
+    fields?: unknown
+  ): Promise<IUserProfile> {
+    if (fields) {
+      const userProfile = await super.insert(
+        entity,
+        fields as (keyof IUserProfile)[]
+      );
+      this.insertUserProfileRelations(userProfile.id, entity);
+      return userProfile;
+    } else {
+      const userProfile = await super.insert(entity);
+      this.insertUserProfileRelations(userProfile.id, entity);
+      return userProfile;
+    }
   }
 
   async update(entity: IUserProfile): Promise<boolean> {
@@ -80,6 +104,31 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
     );
 
     return true;
+  }
+
+  private async insertUserProfileRelations(
+    userProfileId: string,
+    entity: IEntityDetails<IUserProfile>
+  ) {
+    if (entity.userBankAccount) {
+      entity.userBankAccount.userProfileId = userProfileId;
+      await UserBankAccount.upsert(entity.userBankAccount, {
+        transaction: findTransaction(),
+      });
+    }
+
+    if (entity.userContactOptions) {
+      entity.userContactOptions.userProfileId = userProfileId;
+      await UserContactOptions.upsert(entity.userContactOptions, {
+        transaction: findTransaction(),
+      });
+    }
+
+    if (entity.userGradings) {
+    }
+
+    if (entity.userGuardians) {
+    }
   }
 
   private async updateUserGradings(entity: IUserProfile) {
