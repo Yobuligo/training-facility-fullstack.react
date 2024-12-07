@@ -532,15 +532,6 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.isLocked = isLocked;
     props.user.lockedAt = lockedAt;
 
-    userProfile.guardian1Firstname = guardian1Firstname;
-    userProfile.guardian1Lastname = guardian1Lastname;
-    userProfile.guardian1Phone = guardian1Phone;
-    userProfile.guardian1Email = guardian1Email;
-    userProfile.guardian2Firstname = guardian2Firstname;
-    userProfile.guardian2Lastname = guardian2Lastname;
-    userProfile.guardian2Phone = guardian2Phone;
-    userProfile.guardian2Email = guardian2Email;
-
     updateUserGuardians();
     updateUserBankAccount();
     updateUserContactOptions();

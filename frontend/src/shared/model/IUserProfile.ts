@@ -2,7 +2,6 @@ import { IEntity } from "../../core/api/types/IEntity";
 import { IHaveUserId } from "../../core/api/types/IHaveUserId";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 import { Gender } from "../types/Gender";
-import { IHaveGuardian } from "../types/IHaveGuardian";
 import { IHaveName } from "../types/IHaveName";
 import { Tariff } from "../types/Tariff";
 import { IUserBankAccount } from "./IUserBankAccount";
@@ -10,11 +9,7 @@ import { IUserContactOptions } from "./IUserContactOptions";
 import { IUserGrading } from "./IUserGrading";
 import { IUserGuardian } from "./IUserGuardian";
 
-export interface IUserProfile
-  extends IEntity,
-    IHaveUserId,
-    IHaveName,
-    IHaveGuardian {
+export interface IUserProfile extends IEntity, IHaveUserId, IHaveName {
   memberId: number;
   gender: Gender;
   birthday?: Date;
