@@ -20,6 +20,7 @@ import { DummyUser } from "../../../model/DummyUser";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
+import { IUserGuardian } from "../../../shared/model/IUserGuardian";
 import { AuthRole } from "../../../shared/types/AuthRole";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
@@ -28,6 +29,7 @@ import { uuid } from "../../../utils/uuid";
 import { useSendPasswordResetRequest } from "../hooks/useSendPasswordResetRequest";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
 import { IUserProps } from "./IUserProps";
+import { updateUserGuardian } from "./updateUserGuardian";
 
 export const useUserViewModel = (props: IUserProps) => {
   const { t } = useTranslation();
@@ -63,30 +65,32 @@ export const useUserViewModel = (props: IUserProps) => {
   const [phone, setPhone] = useState(userProfile.phone);
 
   // Guardian
+  const userGuardian1 = userProfile.userGuardians?.[0];
   const [guardian1Email, setGuardian1Email] = useState(
-    userProfile.guardian1Email ?? ""
+    userGuardian1?.email ?? ""
   );
   const [guardian1Firstname, setGuardian1Firstname] = useState(
-    userProfile.guardian1Firstname ?? ""
+    userGuardian1?.firstname ?? ""
   );
   const [guardian1Lastname, setGuardian1Lastname] = useState(
-    userProfile.guardian1Lastname ?? ""
+    userGuardian1?.lastname ?? ""
   );
   const [guardian1Phone, setGuardian1Phone] = useState(
-    userProfile.guardian1Phone ?? ""
+    userGuardian1?.phone ?? ""
   );
 
+  const userGuardian2 = userProfile.userGuardians?.[1];
   const [guardian2Email, setGuardian2Email] = useState(
-    userProfile.guardian2Email ?? ""
+    userGuardian2?.email ?? ""
   );
   const [guardian2Firstname, setGuardian2Firstname] = useState(
-    userProfile.guardian2Firstname ?? ""
+    userGuardian2?.firstname ?? ""
   );
   const [guardian2Lastname, setGuardian2Lastname] = useState(
-    userProfile.guardian2Lastname ?? ""
+    userGuardian2?.lastname ?? ""
   );
   const [guardian2Phone, setGuardian2Phone] = useState(
-    userProfile.guardian2Phone ?? ""
+    userGuardian2?.phone ?? ""
   );
 
   const [street, setStreet, streetError, setStreetError] = useLabeledElement(
@@ -163,14 +167,14 @@ export const useUserViewModel = (props: IUserProps) => {
     setPhone(userProfile.phone);
     setTariff(userProfile.tariff);
 
-    setGuardian1Firstname(userProfile.guardian1Firstname ?? "");
-    setGuardian1Lastname(userProfile.guardian1Lastname ?? "");
-    setGuardian1Phone(userProfile.guardian1Phone ?? "");
-    setGuardian1Email(userProfile.guardian1Email ?? "");
-    setGuardian2Firstname(userProfile.guardian2Firstname ?? "");
-    setGuardian2Lastname(userProfile.guardian2Lastname ?? "");
-    setGuardian2Phone(userProfile.guardian2Phone ?? "");
-    setGuardian2Email(userProfile.guardian2Email ?? "");
+    setGuardian1Email(userGuardian1?.email ?? "");
+    setGuardian1Firstname(userGuardian1?.firstname ?? "");
+    setGuardian1Lastname(userGuardian1?.lastname ?? "");
+    setGuardian1Phone(userGuardian1?.phone ?? "");
+    setGuardian2Firstname(userGuardian2?.firstname ?? "");
+    setGuardian2Lastname(userGuardian2?.firstname ?? "");
+    setGuardian2Phone(userGuardian2?.phone ?? "");
+    setGuardian2Email(userGuardian2?.email ?? "");
 
     setStreet(userProfile.street);
     setPostalCode(userProfile.postalCode);
@@ -218,14 +222,6 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.gender,
     userProfile.phone,
     userProfile.tariff,
-    userProfile.guardian1Firstname,
-    userProfile.guardian1Lastname,
-    userProfile.guardian1Phone,
-    userProfile.guardian1Email,
-    userProfile.guardian2Firstname,
-    userProfile.guardian2Lastname,
-    userProfile.guardian2Phone,
-    userProfile.guardian2Email,
     userProfile.street,
     userProfile.postalCode,
     userProfile.city,
@@ -243,6 +239,13 @@ export const useUserViewModel = (props: IUserProps) => {
     props.user.lockedAt,
     setFirstname,
     setLastname,
+    userGuardian1?.email,
+    userGuardian1?.firstname,
+    userGuardian1?.lastname,
+    userGuardian1?.phone,
+    userGuardian2?.firstname,
+    userGuardian2?.phone,
+    userGuardian2?.email,
     setStreet,
     setPostalCode,
     setCity,
@@ -453,6 +456,37 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userContactOptions.whatsApp = contactOptionWhatsApp;
   };
 
+  /**
+   * This function is responsible for updating the userGuardians of the current user.
+   * Sets an empty user guardian list if no user guardian values was set
+   * or updates or inserts a user guardian and update the userProfile.
+   */
+  const updateUserGuardians = () => {
+    const userGuardians: IUserGuardian[] = [];
+
+    updateUserGuardian(
+      userGuardians,
+      userProfile.id,
+      guardian1Email,
+      guardian1Firstname,
+      guardian1Lastname,
+      guardian1Phone,
+      userGuardian1
+    );
+
+    updateUserGuardian(
+      userGuardians,
+      userProfile.id,
+      guardian2Email,
+      guardian2Firstname,
+      guardian2Lastname,
+      guardian2Phone,
+      userGuardian2
+    );
+
+    userProfile.userGuardians = userGuardians;
+  };
+
   const updateUserRole = (role: AuthRole, hasRole: boolean) => {
     // find role index
     const index = userRoles.findIndex((userRole) => userRole.role === role);
@@ -507,6 +541,7 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.guardian2Phone = guardian2Phone;
     userProfile.guardian2Email = guardian2Email;
 
+    updateUserGuardians();
     updateUserBankAccount();
     updateUserContactOptions();
     updateUserRoles();

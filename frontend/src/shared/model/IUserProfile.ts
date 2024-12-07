@@ -30,7 +30,7 @@ export interface IUserProfile
   userBankAccount?: IUserBankAccount;
   userContactOptions?: IUserContactOptions;
   userGradings?: IUserGrading[];
-  userGuardians?: IUserGuardian;
+  userGuardians?: IUserGuardian[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };

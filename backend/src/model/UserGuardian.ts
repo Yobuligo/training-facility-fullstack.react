@@ -9,10 +9,10 @@ const userGuardian: ModelStatic<
   Model<IUserGuardian, IEntityDetails<IUserGuardian>>
 > = db.define("user-guardians", {
   id: createIdType(),
-  guardianEmail: { allowNull: true, type: DataTypes.STRING(255) },
-  guardianFirstname: { allowNull: true, type: DataTypes.STRING(50) },
-  guardianLastname: { allowNull: true, type: DataTypes.STRING(50) },
-  guardianPhone: { allowNull: true, type: DataTypes.STRING(20) },
+  email: { allowNull: true, type: DataTypes.STRING(255) },
+  firstname: { allowNull: true, type: DataTypes.STRING(50) },
+  lastname: { allowNull: true, type: DataTypes.STRING(50) },
+  phone: { allowNull: true, type: DataTypes.STRING(20) },
 });
 
 export class UserGuardian extends userGuardian {
