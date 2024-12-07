@@ -77,6 +77,10 @@ export abstract class SequelizeRepository<TEntity extends IEntity>
     return this.toJson(data, fields);
   }
 
+  /**
+   * This method is responsible for synchronizing related data of a sequelize model.
+   * This means to add new entries, deleted obsolete and update existing entries.
+   */
   async synchronize(
     entities: TEntity[],
     where: WhereOptions<TEntity>

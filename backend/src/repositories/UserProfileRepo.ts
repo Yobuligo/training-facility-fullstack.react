@@ -6,6 +6,8 @@ import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
 import { UserGuardian } from "../model/UserGuardian";
 import { UserProfile } from "../model/UserProfile";
+import { IUserGrading } from "../shared/model/IUserGrading";
+import { IUserGuardian } from "../shared/model/IUserGuardian";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 import { findTransaction } from "./sequelize/utils/findTransaction";
@@ -81,8 +83,8 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
         });
       }
 
-      await this.updateUserGradings(entity);
-      await this.updateUserGuardians(entity);
+      await this.synchronizeUserGradings(entity.id, entity.userGradings);
+      await this.synchronizeGuardians(entity.id, entity.userGuardians);
 
       wasUpdated = updatedRows === 1;
     });
@@ -112,42 +114,42 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   ) {
     if (entity.userBankAccount) {
       entity.userBankAccount.userProfileId = userProfileId;
-      await UserBankAccount.upsert(entity.userBankAccount, {
-        transaction: findTransaction(),
-      });
+      await UserBankAccount.upsert(entity.userBankAccount);
     }
 
     if (entity.userContactOptions) {
       entity.userContactOptions.userProfileId = userProfileId;
-      await UserContactOptions.upsert(entity.userContactOptions, {
-        transaction: findTransaction(),
-      });
+      await UserContactOptions.upsert(entity.userContactOptions);
     }
 
     if (entity.userGradings) {
+      await this.synchronizeUserGradings(userProfileId, entity.userGradings);
     }
 
     if (entity.userGuardians) {
+      await this.synchronizeGuardians(userProfileId, entity.userGuardians);
     }
   }
 
-  private async updateUserGradings(entity: IUserProfile) {
-    if (entity.userGradings) {
-      this.updateUserProfileId(entity.userGradings, entity.id);
+  private async synchronizeUserGradings(
+    userProfileId: string,
+    userGradings?: IUserGrading[]
+  ) {
+    if (userGradings) {
+      this.updateUserProfileId(userGradings, userProfileId);
       const userGradingRepo = new UserGradingRepo();
-      await userGradingRepo.synchronize(entity.userGradings, {
-        userProfileId: entity.id,
-      });
+      await userGradingRepo.synchronize(userGradings, { userProfileId });
     }
   }
 
-  private async updateUserGuardians(entity: IUserProfile) {
-    if (entity.userGuardians) {
-      this.updateUserProfileId(entity.userGuardians, entity.id);
+  private async synchronizeGuardians(
+    userProfileId: string,
+    userGuardians?: IUserGuardian[]
+  ) {
+    if (userGuardians) {
+      this.updateUserProfileId(userGuardians, userProfileId);
       const userGuardianRepo = new UserGuardianRepo();
-      await userGuardianRepo.synchronize(entity.userGuardians, {
-        userProfileId: entity.id,
-      });
+      await userGuardianRepo.synchronize(userGuardians, { userProfileId });
     }
   }
 
