@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -105,6 +106,11 @@ export const useUserProfileSectionViewModel = () => {
     loadUserRequest(async () => {
       const userApi = new UserApi();
       const user = await userApi.findById(userShort.id);
+
+      // sort user guardians by createdAt to display first created at the top
+      user?.userProfile?.userGuardians?.sort((left, right) =>
+        DateTime.compare(left.createdAt, right.createdAt)
+      );
       setSelectedUser(user);
     });
 

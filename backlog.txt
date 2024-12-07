@@ -420,6 +420,7 @@
 	- Story: Second guardian can be added
 		- Introduce new entity IUserGuardian
 		- Remove interface IHaveGuardian
+		- 
 	- Bug: UserGradings are not persisted when adding them to a transient user profile
 
 - Backlog
