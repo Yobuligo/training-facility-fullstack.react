@@ -14,7 +14,7 @@ import { calendarEventCreator } from "./calendarEventCreator";
 export const useEventCalendarSectionViewModel = (
   props: IEventCalendarSectionProps
 ) => {
-  const [view, setView] = useState<View>("week");
+  const [view, setView] = useState<View>("day");
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
   const [dateTimeSpanFilter] = useDateTimeSpanFilter();
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
