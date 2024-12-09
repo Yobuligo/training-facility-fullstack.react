@@ -416,12 +416,11 @@
 	# Story: Switch can be disabled
 
 - Version 1.12.0-<>.14
-	- Story: Add guardian email in user profile
-	- Story: Second guardian can be added
-		- Introduce new entity IUserGuardian
-		- Remove interface IHaveGuardian
-		- 
-	- Bug: UserGradings are not persisted when adding them to a transient user profile
+	# Story: Add guardian email in user profile
+	# Story: Second guardian can be added
+		# Introduce new entity IUserGuardian
+		# Remove interface IHaveGuardian
+	# Bug: Related entities are not persisted when adding them to a transient user profile
 
 - Backlog
 	- Story: Sent mails must create an email at the send mail folder of the mail account

@@ -16,8 +16,8 @@ export const App: React.FC = () => {
   const [user, setUser] = useState<IUserInternal | undefined>(undefined);
   const [toasts, setToasts] = useState<IToast[]>([]);
   const [dateTimeSpanFilter, setDateTimeSpanFilter] = useState<IDateTimeSpan>({
-    from: DateTime.getWeekStartDate(new Date()),
-    to: DateTime.getWeekEndDate(new Date()),
+    from: DateTime.getDayStartDate(new Date()),
+    to: DateTime.getDayEndDate(new Date()),
   });
 
   return (
