@@ -420,15 +420,19 @@
 	# Story: Second guardian can be added
 		# Introduce new entity IUserGuardian
 		# Remove interface IHaveGuardian
-	# Bug: Related entities are not persisted when adding them to a transient user profile
+	# Bug: Related entities are not persisted when adding them to a transient user profile	
+	# Story: Set current day as default filter
 
 - Backlog
+	- Bug: Not the whole screen is displayed on smaller devices
+	- Bug: Wrong message when resetting a password with no special characters
+		- Request to reset password. Enter password without special characters and click reset. Wrong message is displayed.
+	- Story: App must run in production with node and not nodemon
 	- Story: Sent mails must create an email at the send mail folder of the mail account
 	- Story: Write first test
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
-		- Story: Set "today" as default filter
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
 		- Story: Dashboard can be accessed via route
