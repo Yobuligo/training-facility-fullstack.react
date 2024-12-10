@@ -2,9 +2,9 @@ import { error } from "./core/utils/error";
 
 export const AppConfig = {
   build: {
-    version: "1.11.0",
-    date: "20241129",
-    number: 13,
+    version: "1.12.0",
+    date: "20241210",
+    number: 14,
   },
   defaultDateTimeSpanFilter: "day", // supported values day or week
   HOST:
