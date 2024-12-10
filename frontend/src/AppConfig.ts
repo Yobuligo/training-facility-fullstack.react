@@ -6,7 +6,7 @@ export const AppConfig = {
     date: "20241129",
     number: 13,
   },
-  defaultDateTimeSpanFilter: "day",
+  defaultDateTimeSpanFilter: "day", // supported values day or week
   HOST:
     process.env.REACT_APP_BACKEND_HOST ??
     error(`Error while getting host information from environment variables`),
