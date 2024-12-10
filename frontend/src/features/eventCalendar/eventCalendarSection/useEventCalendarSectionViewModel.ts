@@ -5,7 +5,9 @@ import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
 import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
+import { SP } from "../../../lib/serviceProvider/ServiceProvider";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { DateTimeSpanFilter } from "../../../services/DateTimeSpanFilter";
 import { EventFactory } from "../../../services/EventFactory";
 import { ICalendarEvent } from "./../model/ICalendarEvent";
 import { IEventCalendarSectionProps } from "./IEventCalendarSectionProps";
@@ -14,7 +16,7 @@ import { calendarEventCreator } from "./calendarEventCreator";
 export const useEventCalendarSectionViewModel = (
   props: IEventCalendarSectionProps
 ) => {
-  const [view, setView] = useState<View>("day");
+  const [view, setView] = useState<View>(SP.fetch(DateTimeSpanFilter).view);
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
   const [dateTimeSpanFilter] = useDateTimeSpanFilter();
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);

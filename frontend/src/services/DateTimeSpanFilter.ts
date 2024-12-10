@@ -4,6 +4,10 @@ import { NotSupportedError } from "../core/errors/NotSupportedError";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpanFilter } from "./IDateTimeSpanFilter";
 
+/**
+ * This service is responsible for providing the default values for the date time span filter.
+ * It is used to define the default *from* and *to* value depending on the big calendar *view*, which might be *day* or *week*.
+ */
 export class DateTimeSpanFilter implements IDateTimeSpanFilter {
   get from(): Date {
     switch (this.deriveViewFromConfig()) {
