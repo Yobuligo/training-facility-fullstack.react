@@ -7,7 +7,7 @@
     "compile": "tsc",
     "deploy": "docker build -t hoffmannpeter82/yeoljeong-backend:latest . && docker push hoffmannpeter82/yeoljeong-backend:latest",
     "start": "nodemon ./dist/app.js",
-    "test": "mocha ./dist/tests/**/*.js"
+    "test": "mocha --require ts-node/register 'tests/**/*.test.ts'"
   },
   "author": "",
   "license": "ISC",
@@ -23,14 +23,21 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.20",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
+    "@types/mocha": "^10.0.10",
     "@types/nodemailer": "^6.4.15",
     "@types/nodemon": "^1.19.6",
     "@types/sequelize": "^4.28.20",
+    "@types/sinon": "^17.0.3",
     "@types/uuid": "^10.0.0",
+    "chai": "^4.5.0",
     "connect-session-sequelize": "^7.1.7",
-    "nodemon": "^3.1.4"
+    "mocha": "^11.0.1",
+    "nodemon": "^3.1.4",
+    "sinon": "^19.0.2",
+    "ts-node": "^10.9.2"
   }
 }
