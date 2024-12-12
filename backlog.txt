@@ -446,13 +446,13 @@
 			- Link must not be opened with missing authorities
 		- Story: Gradings can be accessed via route
 		- Story: Profile can be accessed via route
+	- Epic: Data backup
 	- Story: Increase size of back button in DetailView component
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.
 	- Epic: Version details
 	- Epic: Documentation
 		- Story: Write documentation for deployment
-	- Epic: Data backup
 	- Story: Increase expiration time of session
 	- Epic: Courses and seminar history
 		- Story: Courses can be displayed in user profile
@@ -461,7 +461,7 @@
 	- Story: Inform users who are registered for a training that will be called off
 	- Epic: Performance
 		- Story: Admin tabs are loaded asynchronously
-		- Story: table userTrialTraining needs an index on email	
+		- Story: table userTrialTraining needs an index on email
 	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Story: Display income per month
 		- Story: Display customer development
@@ -474,8 +474,9 @@
 			- for a specific person
 		- Story: Display number training sessions of a user for himself
 	- Epic: Statistic for user
-		- Story: Display last training of user in user profile
-		- Story: Display number training session of a user per week, month, year, max
+		- Story: Display last participated training of an user in user profile
+			- Select last training when the user was checked in or joined as trainer
+		- Story: Display number training sessions of a user per week, month, year, max
 	- Epic: Exercise compendium
 	- Bug: From value of a DateTimeSpan must not be lower than to value 
 	- Story: Check all ui endpoints and delete which are not required anymore
