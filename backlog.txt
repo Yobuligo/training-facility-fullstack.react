@@ -424,36 +424,68 @@
 	# Story: Set current day as default filter
 
 - Version 1.13.0-<>.15
+	# Story: Increase expiration time of session
+	- Epic: TabStrip Routes
+		- Explanation: Tabs of the TabStrip must be accessible via route
+		- Story: Dashboard can be accessed via route
+			- Link is /
+		- Story: User list can be accessed via route
+			- Link is /users
+			- Link must not be opened with missing authorities
+		- Story: User list can be accessed via route
+			- Link is /users/:id
+			- Link must not be opened with missing authorities			
+		- Story: Planer can be accessed via route
+			- Link is /planer
+			- Link must not be opened with missing authorities
+		- Story: Event definition can be accessed via route			
+			- Link is /planer/:id
+			- Link must not be opened with missing authorities
+		- Story: Trainings can be accessed via route
+			- Link is /trainings
+			- Link must not be opened with missing authorities
+		- Story: Event instances can be accessed via route
+			- Link is /trainings/:id
+			- Link must not be opened with missing authorities
+		- Story: Correct route /event-instance-registration/:eventInstanceId
+			- Route must fit the new pattern. Link is /trainings/:id/registration
+		- Story: Gradings can be accessed via route
+			- Link is /gradings
+		- Story: Profile can be accessed via route
+			- Link is /profile
 
 - Backlog
 	- Bug: Not the whole screen is displayed on smaller devices
-	- Story: App must run in production with node and not nodemon
+	- Bug: Canceled trainings must not be displayed at the home screen anymore
+		- has to be discussed, as it is an indicator for students to see if a training was canceled, where I joined
+		- maybe it makes sense to hide trainings where I join as trainer
+	- Bug: Birthday of Charlotte was not displayed at the 05.01.2025
+	- Story: Navigate to training from home screen
+		- The training details are displayed when clicking a training at the home screen
+		- The home screen will be displayed again when navigating back	
+	- Story: Refactor DateTimeSpanFilter
+		- It is possible to switch between the span types day, week, month, custom (Zeitraum in german).
+		- The values of the span types day, week, month can be changed forward or backward and the current value or range is displayed. E.g. < 06.01.2025 - 12.01.2025 >
+		- The from and to values of the custom type can be changed manually. So the display is different from the other span types.	
+	- Epic: User list filter
+		- Users can be filtered by tariff 
+	- Story: Group contract details in user information in a separate collapsible
+		- Tariff, joined At, resigned At
+	- Story: Add field "client reference" to user profile (must not contain Umlaute)
+	- Epic: Shipped artifact
+		- Story: App must run in production with node and not nodemon
+		- Story: Restrict shipped code to those which is required (currently we get the source code and the transpiled code, all environment variables, etc.)
 	- Story: Sent mails must create an email at the send mail folder of the mail account
 	- Story: Write first test
 	- Epic: Improved app transparency
 		- Story: Display number of displayed trainings in event definition list depending on the selected filter
 		- Story: Display number of displayed trainings in event instance list depending on the selected filter
-	- Epic: TabStrip Routes
-		- Explanation: Tabs of the TabStrip must be accessible via route
-		- Story: Dashboard can be accessed via route
-		- Story: Planer can be accessed via route
-			- Link must not be opened with missing authorities
-		- Story: Event definition can be accessed via route
-			- Link must not be opened with missing authorities
-		- Story: Trainings can be accessed via route
-			- Link must not be opened with missing authorities
-		- Story: Event instances can be accessed via route
-			- Link must not be opened with missing authorities
-		- Story: Gradings can be accessed via route
-		- Story: Profile can be accessed via route
 	- Epic: Data backup
 	- Story: Increase size of back button in DetailView component
 	- Epic: Password reset function
 		- Story: A user can request to reset a password by himself.
-	- Epic: Version details
 	- Epic: Documentation
 		- Story: Write documentation for deployment
-	- Story: Increase expiration time of session
 	- Epic: Courses and seminar history
 		- Story: Courses can be displayed in user profile
 	- Story: Display check icon when booking a trial training and cancelling it to visualize it to the user
@@ -465,18 +497,23 @@
 	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Story: Display income per month
 		- Story: Display customer development
-			- Display number of all active customers
-			- Display number of new customers
-			- Display number of quit customers
+			- Display number of all active customers (week, month, year, max)
+			- Display number of new customers (week, month, year, max)
+			- Display number of quit customers (week, month, year, max)
+			- Display pie chart with number of students by tariff
 		- Story: Display number registrations for training sessions
+			- Display number of joinings (week, month, year, max)
+				- E.g. to derive that there are less participants at summer holidays
 			- for a specific class (children, beginners)
 			- overall
 			- for a specific person
-		- Story: Display number training sessions of a user for himself
+		- Story: Display number training sessions of a user for himself (week, month, year, max)
+			- Participation at a training means to join as trainer or student
 	- Epic: Statistic for user
 		- Story: Display last participated training of an user in user profile
 			- Select last training when the user was checked in or joined as trainer
 		- Story: Display number training sessions of a user per week, month, year, max
+	- Epic: Messenger (Chat)
 	- Epic: Exercise compendium
 	- Bug: From value of a DateTimeSpan must not be lower than to value 
 	- Story: Check all ui endpoints and delete which are not required anymore
