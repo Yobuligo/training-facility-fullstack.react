@@ -1,8 +1,8 @@
 import { ITabItem } from "./ITabItem";
 
-export interface ITabStripProps {
+export interface ITabStripProps<T extends ITabItem> {
   className?: string;
-  onSelect?: (tabItem: ITabItem, index: number) => void;
+  onSelect?: (tabItem: T, index: number) => void;
   selected: number;
-  tabItems: ITabItem[];
+  tabItems: T[];
 }

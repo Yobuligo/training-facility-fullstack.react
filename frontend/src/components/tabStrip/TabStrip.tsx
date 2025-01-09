@@ -1,9 +1,10 @@
 import { style } from "../../core/ui/style";
 import { TabItem } from "../tabItem/TabItem";
+import { ITabItem } from "./ITabItem";
 import { ITabStripProps } from "./ITabStripProps";
 import styles from "./TabStrip.module.scss";
 
-export const TabStrip: React.FC<ITabStripProps> = (props) => {
+export function TabStrip<T extends ITabItem>(props: ITabStripProps<T>) {
   const items = props.tabItems.map((tabItem, index) => (
     <TabItem
       key={index}
@@ -16,4 +17,4 @@ export const TabStrip: React.FC<ITabStripProps> = (props) => {
   return (
     <header className={style(styles.header, props.className)}>{items}</header>
   );
-};
+}

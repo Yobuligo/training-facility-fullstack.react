@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Clock } from "../../../assets/clock.svg";
 import { ReactComponent as Grading } from "../../../assets/grading.svg";
 import { ReactComponent as Profile } from "../../../assets/profile.svg";
@@ -24,6 +25,7 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   const [selected, setSelected] = useState(-1);
   const auth = useAuth();
   const { isSmall } = useScreenSize();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (props.displayWelcomeSignal) {
@@ -32,6 +34,8 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   }, [props.displayWelcomeSignal]);
 
   const onSelect = (index: number): void => setSelected(index);
+
+  const onSelectNew = (index: number): void => {};
 
   const getTabItems = (): ITabItem[] => {
     const tabItems: ITabItem[] = [];
