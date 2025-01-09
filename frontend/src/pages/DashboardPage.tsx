@@ -1,5 +1,5 @@
 import { ProtectedPage } from "../components/pages/protectedPage/ProtectedPage";
-import { Dashboard } from "../features/dashboard/Dashboard";
+import { Dashboard } from "../features/dashboard/dashboard/Dashboard";
 import { useSignal } from "../hooks/useSignal";
 
 export const DashboardPage: React.FC = () => {

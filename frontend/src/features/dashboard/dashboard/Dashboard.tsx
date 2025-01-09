@@ -1,7 +1,8 @@
-import { BurgerMenu } from "../../components/burgerMenu/BurgerMenu";
-import { TabStrip } from "../../components/tabStrip/TabStrip";
-import { TabStripContent } from "../../components/tabStripContent/TabStripContent";
-import { style } from "../../core/ui/style";
+import { Outlet } from "react-router-dom";
+import { BurgerMenu } from "../../../components/burgerMenu/BurgerMenu";
+import { TabStrip } from "../../../components/tabStrip/TabStrip";
+import { TabStripContent } from "../../../components/tabStripContent/TabStripContent";
+import { style } from "../../../core/ui/style";
 import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
 import { useDashboardViewModel } from "./useDashboardViewModel";
@@ -33,6 +34,10 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
           tabItems={viewModel.tabItems}
         />
       )}
+
+      {/* Used to display the TabStrip content */}
+      <Outlet />
+
       <TabStripContent
         children={
           <div className={styles.dashboardContent}>{viewModel.content}</div>
