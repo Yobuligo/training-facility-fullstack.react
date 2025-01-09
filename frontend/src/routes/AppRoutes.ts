@@ -14,6 +14,7 @@ export const AppRoutes = configureRoutes({
 
   dashboard: route("/"),
   users: route("/users"),
+  user: route("/users/:id"),
   planers: route("/planers"),
   planer: route("/planers/:id"),
   trainings: route("/trainings"),
