@@ -9,7 +9,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { UserInvitePage } from "../pages/UserInvitePage";
 import { AppRoutes } from "./AppRoutes";
 import { EventInstanceRegistrationPage } from "../pages/EventInstanceRegistrationPage";
-import { DashboardItem } from "../features/dashboard/dashboardItem/DashboardItem";
+import { DashboardContent } from "../features/dashboard/dashboardContent/DashboardContent";
 
 export const AppRouter = createBrowserRouter([
   { path: AppRoutes.error.origin, element: <ErrorPage /> },
@@ -28,7 +28,7 @@ export const AppRouter = createBrowserRouter([
     element: <DashboardPage />,
     errorElement: <ErrorPage />,
     children: [{
-      path: ":itemId",element: <DashboardItem />
+      path: ":itemId",element: <DashboardContent />
     }]
   },
   {
