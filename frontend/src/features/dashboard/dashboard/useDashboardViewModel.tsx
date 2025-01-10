@@ -3,14 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { IItem } from "../../../core/types/IItem";
 import { useAuth } from "../../../hooks/useAuth";
 import { useScreenSize } from "../../../hooks/useScreenSize";
-import { useTranslation } from "../../../lib/translation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { useDashboardContent } from "../dashboardContentItem/useDashboardContent";
 import { IDashboardProps } from "./IDashboardProps";
 import { IDashboardTabItem } from "./IDashboardTabItem";
 
 export const useDashboardViewModel = (props: IDashboardProps) => {
-  const { t } = useTranslation();
   const [selected, setSelected] = useState(-1);
   const auth = useAuth();
   const { isSmall } = useScreenSize();
@@ -37,7 +35,11 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   const getTabItems = (): IDashboardTabItem[] => {
     const tabItems: IDashboardTabItem[] = [];
     dashboardContent.items.forEach((dashboardItem) => {
-      if (!dashboardItem.needsAdmin || auth.isAdmin()) {
+      // Exclude DashboardPage itself with path /
+      if (
+        dashboardItem.path !== AppRoutes.dashboard.toPath() &&
+        (!dashboardItem.needsAdmin || auth.isAdmin())
+      ) {
         tabItems.push({
           content: <></>, // content must be empty and will be handled by DashboardContent
           path: dashboardItem.path,

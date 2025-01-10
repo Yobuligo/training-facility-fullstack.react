@@ -12,6 +12,7 @@ import { EventCalendarPlanSection } from "../../eventCalendar/eventCalendarPlanS
 import { MyGradingList } from "../../grading/myGradingList/MyGradingList";
 import { MyProfile } from "../../myProfile/MyProfile";
 import { UserProfileSection } from "../../users/userProfileSection/UserProfileSection";
+import { Welcome } from "../../welcome/Welcome";
 import styles from "./DashboardContentItem.module.scss";
 import { IDashboardContent } from "./IIDashboardContentItem";
 
@@ -20,6 +21,13 @@ export const useDashboardContent = () => {
 
   const items = useMemo<IDashboardContent[]>(
     () => [
+      {
+        content: <Welcome />,
+        icon: <></>,
+        needsAdmin: false,
+        path: AppRoutes.dashboard.toPath(),
+        title: "",
+      },
       {
         content: <UserProfileSection />,
         icon: <Users className={styles.icon} />,
