@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 /**
  * In instance of this interface represents a dashboard content,
@@ -6,7 +6,7 @@ import { ReactNode } from "react";
  */
 export interface IDashboardContent {
   content: ReactNode;
-  icon: ReactNode;
+  icon: ReactElement;
   needsAdmin: boolean;
   path: string;
   title: string;
