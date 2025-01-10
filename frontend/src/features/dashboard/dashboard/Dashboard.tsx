@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { BurgerMenu } from "../../../components/burgerMenu/BurgerMenu";
 import { TabStrip } from "../../../components/tabStrip/TabStrip";
-import { TabStripContent } from "../../../components/tabStripContent/TabStripContent";
 import { style } from "../../../core/ui/style";
+import { DashboardContent } from "../dashboardContent/DashboardContent";
 import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
 import { useDashboardViewModel } from "./useDashboardViewModel";
@@ -35,14 +35,8 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
         />
       )}
 
-      {/* Used to display the TabStrip content */}
-      <Outlet />
-
-      <TabStripContent
-        children={
-          <div className={styles.dashboardContent}>{viewModel.content}</div>
-        }
-      />
+      {/* Used to display the TabStrip content. If no tab was selected, display the welcome page by showing the DashboardContent */}
+      {viewModel.selected === -1 ? <DashboardContent /> : <Outlet />}
     </div>
   );
 };

@@ -11,12 +11,6 @@ import { useScreenSize } from "../../../hooks/useScreenSize";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
-import { EventCalendarMyTrainings } from "../../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
-import { EventCalendarPlanSection } from "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
-import { MyGradingList } from "../../grading/myGradingList/MyGradingList";
-import { MyProfile } from "../../myProfile/MyProfile";
-import { UserProfileSection } from "../../users/userProfileSection/UserProfileSection";
-import { Welcome } from "../../welcome/Welcome";
 import styles from "./Dashboard.module.scss";
 import { IDashboardProps } from "./IDashboardProps";
 import { IDashboardTabItem } from "./IDashboardTabItem";
@@ -34,9 +28,8 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
     }
   }, [props.displayWelcomeSignal]);
 
-  const onSelect = (index: number): void => setSelected(index);
-
   const onSelectNew = (index: number): void => {
+    setSelected(index);
     if (index === -1) {
       navigate(AppRoutes.dashboard.toPath());
     } else {
@@ -52,13 +45,13 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
       tabItems.push({
         path: AppRoutes.users.toPath(),
         title: t(texts.dashboard.users),
-        content: <UserProfileSection />,
+        content: <></>,
         icon: <Users className={styles.icon} />,
       });
       tabItems.push({
         path: AppRoutes.planers.toPath(),
         title: t(texts.dashboard.planner),
-        content: <EventCalendarPlanSection />,
+        content: <></>,
         icon: <Clock className={styles.icon} />,
       });
     }
@@ -66,21 +59,21 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
     tabItems.push({
       path: AppRoutes.trainings.toPath(),
       title: t(texts.dashboard.trainings),
-      content: <EventCalendarMyTrainings />,
+      content: <></>,
       icon: <Training className={styles.icon} />,
     });
 
     tabItems.push({
       path: AppRoutes.gradings.toPath(),
       title: t(texts.dashboard.gradings),
-      content: <MyGradingList />,
+      content: <></>,
       icon: <Grading className={styles.icon} />,
     });
 
     tabItems.push({
       path: AppRoutes.profile.toPath(),
       title: t(texts.dashboard.profile),
-      content: <MyProfile />,
+      content: <></>,
       icon: <Profile className={styles.icon} />,
     });
     return tabItems;
@@ -91,13 +84,11 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   const items: IItem[] = tabItems.map((tabItem) => {
     return { title: tabItem.title, icon: tabItem.icon };
   });
-  const content = selected === -1 ? <Welcome /> : tabItems[selected].content;
   const burgerMenuTabItems = selected === -1 ? [] : [tabItems[selected]];
 
   return {
     burgerMenuTabItems,
     items,
-    content,
     needsBurgerMenu,
     onSelect: onSelectNew,
     selected,

@@ -23,10 +23,3 @@
   height: auto;
   color: colors.$color-burger-menu-item-caption;
 }
-
-.dashboardContent {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  @include mixins.page-padding;
-}

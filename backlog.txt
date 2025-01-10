@@ -453,6 +453,7 @@
 			- Link is /gradings
 		- Story: Profile can be accessed via route
 			- Link is /profile
+		- Story: Click on logo must navigate to the dashboard page
 
 - Backlog
 	- Bug: Not the whole screen is displayed on smaller devices
