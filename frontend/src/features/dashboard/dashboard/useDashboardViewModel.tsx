@@ -25,8 +25,9 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   useEffect(() => {
     if (props.displayWelcomeSignal) {
       setSelected(-1);
+      navigate(AppRoutes.dashboard.toPath());
     }
-  }, [props.displayWelcomeSignal]);
+  }, [navigate, props.displayWelcomeSignal]);
 
   const onSelectNew = (index: number): void => {
     setSelected(index);
