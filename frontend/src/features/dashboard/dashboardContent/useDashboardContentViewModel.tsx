@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { EventCalendarMyTrainings } from "../../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
 import { EventCalendarPlanSection } from "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
@@ -33,7 +33,7 @@ export const useDashboardContentViewModel = () => {
         return <MyProfile />;
       }
       default: {
-        // Todo: check for invalid tab
+        return <Navigate to={AppRoutes.error.toPath()} />;
       }
     }
   };
