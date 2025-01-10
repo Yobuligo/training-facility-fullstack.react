@@ -427,22 +427,22 @@
 	# Story: Increase expiration time of session
 	- Epic: TabStrip Routes
 		- Explanation: Tabs of the TabStrip must be accessible via route
-		- Story: Dashboard can be accessed via route
-			- Link is /
+		# Story: Dashboard can be accessed via route
+			# Link is /
 		- Story: User list can be accessed via route
-			- Link is /users
+			# Link is /users
 			- Link must not be opened with missing authorities
 		- Story: User list can be accessed via route
 			- Link is /users/:id
 			- Link must not be opened with missing authorities			
 		- Story: Planer can be accessed via route
-			- Link is /planer
+			# Link is /planer
 			- Link must not be opened with missing authorities
 		- Story: Event definition can be accessed via route			
 			- Link is /planer/:id
 			- Link must not be opened with missing authorities
 		- Story: Trainings can be accessed via route
-			- Link is /trainings
+			# Link is /trainings
 			- Link must not be opened with missing authorities
 		- Story: Event instances can be accessed via route
 			- Link is /trainings/:id
@@ -450,10 +450,10 @@
 		- Story: Correct route /event-instance-registration/:eventInstanceId
 			- Route must fit the new pattern. Link is /trainings/:id/registration
 		- Story: Gradings can be accessed via route
-			- Link is /gradings
+			# Link is /gradings
 		- Story: Profile can be accessed via route
-			- Link is /profile
-		- Story: Click on logo must navigate to the dashboard page
+			# Link is /profile
+		# Story: Click on logo must navigate to the dashboard page
 
 - Backlog
 	- Bug: Not the whole screen is displayed on smaller devices
