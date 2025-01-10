@@ -1,0 +1,7 @@
+@use "../../../styles/colors.module.scss";
+
+.icon {
+  width: 2rem;
+  height: auto;
+  color: colors.$color-burger-menu-item-caption;
+}

@@ -13,6 +13,10 @@ export const useDashboardContentViewModel = () => {
 
   const getContent = (): ReactNode => {
     const path = params.itemId ? `/${params.itemId}` : "/";
+
+    // check if path is invalid
+    // check if user has no authority
+
     switch (path) {
       case AppRoutes.dashboard.toPath(): {
         return <Welcome />;
