@@ -431,19 +431,19 @@
 			# Link is /
 		- Story: User list can be accessed via route
 			# Link is /users
-			- Link must not be opened with missing authorities
+			# Link must not be opened with missing authorities
 		- Story: User list can be accessed via route
 			- Link is /users/:id
 			- Link must not be opened with missing authorities			
 		- Story: Planer can be accessed via route
 			# Link is /planer
-			- Link must not be opened with missing authorities
+			# Link must not be opened with missing authorities
 		- Story: Event definition can be accessed via route			
 			- Link is /planer/:id
 			- Link must not be opened with missing authorities
 		- Story: Trainings can be accessed via route
 			# Link is /trainings
-			- Link must not be opened with missing authorities
+			# Link must not be opened with missing authorities
 		- Story: Event instances can be accessed via route
 			- Link is /trainings/:id
 			- Link must not be opened with missing authorities

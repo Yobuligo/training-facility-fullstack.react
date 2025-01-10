@@ -14,12 +14,12 @@ import { MyProfile } from "../../myProfile/MyProfile";
 import { UserProfileSection } from "../../users/userProfileSection/UserProfileSection";
 import { Welcome } from "../../welcome/Welcome";
 import styles from "./DashboardContentItem.module.scss";
-import { IDashboardContent } from "./IIDashboardContentItem";
+import { IDashboardContentItem } from "./IDashboardContentItem";
 
 export const useDashboardContent = () => {
   const { t } = useTranslation();
 
-  const items = useMemo<IDashboardContent[]>(
+  const items = useMemo<IDashboardContentItem[]>(
     () => [
       {
         content: <Welcome />,
