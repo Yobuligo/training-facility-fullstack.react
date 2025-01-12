@@ -2,15 +2,16 @@ import { ReactNode } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { AppRoutes } from "../../../routes/AppRoutes";
+import { ISectionRouteParams } from "../../../routes/ISectionRouteParams";
 import { useDashboardContent } from "../dashboardContentItem/useDashboardContent";
 
 export const useDashboardContentViewModel = () => {
   const dashboardContent = useDashboardContent();
-  const params = useParams<{ itemId: string }>();
+  const params = useParams<ISectionRouteParams>();
   const auth = useAuth();
 
   const getContent = (): ReactNode => {
-    const path = params.itemId ? `/${params.itemId}` : "/";
+    const path = params.section ? `/${params.section}` : "/";
 
     const dashboardContentItem = dashboardContent.items.find(
       (dashboardItem) => dashboardItem.path === path

@@ -29,11 +29,11 @@ export const AppRouter = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: ":itemId",
+        path: ":section",
         element: <DashboardContent />,
       },
       {
-        path: ":itemId/:id",
+        path: ":section/:itemId",
         element: <DashboardContent />,
       },
     ],

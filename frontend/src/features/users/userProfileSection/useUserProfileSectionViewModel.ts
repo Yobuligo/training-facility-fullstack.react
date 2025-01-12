@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
@@ -28,6 +29,7 @@ export const useUserProfileSectionViewModel = () => {
   const [unlockUserRequest] = useRequest();
   const [lockUserRequest] = useRequest();
   const [sendUserInvite] = useSendUserInvite();
+  // const params = useParams<{ itemId: string; id: string }>();
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
