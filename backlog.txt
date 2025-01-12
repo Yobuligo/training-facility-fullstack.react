@@ -434,7 +434,10 @@
 			# Link must not be opened with missing authorities
 		- Story: User list can be accessed via route
 			- Link is /users/:id
-			- Link must not be opened with missing authorities			
+			- Link must not be opened with missing authorities
+			- Different user must be displayed when changing user id in URL
+			- When navigating back from the user details screen, the user list is displayed
+			- All users must not be loaded from backend when loading user section (component UserProfileSection) with specific user id via URL, as only the user itself must be displayed
 		- Story: Planer can be accessed via route
 			# Link is /planer
 			# Link must not be opened with missing authorities

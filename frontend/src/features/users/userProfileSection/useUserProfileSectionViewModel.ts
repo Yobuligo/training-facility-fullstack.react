@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
@@ -7,6 +7,7 @@ import { useInitialize } from "../../../hooks/useInitialize";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUser } from "../../../model/DummyUser";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { IUser } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
@@ -31,30 +32,31 @@ export const useUserProfileSectionViewModel = () => {
   const [lockUserRequest] = useRequest();
   const [sendUserInvite] = useSendUserInvite();
   const params = useParams<ISectionRouteParams>();
+  const navigate = useNavigate();
 
-  // /**
-  //  * This function is responsible for loading a user by the given {@link userId}.
-  //  */
-  // const loadUser = useCallback(
-  //   (userId: string) =>
-  //     loadUserRequest(async () => {
-  //       const userApi = new UserApi();
-  //       const user = await userApi.findById(userId);
+  /**
+   * This function is responsible for loading and setting a user by the given {@link userId} via URL.
+   */
+  const loadUser = useCallback(
+    (userId: string) =>
+      loadUserRequest(async () => {
+        const userApi = new UserApi();
+        const user = await userApi.findById(userId);
 
-  //       // sort user guardians by createdAt to display first created at the top
-  //       user?.userProfile?.userGuardians?.sort((left, right) =>
-  //         DateTime.compare(left.createdAt, right.createdAt)
-  //       );
-  //       setSelectedUser(user);
-  //     }),
-  //   [loadUserRequest]
-  // );
+        // sort user guardians by createdAt to display first created at the top
+        user?.userProfile?.userGuardians?.sort((left, right) =>
+          DateTime.compare(left.createdAt, right.createdAt)
+        );
+        setSelectedUser(user);
+      }),
+    [loadUserRequest]
+  );
 
-  // useEffect(() => {
-  //   if (params.itemId) {
-  //     loadUser(params.itemId);
-  //   }
-  // }, [params.itemId]);
+  useEffect(() => {
+    if (params.itemId && !selectedUser) {
+      loadUser(params.itemId);
+    }
+  }, [loadUser, params.itemId, selectedUser]);
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
@@ -94,7 +96,11 @@ export const useUserProfileSectionViewModel = () => {
       setResignedUsersShort(sortedResignedUsersShort);
     });
 
-  useInitialize(() => loadUsersShort());
+  useInitialize(() => {
+    if (!params.itemId) {
+      loadUsersShort();
+    }
+  });
 
   const createUserShort = (user: IUser): IUserShort => {
     return {
@@ -130,16 +136,7 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   const onSelect = (userShort: IUserShort) =>
-    loadUserRequest(async () => {
-      const userApi = new UserApi();
-      const user = await userApi.findById(userShort.id);
-
-      // sort user guardians by createdAt to display first created at the top
-      user?.userProfile?.userGuardians?.sort((left, right) =>
-        DateTime.compare(left.createdAt, right.createdAt)
-      );
-      setSelectedUser(user);
-    });
+    navigate(AppRoutes.user.toPath({ id: userShort.id }));
 
   const deleteUser = (user: IUser) =>
     deleteUserRequest(async () => {
@@ -219,9 +216,7 @@ export const useUserProfileSectionViewModel = () => {
       onCancel(selectedUser);
     }
     setSelectedUser(undefined);
-
-    // reload users
-    loadUsersShort();
+    navigate(AppRoutes.users.toPath());
   };
 
   const onCancel = (user: IUser) => {
