@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { FuzzySearch } from "../../../core/services/fuzzySearch/FuzzySearch";
 import { List } from "../../../core/services/list/List";
+import { isInitial } from "../../../core/utils/isInitial";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
@@ -35,7 +36,7 @@ export const useUserProfileSectionViewModel = () => {
   const navigate = useNavigate();
 
   /**
-   * This function is responsible for loading and setting a user by the given {@link userId} via URL.
+   * Loads and sets a user by the given {@link userId}.
    */
   const loadUser = useCallback(
     (userId: string) =>
@@ -52,11 +53,49 @@ export const useUserProfileSectionViewModel = () => {
     [loadUserRequest]
   );
 
+  /**
+   * Loads all users in short format. This format contains only some few properties.
+   */
+  const loadUsersShort = useCallback(
+    () =>
+      loadUsersShortRequest(async () => {
+        const userApi = new UserApi();
+        const users: IUserShort[] = await userApi.findAllShort();
+
+        const usersShort: IUserShort[] = [];
+        const resignedUsersShort: IUserShort[] = [];
+
+        users.forEach((userShort) => {
+          if (userShort.resignedAt === null) {
+            usersShort.push(userShort);
+          } else {
+            resignedUsersShort.push(userShort);
+          }
+        });
+
+        const sortedUsersShort = sortByName(usersShort);
+        setUsersShort(sortedUsersShort);
+        const sortedResignedUsersShort = sortByName(resignedUsersShort);
+        setResignedUsersShort(sortedResignedUsersShort);
+      }),
+    [loadUsersShortRequest]
+  );
+
   useEffect(() => {
+    // Loads the user by the userId which is given via URL, if provided and no selected user is set
+    // if the selected user is set, it means that the details are already displayed.
     if (params.itemId && !selectedUser) {
       loadUser(params.itemId);
     }
-  }, [loadUser, params.itemId, selectedUser]);
+
+    // if no userId was provided via URL, and the usersShort is initial, 
+    // there is a chance that theses users weren't loaded yet, so load it.
+    // This might happen if the user details were displayed via deep link
+    // and finally the user navigates back to the user list, which was not initialized yet
+    if (!params.itemId && isInitial(usersShort)) {
+      loadUsersShort();
+    }
+  }, [loadUser, loadUsersShort, params.itemId, selectedUser, usersShort]);
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
@@ -74,29 +113,10 @@ export const useUserProfileSectionViewModel = () => {
     return fuzzySearch.search(query, resignedUsersShort);
   };
 
-  const loadUsersShort = () =>
-    loadUsersShortRequest(async () => {
-      const userApi = new UserApi();
-      const users: IUserShort[] = await userApi.findAllShort();
-
-      const usersShort: IUserShort[] = [];
-      const resignedUsersShort: IUserShort[] = [];
-
-      users.forEach((userShort) => {
-        if (userShort.resignedAt === null) {
-          usersShort.push(userShort);
-        } else {
-          resignedUsersShort.push(userShort);
-        }
-      });
-
-      const sortedUsersShort = sortByName(usersShort);
-      setUsersShort(sortedUsersShort);
-      const sortedResignedUsersShort = sortByName(resignedUsersShort);
-      setResignedUsersShort(sortedResignedUsersShort);
-    });
-
   useInitialize(() => {
+    // loads all users, if no userId (itemId) is set
+    // if a userId is set, it means the details of this user should be displayed
+    // so there is no need to load all users
     if (!params.itemId) {
       loadUsersShort();
     }
@@ -135,6 +155,9 @@ export const useUserProfileSectionViewModel = () => {
     });
   };
 
+  /**
+   * Navigates to a users details by calling the users path with the userId.
+   */
   const onSelect = (userShort: IUserShort) =>
     navigate(AppRoutes.user.toPath({ id: userShort.id }));
 
