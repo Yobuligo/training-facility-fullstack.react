@@ -1,6 +1,9 @@
 /**
  * This type represents route params for a specific section.
  * An section means e.g. users, trainings, profile etc.
+ *
+ * @example
+ * /trainings/1234567890
  */
 export type ISectionRouteParams = {
   /**

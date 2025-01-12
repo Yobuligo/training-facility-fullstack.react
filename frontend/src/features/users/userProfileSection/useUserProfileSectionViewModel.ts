@@ -11,6 +11,7 @@ import { IUser } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
 import { sortByName } from "../utils/sortByName";
+import { ISectionRouteParams } from "./../../../routes/ISectionRouteParams";
 
 export const useUserProfileSectionViewModel = () => {
   const [usersShort, setUsersShort] = useState<IUserShort[]>([]);
@@ -29,7 +30,31 @@ export const useUserProfileSectionViewModel = () => {
   const [unlockUserRequest] = useRequest();
   const [lockUserRequest] = useRequest();
   const [sendUserInvite] = useSendUserInvite();
-  // const params = useParams<{ itemId: string; id: string }>();
+  const params = useParams<ISectionRouteParams>();
+
+  // /**
+  //  * This function is responsible for loading a user by the given {@link userId}.
+  //  */
+  // const loadUser = useCallback(
+  //   (userId: string) =>
+  //     loadUserRequest(async () => {
+  //       const userApi = new UserApi();
+  //       const user = await userApi.findById(userId);
+
+  //       // sort user guardians by createdAt to display first created at the top
+  //       user?.userProfile?.userGuardians?.sort((left, right) =>
+  //         DateTime.compare(left.createdAt, right.createdAt)
+  //       );
+  //       setSelectedUser(user);
+  //     }),
+  //   [loadUserRequest]
+  // );
+
+  // useEffect(() => {
+  //   if (params.itemId) {
+  //     loadUser(params.itemId);
+  //   }
+  // }, [params.itemId]);
 
   const filterUsers = (): IUserShort[] => {
     if (query.length === 0) {
