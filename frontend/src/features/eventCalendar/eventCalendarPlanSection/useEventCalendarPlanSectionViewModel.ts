@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useSignal } from "../../../hooks/useSignal";
@@ -6,6 +7,7 @@ import { useUser } from "../../../hooks/useUser";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
+import { ISectionRouteParams } from "../../../routes/ISectionRouteParams";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { AuthRole } from "../../../shared/types/AuthRole";
@@ -19,9 +21,11 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [reloadSignal, triggerReloadSignal] = useSignal();
   const [insertEventDefinitionRequest] = useRequest();
   const [updateEventDefinitionRequest] = useRequest();
+  const [loadEventDefinitionsRequest] = useRequest();
   const [loadEventDefinitionRequest] = useRequest();
   const [deleteEventDefinitionRequest] = useRequest();
   const [trainers, setTrainers] = useState<IUserShort[]>([]);
+  const params = useParams<ISectionRouteParams>();
 
   const onAdd = async () => {
     // load trainers
@@ -30,6 +34,45 @@ export const useEventCalendarPlanSectionViewModel = () => {
     setTrainers(trainers);
     setSelectedEventDefinition(new DummyEventDefinition(user.id));
   };
+
+  /**
+   * Loads an event definition by id and sets it as selected
+   */
+  const loadEventDefinition = useCallback(
+    (eventDefinitionId: string) => {
+      loadEventDefinitionRequest(async () => {
+        const eventDefinitionApi = new EventDefinitionApi();
+        const eventDefinition = await eventDefinitionApi.findById(
+          eventDefinitionId
+        );
+        setSelectedEventDefinition(eventDefinition);
+      });
+    },
+    [loadEventDefinitionRequest]
+  );
+
+  /**
+   * Loads all event definitions by id for a specific given {@link dateTimeSpan}.
+   */
+  const onLoadEventDefinitions = useCallback(
+    async (dateTimeSpan: IDateTimeSpan): Promise<IEventDefinition[]> => {
+      let eventDefinitions: IEventDefinition[] = [];
+      await loadEventDefinitionsRequest(async () => {
+        const eventDefinitionApi = new EventDefinitionApi();
+        eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
+          dateTimeSpan
+        );
+      });
+      return eventDefinitions;
+    },
+    [loadEventDefinitionsRequest]
+  );
+
+  useEffect(() => {
+    if (params.itemId && !selectedEventDefinition) {
+      loadEventDefinition(params.itemId);
+    }
+  }, [loadEventDefinition, params.itemId, selectedEventDefinition]);
 
   const onBack = () => {
     setTrainers([]);
@@ -87,20 +130,6 @@ export const useEventCalendarPlanSectionViewModel = () => {
     }
     triggerReloadSignal();
   };
-
-  const onLoadEventDefinitions = useCallback(
-    async (dateTimeSpan: IDateTimeSpan): Promise<IEventDefinition[]> => {
-      let eventDefinitions: IEventDefinition[] = [];
-      await loadEventDefinitionRequest(async () => {
-        const eventDefinitionApi = new EventDefinitionApi();
-        eventDefinitions = await eventDefinitionApi.findByDateTimeSpan(
-          dateTimeSpan
-        );
-      });
-      return eventDefinitions;
-    },
-    [loadEventDefinitionRequest]
-  );
 
   return {
     onAdd,
