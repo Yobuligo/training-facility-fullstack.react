@@ -438,7 +438,8 @@
 			- Different user must be displayed when changing user id in URL
 			- When navigating back from the user details screen, the user list is displayed
 			- All users must not be loaded from backend when loading user section (component UserProfileSection) with specific user id via URL, as only the user itself must be displayed
-			- Bug: Displaying a user via deep link and navigating back to the user list, must display all users
+			- Displaying a user via deep link and navigating back to the user list, must display all users
+			- Deleting a user must end with a navigation to the main user list
 		- Story: Planer can be accessed via route
 			# Link is /planer
 			# Link must not be opened with missing authorities
