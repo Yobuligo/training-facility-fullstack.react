@@ -88,7 +88,7 @@ export const useUserProfileSectionViewModel = () => {
       loadUser(params.itemId);
     }
 
-    // if no userId was provided via URL, and the usersShort is initial, 
+    // if no userId was provided via URL, and the usersShort is initial,
     // there is a chance that theses users weren't loaded yet, so load it.
     // This might happen if the user details were displayed via deep link
     // and finally the user navigates back to the user list, which was not initialized yet
@@ -203,6 +203,9 @@ export const useUserProfileSectionViewModel = () => {
       setSelectedUser(undefined);
       List.delete(previous, (item) => item.id === user.id);
       deleteUser(user);
+
+      // navigate to user list after deleting a user
+      navigate(AppRoutes.users.toPath());
       return [...previous];
     });
   };
