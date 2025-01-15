@@ -52,6 +52,20 @@ export const useEventCalendarPlanSectionViewModel = () => {
   );
 
   /**
+   * Loads the trainers of the given {@link eventDefinitionId}
+   * and set the given {@link eventDefinition} as selected.
+   */
+  const loadTrainers = async (
+    eventDefinitionId: string,
+    eventDefinition: IEventDefinition
+  ) => {
+    const eventDefinitionApi = new EventDefinitionApi();
+    const trainers = await eventDefinitionApi.findTrainers(eventDefinitionId);
+    setTrainers(trainers);
+    setSelectedEventDefinition(eventDefinition);
+  };
+
+  /**
    * Loads all event definitions by id for a specific given {@link dateTimeSpan}.
    */
   const onLoadEventDefinitions = useCallback(
@@ -93,15 +107,14 @@ export const useEventCalendarPlanSectionViewModel = () => {
       triggerReloadSignal();
     });
 
-  const onEventSelected = async (calendarEvent: ICalendarEvent) => {
-    // load trainers
-    const eventDefinitionApi = new EventDefinitionApi();
-    const trainers = await eventDefinitionApi.findTrainers(
-      calendarEvent.eventDefinition.id
+  /**
+   * Handles the selection of a {@link calendarEvent} by loading the trainers and setting the corresponding event definition as selected.
+   */
+  const onEventSelected = async (calendarEvent: ICalendarEvent) =>
+    loadTrainers(
+      calendarEvent.eventDefinition.id,
+      calendarEvent.eventDefinition
     );
-    setTrainers(trainers);
-    setSelectedEventDefinition(calendarEvent.eventDefinition);
-  };
 
   const insertEventDefinition = (eventDefinition: DummyEventDefinition) =>
     insertEventDefinitionRequest(async () => {
