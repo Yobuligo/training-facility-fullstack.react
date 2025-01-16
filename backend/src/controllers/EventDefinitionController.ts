@@ -44,8 +44,8 @@ export class EventDefinitionController extends EntityController<
             fields
           );
         } else {
-          const eventInstances = await this.repo.findAll(fields);
-          res.status(HttpStatusCode.OK_200).send(eventInstances);
+          const eventDefinitions = await this.repo.findAll(fields);
+          res.status(HttpStatusCode.OK_200).send(eventDefinitions);
         }
       })
     );

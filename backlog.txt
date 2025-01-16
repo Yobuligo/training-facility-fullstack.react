@@ -446,6 +446,12 @@
 		- Story: Event definition can be accessed via route			
 			- Link is /planer/:id
 			- Link must not be opened with missing authorities
+			- Different event definition must be displayed when changing event definition id in URL
+			- Displaying an event definition via click on event definition in event definition list and navigating back from the event definition details screen, the event definition list is displayed
+			- Displaying an event definition via deep link and navigating back to the event definition list, must display all event definitions
+			- All event definitions must not be loaded from backend when loading event definition section (component EventCalendarPlanSection) with specific event definition id via URL, as only the event definition itself must be displayed
+			- Deleting an event definition must end with a navigation to the main event definition list
+			- Displaying an event definition via deep link or directly must load the assigned trainers
 		# Story: Trainings can be accessed via route
 			# Link is /trainings
 			# Link must not be opened with missing authorities
