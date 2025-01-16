@@ -2,8 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
-import { isNotInitial } from "../../../core/utils/isNotInitial";
-import { isNotNull } from "../../../core/utils/isNotNull";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
@@ -96,28 +94,17 @@ export const useEventCalendarPlanSectionViewModel = () => {
     if (params.itemId && !selectedEventDefinition) {
       loadEventDefinition(params.itemId);
     }
-
-    // Reset trainers and selected event definition if no event definition id is provided via URL
-    if (
-      !params.itemId &&
-      (isNotInitial(trainers) || isNotNull(selectedEventDefinition))
-    ) {
-      setTrainers([]);
-      setSelectedEventDefinition(undefined);
-    }
-
-    // if no eventDefinitionId was provided via URL, and the event definitions are initial,
-    // there is a chance that theses event definitions weren't loaded yet, so load it.
-    // This might happen if the event definitions details were displayed via deep link
-    // and finally the user navigates back to the event definition list, which was not initialized yet
-    // if (!params.itemId && )
   }, [loadEventDefinition, params.itemId, selectedEventDefinition, trainers]);
 
   /**
    * Handles navigating back from event definition details to the calendar overview.
    * Only the planner itself has to be displayed.
    */
-  const onBack = () => navigate(AppRoutes.planers.toPath());
+  const onBack = () => {
+    setTrainers([]);
+    setSelectedEventDefinition(undefined);
+    navigate(AppRoutes.planers.toPath());
+  };
 
   const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) =>
     deleteEventDefinitionRequest(async () => {
