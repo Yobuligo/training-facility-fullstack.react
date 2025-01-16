@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
+import { isNotInitial } from "../../../core/utils/isNotInitial";
+import { isNotNull } from "../../../core/utils/isNotNull";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyEventDefinition } from "../../../model/DummyEventDefinition";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { ISectionRouteParams } from "../../../routes/ISectionRouteParams";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IUserShort } from "../../../shared/model/IUserShort";
@@ -24,9 +27,9 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [loadEventDefinitionsRequest] = useRequest();
   const [loadEventDefinitionRequest] = useRequest();
   const [deleteEventDefinitionRequest] = useRequest();
-  const [loadTrainersRequest] = useRequest();
   const [trainers, setTrainers] = useState<IUserShort[]>([]);
   const params = useParams<ISectionRouteParams>();
+  const navigate = useNavigate();
 
   const onAdd = async () => {
     // load trainers
@@ -37,35 +40,38 @@ export const useEventCalendarPlanSectionViewModel = () => {
   };
 
   /**
-   * Loads an event definition by id and sets it as selected
-   */
-  const loadEventDefinition = useCallback(
-    async (eventDefinitionId: string) => {
-      loadEventDefinitionRequest(async () => {
-        const eventDefinitionApi = new EventDefinitionApi();
-        const eventDefinition = await eventDefinitionApi.findById(
-          eventDefinitionId
-        );
-        setSelectedEventDefinition(eventDefinition);
-      });
-    },
-    [loadEventDefinitionRequest]
-  );
-
-  /**
    * Loads the trainers of the given {@link eventDefinitionId}
    * and set the given {@link eventDefinition} as selected.
    */
   const loadTrainers = async (
     eventDefinitionId: string,
     eventDefinition: IEventDefinition
-  ) =>
-    loadTrainersRequest(async () => {
-      const eventDefinitionApi = new EventDefinitionApi();
-      const trainers = await eventDefinitionApi.findTrainers(eventDefinitionId);
-      setTrainers(trainers);
-      setSelectedEventDefinition(eventDefinition);
-    });
+  ) => {
+    const eventDefinitionApi = new EventDefinitionApi();
+    const trainers = await eventDefinitionApi.findTrainers(eventDefinitionId);
+    setTrainers(trainers);
+    setSelectedEventDefinition(eventDefinition);
+  };
+
+  /**
+   * Loads an event definition by id and sets it as selected
+   */
+  const loadEventDefinition = useCallback(
+    async (eventDefinitionId: string) => {
+      await loadEventDefinitionRequest(async () => {
+        const eventDefinitionApi = new EventDefinitionApi();
+        const eventDefinition = await eventDefinitionApi.findById(
+          eventDefinitionId
+        );
+        setSelectedEventDefinition(eventDefinition);
+
+        if (eventDefinition) {
+          await loadTrainers(eventDefinitionId, eventDefinition);
+        }
+      });
+    },
+    [loadEventDefinitionRequest]
+  );
 
   /**
    * Loads all event definitions by id for a specific given {@link dateTimeSpan}.
@@ -90,12 +96,28 @@ export const useEventCalendarPlanSectionViewModel = () => {
     if (params.itemId && !selectedEventDefinition) {
       loadEventDefinition(params.itemId);
     }
-  }, [loadEventDefinition, params.itemId, selectedEventDefinition]);
 
-  const onBack = () => {
-    setTrainers([]);
-    setSelectedEventDefinition(undefined);
-  };
+    // Reset trainers and selected event definition if no event definition id is provided via URL
+    if (
+      !params.itemId &&
+      (isNotInitial(trainers) || isNotNull(selectedEventDefinition))
+    ) {
+      setTrainers([]);
+      setSelectedEventDefinition(undefined);
+    }
+
+    // if no eventDefinitionId was provided via URL, and the event definitions are initial,
+    // there is a chance that theses event definitions weren't loaded yet, so load it.
+    // This might happen if the event definitions details were displayed via deep link
+    // and finally the user navigates back to the event definition list, which was not initialized yet
+    // if (!params.itemId && )
+  }, [loadEventDefinition, params.itemId, selectedEventDefinition, trainers]);
+
+  /**
+   * Handles navigating back from event definition details to the calendar overview.
+   * Only the planner itself has to be displayed.
+   */
+  const onBack = () => navigate(AppRoutes.planers.toPath());
 
   const onDeleteEventDefinition = async (eventDefinition: IEventDefinition) =>
     deleteEventDefinitionRequest(async () => {
@@ -115,10 +137,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
    * Handles the selection of a {@link calendarEvent} by loading the trainers and setting the corresponding event definition as selected.
    */
   const onEventSelected = async (calendarEvent: ICalendarEvent) =>
-    loadTrainers(
-      calendarEvent.eventDefinition.id,
-      calendarEvent.eventDefinition
-    );
+    navigate(AppRoutes.planer.toPath({ id: calendarEvent.eventDefinition.id }));
 
   const insertEventDefinition = (eventDefinition: DummyEventDefinition) =>
     insertEventDefinitionRequest(async () => {
