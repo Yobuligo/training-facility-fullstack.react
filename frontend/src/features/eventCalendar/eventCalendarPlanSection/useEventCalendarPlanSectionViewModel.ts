@@ -24,6 +24,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const [loadEventDefinitionsRequest] = useRequest();
   const [loadEventDefinitionRequest] = useRequest();
   const [deleteEventDefinitionRequest] = useRequest();
+  const [loadTrainersRequest] = useRequest();
   const [trainers, setTrainers] = useState<IUserShort[]>([]);
   const params = useParams<ISectionRouteParams>();
 
@@ -39,7 +40,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
    * Loads an event definition by id and sets it as selected
    */
   const loadEventDefinition = useCallback(
-    (eventDefinitionId: string) => {
+    async (eventDefinitionId: string) => {
       loadEventDefinitionRequest(async () => {
         const eventDefinitionApi = new EventDefinitionApi();
         const eventDefinition = await eventDefinitionApi.findById(
@@ -58,12 +59,13 @@ export const useEventCalendarPlanSectionViewModel = () => {
   const loadTrainers = async (
     eventDefinitionId: string,
     eventDefinition: IEventDefinition
-  ) => {
-    const eventDefinitionApi = new EventDefinitionApi();
-    const trainers = await eventDefinitionApi.findTrainers(eventDefinitionId);
-    setTrainers(trainers);
-    setSelectedEventDefinition(eventDefinition);
-  };
+  ) =>
+    loadTrainersRequest(async () => {
+      const eventDefinitionApi = new EventDefinitionApi();
+      const trainers = await eventDefinitionApi.findTrainers(eventDefinitionId);
+      setTrainers(trainers);
+      setSelectedEventDefinition(eventDefinition);
+    });
 
   /**
    * Loads all event definitions by id for a specific given {@link dateTimeSpan}.
@@ -83,6 +85,8 @@ export const useEventCalendarPlanSectionViewModel = () => {
   );
 
   useEffect(() => {
+    // Loads the event definition by the event definition id which is given via URL, if provided and no selected event definition is set
+    // if the selected event definition is set, it means that the details are already displayed.
     if (params.itemId && !selectedEventDefinition) {
       loadEventDefinition(params.itemId);
     }
