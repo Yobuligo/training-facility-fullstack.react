@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -7,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { ISectionRouteParams } from "../../../routes/ISectionRouteParams";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
 import { IUserShort } from "../../../shared/model/IUserShort";
@@ -32,6 +34,37 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [loadEventDefinitionsRequest, isLoadEventDefinitionRequestProcessing] =
     useRequest();
   const fetchEventInstance = useFetchEventInstance();
+  const params = useParams<ISectionRouteParams>();
+
+  /**
+   * Loads an event instance by id and sets it as selected
+   */
+  const loadEventInstance = useCallback(async (eventInstanceId: string) => {
+    // Todo
+    // if (auth.isAdmin()) {
+    //   const eventInstance = await fetchEventInstance(event);
+    //   setSelectedEventInstance(eventInstance);
+
+    //   if (eventInstance) {
+    //     const eventInstanceApi = new EventInstanceApi();
+    //     const trainers = await eventInstanceApi.findTrainers(eventInstance.id);
+    //     setTrainers(trainers);
+    //   } else {
+    //     const userApi = new UserApi();
+    //     const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+    //     setTrainers(trainers);
+    //   }
+    //   setSelectedEvent(event);
+    // }
+  }, []);
+
+  useEffect(() => {
+    // Loads the event instance by the event instance id which is given via URL, if provided and no selected event instance is set
+    // if the selected event instance is set, it means that the details are already displayed.
+    if (params.itemId && !selectedEventInstance) {
+      loadEventInstance(params.itemId);
+    }
+  }, [loadEventInstance, params.itemId, selectedEventInstance]);
 
   const onEventInstanceUnselect = () => {
     setSelectedEventInstance(undefined);
