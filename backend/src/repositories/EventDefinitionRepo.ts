@@ -70,7 +70,7 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     dateTimeSpan: IDateTimeSpan,
     fields?: unknown
   ): Promise<unknown> {
-    let eventDefinitions = await this.selectEventDefinitions(dateTimeSpan);
+    let eventDefinitions = await this.selectByDateTimeSpan(dateTimeSpan);
     eventDefinitions = this.restrictEntitiesFields(eventDefinitions, fields);
     return eventDefinitions;
   }
@@ -84,6 +84,27 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       requestedUserId
     );
     return eventDefinition;
+  }
+
+  findById<K extends keyof IEventDefinition>(
+    id: string,
+    fields: K[]
+  ): Promise<IEntitySubset<IEventDefinition, K> | undefined>;
+  findById(id: string): Promise<IEventDefinition | undefined>;
+  async findById(
+    id: string,
+    fields?: unknown
+  ): Promise<IEventDefinition | undefined> {
+    const dataDefinition = await this.selectById(id);
+    if (dataDefinition) {
+      const eventDefinitions = this.restrictEntitiesFields(
+        [dataDefinition],
+        fields
+      );
+      return eventDefinitions[0];
+    } else {
+      return undefined;
+    }
   }
 
   /**
@@ -148,7 +169,10 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     await EventDefinitionTrainer.bulkCreate(eventDefinitionTrainers);
   }
 
-  private async selectEventDefinitions(
+  /**
+   * Selects event definitions by the given {@link dateTimeSpan} otherwise returns an empty list.
+   */
+  private async selectByDateTimeSpan(
     dateTimeSpan: IDateTimeSpan
   ): Promise<IEventDefinition[]> {
     const query = `
@@ -212,6 +236,41 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
       type: sequelize.QueryTypes.SELECT,
     });
     return this.convertToEventDefinition(data);
+  }
+
+  /**
+   * Selects an event definition by the given {@link eventDefinitionId} otherwise returns undefined.
+   */
+  private async selectById(
+    eventDefinitionId: string
+  ): Promise<IEventDefinition | undefined> {
+    const query = `
+        SELECT 
+          def.*,
+          def_usr.id AS def_usr_id,
+          def_profile.firstname AS def_profile_firstname,
+          def_profile.lastname AS def_profile_lastname
+        FROM \`event-definitions\` AS def
+
+        # join EventDefinition trainers
+        LEFT JOIN \`event-definitions-trainers\` AS trainerRel
+        ON trainerRel.eventDefinitionId = def.id
+        LEFT JOIN \`users\` AS def_usr
+        ON def_usr.id = trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS def_profile
+        ON def_profile.userId = def_usr.id
+        WHERE def.id = :eventDefinitionId
+    `;
+
+    const data = await db.query<IEventDefinition>(query, {
+      replacements: {
+        eventDefinitionId: eventDefinitionId,
+      },
+      type: sequelize.QueryTypes.SELECT,
+    });
+
+    const eventDefinitions = this.convertToEventDefinition(data);
+    return eventDefinitions[0];
   }
 
   private async selectEventDefinitionsAndInstances(
@@ -429,6 +488,9 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
     return this.convertToEventDefinition(data);
   }
 
+  /**
+   *
+   */
   private async selectByEventInstanceAndUser(
     eventInstanceId: string,
     userId: string
