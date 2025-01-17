@@ -118,6 +118,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
       }
       setSelectedEventDefinition(undefined);
       triggerReloadSignal();
+      navigate(AppRoutes.planers.toPath());
     });
 
   /**
