@@ -10,6 +10,10 @@ import { IEvent } from "../model/IEvent";
 import styles from "./EventCalendarMyTrainings.module.scss";
 import { useEventCalendarMyTrainingsViewModel } from "./useEventCalendarMyTrainingsViewModel";
 
+/**
+ * This component is responsible for displaying the trainings of a specific date time span (e.g. week) and the registrations of a user on these trainings.
+ * In addition it is possible to display the event instance details with the required authority.
+ */
 export const EventCalendarMyTrainings: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventCalendarMyTrainingsViewModel();

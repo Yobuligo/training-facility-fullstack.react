@@ -451,13 +451,23 @@
 			# Displaying an event definition via deep link and navigating back to the event definition list, must display all event definitions
 			# All event definitions must not be loaded from backend when loading event definition section (component EventCalendarPlanSection) with specific event definition id via URL, as only the event definition itself must be displayed
 			# Deleting an event definition must end with a navigation to the main event definition list
-			# Displaying an event definition via deep link or directly must load the assigned trainers
+			# Displaying an event definition via deep link or directly must load the assigned trainers			
 		# Story: Trainings can be accessed via route
 			# Link is /trainings
 			# Link must not be opened with missing authorities
 		- Story: Event instances can be accessed via route
 			- Link is /trainings/:id
 			- Link must not be opened with missing authorities
+
+
+			- Different event instance must be displayed when changing event instance id in URL
+			- Displaying an event instance via click on event instance in event instance list and navigating back from the event instance details screen, must display the event instance list again
+			- Displaying an event instance via deep link and navigating back to the event instance list, must display all event instance
+- All event instances must not be loaded from backend when loading event instance section (component EventCalendarMyTrainings) with specific event instance id via URL, as only the event instance itself must be displayed
+- Deleting an event instance must end with a navigation to the main event instance list
+- Displaying an event instance via deep link or directly must load the assigned trainers
+
+
 		- Story: Correct route /event-instance-registration/:eventInstanceId
 			- Route must fit the new pattern. Link is /trainings/:id/registration
 		# Story: Gradings can be accessed via route
@@ -469,15 +479,14 @@
 		# Story: Click on logo must navigate to the dashboard page
 
 - Backlog
+	- Story: Navigate to training from home screen
+		- The training details are displayed when clicking a training at the home screen
+		- The home screen will be displayed again when navigating back	
 	- Story: Default view for calendar of training overview must be set to week
 	- Bug: Not the whole screen is displayed on smaller devices
 	- Bug: Canceled trainings must not be displayed at the home screen anymore
 		- has to be discussed, as it is an indicator for students to see if a training was canceled, where I joined
 		- maybe it makes sense to hide trainings where I join as trainer
-	- Bug: Birthday of Charlotte was not displayed at the 05.01.2025
-	- Story: Navigate to training from home screen
-		- The training details are displayed when clicking a training at the home screen
-		- The home screen will be displayed again when navigating back	
 	- Story: Refactor DateTimeSpanFilter
 		- It is possible to switch between the span types day, week, month, custom (Zeitraum in german).
 		- The values of the span types day, week, month can be changed forward or backward and the current value or range is displayed. E.g. < 06.01.2025 - 12.01.2025 >
