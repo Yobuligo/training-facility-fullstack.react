@@ -35,28 +35,34 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     useRequest();
   const fetchEventInstance = useFetchEventInstance();
   const params = useParams<ISectionRouteParams>();
+  const [fetchEventInstanceRequest] = useRequest();
 
   /**
    * Loads an event instance by id and sets it as selected
    */
-  const loadEventInstance = useCallback(async (eventInstanceId: string) => {
-    // Todo
-    // if (auth.isAdmin()) {
-    //   const eventInstance = await fetchEventInstance(event);
-    //   setSelectedEventInstance(eventInstance);
+  const loadEventInstance = useCallback(
+    async (eventInstanceId: string) => {
+      if (auth.isAdmin()) {
+        await fetchEventInstanceRequest(async () => {
+          const eventInstanceApi = new EventInstanceApi();
+          const eventInstance = await eventInstanceApi.findById(
+            eventInstanceId
+          );
+          if (!eventInstance) {
+            return;
+          }
 
-    //   if (eventInstance) {
-    //     const eventInstanceApi = new EventInstanceApi();
-    //     const trainers = await eventInstanceApi.findTrainers(eventInstance.id);
-    //     setTrainers(trainers);
-    //   } else {
-    //     const userApi = new UserApi();
-    //     const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
-    //     setTrainers(trainers);
-    //   }
-    //   setSelectedEvent(event);
-    // }
-  }, []);
+          // load event instance trainers
+          const trainers = await eventInstanceApi.findTrainers(
+            eventInstance.id
+          );
+          setTrainers(trainers);
+          setSelectedEventInstance(eventInstance);
+        });
+      }
+    },
+    [auth, fetchEventInstanceRequest]
+  );
 
   useEffect(() => {
     // Loads the event instance by the event instance id which is given via URL, if provided and no selected event instance is set

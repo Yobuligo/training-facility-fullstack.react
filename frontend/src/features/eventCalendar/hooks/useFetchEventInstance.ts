@@ -11,6 +11,11 @@ import { IEvent } from "../model/IEvent";
 export const useFetchEventInstance = () => {
   const [fetchEventInstanceRequest] = useRequest();
 
+  /**
+   * This function is responsible for fetching an event instance from the given {@link event}.
+   * This means to find an event instance that matches the {@link event}s start date,
+   * otherwise the event instance is created.
+   */
   const fetchEventInstance = async (
     event: IEvent
   ): Promise<IEventInstance | undefined> => {
