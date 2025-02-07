@@ -14,12 +14,14 @@ import { checkNotNull } from "./core/utils/checkNotNull";
 import { db } from "./db/db";
 import { initializeModels } from "./db/initializeModels";
 import { createRootUser } from "./utils/createRootUser";
+import { createSystemConfig } from "./utils/createSystemConfig";
 
 const SequelizeStore = connectSessionSequelize(session.Store);
 
 const initialize = async () => {
   await initializeModels(false);
   createRootUser();
+  createSystemConfig();
 };
 
 initialize();

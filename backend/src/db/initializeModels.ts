@@ -6,6 +6,7 @@ import { EventInstance } from "../model/EventInstance";
 import { EventInstanceTrainer } from "../model/EventInstanceTrainer";
 import { EventRegistration } from "../model/EventRegistration";
 import { Session } from "../model/Session";
+import { SystemConfig } from "../model/SystemConfig";
 import { User } from "../model/User";
 import { UserBankAccount } from "../model/UserBankAccount";
 import { UserContactOptions } from "../model/UserContactOptions";
@@ -35,6 +36,7 @@ export const initializeModels = async (alter: boolean) => {
     EventInstance,
     EventInstanceTrainer,
     EventRegistration,
+    SystemConfig,
   ];
 
   // create associations
