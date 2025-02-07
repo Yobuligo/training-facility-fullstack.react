@@ -1,17 +1,35 @@
+import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { error } from "../core/utils/error";
-import { SystemConfig } from "../model/SystemConfig";
 import { ISystemConfig } from "../shared/model/ISystemConfig";
+import { SystemConfig } from "./../model/SystemConfig";
 
 export class SystemConfigRepo {
+  /**
+   * Returns the system config or undefined if not found.
+   */
+  async findOrNull(): Promise<ISystemConfig | undefined> {
+    const model = await SystemConfig.findOne();
+    return model?.toJSON();
+  }
+
+  /**
+   * Returns the system config or throws an error if not found
+   */
   async find(): Promise<ISystemConfig> {
-    const systemConfig = await SystemConfig.findOne();
+    const systemConfig = await this.findOrNull();
     return (
-      systemConfig?.toJSON() ??
-      error("Error when loading system config. System config does not exist.")
+      systemConfig ??
+      error("Error while loading system config. System config does not exist.")
     );
   }
 
-  async upsert(systemConfig: ISystemConfig) {
-    SystemConfig.upsert(systemConfig);
+  /**
+   * Inserts the given {@link systemConfig}.
+   */
+  async insert(
+    systemConfig: IEntityDetails<ISystemConfig>
+  ): Promise<ISystemConfig> {
+    const model = await SystemConfig.create(systemConfig);
+    return model.toJSON();
   }
 }
