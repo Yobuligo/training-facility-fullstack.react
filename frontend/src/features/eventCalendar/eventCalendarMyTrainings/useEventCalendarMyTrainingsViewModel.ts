@@ -38,7 +38,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [fetchEventInstanceRequest] = useRequest();
 
   /**
-   * Loads an event instance by id and sets it as selected
+   * Loads an event instance by its id and sets it as selected
    */
   const loadEventInstance = useCallback(
     async (eventInstanceId: string) => {
