@@ -472,8 +472,8 @@
 		# Story: Error is displayed when entering an invalid path
 		# Story: Error is displayed when user has not sufficient authorities for the entered path
 		# Story: Click on logo must navigate to the dashboard page
-		# Story: Extend invite email by adding whatsapp groups
-		# Story: WhatsApp group links can be loaded from database
+	# Story: Extend invite email by adding whatsapp groups
+	# Story: WhatsApp group links can be loaded from database		
 
 - Backlog
 	- Epic: Administration tab
