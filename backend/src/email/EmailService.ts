@@ -46,6 +46,10 @@ export class EmailService {
   ) {
     const linkInvite = this.createInviteLink(userInviteId);
     const linkLogin = `${AppConfig.clientAppUrl}/login`;
+    const linkWhatsAppNews = "https://chat.whatsapp.com/HGDUkNSlFEO6JL3wVArLa2";
+    const linkWhatsAppCommunity =
+      "https://chat.whatsapp.com/ISCvXDZ4AyEBI5RVCqq8bU";
+    const linkWhatsAppKids = "https://chat.whatsapp.com/GLxki5dRnWY8riKXSHcAeH";
 
     try {
       await smtp.sendMail({
@@ -55,7 +59,13 @@ export class EmailService {
         html: `
           <p>Hallo ${firstname},</p>
       
-          <p>herzlich willkommen im Mitgliederbereich unseres Taekwon-Do-Portals! Als Mitglied hast du Zugriff auf alle wichtigen Informationen rund um dein Training, dein Profil und deine Fortschritte. Um dir den Einstieg so einfach wie möglich zu machen, findest du hier die ersten Schritte:</p>
+          <p>
+            herzlich willkommen im Mitgliederbereich unseres Taekwon-Do-Portals! Als Mitglied hast du Zugriff auf alle wichtigen Informationen rund um dein Training, dein Profil, deine Fortschritte und unsere WhatsApp-Gruppen. <br />
+            Schließe bitte zunächst deine Anmeldung ab und tritt anschließend den für dich relevanten WhatsApp-Gruppen bei, um keine wichtigen Neuigkeiten zu verpassen.
+          </p>
+          
+          <h3 style="margin-bottom: 0px;">Anmeldung abschließen</h3>
+          Um dir den Einstieg so einfach wie möglich zu machen, findest du hier die ersten Schritte:
       
           <ol>
             <li><strong>Anmeldung abschließen:</strong> Vor deinem ersten Login musst du dein Passwort vergeben. Bitte wähle ein sicheres Passwort, um deinen Account bestmöglich zu schützen.</li>
@@ -64,9 +74,19 @@ export class EmailService {
             <li><strong>Profil verwalten:</strong> In deinem Profil kannst du persönliche Informationen aktualisieren und stets auf dem neuesten Stand halten. Darüber hinaus hast du Zugriff auf wichtige Informationen zu deinen Prüfungen.</li>
           </ol>
       
-          <p>Um deine Anmeldung abzuschließen, klicke bitte auf folgenden Link: <a href="${linkInvite}">Anmelde-Link</a></p>
-      
-          <p>Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${linkLogin}">Portal-Link</a></p>
+          <p>
+            Um deine Anmeldung abzuschließen, klicke bitte auf folgenden Link: <a href="${linkInvite}">Anmelde-Link</a><br />
+            Nach Abschluss der Registrierung kannst du dich mit deinem Benutzername <strong>${username}</strong> im Portal über diesen Link jederzeit anmelden: <a href="${linkLogin}">Portal-Link</a>
+          </p>
+
+          <h3 style="margin-bottom: 0px;">WhatsApp-Gruppen beitreten</h3>
+          Wir nutzen WhatsApp, um dich immer auf dem Laufenden zu halten und uns auszutauschen. Tritt einfach den passenden Gruppen bei:
+
+          <ol>
+            <li><strong>Ankündigungen</strong>: Für wichtige Infos und Neuigkeiten: <a href="${linkWhatsAppNews}">Ankündigungen-Gruppe-Link</a></li>
+            <li><strong>Kindergruppe</strong>: Speziell für alle Eltern und Kinder: <a href="${linkWhatsAppKids}">Kindergruppe-Link</a></li>
+            <li><strong>Austausch</strong>: Für den offenen Austausch und allgemeine Themen: <a href="${linkWhatsAppCommunity}">Austausch-Gruppe-Link</a></li>
+          </ol>
       
           <p>Bei Fragen oder Problemen stehen wir dir natürlich gerne zur Verfügung.</p>
       

@@ -458,16 +458,11 @@
 		- Story: Event instances can be accessed via route
 			- Link is /trainings/:id
 			- Link must not be opened with missing authorities
-
-
 			- Different event instance must be displayed when changing event instance id in URL
 			- Displaying an event instance via click on event instance in event instance list and navigating back from the event instance details screen, must display the event instance list again
 			- Displaying an event instance via deep link and navigating back to the event instance list, must display all event instance
-- All event instances must not be loaded from backend when loading event instance section (component EventCalendarMyTrainings) with specific event instance id via URL, as only the event instance itself must be displayed
-- Deleting an event instance must end with a navigation to the main event instance list
-- Displaying an event instance via deep link or directly must load the assigned trainers
-
-
+			- All event instances must not be loaded from backend when loading event instance section (component EventCalendarMyTrainings) with specific event instance id via URL, as only the event instance itself must be displayed
+			- Displaying an event instance via deep link or directly must load the assigned trainers
 		- Story: Correct route /event-instance-registration/:eventInstanceId
 			- Route must fit the new pattern. Link is /trainings/:id/registration
 		# Story: Gradings can be accessed via route
@@ -479,6 +474,7 @@
 		# Story: Click on logo must navigate to the dashboard page
 
 - Backlog
+	- Story: Extend invite email by adding whatsapp groups
 	- Story: Navigate to training from home screen
 		- The training details are displayed when clicking a training at the home screen
 		- The home screen will be displayed again when navigating back	
