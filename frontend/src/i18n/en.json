@@ -25,6 +25,7 @@
         "week": "Week"
     },
     "dashboard": {
+        "admin": "Administration",
         "gradings": "Gradings",
         "profile": "Profile",
         "trainings": "Trainings",

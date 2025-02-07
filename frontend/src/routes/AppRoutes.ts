@@ -12,6 +12,7 @@ export const AppRoutes = configureRoutes({
     "/event-instance-registration/:eventInstanceId"
   ),
 
+  admin: route("/admin"),
   dashboard: route("/"),
   users: route("/users"),
   user: route("/users/:id"),

@@ -7,6 +7,7 @@ import { ReactComponent as Users } from "../../../assets/users.svg";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
+import { AdminSection } from "../../admin/adminSection/AdminSection";
 import { EventCalendarMyTrainings } from "../../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
 import { EventCalendarPlanSection } from "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection";
 import { MyGradingList } from "../../grading/myGradingList/MyGradingList";
@@ -28,6 +29,13 @@ export const useDashboardContent = () => {
         path: AppRoutes.dashboard.toPath(),
         title: "",
       },
+      {
+        content: <AdminSection />,
+        icon: <Training className={styles.icon} />,
+        needsAdmin: true,
+        path: AppRoutes.admin.toPath(),
+        title: t(texts.dashboard.admin),
+      },      
       {
         content: <UserProfileSection />,
         icon: <Users className={styles.icon} />,
