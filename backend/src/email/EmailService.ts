@@ -1,5 +1,6 @@
 import { AppConfig } from "../AppConfig";
 import { DateTime } from "../core/services/date/DateTime";
+import { SystemConfigRepo } from "../repositories/SystemConfigRepo";
 import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IUserTrialTraining } from "../shared/model/IUserTrialTraining";
@@ -46,10 +47,9 @@ export class EmailService {
   ) {
     const linkInvite = this.createInviteLink(userInviteId);
     const linkLogin = `${AppConfig.clientAppUrl}/login`;
-    const linkWhatsAppNews = "https://chat.whatsapp.com/HGDUkNSlFEO6JL3wVArLa2";
-    const linkWhatsAppCommunity =
-      "https://chat.whatsapp.com/ISCvXDZ4AyEBI5RVCqq8bU";
-    const linkWhatsAppKids = "https://chat.whatsapp.com/GLxki5dRnWY8riKXSHcAeH";
+
+    const systemConfigRepo = new SystemConfigRepo();
+    const systemConfig = await systemConfigRepo.find();
 
     try {
       await smtp.sendMail({
@@ -83,9 +83,15 @@ export class EmailService {
           Wir nutzen WhatsApp, um dich immer auf dem Laufenden zu halten und uns auszutauschen. Tritt einfach den passenden Gruppen bei:
 
           <ol>
-            <li><strong>Ankündigungen</strong>: Für wichtige Infos und Neuigkeiten: <a href="${linkWhatsAppNews}">Ankündigungen-Gruppe-Link</a></li>
-            <li><strong>Kindergruppe</strong>: Speziell für alle Eltern und Kinder: <a href="${linkWhatsAppKids}">Kindergruppe-Link</a></li>
-            <li><strong>Austausch</strong>: Für den offenen Austausch und allgemeine Themen: <a href="${linkWhatsAppCommunity}">Austausch-Gruppe-Link</a></li>
+            <li><strong>Ankündigungen</strong>: Für wichtige Infos und Neuigkeiten: <a href="${
+              systemConfig.whatsAppURLNews
+            }">Ankündigungen-Gruppe-Link</a></li>
+            <li><strong>Kindergruppe</strong>: Speziell für alle Eltern und Kinder: <a href="${
+              systemConfig.whatsAppURLKids
+            }">Kindergruppe-Link</a></li>
+            <li><strong>Austausch</strong>: Für den offenen Austausch und allgemeine Themen: <a href="${
+              systemConfig.whatsAppURLCommunity
+            }">Austausch-Gruppe-Link</a></li>
           </ol>
       
           <p>Bei Fragen oder Problemen stehen wir dir natürlich gerne zur Verfügung.</p>
