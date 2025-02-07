@@ -4,6 +4,7 @@ export const AdminSection: React.FC = () => {
   return (
     <div>
       <CollapseCard title="WhatsApp">Hello World</CollapseCard>
+      <CollapseCard title="block">Block stuff</CollapseCard>
     </div>
   );
 };

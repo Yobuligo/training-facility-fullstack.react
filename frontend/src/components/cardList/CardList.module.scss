@@ -1,0 +1,7 @@
+@use "../../styles/dimensions.module.scss";
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}
