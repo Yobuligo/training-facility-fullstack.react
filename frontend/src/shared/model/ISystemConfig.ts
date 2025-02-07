@@ -1,7 +1,9 @@
+import { IEntity } from "../../core/api/types/IEntity";
+
 /**
  * This interface represents all system specific parameters, like specific URLs etc.
  */
-export interface ISystemConfig {
+export interface ISystemConfig extends IEntity {
   /**
    * This url refers to the WhatsApp group for general discussion.
    */
