@@ -1,5 +1,6 @@
 import { Button } from "../../../components/button/Button";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
+import { CollapseCard } from "../../../components/collapseCard/CollapseCard";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { LabeledSwitch } from "../../../components/labeledSwitch/LabeledSwitch";
@@ -12,7 +13,6 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { toStringDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
-import { UserProfileGroup } from "../userProfileGroup/UserProfileGroup";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
 import { useUserViewModel } from "./useUserViewModel";
@@ -74,7 +74,7 @@ export const User: React.FC<IUserProps> = (props) => {
         }`}</h3>
 
         {/* Personal Information */}
-        <UserProfileGroup
+        <CollapseCard
           collapsed={
             viewModel.profileDetailsSettings.collapsePersonalInformation
           }
@@ -151,11 +151,11 @@ export const User: React.FC<IUserProps> = (props) => {
             onSelect={viewModel.setTariff}
             value={viewModel.tariff}
           />
-        </UserProfileGroup>
+        </CollapseCard>
 
         {/* Guardian */}
         {props.isAdminMode && (
-          <UserProfileGroup
+          <CollapseCard
             collapsed={viewModel.profileDetailsSettings.collapseGuardian}
             onToggleCollapse={viewModel.onToggleCollapseGuardian}
             title={t(texts.user.guardian)}
@@ -231,11 +231,11 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setGuardian2Phone}
               value={viewModel.guardian2Phone}
             />
-          </UserProfileGroup>
+          </CollapseCard>
         )}
 
         {/* Address */}
-        <UserProfileGroup
+        <CollapseCard
           collapsed={viewModel.profileDetailsSettings.collapseAddress}
           onToggleCollapse={viewModel.onToggleCollapseAddress}
           title={t(texts.user.address)}
@@ -266,11 +266,11 @@ export const User: React.FC<IUserProps> = (props) => {
             onChange={viewModel.setCity}
             value={viewModel.city}
           />
-        </UserProfileGroup>
+        </CollapseCard>
 
         {/* Bank */}
         {props.isAdminMode && (
-          <UserProfileGroup
+          <CollapseCard
             collapsed={viewModel.profileDetailsSettings.collapseBank}
             onToggleCollapse={viewModel.onToggleCollapseBank}
             title={t(texts.user.bank)}
@@ -310,12 +310,12 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setBankAccountInstitution}
               value={viewModel.bankAccountInstitution}
             />
-          </UserProfileGroup>
+          </CollapseCard>
         )}
 
         {/* Contact Options */}
         {props.isAdminMode && (
-          <UserProfileGroup
+          <CollapseCard
             collapsed={viewModel.profileDetailsSettings.collapseContactOptions}
             onToggleCollapse={viewModel.onToggleCollapseContactOptions}
             title={t(texts.user.contactOptions)}
@@ -361,12 +361,12 @@ export const User: React.FC<IUserProps> = (props) => {
               label={t(texts.user.printPhotos)}
               onChange={viewModel.setContactOptionPrintPhotos}
             />
-          </UserProfileGroup>
+          </CollapseCard>
         )}
 
         {/* Gradings */}
         {props.isAdminMode && (
-          <UserProfileGroup
+          <CollapseCard
             className={styles.gradingGroup}
             collapsed={viewModel.profileDetailsSettings.collapseGradings}
             onToggleCollapse={viewModel.onToggleCollapseGradings}
@@ -381,11 +381,11 @@ export const User: React.FC<IUserProps> = (props) => {
               onDelete={viewModel.onDeleteGrading}
               userId={props.user.id}
             />
-          </UserProfileGroup>
+          </CollapseCard>
         )}
 
         {/* Technical Information */}
-        <UserProfileGroup
+        <CollapseCard
           collapsed={
             viewModel.profileDetailsSettings.collapseTechnicalInformation
           }
@@ -451,7 +451,7 @@ export const User: React.FC<IUserProps> = (props) => {
               )}
             </Toolbar>
           </div>
-        </UserProfileGroup>
+        </CollapseCard>
       </ChangeableForm>
     </div>
   );

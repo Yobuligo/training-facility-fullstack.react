@@ -1,11 +1,9 @@
-import { Collapse } from "../../../components/collapse/Collapse";
-import { UserProfileGroup } from "../../users/userProfileGroup/UserProfileGroup";
+import { CollapseCard } from "../../../components/collapseCard/CollapseCard";
 
 export const AdminSection: React.FC = () => {
   return (
     <div>
-      <Collapse collapsed={false} setCollapsed={()=>{}}/>
-      <UserProfileGroup title="WhatsApp">Hello World</UserProfileGroup>
+      <CollapseCard title="WhatsApp">Hello World</CollapseCard>
     </div>
   );
 };
