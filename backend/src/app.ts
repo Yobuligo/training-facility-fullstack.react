@@ -5,6 +5,7 @@ import { AppConfig } from "./AppConfig";
 import { EventDefinitionController } from "./controllers/EventDefinitionController";
 import { EventInstanceController } from "./controllers/EventInstanceController";
 import { EventRegistrationController } from "./controllers/EventRegistrationController";
+import { SystemConfigController } from "./controllers/SystemConfigController";
 import { TokenController } from "./controllers/TokenController";
 import { UserController } from "./controllers/UserController";
 import { UserInviteController } from "./controllers/UserInviteController";
@@ -74,5 +75,6 @@ server.use("/api", new UserProfileController().router);
 server.use("/api", new UserInviteController().router);
 server.use("/api", new UserTrialTrainingController().router);
 server.use("/api", new TokenController().router);
+server.use("/api", new SystemConfigController().router);
 
 server.listen(5000);

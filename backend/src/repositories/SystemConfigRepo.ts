@@ -2,8 +2,13 @@ import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { error } from "../core/utils/error";
 import { ISystemConfig } from "../shared/model/ISystemConfig";
 import { SystemConfig } from "./../model/SystemConfig";
+import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
-export class SystemConfigRepo {
+export class SystemConfigRepo extends SequelizeRepository<ISystemConfig> {
+  constructor() {
+    super(SystemConfig);
+  }
+
   /**
    * Returns the system config or undefined if not found.
    */

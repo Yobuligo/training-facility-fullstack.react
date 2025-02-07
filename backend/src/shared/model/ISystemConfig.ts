@@ -1,4 +1,5 @@
 import { IEntity } from "../../core/api/types/IEntity";
+import { IRouteMeta } from "../../core/api/types/IRouteMeta";
 
 /**
  * This interface represents all system specific parameters, like specific URLs etc.
@@ -19,3 +20,5 @@ export interface ISystemConfig extends IEntity {
    */
   whatsAppURLNews: string;
 }
+
+export const SystemConfigMeta: IRouteMeta = { path: "/system-configs" };

@@ -1,10 +1,35 @@
+import { CardList } from "../../../components/cardList/CardList";
 import { CollapseCard } from "../../../components/collapseCard/CollapseCard";
+import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
+import { useAdminSectionViewModel } from "./useAdminSectionViewModel";
 
 export const AdminSection: React.FC = () => {
+  const { t } = useTranslation();
+  const viewModel = useAdminSectionViewModel();
+
   return (
-    <div>
-      <CollapseCard title="WhatsApp">Hello World</CollapseCard>
-      <CollapseCard title="block">Block stuff</CollapseCard>
-    </div>
+    <CardList>
+      {viewModel.isLoadSystemConfigRequestProcessing ? (
+        <PageSpinner />
+      ) : (
+        <CollapseCard title={t(texts.admin.whatsAppGroups.title)}>
+          <LabeledInput
+            label={t(texts.admin.whatsAppGroups.URLNews)}
+            value={viewModel.systemConfig?.whatsAppURLNews}
+          />
+          <LabeledInput
+            label={t(texts.admin.whatsAppGroups.URLKids)}
+            value={viewModel.systemConfig?.whatsAppURLKids}
+          />
+          <LabeledInput
+            label={t(texts.admin.whatsAppGroups.URLCommunity)}
+            value={viewModel.systemConfig?.whatsAppURLCommunity}
+          />
+        </CollapseCard>
+      )}
+    </CardList>
   );
 };

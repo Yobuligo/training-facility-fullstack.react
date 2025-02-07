@@ -1,4 +1,12 @@
 {
+    "admin": {
+        "whatsAppGroups": {
+            "URLCommunity": "URL community group",
+            "URLKids": "URL kids group",
+            "URLNews": "URL news group",
+            "title": "WhatsApp groups"
+        }
+    },
     "appointmentForm": {
         "description": "Description",
         "endDate": "End date",
