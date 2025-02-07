@@ -35,7 +35,7 @@ export const useDashboardContent = () => {
         needsAdmin: true,
         path: AppRoutes.admin.toPath(),
         title: t(texts.dashboard.admin),
-      },      
+      },
       {
         content: <UserProfileSection />,
         icon: <Users className={styles.icon} />,

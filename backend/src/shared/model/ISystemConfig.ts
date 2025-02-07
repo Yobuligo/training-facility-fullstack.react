@@ -21,4 +21,4 @@ export interface ISystemConfig extends IEntity {
   whatsAppURLNews: string;
 }
 
-export const SystemConfigMeta: IRouteMeta = { path: "/system-configs" };
+export const SystemConfigRouteMeta: IRouteMeta = { path: "/system-configs" };

@@ -10,18 +10,18 @@ export class SystemConfigRepo extends SequelizeRepository<ISystemConfig> {
   }
 
   /**
-   * Returns the system config or undefined if not found.
+   * Returns the first system config or undefined if not found.
    */
-  async findOrNull(): Promise<ISystemConfig | undefined> {
+  async findFirstOrNull(): Promise<ISystemConfig | undefined> {
     const model = await SystemConfig.findOne();
     return model?.toJSON();
   }
 
   /**
-   * Returns the system config or throws an error if not found
+   * Returns the first system config or throws an error if not found
    */
-  async find(): Promise<ISystemConfig> {
-    const systemConfig = await this.findOrNull();
+  async findFirst(): Promise<ISystemConfig> {
+    const systemConfig = await this.findFirstOrNull();
     return (
       systemConfig ??
       error("Error while loading system config. System config does not exist.")

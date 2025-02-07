@@ -1,7 +1,9 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
-import { createError } from "../core/utils/createError";
 import { SystemConfigRepo } from "../repositories/SystemConfigRepo";
-import { ISystemConfig, SystemConfigMeta } from "../shared/model/ISystemConfig";
+import {
+  ISystemConfig,
+  SystemConfigRouteMeta,
+} from "../shared/model/ISystemConfig";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -11,24 +13,23 @@ export class SystemConfigController extends EntityController<
   SystemConfigRepo
 > {
   constructor() {
-    super(SystemConfigMeta, new SystemConfigRepo(), [AuthRole.ADMIN]);
-    this.findFirst();
+    super(SystemConfigRouteMeta, new SystemConfigRepo(), [AuthRole.ADMIN]);
   }
 
-  private findFirst() {
+  protected findAll(authRoles?: AuthRole[]): void {
     this.router.get(
-      `${this.routeMeta.path}/first`,
-      SessionInterceptor(async (_, res) => {
-        try {
-          const systemConfigRepo = new SystemConfigRepo();
-          const systemConfig = await systemConfigRepo.find();
+      `${this.routeMeta.path}`,
+      SessionInterceptor(async (req, res) => {
+        const systemConfigRepo = new SystemConfigRepo();
+        const first = req.query.first === "true" ? true : false;
+        if (first === true) {
+          const systemConfig = await systemConfigRepo.findFirst();
           res.status(HttpStatusCode.OK_200).send(systemConfig);
-        } catch (error) {
-          res
-            .status(HttpStatusCode.INTERNAL_SERVER_ERROR_500)
-            .send(createError("System config not found", "NotFoundError"));
+        } else {
+          const systemConfigs = await systemConfigRepo.findAll();
+          res.status(HttpStatusCode.OK_200).send(systemConfigs);
         }
-      })
+      }, authRoles)
     );
   }
 }

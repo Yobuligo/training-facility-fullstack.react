@@ -8,7 +8,7 @@ import { ISystemConfig } from "../shared/model/ISystemConfig";
 export const createSystemConfig = async () => {
   // check if system config already exists
   const systemConfigRepo = new SystemConfigRepo();
-  if (await systemConfigRepo.findOrNull()) {
+  if (await systemConfigRepo.findFirstOrNull()) {
     return;
   }
 

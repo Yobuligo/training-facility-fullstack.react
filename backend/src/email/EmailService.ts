@@ -49,7 +49,7 @@ export class EmailService {
     const linkLogin = `${AppConfig.clientAppUrl}/login`;
 
     const systemConfigRepo = new SystemConfigRepo();
-    const systemConfig = await systemConfigRepo.find();
+    const systemConfig = await systemConfigRepo.findFirst();
 
     try {
       await smtp.sendMail({
