@@ -5,12 +5,13 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { ISystemConfig } from "../../../shared/model/ISystemConfig";
 
 export const useAdminSectionViewModel = () => {
+  const [displayMode, setDisplayMode] = useState(true);
   const [systemConfig, setSystemConfig] = useState<ISystemConfig | undefined>(
     undefined
   );
   const [loadSystemConfigRequest, isLoadSystemConfigRequestProcessing] =
     useRequest();
-    
+
   useInitialize(() =>
     loadSystemConfigRequest(async () => {
       const systemConfigApi = new SystemConfigApi();
@@ -19,5 +20,10 @@ export const useAdminSectionViewModel = () => {
     })
   );
 
-  return { isLoadSystemConfigRequestProcessing, systemConfig };
+  return {
+    displayMode,
+    isLoadSystemConfigRequestProcessing,
+    setDisplayMode,
+    systemConfig,
+  };
 };
