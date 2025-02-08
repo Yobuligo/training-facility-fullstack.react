@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { ReactComponent as Admin } from "../../../assets/admin.svg";
 import { ReactComponent as Clock } from "../../../assets/clock.svg";
 import { ReactComponent as Grading } from "../../../assets/grading.svg";
 import { ReactComponent as Profile } from "../../../assets/profile.svg";
@@ -66,7 +67,7 @@ export const useDashboardContent = () => {
       },
       {
         content: <AdminSection />,
-        icon: <Training className={styles.icon} />,
+        icon: <Admin className={styles.icon} />,
         needsAdmin: true,
         path: AppRoutes.admin.toPath(),
         title: t(texts.dashboard.admin),
