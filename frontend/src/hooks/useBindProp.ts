@@ -1,18 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Value } from "../../../core/types/Value";
-import { useProfileDetailsSettings } from "../../../hooks/useProfileDetailsSettings";
-import { IProfileDetailsSettings } from "../../../model/IProfileDetailSettings";
+import { Value } from "../core/types/Value";
 
-function bindProp<T, K extends keyof T>(
+/**
+ * This hook is responsible for creating a binding for property {@link propName} of {@link value} to update the property value.
+ *
+ * It returns a tuple with the current property value for {@link propName} of {@link value} and the function to update the property value.
+ * The given function {@link setValue} is required for updating the underlying useState of {@link value}.
+ */
+export function useBindProp<T, K extends keyof T>(
   propName: K,
   value: T,
   setValue: (newValue: (previous: T) => T) => void
 ): [propValue: T[K], setPropValue: (newPropValue: T[K]) => void];
-function bindProp<T, K extends keyof T>(
+
+/**
+ * This hook is responsible for creating a binding for property {@link propName} of the tuple {@link value}s value to update the property value.
+ *
+ * It returns a tuple with the current property value for {@link propName} of the tuple {@link value}s value and the function to update the property value.
+ * {@link value} also contains a function {@link setValue} that is required for updating the underlying useState of {@link value}s value.
+ */
+export function useBindProp<T, K extends keyof T>(
   propName: K,
   value: Value<T>
 ): [propValue: T[K], setPropValue: (newPropValue: T[K]) => void];
-function bindProp<T, K extends keyof T>(
+
+export function useBindProp<T, K extends keyof T>(
   propName: K,
   first: unknown,
   second?: unknown
@@ -43,23 +55,3 @@ function bindProp<T, K extends keyof T>(
 
   return [propValue, setPropValue];
 }
-
-const value: IProfileDetailsSettings & { firstname: string } = {
-  collapseAddress: false,
-  collapseBank: false,
-  firstname: "Stacey",
-};
-
-bindProp("collapseBank", value, () => {});
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const [propValue2, setPropValue2] = bindProp(
-  "collapsePersonalInformation",
-  useProfileDetailsSettings()
-);
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const [propValue, setPropValue] = bindProp(
-  "collapseAddress",
-  useProfileDetailsSettings()
-);
-useBindProp();

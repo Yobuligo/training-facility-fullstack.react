@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import { AppContext } from "./context/AppContext";
 import { IDateTimeSpan } from "./core/services/date/IDateTimeSpan";
+import { useAdminSettingsStorage } from "./hooks/useAdminSettingsStorage";
 import { useProfileDetailsSettingsStorage } from "./hooks/useProfileDetailsSettingsStorage";
 import "./index.scss";
 import { useLanguageStorage } from "./lib/language/useLanguageStorage";
@@ -24,6 +25,7 @@ export const App: React.FC = () => {
   return (
     <AppContext.Provider
       value={{
+        adminSettings: useAdminSettingsStorage(),
         dateTimeSpanFilter: [dateTimeSpanFilter, setDateTimeSpanFilter],
         language: useLanguageStorage(),
         profileDetailsSettings: useProfileDetailsSettingsStorage(),

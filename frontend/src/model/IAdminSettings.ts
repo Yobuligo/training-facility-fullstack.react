@@ -1,3 +1,3 @@
 export interface IAdminSettings {
-  collapseWhatsAppGroups: boolean;
+  collapseWhatsAppGroups?: boolean;
 }
