@@ -20,6 +20,7 @@ import { UserTrialTraining } from "../model/UserTrialTraining";
 
 export const initializeModels = async (alter: boolean) => {
   const models: IHaveStaticAssociate[] = [
+    SystemConfig,
     Session,
     User,
     UserProfile,
@@ -36,7 +37,6 @@ export const initializeModels = async (alter: boolean) => {
     EventInstance,
     EventInstanceTrainer,
     EventRegistration,
-    SystemConfig,
   ];
 
   // create associations
