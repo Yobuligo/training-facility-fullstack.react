@@ -5,7 +5,11 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { IAdminSettings } from "../../../model/IAdminSettings";
+import { IProfileDetailsSettings } from "../../../model/IProfileDetailSettings";
 import { useAdminSectionViewModel } from "./useAdminSectionViewModel";
+
+
 
 export const AdminSection: React.FC = () => {
   const { t } = useTranslation();
