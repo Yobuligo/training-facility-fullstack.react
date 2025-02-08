@@ -20,7 +20,11 @@ export const AdminSection: React.FC = () => {
         {viewModel.isLoadSystemConfigRequestProcessing ? (
           <PageSpinner />
         ) : (
-          <CollapseCard title={t(texts.admin.whatsAppGroups.title)}>
+          <CollapseCard
+            collapsed={viewModel.adminSettings.collapseWhatsAppGroups}
+            onToggleCollapse={viewModel.onToggleCollapseWhatsAppGroups}
+            title={t(texts.admin.whatsAppGroups.title)}
+          >
             <LabeledInput
               disabled={viewModel.displayMode}
               label={t(texts.admin.whatsAppGroups.URLNews)}
