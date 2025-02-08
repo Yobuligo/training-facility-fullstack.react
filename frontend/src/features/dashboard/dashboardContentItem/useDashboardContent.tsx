@@ -30,13 +30,6 @@ export const useDashboardContent = () => {
         title: "",
       },
       {
-        content: <AdminSection />,
-        icon: <Training className={styles.icon} />,
-        needsAdmin: true,
-        path: AppRoutes.admin.toPath(),
-        title: t(texts.dashboard.admin),
-      },
-      {
         content: <UserProfileSection />,
         icon: <Users className={styles.icon} />,
         needsAdmin: true,
@@ -70,6 +63,13 @@ export const useDashboardContent = () => {
         needsAdmin: false,
         path: AppRoutes.profile.toPath(),
         title: t(texts.dashboard.profile),
+      },
+      {
+        content: <AdminSection />,
+        icon: <Training className={styles.icon} />,
+        needsAdmin: true,
+        path: AppRoutes.admin.toPath(),
+        title: t(texts.dashboard.admin),
       },
     ],
     [t]
