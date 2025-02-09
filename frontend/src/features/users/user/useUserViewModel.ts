@@ -554,6 +554,8 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
+
+  // 
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
       previous.collapseAddress = collapsed;
