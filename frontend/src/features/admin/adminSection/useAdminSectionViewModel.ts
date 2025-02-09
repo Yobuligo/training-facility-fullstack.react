@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SystemConfigApi } from "../../../api/SystemConfigApi";
+import { Value } from "../../../core/types/Value";
 import { useAdminSettings } from "../../../hooks/useAdminSettings";
 import { useBindProp } from "../../../hooks/useBindProp";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -11,7 +12,12 @@ export const useAdminSectionViewModel = () => {
   const [systemConfig, setSystemConfig] = useState<ISystemConfig | undefined>(
     undefined
   );
+  const [editedSystemConfig, setEditedSystemConfig] = useState<
+    ISystemConfig | undefined
+  >(undefined);
   const [loadSystemConfigRequest, isLoadSystemConfigRequestProcessing] =
+    useRequest();
+  const [saveSystemConfigRequest, isSaveSystemConfigRequestProcessing] =
     useRequest();
   const [collapseWhatsAppGroups, onToggleCollapseWhatsAppGroups] = useBindProp(
     "collapseWhatsAppGroups",
@@ -26,12 +32,41 @@ export const useAdminSectionViewModel = () => {
     })
   );
 
+  const restore = () => {};
+
+  const onRestore = () => restore();
+
+  const onSave = () => saveSystemConfigRequest(async () => {});
+
   return {
     collapseWhatsAppGroups,
     displayMode,
     isLoadSystemConfigRequestProcessing,
+    isSaveSystemConfigRequestProcessing,
+    onRestore,
+    onSave,
     onToggleCollapseWhatsAppGroups,
     setDisplayMode,
     systemConfig,
   };
+};
+
+const useMemento = <T>(
+  value: Value<T>,
+  config?: { onSave: (value: T) => void; onRestore: () => void }
+) => {
+  const [snapshot, setSnapShot] = useState(value[0]);
+
+  const save = () => {
+    value[1](snapshot);
+    config?.onSave(snapshot);
+  };
+
+  const restore = () => {
+    setSnapShot(value[0]);
+    config?.onRestore();
+  };
+
+  return [save, restore];
+  CONTINUE CODING
 };

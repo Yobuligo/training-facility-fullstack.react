@@ -14,6 +14,9 @@ export const AdminSection: React.FC = () => {
   return (
     <ChangeableForm
       displayMode={viewModel.displayMode}
+      displaySaveSpinner={viewModel.isSaveSystemConfigRequestProcessing}
+      onCancel={viewModel.onRestore}
+      onSave={viewModel.onSave}
       setDisplayMode={viewModel.setDisplayMode}
     >
       <CardList>
