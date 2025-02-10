@@ -476,6 +476,16 @@
 	# Story: WhatsApp group links can be loaded from database
 
 - Backlog
+	- Story: Delete field for bank institute
+	- Story: Add field client date (Mandatsdatum) to bank details
+		- type: Date
+	- Story: Add field client reference (Mandatsreference) to bank details
+		- type: string(20)
+	- Story: Add field kick technique break test (Kicktechnik Bruchtest) to guardian
+		- Display as dropdown with all kicks (Ap-Chagi, Dollyo-Chagi, etc.)
+		- Add "Not relevant" as option as well
+	- Epic: Seminar
+		- Story: Each pupil can add seminars he joined to		
 	- Epic: Administration tab
 		- Story: Administration tab can be selected
 		- Story: URLs for WhatsApp groups can be adjusted in admin tab

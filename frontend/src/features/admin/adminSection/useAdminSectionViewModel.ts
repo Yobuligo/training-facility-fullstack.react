@@ -1,38 +1,41 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SystemConfigApi } from "../../../api/SystemConfigApi";
-import { Value } from "../../../core/types/Value";
 import { useAdminSettings } from "../../../hooks/useAdminSettings";
 import { useBindProp } from "../../../hooks/useBindProp";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { ISystemConfig } from "../../../shared/model/ISystemConfig";
 
+const useMemento = <T>() => {
+  const [origin, setOrigin] = useState<T | undefined>(undefined);
+  const [snapshot, setSnapshot] = useState<T | undefined>(undefined)
 
-const useMemento = <T>(
-  value: Value<T>,
-  config?: { onSave: (value: T) => void; onRestore: () => void }
-) => {
-  const [snapshot, setSnapShot] = useState({ ...value[0] });
+  /**
+   * This function is responsible for initializing the origin value
+   */
+  const initialize = useCallback((origin: T) => {
+    setOrigin(origin);
+  }, []);
 
-  const save = () => {
-    value[1](snapshot);
-    config?.onSave(snapshot);
-  };
+  const restore = useCallback(() => {
 
-  const restore = (value: T) => {
-    setSnapShot(value);
-    config?.onRestore();
-  };
+  }, []);
 
-  return [save, restore];
+  const memento = useMemo(
+    () => ({ initialize, restore }),
+    [initialize, restore]
+  );
+
+  return memento;
 };
-
 
 export const useAdminSectionViewModel = () => {
   const [displayMode, setDisplayMode] = useState(true);
   const [systemConfig, setSystemConfig] = useState<ISystemConfig | undefined>(
     undefined
   );
+  const memento = useMemento<ISystemConfig>();
+
   const [editedSystemConfig, setEditedSystemConfig] = useState<
     ISystemConfig | undefined
   >(undefined);
@@ -50,12 +53,11 @@ export const useAdminSectionViewModel = () => {
       const systemConfigApi = new SystemConfigApi();
       const systemConfig = await systemConfigApi.findFirst();
       setSystemConfig(systemConfig);
+      memento.initialize(systemConfig);
     })
   );
 
-  const restore = () => {};
-
-  const onRestore = () => restore();
+  const onRestore = () => memento.restore();
 
   const onSave = () => saveSystemConfigRequest(async () => {});
 
@@ -71,4 +73,3 @@ export const useAdminSectionViewModel = () => {
     systemConfig,
   };
 };
-
