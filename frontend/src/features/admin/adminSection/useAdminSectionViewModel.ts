@@ -7,6 +7,27 @@ import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { ISystemConfig } from "../../../shared/model/ISystemConfig";
 
+
+const useMemento = <T>(
+  value: Value<T>,
+  config?: { onSave: (value: T) => void; onRestore: () => void }
+) => {
+  const [snapshot, setSnapShot] = useState({ ...value[0] });
+
+  const save = () => {
+    value[1](snapshot);
+    config?.onSave(snapshot);
+  };
+
+  const restore = (value: T) => {
+    setSnapShot(value);
+    config?.onRestore();
+  };
+
+  return [save, restore];
+};
+
+
 export const useAdminSectionViewModel = () => {
   const [displayMode, setDisplayMode] = useState(true);
   const [systemConfig, setSystemConfig] = useState<ISystemConfig | undefined>(
@@ -51,22 +72,3 @@ export const useAdminSectionViewModel = () => {
   };
 };
 
-const useMemento = <T>(
-  value: Value<T>,
-  config?: { onSave: (value: T) => void; onRestore: () => void }
-) => {
-  const [snapshot, setSnapShot] = useState(value[0]);
-
-  const save = () => {
-    value[1](snapshot);
-    config?.onSave(snapshot);
-  };
-
-  const restore = () => {
-    setSnapShot(value[0]);
-    config?.onRestore();
-  };
-
-  return [save, restore];
-  CONTINUE CODING
-};
