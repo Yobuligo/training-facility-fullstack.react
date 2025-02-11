@@ -21,6 +21,14 @@ const userBankAccount: ModelStatic<
     allowNull: true,
     type: DataTypes.STRING(100),
   },
+  mandateDate: {
+    allowNull: true,
+    type: DataTypes.DATE,
+  },
+  mandateReference: {
+    allowNull: true,
+    type: DataTypes.STRING(20),
+  },
 });
 
 export class UserBankAccount extends userBankAccount {
