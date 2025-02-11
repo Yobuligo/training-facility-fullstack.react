@@ -7,7 +7,7 @@ import { Grade } from "../../shared/types/Grade";
 export const useGradingSelectOptions = () => {
   const { t } = useTranslation();
 
-  const gradeOptions: ISelectOption<Grade>[] = useMemo(
+  const selectOptions = useMemo<ISelectOption<Grade>[]>(
     () => [
       { key: Grade.KUP9, text: t(texts.grads.kup9) },
       { key: Grade.KUP8, text: t(texts.grads.kup8) },
@@ -29,5 +29,5 @@ export const useGradingSelectOptions = () => {
     [t]
   );
 
-  return gradeOptions;
+  return selectOptions;
 };

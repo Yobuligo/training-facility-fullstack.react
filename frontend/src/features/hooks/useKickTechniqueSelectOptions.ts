@@ -4,7 +4,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { KickTechnique } from "../../shared/types/KickTechnique";
 
-export const useKickTechniqueSelectOption =
+export const useKickTechniqueSelectOptions =
   (): ISelectOption<KickTechnique>[] => {
     const { t } = useTranslation();
 

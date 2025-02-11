@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ValidationError } from "../../../core/errors/ValidationError";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { checkNotNull } from "../../../core/utils/checkNotNull";
@@ -22,11 +21,11 @@ import { UserInfo } from "../../../services/UserInfo";
 import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { IUserGuardian } from "../../../shared/model/IUserGuardian";
 import { AuthRole } from "../../../shared/types/AuthRole";
-import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
 import { KickTechnique } from "../../../shared/types/KickTechnique";
-import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
+import { useGenderSelectOptions } from "../../hooks/useGenderSelectOptions";
+import { useTariffSelectOptions } from "../../hooks/useTariffSelectOptions";
 import { useSendPasswordResetRequest } from "../hooks/useSendPasswordResetRequest";
 import { useSendUserInvite } from "../hooks/useSendUserInvite";
 import { IUserProps } from "./IUserProps";
@@ -279,30 +278,9 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   }, [onCancel, props.cancelSignal]);
 
-  const genderOptions: ISelectOption<Gender>[] = useMemo(
-    () => [
-      { key: Gender.FEMALE, text: t(texts.general.female) },
-      { key: Gender.MALE, text: t(texts.general.male) },
-    ],
-    [t]
-  );
+  const genderOptions = useGenderSelectOptions();
 
-  const tariffOptions: ISelectOption<Tariff>[] = useMemo(
-    () => [
-      { key: Tariff.TEENAGERS_ADULTS, text: t(texts.tariff.teenagersAdults) },
-      { key: Tariff.CHILDREN, text: t(texts.tariff.children) },
-      {
-        key: Tariff.TRAINEES_STUDENTS_PENSIONERS,
-        text: t(texts.tariff.traineeStudentsPensioner),
-      },
-      { key: Tariff.FAMILY_1, text: t(texts.tariff.family1) },
-      { key: Tariff.FAMILY_2, text: t(texts.tariff.family2) },
-      { key: Tariff.FAMILY_3, text: t(texts.tariff.family3) },
-      { key: Tariff.PRINCIPALS, text: t(texts.tariff.principals) },
-      { key: Tariff.RELATIVES, text: t(texts.tariff.relatives) },
-    ],
-    [t]
-  );
+  const tariffOptions = useTariffSelectOptions();
 
   const isPersistedUser =
     !(props.user instanceof DummyUser) || props.user.isPersisted === true;

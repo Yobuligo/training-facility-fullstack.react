@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGradingSelectOptions } from "../../hooks/useGradingSelectOption";
+import { useGradingSelectOptions } from "../../hooks/useGradingSelectOptions";
 import { Grade } from "../../../shared/types/Grade";
 import { IGradingInputsProps } from "./IGradingInputsProps";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useGradingSelectOptions } from "../../hooks/useGradingSelectOption";
-import { useKickTechniqueSelectOption } from "../../hooks/useKickTechniqueSelectOption";
+import { useGradingSelectOptions } from "../../hooks/useGradingSelectOptions";
+import { useKickTechniqueSelectOptions } from "../../hooks/useKickTechniqueSelectOptions";
 import { Grade } from "../../../shared/types/Grade";
 import { KickTechnique } from "../../../shared/types/KickTechnique";
 import { IGradingAddFormProps } from "./IGradingAddFormProps";
@@ -16,7 +16,7 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
 
   const gradeOptions = useGradingSelectOptions();
 
-  const kickTechniqueOptions = useKickTechniqueSelectOption();
+  const kickTechniqueOptions = useKickTechniqueSelectOptions();
 
   const onChangeAchievedAt = (newValue: string) =>
     setAchievedAt(new Date(newValue));
