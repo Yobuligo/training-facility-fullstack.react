@@ -191,7 +191,7 @@
     "gradingItem": {
         "achievedAt": "Achieved At",
         "examiners": "Examiners",
-        "kickTechnique": "Kick technique break test"
+        "kickTechnique": "Kick break test"
     },
     "gradingList": {
         "noGradingsAvailable": "You have no gradings yet."
@@ -219,6 +219,7 @@
     },
     "kickTechnique": {
         "notRelevant": "Not relevant",
+        "notSpecified": "Not specified",
         "apChagi": "Ap-Chagi",
         "dollyochagi": "Dollyo-Chagi",
         "pandaeChagi": "Pandae-Chagi",

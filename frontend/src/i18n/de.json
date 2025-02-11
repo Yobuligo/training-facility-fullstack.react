@@ -191,7 +191,7 @@
     "gradingItem": {
         "achievedAt": "Erreicht am",
         "examiners": "Prüfer",
-        "kickTechnique": "Kicktechnik Bruchtest"
+        "kickTechnique": "Kick Bruchtest"
     },
     "gradingList": {
         "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
@@ -218,7 +218,8 @@
         "dan7": "VII. Dan"
     },
     "kickTechnique": {
-        "notRelevant": "Not relevant",
+        "notRelevant": "Nicht relevant",
+        "notSpecified": "Nicht angegeben",
         "apChagi": "Ap-Chagi",
         "dollyochagi": "Dollyo-Chagi",
         "pandaeChagi": "Pandae-Chagi",

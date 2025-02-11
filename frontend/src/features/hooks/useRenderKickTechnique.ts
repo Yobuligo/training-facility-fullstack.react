@@ -8,7 +8,7 @@ export const useRenderKickTechnique = () => {
   const render = (kickTechnique: KickTechnique): string => {
     switch (kickTechnique) {
       case KickTechnique.NOT_RELEVANT:
-        return t(texts.kickTechnique.notRelevant);
+        return t(texts.kickTechnique.notSpecified);
       case KickTechnique.AP:
         return t(texts.kickTechnique.apChagi);
       case KickTechnique.DOLLYO:
@@ -23,6 +23,8 @@ export const useRenderKickTechnique = () => {
         return t(texts.kickTechnique.naeryoChagi);
       case KickTechnique.DYT:
         return t(texts.kickTechnique.dytChagi);
+      default:
+        return t(texts.kickTechnique.notSpecified);
     }
   };
 
