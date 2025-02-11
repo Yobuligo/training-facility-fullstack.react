@@ -55,7 +55,7 @@ export const useAdminSectionViewModel = () => {
     saveSystemConfigRequest(async () => {
       const systemConfigApi = new SystemConfigApi();
       await systemConfigApi.update(systemConfigMemento.value);
-      systemConfigMemento.save();
+      systemConfigMemento.apply();
     });
 
   return {

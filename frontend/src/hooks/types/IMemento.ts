@@ -10,6 +10,11 @@ export interface IMemento<T> {
   readonly value: T;
 
   /**
+   * Applies the changes and updates the snapshot with the current {@link value}.
+   */
+  apply(): void;
+
+  /**
    * Overrides the current changes and the snapshot by {@link newValue}. So withdraws any changes.
    */
   override(newValue: T): void;
@@ -18,11 +23,6 @@ export interface IMemento<T> {
    * Restores the {@link value} by the last snapshot.
    */
   restore(): void;
-
-  /**
-   * Applies the changes and updates the snapshot with the current {@link value}.
-   */
-  save(): void;
 
   /**
    * Updates the current {@link value}.
