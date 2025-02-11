@@ -327,6 +327,8 @@
         "isTrainer": "Ist Trainer",
         "joinedOn": "Beigetreten am",
         "lastname": "Nachname",
+        "mandateDate": "Mandatsdatum",
+        "mandateReference": "Mandatsreferenz",
         "personalInformation": "Persönliche Informationen",
         "phone": "Telefon",
         "postalCode": "Postleitzahl",

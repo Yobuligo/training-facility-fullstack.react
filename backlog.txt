@@ -477,13 +477,15 @@
 	# Epic: Administration tab
 		# Story: Administration tab can be selected
 		# Story: URLs for WhatsApp groups can be adjusted in admin tab
-
-- Backlog
-	- Story: Delete field for bank institute
+	# Story: Delete field for bank institute
 	- Story: Add field client date (Mandatsdatum) to bank details
 		- type: Date
 	- Story: Add field client reference (Mandatsreference) to bank details
 		- type: string(20)
+
+	- Story: Delete field for bank institute from db
+
+- Backlog
 	- Story: Add field kick technique break test (Kicktechnik Bruchtest) to guardian
 		- Display as dropdown with all kicks (Ap-Chagi, Dollyo-Chagi, etc.)
 		- Add "Not relevant" as option as well

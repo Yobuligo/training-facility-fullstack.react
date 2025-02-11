@@ -110,6 +110,14 @@ export const useUserViewModel = (props: IUserProps) => {
   const [bankAccountBIC, setBankAccountBIC] = useState(
     userProfile.userBankAccount?.bankAccountBIC ?? ""
   );
+  const [mandateDate, setMandateDate] = useState(
+    userProfile.userBankAccount?.mandateDate
+      ? DateTime.toDate(userProfile.userBankAccount?.mandateDate)
+      : ""
+  );
+  const [mandateReference, setMandateReference] = useState(
+    userProfile.userBankAccount?.mandateReference ?? ""
+  );
   const [isLocked, setIsLocked] = useState(props.user.isLocked);
   const [lockedAt, setLockedAt] = useState(props.user.lockedAt);
   const [collapseBank, setCollapseBank] = useState(false);
@@ -183,6 +191,12 @@ export const useUserViewModel = (props: IUserProps) => {
     setBankAccountBIC(userProfile.userBankAccount?.bankAccountBIC ?? "");
     setBankAccountIBAN(userProfile.userBankAccount?.bankAccountIBAN ?? "");
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
+    setMandateDate(
+      userProfile.userBankAccount?.mandateDate
+        ? DateTime.toDate(userProfile.userBankAccount?.mandateDate)
+        : ""
+    );
+    setMandateReference(userProfile.userBankAccount?.mandateReference ?? "");
 
     setContactOptionEmail(userContactOptions?.email ?? false);
     setContactOptionHomepagePhotos(userContactOptions?.homepagePhotos ?? false);
@@ -222,6 +236,8 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount?.bankAccountBIC,
     userProfile.userBankAccount?.bankAccountIBAN,
     userProfile.userBankAccount?.bankAccountOwner,
+    userProfile.userBankAccount?.mandateDate,
+    userProfile.userBankAccount?.mandateReference,
     userProfile.userGradings,
     userProfile.joinedOn,
     userProfile.resignedAt,
@@ -390,7 +406,9 @@ export const useUserViewModel = (props: IUserProps) => {
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||
     isNotInitial(bankAccountIBAN) ||
-    isNotInitial(bankAccountOwner);
+    isNotInitial(bankAccountOwner) ||
+    isNotInitial(mandateDate) ||
+    isNotInitial(mandateReference);
 
   const updateUserBankAccount = () => {
     // if userBankAccount was not created yet, check if it is required, create userBankAccount
@@ -400,6 +418,8 @@ export const useUserViewModel = (props: IUserProps) => {
         bankAccountBIC,
         bankAccountIBAN,
         bankAccountOwner,
+        mandateDate: DateTime.create(mandateDate, "12:00"),
+        mandateReference,
         userProfileId: userProfile.id,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -416,6 +436,11 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.userBankAccount.bankAccountBIC = bankAccountBIC;
     userProfile.userBankAccount.bankAccountIBAN = bankAccountIBAN;
     userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
+    userProfile.userBankAccount.mandateDate = DateTime.create(
+      mandateDate,
+      "12:00"
+    );
+    userProfile.userBankAccount.mandateReference = mandateReference;
   };
 
   const updateUserContactOptions = () => {
@@ -697,6 +722,8 @@ export const useUserViewModel = (props: IUserProps) => {
     lastInvitedAt,
     lastname,
     lastnameError,
+    mandateDate,
+    mandateReference,
     onAddGrading,
     onCancel,
     onChangeBirthday,
@@ -750,6 +777,8 @@ export const useUserViewModel = (props: IUserProps) => {
     setGender,
     setIsAdmin,
     setIsTrainer,
+    setMandateDate,
+    setMandateReference,
     setPhone,
     setStreet,
     setTariff,

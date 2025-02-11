@@ -27,7 +27,7 @@ const userBankAccount: ModelStatic<
   },
   mandateReference: {
     allowNull: true,
-    type: DataTypes.STRING(20),
+    type: DataTypes.STRING(35),
   },
 });
 

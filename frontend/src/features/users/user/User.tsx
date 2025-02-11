@@ -301,6 +301,24 @@ export const User: React.FC<IUserProps> = (props) => {
               onChange={viewModel.setBankAccountBIC}
               value={viewModel.bankAccountBIC}
             />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.mandateDate)}
+              type="date"
+              onChange={viewModel.setMandateDate}
+              value={viewModel.mandateDate}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              isOptional={true}
+              label={t(texts.user.mandateReference)}
+              maxLength={35}
+              onChange={viewModel.setMandateReference}
+              value={viewModel.mandateReference}
+            />
           </CollapseCard>
         )}
 
