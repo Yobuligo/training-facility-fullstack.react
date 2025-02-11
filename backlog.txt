@@ -474,6 +474,9 @@
 		# Story: Click on logo must navigate to the dashboard page
 	# Story: Extend invite email by adding whatsapp groups
 	# Story: WhatsApp group links can be loaded from database
+	# Epic: Administration tab
+		# Story: Administration tab can be selected
+		# Story: URLs for WhatsApp groups can be adjusted in admin tab
 
 - Backlog
 	- Story: Delete field for bank institute
@@ -486,9 +489,6 @@
 		- Add "Not relevant" as option as well
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to		
-	- Epic: Administration tab
-		- Story: Administration tab can be selected
-		- Story: URLs for WhatsApp groups can be adjusted in admin tab
 	- Story: Navigate to training from home screen
 		- The training details are displayed when clicking a training at the home screen
 		- The home screen will be displayed again when navigating back	

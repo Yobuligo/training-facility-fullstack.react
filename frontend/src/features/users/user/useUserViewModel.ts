@@ -110,9 +110,6 @@ export const useUserViewModel = (props: IUserProps) => {
   const [bankAccountBIC, setBankAccountBIC] = useState(
     userProfile.userBankAccount?.bankAccountBIC ?? ""
   );
-  const [bankAccountInstitution, setBankAccountInstitution] = useState(
-    userProfile.userBankAccount?.bankAccountInstitution ?? ""
-  );
   const [isLocked, setIsLocked] = useState(props.user.isLocked);
   const [lockedAt, setLockedAt] = useState(props.user.lockedAt);
   const [collapseBank, setCollapseBank] = useState(false);
@@ -185,9 +182,6 @@ export const useUserViewModel = (props: IUserProps) => {
 
     setBankAccountBIC(userProfile.userBankAccount?.bankAccountBIC ?? "");
     setBankAccountIBAN(userProfile.userBankAccount?.bankAccountIBAN ?? "");
-    setBankAccountInstitution(
-      userProfile.userBankAccount?.bankAccountInstitution ?? ""
-    );
     setBankAccountOwner(userProfile.userBankAccount?.bankAccountOwner ?? "");
 
     setContactOptionEmail(userContactOptions?.email ?? false);
@@ -227,7 +221,6 @@ export const useUserViewModel = (props: IUserProps) => {
     userProfile.city,
     userProfile.userBankAccount?.bankAccountBIC,
     userProfile.userBankAccount?.bankAccountIBAN,
-    userProfile.userBankAccount?.bankAccountInstitution,
     userProfile.userBankAccount?.bankAccountOwner,
     userProfile.userGradings,
     userProfile.joinedOn,
@@ -397,7 +390,6 @@ export const useUserViewModel = (props: IUserProps) => {
   const needsCreateUserBankAccount = (): boolean =>
     isNotInitial(bankAccountBIC) ||
     isNotInitial(bankAccountIBAN) ||
-    isNotInitial(bankAccountInstitution) ||
     isNotInitial(bankAccountOwner);
 
   const updateUserBankAccount = () => {
@@ -407,7 +399,6 @@ export const useUserViewModel = (props: IUserProps) => {
         id: uuid(),
         bankAccountBIC,
         bankAccountIBAN,
-        bankAccountInstitution,
         bankAccountOwner,
         userProfileId: userProfile.id,
         createdAt: new Date(),
@@ -424,7 +415,6 @@ export const useUserViewModel = (props: IUserProps) => {
     // update user bank account
     userProfile.userBankAccount.bankAccountBIC = bankAccountBIC;
     userProfile.userBankAccount.bankAccountIBAN = bankAccountIBAN;
-    userProfile.userBankAccount.bankAccountInstitution = bankAccountInstitution;
     userProfile.userBankAccount.bankAccountOwner = bankAccountOwner;
   };
 
@@ -554,8 +544,7 @@ export const useUserViewModel = (props: IUserProps) => {
     }
   };
 
-
-  // 
+  //
   const onToggleCollapseAddress = (collapsed: boolean) =>
     setProfileDetailsSettings((previous) => {
       previous.collapseAddress = collapsed;
@@ -667,7 +656,6 @@ export const useUserViewModel = (props: IUserProps) => {
   return {
     bankAccountBIC,
     bankAccountIBAN,
-    bankAccountInstitution,
     bankAccountOwner,
     birthday,
     birthdayError,
@@ -738,7 +726,6 @@ export const useUserViewModel = (props: IUserProps) => {
     resignedAt,
     setBankAccountBIC,
     setBankAccountIBAN,
-    setBankAccountInstitution,
     setBankAccountOwner,
     setCity,
     setCollapseBank,

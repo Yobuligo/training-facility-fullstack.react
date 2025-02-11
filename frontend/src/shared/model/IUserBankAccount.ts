@@ -8,5 +8,4 @@ export interface IUserBankAccount extends IEntity, IHaveUserProfileId {
   bankAccountOwner: string;
   bankAccountIBAN: string;
   bankAccountBIC: string;
-  bankAccountInstitution: string;
 }

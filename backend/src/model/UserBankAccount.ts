@@ -17,10 +17,6 @@ const userBankAccount: ModelStatic<
     allowNull: true,
     type: DataTypes.STRING(34),
   },
-  bankAccountInstitution: {
-    allowNull: true,
-    type: DataTypes.STRING(50),
-  },
   bankAccountOwner: {
     allowNull: true,
     type: DataTypes.STRING(100),

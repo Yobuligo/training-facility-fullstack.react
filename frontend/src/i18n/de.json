@@ -287,7 +287,6 @@
         "bankAccountOwner": "Kontoinhaber",
         "bankAccountIBAN": "IBAN",
         "bankAccountBIC": "BIC",
-        "bankAccountInstitution": "Institut",
         "birthday": "Geburtstag",
         "contactOptions": "Kontaktmöglichkeiten",
         "city": "Stadt",
