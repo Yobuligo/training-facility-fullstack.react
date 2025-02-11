@@ -487,8 +487,16 @@
 
 - Backlog
 	- Story: Add field kick technique break test (Kicktechnik Bruchtest) to guardian
-		- Display as dropdown with all kicks (Ap-Chagi, Dollyo-Chagi, etc.)
-		- Add "Not relevant" as option as well
+		- Display as dropdown with the following options: 
+			- not relevant
+			- Ap-Chagi
+			- Dollyo-Chagi
+			- ...
+		- Kick technique must be selectable when adding it
+		- Kick technique must be displayed for added gradings
+	- Bug: Grading select options are not centralized
+		- Search for "{ key: Grade.KUP9, text: t(texts.grads.kup9) },"
+		- Grading select options are centralized as hook
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to		
 	- Story: Navigate to training from home screen
