@@ -1,6 +1,6 @@
 import { Collapse } from "../../../components/collapse/Collapse";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
-import { useRenderGrade } from "../../../hooks/useRenderGrade";
+import { useRenderGrade } from "../../hooks/useRenderGrade";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { GradingInputs } from "../gradingInputs/GradingInputs";
