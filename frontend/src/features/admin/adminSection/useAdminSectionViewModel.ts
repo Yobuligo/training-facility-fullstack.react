@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { SystemConfigApi } from "../../../api/SystemConfigApi";
 import { useAdminSettings } from "../../../hooks/useAdminSettings";
 import { useBindProp } from "../../../hooks/useBindProp";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -7,6 +6,7 @@ import { useMemento } from "../../../hooks/useMemento";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummySystemConfig } from "../../../model/DummySystemConfig";
 import { ISystemConfig } from "../../../shared/model/ISystemConfig";
+import { SystemConfigApi } from "./../../../api/SystemConfigApi";
 
 export const useAdminSectionViewModel = () => {
   const [displayMode, setDisplayMode] = useState(true);
@@ -53,6 +53,8 @@ export const useAdminSectionViewModel = () => {
 
   const onSave = () =>
     saveSystemConfigRequest(async () => {
+      const systemConfigApi = new SystemConfigApi();
+      await systemConfigApi.update(systemConfigMemento.value);
       systemConfigMemento.save();
     });
 
