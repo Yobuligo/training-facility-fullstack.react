@@ -10,18 +10,18 @@ export const useMemento = <T>(origin: T): IMemento<T> => {
   const [snapshot, setSnapshot] = useState({ ...value });
 
   /**
+   * Applies the changes by updating the snapshot with the current state.
+   */
+  const apply = useCallback(() => {
+    setSnapshot({ ...value });
+  }, [value]);
+
+  /**
    * Restores the value by the last snapshot
    */
   const restore = useCallback(() => {
     setValue({ ...snapshot });
   }, [setValue, snapshot]);
-
-  /**
-   * Saves the changes by updating the snapshot with the current state.
-   */
-  const save = useCallback(() => {
-    setSnapshot({ ...value });
-  }, [value]);
 
   /**
    * Overrides the current changes by resetting the value and the snapshot.
@@ -40,8 +40,8 @@ export const useMemento = <T>(origin: T): IMemento<T> => {
   const toValue = useCallback((): Value<T> => [value, setValue], [value]);
 
   const memento = useMemo(
-    () => ({ override, restore, save, setValue, toValue, value }),
-    [override, restore, save, toValue, value]
+    () => ({ apply, override, restore, setValue, toValue, value }),
+    [apply, override, restore, toValue, value]
   );
 
   return memento;
