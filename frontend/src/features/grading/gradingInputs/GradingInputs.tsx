@@ -29,6 +29,14 @@ export const GradingInputs: React.FC<IGradingInputsProps> = (props) => {
         onSelect={viewModel.onGradeChange}
       />
 
+      <LabeledSelect
+        disabled={props.displayMode}
+        label={t(texts.gradingItem.kickTechnique)}
+        options={viewModel.kickTechniqueOptions}
+        value={viewModel.kickTechnique}
+        onSelect={viewModel.onKickTechniqueChange}
+      />
+
       <LabeledInput
         disabled={props.displayMode}
         label={t(texts.general.place)}

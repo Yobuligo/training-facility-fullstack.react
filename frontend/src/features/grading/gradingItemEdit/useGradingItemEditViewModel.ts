@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Grade } from "../../../shared/types/Grade";
+import { KickTechnique } from "../../../shared/types/KickTechnique";
 import { IGradingItemEditProps } from "./IGradingItemEditProps";
 
 export const useGradingItemEditViewModel = (props: IGradingItemEditProps) => {
@@ -24,6 +25,11 @@ export const useGradingItemEditViewModel = (props: IGradingItemEditProps) => {
     publishChange();
   };
 
+  const onKickTechniqueChange = (kickTechnique: KickTechnique) => {
+    props.grading.kickTechnique = kickTechnique;
+    publishChange();
+  };
+
   const onPlaceChange = (place: string) => {
     props.grading.place = place;
     publishChange();
@@ -35,6 +41,7 @@ export const useGradingItemEditViewModel = (props: IGradingItemEditProps) => {
     onDelete,
     onExaminersChange,
     onGradeChange,
+    onKickTechniqueChange,
     onPlaceChange,
     setCollapse,
   };

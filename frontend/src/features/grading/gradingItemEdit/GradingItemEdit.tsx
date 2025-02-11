@@ -27,10 +27,12 @@ export const GradingItemEdit: React.FC<IGradingItemEditProps> = (props) => {
             displayMode={props.displayMode}
             examiners={props.grading.examiners}
             grade={props.grading.grade}
+            kickTechnique={props.grading.kickTechnique}
             place={props.grading.place}
             onAchievedAtChange={viewModel.onAchievedAtChange}
             onExaminersChange={viewModel.onExaminersChange}
             onGradeChange={viewModel.onGradeChange}
+            onKickTechniqueChange={viewModel.onKickTechniqueChange}
             onPlaceChange={viewModel.onPlaceChange}
           />
           <div className={styles.deleteButton}>
