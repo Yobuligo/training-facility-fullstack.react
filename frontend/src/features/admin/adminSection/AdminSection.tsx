@@ -31,17 +31,20 @@ export const AdminSection: React.FC = () => {
             <LabeledInput
               disabled={viewModel.displayMode}
               label={t(texts.admin.whatsAppGroups.URLNews)}
-              value={viewModel.systemConfigMemento.value?.whatsAppURLNews}
+              onChange={viewModel.setWhatsAppURLNews}
+              value={viewModel.whatsAppURLNews}
             />
             <LabeledInput
               disabled={viewModel.displayMode}
               label={t(texts.admin.whatsAppGroups.URLKids)}
-              value={viewModel.systemConfigMemento.value?.whatsAppURLKids}
+              onChange={viewModel.setWhatsAppURLKids}
+              value={viewModel.whatsAppURLKids}
             />
             <LabeledInput
               disabled={viewModel.displayMode}
               label={t(texts.admin.whatsAppGroups.URLCommunity)}
-              value={viewModel.systemConfigMemento.value?.whatsAppURLCommunity}
+              onChange={viewModel.setWhatsAppURLCommunity}
+              value={viewModel.whatsAppURLCommunity}
             />
           </CollapseCard>
         )}
