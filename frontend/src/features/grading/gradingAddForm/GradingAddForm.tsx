@@ -30,6 +30,16 @@ export const GradingAddForm: React.FC<IGradingAddFormProps> = (props) => {
           onSelect={(grade) => viewModel.setGrade(grade)}
         />
 
+        <LabeledSelect
+          disabled={props.displayMode}
+          label={t(texts.gradingItem.kickTechnique)}
+          options={viewModel.kickTechniqueOptions}
+          value={viewModel.kickTechnique}
+          onSelect={(kickTechnique) =>
+            viewModel.setKickTechnique(kickTechnique)
+          }
+        />
+
         <LabeledInput
           disabled={props.displayMode}
           label={t(texts.general.place)}

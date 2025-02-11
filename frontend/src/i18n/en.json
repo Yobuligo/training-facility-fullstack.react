@@ -190,7 +190,8 @@
     },
     "gradingItem": {
         "achievedAt": "Achieved At",
-        "examiners": "Examiners"
+        "examiners": "Examiners",
+        "kickTechnique": "Kick technique break test"
     },
     "gradingList": {
         "noGradingsAvailable": "You have no gradings yet."
@@ -215,6 +216,16 @@
         "dan5": "V. Dan",
         "dan6": "VI. Dan",
         "dan7": "VII. Dan"
+    },
+    "kickTechnique": {
+        "notRelevant": "Not relevant",
+        "apChagi": "Ap-Chagi",
+        "dollyochagi": "Dollyo-Chagi",
+        "pandaeChagi": "Pandae-Chagi",
+        "bituroChagi": "Bituro-Chagi",
+        "yopChagi": "Yop-Chagi",
+        "naeryoChagi": "Naeryo-Chagi",
+        "dytChagi": "Dit-Chagi"
     },
     "language": {
         "de": "Deutsch",

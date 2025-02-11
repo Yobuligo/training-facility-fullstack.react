@@ -478,10 +478,10 @@
 		# Story: Administration tab can be selected
 		# Story: URLs for WhatsApp groups can be adjusted in admin tab
 	# Story: Delete field for bank institute
-	- Story: Add field client date (Mandatsdatum) to bank details
-		- type: Date
-	- Story: Add field client reference (Mandatsreference) to bank details
-		- type: string(20)
+	# Story: Add field client date (Mandatsdatum) to bank details
+		# type: Date
+	# Story: Add field client reference (Mandatsreference) to bank details
+		# type: string(35)
 
 	- Story: Delete field for bank institute from db
 

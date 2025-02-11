@@ -12,6 +12,7 @@ const userGrading: ModelStatic<
   achievedAt: DataTypes.DATE,
   examiners: DataTypes.STRING,
   grade: DataTypes.INTEGER,
+  kickTechnique: DataTypes.INTEGER,
   place: DataTypes.STRING(50),
 });
 

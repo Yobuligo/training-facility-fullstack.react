@@ -1,14 +1,19 @@
 import { useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
+import { useKickTechniqueSelectOption } from "../../../hooks/useKickTechniqueSelectOption";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { Grade } from "../../../shared/types/Grade";
+import { KickTechnique } from "../../../shared/types/KickTechnique";
 import { IGradingAddFormProps } from "./IGradingAddFormProps";
 
 export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   const { t } = useTranslation();
   const [achievedAt, setAchievedAt] = useState<Date>(new Date());
   const [grade, setGrade] = useState<Grade>(Grade.KUP9);
+  const [kickTechnique, setKickTechnique] = useState<KickTechnique>(
+    KickTechnique.NOT_RELEVANT
+  );
   const [examiners, setExaminers] = useState("");
   const [place, setPlace] = useState("");
 
@@ -34,6 +39,8 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
     [t]
   );
 
+  const kickTechniqueOptions = useKickTechniqueSelectOption();
+
   const onChangeAchievedAt = (newValue: string) =>
     setAchievedAt(new Date(newValue));
 
@@ -48,7 +55,7 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
   };
 
   const onConfirm = () => {
-    props.onAddGrading?.(achievedAt, grade, place, examiners);
+    props.onAddGrading?.(achievedAt, grade, kickTechnique, place, examiners);
     reset();
   };
 
@@ -57,12 +64,15 @@ export const useGradingAddFormViewModel = (props: IGradingAddFormProps) => {
     examiners,
     grade,
     gradeOptions,
+    kickTechnique,
+    kickTechniqueOptions,
     onChangeAchievedAt,
     onConfirm,
     onSubmit,
     place,
     setExaminers,
     setGrade,
+    setKickTechnique,
     setPlace,
   };
 };

@@ -24,6 +24,7 @@ import { IUserGuardian } from "../../../shared/model/IUserGuardian";
 import { AuthRole } from "../../../shared/types/AuthRole";
 import { Gender } from "../../../shared/types/Gender";
 import { Grade } from "../../../shared/types/Grade";
+import { KickTechnique } from "../../../shared/types/KickTechnique";
 import { Tariff } from "../../../shared/types/Tariff";
 import { uuid } from "../../../utils/uuid";
 import { useSendPasswordResetRequest } from "../hooks/useSendPasswordResetRequest";
@@ -326,6 +327,7 @@ export const useUserViewModel = (props: IUserProps) => {
   const onAddGrading = (
     achievedAt: Date,
     grade: Grade,
+    kickTechnique: KickTechnique,
     place: string,
     examiners: string
   ) => {
@@ -336,6 +338,7 @@ export const useUserViewModel = (props: IUserProps) => {
         achievedAt: achievedAt.toISOString() as unknown as Date,
         examiners,
         grade,
+        kickTechnique,
         place,
         createdAt: new Date(),
         updatedAt: new Date(),
