@@ -8,15 +8,20 @@ import { IEventInstanceListProps } from "./IEventInstanceListProps";
 export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
   const { t } = useTranslation();
 
-  const items = props.eventInstanceItemModelAndRoles.map((eventInstanceItemModel) => (
-    <EventInstanceItemAligned
-      key={eventInstanceItemModel.id}
-      eventInstanceItemModel={eventInstanceItemModel}
-      renderChildrenInline={true}
-    >
-      {props.renderChild && props.renderChild(eventInstanceItemModel)}
-    </EventInstanceItemAligned>
-  ));
+  const items = props.eventInstanceItemModelAndRoles.map(
+    (eventInstanceItemModel) => (
+      <EventInstanceItemAligned
+        key={eventInstanceItemModel.id}
+        eventInstanceItemModel={eventInstanceItemModel}
+        renderChildrenInline={true}
+        onClick={() => {
+          props.onClick?.(eventInstanceItemModel);
+        }}
+      >
+        {props.renderChild && props.renderChild(eventInstanceItemModel)}
+      </EventInstanceItemAligned>
+    )
+  );
 
   return (
     <div className={styles.eventInstanceList}>

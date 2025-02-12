@@ -3,6 +3,7 @@ import { IEventInstanceItemModelAndRole } from "../../../shared/model/IEventInst
 
 export interface IEventInstanceListProps {
   eventInstanceItemModelAndRoles: IEventInstanceItemModelAndRole[];
+  onClick?: (eventInstanceItem: IEventInstanceItemModelAndRole) => void;
   renderChild?: (
     eventInstanceItemModelAndRole: IEventInstanceItemModelAndRole
   ) => ReactNode;
