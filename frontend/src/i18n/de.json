@@ -191,7 +191,7 @@
     "gradingItem": {
         "achievedAt": "Erreicht am",
         "examiners": "Prüfer",
-        "kickTechnique": "Kick Bruchtest"
+        "kickTechnique": "Kick-Bruchtest"
     },
     "gradingList": {
         "noGradingsAvailable": "Bisher hast du noch keine Prüfung absolviert."
