@@ -14,10 +14,10 @@ export const GradingItem: React.FC<IGradingItemProps> = (props) => {
   return (
     <div className={styles.gradingItem}>
       <div className={styles.header}>
-        <BeltAndDate
-          achievedAt={props.grading.achievedAt}
-          grade={props.grading.grade}
-        />
+          <BeltAndDate
+            achievedAt={props.grading.achievedAt}
+            grade={props.grading.grade}
+          />
         <div className={styles.grade}>{renderGrade(props.grading.grade)}</div>
       </div>
       <div className={styles.details}>
