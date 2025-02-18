@@ -15,7 +15,7 @@ export const useDateTimeSpanFilter = (): [
   const context = useContext(AppContext);
 
   /**
-   * Updates the default view, which is otherwise derived from AppConfig.
+   * Updates the default view, which is otherwise derived from AppConfig, and sets it to the given view {@link view}.
    */
   const updateView = (view: View) => {
     const dateTimeSpanFilter = SP.fetch(DateTimeSpanFilter);
