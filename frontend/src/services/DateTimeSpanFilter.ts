@@ -9,8 +9,10 @@ import { IDateTimeSpanFilter } from "./IDateTimeSpanFilter";
  * It is used to define the default *from* and *to* value depending on the big calendar *view*, which might be *day* or *week* and set in the AppConfig.
  */
 export class DateTimeSpanFilter implements IDateTimeSpanFilter {
+  private defaultView: View | undefined = undefined;
+
   get from(): Date {
-    switch (this.deriveViewFromConfig()) {
+    switch (this.deriveView()) {
       case "day": {
         return DateTime.getDayStartDate(new Date());
       }
@@ -26,7 +28,7 @@ export class DateTimeSpanFilter implements IDateTimeSpanFilter {
   }
 
   get to(): Date {
-    switch (this.deriveViewFromConfig()) {
+    switch (this.deriveView()) {
       case "day": {
         return DateTime.getDayEndDate(new Date());
       }
@@ -42,7 +44,15 @@ export class DateTimeSpanFilter implements IDateTimeSpanFilter {
   }
 
   get view(): View {
-    return this.deriveViewFromConfig();
+    return this.deriveView();
+  }
+
+  overrideView(view: View | undefined): void {
+    this.defaultView = view;
+  }
+
+  private deriveView(): View {
+    return this.defaultView ?? this.deriveViewFromConfig();
   }
 
   private deriveViewFromConfig(): View {

@@ -22,4 +22,9 @@ export interface IDateTimeSpanFilter {
    * E.g. returns *day* or *week*.
    */
   readonly view: View;
+
+  /**
+   * Overrides the default view which is derived from the AppConfig by the new value {@link view}.
+   */
+  overrideView(view: View): void;
 }

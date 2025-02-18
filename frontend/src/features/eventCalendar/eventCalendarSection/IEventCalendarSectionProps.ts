@@ -31,5 +31,8 @@ export interface IEventCalendarSectionProps {
    */
   renderEventStyle?: (calendarEvent: ICalendarEvent) => React.CSSProperties;
 
+  /**
+   * Provides the supported views for this calendar (e.g. day, week)
+   */
   views?: ViewsProps<ICalendarEvent, any>;
 }

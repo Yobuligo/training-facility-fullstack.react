@@ -485,7 +485,7 @@
 	# Bug: Grading select options are not centralized
 		# Search for "{ key: Grade.KUP9, text: t(texts.grads.kup9) },"
 		# Grading select options are centralized as hook
-	- Epic: Kick Technique
+	# Epic: Kick Technique
 		# Story: Add field kick technique break test (Kicktechnik Bruchtest) to guardian
 			# Display as dropdown with the following options: 
 				# not relevant
@@ -496,18 +496,17 @@
 		# Story: Kick technique must be changeable from user profile admin view
 			# Must be persisted when saving
 			# Must be restored when withdrawing changes
-		- Story: Kick technique must be displayed in user profile view mode
+		# Story: Kick technique must be displayed in user profile view mode
+	- Story: Navigate to training details from home screen
+		- The training details are displayed when clicking a training at the home screen
+		# The home screen will be displayed again when navigating back	
 
 	- Story: Delete field for bank institute from db
 
-- Backlog
-		
-	- Epic: Seminar
-		- Story: Each pupil can add seminars he joined to		
-	- Story: Navigate to training from home screen
-		- The training details are displayed when clicking a training at the home screen
-		- The home screen will be displayed again when navigating back	
+- Backlog		
 	- Story: Default view for calendar of training overview must be set to week
+	- Epic: Seminar
+		- Story: Each pupil can add seminars he joined to
 	- Bug: Not the whole screen is displayed on smaller devices
 	- Bug: Canceled trainings must not be displayed at the home screen anymore
 		- has to be discussed, as it is an indicator for students to see if a training was canceled, where I joined
