@@ -81,7 +81,7 @@ export const Welcome: React.FC = () => {
             <>
               <p>{t(texts.welcome.weekTrainings)}</p>
               <EventInstanceList
-                displayCursor
+                displayCursor={auth.isAdmin()}
                 eventInstanceItemModelAndRoles={eventInstanceItemModelAndRoles}
                 onClick={onSelectEventInstanceItem}
                 renderChild={(eventInstanceItemModelAndRole) =>

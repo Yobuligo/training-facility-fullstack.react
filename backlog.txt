@@ -500,9 +500,10 @@
 	- Story: Navigate to training details from home screen
 		- The training details are displayed when clicking a training at the home screen
 		# The home screen will be displayed again when navigating back	
-		# Display mouse cursor when hovering over an event instance item
+		# Display mouse cursor when hovering over an event instance item and user is admin
 	# Story: Default view for calendar of training overview must be set to week
 	# Bug: Selected calendar view (day or week) is reset when navigating to another route and come back to the calendar
+	- Bug: Assigned trainers of event instance are not loaded, when open event instance item from home screen
 
 	- Story: Delete field for bank institute from db
 
