@@ -21,10 +21,6 @@ export const useEventRegistrationButtonViewModel = <TEvent extends IEvent>(
 
   const onRegister = async (event: TEvent) => {
     const eventInstance = await fetchEventInstance(event);
-    if (!eventInstance) {
-      return;
-    }
-
     if (eventInstance.state === EventInstanceState.CLOSED) {
       confirmDialog.show(
         t(texts.eventCalendarMyTrainings.registerTitle),

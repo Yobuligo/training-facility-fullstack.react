@@ -1,4 +1,6 @@
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
+import { IllegalStateError } from "../../../core/errors/IllegalStateError";
+import { error } from "../../../core/utils/error";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { EventInfo } from "../../../services/EventInfo";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
@@ -16,9 +18,7 @@ export const useFetchEventInstance = () => {
    * This means to find an event instance that matches the {@link event}s start date,
    * otherwise the event instance is created.
    */
-  const fetchEventInstance = async (
-    event: IEvent
-  ): Promise<IEventInstance | undefined> => {
+  const fetchEventInstance = async (event: IEvent): Promise<IEventInstance> => {
     let eventInstance: IEventInstance | undefined;
     await fetchEventInstanceRequest(async () => {
       const cachedEventInstance = EventInfo.findEventInstance(event);
@@ -35,7 +35,14 @@ export const useFetchEventInstance = () => {
       }
     });
 
-    return eventInstance;
+    return (
+      eventInstance ??
+      error(
+        new IllegalStateError(
+          "EventInstance was not initialized but must be not null"
+        )
+      )
+    );
   };
 
   return fetchEventInstance;

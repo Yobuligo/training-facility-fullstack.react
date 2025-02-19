@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { EventInstanceApi } from "../../../api/EventInstanceApi";
 import { DateTime } from "../../../core/services/date/DateTime";
@@ -8,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useSignal } from "../../../hooks/useSignal";
 import { useUser } from "../../../hooks/useUser";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { AppRoutes } from "../../../routes/AppRoutes";
 import { ISectionRouteParams } from "../../../routes/ISectionRouteParams";
 import { IEventDefinition } from "../../../shared/model/IEventDefinition";
 import { IEventInstance } from "../../../shared/model/IEventInstance";
@@ -36,6 +37,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const fetchEventInstance = useFetchEventInstance();
   const params = useParams<ISectionRouteParams>();
   const [fetchEventInstanceRequest] = useRequest();
+  const navigate = useNavigate();
 
   /**
    * Loads an event instance by its id and sets it as selected
@@ -75,6 +77,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const onEventInstanceUnselect = () => {
     setSelectedEventInstance(undefined);
     setSelectedEvent(undefined);
+    navigate(AppRoutes.trainings.toPath());
   };
 
   const onEventSelected = async (event: IEvent) => {
@@ -92,6 +95,8 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         setTrainers(trainers);
       }
       setSelectedEvent(event);
+
+      navigate(AppRoutes.training.toPath({ id: eventInstance.id }));
     }
   };
 
