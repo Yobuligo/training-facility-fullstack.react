@@ -4,6 +4,10 @@
 
 $medium-screen-width: 46rem;
 
+.displayCursor {
+  cursor: pointer;
+}
+
 .card {
   padding: 0;
   background-color: colors.$color-event-background;

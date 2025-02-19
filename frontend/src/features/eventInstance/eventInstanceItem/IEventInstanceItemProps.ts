@@ -4,6 +4,12 @@ import { IEventInstanceItemModel } from "../../../shared/model/IEventInstanceIte
 export interface IEventInstanceItemProps {
   children?: ReactNode;
   classNameChildren?: string;
+
+  /**
+   * Defines if a cursor should be displayed when hovering over the event instance item. Default is false.
+   */
+  displayCursor?: boolean;
+
   eventInstanceItemModel: IEventInstanceItemModel;
   onClick?: () => void;
 

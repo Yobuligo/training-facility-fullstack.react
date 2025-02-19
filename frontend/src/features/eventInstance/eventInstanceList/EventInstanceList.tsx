@@ -13,6 +13,7 @@ export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
       <EventInstanceItemAligned
         key={eventInstanceItemModel.id}
         eventInstanceItemModel={eventInstanceItemModel}
+        displayCursor={props.displayCursor}
         renderChildrenInline={true}
         onClick={() => {
           props.onClick?.(eventInstanceItemModel);

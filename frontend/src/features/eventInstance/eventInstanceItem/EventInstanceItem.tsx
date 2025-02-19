@@ -27,7 +27,8 @@ export const EventInstanceItem: React.FC<IEventInstanceItemProps> = (props) => {
     <Card
       className={style(
         styles.card,
-        props.eventInstanceItemModel.calledOff ? styles.cardCalledOff : ""
+        props.eventInstanceItemModel.calledOff ? styles.cardCalledOff : "",
+        props.displayCursor ? styles.displayCursor : ""
       )}
       onClick={props.onClick}
     >
