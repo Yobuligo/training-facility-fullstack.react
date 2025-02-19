@@ -46,19 +46,18 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     async (eventInstanceId: string) => {
       if (auth.isAdmin()) {
         await fetchEventInstanceRequest(async () => {
-          // Load event instance with corresponding event definition
+          // Load event instance
           const eventInstanceApi = new EventInstanceApi();
+
           const eventDefinition =
             await eventInstanceApi.findByEventInstanceAndUser(
               eventInstanceId,
               user.id
             );
 
-          // find event instance by the given event instance id
           const eventInstance = eventDefinition?.eventInstances?.find(
             (eventInstance) => eventInstance.id === eventInstanceId
           );
-
           if (!eventDefinition || !eventInstance) {
             return;
           }

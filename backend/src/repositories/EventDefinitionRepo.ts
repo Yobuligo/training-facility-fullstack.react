@@ -509,6 +509,9 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           inst.createdAt AS inst_createdAt,
           inst.updatedAt AS inst_updatedAt,
           inst.eventDefinitionId AS inst_eventDefinitionId,
+          inst_usr.id AS inst_usr_id,
+          inst_profile.firstname AS inst_profile_firstname,
+          inst_profile.lastname AS inst_profile_lastname,          
           reg.id AS reg_id,
           reg.manuallyAdded AS reg_manuallyAdded,
           reg.state AS reg_state,
@@ -517,10 +520,23 @@ export class EventDefinitionRepo extends SequelizeRepository<IEventDefinition> {
           reg.updatedAt AS reg_updatedAt,
           reg.eventInstanceId AS reg_eventInstanceId
         FROM \`event-definitions\` AS def
+
+        # join EventDefinitions
         INNER JOIN \`event-instances\` AS inst
         ON inst.eventDefinitionId = def.id
+
+        # join EventInstance registrations
         LEFT JOIN \`event-registrations\` AS reg
         ON reg.eventInstanceId = inst.id
+
+        # join EventInstance trainers
+        LEFT JOIN \`event-instances-trainers\` AS inst_trainerRel
+        ON inst_trainerRel.eventInstanceId = "${eventInstanceId}"
+        LEFT JOIN \`users\` AS inst_usr
+        ON inst_usr.id = inst_trainerRel.userId
+        LEFT JOIN \`user-profiles\` AS inst_profile
+        ON inst_profile.userId = inst_usr.id
+
         AND reg.userId = "${userId}"
         WHERE inst.id="${eventInstanceId}"
     `;

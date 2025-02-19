@@ -505,7 +505,9 @@
 
 	- Story: Delete field for bank institute from db
 
-- Backlog		
+- Backlog
+	- Bug: Tab is not selected when navigating to deep link
+		Copy link of training or plan and open URL. Tab is not selected.
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
 	- Bug: Not the whole screen is displayed on smaller devices
