@@ -22,9 +22,9 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const [selectedEventInstance, setSelectedEventInstance] = useState<
     IEventInstance | undefined
   >(undefined);
-  const [selectedEvent, setSelectedEvent] = useState<IEvent | undefined>(
-    undefined
-  );
+  const [selectedEventDefinition, setSelectedEventDefinition] = useState<
+    IEventDefinition | undefined
+  >(undefined);
   const [trainers, setTrainers] = useState<IUserShort[]>([]);
   const auth = useAuth();
   const [user] = useUser();
@@ -46,11 +46,20 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     async (eventInstanceId: string) => {
       if (auth.isAdmin()) {
         await fetchEventInstanceRequest(async () => {
+          // Load event instance with corresponding event definition
           const eventInstanceApi = new EventInstanceApi();
-          const eventInstance = await eventInstanceApi.findById(
-            eventInstanceId
+          const eventDefinition =
+            await eventInstanceApi.findByEventInstanceAndUser(
+              eventInstanceId,
+              user.id
+            );
+
+          // find event instance by the given event instance id
+          const eventInstance = eventDefinition?.eventInstances?.find(
+            (eventInstance) => eventInstance.id === eventInstanceId
           );
-          if (!eventInstance) {
+
+          if (!eventDefinition || !eventInstance) {
             return;
           }
 
@@ -60,10 +69,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
           );
           setTrainers(trainers);
           setSelectedEventInstance(eventInstance);
+          setSelectedEventDefinition(eventDefinition);
         });
       }
     },
-    [auth, fetchEventInstanceRequest]
+    [auth, fetchEventInstanceRequest, user.id]
   );
 
   useEffect(() => {
@@ -76,7 +86,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
 
   const onEventInstanceUnselect = () => {
     setSelectedEventInstance(undefined);
-    setSelectedEvent(undefined);
+    setSelectedEventDefinition(undefined);
     navigate(AppRoutes.trainings.toPath());
   };
 
@@ -94,7 +104,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
         setTrainers(trainers);
       }
-      setSelectedEvent(event);
+      setSelectedEventDefinition(event.eventDefinition);
 
       navigate(AppRoutes.training.toPath({ id: eventInstance.id }));
     }
@@ -131,7 +141,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     onEventInstanceUnselect,
     onEventSelected,
     reloadSignal,
-    selectedEvent,
+    selectedEventDefinition,
     selectedEventInstance,
     showAdditionalAdminDescription,
     trainers,
