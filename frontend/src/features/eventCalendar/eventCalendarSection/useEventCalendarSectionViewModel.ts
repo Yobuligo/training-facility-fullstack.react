@@ -14,7 +14,8 @@ import { calendarEventCreator } from "./calendarEventCreator";
 export const useEventCalendarSectionViewModel = (
   props: IEventCalendarSectionProps
 ) => {
-  const [dateTimeSpanFilter, , , defaultView] = useDateTimeSpanFilter();
+  const [dateTimeSpanFilter, , updateView, defaultView] =
+    useDateTimeSpanFilter();
   const [view, setView] = useState<View>(defaultView);
   const [calendarEvents, setCalendarEvents] = useState<ICalendarEvent[]>([]);
   const [fromTime, setFromTime] = useState<Date | undefined>(undefined);
@@ -92,7 +93,15 @@ export const useEventCalendarSectionViewModel = (
     setToDate(dateTimeSpan.to);
   };
 
-  const onViewChanged = (view: View) => setView(view);
+  /**
+   * Handles the change of the calendar view (e.g. from day to week view)
+   */
+  const onViewChanged = (view: View) => {
+    setView(view);
+
+    // Update the default view of the dateTimeSpanFilter to keep that view as default as long as the app wont restarted
+    updateView(view);
+  };
 
   return {
     calendarEvents,
