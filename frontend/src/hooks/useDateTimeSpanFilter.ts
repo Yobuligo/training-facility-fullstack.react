@@ -10,7 +10,8 @@ export const useDateTimeSpanFilter = (): [
   setValue: (
     newValue: IDateTimeSpan | ((previous: IDateTimeSpan) => IDateTimeSpan)
   ) => void,
-  updateView: (view: View) => void
+  updateView: (view: View) => void,
+  view: View
 ] => {
   const context = useContext(AppContext);
 
@@ -26,9 +27,16 @@ export const useDateTimeSpanFilter = (): [
     });
   };
 
+  /**
+   * Returns the default *view* value depending on the default date time span filter defined in the AppConfig.
+   * E.g. returns *day* or *week*.
+   */
+  const view = SP.fetch(DateTimeSpanFilter).view;
+
   return [
     context.dateTimeSpanFilter[0],
     context.dateTimeSpanFilter[1],
     updateView,
+    view,
   ];
 };

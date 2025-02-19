@@ -12,13 +12,13 @@ export interface IDateTimeSpanFilter {
   readonly from: Date;
 
   /**
-   * Returns the default *from* value depending on the default date time span filter defined in the AppConfig.
+   * Returns the default *to* value depending on the default date time span filter defined in the AppConfig.
    * E.g. returns the current end time of a day or of a week.
    */
   readonly to: Date;
 
   /**
-   * Returns the default *from* value depending on the default date time span filter defined in the AppConfig.
+   * Returns the default *view* value depending on the default date time span filter defined in the AppConfig.
    * E.g. returns *day* or *week*.
    */
   readonly view: View;
