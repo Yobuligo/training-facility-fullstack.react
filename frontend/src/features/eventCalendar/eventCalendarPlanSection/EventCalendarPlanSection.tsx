@@ -1,5 +1,6 @@
 import { Button } from "../../../components/button/Button";
 import { InfoArea } from "../../../components/infoArea/InfoArea";
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventDefinitionDetails } from "../../eventDefinition/eventDefinitionDetails/EventDefinitionDetails";
@@ -18,25 +19,31 @@ export const EventCalendarPlanSection: React.FC = () => {
   return (
     <div>
       <InfoArea text={t(texts.eventPlanSection.description)} />
-      {viewModel.selectedEventDefinition ? (
-        <EventDefinitionDetails
-          eventDefinition={viewModel.selectedEventDefinition}
-          onBack={viewModel.onBack}
-          onDelete={viewModel.onDeleteEventDefinition}
-          onSave={viewModel.onSaveEventDefinition}
-          trainers={viewModel.trainers}
-        />
+      {viewModel.needsDisplayLoadingSpinner ? (
+        <PageSpinner />
       ) : (
-        <div className={styles.eventCalendar}>
-          <Button className={styles.button} onClick={viewModel.onAdd}>
-            {t(texts.eventPlanSection.addTraining)}
-          </Button>
-          <EventCalendarSection
-            eventDefinitionLoader={viewModel.onLoadEventDefinitions}
-            onEventSelected={viewModel.onEventSelected}
-            reloadSignal={viewModel.reloadSignal}
-          />
-        </div>
+        <>
+          {viewModel.selectedEventDefinition ? (
+            <EventDefinitionDetails
+              eventDefinition={viewModel.selectedEventDefinition}
+              onBack={viewModel.onBack}
+              onDelete={viewModel.onDeleteEventDefinition}
+              onSave={viewModel.onSaveEventDefinition}
+              trainers={viewModel.trainers}
+            />
+          ) : (
+            <div className={styles.eventCalendar}>
+              <Button className={styles.button} onClick={viewModel.onAdd}>
+                {t(texts.eventPlanSection.addTraining)}
+              </Button>
+              <EventCalendarSection
+                eventDefinitionLoader={viewModel.onLoadEventDefinitions}
+                onEventSelected={viewModel.onEventSelected}
+                reloadSignal={viewModel.reloadSignal}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

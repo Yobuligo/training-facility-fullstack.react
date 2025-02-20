@@ -136,10 +136,19 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   const onReload = (dateTimeSpan: IDateTimeSpan) =>
     loadEventDefinitions(dateTimeSpan);
 
+  /**
+   * Returns if a loading spinner has to be displayed.
+   * Display loading spinner if component was called via deep link with a specific event definition id,
+   * while the event definition is not loaded yet.
+   */
+  const needsDisplayLoadingSpinner =
+    params.itemId !== undefined && !selectedEventDefinition;
+
   return {
     eventDefinitions,
     isLoadEventDefinitionRequestProcessing,
     loadEventDefinitions,
+    needsDisplayLoadingSpinner,
     onReload,
     onEventInstanceUnselect,
     onEventSelected,

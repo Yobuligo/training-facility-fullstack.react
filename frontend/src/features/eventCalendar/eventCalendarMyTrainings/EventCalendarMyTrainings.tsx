@@ -1,4 +1,5 @@
 import { InfoArea } from "../../../components/infoArea/InfoArea";
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { useScreenSize } from "../../../hooks/useScreenSize";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -46,20 +47,27 @@ export const EventCalendarMyTrainings: React.FC = () => {
             : ""
         }`}
       />
-      {viewModel.selectedEventInstance && viewModel.selectedEventDefinition ? (
-        <EventRegistrationDetails
-          eventInstance={viewModel.selectedEventInstance}
-          isMemberOnly={viewModel.selectedEventDefinition.isMemberOnly}
-          onBack={viewModel.onEventInstanceUnselect}
-          trainers={viewModel.trainers}
-        />
+      {viewModel.needsDisplayLoadingSpinner ? (
+        <PageSpinner />
       ) : (
-        <EventCalendarSection
-          eventDefinitionLoader={viewModel.loadEventDefinitions}
-          onEventSelected={viewModel.onEventSelected}
-          reloadSignal={viewModel.reloadSignal}
-          renderEvent={renderEvent}
-        />
+        <>
+          {viewModel.selectedEventInstance &&
+          viewModel.selectedEventDefinition ? (
+            <EventRegistrationDetails
+              eventInstance={viewModel.selectedEventInstance}
+              isMemberOnly={viewModel.selectedEventDefinition.isMemberOnly}
+              onBack={viewModel.onEventInstanceUnselect}
+              trainers={viewModel.trainers}
+            />
+          ) : (
+            <EventCalendarSection
+              eventDefinitionLoader={viewModel.loadEventDefinitions}
+              onEventSelected={viewModel.onEventSelected}
+              reloadSignal={viewModel.reloadSignal}
+              renderEvent={renderEvent}
+            />
+          )}
+        </>
       )}
     </div>
   );
