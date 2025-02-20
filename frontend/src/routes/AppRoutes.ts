@@ -8,9 +8,7 @@ export const AppRoutes = configureRoutes({
   eventOverview: route("/training-times"),
 
   changePassword: route("/changePassword"),
-  eventInstanceRegistration: route(
-    "/event-instance-registration/:eventInstanceId"
-  ),
+  eventInstanceRegistration: route("/trainings/:id/registration"),
 
   admin: route("/admin"),
   dashboard: route("/"),

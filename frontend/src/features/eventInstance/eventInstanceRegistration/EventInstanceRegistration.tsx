@@ -24,7 +24,7 @@ import styles from "./EventInstanceRegistration.module.scss";
  * with its properties and a button to register or unregister.
  */
 export const EventInstanceRegistration: React.FC = () => {
-  const params = useParams<{ eventInstanceId: string }>();
+  const params = useParams<{ id: string }>();
   const [request] = useRequest();
   const [eventInstance, setEventInstance] = useState<
     IEventInstance | undefined
@@ -40,7 +40,7 @@ export const EventInstanceRegistration: React.FC = () => {
       async () => {
         const eventDefinition =
           await new EventInstanceApi().findByEventInstanceAndUser(
-            checkNotNull(params.eventInstanceId),
+            checkNotNull(params.id),
             user.id
           );
         const eventInstance = eventDefinition?.eventInstances?.[0];

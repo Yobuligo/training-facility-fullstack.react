@@ -196,7 +196,7 @@ export const useEventRegistrationSectionViewModel = (
     const link = `${window.location.protocol}//${
       window.location.host
     }${AppRoutes.eventInstanceRegistration.toPath({
-      eventInstanceId: props.eventInstance.id,
+      id: props.eventInstance.id,
     })}`;
     navigator.clipboard.writeText(link);
   };

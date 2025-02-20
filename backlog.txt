@@ -455,16 +455,16 @@
 		# Story: Trainings can be accessed via route
 			# Link is /trainings
 			# Link must not be opened with missing authorities
-		- Story: Event instances can be accessed via route
+		# Story: Event instances can be accessed via route
 			# Link is /trainings/:id
-			- Link must not be opened with missing authorities
-			- Different event instance must be displayed when changing event instance id in URL
-			- Displaying an event instance via click on event instance in event instance list and navigating back from the event instance details screen, must display the event instance list again
-			- Displaying an event instance via deep link and navigating back to the event instance list, must display all event instance
-			- All event instances must not be loaded from backend when loading event instance section (component EventCalendarMyTrainings) with specific event instance id via URL, as only the event instance itself must be displayed
-			- Displaying an event instance via deep link or directly must load the assigned trainers
-		- Story: Correct route /event-instance-registration/:eventInstanceId
-			- Route must fit the new pattern. Link is /trainings/:id/registration
+			# Link must not be opened with missing authorities
+			# Different event instance must be displayed when changing event instance id in URL
+			# Displaying an event instance via click on event instance in event instance list and navigating back from the event instance details screen, must display the event instance list again
+			# Displaying an event instance via deep link and navigating back to the event instance list, must display all event instance
+			# All event instances must not be loaded from backend when loading event instance section (component EventCalendarMyTrainings) with specific event instance id via URL, as only the event instance itself must be displayed
+			# Displaying an event instance via deep link or directly must load the assigned trainers
+		# Story: Correct route /event-instance-registration/:eventInstanceId to /trainings/:id/registration
+			# Route must fit the new pattern. Link is /trainings/:id/registration
 		# Story: Gradings can be accessed via route
 			# Link is /gradings
 		# Story: Profile can be accessed via route
@@ -510,7 +510,8 @@
 
 - Backlog
 	- Bug: Tab is not selected when navigating to deep link
-		Copy link of training or plan and open URL. Tab is not selected.
+		Copy link of training or plan and open URL. Tab is not selected
+	- Bug: Calendar must not be loaded if event instance or event definition is loaded via url id
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
 	- Bug: Not the whole screen is displayed on smaller devices
