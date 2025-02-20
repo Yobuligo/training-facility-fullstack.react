@@ -8,6 +8,7 @@ import {
 } from "../shared/model/IEventDefinition";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 import { IEventInstanceItemModelAndRole } from "../shared/model/IEventInstanceItemModelAndRole";
+import { UserRouteMeta } from "../shared/model/IUser";
 import { IUserShort } from "../shared/model/IUserShort";
 import { EventInstanceState } from "../shared/types/EventInstanceState";
 import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
@@ -61,14 +62,22 @@ export class EventInstanceApi extends EntityRepository<IEventInstance> {
     userId: string
   ): Promise<IEventDefinition | undefined> {
     return RESTApi.get(
-      `${this.url}/${eventInstanceId}${EventDefinitionRouteMeta.path}`,
-      {
-        urlParams: {
-          userId,
-        },
-      }
+      `${this.url}/${eventInstanceId}${UserRouteMeta.path}/${userId}${EventDefinitionRouteMeta.path}`
     );
   }
+
+  /**
+   * Finds an event definition with event instance and event registration by the given {@link eventInstanceId}.
+   */
+  async findByEventInstanceId(
+    eventInstanceId: string
+  ): Promise<IEventDefinition | undefined> {
+    return RESTApi.get(
+      `${this.url}/${eventInstanceId}${EventDefinitionRouteMeta.path}`
+    );
+  }
+
+  // async findByEventInstance(eventInstanceId: string)
 
   /**
    * Returns the trainers for the given {@link eventInstanceId}.

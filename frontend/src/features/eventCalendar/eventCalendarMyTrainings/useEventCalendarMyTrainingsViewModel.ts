@@ -48,12 +48,9 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         await fetchEventInstanceRequest(async () => {
           // Load event instance
           const eventInstanceApi = new EventInstanceApi();
-
-          const eventDefinition =
-            await eventInstanceApi.findByEventInstanceAndUser(
-              eventInstanceId,
-              user.id
-            );
+          const eventDefinition = await eventInstanceApi.findByEventInstanceId(
+            eventInstanceId
+          );
 
           const eventInstance = eventDefinition?.eventInstances?.find(
             (eventInstance) => eventInstance.id === eventInstanceId
@@ -72,7 +69,7 @@ export const useEventCalendarMyTrainingsViewModel = () => {
         });
       }
     },
-    [auth, fetchEventInstanceRequest, user.id]
+    [auth, fetchEventInstanceRequest]
   );
 
   useEffect(() => {

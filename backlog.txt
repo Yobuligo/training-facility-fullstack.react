@@ -504,6 +504,7 @@
 	# Story: Default view for calendar of training overview must be set to week
 	# Bug: Selected calendar view (day or week) is reset when navigating to another route and come back to the calendar
 	- Bug: Assigned trainers of event instance are not loaded, when open event instance item from home screen
+		- Occurs if more than one trainer is assigned
 
 	- Story: Delete field for bank institute from db
 

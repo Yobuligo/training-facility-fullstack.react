@@ -8,6 +8,7 @@ import {
   EventInstanceRouteMeta,
   IEventInstance,
 } from "../shared/model/IEventInstance";
+import { UserRouteMeta } from "../shared/model/IUser";
 import { AuthRole } from "../shared/types/AuthRole";
 import { ITrainer, TrainerRouteMeta } from "../shared/types/ITrainer";
 import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
@@ -23,6 +24,7 @@ export class EventInstanceController extends EntityController<
     super(EventInstanceRouteMeta, new EventInstanceRepo(), [AuthRole.ADMIN]);
     this.findAllWithRole();
     this.findDefinitionByInstanceId();
+    this.findDefinitionByInstanceAndUser();
     this.findTrainers();
     this.insertPublic();
     this.updateTrainers();
@@ -70,20 +72,14 @@ export class EventInstanceController extends EntityController<
     );
   }
 
-  private findDefinitionByInstanceId() {
+  /**
+   * Finds an EventDefinition by the corresponding EventInstanceId and an UserId.
+   */
+  private findDefinitionByInstanceAndUser() {
     this.router.get(
-      `${this.routeMeta.path}/:id${EventDefinitionRouteMeta.path}`,
+      `${this.routeMeta.path}/:id${UserRouteMeta.path}/:userId${EventDefinitionRouteMeta.path}`,
       SessionInterceptor(async (req, res) => {
-        const requestedUserId = req.query.userId;
-        if (!requestedUserId || !(typeof requestedUserId === "string")) {
-          return res
-            .status(HttpStatusCode.BAD_REQUEST_400)
-            .send(
-              createError(
-                "Error while getting event definition by event instance id and user id. The user id is invalid."
-              )
-            );
-        }
+        const requestedUserId = req.params.userId;
         if (!this.checkIsAdminOrYourself(req, res, requestedUserId)) {
           return;
         }
@@ -103,6 +99,31 @@ export class EventInstanceController extends EntityController<
             .send(createError("Not found", "NotFoundError"));
         }
       })
+    );
+  }
+
+  /**
+   * Finds an EventDefinition by the corresponding EventInstanceId.
+   */
+  private findDefinitionByInstanceId() {
+    this.router.get(
+      `${this.routeMeta.path}/:id${EventDefinitionRouteMeta.path}`,
+      SessionInterceptor(
+        async (req, res) => {
+          const eventInstanceId = req.params.id;
+          const eventDefinitionRepo = new EventDefinitionRepo();
+          const eventDefinition =
+            await eventDefinitionRepo.findByEventInstanceId(eventInstanceId);
+          if (eventDefinition) {
+            res.status(HttpStatusCode.OK_200).send(eventDefinition);
+          } else {
+            res
+              .status(HttpStatusCode.NOT_FOUND_404)
+              .send(createError("Not found", "NotFoundError"));
+          }
+        },
+        [AuthRole.ADMIN]
+      )
     );
   }
 

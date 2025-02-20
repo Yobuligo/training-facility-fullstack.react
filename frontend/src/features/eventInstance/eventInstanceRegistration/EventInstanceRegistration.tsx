@@ -19,6 +19,10 @@ import { EventRegistrationButtonContent } from "../../eventRegistration/eventReg
 import { EventInstanceItemAligned } from "../eventInstanceItemAligned/EventInstanceItemAligned";
 import styles from "./EventInstanceRegistration.module.scss";
 
+/**
+ * This component is responsible for displaying a specific event instance item
+ * with its properties and a button to register or unregister.
+ */
 export const EventInstanceRegistration: React.FC = () => {
   const params = useParams<{ eventInstanceId: string }>();
   const [request] = useRequest();
