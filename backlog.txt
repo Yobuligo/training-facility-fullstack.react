@@ -514,6 +514,7 @@
 - Backlog
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
+			- has to be discussed if it is required
 	- Bug: Not the whole screen is displayed on smaller devices
 	- Bug: Canceled trainings must not be displayed at the home screen anymore
 		- has to be discussed, as it is an indicator for students to see if a training was canceled, where I joined
