@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IItem } from "../../../core/types/IItem";
 import { useAuth } from "../../../hooks/useAuth";
 import { useScreenSize } from "../../../hooks/useScreenSize";
@@ -14,6 +14,7 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
   const { isSmall } = useScreenSize();
   const navigate = useNavigate();
   const dashboardContent = useDashboardContent();
+  const location = useLocation();
 
   useEffect(() => {
     if (props.displayWelcomeSignal) {
@@ -22,17 +23,7 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
     }
   }, [navigate, props.displayWelcomeSignal]);
 
-  const onSelectNew = (index: number): void => {
-    setSelected(index);
-    if (index === -1) {
-      navigate(AppRoutes.dashboard.toPath());
-    } else {
-      const path = getTabItems()[index].path;
-      navigate(path);
-    }
-  };
-
-  const getTabItems = (): IDashboardTabItem[] => {
+  const getTabItems = useCallback((): IDashboardTabItem[] => {
     const tabItems: IDashboardTabItem[] = [];
     dashboardContent.items.forEach((dashboardItem) => {
       // Exclude DashboardPage itself with path /
@@ -49,9 +40,29 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
       }
     });
     return tabItems;
-  };
+  }, [auth, dashboardContent.items]);
 
   const tabItems = getTabItems();
+
+  useEffect(() => {
+    // selects a tab from the given url (location)
+    // e.g. if a specific training was called via deep link, the corresponding tab has to be selected.
+    const tabItemIndex = tabItems.findIndex((dashboardTabItem) =>
+      location.pathname.startsWith(dashboardTabItem.path)
+    );
+    setSelected(tabItemIndex);
+  }, [location, tabItems]);
+
+  const onSelect = (index: number): void => {
+    setSelected(index);
+    if (index === -1) {
+      navigate(AppRoutes.dashboard.toPath());
+    } else {
+      const path = getTabItems()[index].path;
+      navigate(path);
+    }
+  };
+
   const needsBurgerMenu = isSmall() && tabItems.length > 4;
   const items: IItem[] = tabItems.map((tabItem) => {
     return { title: tabItem.title, icon: tabItem.icon };
@@ -62,7 +73,7 @@ export const useDashboardViewModel = (props: IDashboardProps) => {
     burgerMenuTabItems,
     items,
     needsBurgerMenu,
-    onSelect: onSelectNew,
+    onSelect,
     selected,
     tabItems,
   };

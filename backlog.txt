@@ -505,13 +505,13 @@
 	# Bug: Selected calendar view (day or week) is reset when navigating to another route and come back to the calendar
 	# Bug: Assigned trainers of event instance are not loaded, when open event instance item from home screen
 		# Occurs if more than one trainer is assigned
+	# Bug: Tab is not selected when navigating to deep link
+		# Copy link of training or plan and open URL. Tab is not selected
+	- Bug: Calendar must not be loaded if event instance or event definition is loaded via url id
 
 	- Story: Delete field for bank institute from db
 
 - Backlog
-	- Bug: Tab is not selected when navigating to deep link
-		Copy link of training or plan and open URL. Tab is not selected
-	- Bug: Calendar must not be loaded if event instance or event definition is loaded via url id
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
 	- Bug: Not the whole screen is displayed on smaller devices
