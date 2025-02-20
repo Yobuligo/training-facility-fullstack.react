@@ -73,12 +73,19 @@ export const useEventCalendarMyTrainingsViewModel = () => {
   );
 
   useEffect(() => {
+    /**
+     * Checks if a specific training was called. Navigate to error page if user is not an admin.
+     */
+    if (params.itemId && !auth.isAdmin()) {
+      navigate(AppRoutes.error.toPath());
+    }
+
     // Loads the event instance by the event instance id which is given via URL, if provided and no selected event instance is set
     // if the selected event instance is set, it means that the details are already displayed.
     if (params.itemId && !selectedEventInstance) {
       loadEventInstance(params.itemId);
     }
-  }, [loadEventInstance, params.itemId, selectedEventInstance]);
+  }, [auth, loadEventInstance, navigate, params.itemId, selectedEventInstance]);
 
   const onEventInstanceUnselect = () => {
     setSelectedEventInstance(undefined);
