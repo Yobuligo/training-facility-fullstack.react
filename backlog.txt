@@ -516,9 +516,9 @@
 		# Story: Lazy load MyGradingList tab
 		# Story: Lazy load MyProfile tab
 		# Story: Lazy load PasswordChange change component
-		# Story: Lazy load UserInvitePage component		
+		# Story: Lazy load UserInvitePage component
 		# Story: Lazy load EventCalendarTrialTraining component
-		# Story: Lazy load EventCalendarOverview component	
+		# Story: Lazy load EventCalendarOverview component
 
 	- Story: Delete field for bank institute from db
 

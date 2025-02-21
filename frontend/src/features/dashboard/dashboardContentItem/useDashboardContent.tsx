@@ -14,29 +14,29 @@ import { Welcome } from "../../welcome/Welcome";
 import styles from "./DashboardContentItem.module.scss";
 import { IDashboardContentItem } from "./IDashboardContentItem";
 
+const UserProfileSection = lazy(
+  () => import("../../users/userProfileSection/UserProfileSection")
+);
+
+const EventCalendarPlanSection = lazy(
+  () =>
+    import(
+      "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection"
+    )
+);
+
+const MyGradingList = lazy(
+  () => import("../../grading/myGradingList/MyGradingList")
+);
+
+const MyProfile = lazy(() => import("../../myProfile/MyProfile"));
+
+const AdminSection = lazy(
+  () => import("../../admin/adminSection/AdminSection")
+);
+
 export const useDashboardContent = () => {
   const { t } = useTranslation();
-
-  const UserProfileSection = lazy(
-    () => import("../../users/userProfileSection/UserProfileSection")
-  );
-
-  const EventCalendarPlanSection = lazy(
-    () =>
-      import(
-        "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection"
-      )
-  );
-
-  const MyGradingList = lazy(
-    () => import("../../grading/myGradingList/MyGradingList")
-  );
-
-  const MyProfile = lazy(() => import("../../myProfile/MyProfile"));
-
-  const AdminSection = lazy(
-    () => import("../../admin/adminSection/AdminSection")
-  );
 
   const items = useMemo<IDashboardContentItem[]>(
     () => [
@@ -110,14 +110,7 @@ export const useDashboardContent = () => {
         title: t(texts.dashboard.admin),
       },
     ],
-    [
-      AdminSection,
-      EventCalendarPlanSection,
-      MyGradingList,
-      MyProfile,
-      UserProfileSection,
-      t,
-    ]
+    [t]
   );
 
   return {
