@@ -68,7 +68,8 @@ export const useUserInviteViewModel = () => {
     return (
       arePasswordRequirementsValid(newPassword[0]) === false ||
       isNotInitial(newConfirmPassword[2]) ||
-      isInitial(newConfirmPassword[0])
+      isInitial(newConfirmPassword[0]) ||
+      isNotInitial(error)
     );
   };
 

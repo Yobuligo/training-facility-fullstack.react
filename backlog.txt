@@ -522,6 +522,7 @@
 	# Bug: Navigating back doesn't work for deep links
 		# Display e.g. the details of a user and press the browser back button. Now still the details are displayed
 		# Must be fixed for Users, Planers and Trainings
+	# Bug: Expired invitation and password reset can be displayed and results in error when reconfirm the changes
 
 	- Story: Delete field for bank institute from db
 
