@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { InfoArea } from "../../../components/infoArea/InfoArea";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { useScreenSize } from "../../../hooks/useScreenSize";
@@ -5,7 +6,6 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInfo } from "../../../services/EventInfo";
 import { EventRegistrationButtonContent } from "../../eventRegistration/eventRegistrationButtonContent/EventRegistrationButtonContent";
-import { EventRegistrationDetails } from "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails";
 import { EventCalendarSection } from "../eventCalendarSection/EventCalendarSection";
 import { IEvent } from "../model/IEvent";
 import styles from "./EventCalendarMyTrainings.module.scss";
@@ -37,6 +37,13 @@ export const EventCalendarMyTrainings: React.FC = () => {
     );
   };
 
+  const EventRegistrationDetails = lazy(
+    () =>
+      import(
+        "../../eventRegistration/eventRegistrationDetails/EventRegistrationDetails"
+      )
+  );
+
   return (
     <div>
       <InfoArea
@@ -53,12 +60,14 @@ export const EventCalendarMyTrainings: React.FC = () => {
         <>
           {viewModel.selectedEventInstance &&
           viewModel.selectedEventDefinition ? (
-            <EventRegistrationDetails
-              eventInstance={viewModel.selectedEventInstance}
-              isMemberOnly={viewModel.selectedEventDefinition.isMemberOnly}
-              onBack={viewModel.onEventInstanceUnselect}
-              trainers={viewModel.trainers}
-            />
+            <Suspense fallback={<PageSpinner />}>
+              <EventRegistrationDetails
+                eventInstance={viewModel.selectedEventInstance}
+                isMemberOnly={viewModel.selectedEventDefinition.isMemberOnly}
+                onBack={viewModel.onEventInstanceUnselect}
+                trainers={viewModel.trainers}
+              />
+            </Suspense>
           ) : (
             <EventCalendarSection
               eventDefinitionLoader={viewModel.loadEventDefinitions}
