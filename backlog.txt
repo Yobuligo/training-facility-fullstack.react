@@ -423,7 +423,7 @@
 	# Bug: Related entities are not persisted when adding them to a transient user profile
 	# Story: Set current day as default filter
 
-- Version 1.13.0-<>.15
+# Version 1.13.0-20250221.15
 	# Story: Increase expiration time of session
 	# Epic: TabStrip Routes
 		# Explanation: Tabs of the TabStrip must be accessible via route
@@ -523,8 +523,9 @@
 		# Display e.g. the details of a user and press the browser back button. Now still the details are displayed
 		# Must be fixed for Users, Planers and Trainings
 	# Bug: Expired invitation and password reset can be displayed and results in error when reconfirm the changes
+	# Story: Delete field for bank institute from db
 
-	- Story: Delete field for bank institute from db
+- Version 1.14.0-<>.16
 
 - Backlog
 	- Epic: Seminar
