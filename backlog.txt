@@ -519,6 +519,9 @@
 		# Story: Lazy load UserInvitePage component
 		# Story: Lazy load EventCalendarTrialTraining component
 		# Story: Lazy load EventCalendarOverview component
+	# Bug: Navigating back doesn't work for deep links
+		# Display e.g. the details of a user and press the browser back button. Now still the details are displayed
+		# Must be fixed for Users, Planers and Trainings
 
 	- Story: Delete field for bank institute from db
 

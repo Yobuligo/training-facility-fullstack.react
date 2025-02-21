@@ -88,6 +88,12 @@ export const useUserProfileSectionViewModel = () => {
       loadUser(params.itemId);
     }
 
+    // When the component was loaded without userId via URL, but the displayed user is still set, it means,
+    // that the app user was navigating back. In that case we have to reset the selected user.
+    if (!params.itemId && selectedUser) {
+      setSelectedUser(undefined);
+    }
+
     // if no userId was provided via URL, and the usersShort is initial,
     // there is a chance that theses users weren't loaded yet, so load it.
     // This might happen if the user details were displayed via deep link

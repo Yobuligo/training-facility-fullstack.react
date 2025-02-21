@@ -72,6 +72,11 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     [auth, fetchEventInstanceRequest]
   );
 
+  const resetSelection = () => {
+    setSelectedEventInstance(undefined);
+    setSelectedEventDefinition(undefined);
+  };
+
   useEffect(() => {
     /**
      * Checks if a specific training was called. Navigate to error page if user is not an admin.
@@ -85,11 +90,16 @@ export const useEventCalendarMyTrainingsViewModel = () => {
     if (params.itemId && !selectedEventInstance) {
       loadEventInstance(params.itemId);
     }
+
+    // When the component was loaded without event instance id via URL, but the displayed event instance is still set, it means,
+    // that the app user was navigating back. In that case we have to reset the selected event instance.
+    if (!params.itemId && selectedEventInstance) {
+      resetSelection();
+    }
   }, [auth, loadEventInstance, navigate, params.itemId, selectedEventInstance]);
 
   const onEventInstanceUnselect = () => {
-    setSelectedEventInstance(undefined);
-    setSelectedEventDefinition(undefined);
+    resetSelection();
     navigate(AppRoutes.trainings.toPath());
   };
 

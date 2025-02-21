@@ -88,11 +88,22 @@ export const useEventCalendarPlanSectionViewModel = () => {
     [loadEventDefinitionsRequest]
   );
 
+  const resetSelection = () => {
+    setTrainers([]);
+    setSelectedEventDefinition(undefined);
+  };
+
   useEffect(() => {
     // Loads the event definition by the event definition id which is given via URL, if provided and no selected event definition is set
     // if the selected event definition is set, it means that the details are already displayed.
     if (params.itemId && !selectedEventDefinition) {
       loadEventDefinition(params.itemId);
+    }
+
+    // When the component was loaded without event definition id via URL, but the displayed event definition is still set, it means,
+    // that the app user was navigating back. In that case we have to reset the selected event definition.
+    if (!params.itemId && selectedEventDefinition) {
+      resetSelection();
     }
   }, [loadEventDefinition, params.itemId, selectedEventDefinition, trainers]);
 
@@ -101,8 +112,7 @@ export const useEventCalendarPlanSectionViewModel = () => {
    * Only the planner itself has to be displayed.
    */
   const onBack = () => {
-    setTrainers([]);
-    setSelectedEventDefinition(undefined);
+    resetSelection();
     navigate(AppRoutes.planers.toPath());
   };
 
