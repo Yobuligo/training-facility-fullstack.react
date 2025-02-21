@@ -7,7 +7,7 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useAdminSectionViewModel } from "./useAdminSectionViewModel";
 
-export const AdminSection: React.FC = () => {
+const AdminSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useAdminSectionViewModel();
 
@@ -52,3 +52,5 @@ export const AdminSection: React.FC = () => {
     </ChangeableForm>
   );
 };
+
+export default AdminSection;

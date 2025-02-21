@@ -12,7 +12,7 @@ import { useEventCalendarPlanSectionViewModel } from "./useEventCalendarPlanSect
  * This component is responsible for displaying the training templates of a specific date time span (e.g. week).
  * Theses entries are used as template for the concrete training sessions.
  */
-export const EventCalendarPlanSection: React.FC = () => {
+const EventCalendarPlanSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventCalendarPlanSectionViewModel();
 
@@ -48,3 +48,5 @@ export const EventCalendarPlanSection: React.FC = () => {
     </div>
   );
 };
+
+export default EventCalendarPlanSection;

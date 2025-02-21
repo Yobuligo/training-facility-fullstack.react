@@ -527,7 +527,6 @@
 		- Users can be filtered by tariff 
 	- Story: Group contract details in user information in a separate collapsible
 		- Tariff, joined At, resigned At
-	- Story: Add field "client reference" to user profile (must not contain Umlaute)
 	- Epic: Shipped artifact
 		- Story: App must run in production with node and not nodemon
 		- Story: Restrict shipped code to those which is required (currently we get the source code and the transpiled code, all environment variables, etc.)

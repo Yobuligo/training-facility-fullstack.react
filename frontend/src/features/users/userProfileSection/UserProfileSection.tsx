@@ -9,7 +9,7 @@ import { UserProfileList } from "../userProfileList/UserProfileList";
 import styles from "./UserProfileSection.module.scss";
 import { useUserProfileSectionViewModel } from "./useUserProfileSectionViewModel";
 
-export const UserProfileSection: React.FC = () => {
+const UserProfileSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useUserProfileSectionViewModel();
 
@@ -68,3 +68,5 @@ export const UserProfileSection: React.FC = () => {
     </div>
   );
 };
+
+export default UserProfileSection;
