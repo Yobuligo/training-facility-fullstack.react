@@ -16,7 +16,7 @@ import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialT
  * This component is responsible for displaying the events for to book a trial training.
  * This calendar has no functionality like registration or planning the trainings but a user can book a trial training.
  */
-export const EventCalendarTrialTraining: React.FC = () => {
+const EventCalendarTrialTraining: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventCalendarTrialTrainingViewModel();
 
@@ -58,3 +58,5 @@ export const EventCalendarTrialTraining: React.FC = () => {
     </div>
   );
 };
+
+export default EventCalendarTrialTraining;

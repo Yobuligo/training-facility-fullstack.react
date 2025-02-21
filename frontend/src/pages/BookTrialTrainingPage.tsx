@@ -1,5 +1,16 @@
-import { EventCalendarTrialTraining } from "../features/eventCalendar/eventCalendarTrialTraining/EventCalendarTrialTraining";
+import { lazy, Suspense } from "react";
+import { PageSpinner } from "../components/pageSpinner/PageSpinner";
 
 export const BookTrialTrainingPage: React.FC = () => {
-  return <EventCalendarTrialTraining />;
+  const EventCalendarTrialTraining = lazy(
+    () =>
+      import(
+        "../features/eventCalendar/eventCalendarTrialTraining/EventCalendarTrialTraining"
+      )
+  );
+  return (
+    <Suspense fallback={<PageSpinner />}>
+      <EventCalendarTrialTraining />
+    </Suspense>
+  );
 };

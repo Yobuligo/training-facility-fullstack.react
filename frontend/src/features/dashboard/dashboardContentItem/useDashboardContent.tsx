@@ -10,8 +10,6 @@ import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { EventCalendarMyTrainings } from "../../eventCalendar/eventCalendarMyTrainings/EventCalendarMyTrainings";
-import { MyGradingList } from "../../grading/myGradingList/MyGradingList";
-import { MyProfile } from "../../myProfile/MyProfile";
 import { Welcome } from "../../welcome/Welcome";
 import styles from "./DashboardContentItem.module.scss";
 import { IDashboardContentItem } from "./IDashboardContentItem";
@@ -29,6 +27,12 @@ export const useDashboardContent = () => {
         "../../eventCalendar/eventCalendarPlanSection/EventCalendarPlanSection"
       )
   );
+
+  const MyGradingList = lazy(
+    () => import("../../grading/myGradingList/MyGradingList")
+  );
+
+  const MyProfile = lazy(() => import("../../myProfile/MyProfile"));
 
   const AdminSection = lazy(
     () => import("../../admin/adminSection/AdminSection")
@@ -73,14 +77,22 @@ export const useDashboardContent = () => {
         title: t(texts.dashboard.trainings),
       },
       {
-        content: <MyGradingList />,
+        content: (
+          <Suspense fallback={<PageSpinner />}>
+            <MyGradingList />
+          </Suspense>
+        ),
         icon: <Grading className={styles.icon} />,
         needsAdmin: false,
         path: AppRoutes.gradings.toPath(),
         title: t(texts.dashboard.gradings),
       },
       {
-        content: <MyProfile />,
+        content: (
+          <Suspense fallback={<PageSpinner />}>
+            <MyProfile />
+          </Suspense>
+        ),
         icon: <Profile className={styles.icon} />,
         needsAdmin: false,
         path: AppRoutes.profile.toPath(),
@@ -98,7 +110,14 @@ export const useDashboardContent = () => {
         title: t(texts.dashboard.admin),
       },
     ],
-    [AdminSection, EventCalendarPlanSection, UserProfileSection, t]
+    [
+      AdminSection,
+      EventCalendarPlanSection,
+      MyGradingList,
+      MyProfile,
+      UserProfileSection,
+      t,
+    ]
   );
 
   return {

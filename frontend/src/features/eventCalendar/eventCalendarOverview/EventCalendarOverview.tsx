@@ -11,7 +11,7 @@ import styles from "./EventCalendarOverview.module.scss";
  * This component is responsible for displaying the events for the current week as calendar.
  * This calendar has no functionality like registration or planning the trainings.
  */
-export const EventCalendarOverview: React.FC = () => {
+const EventCalendarOverview: React.FC = () => {
   const [, , updateView] = useDateTimeSpanFilter();
   const [initialized, setInitialized] = useState(false);
 
@@ -43,3 +43,5 @@ export const EventCalendarOverview: React.FC = () => {
     </div>
   );
 };
+
+export default EventCalendarOverview;

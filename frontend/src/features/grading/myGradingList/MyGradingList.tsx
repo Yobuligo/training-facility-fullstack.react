@@ -12,7 +12,7 @@ import { IUserGrading } from "../../../shared/model/IUserGrading";
 import { GradingList } from "../gradingList/GradingList";
 import styles from "./MyGradingList.module.scss";
 
-export const MyGradingList: React.FC = () => {
+const MyGradingList: React.FC = () => {
   const [gradings, setGradings] = useState<IUserGrading[]>([]);
   const [loadGradingRequest, isLoadGradingRequestProcessing] = useRequest();
   const [user] = useUser();
@@ -44,3 +44,5 @@ export const MyGradingList: React.FC = () => {
     </>
   );
 };
+
+export default MyGradingList;

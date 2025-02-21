@@ -11,7 +11,7 @@ import { IUserInviteProps } from "./IUserInviteProps";
 import styles from "./UserInvite.module.scss";
 import { useUserInviteViewModel } from "./useUserInviteViewModel";
 
-export const UserInvite: React.FC<IUserInviteProps> = (props) => {
+const UserInvite: React.FC<IUserInviteProps> = (props) => {
   const viewModel = useUserInviteViewModel();
   const { t } = useTranslation();
 
@@ -52,3 +52,5 @@ export const UserInvite: React.FC<IUserInviteProps> = (props) => {
     </div>
   );
 };
+
+export default UserInvite;

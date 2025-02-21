@@ -10,7 +10,7 @@ import { PasswordConfirmForm } from "../passwordConfirmForm/PasswordConfirmForm"
 import styles from "./PasswordChange.module.scss";
 import { usePasswordChangeViewModel } from "./usePasswordChangeViewModel";
 
-export const PasswordChange: React.FC = () => {
+const PasswordChange: React.FC = () => {
   const viewModel = usePasswordChangeViewModel();
   const { t } = useTranslation();
 
@@ -47,3 +47,5 @@ export const PasswordChange: React.FC = () => {
     </div>
   );
 };
+
+export default PasswordChange;

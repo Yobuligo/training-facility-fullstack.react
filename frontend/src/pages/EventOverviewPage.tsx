@@ -1,5 +1,17 @@
-import { EventCalendarOverview } from "../features/eventCalendar/eventCalendarOverview/EventCalendarOverview";
+import { lazy, Suspense } from "react";
+import { PageSpinner } from "../components/pageSpinner/PageSpinner";
 
 export const EventOverviewPage: React.FC = () => {
-  return <EventCalendarOverview />;
+  const EventCalendarOverview = lazy(
+    () =>
+      import(
+        "../features/eventCalendar/eventCalendarOverview/EventCalendarOverview"
+      )
+  );
+
+  return (
+    <Suspense fallback={<PageSpinner />}>
+      <EventCalendarOverview />
+    </Suspense>
+  );
 };

@@ -508,6 +508,17 @@
 	# Bug: Tab is not selected when navigating to deep link
 		# Copy link of training or plan and open URL. Tab is not selected
 	# Bug: Calendar must not be loaded if event instance or event definition is loaded via url id
+	# Epic: Performance
+		# Story: Lazy load Administration tab
+		# Story: Lazy load UserProfileSection tab
+		# Story: Lazy load EventCalendarPlanSection tab
+		# Story: Lazy load EventRegistrationDetails in Trainings tab
+		# Story: Lazy load MyGradingList tab
+		# Story: Lazy load MyProfile tab
+		# Story: Lazy load PasswordChange change component
+		# Story: Lazy load UserInvitePage component		
+		# Story: Lazy load EventCalendarTrialTraining component
+		# Story: Lazy load EventCalendarOverview component	
 
 	- Story: Delete field for bank institute from db
 
@@ -547,7 +558,6 @@
 	- Story: Add dobok size to user profile
 	- Story: Inform users who are registered for a training that will be called off
 	- Epic: Performance
-		- Story: Admin tabs are loaded asynchronously
 		- Story: table userTrialTraining needs an index on email
 	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Story: Display income per month

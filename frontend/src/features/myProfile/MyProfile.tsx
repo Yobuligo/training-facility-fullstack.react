@@ -3,7 +3,7 @@ import { Error } from "../error/Error";
 import { User } from "../users/user/User";
 import { useMyProfileViewModel } from "./useMyProfileViewModel";
 
-export const MyProfile: React.FC = () => {
+const MyProfile: React.FC = () => {
   const viewModel = useMyProfileViewModel();
 
   return (
@@ -23,3 +23,5 @@ export const MyProfile: React.FC = () => {
     </div>
   );
 };
+
+export default MyProfile;
