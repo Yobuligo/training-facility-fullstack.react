@@ -525,12 +525,12 @@
 	# Bug: Expired invitation and password reset can be displayed and results in error when reconfirm the changes
 	# Story: Delete field for bank institute from db
 
-# Version 1.13.1-20250224.17
+# Version 1.13.1-20250224.16
 	# Bug: User can not be added
 		# Click button to add user. User is added but details can not be changed. 
 		# When selecting user, which was added to user list, the error boundary page is displayed
 
-- Version 1.14.0-<>.16
+- Version 1.14.0-<>.17
 
 - Backlog
 	- Epic: Seminar
