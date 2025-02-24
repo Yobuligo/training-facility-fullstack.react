@@ -219,12 +219,14 @@ export const useUserProfileSectionViewModel = () => {
   /**
    * Appends a new user profile, which is not persisted yet
    */
-  const onAppend = () =>
+  const onAppend = () => {
+    const user: IUser = new DummyUser();
     setUsersShort((previous) => {
-      const user: IUser = new DummyUser();
       setSelectedUser(user);
       return [createUserShort(user), ...previous];
     });
+    navigate(AppRoutes.user.toPath({ id: user.id }));
+  };
 
   /**
    * Unlock an user

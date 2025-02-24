@@ -141,7 +141,7 @@
 		# Story: UserBankAccount must be loaded with User
 		# Story: Delete user with user profile, bank account, gradings, roles, etc.
 			# Delete user is active in display mode
-		# Story: Refactor Collapsables can be toggled on click at title
+		# Story: Refactor Collapsibles can be toggled on click at title
 		# Story: Errors from backend must be translatable or mapped to client errors
 			# e.g. when user credentials are invalid or user is locked, the displayed messages are from the backend
 		# Story: Default user must not be able to change username, tariff, joined on and user roles (e.g. assigning admin role)
@@ -524,6 +524,11 @@
 		# Must be fixed for Users, Planers and Trainings
 	# Bug: Expired invitation and password reset can be displayed and results in error when reconfirm the changes
 	# Story: Delete field for bank institute from db
+
+# Version 1.13.1-20250224.17
+	# Bug: User can not be added
+		# Click button to add user. User is added but details can not be changed. 
+		# When selecting user, which was added to user list, the error boundary page is displayed
 
 - Version 1.14.0-<>.16
 
