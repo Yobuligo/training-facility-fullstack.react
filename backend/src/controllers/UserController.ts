@@ -1,10 +1,13 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
+import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { createError } from "../core/utils/createError";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { SessionRepo } from "../repositories/SessionRepo";
 import { UserRepo } from "../repositories/UserRepo";
+import { UserStatsRepo } from "../repositories/UserStatsRepo";
 import { IAuthentication } from "../shared/model/IAuthentication";
 import { IChangeCredentials } from "../shared/model/IChangeCredentials";
+import { ChartStatsRouteMeta } from "../shared/model/IChartData";
 import { IUser, UserRouteMeta } from "../shared/model/IUser";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
@@ -22,6 +25,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.findSession();
     this.login();
     this.logout();
+    this.activeStats();
   }
 
   protected findById(): void {
@@ -232,6 +236,27 @@ export class UserController extends EntityController<IUser, UserRepo> {
         res.clearCookie("connect.sid"); // connect.sid is the default cookie name of express-session
         res.status(HttpStatusCode.OK_200).send(true);
       })
+    );
+  }
+
+  /**
+   * Returns the number of active members
+   */
+  private activeStats() {
+    this.router.get(
+      `${this.routeMeta.path}${ChartStatsRouteMeta.path}/active`,
+      async (req, res) => {
+        const dateTimeSpan: IDateTimeSpan = {
+          from: new Date("2024-02-01"),
+          to: new Date("2025-01-01"),
+        };
+
+        const userStatsRepo = new UserStatsRepo();
+        const chartData = await userStatsRepo.getActive(dateTimeSpan);
+        res.status(HttpStatusCode.OK_200).send(chartData);
+      }
+
+      // SessionInterceptor(async (req, res) => {}, [AuthRole.ADMIN])
     );
   }
 

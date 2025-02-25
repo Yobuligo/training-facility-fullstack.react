@@ -575,10 +575,10 @@
 		- Story: table userTrialTraining needs an index on email
 	- Epic: Statistics / Reporting / Gamification (like a chart in Scalable Capital with day / week / month / year / all)
 		- Story: Display income per month
-		- Story: Display customer development
-			- Display number of all active customers (week, month, year, max)
-			- Display number of new customers (week, month, year, max)
-			- Display number of quit customers (week, month, year, max)
+		- Story: Display member development
+			- Display number of all active members (week, month, year, max)
+			- Display number of new members (week, month, year, max)
+			- Display number of quit members (week, month, year, max)
 			- Display pie chart with number of students by tariff
 		- Story: Display number registrations for training sessions
 			- Display number of joinings (week, month, year, max)
