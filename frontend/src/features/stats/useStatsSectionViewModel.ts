@@ -18,6 +18,12 @@ export const useStatsSectionViewModel = () => {
       };
       const userApi = new UserApi();
       const chartData = await userApi.getStatsActiveUsers(dateTimeSpan);
+
+      chartData.data.forEach((chartEntry) => {
+        const [year, month] = chartEntry.name.split("-");
+        chartEntry.name = `${year}-${month}`;
+      });
+
       setChartData(chartData);
     })
   );

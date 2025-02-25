@@ -31,10 +31,7 @@ const StatsSection: React.FC = () => {
           }}
         >
           <ResponsiveContainer width="100%" height={"100%"}>
-            <LineChart
-              data={viewModel.chartData?.data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-            >
+            <LineChart data={viewModel.chartData?.data} margin={{ left: -25, right: 10, top: 10 }}>
               <CartesianGrid
                 strokeDasharray="3 3"
                 stroke={colors.colorSecondary}
