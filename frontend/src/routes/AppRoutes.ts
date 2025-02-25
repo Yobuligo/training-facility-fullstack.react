@@ -16,6 +16,7 @@ export const AppRoutes = configureRoutes({
   user: route("/users/:id"),
   planers: route("/planers"),
   planer: route("/planers/:id"),
+  stats: route("/stats"),
   trainings: route("/trainings"),
   training: route("/trainings/:id"),
   gradings: route("/gradings"),

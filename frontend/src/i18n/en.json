@@ -38,6 +38,7 @@
         "profile": "Profile",
         "trainings": "Trainings",
         "planner": "Planner",
+        "stats": "Stats",
         "users": "Users"
     },
     "eventCalendarMyTrainings": {
@@ -271,6 +272,9 @@
         "errorNeedsNumber": "number",
         "errorNeedsUppercaseLetter": "uppercase letter",
         "errorNeedsLowercaseLetter": "lowercase letter"
+    },
+    "stats": {
+        "activeMembers": "Active members"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",

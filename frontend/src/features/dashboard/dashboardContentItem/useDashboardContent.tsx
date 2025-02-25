@@ -31,6 +31,8 @@ const MyGradingList = lazy(
 
 const MyProfile = lazy(() => import("../../myProfile/MyProfile"));
 
+const StatsSection = lazy(() => import("../../stats/StatsSection"));
+
 const AdminSection = lazy(
   () => import("../../admin/adminSection/AdminSection")
 );
@@ -97,6 +99,17 @@ export const useDashboardContent = () => {
         needsAdmin: false,
         path: AppRoutes.profile.toPath(),
         title: t(texts.dashboard.profile),
+      },
+      {
+        content: (
+          <Suspense fallback={<PageSpinner />}>
+            <StatsSection />
+          </Suspense>
+        ),
+        icon: <Admin className={styles.icon} />,
+        needsAdmin: true,
+        path: AppRoutes.stats.toPath(),
+        title: t(texts.dashboard.stats),
       },
       {
         content: (
