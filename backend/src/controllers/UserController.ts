@@ -25,7 +25,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.findSession();
     this.login();
     this.logout();
-    this.activeStats();
+    this.getStatsActiveUsers();
   }
 
   protected findById(): void {
@@ -242,21 +242,41 @@ export class UserController extends EntityController<IUser, UserRepo> {
   /**
    * Returns the number of active members
    */
-  private activeStats() {
+  private getStatsActiveUsers() {
     this.router.get(
       `${this.routeMeta.path}${ChartStatsRouteMeta.path}/active`,
-      async (req, res) => {
-        const dateTimeSpan: IDateTimeSpan = {
-          from: new Date("2024-02-01"),
-          to: new Date("2025-01-01"),
-        };
 
-        const userStatsRepo = new UserStatsRepo();
-        const chartData = await userStatsRepo.getActive(dateTimeSpan);
-        res.status(HttpStatusCode.OK_200).send(chartData);
-      }
+      SessionInterceptor(
+        async (req, res) => {
+          const from = req.query.from;
+          const to = req.query.to;
 
-      // SessionInterceptor(async (req, res) => {}, [AuthRole.ADMIN])
+          if (
+            !from ||
+            typeof from !== "string" ||
+            !to ||
+            typeof to !== "string"
+          ) {
+            return res
+              .status(HttpStatusCode.BAD_REQUEST_400)
+              .send(
+                createError(
+                  "Error when loading active users stats. Given date time span is invalid"
+                )
+              );
+          }
+
+          const dateTimeSpan: IDateTimeSpan = {
+            from: new Date(from),
+            to: new Date(to),
+          };
+
+          const userStatsRepo = new UserStatsRepo();
+          const chartData = await userStatsRepo.getActive(dateTimeSpan);
+          res.status(HttpStatusCode.OK_200).send(chartData);
+        },
+        [AuthRole.ADMIN]
+      )
     );
   }
 

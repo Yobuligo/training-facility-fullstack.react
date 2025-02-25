@@ -1,6 +1,12 @@
 import { EntityRepository } from "../../../api/core/EntityRepository";
 import { RESTApi } from "../../../api/core/RESTApi";
+import { DateTime } from "../../../core/services/date/DateTime";
+import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { IUserInternal } from "../../../model/IUserInternal";
+import {
+  ChartStatsRouteMeta,
+  IChartData,
+} from "../../../shared/model/IChartData";
 import { IUser, UserRouteMeta } from "../../../shared/model/IUser";
 import { IUserShort } from "../../../shared/model/IUserShort";
 import { AuthRole } from "../../../shared/types/AuthRole";
@@ -59,6 +65,14 @@ export class UserApi extends EntityRepository<IUser> {
 
   async findSession(): Promise<IUserInternal | undefined> {
     return await RESTApi.get(`${this.url}/auth/session`);
+  }
+
+  async getStatsActiveUsers(dateTimeSpan: IDateTimeSpan): Promise<IChartData> {
+    const from = DateTime.toDate(dateTimeSpan.from);
+    const to = DateTime.toDate(dateTimeSpan.to);
+    return await RESTApi.get(`${this.url}${ChartStatsRouteMeta.path}/active`, {
+      urlParams: { from, to },
+    });
   }
 
   async login(username: string, password: string): Promise<IUserInternal> {

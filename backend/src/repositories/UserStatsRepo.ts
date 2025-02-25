@@ -1,7 +1,9 @@
+import sequelize from "sequelize";
 import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
 import { IChartData } from "../shared/model/IChartData";
+import { IChartEntry } from "../shared/model/IChartEntry";
 
 export class UserStatsRepo {
   /**
@@ -11,36 +13,38 @@ export class UserStatsRepo {
     const query = `
         WITH RECURSIVE months AS (
             # Start mit dem ersten Monat
-            SELECT :startDate AS month
+            SELECT :startDate AS name
             UNION
             
             # Rekursive Generierung der Monate
-            SELECT DATE_ADD(month, INTERVAL 1 MONTH)
+            SELECT DATE_ADD(name, INTERVAL 1 MONTH)
             FROM months
-            WHERE month < :endDate
+            WHERE name < :endDate
         )
 
         SELECT 
-            m.month,
-            COUNT(u.id) AS activeMembers
+            m.name,
+            COUNT(u.id) AS value
         FROM 
             months m
         LEFT JOIN 
             \`user-profiles\` u
         ON 
-            u.joinedOn <= LAST_DAY(STR_TO_DATE(CONCAT(m.month, '-01'), '%Y-%m-%d'))
-            AND (u.resignedAt IS NULL OR u.resignedAt >= STR_TO_DATE(CONCAT(m.month, '-01'), '%Y-%m-%d'))
+            u.joinedOn <= LAST_DAY(STR_TO_DATE(CONCAT(m.name, '-01'), '%Y-%m-%d'))
+            AND (u.resignedAt IS NULL OR u.resignedAt >= STR_TO_DATE(CONCAT(m.name, '-01'), '%Y-%m-%d'))
         GROUP BY 
-            m.month
+            m.name
         ORDER BY 
-            m.month;    
+            m.name;    
     `;
 
     const startDate = DateTime.toDate(dateTimeSpan.from);
     const endDate = DateTime.toDate(dateTimeSpan.to);
+    const data = await db.query<IChartEntry>(query, {
+      replacements: { startDate, endDate },
+      type: sequelize.QueryTypes.SELECT,
+    });
 
-    db.query(query, { replacements: { startDate, endDate } });
-
-    return { dateTimeSpan, data: [] };
+    return { dateTimeSpan, data };
   }
 }
