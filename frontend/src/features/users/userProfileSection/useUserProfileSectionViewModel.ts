@@ -44,7 +44,7 @@ export const useUserProfileSectionViewModel = () => {
         const userApi = new UserApi();
         const user = await userApi.findById(userId);
 
-        // sort user guardians by createdAt to display first created at the top
+        // sort user guardians by createdAt to display first created at the top as a user can have multiple guardians
         user?.userProfile?.userGuardians?.sort((left, right) =>
           DateTime.compare(left.createdAt, right.createdAt)
         );
@@ -130,6 +130,7 @@ export const useUserProfileSectionViewModel = () => {
 
   const createUserShort = (user: IUser): IUserShort => {
     return {
+      birthday: user.userProfile?.birthday,
       email: user.userProfile?.email ?? "",
       firstname: user.userProfile?.firstname ?? "",
       id: user.id,
@@ -146,16 +147,19 @@ export const useUserProfileSectionViewModel = () => {
   };
 
   /**
-   * Updates the user short list
+   * Updates the user short list by replacing the current user by its id or by the separate provided {@link userId}.
    *
-   * @param userId contains an alternative userId of e.g. obsolete entries
+   * @param userId contains an alternative userId of e.g. obsolete entries.
+   * E.g. when a new user is added, he will get a temporary dummy id, which is later replaced, when the user will be added to the backend.
+   * In that case the dummy user entry has to be replaced by the finally user entry
    */
   const updateUserShort = (user: IUser, userId?: string) => {
     setUsersShort((previous) => {
       const searchUserId = userId ? userId : user.id;
       const index = previous.findIndex((item) => item.id === searchUserId);
       if (index !== -1) {
-        previous.splice(index, 1, createUserShort(user));
+        const userShort = createUserShort(user);
+        previous.splice(index, 1, userShort);
       }
       return [...previous];
     });
@@ -186,6 +190,10 @@ export const useUserProfileSectionViewModel = () => {
 
       // if created user is selected, replace by new created instance, which has an valid uuid
       setSelectedUser(createdUser);
+
+      // user list must be resorted with the current name of the new added user
+      const sortedUsersShort = sortByName(usersShort);
+      setUsersShort(sortedUsersShort);
     });
 
   const updateUser = (user: IUser) =>

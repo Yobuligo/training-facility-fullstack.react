@@ -530,7 +530,11 @@
 		# Click button to add user. User is added but details can not be changed. 
 		# When selecting user, which was added to user list, the error boundary page is displayed
 
-- Version 1.14.0-<>.17
+# Version 1.13.2-20250225.17
+	# Bug: Added user will be not displayed correctly in the user list
+		# Click add user -> save -> navigate back to user list -> added user is displayed at first position and the age is not calculated correctly
+
+- Version 1.14.0-<>.18
 
 - Backlog
 	- Epic: Seminar
