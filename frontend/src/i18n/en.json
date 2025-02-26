@@ -24,13 +24,15 @@
         "date": "Date",
         "day": "Day",
         "event": "Event",
+        "max": "Max",
         "month": "Month",
         "next": "Next",
         "noEventsInRange": "No events in range",
         "previous": "Previous",
         "time": "Time",
         "today": "Today",
-        "week": "Week"
+        "week": "Week",
+        "year": "Year"
     },
     "dashboard": {
         "admin": "Administration",
