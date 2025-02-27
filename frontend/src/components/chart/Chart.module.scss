@@ -1,0 +1,13 @@
+@use "../../styles/mixins.scss";
+@use "../../styles/dimensions.module.scss";
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  height: 15rem;
+
+  @include mixins.medium-screen {
+    height: 25rem;
+  }
+}

@@ -579,7 +579,7 @@
 			- Display number of all active members (week, month, year, max)
 			- Display number of new members (week, month, year, max)
 			- Display number of quit members (week, month, year, max)
-			- Display pie chart with number of students by tariff
+			- Display pie chart with number members by tariff
 		- Story: Display number registrations for training sessions
 			- Display number of joinings (week, month, year, max)
 				- E.g. to derive that there are less participants at summer holidays

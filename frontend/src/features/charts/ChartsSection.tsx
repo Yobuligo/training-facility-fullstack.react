@@ -1,5 +1,6 @@
 import {
   CartesianGrid,
+  LabelList,
   Legend,
   Line,
   LineChart,
@@ -17,7 +18,7 @@ import colors from "../../styles/colors.module.scss";
 import styles from "./StatsSection.module.scss";
 import { useStatsSectionViewModel } from "./useStatsSectionViewModel";
 
-const StatsSection: React.FC = () => {
+const ChartsSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useStatsSectionViewModel();
 
@@ -40,7 +41,7 @@ const StatsSection: React.FC = () => {
             margin={{ left: -25, right: 10, top: 10 }}
           >
             <CartesianGrid
-              strokeDasharray="3 3"
+              strokeDasharray="1 5"
               stroke={colors.colorSecondary}
             />
             <XAxis dataKey="name" />
@@ -55,7 +56,9 @@ const StatsSection: React.FC = () => {
               strokeWidth={1}
               dot={{ fill: colors.colorPrimary, r: 2 }}
               name={t(texts.stats.activeMembers)}
-            />
+            >
+              <LabelList dataKey="value" position="top" />
+            </Line>
           </LineChart>
         </ResponsiveContainer>
       )}
@@ -63,4 +66,4 @@ const StatsSection: React.FC = () => {
   );
 };
 
-export default StatsSection;
+export default ChartsSection;

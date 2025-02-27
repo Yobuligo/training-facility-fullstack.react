@@ -31,7 +31,7 @@ const MyGradingList = lazy(
 
 const MyProfile = lazy(() => import("../../myProfile/MyProfile"));
 
-const StatsSection = lazy(() => import("../../stats/StatsSection"));
+const ChartsSection = lazy(() => import("../../charts/ChartsSection"));
 
 const AdminSection = lazy(
   () => import("../../admin/adminSection/AdminSection")
@@ -103,7 +103,7 @@ export const useDashboardContent = () => {
       {
         content: (
           <Suspense fallback={<PageSpinner />}>
-            <StatsSection />
+            <ChartsSection />
           </Suspense>
         ),
         icon: <Admin className={styles.icon} />,

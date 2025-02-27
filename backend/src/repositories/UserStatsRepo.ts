@@ -12,11 +12,11 @@ export class UserStatsRepo {
   async getActive(dateTimeSpan: IDateTimeSpan): Promise<IChartData> {
     const query = `
         WITH RECURSIVE months AS (
-            # Start mit dem ersten Monat
+            # start with the first month
             SELECT :startDate AS name
             UNION
             
-            # Rekursive Generierung der Monate
+            # recursive generation of months
             SELECT DATE_ADD(name, INTERVAL 1 MONTH)
             FROM months
             WHERE name < :endDate

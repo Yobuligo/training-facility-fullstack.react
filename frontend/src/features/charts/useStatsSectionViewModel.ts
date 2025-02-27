@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
 import { UserApi } from "../../lib/userSession/api/UserApi";
 import { useRequest } from "../../lib/userSession/hooks/useRequest";
 import { IChartData } from "../../shared/model/IChartData";
-import { DateTime } from "./../../core/services/date/DateTime";
+import { DateTime } from "../../core/services/date/DateTime";
 
-export enum ChartView {
+enum ChartView {
   MAX,
   YEAR,
 }
@@ -34,11 +33,6 @@ const getTo = (chartView: ChartView): Date => {
   }
 };
 
-const getDateTimeSpan = (chartView: ChartView): IDateTimeSpan => ({
-  from: getFrom(chartView),
-  to: getTo(chartView),
-});
-
 export const useStatsSectionViewModel = () => {
   const [chartData, setChartData] = useState<IChartData | undefined>(undefined);
   const [loadStatsRequest, isLoadStatsRequestProcessing] = useRequest();
@@ -64,24 +58,6 @@ export const useStatsSectionViewModel = () => {
       setChartData(chartData);
     });
   }, [from, to]);
-
-  // useInitialize(() =>
-  //   loadStats(async () => {
-  //     const dateTimeSpan: IDateTimeSpan = {
-  //       from: new Date("2024-04-01"),
-  //       to: new Date(DateTime.toDate(new Date())),
-  //     };
-  //     const userApi = new UserApi();
-  //     const chartData = await userApi.getStatsActiveUsers(dateTimeSpan);
-
-  //     chartData.data.forEach((chartEntry) => {
-  //       const [year, month] = chartEntry.name.split("-");
-  //       chartEntry.name = `${year}-${month}`;
-  //     });
-
-  //     setChartData(chartData);
-  //   })
-  // );
 
   const onSelectMax = () => setChartView(ChartView.MAX);
 
