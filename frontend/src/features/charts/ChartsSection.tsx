@@ -5,7 +5,6 @@ const ChartsSection: React.FC = () => {
   return (
     <div className={styles.chartsSection}>
       <ActiveMemberChart />
-      {/* <TariffMemberChart /> */}
     </div>
   );
 };
