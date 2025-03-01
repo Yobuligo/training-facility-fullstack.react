@@ -537,7 +537,7 @@
 # Version 1.13.2-20250301.18
 	# Bug: Trainings cannot be added
 
-- Version 1.14.0-<>.18
+- Version 1.14.0-<>.19
 
 - Backlog
 	- Epic: Seminar
