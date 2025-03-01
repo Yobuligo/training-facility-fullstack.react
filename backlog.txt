@@ -534,8 +534,8 @@
 	# Bug: Added user will be not displayed correctly in the user list
 		# Click add user -> save -> navigate back to user list -> added user is displayed at first position and the age is not calculated correctly
 
-- Version 1.13.2-20250301.18
-	- Bug: Trainings cannot be added
+# Version 1.13.2-20250301.18
+	# Bug: Trainings cannot be added
 
 - Version 1.14.0-<>.18
 

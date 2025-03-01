@@ -1,5 +1,6 @@
 import { lazy, Suspense, useMemo } from "react";
 import { ReactComponent as Admin } from "../../../assets/admin.svg";
+import { ReactComponent as Chart } from "../../../assets/chart.svg";
 import { ReactComponent as Clock } from "../../../assets/clock.svg";
 import { ReactComponent as Grading } from "../../../assets/grading.svg";
 import { ReactComponent as Profile } from "../../../assets/profile.svg";
@@ -106,7 +107,7 @@ export const useDashboardContent = () => {
             <ChartsSection />
           </Suspense>
         ),
-        icon: <Admin className={styles.icon} />,
+        icon: <Chart className={styles.icon} />,
         needsAdmin: true,
         path: AppRoutes.stats.toPath(),
         title: t(texts.dashboard.stats),
