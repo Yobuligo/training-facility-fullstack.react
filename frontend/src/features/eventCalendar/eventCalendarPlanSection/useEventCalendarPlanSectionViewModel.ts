@@ -33,8 +33,10 @@ export const useEventCalendarPlanSectionViewModel = () => {
     // load trainers
     const userApi = new UserApi();
     const trainers = await userApi.findAllShortByRole(AuthRole.TRAINER);
+    const dummyEventDefinition = new DummyEventDefinition(user.id);
     setTrainers(trainers);
-    setSelectedEventDefinition(new DummyEventDefinition(user.id));
+    setSelectedEventDefinition(dummyEventDefinition);
+    navigate(AppRoutes.planer.toPath({ id: dummyEventDefinition.id }));
   };
 
   /**
