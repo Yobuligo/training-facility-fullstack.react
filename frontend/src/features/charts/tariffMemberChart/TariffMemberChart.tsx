@@ -3,7 +3,7 @@ import Chart from "../../../components/chart/Chart";
 import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
 
 export const TariffMemberChart: React.FC = () => {
-  const viewMolde = useTariffMemberChartViewModel();
+  const viewMode = useTariffMemberChartViewModel();
 
   const data = [
     { name: "Apples", value: 400 },
