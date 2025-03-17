@@ -13,7 +13,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { toStringDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
-import { ProfileImageSkeleton } from "../../profileImage/profileImageSkeleton/ProfileImageSkeleton";
+import { ProfileImageContainer } from "../../profileImage/profileImageContainer/ProfileImageContainer";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
 import { useUserViewModel } from "./useUserViewModel";
@@ -67,8 +67,7 @@ export const User: React.FC<IUserProps> = (props) => {
         setDisplayMode={viewModel.setDisplayMode}
       >
         <div className={styles.imageAndNameContainer}>
-        {/* <div> */}
-          <ProfileImageSkeleton />
+          <ProfileImageContainer />
           <h3 className={styles.username}>{`${
             props.user.userProfile?.firstname
           } ${props.user.userProfile?.lastname} ${

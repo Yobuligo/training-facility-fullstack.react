@@ -1,8 +1,8 @@
 @use "../../../styles/colors.module.scss";
 
 .profileImageSkeleton {
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   background-color: colors.$color-disabled;
 }
