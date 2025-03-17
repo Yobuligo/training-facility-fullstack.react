@@ -540,6 +540,12 @@
 - Version 1.14.0-<>.19
 
 - Backlog
+	- Epic: Profile Images
+		- Story: Profile image can be added to a user
+			- Uploaded image can be cropped to fit the given image size
+		- Story: Uploaded image will be persisted in full size, medium and small size
+		- Story: Profile image can be replaced by a new image
+		- Story: Display small profile image in user search for assigning a pupil to a training
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
 			- has to be discussed if it is required

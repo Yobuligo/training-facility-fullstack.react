@@ -13,6 +13,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { toStringDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
+import { ProfileImageSkeleton } from "../../profileImage/profileImageSkeleton/ProfileImageSkeleton";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
 import { useUserViewModel } from "./useUserViewModel";
@@ -65,13 +66,17 @@ export const User: React.FC<IUserProps> = (props) => {
         onValidate={viewModel.onValidate}
         setDisplayMode={viewModel.setDisplayMode}
       >
-        <h3 className={styles.username}>{`${
-          props.user.userProfile?.firstname
-        } ${props.user.userProfile?.lastname} ${
-          props.user.userProfile && props.user.userProfile.memberId !== 0
-            ? `| ${formatMemberId(props.user.userProfile.memberId)}`
-            : ""
-        }`}</h3>
+        <div className={styles.imageAndNameContainer}>
+        {/* <div> */}
+          <ProfileImageSkeleton />
+          <h3 className={styles.username}>{`${
+            props.user.userProfile?.firstname
+          } ${props.user.userProfile?.lastname} ${
+            props.user.userProfile && props.user.userProfile.memberId !== 0
+              ? `| ${formatMemberId(props.user.userProfile.memberId)}`
+              : ""
+          }`}</h3>
+        </div>
 
         {/* Personal Information */}
         <CollapseCard

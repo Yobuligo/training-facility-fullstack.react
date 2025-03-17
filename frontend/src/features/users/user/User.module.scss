@@ -8,6 +8,13 @@
   row-gap: dimensions.$negative-space;
 }
 
+.imageAndNameContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  align-items: center;
+}
+
 .username {
   font-family: "MerriweatherSans";
 }
