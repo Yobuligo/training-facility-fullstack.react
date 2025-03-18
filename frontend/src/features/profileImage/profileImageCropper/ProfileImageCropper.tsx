@@ -1,5 +1,6 @@
 import ReactCrop from "react-image-crop";
 import { Button } from "../../../components/button/Button";
+import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { IProfileImageCropperProps } from "./IProfileImageCropperProps";
@@ -17,18 +18,20 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <Button onClick={viewModel.onSelectFileClick}>
-        <input
-          accept="image/*"
-          capture="environment"
-          className={styles.input}
-          onChange={viewModel.onSelectFile}
-          ref={viewModel.selectFileInputRef}
-          type="file"
-        />
-        {t(texts.profileImage.gallery)}
-      </Button>
+    <>
+      <Toolbar className={styles.toolbar}>
+        <Button onClick={viewModel.onSelectFileClick}>
+          <input
+            accept="image/*"
+            capture="environment"
+            className={styles.input}
+            onChange={viewModel.onSelectFile}
+            ref={viewModel.selectFileInputRef}
+            type="file"
+          />
+          {t(texts.profileImage.gallery)}
+        </Button>
+      </Toolbar>
 
       {viewModel.image ? (
         <div>
@@ -53,7 +56,7 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
           {t(texts.profileImage.pleaseSelectedImage)}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
