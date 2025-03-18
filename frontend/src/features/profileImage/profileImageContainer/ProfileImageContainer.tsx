@@ -12,7 +12,9 @@ export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
   return (
     <div className={styles.profileImageContainer}>
       {image ? <div>My Image</div> : <ProfileImageSkeleton />}
-      <ProfileImageEditButton className={styles.editButton} />
+      {props.displayEditButton && (
+        <ProfileImageEditButton className={styles.editButton} />
+      )}
     </div>
   );
 };
