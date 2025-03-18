@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { ProfileImageCropper } from "../profileImageCropper/ProfileImageCropper";
+import ProfileImageCropper from "../profileImageCropper/ProfileImageCropper";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
 
 export const useProfileImageContainerViewModel = (

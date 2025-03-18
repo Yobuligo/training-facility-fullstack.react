@@ -277,7 +277,8 @@
     },
     "profileImage": {
         "chooseImage": "Choose image",
-        "gallery": "Gallery"
+        "gallery": "Gallery",
+        "preview": "Preview"
     },
     "stats": {
         "activeMembers": "Active members"
