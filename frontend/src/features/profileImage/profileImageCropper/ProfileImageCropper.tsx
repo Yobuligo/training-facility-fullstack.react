@@ -35,7 +35,7 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
         </Button>
       </Toolbar>
 
-      {viewModel.image ? (
+      {viewModel.imageSrc ? (
         <div>
           <ReactCrop
             aspect={CropConfig.aspectRatio}
@@ -47,7 +47,7 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
           >
             <img
               alt={t(texts.profileImage.preview)}
-              src={viewModel.image}
+              src={viewModel.imageSrc}
               className={styles.image}
               onLoad={viewModel.onLoadImage}
               ref={viewModel.imageRef}

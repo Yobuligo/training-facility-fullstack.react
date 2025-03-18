@@ -15,7 +15,7 @@ export const useProfileImageCropperViewModel = (
   props: IProfileImageCropperProps
 ) => {
   const selectFileInputRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState<string>("");
+  const [imageSrc, setImage] = useState<string>("");
   const [crop, setCrop] = useState<Crop>();
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -23,20 +23,10 @@ export const useProfileImageCropperViewModel = (
    * Creates an image from the cropped preview file.
    */
   const createCroppedImage = async (
-    image: string,
+    image: HTMLImageElement,
     crop: Crop
   ): Promise<Blob | null> => {
-    const img = new Image();
-    img.src = image;
-    await img.decode();
-
     const canvas = document.createElement("canvas");
-    // const scaleX = img.naturalWidth / img.width;
-    // const scaleY = img.naturalHeight / img.height;
-
-    canvas.width = crop.width;
-    canvas.height = crop.height;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) {
       throw new Error(
@@ -44,25 +34,13 @@ export const useProfileImageCropperViewModel = (
       );
     }
 
-    // ctx.drawImage(
-    //   img,
-    //   crop.x * scaleX,
-    //   crop.y * scaleY,
-    //   crop.width * scaleX,
-    //   crop.height * scaleY,
-    //   0,
-    //   0,
-    //   crop.width,
-    //   crop.height
-    // );
-
     // devicePixelRatio slightly increases sharpness on retina devices
     // at the expense of slightly slower render times and needing to
     // size the image back down if you want to download/upload and be
     // true to the images natural size.
     const pixelRatio = window.devicePixelRatio;
-    const scaleX = img.naturalWidth / img.width;
-    const scaleY = img.naturalHeight / img.height;
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
 
     canvas.width = Math.floor(crop.width * scaleX * pixelRatio);
     canvas.height = Math.floor(crop.height * scaleY * pixelRatio);
@@ -77,15 +55,15 @@ export const useProfileImageCropperViewModel = (
     // Move the crop origin to the canvas origin (0,0)
     ctx.translate(-cropX, -cropY);
     ctx.drawImage(
-      img,
+      image,
       0,
       0,
-      img.naturalWidth,
-      img.naturalHeight,
+      image.naturalWidth,
+      image.naturalHeight,
       0,
       0,
-      img.naturalWidth,
-      img.naturalHeight
+      image.naturalWidth,
+      image.naturalHeight
     );
 
     ctx.restore();
@@ -100,14 +78,14 @@ export const useProfileImageCropperViewModel = (
     if (props.onCrop) {
       props.onCrop(async () => {
         if (
-          image !== "" &&
+          imageSrc !== "" &&
           crop !== undefined &&
           imageRef !== null &&
           imageRef.current !== null
         ) {
           // return createCroppedImage(image,  crop);
           return createCroppedImage(
-            image,
+            imageRef.current,
             convertToPixelCrop(
               crop,
               imageRef.current.width,
@@ -118,7 +96,7 @@ export const useProfileImageCropperViewModel = (
         return null;
       });
     }
-  }, [crop, image, props]);
+  }, [crop, imageSrc, props]);
 
   /**
    * Button for displaying file select dialog was clicked.
@@ -166,7 +144,7 @@ export const useProfileImageCropperViewModel = (
 
   return {
     crop,
-    image,
+    imageSrc,
     imageRef,
     onLoadImage,
     onSelectFile,
