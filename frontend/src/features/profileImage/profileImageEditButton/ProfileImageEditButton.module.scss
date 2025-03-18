@@ -1,0 +1,17 @@
+@use "../../../styles/colors.module.scss";
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$color-secondary;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+}
+
+.editIcon {
+  fill: colors.$color-text-light;
+}
