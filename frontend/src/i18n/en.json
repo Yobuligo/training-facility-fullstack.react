@@ -275,6 +275,10 @@
         "errorNeedsUppercaseLetter": "uppercase letter",
         "errorNeedsLowercaseLetter": "lowercase letter"
     },
+    "profileImage": {
+        "chooseImage": "Choose image",
+        "gallery": "Gallery"
+    },
     "stats": {
         "activeMembers": "Active members"
     },

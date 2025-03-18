@@ -275,6 +275,10 @@
         "errorNeedsUppercaseLetter": "Großbuchstabe",
         "errorNeedsLowercaseLetter": "Kleinbuchstabe"
     },
+    "profileImage": {
+        "chooseImage": "Bild auswählen",
+        "gallery": "Gallerie"
+    },
     "stats": {
         "activeMembers": "Aktive Mitglieder"
     },

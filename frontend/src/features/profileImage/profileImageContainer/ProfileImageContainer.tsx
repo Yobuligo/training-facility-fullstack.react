@@ -1,20 +1,26 @@
-import { useState } from "react";
 import { ProfileImageEditButton } from "../profileImageEditButton/ProfileImageEditButton";
 import { ProfileImageSkeleton } from "../profileImageSkeleton/ProfileImageSkeleton";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
 import styles from "./ProfileImageContainer.module.scss";
+import { useProfileImageContainerViewModel } from "./useProfileImageContainerViewModel";
 
 export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
   props
 ) => {
-  const [image, setImage] = useState(props.image);
+  const viewModel = useProfileImageContainerViewModel(props);
 
   return (
-    <div className={styles.profileImageContainer}>
-      {image ? <div>My Image</div> : <ProfileImageSkeleton />}
-      {props.displayEditButton && (
-        <ProfileImageEditButton className={styles.editButton} />
-      )}
-    </div>
+    <>
+      {viewModel.confirmDialog.content}
+      <div className={styles.profileImageContainer}>
+        {viewModel.image ? <div>My Image</div> : <ProfileImageSkeleton />}
+        {props.displayEditButton && (
+          <ProfileImageEditButton
+            className={styles.editButton}
+            onClick={viewModel.onEdit}
+          />
+        )}
+      </div>
+    </>
   );
 };
