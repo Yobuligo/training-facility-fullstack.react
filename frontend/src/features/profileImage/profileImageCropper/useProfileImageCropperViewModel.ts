@@ -1,11 +1,16 @@
 import { useRef, useState } from "react";
-import { Crop, makeAspectCrop } from "react-image-crop";
+import {
+  centerCrop,
+  Crop,
+  makeAspectCrop,
+  PercentCrop,
+  PixelCrop,
+} from "react-image-crop";
 
 export const CropConfig = {
   minDimensions: 150,
   aspectRatio: 1,
 };
-
 export const useProfileImageCropperViewModel = () => {
   const selectFileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<string>("");
@@ -33,28 +38,39 @@ export const useProfileImageCropperViewModel = () => {
     reader.readAsDataURL(file);
   };
 
-  const onImageLoad = (
+  /**
+   * Completes file loading process by updating the crop to the pictures width and height.
+   */
+  const onLoadImage = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const { width, height } = event.currentTarget;
     const crop = makeAspectCrop(
       {
-        unit: "px",
-        width: CropConfig.minDimensions,
+        unit: "%",
+        width: 25,
       },
       CropConfig.aspectRatio,
       width,
       height
     );
-    setCrop(crop);
+    const centeredCrop = centerCrop(crop, width, height);
+    setCrop(centeredCrop);
   };
+
+  /**
+   * Updates the crop
+   */
+  const onUpdateCrop = (cropPixel: PixelCrop, cropPercent: PercentCrop) =>
+    setCrop(cropPercent);
 
   return {
     crop,
     image,
-    onImageLoad,
+    onLoadImage,
     onSelectFile,
     onSelectFileClick,
+    onUpdateCrop,
     selectFileInputRef,
     setCrop,
   };

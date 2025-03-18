@@ -40,14 +40,14 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
             circularCrop
             crop={viewModel.crop}
             keepSelection
-            onChange={viewModel.setCrop}
+            onChange={viewModel.onUpdateCrop}
             minWidth={CropConfig.minDimensions}
           >
             <img
               alt={t(texts.profileImage.preview)}
               src={viewModel.image}
               className={styles.image}
-              onLoad={viewModel.onImageLoad}
+              onLoad={viewModel.onLoadImage}
             />
           </ReactCrop>
         </div>
