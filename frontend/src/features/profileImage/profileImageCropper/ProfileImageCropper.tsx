@@ -29,13 +29,12 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
 
       <input
         accept="image/*"
-        capture="environment"
         className={styles.input}
         onChange={viewModel.onSelectFile}
         ref={viewModel.selectFileInputRef}
         type="file"
       />
-      
+
       {viewModel.imageSrc ? (
         <div>
           <ReactCrop
