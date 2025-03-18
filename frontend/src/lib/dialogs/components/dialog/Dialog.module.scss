@@ -19,7 +19,7 @@
   background-color: colors.$color-dialog-background;
   box-shadow: colors.$color-box-shadow;
   border: 1px solid colors.$color-border;
-  width: 20rem;
+  width: 90%;
 
   @include mixins.medium-screen {
     width: 30rem;
@@ -39,5 +39,5 @@
 }
 
 .body {
-  padding: 2rem;
+  padding: 1rem;
 }
