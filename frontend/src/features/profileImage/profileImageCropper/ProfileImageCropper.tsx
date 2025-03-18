@@ -30,7 +30,7 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
         {t(texts.profileImage.gallery)}
       </Button>
 
-      {viewModel.image && (
+      {viewModel.image ? (
         <div>
           <ReactCrop
             aspect={CropConfig.aspectRatio}
@@ -47,6 +47,10 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
               onLoad={viewModel.onImageLoad}
             />
           </ReactCrop>
+        </div>
+      ) : (
+        <div className={styles.selectImageContainer}>
+          {t(texts.profileImage.pleaseSelectedImage)}
         </div>
       )}
     </div>

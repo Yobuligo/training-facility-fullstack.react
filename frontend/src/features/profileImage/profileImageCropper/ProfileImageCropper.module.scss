@@ -5,3 +5,12 @@
 .image {
   width: 100%;
 }
+
+.selectImageContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}

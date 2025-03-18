@@ -278,6 +278,7 @@
     "profileImage": {
         "chooseImage": "Bild auswählen",
         "gallery": "Gallerie",
+        "pleaseSelectedImage": "Bitte wähle ein Bild aus",
         "preview": "Preview"
     },
     "stats": {
