@@ -22,9 +22,13 @@ export const useProfileImageContainerViewModel = (
    * Handles event when button okay was clicked to created a profile image from the selected and cropped image.
    */
   const onOkay = async () => {
-    // Todo
-    const image = await cropEvent.handlers[0]?.();
-    console.log("image was cropped");
+    const blob = await cropEvent.handlers[0]?.();
+
+    // Set image to display it.
+    if (blob) {
+      const image = URL.createObjectURL(blob);
+      setImage(image);
+    }
   };
 
   const onEdit = () => {

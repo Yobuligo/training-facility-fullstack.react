@@ -1,3 +1,5 @@
+import { texts } from "../../../lib/translation/texts";
+import { useTranslation } from "../../../lib/translation/useTranslation";
 import { ProfileImageEditButton } from "../profileImageEditButton/ProfileImageEditButton";
 import { ProfileImageSkeleton } from "../profileImageSkeleton/ProfileImageSkeleton";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
@@ -7,13 +9,18 @@ import { useProfileImageContainerViewModel } from "./useProfileImageContainerVie
 export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
   props
 ) => {
+  const { t } = useTranslation();
   const viewModel = useProfileImageContainerViewModel(props);
 
   return (
     <>
       {viewModel.confirmDialog.content}
       <div className={styles.profileImageContainer}>
-        {viewModel.image ? <div>My Image</div> : <ProfileImageSkeleton />}
+        {viewModel.image ? (
+          <img src={viewModel.image} alt={t(texts.profileImage.profileImage)} />
+        ) : (
+          <ProfileImageSkeleton />
+        )}
         {props.displayEditButton && (
           <ProfileImageEditButton
             className={styles.editButton}

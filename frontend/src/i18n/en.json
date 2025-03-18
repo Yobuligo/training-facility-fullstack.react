@@ -279,7 +279,8 @@
         "chooseImage": "Choose image",
         "gallery": "Gallery",
         "pleaseSelectedImage": "Please selected an image",
-        "preview": "Preview"
+        "preview": "Preview",
+        "profileImage": "Profile image"
     },
     "stats": {
         "activeMembers": "Active members"

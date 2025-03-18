@@ -32,7 +32,13 @@ export const useProfileImageCropperViewModel = (
     canvas.height = crop.height;
 
     const ctx = canvas.getContext("2d");
-    ctx?.drawImage(
+    if (!ctx) {
+      throw new Error(
+        "Error while creating cropped image. Canvas context not available."
+      );
+    }
+
+    ctx.drawImage(
       img,
       crop.x * scaleX,
       crop.y * scaleY,

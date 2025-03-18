@@ -279,7 +279,8 @@
         "chooseImage": "Bild auswählen",
         "gallery": "Gallerie",
         "pleaseSelectedImage": "Bitte wähle ein Bild aus",
-        "preview": "Preview"
+        "preview": "Preview",
+        "profileImage": "Profilbild"
     },
     "stats": {
         "activeMembers": "Aktive Mitglieder"
