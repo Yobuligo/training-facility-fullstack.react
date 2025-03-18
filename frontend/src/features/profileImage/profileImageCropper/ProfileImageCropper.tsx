@@ -50,6 +50,7 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
               src={viewModel.image}
               className={styles.image}
               onLoad={viewModel.onLoadImage}
+              ref={viewModel.imageRef}
             />
           </ReactCrop>
         </div>
