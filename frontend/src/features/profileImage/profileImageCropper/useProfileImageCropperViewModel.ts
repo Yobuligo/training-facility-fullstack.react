@@ -15,7 +15,7 @@ export const useProfileImageCropperViewModel = (
   props: IProfileImageCropperProps
 ) => {
   const selectFileInputRef = useRef<HTMLInputElement>(null);
-  const [imageSrc, setImage] = useState<string>("");
+  const [imageSrc, setImageSrc] = useState<string>("");
   const [crop, setCrop] = useState<Crop>();
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -78,12 +78,11 @@ export const useProfileImageCropperViewModel = (
     if (props.onCrop) {
       props.onCrop(async () => {
         if (
-          imageSrc !== "" &&
           crop !== undefined &&
           imageRef !== null &&
           imageRef.current !== null
         ) {
-          // return createCroppedImage(image,  crop);
+
           return createCroppedImage(
             imageRef.current,
             convertToPixelCrop(
@@ -96,7 +95,7 @@ export const useProfileImageCropperViewModel = (
         return null;
       });
     }
-  }, [crop, imageSrc, props]);
+  }, [crop, props]);
 
   /**
    * Button for displaying file select dialog was clicked.
@@ -115,7 +114,7 @@ export const useProfileImageCropperViewModel = (
     const reader = new FileReader();
     reader.addEventListener("load", () => {
       const image = reader.result?.toString() ?? "";
-      setImage(image);
+      setImageSrc(image);
     });
     reader.readAsDataURL(file);
   };

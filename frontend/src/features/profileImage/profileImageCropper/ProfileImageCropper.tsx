@@ -23,18 +23,19 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
     <>
       <Toolbar className={styles.toolbar}>
         <Button onClick={viewModel.onSelectFileClick}>
-          <input
-            accept="image/*"
-            capture="environment"
-            className={styles.input}
-            onChange={viewModel.onSelectFile}
-            ref={viewModel.selectFileInputRef}
-            type="file"
-          />
           {t(texts.profileImage.gallery)}
         </Button>
       </Toolbar>
 
+      <input
+        accept="image/*"
+        capture="environment"
+        className={styles.input}
+        onChange={viewModel.onSelectFile}
+        ref={viewModel.selectFileInputRef}
+        type="file"
+      />
+      
       {viewModel.imageSrc ? (
         <div>
           <ReactCrop
