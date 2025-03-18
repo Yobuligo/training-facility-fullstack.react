@@ -13,8 +13,10 @@ import {
 /**
  * This component is responsible for displaying a button to select a profile image and to crop it.
  */
-const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
-  const viewModel = useProfileImageCropperViewModel();
+export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
+  props
+) => {
+  const viewModel = useProfileImageCropperViewModel(props);
   const { t } = useTranslation();
 
   return (
@@ -40,7 +42,7 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
             circularCrop
             crop={viewModel.crop}
             keepSelection
-            onChange={viewModel.onUpdateCrop}
+            onChange={(_, cropPercent) => viewModel.setCrop(cropPercent)}
             minWidth={CropConfig.minDimensions}
           >
             <img
@@ -59,5 +61,3 @@ const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (props) => {
     </>
   );
 };
-
-export default ProfileImageCropper;
