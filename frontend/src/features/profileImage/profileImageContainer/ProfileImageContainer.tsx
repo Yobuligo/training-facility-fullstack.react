@@ -17,7 +17,11 @@ export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
       {viewModel.confirmDialog.content}
       <div className={styles.profileImageContainer}>
         {viewModel.image ? (
-          <img src={viewModel.image} alt={t(texts.profileImage.profileImage)} />
+          <img
+            className={styles.image}
+            src={viewModel.image}
+            alt={t(texts.profileImage.profileImage)}
+          />
         ) : (
           <ProfileImageSkeleton />
         )}
