@@ -4,7 +4,7 @@ import { UserProfileImageSize } from "../types/UserProfileImageSize";
 
 export interface IUserProfileImage extends IEntity {
   mimeType: string;
-  image: Buffer;
+  image: Buffer | string;
   size: UserProfileImageSize;
   userProfileId: string;
 }

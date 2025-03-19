@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
 import { Event } from "../../../core/services/event/Event";
 import { error } from "../../../core/utils/error";
@@ -20,6 +20,21 @@ export const useProfileImageContainerViewModel = (
     props.user.userProfile?.id ??
     error("Error while retrieving user profile id. UserProfile not found.");
 
+  // DEMO - TO BE DELETED
+  const [requestImage] = useRequest();
+
+  useEffect(() => {
+    requestImage(async () => {
+      if (!image) {
+        const userProfileImageApi = new UserProfileImageApi();
+        const userProfileImage = await userProfileImageApi.findById("123");
+        if (userProfileImage && typeof userProfileImage.image === "string") {
+          setImage(userProfileImage?.image as string);
+        }
+      }
+    });
+  });
+
   /**
    * Event to register a crop handler, which is responsible for cropping the selected image.
    */
@@ -38,7 +53,11 @@ export const useProfileImageContainerViewModel = (
 
       uploadUserProfileImageRequest(async () => {
         const userProfileImageApi = new UserProfileImageApi();
-        userProfileImageApi.insertFromBlob(userProfileId, blob);
+        const userProfileImage = await userProfileImageApi.insertFromBlob(
+          userProfileId,
+          blob
+        );
+        debugger;
       });
     }
   };

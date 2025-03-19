@@ -1,5 +1,5 @@
+import { ImageFileService } from "../lib/file/ImageFileService";
 import { SP } from "../lib/serviceProvider/ServiceProvider";
-import { FileService } from "../services/FileService";
 import {
   IUserProfileImage,
   UserProfileImageMeta,
@@ -19,8 +19,7 @@ export class UserProfileImageApi extends EntityRepository<IUserProfileImage> {
     userProfileId: string,
     blob: Blob
   ): Promise<IUserProfileImage> {
-    const fileService = SP.fetch(FileService);
-    const base64Image = await fileService.blobToBase64(blob);
+    const base64Image = await SP.fetch(ImageFileService).blobToBase64(blob);
     return await this.insert({
       image: base64Image,
       mimeType: blob.type,

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { UserProfileImageRepo } from "../repositories/UserProfileImageRepo";
 import {
   IUserProfileImage,
@@ -15,13 +16,14 @@ export class UserProfileImageController extends EntityController<
     super(UserProfileImageMeta, new UserProfileImageRepo(), [AuthRole.ADMIN]);
   }
 
-  protected insert(authRoles?: AuthRole[]): void {
+  protected insert(): void {
     this.router.post(
       `${this.routeMeta.path}`,
       SessionInterceptor(
         async (req, res) => {
           const userProfileImage: IUserProfileImage = req.body;
-          debugger;
+          const createdUserProfileImage = await this.repo.insert(userProfileImage);
+          res.status(HttpStatusCode.CREATED_201).send(createdUserProfileImage);
         },
         [AuthRole.ADMIN]
       )
