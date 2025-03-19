@@ -5,7 +5,7 @@ import { IAddDocumentProps } from "./IAddDocumentProps";
 
 export const AddDocument: React.FC<IAddDocumentProps> = (props) => {
   return (
-    <button className={styles.addButton}>
+    <button className={styles.addButton} onClick={props.onClick}>
       <AddIcon className={styles.icon} />
       {props.text}
     </button>

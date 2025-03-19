@@ -278,8 +278,6 @@
     "profileImage": {
         "addImage": "Bild hinzufügen",
         "chooseImage": "Bild auswählen",
-        "gallery": "Gallerie",
-        "pleaseSelectedImage": "Bitte wähle ein Bild aus",
         "preview": "Preview",
         "profileImage": "Profilbild"
     },

@@ -82,7 +82,6 @@ export const useProfileImageCropperViewModel = (
           imageRef !== null &&
           imageRef.current !== null
         ) {
-
           return createCroppedImage(
             imageRef.current,
             convertToPixelCrop(
@@ -100,7 +99,7 @@ export const useProfileImageCropperViewModel = (
   /**
    * Button for displaying file select dialog was clicked.
    */
-  const onSelectFileClick = () => selectFileInputRef.current?.click();
+  const onAddFile = () => selectFileInputRef.current?.click();
 
   /**
    * Handles file selection
@@ -145,9 +144,9 @@ export const useProfileImageCropperViewModel = (
     crop,
     imageSrc,
     imageRef,
+    onAddFile,
     onLoadImage,
     onSelectFile,
-    onSelectFileClick,
     selectFileInputRef,
     setCrop,
   };
