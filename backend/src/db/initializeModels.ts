@@ -15,6 +15,7 @@ import { UserGuardian } from "../model/UserGuardian";
 import { UserInvite } from "../model/UserInvite";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
+import { UserProfileImage } from "../model/UserProfileImage";
 import { UserRole } from "../model/UserRole";
 import { UserTrialTraining } from "../model/UserTrialTraining";
 
@@ -24,6 +25,7 @@ export const initializeModels = async (alter: boolean) => {
     Session,
     User,
     UserProfile,
+    UserProfileImage,
     UserRole,
     UserBankAccount,
     UserContactOptions,
