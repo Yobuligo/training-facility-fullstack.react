@@ -6,6 +6,10 @@ import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
 import styles from "./ProfileImageContainer.module.scss";
 import { useProfileImageContainerViewModel } from "./useProfileImageContainerViewModel";
 
+/**
+ * This component is responsible for displaying a profile image or alternatively an profile image skeleton.
+ * In addition it is possible to trigger the upload of a profile image.
+ */
 export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
   props
 ) => {
