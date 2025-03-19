@@ -13,6 +13,7 @@ import { UserGrading } from "../model/UserGrading";
 import { UserGuardian } from "../model/UserGuardian";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
+import { UserProfileImage } from "../model/UserProfileImage";
 import { UserRole } from "../model/UserRole";
 import { UserLoginFailAttemptService } from "../services/UserLoginFailAttemptService";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
@@ -55,6 +56,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
           { model: UserContactOptions, as: "userContactOptions" },
           { model: UserGrading, as: "userGradings" },
           { model: UserGuardian, as: "userGuardians" },
+          { model: UserProfileImage, as: "userProfileImages" },
         ],
       },
     ]);

@@ -24,7 +24,7 @@ export class UserProfileImage extends userProfileImage {
   static associate() {
     UserProfileImage.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasMany(UserProfileImage, {
-      as: "userProfileImage",
+      as: "userProfileImages",
       foreignKey: "userProfileId",
     });
   }
