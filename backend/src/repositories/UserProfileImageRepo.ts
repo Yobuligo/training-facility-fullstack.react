@@ -82,7 +82,7 @@ export class UserProfileImageRepo extends SequelizeRepository<IUserProfileImage>
     const thumbnailImage = await sharp(image).resize(100, 100).toBuffer();
 
     // insert to database
-    return await this.insert({
+    return await super.insert({
       image: thumbnailImage,
       mimeType,
       size: UserProfileImageSize.THUMBNAIL,

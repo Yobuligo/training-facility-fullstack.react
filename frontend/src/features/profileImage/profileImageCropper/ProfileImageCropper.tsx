@@ -10,7 +10,7 @@ import {
 } from "./useProfileImageCropperViewModel";
 
 /**
- * This component is responsible for displaying a button to select a profile image and to crop it.
+ * This component is responsible for displaying a button to select a user profile image and to crop it.
  */
 export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
   props

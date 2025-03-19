@@ -551,6 +551,7 @@
 			- Currently the ConfirmDialog is even at the PC pretty small
 		- Story: Profile image will be loaded with UserProfile in UserProfile component
 			- The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
+		- Story: Rename profile image classes, interface and components to user profile image
 
 - Backlog
 	- Epic: Seminar
