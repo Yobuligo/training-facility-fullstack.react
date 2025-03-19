@@ -546,6 +546,8 @@
 		- Story: Display profile image in user profile
 			- Profile image must be displayed in the user profile but must not be changeable
 		- Story: Display small profile image in user search for assigning a pupil to a training
+		- Story: Increase size of ConfirmDialog for PC when loading images
+			- Currently the ConfirmDialog is even at the PC pretty small
 
 - Backlog
 	- Epic: Seminar

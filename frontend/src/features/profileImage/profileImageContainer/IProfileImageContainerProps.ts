@@ -1,4 +1,6 @@
+import { IUser } from "../../../shared/model/IUser";
+
 export interface IProfileImageContainerProps {
   displayEditButton?: boolean;
-  image?: string;
+  user: IUser;
 }

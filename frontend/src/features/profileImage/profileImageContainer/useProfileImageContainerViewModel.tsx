@@ -1,8 +1,11 @@
 import { useMemo, useState } from "react";
+import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
 import { Event } from "../../../core/services/event/Event";
+import { error } from "../../../core/utils/error";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { ProfileImageCropper } from "../profileImageCropper/ProfileImageCropper";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
 
@@ -10,8 +13,12 @@ export const useProfileImageContainerViewModel = (
   props: IProfileImageContainerProps
 ) => {
   const { t } = useTranslation();
-  const [image, setImage] = useState(props.image);
+  const [image, setImage] = useState("");
   const confirmDialog = useConfirmDialog();
+  const [uploadUserProfileImageRequest] = useRequest();
+  const userProfileId =
+    props.user.userProfile?.id ??
+    error("Error while retrieving user profile id. UserProfile not found.");
 
   /**
    * Event to register a crop handler, which is responsible for cropping the selected image.
@@ -28,6 +35,11 @@ export const useProfileImageContainerViewModel = (
     if (blob) {
       const image = URL.createObjectURL(blob);
       setImage(image);
+
+      uploadUserProfileImageRequest(async () => {
+        const userProfileImageApi = new UserProfileImageApi();
+        userProfileImageApi.insertFromBlob(userProfileId, blob);
+      });
     }
   };
 
