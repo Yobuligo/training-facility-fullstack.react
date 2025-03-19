@@ -539,15 +539,18 @@
 
 - Version 1.14.0-<>.19
 	- Epic: Profile Images
-		- Story: Profile image can be added to a user
-			- Uploaded image can be cropped to fit the given image size
-		- Story: Uploaded image will be persisted in original size and thumbnail size
+		# Story: Profile image can be added to a user
+			# Uploaded image can be cropped to fit the given image size
+		# Story: Uploaded image will be persisted in original size and thumbnail size
+		- Story: Uploaded image will be persisted in thumbnail size
 		- Story: Profile image can be replaced by a new image
 		- Story: Display profile image in user profile
 			- Profile image must be displayed in the user profile but must not be changeable
 		- Story: Display small profile image in user search for assigning a pupil to a training
 		- Story: Increase size of ConfirmDialog for PC when loading images
 			- Currently the ConfirmDialog is even at the PC pretty small
+		- Story: Profile image will be loaded with UserProfile in UserProfile component
+			- The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
 
 - Backlog
 	- Epic: Seminar
