@@ -10,6 +10,7 @@ import { TokenController } from "./controllers/TokenController";
 import { UserController } from "./controllers/UserController";
 import { UserInviteController } from "./controllers/UserInviteController";
 import { UserProfileController } from "./controllers/UserProfileController";
+import { UserProfileImageController } from "./controllers/UserProfileImageController";
 import { UserTrialTrainingController } from "./controllers/UserTrialTrainingController";
 import { checkNotNull } from "./core/utils/checkNotNull";
 import { db } from "./db/db";
@@ -28,7 +29,7 @@ const initialize = async () => {
 initialize();
 
 const server = express();
-server.use(express.json({ limit: "2mb" }));
+server.use(express.json({ limit: "16mb" })); // restrict to 16 MB for e.g. profile images
 server.set("trust proxy", 1);
 
 // add user session
@@ -72,6 +73,7 @@ server.use("/api", new EventInstanceController().router);
 server.use("/api", new EventRegistrationController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProfileController().router);
+server.use("/api", new UserProfileImageController().router);
 server.use("/api", new UserInviteController().router);
 server.use("/api", new UserTrialTrainingController().router);
 server.use("/api", new TokenController().router);

@@ -8,6 +8,7 @@ import { IUserBankAccount } from "./IUserBankAccount";
 import { IUserContactOptions } from "./IUserContactOptions";
 import { IUserGrading } from "./IUserGrading";
 import { IUserGuardian } from "./IUserGuardian";
+import { IUserProfileImage } from "./IUserProfileImage";
 
 export interface IUserProfile extends IEntity, IHaveUserId, IHaveName {
   memberId: number;
@@ -26,6 +27,7 @@ export interface IUserProfile extends IEntity, IHaveUserId, IHaveName {
   userContactOptions?: IUserContactOptions;
   userGradings?: IUserGrading[];
   userGuardians?: IUserGuardian[];
+  userProfileImages?: IUserProfileImage[];
 }
 
 export const UserProfileMeta: IRouteMeta = { path: "/user-profiles" };
