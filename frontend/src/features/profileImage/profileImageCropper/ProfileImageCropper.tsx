@@ -1,4 +1,5 @@
 import ReactCrop from "react-image-crop";
+import { AddDocument } from "../../../components/addDocument/AddDocument";
 import { Button } from "../../../components/button/Button";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { texts } from "../../../lib/translation/texts";
@@ -21,11 +22,11 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
 
   return (
     <>
-      <Toolbar className={styles.toolbar}>
+      {/* <Toolbar className={styles.toolbar}>
         <Button onClick={viewModel.onSelectFileClick}>
           {t(texts.profileImage.gallery)}
         </Button>
-      </Toolbar>
+      </Toolbar> */}
 
       <input
         accept="image/*"
@@ -55,9 +56,13 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
           </ReactCrop>
         </div>
       ) : (
-        <div className={styles.selectImageContainer}>
-          {t(texts.profileImage.pleaseSelectedImage)}
-        </div>
+        <AddDocument text={t(texts.profileImage.addImage)}/>
+        // <div className={styles.selectImageContainer}>
+
+
+
+        //    {/* {t(texts.profileImage.pleaseSelectedImage)} */}
+        //  </div>
       )}
     </>
   );

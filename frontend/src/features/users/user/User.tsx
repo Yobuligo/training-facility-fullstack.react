@@ -67,9 +67,7 @@ export const User: React.FC<IUserProps> = (props) => {
         setDisplayMode={viewModel.setDisplayMode}
       >
         <div className={styles.imageAndNameContainer}>
-          {user.username === "peter.hoffmann" && (
-            <ProfileImageContainer displayEditButton={props.isAdminMode} />
-          )}
+          <ProfileImageContainer displayEditButton={props.isAdminMode} />
           <h3 className={styles.username}>{`${
             props.user.userProfile?.firstname
           } ${props.user.userProfile?.lastname} ${

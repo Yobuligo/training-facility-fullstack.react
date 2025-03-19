@@ -276,6 +276,7 @@
         "errorNeedsLowercaseLetter": "lowercase letter"
     },
     "profileImage": {
+        "addImage": "Add image",
         "chooseImage": "Choose image",
         "gallery": "Gallery",
         "pleaseSelectedImage": "Please selected an image",
