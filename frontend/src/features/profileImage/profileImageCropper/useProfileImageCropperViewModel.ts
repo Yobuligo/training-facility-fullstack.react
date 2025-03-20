@@ -15,7 +15,7 @@ export const useProfileImageCropperViewModel = (
   props: IProfileImageCropperProps
 ) => {
   const selectFileInputRef = useRef<HTMLInputElement>(null);
-  const [imageSrc, setImageSrc] = useState<string>("");
+  const [imageSrc, setImageSrc] = useState<string>(props.imageSrc ?? "");
   const [crop, setCrop] = useState<Crop>();
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -73,8 +73,11 @@ export const useProfileImageCropperViewModel = (
     });
   };
 
+  /**
+   * Handles outer onCrop request.
+   * Provides a handler which can be called from the outer component to create a cropped image
+   */
   useEffect(() => {
-    // Registers callback onCrop. When onCrop is called a blob is created from the currently selected and cropped image.
     if (props.onCropRequest) {
       props.onCropRequest(async () => {
         if (
@@ -98,6 +101,7 @@ export const useProfileImageCropperViewModel = (
 
   /**
    * Handles outer onDelete request
+   * Provides a handler which can be called from the outer component to delete the current selected image
    */
   useEffect(() => {
     if (props.onDeleteRequest) {

@@ -25,7 +25,9 @@ export const useProfileImageContainerViewModel = (
   props: IProfileImageContainerProps
 ) => {
   const { t } = useTranslation();
-  const [image, setImage] = useState(findOriginalUserProfileImage(props.user));
+  const [imageSrc, setImageSrc] = useState(
+    findOriginalUserProfileImage(props.user)
+  );
   const confirmDialog = useConfirmDialog();
   const [uploadUserProfileImageRequest] = useRequest();
   const userProfileId =
@@ -54,7 +56,7 @@ export const useProfileImageContainerViewModel = (
     // Set image to display it.
     if (blob) {
       const image = URL.createObjectURL(blob);
-      setImage(image);
+      setImageSrc(image);
 
       uploadUserProfileImageRequest(async () => {
         const userProfileImageApi = new UserProfileImageApi();
@@ -69,6 +71,7 @@ export const useProfileImageContainerViewModel = (
     confirmDialog.show(
       t(texts.profileImage.chooseImage),
       <ProfileImageCropper
+        imageSrc={imageSrc}
         onCropRequest={(handler) => {
           cropImageEvent.clear();
           cropImageEvent.register(handler);
@@ -91,7 +94,7 @@ export const useProfileImageContainerViewModel = (
 
   return {
     confirmDialog,
-    image,
+    imageSrc,
     onEdit,
   };
 };
