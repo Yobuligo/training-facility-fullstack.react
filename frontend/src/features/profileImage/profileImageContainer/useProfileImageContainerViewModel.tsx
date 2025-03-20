@@ -19,7 +19,7 @@ export const useProfileImageContainerViewModel = (
   const { t } = useTranslation();
   const [imageSrc, setImageSrc] = useState(
     UserInfo.findUserProfileImageBySize(
-      UserProfileImageSize.ORIGINAL,
+      props.size ?? UserProfileImageSize.ORIGINAL,
       props.user.userProfile
     )
   );

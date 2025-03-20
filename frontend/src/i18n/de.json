@@ -384,9 +384,6 @@
         "addUser": "Benutzer hinzufügen",
         "resignedUsers": "Gekündigte Benutzer"
     },
-    "userSearchItem": {
-        "addUser": "Benutzer hinzufügen"
-    },
     "welcome": {
         "explanation": "Im Yeoljeong-Mitgliederbereich kannst Du Deine Trainings planen und Dein Benutzerprofil pflegen.",
         "infoParticipateAsTrainer": "Teilnahme als Trainer",

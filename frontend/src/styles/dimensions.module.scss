@@ -8,6 +8,9 @@ $large-screen-min-width: 64;
 $large-screen-min-width-in-rem: $large-screen-min-width + rem;
 $button-padding: 0.5rem 1rem;
 
+$user-profile-image-size-original: 7rem;
+$user-profile-image-size-thumbnail: 3rem;
+
 :export {
   mediumScreenMinWidth: $medium-screen-min-width;
   largeScreenMinWidth: $large-screen-min-width;

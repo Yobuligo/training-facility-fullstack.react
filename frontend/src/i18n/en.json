@@ -384,9 +384,6 @@
         "addUser": "Add user",
         "resignedUsers": "Resigned users"
     },
-    "userSearchItem": {
-        "addUser": "Add user"
-    },
     "welcome": {
         "explanation": "In the Yeoljeong member area, you can plan your trainings and maintain your user profile.",
         "infoParticipateAsTrainer": "Participation as trainer",

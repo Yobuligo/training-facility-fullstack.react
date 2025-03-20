@@ -1,4 +1,5 @@
 @use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.module.scss";
 
 .profileImageSkeleton {
   border-radius: 50%;
@@ -6,13 +7,13 @@
 }
 
 .profileImageSkeletonOriginal {
-  width: 7rem;
-  height: 7rem;
+  width: dimensions.$user-profile-image-size-original;
+  height: dimensions.$user-profile-image-size-original;
   @extend .profileImageSkeleton;
 }
 
 .profileImageSkeletonThumbnail {
-  width: 2rem;
-  height: 2rem;
+  width: dimensions.$user-profile-image-size-thumbnail;
+  height: dimensions.$user-profile-image-size-thumbnail;
   @extend .profileImageSkeleton;
 }

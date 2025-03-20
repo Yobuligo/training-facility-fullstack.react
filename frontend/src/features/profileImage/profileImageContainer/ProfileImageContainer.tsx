@@ -1,5 +1,6 @@
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
 import { ProfileImageEditButton } from "../profileImageEditButton/ProfileImageEditButton";
 import { ProfileImageSkeleton } from "../profileImageSkeleton/ProfileImageSkeleton";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
@@ -22,12 +23,17 @@ export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
       <div className={styles.profileImageContainer}>
         {viewModel.imageSrc ? (
           <img
-            className={styles.image}
+            className={
+              props.size === undefined ||
+              props.size === UserProfileImageSize.ORIGINAL
+                ? styles.imageOriginal
+                : styles.imageThumbnail
+            }
             src={viewModel.imageSrc}
             alt={t(texts.profileImage.profileImage)}
           />
         ) : (
-          <ProfileImageSkeleton />
+          <ProfileImageSkeleton size={props.size} />
         )}
         {props.displayEditButton && (
           <ProfileImageEditButton
