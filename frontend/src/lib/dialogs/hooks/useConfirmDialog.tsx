@@ -42,6 +42,7 @@ export const useConfirmDialog = () => {
           onCancel={onCancel}
           onOkay={onOkay}
           title={title}
+          toolbarContent={confirmDialogOptions?.toolbarContent}
         >
           {dialogContent}
         </ConfirmDialog>

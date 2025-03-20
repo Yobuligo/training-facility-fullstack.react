@@ -30,6 +30,7 @@ export const ConfirmDialog: React.FC<IConfirmDialogProps> = (props) => {
               : t(texts.general.cancel)}
           </SecondaryButton>
         )}
+        {props.toolbarContent && <>{props.toolbarContent}</>}
         <Button onClick={onOkay}>
           {props.okayButtonCaption
             ? props.okayButtonCaption

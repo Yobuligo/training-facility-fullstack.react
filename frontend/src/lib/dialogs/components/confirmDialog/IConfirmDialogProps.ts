@@ -17,4 +17,9 @@ export interface IConfirmDialogProps {
   onCancel?: () => void;
   onOkay?: () => void;
   title: string;
+
+  /**
+   * Set additional toolbar content like buttons.
+   */
+  toolbarContent?: ReactNode;
 }

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IConfirmDialogOptions {
   displayCancelButton?: boolean;
 
@@ -13,4 +15,9 @@ export interface IConfirmDialogOptions {
 
   onCancel?: () => void;
   onOkay?: () => void;
+
+  /**
+   * Set additional toolbar content like buttons.
+   */
+  toolbarContent?: ReactNode;
 }
