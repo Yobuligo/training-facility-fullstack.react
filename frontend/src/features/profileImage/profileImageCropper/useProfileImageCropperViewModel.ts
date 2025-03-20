@@ -75,8 +75,8 @@ export const useProfileImageCropperViewModel = (
 
   useEffect(() => {
     // Registers callback onCrop. When onCrop is called a blob is created from the currently selected and cropped image.
-    if (props.onCrop) {
-      props.onCrop(async () => {
+    if (props.onCropRequest) {
+      props.onCropRequest(async () => {
         if (
           crop !== undefined &&
           imageRef !== null &&
@@ -97,6 +97,15 @@ export const useProfileImageCropperViewModel = (
   }, [crop, props]);
 
   /**
+   * Handles outer onDelete request
+   */
+  useEffect(() => {
+    if (props.onDeleteRequest) {
+      props.onDeleteRequest(() => setImageSrc(""));
+    }
+  }, [props]);
+
+  /**
    * Button for displaying file select dialog was clicked.
    */
   const onAddFile = () => selectFileInputRef.current?.click();
@@ -114,6 +123,12 @@ export const useProfileImageCropperViewModel = (
     reader.addEventListener("load", () => {
       const image = reader.result?.toString() ?? "";
       setImageSrc(image);
+
+      // reset event target value,
+      // otherwise it won't be possible to delete the image and select the same image again.
+      if (event.target) {
+        event.target.value = "";
+      }
     });
     reader.readAsDataURL(file);
   };

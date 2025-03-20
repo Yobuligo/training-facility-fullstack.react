@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
+import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { Event } from "../../../core/services/event/Event";
 import { error } from "../../../core/utils/error";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
@@ -34,13 +35,21 @@ export const useProfileImageContainerViewModel = (
   /**
    * Event to register a crop handler, which is responsible for cropping the selected image.
    */
-  const cropEvent = useMemo(() => new Event<() => Promise<Blob | null>>(), []);
+  const cropImageEvent = useMemo(
+    () => new Event<() => Promise<Blob | null>>(),
+    []
+  );
+
+  /**
+   * Event to register a handler, which is responsible for deleting the current image.
+   */
+  const deleteImageEvent = useMemo(() => new Event<VoidFunction>(), []);
 
   /**
    * Handles event when button okay was clicked to created a profile image from the selected and cropped image.
    */
   const onOkay = async () => {
-    const blob = await cropEvent.handlers[0]?.();
+    const blob = await cropImageEvent.handlers[0]?.();
 
     // Set image to display it.
     if (blob) {
@@ -54,17 +63,28 @@ export const useProfileImageContainerViewModel = (
     }
   };
 
+  const onDelete = () => deleteImageEvent.notify();
+
   const onEdit = () => {
     confirmDialog.show(
       t(texts.profileImage.chooseImage),
       <ProfileImageCropper
-        onCrop={(handler) => {
-          cropEvent.clear();
-          cropEvent.register(handler);
+        onCropRequest={(handler) => {
+          cropImageEvent.clear();
+          cropImageEvent.register(handler);
+        }}
+        onDeleteRequest={(handler) => {
+          deleteImageEvent.clear();
+          deleteImageEvent.register(handler);
         }}
       />,
       {
         onOkay,
+        toolbarContent: (
+          <SecondaryButton onClick={onDelete}>
+            {t(texts.general.delete)}
+          </SecondaryButton>
+        ),
       }
     );
   };
