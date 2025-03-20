@@ -32,11 +32,13 @@ const userProfile: ModelStatic<
   resignedAt: DataTypes.DATE,
 });
 
+export const relHasOneUserProfile = "userProfile";
+
 export class UserProfile extends userProfile {
   static associate() {
     UserProfile.belongsTo(User, { onDelete: "CASCADE" });
     User.hasOne(UserProfile, {
-      as: "userProfile",
+      as: relHasOneUserProfile,
       foreignKey: "userId",
     });
   }

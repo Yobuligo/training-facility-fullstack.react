@@ -14,11 +14,13 @@ const eventRegistration: ModelStatic<
   state: DataTypes.INTEGER,
 });
 
+export const relHasManyEventRegistrations = "eventRegistrations";
+
 export class EventRegistration extends eventRegistration {
   static associate() {
     EventRegistration.belongsTo(EventInstance, { onDelete: "CASCADE" });
     EventInstance.hasMany(EventRegistration, {
-      as: "eventRegistrations",
+      as: relHasManyEventRegistrations,
       foreignKey: "eventInstanceId",
     });
 

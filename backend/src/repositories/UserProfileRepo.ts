@@ -1,13 +1,19 @@
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { IEntityWithUserProfileId } from "../model/types/IEntityWithUserProfileId";
-import { UserBankAccount } from "../model/UserBankAccount";
-import { UserContactOptions } from "../model/UserContactOptions";
-import { UserGrading } from "../model/UserGrading";
-import { UserGuardian } from "../model/UserGuardian";
+import {
+  relHasOneUserBankAccount,
+  UserBankAccount,
+} from "../model/UserBankAccount";
+import {
+  relHasOneUserContactOptions,
+  UserContactOptions,
+} from "../model/UserContactOptions";
+import { relHasManyUserGradings, UserGrading } from "../model/UserGrading";
+import { relHasManyUserGuardians, UserGuardian } from "../model/UserGuardian";
 import { UserProfile } from "../model/UserProfile";
 import {
-  relUserProfileImages,
+  relHasManyUserProfileImages,
   UserProfileImage,
 } from "../model/UserProfileImage";
 import { IUserGrading } from "../shared/model/IUserGrading";
@@ -22,11 +28,11 @@ import { UserGuardianRepo } from "./UserGuardianRepo";
 export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
   constructor() {
     super(UserProfile, [
-      { model: UserBankAccount, as: "userBankAccount" },
-      { model: UserContactOptions, as: "userContactOptions" },
-      { model: UserGrading, as: "userGradings" },
-      { model: UserGuardian, as: "userGuardians" },
-      { model: UserProfileImage, as: relUserProfileImages },
+      { model: UserBankAccount, as: relHasOneUserBankAccount },
+      { model: UserContactOptions, as: relHasOneUserContactOptions },
+      { model: UserGrading, as: relHasManyUserGradings },
+      { model: UserGuardian, as: relHasManyUserGuardians },
+      { model: UserProfileImage, as: relHasManyUserProfileImages },
     ]);
   }
 

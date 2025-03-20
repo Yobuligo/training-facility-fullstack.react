@@ -6,8 +6,14 @@ import { checkNotNull } from "../core/utils/checkNotNull";
 import { db } from "../db/db";
 import { EventInstance } from "../model/EventInstance";
 import { EventInstanceTrainer } from "../model/EventInstanceTrainer";
-import { EventRegistration } from "../model/EventRegistration";
-import { UserTrialTraining } from "../model/UserTrialTraining";
+import {
+  EventRegistration,
+  relHasManyEventRegistrations,
+} from "../model/EventRegistration";
+import {
+  relHasManyUserTrialTrainings,
+  UserTrialTraining,
+} from "../model/UserTrialTraining";
 import { IEventInstance } from "../shared/model/IEventInstance";
 import { IEventInstanceItemModelAndRole } from "../shared/model/IEventInstanceItemModelAndRole";
 import { IEventInstanceTrainer } from "../shared/model/IEventInstanceTrainer";
@@ -19,8 +25,8 @@ import { findTrainers } from "./utils/findTrainers";
 export class EventInstanceRepo extends SequelizeRepository<IEventInstance> {
   constructor() {
     super(EventInstance, [
-      { model: EventRegistration, as: "eventRegistrations" },
-      { model: UserTrialTraining, as: "userTrialTrainings" },
+      { model: EventRegistration, as: relHasManyEventRegistrations },
+      { model: UserTrialTraining, as: relHasManyUserTrialTrainings },
     ]);
   }
 

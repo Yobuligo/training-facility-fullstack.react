@@ -15,11 +15,13 @@ const userTrialTraining: ModelStatic<
   state: DataTypes.INTEGER,
 });
 
+export const relHasManyUserTrialTrainings = "userTrialTrainings";
+
 export class UserTrialTraining extends userTrialTraining {
   static associate() {
     UserTrialTraining.belongsTo(EventInstance, { onDelete: "CASCADE" });
     EventInstance.hasMany(UserTrialTraining, {
-      as: "userTrialTrainings",
+      as: relHasManyUserTrialTrainings,
       foreignKey: "eventInstanceId",
     });
   }

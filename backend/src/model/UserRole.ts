@@ -11,11 +11,13 @@ const userRole: ModelStatic<Model<IUserRole, IEntityDetails<IUserRole>>> =
     role: DataTypes.STRING(20),
   });
 
+export const relHasManyUserRoles = "userRoles";
+
 export class UserRole extends userRole {
   static associate() {
     UserRole.belongsTo(User, { onDelete: "CASCADE" });
     User.hasMany(UserRole, {
-      as: "userRoles",
+      as: relHasManyUserRoles,
       foreignKey: "userId",
     });
   }

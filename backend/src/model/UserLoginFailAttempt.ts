@@ -22,11 +22,13 @@ const userLoginFailAttempt: ModelStatic<
   },
 });
 
+export const relHasOneUserLoginFailAttempt = "userLoginFailAttempt";
+
 export class UserLoginFailAttempt extends userLoginFailAttempt {
   static associate() {
     UserLoginFailAttempt.belongsTo(User, { onDelete: "CASCADE" });
     User.hasOne(UserLoginFailAttempt, {
-      as: "userLoginFailAttempt",
+      as: relHasOneUserLoginFailAttempt,
       foreignKey: "userId",
     });
   }

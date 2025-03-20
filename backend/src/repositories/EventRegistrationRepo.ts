@@ -5,7 +5,7 @@ import { checkNotNull } from "../core/utils/checkNotNull";
 import { db } from "../db/db";
 import { EventRegistration } from "../model/EventRegistration";
 import { User } from "../model/User";
-import { UserProfile } from "../model/UserProfile";
+import { relHasOneUserProfile, UserProfile } from "../model/UserProfile";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
 import { UserNotFoundError } from "./../shared/errors/UserNotFoundError";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
@@ -16,7 +16,7 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
       {
         model: User,
         as: "user",
-        include: [{ model: UserProfile, as: "userProfile" }],
+        include: [{ model: UserProfile, as: relHasOneUserProfile }],
       },
     ]);
   }
@@ -30,7 +30,7 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
         {
           model: User,
           as: "user",
-          include: [{ model: UserProfile, as: "userProfile" }],
+          include: [{ model: UserProfile, as: relHasOneUserProfile }],
         },
       ],
     });

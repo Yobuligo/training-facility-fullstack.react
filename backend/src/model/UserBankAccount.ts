@@ -31,11 +31,13 @@ const userBankAccount: ModelStatic<
   },
 });
 
+export const relHasOneUserBankAccount = "userBankAccount";
+
 export class UserBankAccount extends userBankAccount {
   static associate() {
     UserBankAccount.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasOne(UserBankAccount, {
-      as: "userBankAccount",
+      as: relHasOneUserBankAccount,
       foreignKey: {
         allowNull: false,
         name: "userProfileId",

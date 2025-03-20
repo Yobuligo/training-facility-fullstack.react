@@ -555,9 +555,8 @@
 			# When confirming the user profile image cropper without selected image, and no previous image was assigned to the user profile, the deletion must work anyway or skipped
 		# Story: User profiles images must not be loaded with user session
 			# When loading the user session, the user profile images must not be loaded
-		- Story: User profile image will be loaded with UserProfile in UserProfile component
-			- The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
-			- Anyway the UserProfileImage is not automatically loaded with userProfile to avoid workload, but only in this case
+		# Story: User profile image will be loaded with UserProfile in UserProfile component
+			# The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
 		- Story: Display small profile image in user search for assigning a pupil to a training
 		- Story: Rename profile image classes, interface and components to user profile image
 

@@ -17,11 +17,13 @@ const userContactOptions: ModelStatic<
   whatsApp: DataTypes.BOOLEAN,
 });
 
+export const relHasOneUserContactOptions = "userContactOptions";
+
 export class UserContactOptions extends userContactOptions {
   static associate() {
     UserContactOptions.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasOne(UserContactOptions, {
-      as: "userContactOptions",
+      as: relHasOneUserContactOptions,
       foreignKey: {
         allowNull: false,
         name: "userProfileId",

@@ -15,11 +15,13 @@ const userGuardian: ModelStatic<
   phone: { allowNull: true, type: DataTypes.STRING(20) },
 });
 
+export const relHasManyUserGuardians = "userGuardians";
+
 export class UserGuardian extends userGuardian {
   static associate() {
     UserGuardian.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasMany(UserGuardian, {
-      as: "userGuardians",
+      as: relHasManyUserGuardians,
       foreignKey: {
         allowNull: false,
         name: "userProfileId",

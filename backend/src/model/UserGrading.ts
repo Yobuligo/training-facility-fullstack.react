@@ -16,11 +16,13 @@ const userGrading: ModelStatic<
   place: DataTypes.STRING(50),
 });
 
+export const relHasManyUserGradings = "userGradings";
+
 export class UserGrading extends userGrading {
   static associate() {
     UserGrading.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasMany(UserGrading, {
-      as: "userGradings",
+      as: relHasManyUserGradings,
       foreignKey: {
         name: "userProfileId",
         allowNull: false,

@@ -7,17 +7,26 @@ import { DateTime } from "../core/services/date/DateTime";
 import { checkNotNull } from "../core/utils/checkNotNull";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { User } from "../model/User";
-import { UserBankAccount } from "../model/UserBankAccount";
-import { UserContactOptions } from "../model/UserContactOptions";
-import { UserGrading } from "../model/UserGrading";
-import { UserGuardian } from "../model/UserGuardian";
-import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
-import { UserProfile } from "../model/UserProfile";
 import {
-  relUserProfileImages,
+  relHasOneUserBankAccount,
+  UserBankAccount,
+} from "../model/UserBankAccount";
+import {
+  relHasOneUserContactOptions,
+  UserContactOptions,
+} from "../model/UserContactOptions";
+import { relHasManyUserGradings, UserGrading } from "../model/UserGrading";
+import { relHasManyUserGuardians, UserGuardian } from "../model/UserGuardian";
+import {
+  relHasOneUserLoginFailAttempt,
+  UserLoginFailAttempt,
+} from "../model/UserLoginFailAttempt";
+import { relHasOneUserProfile, UserProfile } from "../model/UserProfile";
+import {
+  relHasManyUserProfileImages,
   UserProfileImage,
 } from "../model/UserProfileImage";
-import { UserRole } from "../model/UserRole";
+import { relHasManyUserRoles, UserRole } from "../model/UserRole";
 import { UserLoginFailAttemptService } from "../services/UserLoginFailAttemptService";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
 import { NotFoundError } from "../shared/errors/NotFoundError";
@@ -50,16 +59,16 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
 
   constructor() {
     super(User, [
-      { model: UserRole, as: "userRoles" },
+      { model: UserRole, as: relHasManyUserRoles },
       {
         model: UserProfile,
-        as: "userProfile",
+        as: relHasOneUserProfile,
         include: [
-          { model: UserBankAccount, as: "userBankAccount" },
-          { model: UserContactOptions, as: "userContactOptions" },
-          { model: UserGrading, as: "userGradings" },
-          { model: UserGuardian, as: "userGuardians" },
-          { model: UserProfileImage, as: relUserProfileImages },
+          { model: UserBankAccount, as: relHasOneUserBankAccount },
+          { model: UserContactOptions, as: relHasOneUserContactOptions },
+          { model: UserGrading, as: relHasManyUserGradings },
+          { model: UserGuardian, as: relHasManyUserGuardians },
+          { model: UserProfileImage, as: relHasManyUserProfileImages },
         ],
       },
     ]);
@@ -167,7 +176,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     }
 
     const data = await this.model.findAll({
-      include: [{ model: UserProfile, as: "userProfile", where }],
+      include: [{ model: UserProfile, as: relHasOneUserProfile, where }],
     });
 
     let users = data.map((model) => model.toJSON());
@@ -198,12 +207,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       include: [
         {
           model: UserProfile,
-          as: "userProfile",
+          as: relHasOneUserProfile,
           attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
-          as: "userRoles",
+          as: relHasManyUserRoles,
           attributes: ["id", "role"],
         },
       ],
@@ -226,12 +235,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       include: [
         {
           model: UserProfile,
-          as: "userProfile",
+          as: relHasOneUserProfile,
           attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
-          as: "userRoles",
+          as: relHasManyUserRoles,
           attributes: ["id", "role"],
           where: {
             role: role,
@@ -252,10 +261,10 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       include: [
         {
           model: UserProfile,
-          as: "userProfile",
-          attributes: { exclude: [relUserProfileImages] },
+          as: relHasOneUserProfile,
+          attributes: { exclude: [relHasManyUserProfileImages] },
         },
-        { model: UserRole, as: "userRoles" },
+        { model: UserRole, as: relHasManyUserRoles },
       ],
     });
 
@@ -268,12 +277,12 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       include: [
         {
           model: UserProfile,
-          as: "userProfile",
+          as: relHasOneUserProfile,
           attributes: this.userProfileShortAttributes,
         },
         {
           model: UserRole,
-          as: "userRoles",
+          as: relHasManyUserRoles,
           attributes: ["id", "role"],
         },
       ],
@@ -461,7 +470,9 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
         "createdAt",
         "updatedAt",
       ],
-      include: [{ as: "userLoginFailAttempt", model: UserLoginFailAttempt }],
+      include: [
+        { model: UserLoginFailAttempt, as: relHasOneUserLoginFailAttempt },
+      ],
     });
     return data?.toJSON();
   }

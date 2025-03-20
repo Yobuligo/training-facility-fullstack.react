@@ -23,11 +23,13 @@ const eventInstance: ModelStatic<
   to: DataTypes.DATE,
 });
 
+export const relHasManyEventInstances = "eventInstances";
+
 export class EventInstance extends eventInstance {
   static associate() {
     EventInstance.belongsTo(EventDefinition);
     EventDefinition.hasMany(EventInstance, {
-      as: "eventInstances",
+      as: relHasManyEventInstances,
       foreignKey: "eventDefinitionId",
     });
 
