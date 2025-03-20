@@ -3,6 +3,8 @@ import { Card } from "../../../components/card/Card";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
+import { CheckIcon } from "../../../icons/CheckIcon";
+import { DeleteIcon } from "../../../icons/DeleteIcon";
 import { GiftsIcon } from "../../../icons/GiftsIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -27,26 +29,35 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
     <Card className={styles.eventRegistrationItem}>
       <div className={styles.eventRegistrationItemContent}>
         {viewModel.confirmDialog.content}
-        <UserProfileImageAndName user={props.eventRegistration.user} />
+
         {props.eventRegistration.manuallyAdded ? (
           <div className={styles.manuallyAddedSection}>
             <div className={styles.addedByTrainerInfo}>
               {t(texts.eventRegistrationItem.addedByTrainer)}
             </div>
-            <Toolbar>
-              <SecondaryButton onClick={viewModel.onDelete}>
-                {t(texts.general.delete)}
-              </SecondaryButton>
-              <Button>{t(texts.eventRegistrationItem.present)}</Button>
-            </Toolbar>
+
+            <div className={styles.nameAndToolbarContainer}>
+              <UserProfileImageAndName user={props.eventRegistration.user} />
+              <Toolbar>
+                <SecondaryButton onClick={viewModel.onDelete}>
+                  <DeleteIcon />
+                </SecondaryButton>
+                <Button>
+                  <CheckIcon className={styles.icon} />
+                </Button>
+              </Toolbar>
+            </div>
           </div>
         ) : (
-          <ToggleButtonGroup
-            enableUnselectAll={true}
-            items={viewModel.toggleButtonOptions}
-            onChange={viewModel.onToggleButtonOptionChange}
-            selected={viewModel.selectedToggleButtonOption}
-          />
+          <div className={styles.nameAndToolbarContainer}>
+            <UserProfileImageAndName user={props.eventRegistration.user} />
+            <ToggleButtonGroup
+              enableUnselectAll={true}
+              items={viewModel.toggleButtonOptions}
+              onChange={viewModel.onToggleButtonOptionChange}
+              selected={viewModel.selectedToggleButtonOption}
+            />
+          </div>
         )}
       </div>
       <>
