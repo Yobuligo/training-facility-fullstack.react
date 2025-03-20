@@ -1,0 +1,8 @@
+@use "../../../styles/dimensions.module.scss";
+
+.userProfileImageAndName {
+  display: flex;
+  flex-direction: row;
+  column-gap: dimensions.$negative-space;
+  align-items: center;
+}

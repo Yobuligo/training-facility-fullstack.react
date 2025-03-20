@@ -6,7 +6,12 @@ import { db } from "../db/db";
 import { EventRegistration } from "../model/EventRegistration";
 import { User } from "../model/User";
 import { relHasOneUserProfile, UserProfile } from "../model/UserProfile";
+import {
+  relHasManyUserProfileImages,
+  UserProfileImage,
+} from "../model/UserProfileImage";
 import { IEventRegistration } from "../shared/model/IEventRegistration";
+import { UserProfileImageSize } from "../shared/types/UserProfileImageSize";
 import { UserNotFoundError } from "./../shared/errors/UserNotFoundError";
 import { SequelizeRepository } from "./sequelize/SequelizeRepository";
 
@@ -30,7 +35,20 @@ export class EventRegistrationRepo extends SequelizeRepository<IEventRegistratio
         {
           model: User,
           as: "user",
-          include: [{ model: UserProfile, as: relHasOneUserProfile }],
+          include: [
+            {
+              model: UserProfile,
+              as: relHasOneUserProfile,
+              include: [
+                {
+                  model: UserProfileImage,
+                  as: relHasManyUserProfileImages,
+                  required: false,
+                  where: { size: UserProfileImageSize.THUMBNAIL },
+                },
+              ],
+            },
+          ],
         },
       ],
     });

@@ -7,6 +7,7 @@ import { GiftsIcon } from "../../../icons/GiftsIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { hasBirthday } from "../../../utils/hasBirthday";
+import { UserProfileImageAndName } from "../../profileImage/profileImageAndName/UserProfileImageAndName";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
@@ -26,7 +27,7 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
     <Card className={styles.eventRegistrationItem}>
       <div className={styles.eventRegistrationItemContent}>
         {viewModel.confirmDialog.content}
-        <div>{viewModel.fullName}</div>
+        <UserProfileImageAndName user={props.eventRegistration.user} />
         {props.eventRegistration.manuallyAdded ? (
           <div className={styles.manuallyAddedSection}>
             <div className={styles.addedByTrainerInfo}>

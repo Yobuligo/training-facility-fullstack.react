@@ -1,9 +1,7 @@
 import { Button } from "../../../../components/button/Button";
 import { Card } from "../../../../components/card/Card";
 import { AddIcon } from "../../../../icons/AddIcon";
-import { UserInfo } from "../../../../services/UserInfo";
-import { UserProfileImageSize } from "../../../../shared/types/UserProfileImageSize";
-import { ProfileImageContainer } from "../../../profileImage/profileImageContainer/ProfileImageContainer";
+import { UserProfileImageAndName } from "../../../profileImage/profileImageAndName/UserProfileImageAndName";
 import { IUserSearchItemProps } from "./IUserSearchItemProps";
 import styles from "./UserSearchItem.module.scss";
 
@@ -12,14 +10,7 @@ export const UserSearchItem: React.FC<IUserSearchItemProps> = (props) => {
 
   return (
     <Card className={styles.userSearchItem}>
-      <div className={styles.imageAndNameContainer}>
-        <ProfileImageContainer
-          displayEditButton={false}
-          size={UserProfileImageSize.THUMBNAIL}
-          user={props.user}
-        />
-        <div>{UserInfo.toFullName(props.user.userProfile)}</div>
-      </div>
+      <UserProfileImageAndName user={props.user} />
       <Button onClick={onSelectUser}>
         <AddIcon className={styles.icon} />
       </Button>

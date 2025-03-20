@@ -557,7 +557,8 @@
 			# When loading the user session, the user profile images must not be loaded
 		# Story: User profile image will be loaded with UserProfile in UserProfile component
 			# The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
-		- Story: Display small profile image in user search for assigning a pupil to a training
+		- Story: Display thumbnail profile image in user search for adding users to a training
+		- Story: Display user profile image in fullscreen when clicking on image
 		- Story: Rename profile image classes, interface and components to user profile image
 
 - Backlog

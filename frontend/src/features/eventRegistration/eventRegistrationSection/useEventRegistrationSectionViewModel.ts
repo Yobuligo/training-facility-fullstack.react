@@ -55,10 +55,6 @@ export const useEventRegistrationSectionViewModel = (
   const renderTimeSpan = useRenderTimeSpan();
   const [trainerSelectOptions, selectedTrainerIds, setSelectedTrainerIds] =
     useTrainer(props.trainers, props.eventInstance.trainers);
-  // const trainerSelectOptions = useTrainerSelectOptions(props.trainers);
-  // const [selectedTrainerIds, setSelectedTrainerIds] = useTrainerIds(
-  //   props.eventInstance.trainers
-  // );
   const [updateTrainersRequest] = useRequest();
 
   const loadRegistrations = async () => {

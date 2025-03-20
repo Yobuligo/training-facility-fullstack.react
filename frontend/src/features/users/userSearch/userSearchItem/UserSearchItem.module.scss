@@ -8,13 +8,6 @@
   align-items: center;
 }
 
-.imageAndNameContainer {
-  display: flex;
-  flex-direction: row;
-  column-gap: dimensions.$negative-space;
-  align-items: center;
-}
-
 .icon {
   fill: colors.$color-search-button-text;
 }

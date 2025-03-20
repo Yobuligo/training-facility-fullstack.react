@@ -4,6 +4,7 @@ import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
+import { UserInfo } from "../../../services/UserInfo";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 
@@ -12,7 +13,6 @@ export const useEventRegistrationItemViewModel = (
 ) => {
   const { t } = useTranslation();
   const [updateRequest] = useRequest();
-  const fullName = `${props.eventRegistration.user?.userProfile?.firstname} ${props.eventRegistration.user?.userProfile?.lastname}`;
   const confirmDialog = useConfirmDialog();
 
   const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
@@ -54,7 +54,9 @@ export const useEventRegistrationItemViewModel = (
   const onDelete = () =>
     confirmDialog.show(
       t(texts.eventRegistrationItem.deleteTitle),
-      t(texts.eventRegistrationItem.deleteQuestion, { user: fullName }),
+      t(texts.eventRegistrationItem.deleteQuestion, {
+        user: UserInfo.toFullName(props.eventRegistration.user?.userProfile),
+      }),
       {
         onOkay: () => props.onDelete?.(props.eventRegistration),
       }
@@ -62,7 +64,6 @@ export const useEventRegistrationItemViewModel = (
 
   return {
     confirmDialog,
-    fullName,
     onDelete,
     onToggleButtonOptionChange,
     selectedToggleButtonOption,
