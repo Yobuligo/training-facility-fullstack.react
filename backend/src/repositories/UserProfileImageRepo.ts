@@ -19,6 +19,16 @@ export class UserProfileImageRepo extends SequelizeRepository<IUserProfileImage>
     return count > 0;
   }
 
+  /**
+   * Returns all user profile images of the given {@link userProfileId}.
+   */
+  async findByUserProfileId(
+    userProfileId: string
+  ): Promise<IUserProfileImage[]> {
+    const data = await this.model.findAll({ where: { userProfileId } });
+    return data.map((model) => model.toJSON());
+  }
+
   insert<K extends keyof IUserProfileImage>(
     entity: IEntityDetails<IUserProfileImage>,
     fields: K[]

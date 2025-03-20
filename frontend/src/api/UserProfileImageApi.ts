@@ -1,15 +1,25 @@
 import { ImageFileService } from "../lib/file/ImageFileService";
 import { SP } from "../lib/serviceProvider/ServiceProvider";
+import { UserProfileMeta } from "../shared/model/IUserProfile";
 import {
   IUserProfileImage,
   UserProfileImageMeta,
 } from "../shared/model/IUserProfileImage";
 import { UserProfileImageSize } from "../shared/types/UserProfileImageSize";
 import { EntityRepository } from "./core/EntityRepository";
+import { RESTApi } from "./core/RESTApi";
 
 export class UserProfileImageApi extends EntityRepository<IUserProfileImage> {
   constructor() {
     super(UserProfileImageMeta);
+  }
+
+  async findByUserProfileId(
+    userProfileId: string
+  ): Promise<IUserProfileImage[]> {
+    return await RESTApi.get(
+      `${this.host}${UserProfileMeta.path}/${userProfileId}${this.routeMeta.path}`
+    );
   }
 
   /**

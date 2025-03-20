@@ -20,6 +20,7 @@ export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
   return (
     <>
       {viewModel.confirmDialog.content}
+      {viewModel.displayFullscreenDialog.content}
       <div className={styles.profileImageContainer}>
         {viewModel.imageSrc ? (
           <img
@@ -31,6 +32,7 @@ export const ProfileImageContainer: React.FC<IProfileImageContainerProps> = (
             }
             src={viewModel.imageSrc}
             alt={t(texts.profileImage.profileImage)}
+            onClick={viewModel.onClickImage}
           />
         ) : (
           <ProfileImageSkeleton size={props.size} />

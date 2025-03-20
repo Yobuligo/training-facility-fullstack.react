@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { UserProfileImageRepo } from "../repositories/UserProfileImageRepo";
+import { UserProfileMeta } from "../shared/model/IUserProfile";
 import {
   IUserProfileImage,
   UserProfileImageMeta,
@@ -14,6 +15,7 @@ export class UserProfileImageController extends EntityController<
 > {
   constructor() {
     super(UserProfileImageMeta, new UserProfileImageRepo(), [AuthRole.ADMIN]);
+    this.loadByUserProfileId();
   }
 
   protected insert(): void {
@@ -22,8 +24,29 @@ export class UserProfileImageController extends EntityController<
       SessionInterceptor(
         async (req, res) => {
           const userProfileImage: IUserProfileImage = req.body;
-          const createdUserProfileImage = await this.repo.insert(userProfileImage);
+          const createdUserProfileImage = await this.repo.insert(
+            userProfileImage
+          );
           res.status(HttpStatusCode.CREATED_201).send(createdUserProfileImage);
+        },
+        [AuthRole.ADMIN]
+      )
+    );
+  }
+
+  /**
+   * Loads user profiles images by the corresponding user profile id.
+   */
+  private loadByUserProfileId() {
+    this.router.get(
+      `${UserProfileMeta.path}/:id${this.routeMeta.path}`,
+      SessionInterceptor(
+        async (req, res) => {
+          const userProfileId = req.params.id;
+          const userProfileImageRepo = new UserProfileImageRepo();
+          const userProfileImages =
+            await userProfileImageRepo.findByUserProfileId(userProfileId);
+          res.status(HttpStatusCode.OK_200).send(userProfileImages);
         },
         [AuthRole.ADMIN]
       )

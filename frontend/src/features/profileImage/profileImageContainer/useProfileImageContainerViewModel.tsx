@@ -11,6 +11,7 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { UserInfo } from "../../../services/UserInfo";
 import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
 import { ProfileImageCropper } from "../profileImageCropper/ProfileImageCropper";
+import { UserProfileImageDisplay } from "../profileImageDisplay/UserProfileImageDisplay";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
 
 export const useProfileImageContainerViewModel = (
@@ -29,6 +30,7 @@ export const useProfileImageContainerViewModel = (
   const userProfileId =
     props.user.userProfile?.id ??
     error("Error while retrieving user profile id. UserProfile not found.");
+  const displayFullscreenDialog = useConfirmDialog();
 
   /**
    * Event to register a crop handler, which is responsible for cropping the selected image.
@@ -72,7 +74,7 @@ export const useProfileImageContainerViewModel = (
 
   const onDelete = () => deleteImageEvent.notify();
 
-  const onEdit = () => {
+  const onEdit = () =>
     confirmDialog.show(
       t(texts.profileImage.chooseImage),
       <ProfileImageCropper
@@ -95,11 +97,20 @@ export const useProfileImageContainerViewModel = (
         ),
       }
     );
+
+  const onClickImage = async () => {
+    displayFullscreenDialog.show(
+      UserInfo.toFullName(props.user.userProfile),
+      <UserProfileImageDisplay userProfileId={userProfileId} />,
+      { displayCancelButton: false }
+    );
   };
 
   return {
     confirmDialog,
+    displayFullscreenDialog,
     imageSrc,
     onEdit,
+    onClickImage,
   };
 };

@@ -553,12 +553,14 @@
 		# Story: User Profile Image must be deletable
 			# When deleting the user profile image cropper without image, the user profile image must be deleted
 			# When confirming the user profile image cropper without selected image, and no previous image was assigned to the user profile, the deletion must work anyway or skipped
-		# Story: User profiles images must not be loaded with user session
+		# Story: User profile images must not be loaded with user session
 			# When loading the user session, the user profile images must not be loaded
 		# Story: User profile image will be loaded with UserProfile in UserProfile component
 			# The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
-		- Story: Display thumbnail profile image in user search for adding users to a training
+		# Story: Display thumbnail profile image in user search for adding users to a training
 		- Story: Display user profile image in fullscreen when clicking on image
+			- Origin size must be loaded to display all details
+			- Display cursor pointer when hovering over image
 		- Story: Rename profile image classes, interface and components to user profile image
 
 - Backlog
