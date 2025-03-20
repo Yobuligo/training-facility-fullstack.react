@@ -1,8 +1,10 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { createError } from "../core/utils/createError";
+import { UserProfileImageRepo } from "../repositories/UserProfileImageRepo";
 import { UserProfileRepo } from "../repositories/UserProfileRepo";
 import { UserRouteMeta } from "../shared/model/IUser";
 import { IUserProfile, UserProfileMeta } from "../shared/model/IUserProfile";
+import { UserProfileImageMeta } from "../shared/model/IUserProfileImage";
 import { AuthRole } from "../shared/types/AuthRole";
 import { EntityController } from "./core/EntityController";
 import { SessionInterceptor } from "./core/SessionInterceptor";
@@ -14,6 +16,7 @@ export class UserProfileController extends EntityController<
   constructor() {
     super(UserProfileMeta, new UserProfileRepo(), [AuthRole.ADMIN]);
     this.findByUserId();
+    this.deleteUserProfileImages();
   }
 
   private findByUserId() {
@@ -41,6 +44,27 @@ export class UserProfileController extends EntityController<
             )
           );
       })
+    );
+  }
+
+  private deleteUserProfileImages() {
+    this.router.delete(
+      `${this.routeMeta.path}/:id${UserProfileImageMeta.path}`,
+      SessionInterceptor(
+        async (req, res) => {
+          const userProfileId = req.params.id;
+          const userProfileImageRepo = new UserProfileImageRepo();
+          const success = await userProfileImageRepo.deleteByUserProfileId(
+            userProfileId
+          );
+          if (success) {
+            res.status(HttpStatusCode.OK_200).send(true);
+          } else {
+            res.status(HttpStatusCode.NO_CONTENT_204).send(false);
+          }
+        },
+        [AuthRole.ADMIN]
+      )
     );
   }
 }

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { UserProfileApi } from "../../../api/UserProfileApi";
 import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
 import { Event } from "../../../core/services/event/Event";
@@ -30,6 +31,7 @@ export const useProfileImageContainerViewModel = (
   );
   const confirmDialog = useConfirmDialog();
   const [uploadUserProfileImageRequest] = useRequest();
+  const [deleteUserProfileImageRequest] = useRequest();
   const userProfileId =
     props.user.userProfile?.id ??
     error("Error while retrieving user profile id. UserProfile not found.");
@@ -53,7 +55,7 @@ export const useProfileImageContainerViewModel = (
   const onOkay = async () => {
     const blob = await cropImageEvent.handlers[0]?.();
 
-    // Set image to display it.
+    // Upload image
     if (blob) {
       const image = URL.createObjectURL(blob);
       setImageSrc(image);
@@ -61,6 +63,13 @@ export const useProfileImageContainerViewModel = (
       uploadUserProfileImageRequest(async () => {
         const userProfileImageApi = new UserProfileImageApi();
         await userProfileImageApi.insertFromBlob(userProfileId, blob);
+      });
+    } else {
+      // Delete image
+      setImageSrc("");
+      deleteUserProfileImageRequest(async () => {
+        const userProfileApi = new UserProfileApi();
+        await userProfileApi.deleteUserProfileImage(userProfileId);
       });
     }
   };

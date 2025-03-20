@@ -10,6 +10,11 @@ export enum HttpStatusCode {
   CREATED_201 = 201,
 
   /**
+   * The request succeeded but no content was found. This is typically the response sent after DELETE requests, if entry to be deleted was not found.
+   */
+  NO_CONTENT_204 = 204,
+
+  /**
    * The server cannot or will not process the request due to something that is perceived to be a client error.
    */
   BAD_REQUEST_400 = 400,

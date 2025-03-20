@@ -14,6 +14,11 @@ export class UserProfileImageRepo extends SequelizeRepository<IUserProfileImage>
     super(UserProfileImage);
   }
 
+  async deleteByUserProfileId(userProfileId: string): Promise<boolean> {
+    const count = await this.model.destroy({ where: { userProfileId } });
+    return count > 0;
+  }
+
   insert<K extends keyof IUserProfileImage>(
     entity: IEntityDetails<IUserProfileImage>,
     fields: K[]
