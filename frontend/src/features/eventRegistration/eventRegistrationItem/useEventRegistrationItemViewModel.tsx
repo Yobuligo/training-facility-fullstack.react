@@ -1,5 +1,7 @@
 import { EventRegistrationApi } from "../../../api/EventRegistrationApi";
 import { IToggleButtonOption } from "../../../components/toggleButtonGroup/IToggleButtonOption";
+import { CheckIcon } from "../../../icons/CheckIcon";
+import { CloseIcon } from "../../../icons/CloseIcon";
 import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
@@ -7,6 +9,7 @@ import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { UserInfo } from "../../../services/UserInfo";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
+import styles from "./EventRegistrationItem.module.scss";
 
 export const useEventRegistrationItemViewModel = (
   props: IEventRegistrationItemProps
@@ -18,11 +21,11 @@ export const useEventRegistrationItemViewModel = (
   const toggleButtonOptions: IToggleButtonOption<EventRegistrationState>[] = [
     {
       key: EventRegistrationState.MISSING,
-      text: t(texts.eventRegistrationItem.missing),
+      text: <CloseIcon className={styles.icon} />,
     },
     {
       key: EventRegistrationState.PRESENT,
-      text: t(texts.eventRegistrationItem.present),
+      text: <CheckIcon className={styles.icon} />,
     },
   ];
 

@@ -1,3 +1,6 @@
-import { ISelectOption } from "../select/ISelectOption";
+import { ReactNode } from "react";
 
-export interface IToggleButtonOption<TKey> extends ISelectOption<TKey> {}
+export interface IToggleButtonOption<TKey> {
+  key: TKey;
+  text: string | ReactNode;
+}
