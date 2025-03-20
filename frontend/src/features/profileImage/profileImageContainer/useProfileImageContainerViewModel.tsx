@@ -65,12 +65,14 @@ export const useProfileImageContainerViewModel = (
         await userProfileImageApi.insertFromBlob(userProfileId, blob);
       });
     } else {
-      // Delete image
-      setImageSrc("");
-      deleteUserProfileImageRequest(async () => {
-        const userProfileApi = new UserProfileApi();
-        await userProfileApi.deleteUserProfileImage(userProfileId);
-      });
+      // Delete image. Deletion is only required if image exists
+      if (imageSrc !== undefined && imageSrc !== "") {
+        setImageSrc("");
+        deleteUserProfileImageRequest(async () => {
+          const userProfileApi = new UserProfileApi();
+          await userProfileApi.deleteUserProfileImage(userProfileId);
+        });
+      }
     }
   };
 
