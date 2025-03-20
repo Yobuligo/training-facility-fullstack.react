@@ -1,13 +1,7 @@
 import { IImageFileService } from "./IImageFileService";
+import { ImageType } from "./types/ImageType";
 
 export class ImageFileService implements IImageFileService {
-  base64BlobToBuffer(encodedImageBlob: string): Promise<Buffer> {
-    return new Promise((resolve) => {
-      const data = encodedImageBlob.split(",")[1]; // Remove prefix "data:image/jpeg;base64,"
-      resolve(Buffer.from(data, "base64"));
-    });
-  }
-
   blobToBase64(blob: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -21,12 +15,19 @@ export class ImageFileService implements IImageFileService {
     });
   }
 
-  bufferToBase64Blob(imageBuffer: Buffer, mimeType: string): Promise<string> {
-    return new Promise((resolve) => {
-      const base64Image = `data:${mimeType};base64,${imageBuffer.toString(
-        "base64"
-      )}`;
-      resolve(base64Image);
-    });
+  toBase64Blob(image: ImageType, mimeType: string): string {
+    if (Buffer.isBuffer(image)) {
+      const base64Image = `data:${mimeType};base64,${image.toString("base64")}`;
+      return base64Image;
+    }
+    return image;
+  }
+
+  toBuffer(image: ImageType): Buffer {
+    if (!Buffer.isBuffer(image)) {
+      const data = image.split(",")[1]; // Remove prefix "data:image/jpeg;base64,"
+      return Buffer.from(data, "base64");
+    }
+    return image;
   }
 }

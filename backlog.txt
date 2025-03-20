@@ -538,12 +538,13 @@
 	# Bug: Trainings cannot be added
 
 - Version 1.14.0-<>.19
-	- Epic: Profile Images
+	- Epic: User Profile Images
 		# Story: Profile image can be added to a user
 			# Uploaded image can be cropped to fit the given image size
 			- Uploaded image can be replaced by another upload
 		# Story: Uploaded image will be persisted in original size and thumbnail size
 		# Story: Uploaded image will be persisted in thumbnail size
+		- Story: User Profile Image must be deletable
 		- Story: Profile image will be loaded with UserProfile in UserProfile component
 			- The user profile image should be loaded directly with the user profile when opening the user profile component and must not be loaded lazy (Usability)
 			- UserProfileImage is not automatically loaded with userProfile to avoid workload
@@ -553,7 +554,6 @@
 		- Story: Display small profile image in user search for assigning a pupil to a training
 		- Story: Increase size of ConfirmDialog for PC when loading images
 			- Currently the ConfirmDialog is even at the PC pretty small
-
 		- Story: Rename profile image classes, interface and components to user profile image
 
 - Backlog

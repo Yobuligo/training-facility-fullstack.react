@@ -1,10 +1,11 @@
 import { IEntity } from "../../core/api/types/IEntity";
 import { IRouteMeta } from "../../core/api/types/IRouteMeta";
+import { ImageType } from "../../libs/file/types/ImageType";
 import { UserProfileImageSize } from "../types/UserProfileImageSize";
 
 export interface IUserProfileImage extends IEntity {
   mimeType: string;
-  image: Buffer | string;
+  image: ImageType;
   size: UserProfileImageSize;
   userProfileId: string;
 }
