@@ -55,6 +55,8 @@ export class UserProfileImageRepo extends SequelizeRepository<IUserProfileImage>
       entity.mimeType
     );
 
+    this.resizeImage(entity);
+
     // create and insert original user profile image
     if (fields) {
       const insertedEntity = await super.insert(entity, fields as any);
@@ -81,5 +83,19 @@ export class UserProfileImageRepo extends SequelizeRepository<IUserProfileImage>
       size: UserProfileImageSize.THUMBNAIL,
       userProfileId,
     });
+  }
+
+  /**
+   * Resize image of the given {@link userProfileImage} to restrict size.
+   */
+  private async resizeImage(
+    userProfileImage: IEntityDetails<IUserProfileImage>
+  ) {
+    const imageBuffer = SP.fetch(ImageFileService).toBuffer(
+      userProfileImage.image
+    );
+    userProfileImage.image = await sharp(imageBuffer)
+      .resize(1000, 1000)
+      .toBuffer();
   }
 }
