@@ -57,7 +57,10 @@ export class UserApi extends EntityRepository<IUser> {
     return await RESTApi.get(`${this.url}/short/all`, { urlParams: { role } });
   }
 
-  async findByQuery(query: string): Promise<IUser[]> {
+  async findByQuery(
+    query: string,
+    includeImages: boolean = false
+  ): Promise<IUser[]> {
     return await RESTApi.get(`${this.url}`, {
       urlParams: { query, excludeResigned: "true" },
     });

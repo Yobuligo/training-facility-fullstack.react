@@ -36,6 +36,7 @@ import { IUser } from "../shared/model/IUser";
 import { IUserProfile } from "../shared/model/IUserProfile";
 import { IUserShort } from "../shared/model/IUserShort";
 import { AuthRole } from "../shared/types/AuthRole";
+import { UserProfileImageSize } from "../shared/types/UserProfileImageSize";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
 import { uuid } from "../utils/uuid";
@@ -176,7 +177,21 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     }
 
     const data = await this.model.findAll({
-      include: [{ model: UserProfile, as: relHasOneUserProfile, where }],
+      include: [
+        {
+          model: UserProfile,
+          as: relHasOneUserProfile,
+          include: [
+            {
+              model: UserProfileImage,
+              as: relHasManyUserProfileImages,
+              required: false,
+              where: { size: UserProfileImageSize.THUMBNAIL },
+            },
+          ],
+          where,
+        },
+      ],
     });
 
     let users = data.map((model) => model.toJSON());
