@@ -1,7 +1,9 @@
 import { Subset } from "../core/Subset";
+import { IUserProfile } from "../shared/model/IUserProfile";
 import { IUserRole } from "../shared/model/IUserRole";
 import { AuthRole } from "../shared/types/AuthRole";
 import { IHaveName } from "../shared/types/IHaveName";
+import { UserProfileImageSize } from "../shared/types/UserProfileImageSize";
 
 export class UserInfo {
   static containsAdminRole(userRoles: IUserRole[]): boolean {
@@ -29,6 +31,16 @@ export class UserInfo {
   ): boolean {
     const index = userRoles.findIndex((row) => row.role === AuthRole.TRAINER);
     return index !== -1;
+  }
+
+  static findUserProfileImageBySize(
+    size: UserProfileImageSize,
+    userProfile?: IUserProfile
+  ): string | undefined {
+    const userProfileImage = userProfile?.userProfileImages?.find(
+      (userProfileImage) => userProfileImage.size === size
+    );
+    return userProfileImage?.image.toString();
   }
 
   static toFullName(object?: IHaveName): string {

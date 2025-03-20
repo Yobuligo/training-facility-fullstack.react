@@ -8,26 +8,20 @@ import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { IUser } from "../../../shared/model/IUser";
+import { UserInfo } from "../../../services/UserInfo";
 import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
 import { ProfileImageCropper } from "../profileImageCropper/ProfileImageCropper";
 import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
-
-const findOriginalUserProfileImage = (user: IUser): string | undefined => {
-  const userProfileImage = user.userProfile?.userProfileImages?.find(
-    (userProfileImage) =>
-      userProfileImage.size === UserProfileImageSize.ORIGINAL
-  );
-
-  return userProfileImage?.image.toString();
-};
 
 export const useProfileImageContainerViewModel = (
   props: IProfileImageContainerProps
 ) => {
   const { t } = useTranslation();
   const [imageSrc, setImageSrc] = useState(
-    findOriginalUserProfileImage(props.user)
+    UserInfo.findUserProfileImageBySize(
+      UserProfileImageSize.ORIGINAL,
+      props.user.userProfile
+    )
   );
   const confirmDialog = useConfirmDialog();
   const [uploadUserProfileImageRequest] = useRequest();
