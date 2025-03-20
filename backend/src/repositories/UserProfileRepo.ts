@@ -6,7 +6,10 @@ import { UserContactOptions } from "../model/UserContactOptions";
 import { UserGrading } from "../model/UserGrading";
 import { UserGuardian } from "../model/UserGuardian";
 import { UserProfile } from "../model/UserProfile";
-import { UserProfileImage } from "../model/UserProfileImage";
+import {
+  relUserProfileImages,
+  UserProfileImage,
+} from "../model/UserProfileImage";
 import { IUserGrading } from "../shared/model/IUserGrading";
 import { IUserGuardian } from "../shared/model/IUserGuardian";
 import { IUserProfile } from "../shared/model/IUserProfile";
@@ -23,7 +26,7 @@ export class UserProfileRepo extends SequelizeRepository<IUserProfile> {
       { model: UserContactOptions, as: "userContactOptions" },
       { model: UserGrading, as: "userGradings" },
       { model: UserGuardian, as: "userGuardians" },
-      { model: UserProfileImage, as: "userProfileImages" },
+      { model: UserProfileImage, as: relUserProfileImages },
     ]);
   }
 

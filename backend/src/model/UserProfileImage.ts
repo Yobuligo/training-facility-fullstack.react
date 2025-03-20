@@ -36,11 +36,13 @@ const userProfileImage: ModelStatic<
   size: DataTypes.INTEGER,
 });
 
+export const relUserProfileImages = "userProfileImages";
+
 export class UserProfileImage extends userProfileImage {
   static associate() {
     UserProfileImage.belongsTo(UserProfile, { onDelete: "CASCADE" });
     UserProfile.hasMany(UserProfileImage, {
-      as: "userProfileImages",
+      as: relUserProfileImages,
       foreignKey: "userProfileId",
     });
   }

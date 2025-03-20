@@ -13,7 +13,10 @@ import { UserGrading } from "../model/UserGrading";
 import { UserGuardian } from "../model/UserGuardian";
 import { UserLoginFailAttempt } from "../model/UserLoginFailAttempt";
 import { UserProfile } from "../model/UserProfile";
-import { UserProfileImage } from "../model/UserProfileImage";
+import {
+  relUserProfileImages,
+  UserProfileImage,
+} from "../model/UserProfileImage";
 import { UserRole } from "../model/UserRole";
 import { UserLoginFailAttemptService } from "../services/UserLoginFailAttemptService";
 import { InvalidCredentialsError } from "../shared/errors/InvalidCredentialsError";
@@ -56,7 +59,7 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
           { model: UserContactOptions, as: "userContactOptions" },
           { model: UserGrading, as: "userGradings" },
           { model: UserGuardian, as: "userGuardians" },
-          { model: UserProfileImage, as: "userProfileImages" },
+          { model: UserProfileImage, as: relUserProfileImages },
         ],
       },
     ]);
@@ -241,6 +244,22 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
       this.toUserShort(model)
     );
     return userShorts;
+  }
+
+  async findSessionUser(userId: string): Promise<IUser | undefined> {
+    const data = await User.findByPk(userId, {
+      attributes: ["id", "username"],
+      include: [
+        {
+          model: UserProfile,
+          as: "userProfile",
+          attributes: { exclude: [relUserProfileImages] },
+        },
+        { model: UserRole, as: "userRoles" },
+      ],
+    });
+
+    return data?.toJSON();
   }
 
   async findByIdShort(userId: string): Promise<IUserShort | undefined> {

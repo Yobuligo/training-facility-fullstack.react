@@ -163,9 +163,8 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.router.get(
       `${this.routeMeta.path}/auth/session`,
       SessionInterceptor(async (req, res) => {
-        const entity = await this.repo.findById(
-          req.sessionInfo.session.userId,
-          ["id", "userProfile", "userRoles", "username"]
+        const entity = await this.repo.findSessionUser(
+          req.sessionInfo.session.userId
         );
         if (entity) {
           res.status(HttpStatusCode.OK_200).send(entity);
