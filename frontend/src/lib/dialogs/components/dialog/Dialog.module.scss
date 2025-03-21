@@ -20,7 +20,7 @@
   box-shadow: colors.$color-box-shadow;
   border: 1px solid colors.$color-border;
   width: 90%;
-  max-height: 80vh;
+  max-height: 80vh; // restrict view height of dialog
 
   @include mixins.medium-screen {
     width: 30rem;
@@ -40,6 +40,6 @@
 }
 
 .body {
-  overflow-y: auto;
+  overflow-y: auto; // provide scrolling for children in dialog
   padding: 1rem;
 }

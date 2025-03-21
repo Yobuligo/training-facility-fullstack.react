@@ -561,7 +561,7 @@
 		# Story: Display user profile image in fullscreen when clicking on image
 			# Origin size must be loaded to display all details
 			# Display cursor pointer when hovering over image
-		- Story: Rename profile image classes, interface and components to user profile image
+		# Story: Rename profile image classes, interface and components to user profile image
 
 - Backlog
 	- Epic: Seminar
