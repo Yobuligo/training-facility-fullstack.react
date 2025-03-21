@@ -80,7 +80,7 @@ export class EventInstanceController extends EntityController<
       `${this.routeMeta.path}/:id${UserRouteMeta.path}/:userId${EventDefinitionRouteMeta.path}`,
       SessionInterceptor(async (req, res) => {
         const requestedUserId = req.params.userId;
-        if (!this.checkIsAdminOrYourself(req, res, requestedUserId)) {
+        if (!await this.checkIsAdminOrYourself(req, res, requestedUserId)) {
           return;
         }
 

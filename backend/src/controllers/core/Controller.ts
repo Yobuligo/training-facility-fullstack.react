@@ -16,12 +16,12 @@ export abstract class Controller {
    * Checks if the user of this session from {@link req} is either the owner of the {@link requestedUserId} or an admin and returns true.
    * Otherwise a missing authority error is send as response and false is returned.
    */
-  protected checkIsAdminOrYourself(
+  protected async checkIsAdminOrYourself(
     req: ISessionRequest,
     res: Response,
     requestedUserId: string
-  ): boolean {
-    if (!req.sessionInfo.isAdminOrYourself(requestedUserId)) {
+  ): Promise<boolean> {
+    if (!await req.sessionInfo.isAdminOrYourself(requestedUserId)) {
       this.sendMissingAuthorityError(res);
       return false;
     }

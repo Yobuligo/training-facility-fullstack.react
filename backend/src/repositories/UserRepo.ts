@@ -210,6 +210,24 @@ export class UserRepo extends SequelizeRepository<IUserSecure> {
     return data?.toJSON();
   }
 
+  async findUserIdByUserProfileId(
+    userProfileId: string
+  ): Promise<string | undefined> {
+    const data = await this.model.findOne({
+      attributes: ["id"],
+      include: [
+        {
+          attributes: ["id"],
+          model: UserProfile,
+          as: relHasOneUserProfile,
+          required: true,
+          where: { id: userProfileId },
+        },
+      ],
+    });
+    return data?.toJSON().id;
+  }
+
   async findAllShort(userIds?: string[]): Promise<IUserShort[]> {
     let where: WhereOptions<IUserSecure> | undefined;
     if (userIds) {

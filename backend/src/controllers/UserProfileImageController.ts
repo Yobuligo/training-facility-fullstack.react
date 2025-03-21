@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
 import { UserProfileImageRepo } from "../repositories/UserProfileImageRepo";
+import { UserRepo } from "../repositories/UserRepo";
 import { UserProfileMeta } from "../shared/model/IUserProfile";
 import {
   IUserProfileImage,
@@ -40,16 +41,26 @@ export class UserProfileImageController extends EntityController<
   private loadByUserProfileId() {
     this.router.get(
       `${UserProfileMeta.path}/:id${this.routeMeta.path}`,
-      SessionInterceptor(
-        async (req, res) => {
-          const userProfileId = req.params.id;
-          const userProfileImageRepo = new UserProfileImageRepo();
-          const userProfileImages =
-            await userProfileImageRepo.findByUserProfileId(userProfileId);
-          res.status(HttpStatusCode.OK_200).send(userProfileImages);
-        },
-        [AuthRole.ADMIN]
-      )
+      SessionInterceptor(async (req, res) => {
+        const userProfileId = req.params.id;
+
+        const userRepo = new UserRepo();
+        const requestedUserId = await userRepo.findUserIdByUserProfileId(
+          userProfileId
+        );
+        if (!requestedUserId) {
+          return this.sendMissingAuthorityError(res);
+        }
+
+        if (!(await this.checkIsAdminOrYourself(req, res, requestedUserId))) {
+          return;
+        }
+
+        const userProfileImageRepo = new UserProfileImageRepo();
+        const userProfileImages =
+          await userProfileImageRepo.findByUserProfileId(userProfileId);
+        res.status(HttpStatusCode.OK_200).send(userProfileImages);
+      }, [])
     );
   }
 }
