@@ -566,7 +566,10 @@
 # Version 1.14.1-20250321.20
 	# Bug: Default user is not able to display its profile image
 
-- Version 1.15.0-<>.21
+# Version 1.14.2-20250321.21
+	# Bug: User profile image in portrait format can not be displayed correctly
+
+- Version 1.15.0-<>.22
 
 - Backlog
 	- Epic: Seminar

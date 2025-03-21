@@ -13,7 +13,7 @@
   z-index: 150;
   display: flex;
   flex-direction: column;
-  top: 20%;
+  top: 5%;
   margin-left: auto;
   margin-right: auto;
   background-color: colors.$color-dialog-background;
@@ -23,6 +23,7 @@
   max-height: 80vh; // restrict view height of dialog
 
   @include mixins.medium-screen {
+    top: 20%;
     width: 30rem;
   }
 }
