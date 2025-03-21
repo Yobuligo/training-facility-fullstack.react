@@ -2,9 +2,9 @@ import { error } from "./core/utils/error";
 
 export const AppConfig = {
   build: {
-    version: "1.13.3",
-    date: "20250301",
-    number: 18,
+    version: "1.14.0",
+    date: "20250321",
+    number: 19,
   },
   defaultDateTimeSpanFilter: "day", // Sets the default view for the event calendar (supported values day or week).
   HOST:
