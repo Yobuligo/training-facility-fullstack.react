@@ -13,7 +13,7 @@ export const UserSearchItem: React.FC<IUserSearchItemProps> = (props) => {
 
   return (
     <Card className={styles.userSearchItem}>
-      <UserProfileImageAndName user={props.user} />
+      <UserProfileImageAndName userProfile={props.user.userProfile} />
       <Button onClick={onSelectUser}>
         <AddIcon className={styles.icon} />
       </Button>

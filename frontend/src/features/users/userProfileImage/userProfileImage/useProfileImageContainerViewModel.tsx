@@ -21,14 +21,14 @@ export const useProfileImageContainerViewModel = (
   const [imageSrc, setImageSrc] = useState(
     UserInfo.findUserProfileImageBySize(
       props.size ?? UserProfileImageSize.ORIGINAL,
-      props.user.userProfile
+      props.userProfile
     )
   );
   const confirmDialog = useConfirmDialog();
   const [uploadUserProfileImageRequest] = useRequest();
   const [deleteUserProfileImageRequest] = useRequest();
   const userProfileId =
-    props.user.userProfile?.id ??
+    props.userProfile?.id ??
     error("Error while retrieving user profile id. UserProfile not found.");
   const displayFullscreenDialog = useConfirmDialog();
 
@@ -100,7 +100,7 @@ export const useProfileImageContainerViewModel = (
 
   const onClickImage = async () => {
     displayFullscreenDialog.show(
-      UserInfo.toFullName(props.user.userProfile),
+      UserInfo.toFullName(props.userProfile),
       <UserProfileImageDisplay userProfileId={userProfileId} />,
       { displayCancelButton: false }
     );

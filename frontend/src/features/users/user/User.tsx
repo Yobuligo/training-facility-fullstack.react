@@ -69,7 +69,7 @@ export const User: React.FC<IUserProps> = (props) => {
         <div className={styles.imageAndNameContainer}>
           <UserProfileImage
             displayEditButton={props.isAdminMode}
-            user={props.user}
+            userProfile={props.user.userProfile}
           />
           <h3 className={styles.username}>{`${
             props.user.userProfile?.firstname

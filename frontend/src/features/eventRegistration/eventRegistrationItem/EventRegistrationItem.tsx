@@ -37,7 +37,9 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
             </div>
 
             <div className={styles.nameAndToolbarContainer}>
-              <UserProfileImageAndName user={props.eventRegistration.user} />
+              <UserProfileImageAndName
+                userProfile={props.eventRegistration.user?.userProfile}
+              />
               <Toolbar>
                 <SecondaryButton onClick={viewModel.onDelete}>
                   <DeleteIcon />
@@ -50,7 +52,9 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
           </div>
         ) : (
           <div className={styles.nameAndToolbarContainer}>
-            <UserProfileImageAndName user={props.eventRegistration.user} />
+            <UserProfileImageAndName
+              userProfile={props.eventRegistration.user?.userProfile}
+            />
             <ToggleButtonGroup
               enableUnselectAll={true}
               items={viewModel.toggleButtonOptions}

@@ -1,5 +1,5 @@
-import { IUser } from "../../../../shared/model/IUser";
+import { IUserProfile } from "../../../../shared/model/IUserProfile";
 
 export interface IUserProfileImageAndNameProps {
-  user?: IUser;
+  userProfile?: IUserProfile;
 }

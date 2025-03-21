@@ -13,15 +13,15 @@ export const UserProfileImageAndName: React.FC<
 > = (props) => {
   return (
     <div className={styles.userProfileImageAndName}>
-      {props.user ? (
+      {props.userProfile ? (
         <UserProfileImage
           size={UserProfileImageSize.THUMBNAIL}
-          user={props.user}
+          userProfile={props.userProfile}
         />
       ) : (
         <UserProfileImageSkeleton size={UserProfileImageSize.THUMBNAIL} />
       )}
-      {UserInfo.toFullName(props.user?.userProfile)}
+      {UserInfo.toFullName(props.userProfile)}
     </div>
   );
 };

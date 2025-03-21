@@ -1,4 +1,4 @@
-import { IUser } from "../../../../shared/model/IUser";
+import { IUserProfile } from "../../../../shared/model/IUserProfile";
 import { UserProfileImageSize } from "../../../../shared/types/UserProfileImageSize";
 
 export interface IUserProfileImageProps {
@@ -10,7 +10,7 @@ export interface IUserProfileImageProps {
   /**
    * Provides the user for which the user profile image should be displayed
    */
-  user: IUser;
+  userProfile?: IUserProfile;
 
   /**
    * Provides the user profile image size which should be displayed. Default is the original size.
