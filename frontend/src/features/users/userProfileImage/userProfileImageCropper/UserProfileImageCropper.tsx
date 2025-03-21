@@ -1,21 +1,21 @@
 import ReactCrop from "react-image-crop";
-import { AddDocument } from "../../../components/addDocument/AddDocument";
-import { texts } from "../../../lib/translation/texts";
-import { useTranslation } from "../../../lib/translation/useTranslation";
-import { IProfileImageCropperProps } from "./IProfileImageCropperProps";
-import styles from "./ProfileImageCropper.module.scss";
+import { AddDocument } from "../../../../components/addDocument/AddDocument";
+import { texts } from "../../../../lib/translation/texts";
+import { useTranslation } from "../../../../lib/translation/useTranslation";
+import { IUserProfileImageCropperProps } from "./IUserProfileImageCropperProps";
+import styles from "./UserProfileImageCropper.module.scss";
 import {
   CropConfig,
-  useProfileImageCropperViewModel,
-} from "./useProfileImageCropperViewModel";
+  useUserProfileImageCropperViewModel,
+} from "./useUserProfileImageCropperViewModel";
 
 /**
- * This component is responsible for displaying a button to select a user profile image and to crop it.
+ * This component is responsible for uploading, cropping and returning a user profile image.
  */
-export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
-  props
-) => {
-  const viewModel = useProfileImageCropperViewModel(props);
+export const UserProfileImageCropper: React.FC<
+  IUserProfileImageCropperProps
+> = (props) => {
+  const viewModel = useUserProfileImageCropperViewModel(props);
   const { t } = useTranslation();
 
   return (
@@ -48,7 +48,7 @@ export const ProfileImageCropper: React.FC<IProfileImageCropperProps> = (
           </ReactCrop>
         </div>
       ) : (
-        <div className={styles.selectImageContainer}>
+        <div className={styles.addImageContainer}>
           <AddDocument
             onClick={viewModel.onAddFile}
             text={t(texts.profileImage.addImage)}

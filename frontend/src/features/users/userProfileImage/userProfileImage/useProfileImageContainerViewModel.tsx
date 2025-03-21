@@ -1,21 +1,21 @@
 import { useMemo, useState } from "react";
-import { UserProfileApi } from "../../../api/UserProfileApi";
-import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
-import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
-import { Event } from "../../../core/services/event/Event";
-import { error } from "../../../core/utils/error";
-import { useConfirmDialog } from "../../../lib/dialogs/hooks/useConfirmDialog";
-import { texts } from "../../../lib/translation/texts";
-import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { UserInfo } from "../../../services/UserInfo";
-import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
-import { ProfileImageCropper } from "../profileImageCropper/ProfileImageCropper";
-import { UserProfileImageDisplay } from "../profileImageDisplay/UserProfileImageDisplay";
-import { IProfileImageContainerProps } from "./IProfileImageContainerProps";
+import { UserProfileApi } from "../../../../api/UserProfileApi";
+import { UserProfileImageApi } from "../../../../api/UserProfileImageApi";
+import { SecondaryButton } from "../../../../components/secondaryButton/SecondaryButton";
+import { Event } from "../../../../core/services/event/Event";
+import { error } from "../../../../core/utils/error";
+import { useConfirmDialog } from "../../../../lib/dialogs/hooks/useConfirmDialog";
+import { texts } from "../../../../lib/translation/texts";
+import { useTranslation } from "../../../../lib/translation/useTranslation";
+import { useRequest } from "../../../../lib/userSession/hooks/useRequest";
+import { UserInfo } from "../../../../services/UserInfo";
+import { UserProfileImageSize } from "../../../../shared/types/UserProfileImageSize";
+import { UserProfileImageCropper } from "../userProfileImageCropper/UserProfileImageCropper";
+import { UserProfileImageDisplay } from "../userProfileImageDisplay/UserProfileImageDisplay";
+import { IUserProfileImageProps } from "./IUserProfileImageProps";
 
 export const useProfileImageContainerViewModel = (
-  props: IProfileImageContainerProps
+  props: IUserProfileImageProps
 ) => {
   const { t } = useTranslation();
   const [imageSrc, setImageSrc] = useState(
@@ -41,7 +41,7 @@ export const useProfileImageContainerViewModel = (
   );
 
   /**
-   * Event to register a handler, which is responsible for deleting the current image.
+   * Event to register a handler, which is responsible for deleting the currently selected image.
    */
   const deleteImageEvent = useMemo(() => new Event<VoidFunction>(), []);
 
@@ -77,13 +77,13 @@ export const useProfileImageContainerViewModel = (
   const onEdit = () =>
     confirmDialog.show(
       t(texts.profileImage.chooseImage),
-      <ProfileImageCropper
+      <UserProfileImageCropper
         imageSrc={imageSrc}
-        onCropRequest={(handler) => {
+        onRequestCrop={(handler) => {
           cropImageEvent.clear();
           cropImageEvent.register(handler);
         }}
-        onDeleteRequest={(handler) => {
+        onRequestDelete={(handler) => {
           deleteImageEvent.clear();
           deleteImageEvent.register(handler);
         }}

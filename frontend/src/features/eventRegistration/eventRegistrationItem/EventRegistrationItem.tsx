@@ -9,7 +9,7 @@ import { GiftsIcon } from "../../../icons/GiftsIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { hasBirthday } from "../../../utils/hasBirthday";
-import { UserProfileImageAndName } from "../../profileImage/profileImageAndName/UserProfileImageAndName";
+import { UserProfileImageAndName } from "../../users/userProfileImage/userProfileImageAndName/UserProfileImageAndName";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";

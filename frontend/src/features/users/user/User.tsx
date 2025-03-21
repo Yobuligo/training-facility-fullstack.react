@@ -13,7 +13,7 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { formatMemberId } from "../../../utils/formatMemberId";
 import { toStringDate } from "../../../utils/toDate";
 import { GradingSection } from "../../grading/gradingSection/GradingSection";
-import { ProfileImageContainer } from "../../profileImage/profileImageContainer/ProfileImageContainer";
+import { UserProfileImage } from "../userProfileImage/userProfileImage/UserProfileImage";
 import { IUserProps } from "./IUserProps";
 import styles from "./User.module.scss";
 import { useUserViewModel } from "./useUserViewModel";
@@ -67,7 +67,7 @@ export const User: React.FC<IUserProps> = (props) => {
         setDisplayMode={viewModel.setDisplayMode}
       >
         <div className={styles.imageAndNameContainer}>
-          <ProfileImageContainer
+          <UserProfileImage
             displayEditButton={props.isAdminMode}
             user={props.user}
           />

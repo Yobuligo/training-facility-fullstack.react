@@ -1,7 +1,7 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
 
-.profileImageContainer {
+.userProfileImage {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
 
 .image {
   cursor: pointer;
-  border-radius: 50%;  
+  border-radius: 50%;
 }
 
 .imageOriginal {

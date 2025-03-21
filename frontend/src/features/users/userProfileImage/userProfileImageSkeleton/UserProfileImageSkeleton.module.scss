@@ -1,19 +1,19 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.module.scss";
 
-.profileImageSkeleton {
+.userProfileImageSkeleton {
   border-radius: 50%;
   background-color: colors.$color-disabled;
 }
 
-.profileImageSkeletonOriginal {
+.userProfileImageSkeletonOriginal {
   width: dimensions.$user-profile-image-size-original;
   height: dimensions.$user-profile-image-size-original;
-  @extend .profileImageSkeleton;
+  @extend .userProfileImageSkeleton;
 }
 
-.profileImageSkeletonThumbnail {
+.userProfileImageSkeletonThumbnail {
   width: dimensions.$user-profile-image-size-thumbnail;
   height: dimensions.$user-profile-image-size-thumbnail;
-  @extend .profileImageSkeleton;
+  @extend .userProfileImageSkeleton;
 }

@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { UserProfileImageApi } from "../../../api/UserProfileImageApi";
-import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
-import { useInitialize } from "../../../hooks/useInitialize";
-import { texts } from "../../../lib/translation/texts";
-import { useTranslation } from "../../../lib/translation/useTranslation";
-import { useRequest } from "../../../lib/userSession/hooks/useRequest";
-import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
+import { UserProfileImageApi } from "../../../../api/UserProfileImageApi";
+import { PageSpinner } from "../../../../components/pageSpinner/PageSpinner";
+import { useInitialize } from "../../../../hooks/useInitialize";
+import { texts } from "../../../../lib/translation/texts";
+import { useTranslation } from "../../../../lib/translation/useTranslation";
+import { useRequest } from "../../../../lib/userSession/hooks/useRequest";
+import { UserProfileImageSize } from "../../../../shared/types/UserProfileImageSize";
 import { IUserProfileImageDisplayProps } from "./IUserProfileImageDisplayProps";
 import styles from "./UserProfileImageDisplay.module.scss";
 
+/**
+ * This component is responsible for displaying the original user profile image in a fullscreen dialog.
+ */
 export const UserProfileImageDisplay: React.FC<
   IUserProfileImageDisplayProps
 > = (props) => {

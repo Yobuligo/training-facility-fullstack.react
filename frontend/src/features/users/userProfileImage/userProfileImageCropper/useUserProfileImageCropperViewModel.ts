@@ -5,14 +5,15 @@ import {
   Crop,
   makeAspectCrop,
 } from "react-image-crop";
-import { IProfileImageCropperProps } from "./IProfileImageCropperProps";
+import { IUserProfileImageCropperProps } from "./IUserProfileImageCropperProps";
 
 export const CropConfig = {
   minDimensions: 150,
   aspectRatio: 1,
 };
-export const useProfileImageCropperViewModel = (
-  props: IProfileImageCropperProps
+
+export const useUserProfileImageCropperViewModel = (
+  props: IUserProfileImageCropperProps
 ) => {
   const selectFileInputRef = useRef<HTMLInputElement>(null);
   const [imageSrc, setImageSrc] = useState<string>(props.imageSrc ?? "");
@@ -74,12 +75,12 @@ export const useProfileImageCropperViewModel = (
   };
 
   /**
-   * Handles outer onCrop request.
-   * Provides a handler which can be called from the outer component to create a cropped image
+   * Checks if the caller component wants to request cropping an image 
+   * and provides a handler which can be called from the caller component to create and return that cropped image.
    */
   useEffect(() => {
-    if (props.onCropRequest) {
-      props.onCropRequest(async () => {
+    if (props.onRequestCrop) {
+      props.onRequestCrop(async () => {
         if (
           crop !== undefined &&
           imageRef !== null &&
@@ -100,12 +101,12 @@ export const useProfileImageCropperViewModel = (
   }, [crop, props]);
 
   /**
-   * Handles outer onDelete request
-   * Provides a handler which can be called from the outer component to delete the current selected image
+   * Checks if the caller component wants to request the deletion of an image 
+   * and provides a handler which can be called from the caller component to delete the currently selected image
    */
   useEffect(() => {
-    if (props.onDeleteRequest) {
-      props.onDeleteRequest(() => setImageSrc(""));
+    if (props.onRequestDelete) {
+      props.onRequestDelete(() => setImageSrc(""));
     }
   }, [props]);
 

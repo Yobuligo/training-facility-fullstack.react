@@ -1,12 +1,12 @@
-import { UserInfo } from "../../../services/UserInfo";
-import { UserProfileImageSize } from "../../../shared/types/UserProfileImageSize";
-import { ProfileImageContainer } from "../profileImageContainer/ProfileImageContainer";
-import { ProfileImageSkeleton } from "../profileImageSkeleton/ProfileImageSkeleton";
+import { UserInfo } from "../../../../services/UserInfo";
+import { UserProfileImageSize } from "../../../../shared/types/UserProfileImageSize";
+import { UserProfileImage } from "../userProfileImage/UserProfileImage";
+import { UserProfileImageSkeleton } from "../userProfileImageSkeleton/UserProfileImageSkeleton";
 import { IUserProfileImageAndNameProps } from "./IUserProfileImageAndNameProps";
 import styles from "./UserProfileImageAndName.module.scss";
 
 /**
- * This component is responsible for rendering an users image and its full name.
+ * This component is responsible for rendering an users profile image and its full name.
  */
 export const UserProfileImageAndName: React.FC<
   IUserProfileImageAndNameProps
@@ -14,12 +14,12 @@ export const UserProfileImageAndName: React.FC<
   return (
     <div className={styles.userProfileImageAndName}>
       {props.user ? (
-        <ProfileImageContainer
+        <UserProfileImage
           size={UserProfileImageSize.THUMBNAIL}
           user={props.user}
         />
       ) : (
-        <ProfileImageSkeleton size={UserProfileImageSize.THUMBNAIL} />
+        <UserProfileImageSkeleton size={UserProfileImageSize.THUMBNAIL} />
       )}
       {UserInfo.toFullName(props.user?.userProfile)}
     </div>
