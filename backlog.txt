@@ -563,7 +563,10 @@
 			# Display cursor pointer when hovering over image
 		# Story: Rename profile image classes, interface and components to user profile image
 
-- Version 1.15.0-<>.20
+# Version 1.14.1-20250321.20
+	# Bug: Default user is not able to display its profile image
+
+- Version 1.15.0-<>.21
 
 - Backlog
 	- Epic: Seminar
