@@ -78,7 +78,7 @@ export class UserApi extends EntityRepository<IUser> {
     });
   }
 
-  async getStatsActiveUsersGroupedByTariff(): Promise<any> {
+  async getStatsActiveUsersGroupedByTariff(): Promise<IChartData> {
     return await RESTApi.get(
       `${this.url}${ChartStatsRouteMeta.path}/groupedByTariff`
     );

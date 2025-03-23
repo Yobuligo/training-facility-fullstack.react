@@ -52,9 +52,6 @@ export const useActiveMemberChartViewModel = () => {
       });
 
       setChartData(chartData);
-
-      const data = await userApi.getStatsActiveUsersGroupedByTariff();
-      debugger;
     });
   }, [from, to]);
 
