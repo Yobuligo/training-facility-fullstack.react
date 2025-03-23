@@ -78,6 +78,12 @@ export class UserApi extends EntityRepository<IUser> {
     });
   }
 
+  async getStatsActiveUsersGroupedByTariff(): Promise<any> {
+    return await RESTApi.get(
+      `${this.url}${ChartStatsRouteMeta.path}/groupedByTariff`
+    );
+  }
+
   async login(username: string, password: string): Promise<IUserInternal> {
     const credentials: ICredentials = {
       username,

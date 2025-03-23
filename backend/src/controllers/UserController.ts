@@ -26,6 +26,7 @@ export class UserController extends EntityController<IUser, UserRepo> {
     this.login();
     this.logout();
     this.getStatsActiveUsers();
+    this.getStatsActiveUsersGroupedByTariff();
   }
 
   protected findById(): void {
@@ -272,6 +273,20 @@ export class UserController extends EntityController<IUser, UserRepo> {
 
           const userStatsRepo = new UserStatsRepo();
           const chartData = await userStatsRepo.getActive(dateTimeSpan);
+          res.status(HttpStatusCode.OK_200).send(chartData);
+        },
+        [AuthRole.ADMIN]
+      )
+    );
+  }
+
+  private getStatsActiveUsersGroupedByTariff() {
+    this.router.get(
+      `${this.routeMeta.path}${ChartStatsRouteMeta.path}/groupedByTariff`,
+      SessionInterceptor(
+        async (_, res) => {
+          const userStatsRepo = new UserStatsRepo();
+          const chartData = await userStatsRepo.groupedByTariff();
           res.status(HttpStatusCode.OK_200).send(chartData);
         },
         [AuthRole.ADMIN]

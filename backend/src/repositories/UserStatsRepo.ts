@@ -3,7 +3,7 @@ import { DateTime } from "../core/services/date/DateTime";
 import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { db } from "../db/db";
 import { IChartData } from "../shared/model/IChartData";
-import { IChartEntry } from "../shared/model/IChartEntry";
+import { IChartEntry } from "./../shared/model/IChartEntry";
 
 export class UserStatsRepo {
   /**
@@ -46,5 +46,24 @@ export class UserStatsRepo {
     });
 
     return { dateTimeSpan, data };
+  }
+
+  /**
+   * Returns the active users grouped by tariff
+   */
+  async groupedByTariff(): Promise<IChartData> {
+    const query = `
+        SELECT prof.tariff as name, COUNT(*) as value FROM users AS usr
+        INNER JOIN \`user-profiles\` AS prof
+        ON prof.userId = usr.id
+        WHERE usr.username != "root"
+        AND prof.resignedAt IS NULL
+        GROUP BY prof.tariff
+    `;
+
+    const data = await db.query<IChartEntry>(query, {
+      type: sequelize.QueryTypes.SELECT,
+    });
+    return { dateTimeSpan: { from: new Date(), to: new Date() }, data };
   }
 }
