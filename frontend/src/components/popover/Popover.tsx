@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { HorizontalAlignment } from "../../core/ui/HorizontalAlignment";
-import { style } from "../../core/ui/style";
-import { Card } from "../card/Card";
 import { IPopoverProps } from "./IPopoverProps";
 import styles from "./Popover.module.scss";
+import { PopoverContent } from "../popoverContent/PopoverContent";
 
 export const Popover: React.FC<IPopoverProps> = (props) => {
   const [visible, setVisible] = useState(false);
@@ -19,16 +17,9 @@ export const Popover: React.FC<IPopoverProps> = (props) => {
     >
       {props.children}
       {visible && (
-        <Card
-          className={style(
-            styles.content,
-            props.align === HorizontalAlignment.LEFT
-              ? styles.alignLeft
-              : styles.alignRight
-          )}
-        >
+        <PopoverContent align={props.align} className={styles.content}>
           {props.content}
-        </Card>
+        </PopoverContent>
       )}
     </span>
   );

@@ -22,7 +22,6 @@ export const TariffMemberChart: React.FC = () => {
           ))}
         </Pie>
         <Tooltip content={viewModel.renderTooltip} />
-        {/* <Tooltip /> */}
       </PieChart>
     </Chart>
   );

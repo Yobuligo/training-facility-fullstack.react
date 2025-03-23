@@ -1,0 +1,17 @@
+@use "../../styles/colors.module.scss";
+
+.alignLeft {
+  right: 0;
+}
+
+.alignRight {
+  left: 0;
+}
+
+.content {
+  row-gap: 0.5rem;
+  background-color: colors.$color-tooltip-background;
+  border: 1px solid colors.$color-secondary-dark;
+  box-shadow: none;
+  z-index: 150;
+}

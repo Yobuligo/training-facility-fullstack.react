@@ -4,6 +4,7 @@ import {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import { PopoverContent } from "../../../components/popoverContent/PopoverContent";
 import { error } from "../../../core/utils/error";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
@@ -15,33 +16,21 @@ import colors from "../../../styles/colors.module.scss";
 import { useRenderTariff } from "../../hooks/useRenderTariff";
 
 /**
- * Converts the given {@link tariff}, which is at this point represented as string to a string,
- * which is represents by a number > 0
+ * Converts the given {@link key} to a variable of type {@link Tariff}.
  */
-const tariffToKeyString = (tariff: string) => {
-  let key = +tariff;
-  key++;
-  return key.toString();
-};
-
-/**
- * Converts the given {@link keyString} to a variable of type {@link Tariff}.
- */
-const keyStringToTariff = (keyString: string): Tariff =>
-  keyStringToTariffOrNull(keyString) ??
+const toTariff = (key: string): Tariff =>
+  toTariffOrNull(key) ??
   error("Error while converting key to type Tariff. Value of key is null.");
 
 /**
- * Converts the given {@link keyString} to a variable of type {@link Tariff} or returns undefined if {@link keyString} is undefined.
+ * Converts the given {@link key} to a variable of type {@link Tariff} or returns undefined if {@link key} is undefined.
  */
-const keyStringToTariffOrNull = (keyString?: string): Tariff | undefined => {
-  if (!keyString) {
+const toTariffOrNull = (key?: string): Tariff | undefined => {
+  if (key === undefined) {
     return;
   }
-
-  let key = +keyString;
-  key--;
-  return key;
+  let tariff = +key;
+  return tariff;
 };
 
 export const useTariffMemberChartViewModel = () => {
@@ -53,15 +42,12 @@ export const useTariffMemberChartViewModel = () => {
     loadStatsRequest(async () => {
       const userApi = new UserApi();
       const chartData = await userApi.getStatsActiveUsersGroupedByTariff();
-      chartData.data.forEach((chartEntry) => {
-        chartEntry.name = tariffToKeyString(chartEntry.name);
-      });
       setChartData(chartData);
     });
   });
 
   const renderColor = (chartEntry: IChartEntry): string => {
-    const tariff = keyStringToTariff(chartEntry.name);
+    const tariff = toTariff(chartEntry.name);
     switch (tariff) {
       case Tariff.CHILDREN:
         return colors.colorChartChildren;
@@ -83,15 +69,14 @@ export const useTariffMemberChartViewModel = () => {
   };
 
   const renderTooltip = (props: TooltipProps<ValueType, NameType>) => {
-    const tariff = keyStringToTariffOrNull(
-      props.payload?.[0]?.name?.toString()
-    );
-    if (!tariff) {
+    const tariff = toTariffOrNull(props.payload?.[0]?.name?.toString());
+    if (tariff === undefined) {
       return <></>;
     }
 
+    const count = props.payload?.[0].value;
     const tooltip = renderTariff(tariff);
-    return <div>{tooltip}</div>;
+    return <PopoverContent>{`${tooltip}: ${count}`}</PopoverContent>;
   };
 
   return {
