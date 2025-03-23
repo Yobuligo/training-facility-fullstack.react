@@ -570,6 +570,8 @@
 	# Bug: User profile image in portrait format can not be displayed correctly
 
 - Version 1.15.0-<>.22
+	- Epic: Statistic
+		- Story: Display pie chart with number members by tariff
 
 - Backlog
 	- Epic: Seminar
@@ -583,8 +585,6 @@
 		- It is possible to switch between the span types day, week, month, custom (Zeitraum in german).
 		- The values of the span types day, week, month can be changed forward or backward and the current value or range is displayed. E.g. < 06.01.2025 - 12.01.2025 >
 		- The from and to values of the custom type can be changed manually. So the display is different from the other span types.	
-	- Epic: User list filter
-		- Users can be filtered by tariff 
 	- Story: Group contract details in user information in a separate collapsible
 		- Tariff, joined At, resigned At
 	- Epic: Shipped artifact
@@ -628,7 +628,6 @@
 			- Select last training when the user was checked in or joined as trainer
 		- Story: Display number training sessions of a user per week, month, year, max
 	- Epic: Messenger (Chat)
-	- Epic: Exercise compendium
 	- Bug: From value of a DateTimeSpan must not be lower than to value 
 	- Story: Check all ui endpoints and delete which are not required anymore
 	- Story: Check all ui REST calls if they use useRequest
