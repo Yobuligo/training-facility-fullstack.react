@@ -6,26 +6,37 @@ import { ActiveMemberByGenderChart } from "./activeMemberByGenderChart/ActiveMem
 import { ActiveMemberByTariffChart } from "./activeMemberByTariffChart/ActiveMemberByTariffChart";
 import { ActiveMemberChart } from "./activeMemberChart/ActiveMemberChart";
 import styles from "./ChartsSection.module.scss";
+import { useChartsSectionViewModel } from "./useChartsSectionViewModel";
 
+/**
+ * This component is responsible for displaying the charts section
+ */
 const ChartsSection: React.FC = () => {
+  const viewModel = useChartsSectionViewModel();
   const { t } = useTranslation();
 
   return (
     <CardList>
       <CollapseCard
         className={styles.collapsibleCard}
+        collapsed={viewModel.chartsSettings.collapseActiveMember}
+        onToggleCollapse={viewModel.onToggleActiveMembers}
         title={t(texts.stats.activeMembers)}
       >
         <ActiveMemberChart />
       </CollapseCard>
       <CollapseCard
         className={styles.collapsibleCard}
+        collapsed={viewModel.chartsSettings.collapseActiveMemberByTariff}
+        onToggleCollapse={viewModel.onToggleActiveMembersByTariff}
         title={t(texts.stats.activeMembersByTariff)}
       >
         <ActiveMemberByTariffChart />
       </CollapseCard>
       <CollapseCard
         className={styles.collapsibleCard}
+        collapsed={viewModel.chartsSettings.collapseActiveMemberByGender}
+        onToggleCollapse={viewModel.onToggleActiveMembersByGender}
         title={t(texts.stats.activeMembersByGender)}
       >
         <ActiveMemberByGenderChart />

@@ -80,7 +80,7 @@ export const usePieChartViewModel = (props: IPieChartProps) => {
           Math.floor((chartEntry.value / total) * 100),
       }));
 
-      // sort by size
+      // sort elements by biggest decimal value
       decimals.sort((a, b) => b.decimal - a.decimal);
 
       // distribute difference
