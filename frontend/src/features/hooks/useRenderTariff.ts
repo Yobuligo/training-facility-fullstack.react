@@ -3,7 +3,7 @@ import { useTranslation } from "../../lib/translation/useTranslation";
 import { Tariff } from "../../shared/types/Tariff";
 
 /**
- * This hook is responsible for rendering a tariff to text
+ * This hook is responsible for rendering a {@link Tariff} to text.
  */
 export const useRenderTariff = () => {
   const { t } = useTranslation();

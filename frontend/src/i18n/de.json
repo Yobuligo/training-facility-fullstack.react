@@ -283,7 +283,8 @@
     },
     "stats": {
         "activeMembers": "Aktive Mitglieder",
-        "activeMembersByTariff": "Aktive Mitglieder nach Tarif"
+        "activeMembersByTariff": "Aktive Mitglieder nach Tarif",
+        "activeMembersByGender": "Aktive Mitglieder nach Geschlecht"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",

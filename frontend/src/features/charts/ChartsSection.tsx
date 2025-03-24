@@ -2,9 +2,10 @@ import { CardList } from "../../components/cardList/CardList";
 import { CollapseCard } from "../../components/collapseCard/CollapseCard";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
+import { ActiveMemberByGenderChart } from "./activeMemberByGenderChart/ActiveMemberByGenderChart";
+import { ActiveMemberByTariffChart } from "./activeMemberByTariffChart/ActiveMemberByTariffChart";
 import { ActiveMemberChart } from "./activeMemberChart/ActiveMemberChart";
 import styles from "./ChartsSection.module.scss";
-import { ActiveMemberByTariffChart } from "./activeMemberByTariffChart/ActiveMemberByTariffChart";
 
 const ChartsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +23,12 @@ const ChartsSection: React.FC = () => {
         title={t(texts.stats.activeMembersByTariff)}
       >
         <ActiveMemberByTariffChart />
+      </CollapseCard>
+      <CollapseCard
+        className={styles.collapsibleCard}
+        title={t(texts.stats.activeMembersByGender)}
+      >
+        <ActiveMemberByGenderChart />
       </CollapseCard>
     </CardList>
   );
