@@ -1,0 +1,10 @@
+@use "../../../styles/mixins.scss";
+
+.chart {
+  height: 20rem;
+  row-gap: 0;
+
+  @include mixins.medium-screen {
+    height: 25rem;
+  }
+}

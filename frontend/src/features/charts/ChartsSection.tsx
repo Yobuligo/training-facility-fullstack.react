@@ -4,7 +4,7 @@ import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { ActiveMemberChart } from "./activeMemberChart/ActiveMemberChart";
 import styles from "./ChartsSection.module.scss";
-import { TariffMemberChart } from "./tariffMemberChart/TariffMemberChart";
+import { ActiveMemberByTariffChart } from "./activeMemberByTariffChart/ActiveMemberByTariffChart";
 
 const ChartsSection: React.FC = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const ChartsSection: React.FC = () => {
         className={styles.collapsibleCard}
         title={t(texts.stats.activeMembersByTariff)}
       >
-        <TariffMemberChart />
+        <ActiveMemberByTariffChart />
       </CollapseCard>
     </CardList>
   );
