@@ -1,0 +1,9 @@
+@use "../../../styles/mixins.scss";
+
+.chart {
+  height: 20rem;
+
+  @include mixins.medium-screen {
+    height: 25rem;
+  }
+}

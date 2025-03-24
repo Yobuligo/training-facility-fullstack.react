@@ -1,4 +1,5 @@
 import { ResponsiveContainer } from "recharts";
+import { style } from "../../core/ui/style";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { PageSpinner } from "../pageSpinner/PageSpinner";
@@ -15,7 +16,7 @@ const Chart: React.FC<IChartProps> = (props) => {
       {props.isLoading ? (
         <PageSpinner />
       ) : (
-        <div className={styles.chart}>
+        <div className={style(styles.chart, props.className)}>
           <Toolbar>
             <SecondaryButton onClick={props.onSelectYear}>
               {t(texts.calendar.year)}

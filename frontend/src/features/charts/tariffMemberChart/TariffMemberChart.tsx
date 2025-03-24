@@ -1,12 +1,16 @@
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import Chart from "../../../components/chart/Chart";
+import styles from "./TariffMemberChart.module.scss";
 import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
 
 export const TariffMemberChart: React.FC = () => {
   const viewModel = useTariffMemberChartViewModel();
 
   return (
-    <Chart isLoading={viewModel.isLoadStatsRequestProcessing}>
+    <Chart
+      className={styles.chart}
+      isLoading={viewModel.isLoadStatsRequestProcessing}
+    >
       <PieChart>
         <Pie
           data={viewModel.chartData?.data}
