@@ -1,6 +1,7 @@
 $color-primary: #893f61;
-$color-primary-dark: #742053;
+$color-primary-dark: hsl(324, 57%, 29%);
 $color-primary-light: #b492a0;
+$color-primary-lighter: #cab3bd;
 $color-secondary-dark: #435234;
 $color-secondary: #687857;
 $color-secondary-light: #acae9b;
@@ -168,12 +169,13 @@ $color-user-deactivated-text: $color-primary-light;
   colorSliderOnStateDisabled: $color-switch-state-on-disabled;
   colorPageSpinnerText: $color-secondary;
   colorMemberOnlyIcon: $color-secondary-dark;
-  colorChartChildren: $color-secondary;
-  colorChartFamily1: $color-primary-light;
-  colorChartFamily2: $color-primary;
-  colorChartFamily3: $color-primary-dark;
-  colorChartPrincipals: $color-accent;
-  colorChartRelatives: $color-secondary-dark;
-  colorChartTeenagersAdults: $color-secondary-light;
-  colorChartTraineeStudentsPensioner: $color-disabled;
+
+  colorChart1: $color-secondary-dark;
+  colorChart2: $color-secondary;
+  colorChart3: $color-secondary-light;
+  colorChart4: $color-secondary-lighter;
+  colorChart5: $color-primary-dark;
+  colorChart6: $color-primary;
+  colorChart7: $color-primary-light;
+  colorChart8: $color-primary-lighter;
 }

@@ -1,9 +1,36 @@
 @use "../../../styles/mixins.scss";
 
+$border-radius: 10px;
+
 .chart {
   height: 20rem;
 
   @include mixins.medium-screen {
     height: 25rem;
   }
+}
+
+.progress {
+  width: 8rem;
+  height: 0.5rem;
+  border-radius: $border-radius;
+  border: 1px solid lightgray;
+  background-color: #eee; // background
+}
+
+// WebKit-Browser (Chrome, Edge, Safari)
+progress::-webkit-progress-bar {
+  background-color: #eee; // background
+  border-radius: $border-radius;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--fillColor);
+  border-radius: $border-radius;
+}
+
+/* Für Firefox */
+progress::-moz-progress-bar {
+  background-color: var(--fillColor);
+  border-radius: $border-radius;
 }

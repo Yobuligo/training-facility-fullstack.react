@@ -46,25 +46,28 @@ export const useTariffMemberChartViewModel = () => {
     });
   });
 
-  const renderColor = (chartEntry: IChartEntry): string => {
-    const tariff = toTariff(chartEntry.name);
-    switch (tariff) {
-      case Tariff.CHILDREN:
-        return colors.colorChartChildren;
-      case Tariff.FAMILY_1:
-        return colors.colorChartFamily1;
-      case Tariff.FAMILY_2:
-        return colors.colorChartFamily2;
-      case Tariff.FAMILY_3:
-        return colors.colorChartFamily3;
-      case Tariff.PRINCIPALS:
-        return colors.colorChartPrincipals;
-      case Tariff.RELATIVES:
-        return colors.colorChartRelatives;
-      case Tariff.TEENAGERS_ADULTS:
-        return colors.colorChartTeenagersAdults;
-      case Tariff.TRAINEES_STUDENTS_PENSIONERS:
-        return colors.colorChartTraineeStudentsPensioner;
+  const renderColor = (index: number): string => {
+    switch (index) {
+      case 0:
+        return colors.colorChart1;
+      case 1:
+        return colors.colorChart2;
+      case 2:
+        return colors.colorChart3;
+      case 3:
+        return colors.colorChart4;
+      case 4:
+        return colors.colorChart5;
+      case 5:
+        return colors.colorChart6;
+      case 6:
+        return colors.colorChart7;
+      case 7:
+        return colors.colorChart8;
+      default:
+        throw new Error(
+          "Error while rendering color. No more colors available."
+        );
     }
   };
 

@@ -59,6 +59,7 @@ export class UserStatsRepo {
         WHERE usr.username != "root"
         AND prof.resignedAt IS NULL
         GROUP BY prof.tariff
+        ORDER BY value DESC
     `;
 
     const data = await db.query<IChartEntry>(query, {
