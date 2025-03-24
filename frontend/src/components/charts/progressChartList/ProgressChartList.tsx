@@ -11,6 +11,7 @@ export const ProgressChartList: React.FC<IProgressChartListProps> = (props) => {
       <ProgressChart
         key={index}
         color={progressChartEntry.color}
+        percent={progressChartEntry.percent}
         title={progressChartEntry.title}
         totalValue={props.totalValue}
         value={progressChartEntry.value}
