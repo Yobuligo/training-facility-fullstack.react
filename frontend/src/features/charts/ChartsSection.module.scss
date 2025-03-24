@@ -1,0 +1,16 @@
+@use "../../styles/mixins.scss";
+
+$margin: 0.5rem;
+
+.collapsibleCard {
+  align-items: center;
+  margin-left: $margin;
+  margin-right: $margin;
+  margin-bottom: $margin;
+
+  @include mixins.medium-screen {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}

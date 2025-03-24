@@ -2,6 +2,7 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import Chart from "../../../components/charts/chart/Chart";
 import { IProgressChartEntry } from "../../../components/charts/progressChartList/IProgressChartEntry";
 import { ProgressChartList } from "../../../components/charts/progressChartList/ProgressChartList";
+import { useRenderChartColor } from "../../hooks/useRenderChartColor";
 import { useRenderTariff } from "../../hooks/useRenderTariff";
 import styles from "./TariffMemberChart.module.scss";
 import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
@@ -9,12 +10,13 @@ import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
 export const TariffMemberChart: React.FC = () => {
   const viewModel = useTariffMemberChartViewModel();
   const renderTariff = useRenderTariff();
+  const renderChartColor = useRenderChartColor();
 
   const progressChartEntries: IProgressChartEntry[] | undefined =
     viewModel.chartData?.data.map((chartEntry, index) => {
       const tariff = renderTariff(Number(chartEntry.name));
       return {
-        color: viewModel.renderColor(index),
+        color: renderChartColor(index),
         title: tariff,
         value: chartEntry.value,
       };
@@ -37,8 +39,8 @@ export const TariffMemberChart: React.FC = () => {
             fill="#8884d8"
             dataKey="value"
           >
-            {viewModel.chartData?.data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={viewModel.renderColor(index)} />
+            {viewModel.chartData?.data.map((_, index) => (
+              <Cell key={`cell-${index}`} fill={renderChartColor(index)} />
             ))}
           </Pie>
           <Tooltip content={viewModel.renderTooltip} />
