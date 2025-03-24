@@ -282,7 +282,8 @@
         "profileImage": "Profilbild"
     },
     "stats": {
-        "activeMembers": "Aktive Mitglieder"
+        "activeMembers": "Aktive Mitglieder",
+        "activeMembersByTariff": "Aktive Mitglieder pro Tarif"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",

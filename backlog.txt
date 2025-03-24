@@ -573,6 +573,7 @@
 	- Epic: Statistic
 		- Story: Display pie chart with number members by tariff
 		- Story: Exclude root user from statistics
+		- Story: Calculation of percent must be in sum 100
 
 - Backlog
 	- Epic: Seminar

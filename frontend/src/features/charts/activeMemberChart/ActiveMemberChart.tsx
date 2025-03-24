@@ -1,14 +1,13 @@
 import {
   CartesianGrid,
   LabelList,
-  Legend,
   Line,
   LineChart,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
-import Chart from "../../../components/chart/Chart";
+import Chart from "../../../components/charts/chart/Chart";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import colors from "../../../styles/colors.module.scss";
@@ -32,7 +31,7 @@ export const ActiveMemberChart: React.FC = () => {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Legend />
+        {/* <Legend /> */}
 
         <Line
           type="monotone"

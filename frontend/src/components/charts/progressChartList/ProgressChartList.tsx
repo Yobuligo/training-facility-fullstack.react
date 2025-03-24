@@ -1,4 +1,4 @@
-import { ProgressChart } from "../progressChart/ProgressChart";
+import { ProgressChart } from "../../../components/charts/progressChart/ProgressChart";
 import { IProgressChartListProps } from "./IProgressChartListProps";
 import styles from "./ProgressChartList.module.scss";
 

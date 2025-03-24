@@ -1,3 +1,5 @@
+@use '../../../styles/dimensions.module.scss';
+
 .progressChart {
   display: flex;
   flex-direction: column;
@@ -8,6 +10,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: dimensions.$negative-space;
 }
 
 .progress {

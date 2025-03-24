@@ -1,13 +1,22 @@
+import { CardList } from "../../components/cardList/CardList";
+import { CollapseCard } from "../../components/collapseCard/CollapseCard";
+import { texts } from "../../lib/translation/texts";
+import { useTranslation } from "../../lib/translation/useTranslation";
 import { ActiveMemberChart } from "./activeMemberChart/ActiveMemberChart";
-import styles from "./ChartsSection.module.scss";
 import { TariffMemberChart } from "./tariffMemberChart/TariffMemberChart";
 
 const ChartsSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
-    <div className={styles.chartsSection}>
-      <ActiveMemberChart />
-      <TariffMemberChart />
-    </div>
+    <CardList>
+      <CollapseCard title={t(texts.stats.activeMembers)}>
+        <ActiveMemberChart />
+      </CollapseCard>
+      <CollapseCard title={t(texts.stats.activeMembersByTariff)}>
+        <TariffMemberChart />
+      </CollapseCard>
+    </CardList>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChartView } from "../../../components/chart/types/ChartView";
+import { ChartView } from "../../../components/charts/chart/types/ChartView";
 import { DateTime } from "../../../core/services/date/DateTime";
 import { UserApi } from "../../../lib/userSession/api/UserApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";

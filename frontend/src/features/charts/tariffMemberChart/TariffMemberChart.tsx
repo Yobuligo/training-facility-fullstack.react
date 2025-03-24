@@ -1,8 +1,8 @@
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
-import Chart from "../../../components/chart/Chart";
+import Chart from "../../../components/charts/chart/Chart";
+import { IProgressChartEntry } from "../../../components/charts/progressChartList/IProgressChartEntry";
+import { ProgressChartList } from "../../../components/charts/progressChartList/ProgressChartList";
 import { useRenderTariff } from "../../hooks/useRenderTariff";
-import { IProgressChartEntry } from "../progressChartList/IProgressChartEntry";
-import { ProgressChartList } from "../progressChartList/ProgressChartList";
 import styles from "./TariffMemberChart.module.scss";
 import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
 
@@ -21,7 +21,7 @@ export const TariffMemberChart: React.FC = () => {
     });
 
   return (
-    <div>
+    <>
       <Chart
         className={styles.chart}
         isLoading={viewModel.isLoadStatsRequestProcessing}
@@ -51,6 +51,6 @@ export const TariffMemberChart: React.FC = () => {
           totalValue={viewModel.total}
         />
       )}
-    </div>
+    </>
   );
 };
