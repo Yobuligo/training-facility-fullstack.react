@@ -44,7 +44,7 @@ export const useActiveMemberChartViewModel = () => {
   useEffect(() => {
     loadStatsRequest(async () => {
       const userApi = new UserApi();
-      const chartData = await userApi.getStatsActiveUsers({ from, to });
+      const chartData = await userApi.getStatsActiveUsers();
 
       chartData.data.forEach((chartEntry) => {
         const [year, month] = chartEntry.name.split("-");

@@ -1,5 +1,4 @@
 import { HttpStatusCode } from "../core/api/types/HttpStatusCode";
-import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { createError } from "../core/utils/createError";
 import { IUserSecure } from "../model/types/IUserSecure";
 import { SessionRepo } from "../repositories/SessionRepo";
@@ -248,32 +247,9 @@ export class UserController extends EntityController<IUser, UserRepo> {
       `${this.routeMeta.path}${ChartStatsRouteMeta.path}/active`,
 
       SessionInterceptor(
-        async (req, res) => {
-          const from = req.query.from;
-          const to = req.query.to;
-
-          if (
-            !from ||
-            typeof from !== "string" ||
-            !to ||
-            typeof to !== "string"
-          ) {
-            return res
-              .status(HttpStatusCode.BAD_REQUEST_400)
-              .send(
-                createError(
-                  "Error when loading active users stats. Given date time span is invalid"
-                )
-              );
-          }
-
-          const dateTimeSpan: IDateTimeSpan = {
-            from: new Date(from),
-            to: new Date(to),
-          };
-
+        async (_, res) => {
           const userStatsRepo = new UserStatsRepo();
-          const chartData = await userStatsRepo.getActive(dateTimeSpan);
+          const chartData = await userStatsRepo.getActive();
           res.status(HttpStatusCode.OK_200).send(chartData);
         },
         [AuthRole.ADMIN]
