@@ -1,15 +1,25 @@
-import { CSSProperties } from "react";
-import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
 import Chart from "../../../components/chart/Chart";
+import { useRenderTariff } from "../../hooks/useRenderTariff";
+import { ProgressChart } from "../progressChart/ProgressChart";
 import styles from "./TariffMemberChart.module.scss";
 import { useTariffMemberChartViewModel } from "./useTariffMemberChartViewModel";
 
 export const TariffMemberChart: React.FC = () => {
   const viewModel = useTariffMemberChartViewModel();
+  const renderTariff = useRenderTariff();
 
-  const styling: CSSProperties = {
-    "--fillColor": "red",
-  } as CSSProperties;
+  const progressCharts = viewModel.chartData?.data.map((chartEntry, index) => {
+    const tariff = renderTariff(Number(chartEntry.name));
+    return (
+      <ProgressChart
+        color={viewModel.renderColor(index)}
+        title={tariff}
+        totalValue={viewModel.total}
+        value={chartEntry.value}
+      />
+    );
+  });
 
   return (
     <div>
@@ -33,15 +43,11 @@ export const TariffMemberChart: React.FC = () => {
             ))}
           </Pie>
           <Tooltip content={viewModel.renderTooltip} />
+          <Legend />
         </PieChart>
       </Chart>
 
-      <progress
-        value={50}
-        max={100}
-        className={styles.progress}
-        style={styling}
-      />
+      {viewModel.chartData && <>{progressCharts}</>}
     </div>
   );
 };
