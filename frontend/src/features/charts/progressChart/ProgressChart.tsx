@@ -9,10 +9,9 @@ export const ProgressChart: React.FC<IProgressChartProps> = (props) => {
 
   return (
     <div className={styles.progressChart}>
-      <div className={styles.title}>
-        {props.title}
-        {"  "}
-        {`${Math.round((props.value *100 ) / props.totalValue)}%`}
+      <div className={styles.titleContainer}>
+        <div>{props.title}</div>
+        {`${Math.round((props.value * 100) / props.totalValue)}%`}
       </div>
       <progress
         value={props.value}

@@ -572,6 +572,7 @@
 - Version 1.15.0-<>.22
 	- Epic: Statistic
 		- Story: Display pie chart with number members by tariff
+		- Story: Exclude root user from statistics
 
 - Backlog
 	- Epic: Seminar
