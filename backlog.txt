@@ -574,7 +574,7 @@
 		# Story: Display pie chart with number members by tariff
 		# Story: Display pie chart with number members by gender
 		# Story: Exclude root user from statistics
-		- Story: Calculation of percent must be in sum 100
+		# Story: Calculation of percent must be in sum 100
 		- Story: State of collapsibles are persisted
 
 - Backlog
