@@ -569,13 +569,15 @@
 # Version 1.14.2-20250321.21
 	# Bug: User profile image in portrait format can not be displayed correctly
 
-- Version 1.15.0-<>.22
-	- Epic: Statistic
+# Version 1.15.0-20250324.22
+	# Epic: Statistic
 		# Story: Display pie chart with number members by tariff
 		# Story: Display pie chart with number members by gender
 		# Story: Exclude root user from statistics
 		# Story: Calculation of percent must be in sum 100
 		# Story: States of collapsibles are persisted
+
+- Version 1.16.0-<>.23
 
 - Backlog
 	- Epic: Seminar
