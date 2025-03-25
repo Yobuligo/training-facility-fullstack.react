@@ -1,7 +1,6 @@
 import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { SecondaryButton } from "../../../components/secondaryButton/SecondaryButton";
-import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { CheckIcon } from "../../../icons/CheckIcon";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
@@ -9,7 +8,8 @@ import { GiftsIcon } from "../../../icons/GiftsIcon";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { hasBirthday } from "../../../utils/hasBirthday";
-import { UserProfileImageAndName } from "../../users/userProfileImage/userProfileImageAndName/UserProfileImageAndName";
+import { EventRegistrationCheckInButtons } from "../eventRegistrationCheckInButtons/EventRegistrationCheckInButtons";
+import { EventRegistrationItemBase } from "../eventRegistrationItemBase/EventRegistrationItemBase";
 import styles from "./EventRegistrationItem.module.scss";
 import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
 import { useEventRegistrationItemViewModel } from "./useEventRegistrationItemViewModel";
@@ -31,37 +31,28 @@ export const EventRegistrationItem: React.FC<IEventRegistrationItemProps> = (
         {viewModel.confirmDialog.content}
 
         {props.eventRegistration.manuallyAdded ? (
-          <div className={styles.manuallyAddedSection}>
-            <div className={styles.addedByTrainerInfo}>
-              {t(texts.eventRegistrationItem.addedByTrainer)}
-            </div>
-
-            <div className={styles.nameAndToolbarContainer}>
-              <UserProfileImageAndName
-                userProfile={props.eventRegistration.user?.userProfile}
-              />
-              <Toolbar>
-                <SecondaryButton onClick={viewModel.onDelete}>
-                  <DeleteIcon />
-                </SecondaryButton>
-                <Button>
-                  <CheckIcon className={styles.icon} />
-                </Button>
-              </Toolbar>
-            </div>
-          </div>
+          <EventRegistrationItemBase
+            text={t(texts.eventRegistrationItem.addedByTrainer)}
+            userProfile={props.eventRegistration.user?.userProfile}
+          >
+            <Toolbar>
+              <SecondaryButton onClick={viewModel.onDelete}>
+                <DeleteIcon />
+              </SecondaryButton>
+              <Button>
+                <CheckIcon className={styles.icon} />
+              </Button>
+            </Toolbar>
+          </EventRegistrationItemBase>
         ) : (
-          <div className={styles.nameAndToolbarContainer}>
-            <UserProfileImageAndName
-              userProfile={props.eventRegistration.user?.userProfile}
+          <EventRegistrationItemBase
+            userProfile={props.eventRegistration.user?.userProfile}
+          >
+            <EventRegistrationCheckInButtons
+              eventRegistrationState={props.eventRegistration.state}
+              onEventRegistrationStateChange={viewModel.updateEventState}
             />
-            <ToggleButtonGroup
-              enableUnselectAll={true}
-              items={viewModel.toggleButtonOptions}
-              onChange={viewModel.onToggleButtonOptionChange}
-              selected={viewModel.selectedToggleButtonOption}
-            />
-          </div>
+          </EventRegistrationItemBase>
         )}
       </div>
       <>

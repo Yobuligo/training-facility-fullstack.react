@@ -15,18 +15,6 @@
   align-items: center;
 }
 
-.manuallyAddedSection {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  width: 100%;
-}
-
-.addedByTrainerInfo {
-  font-style: italic;
-  align-self: end;
-}
-
 .giftContainer {
   display: flex;
   flex-direction: row;
@@ -45,12 +33,4 @@
 
 .icon {
   fill: colors.$color-text-light;
-}
-
-.nameAndToolbarContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
 }
