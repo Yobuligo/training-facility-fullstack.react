@@ -578,11 +578,12 @@
 		# Story: States of collapsibles are persisted
 
 - Version 1.16.0-<>.23
-	- Bug: Trial training email contains wrong timestamp
-		- Instead of 18.45 as starting time, the mail displays 17.45
+	# Story: Default view of trial training calendar must be week
+	# Story: Book trial training page should have Yeoljeong header
+	# Bug: Trial training email contains wrong timestamp
+		# Instead of 18.45 as starting time, the mail displays 17.45
 	- Story: Change button captions to check in person for trial training
 		- Must be changed to check and cancel icon
-	# Story: Default view of trial training calendar must be week
 	- Bug: Difference in percent sum must be subtracted from biggest value
 
 - Backlog

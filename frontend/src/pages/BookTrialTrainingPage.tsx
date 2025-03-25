@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { PageSpinner } from "../components/pageSpinner/PageSpinner";
+import { lazy } from "react";
+import { PublicPage } from "../components/pages/publicPage/PublicPage";
 
 const EventCalendarTrialTraining = lazy(
   () =>
@@ -10,8 +10,8 @@ const EventCalendarTrialTraining = lazy(
 
 export const BookTrialTrainingPage: React.FC = () => {
   return (
-    <Suspense fallback={<PageSpinner />}>
+    <PublicPage>
       <EventCalendarTrialTraining />
-    </Suspense>
+    </PublicPage>
   );
 };
