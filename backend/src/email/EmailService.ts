@@ -110,6 +110,9 @@ export class EmailService {
   ) {
     const cancelLink = `${AppConfig.clientAppUrl}/cancel-trial-training/${userTrialTraining.id}`;
 
+    // convert timestamp to current time zone
+    const startTime: Date = new Date(eventInstance.from);
+
     try {
       await smtp.sendMail({
         from: AppConfig.smtpSender,
@@ -122,10 +125,10 @@ export class EmailService {
 
           <ol>
             <li><strong>Wann:</strong> Das Training findet am ${DateTime.format(
-              eventInstance.from,
+              startTime,
               "dd.MM.yyyy"
             )} um ${DateTime.format(
-          eventInstance.from,
+          startTime,
           "hh:mm"
         )} statt. Falls du es schaffst sei bitte 10 - 15 min vor Trainingsbeginn da, dann kannst du dich noch in Ruhe umziehen und wir haben noch kurz Zeit uns vorzustellen. </li>
             <li><strong>Wo:</strong> Landstraße 108, 69198 Schriesheim</li>
