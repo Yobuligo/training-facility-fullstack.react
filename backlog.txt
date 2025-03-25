@@ -585,6 +585,7 @@
 	- Story: Change button captions to check in person for trial training
 		- Must be changed to check and cancel icon
 	- Bug: Difference in percent sum must be subtracted from biggest value
+	- Bug: Number of entries for training doesn't consider trial trainings
 
 - Backlog
 	- Epic: Seminar
