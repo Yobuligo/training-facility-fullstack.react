@@ -1,0 +1,21 @@
+@use "../../../styles/dimensions.module.scss";
+
+.eventRegistrationItemBase {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  width: 100%;
+}
+
+.text {
+  font-style: italic;
+  align-self: end;
+}
+
+.nameAndToolbarContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}

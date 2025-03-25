@@ -10,9 +10,9 @@ export const EventRegistrationItemBase: React.FC<
   IEventRegistrationItemBaseProps
 > = (props) => {
   return (
-    <div className={styles.manuallyAddedSection}>
+    <div className={styles.eventRegistrationItemBase}>
       {props.text && (
-        <div className={styles.addedByTrainerInfo}>{props.text}</div>
+        <div className={styles.text}>{props.text}</div>
       )}
 
       <div className={styles.nameAndToolbarContainer}>
