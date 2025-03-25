@@ -82,9 +82,7 @@
         "addedByTrainer": "(von Trainer hinzugefügt)",
         "addedByTrialTraining": "(Probetraining)",
         "deleteQuestion": "Soll '{{user}}' wirklich von diesem Ereignis entfernt werden?",
-        "deleteTitle": "Benutzer löschen",
-        "missing": "Fehlend",
-        "present": "Anwesend"
+        "deleteTitle": "Benutzer löschen"
     },
     "eventRegistrationList": {
         "noRegistrations": "Noch keine Benutzer für dieses Training angemeldet"

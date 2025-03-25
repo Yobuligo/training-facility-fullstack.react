@@ -82,9 +82,7 @@
         "addedByTrainer": "(added by trainer)",
         "addedByTrialTraining": "(trial training)",
         "deleteQuestion": "Do you really want to delete '{{user}}' from this event?",
-        "deleteTitle": "Delete user",
-        "missing": "Missing",
-        "present": "Present"
+        "deleteTitle": "Delete user"
     },
     "eventRegistrationList": {
         "noRegistrations": "No users registered yet for this training"

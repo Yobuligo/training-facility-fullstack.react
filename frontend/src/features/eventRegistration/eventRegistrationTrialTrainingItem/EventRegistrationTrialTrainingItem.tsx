@@ -1,7 +1,7 @@
 import { Card } from "../../../components/card/Card";
-import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
+import { EventRegistrationCheckInButtons } from "../eventRegistrationCheckInButtons/EventRegistrationCheckInButtons";
 import styles from "./EventRegistrationTrialTrainingItem.module.scss";
 import { IEventRegistrationTrialTrainingItemProps } from "./IEventRegistrationTrialTrainingItemProps";
 import { useEventRegistrationTrialTrainingItemViewModel } from "./useEventRegistrationTrialTrainingItemViewModel";
@@ -19,11 +19,9 @@ export const EventRegistrationTrialTrainingItem: React.FC<
         <div className={styles.addedByTrialTrainingInfo}>
           {t(texts.eventRegistrationItem.addedByTrialTraining)}
         </div>
-        <ToggleButtonGroup
-          enableUnselectAll={true}
-          items={viewModel.toggleButtonOptions}
-          onChange={viewModel.onToggleButtonOptionChange}
-          selected={viewModel.selectedToggleButtonOption}
+        <EventRegistrationCheckInButtons
+          eventRegistrationState={props.userTrialTraining.state}
+          onEventRegistrationStateChange={viewModel.updateEventState}
         />
       </div>
     </Card>
