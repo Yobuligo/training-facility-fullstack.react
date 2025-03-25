@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import { TokenRepository } from "../../../api/core/TokenRepository";
 import { EventDefinitionApi } from "../../../api/EventDefinitionApi";
 import { requestToken } from "../../../api/utils/requestToken";
+import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { SpinnerButton } from "../../../components/spinnerButton/SpinnerButton";
 import { DateTime } from "../../../core/services/date/DateTime";
+import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventTrialTrainingDetails } from "../../eventTrialTraining/eventTrialTraining/EventTrialTrainingDetails";
@@ -19,6 +22,17 @@ import { useEventCalendarTrialTrainingViewModel } from "./useEventCalendarTrialT
 const EventCalendarTrialTraining: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useEventCalendarTrialTrainingViewModel();
+
+  const [, , updateView] = useDateTimeSpanFilter();
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      // The event calendar overview should always display all events of the week
+      updateView("week");
+      setInitialized(true);
+    }
+  }, [initialized, updateView]);
 
   const renderEvent = (event: IEvent) => (
     <EventContent>
@@ -42,18 +56,24 @@ const EventCalendarTrialTraining: React.FC = () => {
           onBack={viewModel.onBack}
         />
       ) : (
-        <EventCalendarSection
-          eventDefinitionLoader={async (dateTimeSpan) => {
-            TokenRepository.token = await requestToken();
-            const eventDefinitionApi = new EventDefinitionApi();
-            return await eventDefinitionApi.findByDateTimeSpanSecured(
-              dateTimeSpan,
-              true
-            );
-          }}
-          renderEvent={renderEvent}
-          views={["day", "week"]}
-        />
+        <>
+          {initialized === false ? (
+            <PageSpinner />
+          ) : (
+            <EventCalendarSection
+              eventDefinitionLoader={async (dateTimeSpan) => {
+                TokenRepository.token = await requestToken();
+                const eventDefinitionApi = new EventDefinitionApi();
+                return await eventDefinitionApi.findByDateTimeSpanSecured(
+                  dateTimeSpan,
+                  true
+                );
+              }}
+              renderEvent={renderEvent}
+              views={["day", "week"]}
+            />
+          )}
+        </>
       )}
     </div>
   );

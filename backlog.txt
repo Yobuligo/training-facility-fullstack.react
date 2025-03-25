@@ -578,13 +578,13 @@
 		# Story: States of collapsibles are persisted
 
 - Version 1.16.0-<>.23
-
-- Backlog
 	- Bug: Trial training email contains wrong time stamp
 		- Instead of 18.45 as starting time, the mail displays 17.45
 	- Story: Change button captions to check in person for trial training
 		- Must be changed to check and cancel icon
-	- Story: Default view of trial training calendar must be week
+	# Story: Default view of trial training calendar must be week
+
+- Backlog
 	- Epic: Seminar
 		- Story: Each pupil can add seminars he joined to
 			- has to be discussed if it is required
