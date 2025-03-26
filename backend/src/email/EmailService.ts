@@ -130,7 +130,7 @@ export class EmailService {
             )} um ${DateTime.format(
           startTime,
           "hh:mm"
-        )} statt. Falls du es schaffst sei bitte 10 - 15 min vor Trainingsbeginn da, dann kannst du dich noch in Ruhe umziehen und wir haben noch kurz Zeit uns vorzustellen. </li>
+        )} statt. Falls du es schaffst, sei bitte 10 - 15 min vor Trainingsbeginn da, dann kannst du dich noch in Ruhe umziehen und wir haben noch kurz Zeit uns vorzustellen. </li>
             <li><strong>Wo:</strong> Landstraße 108, 69198 Schriesheim</li>
             <li><strong>Was solltest du mitbringen:</strong> Wir trainieren barfuß, daher benötigst du nur eine lange Sporthose und ein T-Shirt. Weitere Ausrüstung ist für das Probetraining nicht notwendig.</li>
           </ol>

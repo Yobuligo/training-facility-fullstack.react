@@ -582,8 +582,10 @@
 	# Story: Book trial training page should have Yeoljeong header
 	# Bug: Trial training email contains wrong timestamp
 		# Instead of 18.45 as starting time, the mail displays 17.45
-	- Story: Change button captions to check in student for trial training
-		- Must be changed to check and cancel icon
+	# Story: Change button captions to check in student for trial training
+		# Must be changed to check and cancel icon
+	- Story: Interest can book more than one trial training but only one trial training in the future
+		- A second trial training can not be booked until the first booking training has passed
 	- Bug: Difference in percent sum must be subtracted from biggest value
 	- Bug: Number of entries for training doesn't consider trial trainings
 
