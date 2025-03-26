@@ -27,7 +27,7 @@ export const EventRegistrationItemUser: React.FC<
 
   return (
     <Card className={styles.eventRegistrationItemUser}>
-      <div className={styles.eventRegistrationItemUserContent}>
+      <>
         {viewModel.confirmDialog.content}
 
         {props.eventRegistration.manuallyAdded ? (
@@ -54,7 +54,7 @@ export const EventRegistrationItemUser: React.FC<
             />
           </EventRegistrationItem>
         )}
-      </div>
+      </>
       <>
         {hasBirthday(props.eventRegistration.user?.userProfile?.birthday) && (
           <div className={styles.giftContainer}>
