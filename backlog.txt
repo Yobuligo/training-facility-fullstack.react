@@ -577,7 +577,7 @@
 		# Story: Calculation of percent must be in sum 100
 		# Story: States of collapsibles are persisted
 
-- Version 1.16.0-<>.23
+# Version 1.16.0-20250326.23
 	# Story: Default view of trial training calendar must be week
 	# Story: Book trial training page should have Yeoljeong header
 	# Bug: Trial training email contains wrong timestamp
@@ -586,10 +586,12 @@
 		# Must be changed to check and cancel icon
 	# Story: Interest can book more than one trial training but only one trial training in the future
 		# A second trial training can not be booked until the first booking training has passed
-	- Bug: Difference in percent sum must be subtracted from biggest value
 	# Bug: Number of entries for training doesn't consider trial trainings
 
+- Version 1.17.0-<>.24
+
 - Backlog
+	- Bug: Difference in percent sum must be subtracted from biggest value
 	- Epic: Seminar
 		- Story: Each student can add seminars he joined to
 			- has to be discussed if it is required
