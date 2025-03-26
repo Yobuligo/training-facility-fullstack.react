@@ -299,7 +299,7 @@
         "bookTrialTraining": "Probetraining buchen",
         "description": "Wir freuen uns, dass du dich für ein Probetraining interessierst. Melde dich hier kostenlos für das Training an.  Im Anschluss erhältst du eine E-Mail mit allen wichtigen Informationen und weiteren Details.",
         "bookingConfirmation": "Dein Probetraining wurde erfolgreich gebucht. Wir freuen uns dich kennenzulernen.",
-        "errorTrialTrainingExists": "Du kannst nur ein kostenloses Probetraining buchen. Falls du stattdessen einen anderen Termin wählen möchtest, storniere bitte das Probetraining über den Link in der E-Mail, die du erhalten hast.",
+        "errorTrialTrainingExists": "Du kannst nur ein kostenloses Probetraining auf einmal buchen. Falls du stattdessen einen anderen Termin wählen möchtest, storniere bitte das Probetraining über den Link in der E-Mail, die du erhalten hast.",
         "sendBooking": "Buchung abschicken"
     },
     "user": {

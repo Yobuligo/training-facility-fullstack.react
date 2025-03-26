@@ -1,7 +1,11 @@
+import { Op } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
 import { EventInstance } from "../model/EventInstance";
-import { UserTrialTraining } from "../model/UserTrialTraining";
+import {
+  relHasManyUserTrialTrainings,
+  UserTrialTraining,
+} from "../model/UserTrialTraining";
 import { UserTrialTrainingExistsError } from "../shared/errors/UserTrialTrainingExistsError";
 import { IUserTrialTraining } from "../shared/model/IUserTrialTraining";
 import { IUserTrialTrainingDetails } from "../shared/model/IUserTrialTrainingDetails";
@@ -50,10 +54,22 @@ export class UserTrialTrainingRepo extends SequelizeRepository<IUserTrialTrainin
     entity: IEntityDetails<IUserTrialTraining>,
     fields?: unknown
   ): Promise<unknown> {
-    // check if an trial training already exists for the given email
-    const data = await UserTrialTraining.findOne({
-      where: { email: entity.email },
+    // check if a trial training already exists for the given email
+    // Therefore find most recent event instance, which is referenced by a trial training in the future, for the given email
+    const nowUTC = new Date().toISOString();
+    const data = await EventInstance.findOne({
+      order: [["from", "DESC"]], // find most recent event instance
+      include: [
+        {
+          model: UserTrialTraining,
+          as: relHasManyUserTrialTrainings,
+          required: true,
+          where: { email: entity.email }, // which is referenced by a trial training of the given email
+        },
+      ],
+      where: { from: { [Op.gt]: nowUTC } }, // in the future
     });
+
     if (data) {
       throw new UserTrialTrainingExistsError();
     }

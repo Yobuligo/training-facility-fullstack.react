@@ -299,7 +299,7 @@
         "bookingConfirmation": "Your trial training was successfully booked. We are looking forward to meeting you.",
         "bookTrialTraining": "Book a trial training",
         "description": "We are excited that you're interested in a trial session. Here you can book this free training. You will receive an email with all the important information and further details afterwards.",
-        "errorTrialTrainingExists": "You can only book one free trial training. If you instead want to switch your trial training, please cancel your previously booked trial session via the email you received.",
+        "errorTrialTrainingExists": "You can only book one free trial training at once. If you instead want to switch your trial training, please cancel your previously booked trial session via the email you received.",
         "sendBooking": "Send booking"
     },
     "user": {
