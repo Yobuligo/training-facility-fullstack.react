@@ -588,7 +588,10 @@
 		# A second trial training can not be booked until the first booking training has passed
 	# Bug: Number of entries for training doesn't consider trial trainings
 
-- Version 1.17.0-<>.24
+# Version 1.16.1-20250326.24
+	# Bug: Trial training email contains wrong timestamp
+
+- Version 1.17.0-<>.25
 
 - Backlog
 	- Bug: Difference in percent sum must be subtracted from biggest value
