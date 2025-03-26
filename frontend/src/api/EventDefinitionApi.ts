@@ -53,6 +53,10 @@ export class EventDefinitionApi extends EntityRepository<IEventDefinition> {
     return eventDefinitions;
   }
 
+  /**
+   * Returns all event definitions in the given {@link dateTimeSpan}.
+   * Considers and returns only public event definitions, if {@link isMemberOnly} is true.
+   */
   async findByDateTimeSpanSecured(
     dateTimeSpan: IDateTimeSpan,
     isMemberOnly: boolean
