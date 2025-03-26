@@ -1,5 +1,6 @@
 import { AppConfig } from "../AppConfig";
 import { DateTime } from "../core/services/date/DateTime";
+import { error } from "../core/utils/error";
 import { SystemConfigRepo } from "../repositories/SystemConfigRepo";
 import { SendEmailError } from "../shared/errors/SendEmailError";
 import { IEventInstance } from "../shared/model/IEventInstance";
@@ -109,9 +110,7 @@ export class EmailService {
     eventInstance: IEventInstance
   ) {
     const cancelLink = `${AppConfig.clientAppUrl}/cancel-trial-training/${userTrialTraining.id}`;
-
-    // convert timestamp to current time zone
-    const startTime: Date = new Date(eventInstance.from);
+    const startTime = this.toDeTimezone(eventInstance.from);
 
     try {
       await smtp.sendMail({
@@ -167,5 +166,34 @@ export class EmailService {
           E-Mail: info@yeoljeong-taekwondo.de<br>
           http://www.yeoljeong-taekwondo.de/<br>
         </p>`;
+  }
+
+  /**
+   * Converts the given {@link date} to the German timezone
+   */
+  private toDeTimezone(date: Date): Date {
+    const formatter = new Intl.DateTimeFormat("de-DE", {
+      timeZone: "Europe/Berlin",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    const parts = formatter.formatToParts(date);
+    const dateParts = {
+      year: parts.find((p) => p.type === "year")?.value ?? error(),
+      month: parts.find((p) => p.type === "month")?.value,
+      day: parts.find((p) => p.type === "day")?.value,
+      hour: parts.find((p) => p.type === "hour")?.value,
+      minute: parts.find((p) => p.type === "minute")?.value,
+      second: parts.find((p) => p.type === "second")?.value,
+    };
+
+    return new Date(
+      `${dateParts.year}-${dateParts.month}-${dateParts.day}T${dateParts.hour}:${dateParts.minute}:${dateParts.second}`
+    );
   }
 }
