@@ -1,0 +1,36 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles/dimensions.module.scss";
+@use "../../../styles/colors.module.scss";
+
+.eventRegistrationItemUser {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventRegistrationItemUserContent {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.giftContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin-top: dimensions.$negative-space;
+
+  @include mixins.medium-screen {
+    justify-content: left;
+  }
+}
+
+.gift {
+  width: 2rem;
+  height: auto;
+}
+
+.icon {
+  fill: colors.$color-text-light;
+}

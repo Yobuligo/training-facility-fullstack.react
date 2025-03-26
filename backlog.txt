@@ -582,14 +582,14 @@
 	# Story: Book trial training page should have Yeoljeong header
 	# Bug: Trial training email contains wrong timestamp
 		# Instead of 18.45 as starting time, the mail displays 17.45
-	- Story: Change button captions to check in person for trial training
+	- Story: Change button captions to check in student for trial training
 		- Must be changed to check and cancel icon
 	- Bug: Difference in percent sum must be subtracted from biggest value
 	- Bug: Number of entries for training doesn't consider trial trainings
 
 - Backlog
 	- Epic: Seminar
-		- Story: Each pupil can add seminars he joined to
+		- Story: Each student can add seminars he joined to
 			- has to be discussed if it is required
 	- Bug: Not the whole screen is displayed on smaller devices
 	- Bug: Canceled trainings must not be displayed at the home screen anymore

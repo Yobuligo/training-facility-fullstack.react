@@ -1,8 +1,23 @@
 {
-    "cSpell.words": [
-        "collapsibles",
-        "Criterias",
-        "gradings",
-        "IBAN"
-    ]
+  // Try to improve project performance START
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.git/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/.next/**": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/.git/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
+  },
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "javascript.suggest.autoImports": false,
+  "typescript.suggest.autoImports": false,
+  // Try to improve project performance END
+
+  "cSpell.words": ["collapsibles", "Criterias", "gradings", "IBAN"]
 }

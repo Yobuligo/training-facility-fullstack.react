@@ -3,10 +3,10 @@ import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { DummyUserProfile } from "../../../model/DummyUserProfile";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
-import { IEventRegistrationTrialTrainingItemProps } from "./IEventRegistrationTrialTrainingItemProps";
+import { IEventRegistrationItemTrialTrainingProps } from "./IEventRegistrationItemTrialTrainingProps";
 
-export const useEventRegistrationTrialTrainingItemViewModel = (
-  props: IEventRegistrationTrialTrainingItemProps
+export const useEventRegistrationItemTrialTrainingViewModel = (
+  props: IEventRegistrationItemTrialTrainingProps
 ) => {
   const [updateRequest] = useRequest();
 

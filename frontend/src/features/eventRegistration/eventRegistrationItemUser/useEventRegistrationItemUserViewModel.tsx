@@ -5,10 +5,10 @@ import { useTranslation } from "../../../lib/translation/useTranslation";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 import { UserInfo } from "../../../services/UserInfo";
 import { EventRegistrationState } from "../../../shared/types/EventRegistrationState";
-import { IEventRegistrationItemProps } from "./IEventRegistrationItemProps";
+import { IEventRegistrationItemUserProps } from "./IEventRegistrationItemUserProps";
 
-export const useEventRegistrationItemViewModel = (
-  props: IEventRegistrationItemProps
+export const useEventRegistrationItemUserViewModel = (
+  props: IEventRegistrationItemUserProps
 ) => {
   const { t } = useTranslation();
   const [updateRequest] = useRequest();

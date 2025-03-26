@@ -1,8 +1,8 @@
 import { List } from "../../../core/services/list/List";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
-import { EventRegistrationItem } from "../eventRegistrationItem/EventRegistrationItem";
-import { EventRegistrationTrialTrainingItem } from "../eventRegistrationTrialTrainingItem/EventRegistrationTrialTrainingItem";
+import { EventRegistrationItemUser } from "../eventRegistrationItemUser/EventRegistrationItemUser";
+import { EventRegistrationItemTrialTraining } from "../eventRegistrationItemTrialTraining/EventRegistrationItemTrialTraining";
 import styles from "./EventRegistrationList.module.scss";
 import { IEventRegistrationListProps } from "./IEventRegistrationListProps";
 
@@ -13,7 +13,7 @@ export const EventRegistrationList: React.FC<IEventRegistrationListProps> = (
 
   const eventRegistrationItems = props.eventRegistrations.map(
     (eventRegistration) => (
-      <EventRegistrationItem
+      <EventRegistrationItemUser
         key={eventRegistration.id}
         eventRegistration={eventRegistration}
         onDelete={props.onDelete}
@@ -23,7 +23,7 @@ export const EventRegistrationList: React.FC<IEventRegistrationListProps> = (
 
   const userTrialTrainingItems = props.userTrialTrainings.map(
     (userTrialTraining) => (
-      <EventRegistrationTrialTrainingItem
+      <EventRegistrationItemTrialTraining
         key={userTrialTraining.id}
         userTrialTraining={userTrialTraining}
       />

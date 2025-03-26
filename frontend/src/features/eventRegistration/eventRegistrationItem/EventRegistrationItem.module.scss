@@ -1,36 +1,21 @@
-@use "../../../styles/mixins.scss";
 @use "../../../styles/dimensions.module.scss";
-@use "../../../styles/colors.module.scss";
 
 .eventRegistrationItem {
   display: flex;
   flex-direction: column;
+  row-gap: dimensions.$negative-space;
+  width: 100%;
 }
 
-.eventRegistrationItemContent {
+.text {
+  font-style: italic;
+  align-self: end;
+}
+
+.nameAndToolbarContainer {
   display: flex;
   flex-direction: row;
-  column-gap: 2rem;
   justify-content: space-between;
+  width: 100%;
   align-items: center;
-}
-
-.giftContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  margin-top: dimensions.$negative-space;
-
-  @include mixins.medium-screen {
-    justify-content: left;
-  }
-}
-
-.gift {
-  width: 2rem;
-  height: auto;
-}
-
-.icon {
-  fill: colors.$color-text-light;
 }

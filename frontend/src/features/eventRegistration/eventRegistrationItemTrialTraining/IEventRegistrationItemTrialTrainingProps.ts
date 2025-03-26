@@ -1,5 +1,5 @@
 import { IUserTrialTraining } from "../../../shared/model/IUserTrialTraining";
 
-export interface IEventRegistrationTrialTrainingItemProps {
+export interface IEventRegistrationItemTrialTrainingProps {
   userTrialTraining: IUserTrialTraining;
 }
