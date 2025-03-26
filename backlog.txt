@@ -587,7 +587,7 @@
 	# Story: Interest can book more than one trial training but only one trial training in the future
 		# A second trial training can not be booked until the first booking training has passed
 	- Bug: Difference in percent sum must be subtracted from biggest value
-	- Bug: Number of entries for training doesn't consider trial trainings
+	# Bug: Number of entries for training doesn't consider trial trainings
 
 - Backlog
 	- Epic: Seminar
