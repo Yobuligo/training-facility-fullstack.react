@@ -594,6 +594,7 @@
 - Version 1.17.0-<>.25
 
 - Backlog
+	- Story: Display chart for active members by grade
 	- Bug: Difference in percent sum must be subtracted from biggest value
 	- Epic: Seminar
 		- Story: Each student can add seminars he joined to

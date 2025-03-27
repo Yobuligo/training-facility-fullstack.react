@@ -68,17 +68,14 @@ export class UserStatsRepo {
     const query = `
         SELECT prof.tariff as name, COUNT(*) as value FROM users AS usr
         INNER JOIN \`user-profiles\` AS prof
-        ON prof.userId = usr.id
+          ON prof.userId = usr.id
         WHERE usr.username != "root"
-        AND prof.resignedAt IS NULL
+          AND prof.resignedAt IS NULL
         GROUP BY prof.tariff
         ORDER BY value DESC
     `;
 
-    const data = await db.query<IChartEntry>(query, {
-      type: sequelize.QueryTypes.SELECT,
-    });
-    return { dateTimeSpan: { from: new Date(), to: new Date() }, data };
+    return await this.selectAndCreateChartData(query);
   }
 
   /**
@@ -88,16 +85,47 @@ export class UserStatsRepo {
     const query = `
         SELECT prof.gender as name, COUNT(*) as value FROM users AS usr
         INNER JOIN \`user-profiles\` AS prof
-        ON prof.userId = usr.id
+          ON prof.userId = usr.id
         WHERE usr.username != "root"
-        AND prof.resignedAt IS NULL
+          AND prof.resignedAt IS NULL
         GROUP BY prof.gender
         ORDER BY value DESC
     `;
 
-    const data = await db.query<IChartEntry>(query, {
+    return await this.selectAndCreateChartData(query);
+  }
+
+  /**
+   * Returns the active users grouped by grade.
+   */
+  async groupedByGrade(): Promise<IChartData> {
+    const query = `
+      SELECT grading.grade, COUNT(*) FROM users AS usr
+      INNER JOIN \`user-profiles\` AS prof
+        ON prof.userId = usr.id
+      LEFT JOIN \`user-gradings\` AS grading
+        ON grading.userProfileId = prof.id
+        AND grading.grade = (
+          SELECT MAX(grade)
+          FROM \`user-gradings\`
+          WHERE userProfileId = prof.id
+        )
+      WHERE usr.username != "root" 
+        AND prof.resignedAt IS NULL
+      GROUP BY grading.grade
+      ORDER BY grading.grade ASC    
+    `;
+
+    return await this.selectAndCreateChartData(query);
+  }
+
+  private async selectAndCreateChartData(query: string): Promise<IChartData> {
+    const chartEntries = await db.query<IChartEntry>(query, {
       type: sequelize.QueryTypes.SELECT,
     });
-    return { dateTimeSpan: { from: new Date(), to: new Date() }, data };
+    return {
+      dateTimeSpan: { from: new Date(), to: new Date() },
+      data: chartEntries,
+    };
   }
 }
