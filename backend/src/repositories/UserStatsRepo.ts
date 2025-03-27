@@ -66,7 +66,7 @@ export class UserStatsRepo {
    */
   async groupedByTariff(): Promise<IChartData> {
     const query = `
-        SELECT prof.tariff as name, COUNT(*) as value FROM users AS usr
+        SELECT prof.tariff AS name, COUNT(*) AS value FROM users AS usr
         INNER JOIN \`user-profiles\` AS prof
           ON prof.userId = usr.id
         WHERE usr.username != "root"
@@ -83,7 +83,7 @@ export class UserStatsRepo {
    */
   async groupedByGender(): Promise<IChartData> {
     const query = `
-        SELECT prof.gender as name, COUNT(*) as value FROM users AS usr
+        SELECT prof.gender AS name, COUNT(*) AS value FROM users AS usr
         INNER JOIN \`user-profiles\` AS prof
           ON prof.userId = usr.id
         WHERE usr.username != "root"
@@ -100,7 +100,7 @@ export class UserStatsRepo {
    */
   async groupedByGrade(): Promise<IChartData> {
     const query = `
-      SELECT grading.grade, COUNT(*) FROM users AS usr
+      SELECT grading.grade AS name, COUNT(*) AS value FROM users AS usr
       INNER JOIN \`user-profiles\` AS prof
         ON prof.userId = usr.id
       LEFT JOIN \`user-gradings\` AS grading
@@ -116,13 +116,24 @@ export class UserStatsRepo {
       ORDER BY grading.grade ASC    
     `;
 
-    return await this.selectAndCreateChartData(query);
+    // Set chart entry name for students without grading to -1, instead of null
+    return await this.selectAndCreateChartData(query, (chartEntry) => {
+      if (chartEntry.name === null) {
+        chartEntry.name = "-1";
+      }
+    });
   }
 
-  private async selectAndCreateChartData(query: string): Promise<IChartData> {
+  private async selectAndCreateChartData(
+    query: string,
+    convert?: (chartEntries: IChartEntry) => void
+  ): Promise<IChartData> {
     const chartEntries = await db.query<IChartEntry>(query, {
       type: sequelize.QueryTypes.SELECT,
     });
+    if (convert) {
+      chartEntries.forEach((chartEntry) => convert(chartEntry));
+    }
     return {
       dateTimeSpan: { from: new Date(), to: new Date() },
       data: chartEntries,

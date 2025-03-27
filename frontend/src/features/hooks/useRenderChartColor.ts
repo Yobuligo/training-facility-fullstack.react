@@ -19,6 +19,11 @@ export const useRenderChartColor = () => {
         return colors.colorChart7;
       case 7:
         return colors.colorChart8;
+
+        case 8: 
+        return "blue";
+        case 9: return "red"
+        case 10: return "yellow"
       default:
         throw new Error(
           "Error while rendering color. No more colors available."

@@ -201,6 +201,7 @@
         "title": "Prüfung hinzufügen"
     },
     "grads": {
+        "whiteBelt": "Weißgurt",
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",
@@ -282,7 +283,8 @@
     "stats": {
         "activeMembers": "Aktive Mitglieder",
         "activeMembersByTariff": "Aktive Mitglieder nach Tarif",
-        "activeMembersByGender": "Aktive Mitglieder nach Geschlecht"
+        "activeMembersByGender": "Aktive Mitglieder nach Geschlecht",
+        "activeMembersByGrade": "Aktive Mitglieder nach Graduierung"
     },
     "tariff": {
         "teenagersAdults": "Jugendliche, Erwachsene",

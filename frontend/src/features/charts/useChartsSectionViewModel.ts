@@ -24,10 +24,18 @@ export const useChartsSectionViewModel = () => {
     });
   };
 
+  const onToggleActiveMembersByGrade = (collapsed: boolean) => {
+    setChartsSettings((previous) => {
+      previous.collapseActiveMemberByGrade = collapsed;
+      return { ...previous };
+    });
+  };
+
   return {
     chartsSettings,
     onToggleActiveMembers,
     onToggleActiveMembersByGender,
+    onToggleActiveMembersByGrade,
     onToggleActiveMembersByTariff,
   };
 };

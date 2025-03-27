@@ -201,6 +201,7 @@
         "title": "Add new Grading"
     },
     "grads": {
+        "whiteBelt": "White belt",
         "kup9": "9. Kup",
         "kup8": "8. Kup",
         "kup7": "7. Kup",
@@ -282,7 +283,8 @@
     "stats": {
         "activeMembers": "Active members",
         "activeMembersByTariff": "Active members by tariff",
-        "activeMembersByGender": "Active members by gender"
+        "activeMembersByGender": "Active members by gender",
+        "activeMembersByGrade": "Active members by grade"
     },
     "tariff": {
         "teenagersAdults": "Teenagers, Adults",
