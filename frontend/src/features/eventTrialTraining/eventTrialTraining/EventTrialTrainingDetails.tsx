@@ -74,7 +74,7 @@ export const EventTrialTrainingDetails: React.FC<
                       </div>
                     </form>
                     <div>
-                      <Checkbox />
+                      <Checkbox  text="Test"/>
                     </div>
                     <Toolbar alignRight={true}>
                       <SpinnerButton

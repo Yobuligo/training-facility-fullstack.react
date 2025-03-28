@@ -1,4 +1,5 @@
 export interface ICheckboxProps {
-  onChange?: (newValue: boolean) => void;
-  value?: boolean;
+  isChecked?: boolean;
+  onChange?: (isChecked: boolean) => void;
+  text?: string;
 }

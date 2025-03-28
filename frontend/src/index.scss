@@ -1,13 +1,12 @@
-@use './styles/typography.scss';
-@use './styles/colors.module.scss';
-
+@use "./styles/typography.scss";
+@use "./styles/colors.module.scss";
 
 h3,
 h4,
 p {
-    color: colors.$color-text;
+  color: colors.$color-text;
 }
 
 h3 {
-    font-family: "MerriweatherSans";
+  font-family: "MerriweatherSans";
 }
