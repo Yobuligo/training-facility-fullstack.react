@@ -24,6 +24,7 @@ export const useEventTrialTrainingDetailsViewModel = (
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail, emailError, setEmailError] = useLabeledElement("");
+  const [isPrivacyPolicyChecked, setIsPrivacyPolicyChecked] = useState(false);
   const [fetchEventInstanceRequest, isFetchEventInstanceRequestProcessing] =
     useTokenRequest();
   const [
@@ -44,7 +45,10 @@ export const useEventTrialTrainingDetailsViewModel = (
   );
 
   const isFilledOut = () =>
-    isNotInitial(firstname) && isNotInitial(lastname) && isNotInitial(email);
+    isNotInitial(firstname) &&
+    isNotInitial(lastname) &&
+    isNotInitial(email) &&
+    isPrivacyPolicyChecked === true;
 
   const isValid = (): boolean => {
     let isValidState = true;
@@ -94,10 +98,12 @@ export const useEventTrialTrainingDetailsViewModel = (
     isFetchEventInstanceRequestProcessing,
     isInsertUserTrialTrainingRequestProcessing,
     isFilledOut,
+    isPrivacyPolicyChecked,
     onFormChange,
     onSendBooking,
     setEmail,
     setFirstname,
+    setIsPrivacyPolicyChecked,
     setLastname,
   };
 };

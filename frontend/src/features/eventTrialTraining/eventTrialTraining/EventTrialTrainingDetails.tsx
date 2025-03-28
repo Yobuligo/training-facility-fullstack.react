@@ -73,25 +73,26 @@ export const EventTrialTrainingDetails: React.FC<
                         />
                       </div>
                     </form>
-                    <div>
-                      <Checkbox
-                        text={t(
-                          texts.trialTrainingContent.privacyPolicyConfirmation,
-                          {
-                            link: (
-                              <a
-                                className={styles.link}
-                                href={AppConfig.privacyPolicy}
-                                rel="noopener noreferrer"
-                                target="_blank"
-                              >
-                                {t(texts.general.privacyPolicy)}
-                              </a>
-                            ),
-                          }
-                        )}
-                      />
-                    </div>
+                    <Checkbox
+                      className={styles.checkbox}
+                      isChecked={viewModel.isPrivacyPolicyChecked}
+                      onChange={viewModel.setIsPrivacyPolicyChecked}
+                      text={t(
+                        texts.trialTrainingContent.privacyPolicyConfirmation,
+                        {
+                          link: (
+                            <a
+                              className={styles.link}
+                              href={AppConfig.privacyPolicy}
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              {t(texts.general.privacyPolicy)}
+                            </a>
+                          ),
+                        }
+                      )}
+                    />
                     <Toolbar alignRight={true}>
                       <SpinnerButton
                         disabled={!viewModel.isFilledOut()}
