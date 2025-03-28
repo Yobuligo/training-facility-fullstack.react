@@ -5,6 +5,7 @@ import { ReactComponent as Clock } from "../../../assets/clock.svg";
 import { ReactComponent as Grading } from "../../../assets/grading.svg";
 import { ReactComponent as Profile } from "../../../assets/profile.svg";
 import { ReactComponent as Training } from "../../../assets/training.svg";
+import { ReactComponent as TrainingTraining } from "../../../assets/trial-training.svg";
 import { ReactComponent as Users } from "../../../assets/users.svg";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
 import { texts } from "../../../lib/translation/texts";
@@ -36,6 +37,10 @@ const ChartsSection = lazy(() => import("../../charts/ChartsSection"));
 
 const AdminSection = lazy(
   () => import("../../admin/adminSection/AdminSection")
+);
+
+const TrialTrainingSection = lazy(
+  () => import("../../trialTraining/trialTrainingSection/TrialTrainingSection")
 );
 
 export const useDashboardContent = () => {
@@ -78,6 +83,17 @@ export const useDashboardContent = () => {
         needsAdmin: false,
         path: AppRoutes.trainings.toPath(),
         title: t(texts.dashboard.trainings),
+      },
+      {
+        content: (
+          <Suspense fallback={<PageSpinner />}>
+            <TrialTrainingSection />
+          </Suspense>
+        ),
+        icon: <TrainingTraining className={styles.icon} />,
+        needsAdmin: true,
+        path: AppRoutes.trialTrainings.toPath(),
+        title: t(texts.dashboard.trialTrainings),
       },
       {
         content: (
