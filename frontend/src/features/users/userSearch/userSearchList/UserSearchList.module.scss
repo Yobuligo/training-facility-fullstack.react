@@ -1,7 +1,0 @@
-@use "../../../../styles/dimensions.module.scss";
-
-.userSearchList {
-  display: flex;
-  flex-direction: column;
-  row-gap: dimensions.$negative-space;
-}

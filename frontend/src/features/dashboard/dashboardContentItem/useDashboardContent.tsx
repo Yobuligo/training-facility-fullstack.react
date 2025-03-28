@@ -40,7 +40,7 @@ const AdminSection = lazy(
 );
 
 const TrialTrainingSection = lazy(
-  () => import("../../trialTraining/trialTrainingSection/TrialTrainingSection")
+  () => import("../../userTrialTraining/userTrialTrainingSection/UserTrialTrainingSection")
 );
 
 export const useDashboardContent = () => {

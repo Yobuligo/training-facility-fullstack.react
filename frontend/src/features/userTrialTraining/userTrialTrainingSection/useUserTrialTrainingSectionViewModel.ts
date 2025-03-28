@@ -5,7 +5,7 @@ import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { useRequest } from "../../../lib/userSession/hooks/useRequest";
 
-export const useTrialTrainingSectionViewModel = () => {
+export const useUserTrialTrainingSectionViewModel = () => {
   const [dateTimeSpanFilter, setDateTimeSpanFilter] = useDateTimeSpanFilter();
   const [loadUserTrialTrainings, isLoadUserTrialTrainingsProcessing] =
     useRequest();
@@ -20,7 +20,6 @@ export const useTrialTrainingSectionViewModel = () => {
           from,
           to,
         });
-      debugger;
     });
 
   useInitialize(() =>

@@ -1,8 +1,9 @@
+import { CardList } from "../../../components/cardList/CardList";
 import { DateTimeSpanFilter } from "../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
-import { useTrialTrainingSectionViewModel } from "./useTrialTrainingSectionViewModel";
+import { useUserTrialTrainingSectionViewModel } from "./useUserTrialTrainingSectionViewModel";
 
-const TrialTrainingSection: React.FC = () => {
-  const viewModel = useTrialTrainingSectionViewModel();
+const UserTrialTrainingSection: React.FC = () => {
+  const viewModel = useUserTrialTrainingSectionViewModel();
 
   return (
     <>
@@ -12,8 +13,11 @@ const TrialTrainingSection: React.FC = () => {
         onChange={viewModel.onDateTimeSpanChanged}
         toDate={viewModel.dateTimeSpanFilter.to}
       />
+      <CardList>
+      Hello World
+      </CardList>
     </>
   );
 };
 
-export default TrialTrainingSection;
+export default UserTrialTrainingSection;

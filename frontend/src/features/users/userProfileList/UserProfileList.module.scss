@@ -1,18 +1,5 @@
-@use "../../../styles/dimensions.module.scss";
-
 .userProfileList {
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
-}
-
-.numberEntries {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items: center;
-  column-gap: dimensions.$negative-space;
-  font-size: medium;
-  font-weight: 500;
-  margin: 0;
 }

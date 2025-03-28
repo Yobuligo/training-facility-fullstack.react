@@ -5,3 +5,14 @@
   flex-direction: column;
   row-gap: dimensions.$negative-space;
 }
+
+.numberEntries {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  column-gap: dimensions.$negative-space;
+  font-size: medium;
+  font-weight: 500;
+  margin: 0;
+}
