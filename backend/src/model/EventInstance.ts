@@ -8,20 +8,29 @@ import { User } from "./User";
 
 const eventInstance: ModelStatic<
   Model<IEventInstance, IEntityDetails<IEventInstance>>
-> = db.define("event-instances", {
-  id: createIdType(),
-  calledOff: DataTypes.BOOLEAN,
-  state: DataTypes.INTEGER,
+> = db.define(
+  "event-instances",
+  {
+    id: createIdType(),
+    calledOff: DataTypes.BOOLEAN,
+    state: DataTypes.INTEGER,
 
-  // EventDetails
-  color: {
-    type: DataTypes.STRING(10),
+    // EventDetails
+    color: {
+      type: DataTypes.STRING(10),
+    },
+    description: DataTypes.STRING(100),
+    from: DataTypes.DATE,
+    title: DataTypes.STRING(100),
+    to: DataTypes.DATE,
   },
-  description: DataTypes.STRING(100),
-  from: DataTypes.DATE,
-  title: DataTypes.STRING(100),
-  to: DataTypes.DATE,
-});
+  {
+    indexes: [
+      { name: "from", fields: ["from"] },
+      { name: "to", fields: ["to"] },
+    ],
+  }
+);
 
 export const relHasManyEventInstances = "eventInstances";
 

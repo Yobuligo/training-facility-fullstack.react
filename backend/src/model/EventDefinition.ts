@@ -7,20 +7,29 @@ import { User } from "./User";
 
 const eventDefinition: ModelStatic<
   Model<IEventDefinition, IEntityDetails<IEventDefinition>>
-> = db.define("event-definitions", {
-  id: createIdType(),
-  isMemberOnly: DataTypes.BOOLEAN,
-  recurrence: DataTypes.INTEGER,
+> = db.define(
+  "event-definitions",
+  {
+    id: createIdType(),
+    isMemberOnly: DataTypes.BOOLEAN,
+    recurrence: DataTypes.INTEGER,
 
-  // EventDetails
-  color: {
-    type: DataTypes.STRING(10),
+    // EventDetails
+    color: {
+      type: DataTypes.STRING(10),
+    },
+    description: DataTypes.STRING(100),
+    from: DataTypes.DATE,
+    title: DataTypes.STRING(100),
+    to: DataTypes.DATE,
   },
-  description: DataTypes.STRING(100),
-  from: DataTypes.DATE,
-  title: DataTypes.STRING(100),
-  to: DataTypes.DATE,
-});
+  {
+    indexes: [
+      { name: "from", fields: ["from"] },
+      { name: "to", fields: ["to"] },
+    ],
+  }
+);
 
 export class EventDefinition extends eventDefinition {
   static associate() {

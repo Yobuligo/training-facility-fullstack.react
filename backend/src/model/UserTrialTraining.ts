@@ -7,14 +7,20 @@ import { EventInstance } from "./EventInstance";
 
 const userTrialTraining: ModelStatic<
   Model<IUserTrialTraining, IEntityDetails<IUserTrialTraining>>
-> = db.define("user-trial-trainings", {
-  id: createIdType(),
-  firstname: DataTypes.STRING(50),
-  lastname: DataTypes.STRING(50),
-  email: DataTypes.STRING(255),
-  privacyPolicyAccepted: DataTypes.BOOLEAN,
-  state: DataTypes.INTEGER,
-});
+> = db.define(
+  "user-trial-trainings",
+  {
+    id: createIdType(),
+    firstname: DataTypes.STRING(50),
+    lastname: DataTypes.STRING(50),
+    email: DataTypes.STRING(255),
+    privacyPolicyAccepted: DataTypes.BOOLEAN,
+    state: DataTypes.INTEGER,
+  },
+  {
+    indexes: [{ name: "email", fields: ["email"] }],
+  }
+);
 
 export const relHasManyUserTrialTrainings = "userTrialTrainings";
 

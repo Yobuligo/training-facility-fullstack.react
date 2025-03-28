@@ -598,6 +598,10 @@
 		- Story: Display overview of trial trainings as list
 			- Cards are grouped by email and displays all trial trainings with state (present or missed)
 		- Story: It is possible to directly create an user out of a trial training card
+		# Story: Update database tables
+			# Add index to user-trial-trainings.email
+			# Add index to event-instances.from and to event-instances.to
+			# Add index to event-definitions.from and to event-definitions.to
 		
 - Backlog
 	- Story: Display chart for active members by grade
