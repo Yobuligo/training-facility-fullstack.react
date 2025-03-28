@@ -1,6 +1,8 @@
-import { Op } from "sequelize";
+import sequelize, { Op } from "sequelize";
 import { IEntityDetails } from "../core/api/types/IEntityDetails";
 import { IEntitySubset } from "../core/api/types/IEntitySubset";
+import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
+import { db } from "../db/db";
 import { EventInstance } from "../model/EventInstance";
 import {
   relHasManyUserTrialTrainings,
@@ -32,6 +34,32 @@ export class UserTrialTrainingRepo extends SequelizeRepository<IUserTrialTrainin
       return userTrialTraining;
     }
     return undefined;
+  }
+
+  /**
+   * Select all trial trainings of a user, who have at least one trial training in the given date time span range
+   */
+  async selectByDateTimeSpan(dateTimeSpan: IDateTimeSpan) {
+    const query = `
+      SELECT 
+        trial.*, inst.id AS inst_id, inst.from AS inst_from, inst.to AS inst_to 
+      FROM \`user-trial-trainings\` AS trial
+      LEFT JOIN \`event-instances\` AS inst
+        ON inst.id = trial.eventInstanceId
+      WHERE email IN (
+          # select all trial trainings in the given date time span range
+          # and return the email of the registered user
+          SELECT DISTINCT trial.email FROM \`user-trial-trainings\` AS trial
+          INNER JOIN \`event-instances\` AS inst
+            ON inst.id = trial.eventInstanceId
+          WHERE inst.\`from\` >= CAST(:from AS DATETIME)
+            AND inst.\`to\` <= CAST(:to AS DATETIME)
+        )  
+    `;
+
+    const data = await db.query<
+      IUserTrialTraining & { inst_id: string; inst_from: Date; inst_to: Date }
+    >(query, { type: sequelize.QueryTypes.SELECT });
   }
 
   async findByEventInstanceId(
