@@ -1,0 +1,10 @@
+@use "../../../styles/colors.module.scss";
+
+.userTrialTrainingRecordsItem {
+  color: colors.$color-text;
+  padding: 1rem;
+}
+
+.name {
+  font-size: large;
+}
