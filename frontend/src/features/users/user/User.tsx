@@ -1,4 +1,5 @@
 import { Button } from "../../../components/button/Button";
+import { CardList } from "../../../components/cardList/CardList";
 import { ChangeableForm } from "../../../components/changeableForm/ChangeableForm";
 import { CollapseCard } from "../../../components/collapseCard/CollapseCard";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
@@ -80,394 +81,400 @@ export const User: React.FC<IUserProps> = (props) => {
           }`}</h3>
         </div>
 
-        {/* Personal Information */}
-        <CollapseCard
-          collapsed={
-            viewModel.profileDetailsSettings.collapsePersonalInformation
-          }
-          onToggleCollapse={viewModel.onToggleCollapsePersonalInformation}
-          title={t(texts.user.personalInformation)}
-        >
-          <LabeledInput
-            autoFocus
-            disabled={viewModel.displayMode || !props.isAdminMode}
-            error={viewModel.usernameError}
-            label={t(texts.general.username)}
-            maxLength={100}
-            onChange={viewModel.setUsername}
-            value={viewModel.username}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.firstnameError}
-            label={t(texts.user.firstname)}
-            maxLength={50}
-            onChange={viewModel.setFirstname}
-            value={viewModel.firstname}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.lastnameError}
-            label={t(texts.user.lastname)}
-            maxLength={50}
-            onChange={viewModel.setLastname}
-            value={viewModel.lastname}
-          />
-
-          <LabeledSelect
-            disabled={viewModel.displayMode}
-            label={t(texts.user.gender)}
-            options={viewModel.genderOptions}
-            onSelect={viewModel.setGender}
-            value={viewModel.gender}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.emailError}
-            label={t(texts.user.email)}
-            maxLength={255}
-            onChange={viewModel.setEmail}
-            value={viewModel.email}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            isOptional={true}
-            label={t(texts.user.phone)}
-            maxLength={20}
-            onChange={viewModel.setPhone}
-            value={viewModel.phone}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.birthdayError}
-            label={t(texts.user.birthday)}
-            type="date"
-            onChange={viewModel.onChangeBirthday}
-            value={viewModel.birthday}
-          />
-
-          <LabeledSelect
-            disabled={props.isAdminMode === true ? viewModel.displayMode : true}
-            label={t(texts.user.tariff)}
-            options={viewModel.tariffOptions}
-            onSelect={viewModel.setTariff}
-            value={viewModel.tariff}
-          />
-        </CollapseCard>
-
-        {/* Guardian */}
-        {props.isAdminMode && (
+        <CardList>
+          {/* Personal Information */}
           <CollapseCard
-            collapsed={viewModel.profileDetailsSettings.collapseGuardian}
-            onToggleCollapse={viewModel.onToggleCollapseGuardian}
-            title={t(texts.user.guardian)}
+            collapsed={
+              viewModel.profileDetailsSettings.collapsePersonalInformation
+            }
+            onToggleCollapse={viewModel.onToggleCollapsePersonalInformation}
+            title={t(texts.user.personalInformation)}
           >
             <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian1Firstname)}
-              maxLength={50}
-              onChange={viewModel.setGuardian1Firstname}
-              value={viewModel.guardian1Firstname}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian1Lastname)}
-              maxLength={50}
-              onChange={viewModel.setGuardian1Lastname}
-              value={viewModel.guardian1Lastname}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian1Email)}
-              maxLength={255}
-              onChange={viewModel.setGuardian1Email}
-              value={viewModel.guardian1Email}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian1Phone)}
-              maxLength={20}
-              onChange={viewModel.setGuardian1Phone}
-              value={viewModel.guardian1Phone}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian2Firstname)}
-              maxLength={50}
-              onChange={viewModel.setGuardian2Firstname}
-              value={viewModel.guardian2Firstname}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian2Lastname)}
-              maxLength={50}
-              onChange={viewModel.setGuardian2Lastname}
-              value={viewModel.guardian2Lastname}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian2Email)}
-              maxLength={255}
-              onChange={viewModel.setGuardian2Email}
-              value={viewModel.guardian2Email}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.guardian2Phone)}
-              maxLength={20}
-              onChange={viewModel.setGuardian2Phone}
-              value={viewModel.guardian2Phone}
-            />
-          </CollapseCard>
-        )}
-
-        {/* Address */}
-        <CollapseCard
-          collapsed={viewModel.profileDetailsSettings.collapseAddress}
-          onToggleCollapse={viewModel.onToggleCollapseAddress}
-          title={t(texts.user.address)}
-        >
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.streetError}
-            label={t(texts.user.street)}
-            maxLength={100}
-            onChange={viewModel.setStreet}
-            value={viewModel.street}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.postalCodeError}
-            label={t(texts.user.postalCode)}
-            maxLength={10}
-            onChange={viewModel.onChangePostalCode}
-            value={viewModel.postalCode?.toString()}
-          />
-
-          <LabeledInput
-            disabled={viewModel.displayMode}
-            error={viewModel.cityError}
-            label={t(texts.user.city)}
-            maxLength={50}
-            onChange={viewModel.setCity}
-            value={viewModel.city}
-          />
-        </CollapseCard>
-
-        {/* Bank */}
-        {props.isAdminMode && (
-          <CollapseCard
-            collapsed={viewModel.profileDetailsSettings.collapseBank}
-            onToggleCollapse={viewModel.onToggleCollapseBank}
-            title={t(texts.user.bank)}
-          >
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.bankAccountOwner)}
+              autoFocus
+              disabled={viewModel.displayMode || !props.isAdminMode}
+              error={viewModel.usernameError}
+              label={t(texts.general.username)}
               maxLength={100}
-              onChange={viewModel.setBankAccountOwner}
-              value={viewModel.bankAccountOwner}
+              onChange={viewModel.setUsername}
+              value={viewModel.username}
             />
 
             <LabeledInput
               disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.bankAccountIBAN)}
-              maxLength={34}
-              onChange={viewModel.setBankAccountIBAN}
-              value={viewModel.bankAccountIBAN}
+              error={viewModel.firstnameError}
+              label={t(texts.user.firstname)}
+              maxLength={50}
+              onChange={viewModel.setFirstname}
+              value={viewModel.firstname}
             />
 
             <LabeledInput
               disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.bankAccountBIC)}
-              maxLength={11}
-              onChange={viewModel.setBankAccountBIC}
-              value={viewModel.bankAccountBIC}
+              error={viewModel.lastnameError}
+              label={t(texts.user.lastname)}
+              maxLength={50}
+              onChange={viewModel.setLastname}
+              value={viewModel.lastname}
+            />
+
+            <LabeledSelect
+              disabled={viewModel.displayMode}
+              label={t(texts.user.gender)}
+              options={viewModel.genderOptions}
+              onSelect={viewModel.setGender}
+              value={viewModel.gender}
             />
 
             <LabeledInput
               disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.mandateDate)}
-              type="date"
-              onChange={viewModel.setMandateDate}
-              value={viewModel.mandateDate}
-            />
-
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              isOptional={true}
-              label={t(texts.user.mandateReference)}
-              maxLength={35}
-              onChange={viewModel.setMandateReference}
-              value={viewModel.mandateReference}
-            />
-          </CollapseCard>
-        )}
-
-        {/* Contact Options */}
-        {props.isAdminMode && (
-          <CollapseCard
-            collapsed={viewModel.profileDetailsSettings.collapseContactOptions}
-            onToggleCollapse={viewModel.onToggleCollapseContactOptions}
-            title={t(texts.user.contactOptions)}
-          >
-            <LabeledSwitch
-              checked={viewModel.contactOptionEmail}
-              disabled={viewModel.displayMode}
+              error={viewModel.emailError}
               label={t(texts.user.email)}
-              onChange={viewModel.setContactOptionEmail}
+              maxLength={255}
+              onChange={viewModel.setEmail}
+              value={viewModel.email}
             />
 
-            <LabeledSwitch
-              checked={viewModel.contactOptionTextMessage}
+            <LabeledInput
               disabled={viewModel.displayMode}
-              label={t(texts.user.textMessage)}
-              onChange={viewModel.setContactOptionTextMessage}
+              isOptional={true}
+              label={t(texts.user.phone)}
+              maxLength={20}
+              onChange={viewModel.setPhone}
+              value={viewModel.phone}
             />
 
-            <LabeledSwitch
-              checked={viewModel.contactOptionWhatsApp}
+            <LabeledInput
               disabled={viewModel.displayMode}
-              label={t(texts.user.whatsApp)}
-              onChange={viewModel.setContactOptionWhatsApp}
+              error={viewModel.birthdayError}
+              label={t(texts.user.birthday)}
+              type="date"
+              onChange={viewModel.onChangeBirthday}
+              value={viewModel.birthday}
             />
 
-            <LabeledSwitch
-              checked={viewModel.contactOptionHomepagePhotos}
-              disabled={viewModel.displayMode}
-              label={t(texts.user.homepagePhotos)}
-              onChange={viewModel.setContactOptionHomepagePhotos}
-            />
-
-            <LabeledSwitch
-              checked={viewModel.contactOptionSocialMediaPhotos}
-              disabled={viewModel.displayMode}
-              label={t(texts.user.socialMediaPhotos)}
-              onChange={viewModel.setContactOptionSocialMediaPhotos}
-            />
-
-            <LabeledSwitch
-              checked={viewModel.contactOptionPrintPhotos}
-              disabled={viewModel.displayMode}
-              label={t(texts.user.printPhotos)}
-              onChange={viewModel.setContactOptionPrintPhotos}
+            <LabeledSelect
+              disabled={
+                props.isAdminMode === true ? viewModel.displayMode : true
+              }
+              label={t(texts.user.tariff)}
+              options={viewModel.tariffOptions}
+              onSelect={viewModel.setTariff}
+              value={viewModel.tariff}
             />
           </CollapseCard>
-        )}
 
-        {/* Gradings */}
-        {props.isAdminMode && (
+          {/* Guardian */}
+          {props.isAdminMode && (
+            <CollapseCard
+              collapsed={viewModel.profileDetailsSettings.collapseGuardian}
+              onToggleCollapse={viewModel.onToggleCollapseGuardian}
+              title={t(texts.user.guardian)}
+            >
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian1Firstname)}
+                maxLength={50}
+                onChange={viewModel.setGuardian1Firstname}
+                value={viewModel.guardian1Firstname}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian1Lastname)}
+                maxLength={50}
+                onChange={viewModel.setGuardian1Lastname}
+                value={viewModel.guardian1Lastname}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian1Email)}
+                maxLength={255}
+                onChange={viewModel.setGuardian1Email}
+                value={viewModel.guardian1Email}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian1Phone)}
+                maxLength={20}
+                onChange={viewModel.setGuardian1Phone}
+                value={viewModel.guardian1Phone}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian2Firstname)}
+                maxLength={50}
+                onChange={viewModel.setGuardian2Firstname}
+                value={viewModel.guardian2Firstname}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian2Lastname)}
+                maxLength={50}
+                onChange={viewModel.setGuardian2Lastname}
+                value={viewModel.guardian2Lastname}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian2Email)}
+                maxLength={255}
+                onChange={viewModel.setGuardian2Email}
+                value={viewModel.guardian2Email}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.guardian2Phone)}
+                maxLength={20}
+                onChange={viewModel.setGuardian2Phone}
+                value={viewModel.guardian2Phone}
+              />
+            </CollapseCard>
+          )}
+
+          {/* Address */}
           <CollapseCard
-            className={styles.gradingGroup}
-            collapsed={viewModel.profileDetailsSettings.collapseGradings}
-            onToggleCollapse={viewModel.onToggleCollapseGradings}
-            title={t(texts.user.gradings)}
+            collapsed={viewModel.profileDetailsSettings.collapseAddress}
+            onToggleCollapse={viewModel.onToggleCollapseAddress}
+            title={t(texts.user.address)}
           >
-            <GradingSection
-              displayMode={viewModel.displayMode}
-              gradings={viewModel.gradings}
-              isAdminMode={props.isAdminMode}
-              onAddGrading={viewModel.onAddGrading}
-              onChange={viewModel.onChangeGrading}
-              onDelete={viewModel.onDeleteGrading}
-              userId={props.user.id}
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              error={viewModel.streetError}
+              label={t(texts.user.street)}
+              maxLength={100}
+              onChange={viewModel.setStreet}
+              value={viewModel.street}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              error={viewModel.postalCodeError}
+              label={t(texts.user.postalCode)}
+              maxLength={10}
+              onChange={viewModel.onChangePostalCode}
+              value={viewModel.postalCode?.toString()}
+            />
+
+            <LabeledInput
+              disabled={viewModel.displayMode}
+              error={viewModel.cityError}
+              label={t(texts.user.city)}
+              maxLength={50}
+              onChange={viewModel.setCity}
+              value={viewModel.city}
             />
           </CollapseCard>
-        )}
 
-        {/* Technical Information */}
-        <CollapseCard
-          collapsed={
-            viewModel.profileDetailsSettings.collapseTechnicalInformation
-          }
-          onToggleCollapse={viewModel.onToggleCollapseTechnicalInformation}
-          title={t(texts.user.technicalInformation)}
-        >
-          {props.isAdminMode ? (
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              label={t(texts.user.joinedOn)}
-              type="date"
-              onChange={viewModel.onChangeJoinedOn}
-              value={viewModel.joinedOn}
-            />
-          ) : (
-            <LabeledText
-              className={styles.joinedOnReadonly}
-              label={t(texts.user.joinedOn)}
-              text={toStringDate(props.user.userProfile?.joinedOn)}
-            />
-          )}
+          {/* Bank */}
           {props.isAdminMode && (
-            <LabeledInput
-              disabled={viewModel.displayMode}
-              label={t(texts.user.resignedAt)}
-              type="date"
-              onChange={viewModel.onChangeResignAt}
-              value={viewModel.resignedAt}
-            />
+            <CollapseCard
+              collapsed={viewModel.profileDetailsSettings.collapseBank}
+              onToggleCollapse={viewModel.onToggleCollapseBank}
+              title={t(texts.user.bank)}
+            >
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.bankAccountOwner)}
+                maxLength={100}
+                onChange={viewModel.setBankAccountOwner}
+                value={viewModel.bankAccountOwner}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.bankAccountIBAN)}
+                maxLength={34}
+                onChange={viewModel.setBankAccountIBAN}
+                value={viewModel.bankAccountIBAN}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.bankAccountBIC)}
+                maxLength={11}
+                onChange={viewModel.setBankAccountBIC}
+                value={viewModel.bankAccountBIC}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.mandateDate)}
+                type="date"
+                onChange={viewModel.setMandateDate}
+                value={viewModel.mandateDate}
+              />
+
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                isOptional={true}
+                label={t(texts.user.mandateReference)}
+                maxLength={35}
+                onChange={viewModel.setMandateReference}
+                value={viewModel.mandateReference}
+              />
+            </CollapseCard>
           )}
+
+          {/* Contact Options */}
           {props.isAdminMode && (
-            <LabeledSelect
-              disabled={viewModel.displayMode}
-              label={t(texts.user.isAdmin)}
-              options={viewModel.isAdminOptions}
-              onSelect={viewModel.setIsAdmin}
-              value={viewModel.isAdmin}
-            />
+            <CollapseCard
+              collapsed={
+                viewModel.profileDetailsSettings.collapseContactOptions
+              }
+              onToggleCollapse={viewModel.onToggleCollapseContactOptions}
+              title={t(texts.user.contactOptions)}
+            >
+              <LabeledSwitch
+                checked={viewModel.contactOptionEmail}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.email)}
+                onChange={viewModel.setContactOptionEmail}
+              />
+
+              <LabeledSwitch
+                checked={viewModel.contactOptionTextMessage}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.textMessage)}
+                onChange={viewModel.setContactOptionTextMessage}
+              />
+
+              <LabeledSwitch
+                checked={viewModel.contactOptionWhatsApp}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.whatsApp)}
+                onChange={viewModel.setContactOptionWhatsApp}
+              />
+
+              <LabeledSwitch
+                checked={viewModel.contactOptionHomepagePhotos}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.homepagePhotos)}
+                onChange={viewModel.setContactOptionHomepagePhotos}
+              />
+
+              <LabeledSwitch
+                checked={viewModel.contactOptionSocialMediaPhotos}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.socialMediaPhotos)}
+                onChange={viewModel.setContactOptionSocialMediaPhotos}
+              />
+
+              <LabeledSwitch
+                checked={viewModel.contactOptionPrintPhotos}
+                disabled={viewModel.displayMode}
+                label={t(texts.user.printPhotos)}
+                onChange={viewModel.setContactOptionPrintPhotos}
+              />
+            </CollapseCard>
           )}
+
+          {/* Gradings */}
           {props.isAdminMode && (
-            <LabeledSelect
-              disabled={viewModel.displayMode}
-              label={t(texts.user.isTrainer)}
-              options={viewModel.isTrainerOptions}
-              onSelect={viewModel.setIsTrainer}
-              value={viewModel.isTrainer}
-            />
+            <CollapseCard
+              className={styles.gradingGroup}
+              collapsed={viewModel.profileDetailsSettings.collapseGradings}
+              onToggleCollapse={viewModel.onToggleCollapseGradings}
+              title={t(texts.user.gradings)}
+            >
+              <GradingSection
+                displayMode={viewModel.displayMode}
+                gradings={viewModel.gradings}
+                isAdminMode={props.isAdminMode}
+                onAddGrading={viewModel.onAddGrading}
+                onChange={viewModel.onChangeGrading}
+                onDelete={viewModel.onDeleteGrading}
+                userId={props.user.id}
+              />
+            </CollapseCard>
           )}
-          <div className={styles.toolbarContainer}>
-            {props.isAdminMode && viewModel.lastInvitedAt && (
+
+          {/* Technical Information */}
+          <CollapseCard
+            collapsed={
+              viewModel.profileDetailsSettings.collapseTechnicalInformation
+            }
+            onToggleCollapse={viewModel.onToggleCollapseTechnicalInformation}
+            title={t(texts.user.technicalInformation)}
+          >
+            {props.isAdminMode ? (
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                label={t(texts.user.joinedOn)}
+                type="date"
+                onChange={viewModel.onChangeJoinedOn}
+                value={viewModel.joinedOn}
+              />
+            ) : (
               <LabeledText
-                className={styles.lastInvitedAt}
-                label={t(texts.user.lastInvitationSent)}
-                text={toStringDate(viewModel.lastInvitedAt)}
+                className={styles.joinedOnReadonly}
+                label={t(texts.user.joinedOn)}
+                text={toStringDate(props.user.userProfile?.joinedOn)}
               />
             )}
-            <Toolbar className={styles.toolbar}>
-              {props.isAdminMode && adminModeButtons}
-              {!props.isAdminMode && (
-                <Button onClick={viewModel.onChangePassword}>
-                  {t(texts.user.changePassword)}
-                </Button>
+            {props.isAdminMode && (
+              <LabeledInput
+                disabled={viewModel.displayMode}
+                label={t(texts.user.resignedAt)}
+                type="date"
+                onChange={viewModel.onChangeResignAt}
+                value={viewModel.resignedAt}
+              />
+            )}
+            {props.isAdminMode && (
+              <LabeledSelect
+                disabled={viewModel.displayMode}
+                label={t(texts.user.isAdmin)}
+                options={viewModel.isAdminOptions}
+                onSelect={viewModel.setIsAdmin}
+                value={viewModel.isAdmin}
+              />
+            )}
+            {props.isAdminMode && (
+              <LabeledSelect
+                disabled={viewModel.displayMode}
+                label={t(texts.user.isTrainer)}
+                options={viewModel.isTrainerOptions}
+                onSelect={viewModel.setIsTrainer}
+                value={viewModel.isTrainer}
+              />
+            )}
+            <div className={styles.toolbarContainer}>
+              {props.isAdminMode && viewModel.lastInvitedAt && (
+                <LabeledText
+                  className={styles.lastInvitedAt}
+                  label={t(texts.user.lastInvitationSent)}
+                  text={toStringDate(viewModel.lastInvitedAt)}
+                />
               )}
-            </Toolbar>
-          </div>
-        </CollapseCard>
+              <Toolbar className={styles.toolbar}>
+                {props.isAdminMode && adminModeButtons}
+                {!props.isAdminMode && (
+                  <Button onClick={viewModel.onChangePassword}>
+                    {t(texts.user.changePassword)}
+                  </Button>
+                )}
+              </Toolbar>
+            </div>
+          </CollapseCard>
+        </CardList>
       </ChangeableForm>
     </div>
   );
