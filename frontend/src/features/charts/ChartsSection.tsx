@@ -3,7 +3,6 @@ import { CollapseCard } from "../../components/collapseCard/CollapseCard";
 import { texts } from "../../lib/translation/texts";
 import { useTranslation } from "../../lib/translation/useTranslation";
 import { ActiveMemberByGenderChart } from "./activeMemberByGenderChart/ActiveMemberByGenderChart";
-import { ActiveMemberByGradeChart } from "./activeMemberByGradeChart/ActiveMemberByGradeChart";
 import { ActiveMemberByTariffChart } from "./activeMemberByTariffChart/ActiveMemberByTariffChart";
 import { ActiveMemberChart } from "./activeMemberChart/ActiveMemberChart";
 import styles from "./ChartsSection.module.scss";
@@ -42,14 +41,6 @@ const ChartsSection: React.FC = () => {
       >
         <ActiveMemberByGenderChart />
       </CollapseCard>
-      {/* <CollapseCard
-        className={styles.collapsibleCard}
-        collapsed={viewModel.chartsSettings.collapseActiveMemberByGrade}
-        onToggleCollapse={viewModel.onToggleActiveMembersByGrade}
-        title={t(texts.stats.activeMembersByGrade)}
-      >
-        <ActiveMemberByGradeChart />
-      </CollapseCard> */}
     </CardList>
   );
 };

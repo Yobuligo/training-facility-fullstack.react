@@ -592,10 +592,15 @@
 	# Bug: Trial training email contains wrong timestamp
 
 - Version 1.17.0-<>.25
+	- Story: Booking trial training is only possible when agreeing to the privacy policy
+	- Epic: Trial training overview
+		- Story: Display overview of trial trainings as list
+			- Cards are grouped by email and displays all trial trainings with state (present or missed)
+		- Story: It is possible to directly create an user out of a trial training card
+		
+- Backlog
 	- Story: Display chart for active members by grade
 		- Pie chart colors must be adjusted to the belt colors
-
-- Backlog
 	- Bug: Difference in percent sum must be subtracted from biggest value
 	- Epic: Seminar
 		- Story: Each student can add seminars he joined to
