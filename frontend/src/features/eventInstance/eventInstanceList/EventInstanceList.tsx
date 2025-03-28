@@ -1,8 +1,7 @@
-import { isInitial } from "../../../core/utils/isInitial";
+import { CardList } from "../../../components/cardList/CardList";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventInstanceItemAligned } from "../eventInstanceItemAligned/EventInstanceItemAligned";
-import styles from "./EventInstanceList.module.scss";
 import { IEventInstanceListProps } from "./IEventInstanceListProps";
 
 export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
@@ -25,12 +24,8 @@ export const EventInstanceList: React.FC<IEventInstanceListProps> = (props) => {
   );
 
   return (
-    <div className={styles.eventInstanceList}>
-      {isInitial(items) ? (
-        <>{t(texts.eventInstanceList.noItems)}</>
-      ) : (
-        <>{items}</>
-      )}
-    </div>
+    <CardList noEntriesFoundText={t(texts.eventInstanceList.noItems)}>
+      {items}
+    </CardList>
   );
 };

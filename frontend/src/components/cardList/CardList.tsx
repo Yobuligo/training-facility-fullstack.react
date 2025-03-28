@@ -27,7 +27,15 @@ export const CardList: React.FC<ICardListProps> = (props) => {
           <NumberDisplay value={numberEntries} />
         </h4>
       )}
-      {isEmpty() ? <>{t(texts.general.noEntriesFound)}</> : props.children}
+      {isEmpty() ? (
+        <>
+          {props.noEntriesFoundText
+            ? props.noEntriesFoundText
+            : t(texts.general.noEntriesFound)}
+        </>
+      ) : (
+        props.children
+      )}
     </div>
   );
 };

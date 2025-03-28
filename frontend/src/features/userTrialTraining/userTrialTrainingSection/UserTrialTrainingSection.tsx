@@ -1,9 +1,19 @@
 import { CardList } from "../../../components/cardList/CardList";
 import { DateTimeSpanFilter } from "../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
+import { UserTrialTrainingRecordsItem } from "../userTrialTrainingRecordsItem/UserTrialTrainingRecordsItem";
 import { useUserTrialTrainingSectionViewModel } from "./useUserTrialTrainingSectionViewModel";
 
 const UserTrialTrainingSection: React.FC = () => {
   const viewModel = useUserTrialTrainingSectionViewModel();
+
+  const items = viewModel.userTrialTrainingRecords.map(
+    (userTrialTrainingRecords, index) => (
+      <UserTrialTrainingRecordsItem
+        key={index}
+        userTrialTrainingRecords={userTrialTrainingRecords}
+      />
+    )
+  );
 
   return (
     <>
@@ -13,9 +23,7 @@ const UserTrialTrainingSection: React.FC = () => {
         onChange={viewModel.onDateTimeSpanChanged}
         toDate={viewModel.dateTimeSpanFilter.to}
       />
-      <CardList>
-      Hello World
-      </CardList>
+      <CardList>{items}</CardList>
     </>
   );
 };

@@ -1,8 +1,7 @@
-import { List } from "../../../core/services/list/List";
+import { CardList } from "../../../components/cardList/CardList";
 import { texts } from "../../../lib/translation/texts";
 import { useTranslation } from "../../../lib/translation/useTranslation";
 import { EventDefinitionItem } from "../eventDefinitionItem/EventDefinitionItem";
-import styles from "./EventDefinitionList.module.scss";
 import { IEventDefinitionListProps } from "./IEventDefinitionListProps";
 
 export const EventDefinitionList: React.FC<IEventDefinitionListProps> = (
@@ -22,12 +21,8 @@ export const EventDefinitionList: React.FC<IEventDefinitionListProps> = (
   });
 
   return (
-    <div className={styles.eventDefinitionList}>
-      {List.isEmpty(items) ? (
-        <>{t(texts.eventDefinitionList.noItems)}</>
-      ) : (
-        <>{items}</>
-      )}
-    </div>
+    <CardList noEntriesFoundText={t(texts.eventDefinitionList.noItems)}>
+      {items}
+    </CardList>
   );
 };
