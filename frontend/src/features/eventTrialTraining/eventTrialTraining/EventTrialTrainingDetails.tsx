@@ -1,4 +1,5 @@
-import { Label } from "recharts";
+import { AppConfig } from "../../../AppConfig";
+import { Checkbox } from "../../../components/checkbox/Checkbox";
 import { DetailView } from "../../../components/detailView/DetailView";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { PageSpinner } from "../../../components/pageSpinner/PageSpinner";
@@ -10,7 +11,6 @@ import { EventInstanceItem } from "../../eventInstance/eventInstanceItem/EventIn
 import styles from "./EventTrialTrainingDetails.module.scss";
 import { IEventTrialTrainingDetailsProps } from "./IEventTrialTrainingDetailsProps";
 import { useEventTrialTrainingDetailsViewModel } from "./useEventTrialTrainingDetailsViewModel";
-import { Checkbox } from "../../../components/checkbox/Checkbox";
 
 export const EventTrialTrainingDetails: React.FC<
   IEventTrialTrainingDetailsProps
@@ -74,7 +74,23 @@ export const EventTrialTrainingDetails: React.FC<
                       </div>
                     </form>
                     <div>
-                      <Checkbox  text="Test"/>
+                      <Checkbox
+                        text={t(
+                          texts.trialTrainingContent.privacyPolicyConfirmation,
+                          {
+                            link: (
+                              <a
+                                className={styles.link}
+                                href={AppConfig.privacyPolicy}
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                {t(texts.general.privacyPolicy)}
+                              </a>
+                            ),
+                          }
+                        )}
+                      />
                     </div>
                     <Toolbar alignRight={true}>
                       <SpinnerButton

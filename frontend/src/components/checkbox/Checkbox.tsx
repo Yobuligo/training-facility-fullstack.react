@@ -7,9 +7,11 @@ export const Checkbox: React.FC<ICheckboxProps> = (props) => {
 
   return (
     <label className={styles.checkbox}>
-      <input type="checkbox" checked={props.isChecked} onChange={onChange} />
-      <span className={styles.checkmark}></span>
-      {props.text}
+      <div>
+        <input type="checkbox" checked={props.isChecked} onChange={onChange} />
+        <span className={styles.checkmark}></span>
+      </div>
+      <p className={styles.text}>{props.text}</p>
     </label>
   );
 };

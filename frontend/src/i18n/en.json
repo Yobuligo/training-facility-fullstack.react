@@ -302,6 +302,7 @@
         "bookTrialTraining": "Book a trial training",
         "description": "We are excited that you're interested in a trial session. Here you can book this free training. You will receive an email with all the important information and further details afterwards.",
         "errorTrialTrainingExists": "You can only book one free trial training at once. If you instead want to switch your trial training, please cancel your previously booked trial session via the email you received.",
+        "privacyPolicyConfirmation": "I have read the {{link}} and agree to the processing of my personal data in accordance with it. Consent can be withdrawn at any time with effect for the future.",
         "sendBooking": "Send booking"
     },
     "user": {
