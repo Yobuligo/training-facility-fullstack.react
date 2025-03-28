@@ -1,5 +1,5 @@
 import { IDateTimeSpan } from "../../core/services/date/IDateTimeSpan";
-import { EventRegistrationState } from "./EventRegistrationState";
+import { EventRegistrationState } from "../types/EventRegistrationState";
 
 /**
  * An instance of this interface represents a specific user trial training record

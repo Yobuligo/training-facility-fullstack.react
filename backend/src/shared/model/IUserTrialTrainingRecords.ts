@@ -1,4 +1,5 @@
-import { IHaveName } from "./IHaveName";
+import { IRouteMeta } from "./../../core/api/types/IRouteMeta";
+import { IHaveName } from "../types/IHaveName";
 import { IUserTrialTrainingRecord } from "./IUserTrialTrainingRecord";
 
 /**
@@ -8,3 +9,7 @@ export interface IUserTrialTrainingRecords extends IHaveName {
   email: string;
   userTrialTrainingRecords: IUserTrialTrainingRecord[];
 }
+
+export const UserTrialTrainingRecordsMeta: IRouteMeta = {
+  path: "/user-trial-training-records",
+};

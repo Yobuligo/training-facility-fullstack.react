@@ -8,6 +8,8 @@ import {
   IUserTrialTraining,
   UserTrialTrainingRouteMeta,
 } from "../shared/model/IUserTrialTraining";
+import { UserTrialTrainingRecordsMeta } from "../shared/model/IUserTrialTrainingRecords";
+import { AuthRole } from "../shared/types/AuthRole";
 import { PublicRouteMeta } from "../shared/types/PublicRouteMeta";
 import { UserTrialTrainingRepo } from "./../repositories/UserTrialTrainingRepo";
 import { EntityController } from "./core/EntityController";
@@ -24,6 +26,7 @@ export class UserTrialTrainingController extends EntityController<
     this.findByEventInstanceId();
     this.findByIdPublic();
     this.insertPublic();
+    this.findAllUserTrialTrainingRecords();
   }
 
   private deleteByIdPublic() {
@@ -35,6 +38,30 @@ export class UserTrialTrainingController extends EntityController<
         const wasDeleted = await userTrialTrainingRepo.deleteById(id);
         res.status(HttpStatusCode.OK_200).send(wasDeleted);
       })
+    );
+  }
+
+  private findAllUserTrialTrainingRecords() {
+    this.router.get(
+      `${UserTrialTrainingRecordsMeta.path}`,
+      SessionInterceptor(
+        async (req, res) => {
+          const from = req.query.from;
+          const to = req.query.to;
+
+          if (typeof from !== "string" || typeof to !== "string") {
+            return res.status(HttpStatusCode.BAD_REQUEST_400).end();
+          }
+
+          const userTrialTrainingRecordsList =
+            await this.repo.findAllUserTrialTrainingRecords({
+              from: new Date(from),
+              to: new Date(to),
+            });
+          res.status(HttpStatusCode.OK_200).send(userTrialTrainingRecordsList);
+        },
+        [AuthRole.ADMIN]
+      )
     );
   }
 

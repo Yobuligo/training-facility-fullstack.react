@@ -1,4 +1,5 @@
 import { UserTrialTrainingApi } from "../../../api/UserTrialTrainingApi";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { IDateTimeSpan } from "../../../core/services/date/IDateTimeSpan";
 import { useDateTimeSpanFilter } from "../../../hooks/useDateTimeSpanFilter";
 import { useInitialize } from "../../../hooks/useInitialize";
@@ -11,10 +12,15 @@ export const useTrialTrainingSectionViewModel = () => {
 
   const onLoadUserTrialTrainings = (dateTimeSpan: IDateTimeSpan) =>
     loadUserTrialTrainings(async () => {
-      console.log(`from : ${dateTimeSpan.from.toLocaleString()}`);
-      console.log(`to : ${dateTimeSpan.to.toLocaleString()}`);
+      const from = DateTime.getDayStartDate(dateTimeSpan.from);
+      const to = DateTime.getDayEndDate(dateTimeSpan.to);
       const userTrialTrainingsApi = new UserTrialTrainingApi();
-      const userTrialTrainings = await userTrialTrainingsApi.findAll();
+      const userTrialTrainings =
+        await userTrialTrainingsApi.findAllUserTrialTrainingRecords({
+          from,
+          to,
+        });
+      debugger;
     });
 
   useInitialize(() =>

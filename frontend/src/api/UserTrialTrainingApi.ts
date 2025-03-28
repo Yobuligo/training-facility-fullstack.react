@@ -1,3 +1,4 @@
+import { IDateTimeSpan } from "../core/services/date/IDateTimeSpan";
 import { EventInstanceRouteMeta } from "../shared/model/IEventInstance";
 
 import {
@@ -5,6 +6,10 @@ import {
   UserTrialTrainingRouteMeta,
 } from "../shared/model/IUserTrialTraining";
 import { IUserTrialTrainingDetails } from "../shared/model/IUserTrialTrainingDetails";
+import {
+  IUserTrialTrainingRecords,
+  UserTrialTrainingRecordsMeta,
+} from "../shared/model/IUserTrialTrainingRecords";
 import { EventRegistrationState } from "../shared/types/EventRegistrationState";
 import { uuid } from "../utils/uuid";
 import { EntityRepository } from "./core/EntityRepository";
@@ -17,6 +22,20 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
 
   async deleteByIdSecured(id: string): Promise<boolean> {
     return await RESTApi.delete(`${this.publicUrl}/${id}`);
+  }
+
+  async findAllUserTrialTrainingRecords(
+    dateTimeSpan: IDateTimeSpan
+  ): Promise<IUserTrialTrainingRecords[]> {
+    return await RESTApi.get(
+      `${this.host}${UserTrialTrainingRecordsMeta.path}`,
+      {
+        urlParams: {
+          from: dateTimeSpan.from.toString(),
+          to: dateTimeSpan.to.toString(),
+        },
+      }
+    );
   }
 
   async findByEventInstanceId(
