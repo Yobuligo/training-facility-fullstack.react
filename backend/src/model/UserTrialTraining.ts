@@ -12,6 +12,7 @@ const userTrialTraining: ModelStatic<
   firstname: DataTypes.STRING(50),
   lastname: DataTypes.STRING(50),
   email: DataTypes.STRING(255),
+  privacyPolicyAccepted: DataTypes.BOOLEAN,
   state: DataTypes.INTEGER,
 });
 

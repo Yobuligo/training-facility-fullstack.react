@@ -37,7 +37,8 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
     eventInstanceId: string,
     firstname: string,
     lastname: string,
-    email: string
+    email: string,
+    privacyPolicyAccepted: boolean
   ): Promise<IUserTrialTraining> {
     const useTrialTraining: IUserTrialTraining = {
       id: uuid(),
@@ -45,6 +46,7 @@ export class UserTrialTrainingApi extends EntityRepository<IUserTrialTraining> {
       eventInstanceId,
       firstname,
       lastname,
+      privacyPolicyAccepted,
       state: EventRegistrationState.OPEN,
       createdAt: new Date(),
       updatedAt: new Date(),

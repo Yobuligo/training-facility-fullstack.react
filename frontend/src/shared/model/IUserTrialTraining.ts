@@ -11,6 +11,7 @@ import { IHaveName } from "../types/IHaveName";
 export interface IUserTrialTraining extends IEntity, IHaveName {
   email: string;
   eventInstanceId: string;
+  privacyPolicyAccepted: boolean;
   state: EventRegistrationState;
 }
 

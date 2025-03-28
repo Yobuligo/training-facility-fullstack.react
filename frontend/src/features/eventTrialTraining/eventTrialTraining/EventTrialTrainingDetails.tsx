@@ -73,10 +73,11 @@ export const EventTrialTrainingDetails: React.FC<
                         />
                       </div>
                     </form>
+
                     <Checkbox
                       className={styles.checkbox}
                       isChecked={viewModel.isPrivacyPolicyChecked}
-                      onChange={viewModel.setIsPrivacyPolicyChecked}
+                      onChange={viewModel.setIsPrivacyPolicyAccepted}
                       text={t(
                         texts.trialTrainingContent.privacyPolicyConfirmation,
                         {
@@ -93,6 +94,7 @@ export const EventTrialTrainingDetails: React.FC<
                         }
                       )}
                     />
+
                     <Toolbar alignRight={true}>
                       <SpinnerButton
                         disabled={!viewModel.isFilledOut()}
