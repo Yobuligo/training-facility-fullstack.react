@@ -42,14 +42,14 @@ const ChartsSection: React.FC = () => {
       >
         <ActiveMemberByGenderChart />
       </CollapseCard>
-      <CollapseCard
+      {/* <CollapseCard
         className={styles.collapsibleCard}
         collapsed={viewModel.chartsSettings.collapseActiveMemberByGrade}
         onToggleCollapse={viewModel.onToggleActiveMembersByGrade}
         title={t(texts.stats.activeMembersByGrade)}
       >
         <ActiveMemberByGradeChart />
-      </CollapseCard>
+      </CollapseCard> */}
     </CardList>
   );
 };
